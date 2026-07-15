@@ -1,0 +1,9 @@
+
+CREATE OR REPLACE FUNCTION public.xp_to_level(_xp INTEGER)
+RETURNS INTEGER
+LANGUAGE sql
+IMMUTABLE
+SET search_path = public
+AS $$
+  SELECT GREATEST(1, 1 + FLOOR(SQRT(GREATEST(_xp,0)::numeric / 50.0)))::INTEGER;
+$$;

@@ -14,6 +14,81 @@ export type Database = {
   }
   public: {
     Tables: {
+      achievements: {
+        Row: {
+          created_at: string
+          description: string
+          icon: string | null
+          id: string
+          key: string
+          tier: Database["public"]["Enums"]["achievement_tier"]
+          title: string
+          xp_reward: number
+        }
+        Insert: {
+          created_at?: string
+          description: string
+          icon?: string | null
+          id?: string
+          key: string
+          tier?: Database["public"]["Enums"]["achievement_tier"]
+          title: string
+          xp_reward?: number
+        }
+        Update: {
+          created_at?: string
+          description?: string
+          icon?: string | null
+          id?: string
+          key?: string
+          tier?: Database["public"]["Enums"]["achievement_tier"]
+          title?: string
+          xp_reward?: number
+        }
+        Relationships: []
+      }
+      daily_quests: {
+        Row: {
+          completed_at: string | null
+          created_at: string
+          description: string | null
+          difficulty: number
+          id: string
+          quest_date: string
+          status: Database["public"]["Enums"]["quest_status"]
+          title: string
+          updated_at: string
+          user_id: string
+          xp_reward: number
+        }
+        Insert: {
+          completed_at?: string | null
+          created_at?: string
+          description?: string | null
+          difficulty?: number
+          id?: string
+          quest_date?: string
+          status?: Database["public"]["Enums"]["quest_status"]
+          title: string
+          updated_at?: string
+          user_id: string
+          xp_reward?: number
+        }
+        Update: {
+          completed_at?: string | null
+          created_at?: string
+          description?: string | null
+          difficulty?: number
+          id?: string
+          quest_date?: string
+          status?: Database["public"]["Enums"]["quest_status"]
+          title?: string
+          updated_at?: string
+          user_id?: string
+          xp_reward?: number
+        }
+        Relationships: []
+      }
       onboarding_answers: {
         Row: {
           answer_value: string
@@ -92,21 +167,180 @@ export type Database = {
         }
         Relationships: []
       }
+      shields: {
+        Row: {
+          created_at: string
+          id: string
+          note: string | null
+          reason: Database["public"]["Enums"]["shield_reason"]
+          used_on: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          note?: string | null
+          reason?: Database["public"]["Enums"]["shield_reason"]
+          used_on?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          note?: string | null
+          reason?: Database["public"]["Enums"]["shield_reason"]
+          used_on?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      streaks: {
+        Row: {
+          created_at: string
+          current_days: number
+          freeze_active_until: string | null
+          last_check_in: string | null
+          longest_days: number
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          current_days?: number
+          freeze_active_until?: string | null
+          last_check_in?: string | null
+          longest_days?: number
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          current_days?: number
+          freeze_active_until?: string | null
+          last_check_in?: string | null
+          longest_days?: number
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      user_achievements: {
+        Row: {
+          achievement_id: string
+          id: string
+          unlocked_at: string
+          user_id: string
+        }
+        Insert: {
+          achievement_id: string
+          id?: string
+          unlocked_at?: string
+          user_id: string
+        }
+        Update: {
+          achievement_id?: string
+          id?: string
+          unlocked_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_achievements_achievement_id_fkey"
+            columns: ["achievement_id"]
+            isOneToOne: false
+            referencedRelation: "achievements"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      user_stats: {
+        Row: {
+          created_at: string
+          discipline_score: number
+          last_action_at: string | null
+          level: number
+          total_xp: number
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          discipline_score?: number
+          last_action_at?: string | null
+          level?: number
+          total_xp?: number
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          discipline_score?: number
+          last_action_at?: string | null
+          level?: number
+          total_xp?: number
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      xp_events: {
+        Row: {
+          amount: number
+          created_at: string
+          id: string
+          note: string | null
+          reference_id: string | null
+          source: Database["public"]["Enums"]["xp_source"]
+          user_id: string
+        }
+        Insert: {
+          amount: number
+          created_at?: string
+          id?: string
+          note?: string | null
+          reference_id?: string | null
+          source: Database["public"]["Enums"]["xp_source"]
+          user_id: string
+        }
+        Update: {
+          amount?: number
+          created_at?: string
+          id?: string
+          note?: string | null
+          reference_id?: string | null
+          source?: Database["public"]["Enums"]["xp_source"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      xp_to_level: { Args: { _xp: number }; Returns: number }
     }
     Enums: {
+      achievement_tier: "bronze" | "silver" | "gold" | "platinum"
       activity_level:
         | "sedentary"
         | "light"
         | "moderate"
         | "active"
         | "very_active"
+      quest_status: "pending" | "completed" | "skipped" | "failed"
       sex: "male" | "female" | "other" | "prefer_not_say"
+      shield_reason: "missed_day" | "manual_freeze" | "sick" | "travel"
+      xp_source:
+        | "habit"
+        | "quest"
+        | "journal"
+        | "achievement"
+        | "streak_bonus"
+        | "penalty"
+        | "shield_use"
+        | "workout"
+        | "diet"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -234,6 +468,7 @@ export type CompositeTypes<
 export const Constants = {
   public: {
     Enums: {
+      achievement_tier: ["bronze", "silver", "gold", "platinum"],
       activity_level: [
         "sedentary",
         "light",
@@ -241,7 +476,20 @@ export const Constants = {
         "active",
         "very_active",
       ],
+      quest_status: ["pending", "completed", "skipped", "failed"],
       sex: ["male", "female", "other", "prefer_not_say"],
+      shield_reason: ["missed_day", "manual_freeze", "sick", "travel"],
+      xp_source: [
+        "habit",
+        "quest",
+        "journal",
+        "achievement",
+        "streak_bonus",
+        "penalty",
+        "shield_use",
+        "workout",
+        "diet",
+      ],
     },
   },
 } as const
