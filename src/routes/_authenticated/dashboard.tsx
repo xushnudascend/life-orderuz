@@ -222,24 +222,14 @@ function Dashboard() {
           />
         </button>
         {aiOpen && (
-          <div className="border-t border-border">
-            <Suspense
-              fallback={
-                <div className="flex justify-center py-8">
-                  <Loader2 className="h-4 w-4 animate-spin text-muted-foreground" />
-                </div>
-              }
-            >
-              <div className="p-5">
-                <p className="text-sm text-muted-foreground">
-                  Nadir bilan chuqurroq gaplashish uchun{" "}
-                  <Link to="/mentor" className="text-primary hover:underline">
-                    to'liq sahifani och
-                  </Link>
-                  .
-                </p>
-              </div>
-            </Suspense>
+          <div className="border-t border-border p-5">
+            <p className="text-sm text-muted-foreground">
+              Nadir bilan chuqurroq gaplashish uchun{" "}
+              <Link to="/mentor" className="text-primary hover:underline">
+                to'liq sahifani och
+              </Link>
+              .
+            </p>
           </div>
         )}
       </section>
