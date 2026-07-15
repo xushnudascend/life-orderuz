@@ -71,7 +71,7 @@ function Header() {
             <Link to="/auth">
               {t("nav.startFree")}
               <ArrowRight className="ml-1 h-4 w-4" />
-            </a>
+            </Link>
           </Button>
         </div>
       </div>
@@ -117,7 +117,7 @@ function Hero() {
             <Link to="/auth">
               {t("hero.ctaPrimary")}
               <ArrowRight className="ml-1.5 h-4 w-4" />
-            </a>
+            </Link>
           </Button>
           <Button size="lg" variant="secondary" className="font-ui" asChild>
             <a href="#method">{t("hero.ctaSecondary")}</a>
@@ -340,7 +340,7 @@ function Pricing() {
                 className="mt-8 w-full font-ui font-semibold"
                 asChild
               >
-                <Link to="/auth">{plan.cta}</a>
+                <Link to="/auth">{plan.cta}</Link>
               </Button>
             </div>
           ))}
@@ -366,7 +366,7 @@ function FinalCta() {
             <Link to="/auth">
               {uz.cta.button}
               <ArrowRight className="ml-1.5 h-4 w-4" />
-            </a>
+            </Link>
           </Button>
         </div>
       </div>
