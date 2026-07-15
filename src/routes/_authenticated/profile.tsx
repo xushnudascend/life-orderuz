@@ -3,7 +3,8 @@ import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { AppShell } from "@/components/app-shell";
 import { Button } from "@/components/ui/button";
-import { Loader2 } from "lucide-react";
+import { Loader2, Shield } from "lucide-react";
+import { toast } from "sonner";
 import { uz } from "@/i18n";
 
 export const Route = createFileRoute("/_authenticated/profile")({
