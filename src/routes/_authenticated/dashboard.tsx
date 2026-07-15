@@ -15,6 +15,8 @@ import { ProgressRing } from "@/components/progress-ring";
 import { RankBadge } from "@/components/rank-badge";
 import { ShieldIndicator } from "@/components/shield-indicator";
 import { ArchetypeRow } from "@/components/archetype-row";
+import { DailyTimetable } from "@/components/daily-timetable";
+import { ProfileCompletionCard } from "@/components/profile-completion-card";
 import {
   circadian,
   progressMessage,
@@ -37,6 +39,11 @@ type Profile = {
   display_name: string | null;
   plan_length_days: number | null;
   archetype: string | null;
+  age: number | null;
+  height_cm: number | null;
+  weight_kg: number | null;
+  sex: string | null;
+  onboarding_completed_at: string | null;
 };
 type Habit = { id: string; title: string; xp_reward: number; category: string | null };
 type Stats = { total_xp: number; level: number; discipline_score: number } | null;
@@ -63,7 +70,7 @@ function Dashboard() {
     const [p, hs, logs, s, st, sh] = await Promise.all([
       supabase
         .from("profiles")
-        .select("display_name, plan_length_days, archetype")
+        .select("display_name, plan_length_days, archetype, age, height_cm, weight_kg, sex, onboarding_completed_at")
         .eq("id", userId)
         .maybeSingle(),
       supabase
@@ -154,8 +161,20 @@ function Dashboard() {
   const xpForNext = 100 * ((stats?.level ?? 1) + 1) ** 2;
   const xpProgress = stats ? Math.min(100, Math.round((stats.total_xp / xpForNext) * 100)) : 0;
 
+  // Profile completion detection (fast-track / missing onboarding fields)
+  const missing: string[] = [];
+  if (profile) {
+    if (!profile.age) missing.push("yosh");
+    if (!profile.height_cm) missing.push("bo'y");
+    if (!profile.weight_kg) missing.push("vazn");
+    if (!profile.sex) missing.push("jins");
+    if (!profile.archetype) missing.push("arxetip");
+  }
+
   return (
     <AppShell title="Bugun">
+      <ProfileCompletionCard missing={missing} />
+
       {/* HERO-BENTO */}
       <section className="rounded-[var(--radius)] border border-border bg-gradient-to-br from-background via-background to-primary/5 p-6 sm:p-8">
         <div className="flex flex-wrap items-start justify-between gap-4">
@@ -322,30 +341,14 @@ function Dashboard() {
             </Button>
           </div>
 
-          <div className="mt-4 rounded-[var(--radius)] border border-border p-5">
-            <p className="font-ui text-[11px] uppercase tracking-[0.22em] text-muted-foreground">
-              Kunlik jadval
-            </p>
-            <ul className="mt-3 space-y-2 font-ui text-sm">
-              <li className="flex justify-between border-b border-border/60 pb-1.5">
-                <span className="text-muted-foreground">05:00–09:00</span>
-                <span>Peak — eng qiyin ish</span>
-              </li>
-              <li className="flex justify-between border-b border-border/60 pb-1.5">
-                <span className="text-muted-foreground">12:00–15:00</span>
-                <span>Steady — reja tekshir</span>
-              </li>
-              <li className="flex justify-between">
-                <span className="text-muted-foreground">18:00–22:00</span>
-                <span>Micro — 2 daq. qadam</span>
-              </li>
-            </ul>
+          <div className="mt-4">
+            <DailyTimetable />
           </div>
         </aside>
       </div>
 
       {/* Quick access */}
-      <section className="mt-8 grid gap-3 sm:grid-cols-4">
+      <section className="mt-8 grid gap-3 sm:grid-cols-3 md:grid-cols-6">
         <Button asChild variant="outline" size="sm">
           <Link to="/workout">Mashg'ulot</Link>
         </Button>
@@ -354,6 +357,12 @@ function Dashboard() {
         </Button>
         <Button asChild variant="outline" size="sm">
           <Link to="/quests">Vazifalar</Link>
+        </Button>
+        <Button asChild variant="outline" size="sm">
+          <Link to="/temir-intizom">21 kun</Link>
+        </Button>
+        <Button asChild variant="outline" size="sm">
+          <Link to="/party">Party</Link>
         </Button>
         <Button asChild variant="outline" size="sm">
           <Link to="/leaderboard">Reyting</Link>

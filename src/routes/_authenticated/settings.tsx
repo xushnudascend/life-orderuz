@@ -6,11 +6,12 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
-import { Loader2, Bell, User as UserIcon, ShieldAlert, Sparkles, Languages, Clock, Wand2, HelpCircle } from "lucide-react";
+import { Loader2, Bell, User as UserIcon, ShieldAlert, Sparkles, Languages, Clock, Wand2, HelpCircle, Palette } from "lucide-react";
 import { toast } from "sonner";
 import { uz } from "@/i18n";
 import { TIMEZONES } from "@/lib/nervous";
 import { getLocale, setLocale as setLoc, type Locale } from "@/i18n";
+import { ThemeSwitcher } from "@/components/theme-switcher";
 
 export const Route = createFileRoute("/_authenticated/settings")({
   head: () => ({
@@ -222,6 +223,13 @@ function Settings() {
               onCheckedChange={(v) => setPrefs({ ...prefs, ai_mentor_enabled: v })}
             />
           </Row>
+        </Card>
+
+        <Card icon={<Palette className="h-4 w-4 text-primary" />} title="Tema">
+          <p className="mb-4 text-sm text-muted-foreground">
+            Uch tema — bir xil semantik token strukturasi. Almashtirilganda komponentlar avtomatik moslashadi.
+          </p>
+          <ThemeSwitcher />
         </Card>
 
         <Card icon={<Wand2 className="h-4 w-4 text-primary" />} title="Animatsiyalar">

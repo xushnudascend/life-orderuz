@@ -1,15 +1,35 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { t, uz } from "@/i18n";
+import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, ShieldCheck, Compass, Sparkles, Check } from "lucide-react";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import {
+  ArrowRight,
+  Sparkles,
+  BarChart3,
+  Target,
+  Flame,
+  BookOpen,
+  Users,
+  Check,
+  LineChart,
+} from "lucide-react";
+
+const BRAND = "Life Order";
+const ONE_LINER =
+  "Life Order — o'z-o'zini boshqarishning operatsion tizimi. Trigger tahlili, kunlik uchta aniq qadam, halol AI mentor Nadir. 60 soniyada tashxis. Kartasiz.";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: `${uz.brand.name} — ${uz.brand.tagline}` },
-      { name: "description", content: uz.brand.oneLiner },
-      { property: "og:title", content: `${uz.brand.name} — ${uz.brand.tagline}` },
-      { property: "og:description", content: uz.brand.oneLiner },
+      { title: `${BRAND} — Hayotingni tartibga sol` },
+      { name: "description", content: ONE_LINER },
+      { property: "og:title", content: `${BRAND} — Hayotingni tartibga sol` },
+      { property: "og:description", content: ONE_LINER },
     ],
   }),
   component: Landing,
@@ -21,10 +41,17 @@ function Landing() {
       <Header />
       <main>
         <Hero />
-        <Pillars />
-        <NervousSystem />
-        <Mentor />
+        <ProblemsGrid />
+        <DashboardPreview />
+        <SocialProof />
+        <ProblemDeep />
+        <TurningPoint />
+        <ThreePillars />
+        <HowItWorks />
+        <FeaturesGrid />
+        <EarlyMembers />
         <Pricing />
+        <Faq />
         <FinalCta />
       </main>
       <Footer />
@@ -32,46 +59,21 @@ function Landing() {
   );
 }
 
-/* ---------------- Header ---------------- */
+/* ================= C.1 — Header ================= */
 function Header() {
-  const items: { key: string; label: string }[] = [
-    { key: "features", label: t("nav.features") },
-    { key: "method", label: t("nav.method") },
-    { key: "mentor", label: t("nav.mentor") },
-    { key: "pricing", label: t("nav.pricing") },
-  ];
   return (
-    <header className="sticky top-0 z-40 border-b border-border bg-background/70 backdrop-blur-md">
-      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5">
-        <Link to="/" className="flex items-center gap-2 font-serif text-lg tracking-tight">
+    <header className="sticky top-0 z-40 h-14 border-b border-border bg-background/80 backdrop-blur-sm">
+      <div className="mx-auto flex h-full max-w-6xl items-center justify-between px-5">
+        <Link to="/" className="flex items-center gap-2">
           <LogoMark />
-          <span>{uz.brand.name}</span>
+          <span className="font-serif text-lg font-bold tracking-tight">{BRAND}</span>
         </Link>
-        <nav className="hidden items-center gap-8 md:flex">
-          {items.map((item) => (
-            <a
-              key={item.key}
-              href={`#${item.key}`}
-              className="font-ui text-sm text-muted-foreground transition-colors hover:text-foreground"
-            >
-              {item.label}
-            </a>
-          ))}
-        </nav>
         <div className="flex items-center gap-2">
-          <Button
-            variant="ghost"
-            size="sm"
-            className="hidden font-ui text-muted-foreground hover:text-foreground sm:inline-flex"
-            asChild
-          >
-            <Link to="/auth">{t("nav.signIn")}</Link>
+          <Button asChild variant="ghost" size="sm" className="font-ui text-muted-foreground">
+            <Link to="/auth">Kirish</Link>
           </Button>
-          <Button size="sm" className="font-ui font-semibold" asChild>
-            <Link to="/auth">
-              {t("nav.startFree")}
-              <ArrowRight className="ml-1 h-4 w-4" />
-            </Link>
+          <Button asChild size="sm" className="rounded-full font-ui font-semibold">
+            <Link to="/auth">Boshlash</Link>
           </Button>
         </div>
       </div>
@@ -90,83 +92,318 @@ function LogoMark() {
   );
 }
 
-/* ---------------- Hero ---------------- */
+/* ================= C.2 — Hero ================= */
 function Hero() {
   return (
     <section className="relative overflow-hidden">
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-0 h-[520px]"
+        className="pointer-events-none absolute inset-x-0 top-0 h-[560px]"
         style={{
           background:
             "radial-gradient(ellipse 60% 60% at 50% 0%, hsl(var(--primary) / 0.10), transparent 60%)",
         }}
       />
-      <div className="relative mx-auto max-w-4xl px-5 pb-24 pt-20 text-center md:pt-28">
-        <p className="font-ui text-xs uppercase tracking-[0.28em] text-muted-foreground">
-          {t("hero.eyebrow")}
-        </p>
-        <h1 className="mx-auto mt-6 max-w-3xl font-serif text-4xl leading-[1.05] tracking-tight text-balance md:text-6xl">
-          {t("hero.title")}
-        </h1>
-        <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground text-pretty">
-          {t("hero.subtitle")}
-        </p>
-        <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
-          <Button size="lg" className="font-ui font-semibold" asChild>
-            <Link to="/auth">
-              {t("hero.ctaPrimary")}
-              <ArrowRight className="ml-1.5 h-4 w-4" />
-            </Link>
-          </Button>
-          <Button size="lg" variant="secondary" className="font-ui" asChild>
-            <a href="#method">{t("hero.ctaSecondary")}</a>
-          </Button>
+      <div className="relative mx-auto grid max-w-6xl gap-10 px-5 pb-20 pt-16 md:grid-cols-[1.15fr_1fr] md:items-center md:pt-24">
+        <div>
+          <p className="flex items-center gap-2 font-ui text-[11px] uppercase tracking-[0.24em] text-muted-foreground">
+            <span className="inline-block h-1.5 w-1.5 rounded-full bg-primary" />
+            Self-Control OS · Beta
+          </p>
+          <h1 className="mt-5 font-serif text-4xl leading-[1.05] tracking-tight text-balance sm:text-5xl md:text-6xl">
+            Motivatsiya tugaydi.
+            <br />
+            <span className="text-muted-foreground">Tizim qoladi.</span>
+          </h1>
+          <p className="mt-6 max-w-xl text-base leading-relaxed text-muted-foreground text-pretty md:text-lg">
+            Life Order — o'z-o'zini boshqarishning operatsion tizimi. Trigger tahlili, kunlik uchta aniq qadam, halol AI mentor Nadir. 60 soniyada tashxis. Kartasiz.
+          </p>
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <Button asChild size="xl" className="h-12 rounded-full font-ui font-semibold">
+              <Link to="/auth">
+                60 soniyada tashxis olish
+                <ArrowRight className="ml-1.5 h-4 w-4" />
+              </Link>
+            </Button>
+            <Button asChild variant="ghost" size="xl" className="h-12 rounded-full font-ui">
+              <a href="#how-it-works">Qanday ishlaydi?</a>
+            </Button>
+          </div>
+          <p className="mt-5 font-ui text-xs text-muted-foreground">
+            Kartasiz · Istalgan paytda to'xtatasan · O'zbek tilida
+          </p>
         </div>
-        <p className="mt-6 font-ui text-xs text-muted-foreground">
-          {t("hero.trustLine")}
+        <HeroOrnament />
+      </div>
+    </section>
+  );
+}
+
+function HeroOrnament() {
+  return (
+    <div className="relative hidden aspect-square items-center justify-center md:flex">
+      <div
+        aria-hidden
+        className="absolute inset-0 rounded-full opacity-40"
+        style={{
+          background:
+            "conic-gradient(from 0deg, hsl(var(--primary) / 0.35), transparent 55%)",
+          animation: "lo-spin-slow 24s linear infinite",
+        }}
+      />
+      <div className="relative h-56 w-56 rounded-full border border-primary/40 bg-card/40" />
+      <div className="absolute h-40 w-40 rounded-full border border-border" />
+      <div className="absolute h-24 w-24 rounded-full border border-border/60" />
+      <style>{`@keyframes lo-spin-slow{to{transform:rotate(360deg)}}`}</style>
+    </div>
+  );
+}
+
+/* ================= C.3 — Problems grid ================= */
+function ProblemsGrid() {
+  const items = [
+    {
+      n: "01",
+      title: "Telefon qaramligi",
+      body:
+        "Cheksiz scroll seni maqsadlaringdan uzoqlashtiradi. Ekran vaqtini nazoratga ol.",
+    },
+    {
+      n: "02",
+      title: "Kechiktirish odati",
+      body: "Ertaga emas, hozir. Mikro-qadam bilan boshlash — halqani sindiradi.",
+    },
+    {
+      n: "03",
+      title: "Tartibsiz kun",
+      body:
+        "Xaosni tizimga aylantir. Har kuni uchta aniq vazifa, aniq javobgarlik.",
+    },
+  ];
+  return (
+    <section className="border-t border-border">
+      <div className="mx-auto max-w-6xl px-5 py-20">
+        <div className="grid gap-4 md:grid-cols-3">
+          {items.map((i) => (
+            <article
+              key={i.n}
+              className="rounded-[var(--radius)] border border-border/60 bg-card/40 p-7 transition-colors hover:border-border"
+            >
+              <p className="font-ui text-xs uppercase tracking-[0.24em] text-primary">{i.n}</p>
+              <h3 className="mt-4 font-serif text-2xl leading-tight">{i.title}</h3>
+              <p className="mt-3 leading-relaxed text-muted-foreground">{i.body}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ================= C.4 — Dashboard preview ================= */
+function DashboardPreview() {
+  return (
+    <section className="border-t border-border bg-card/30">
+      <div className="mx-auto max-w-4xl px-5 py-20">
+        <div className="rounded-[var(--radius)] border border-border bg-background/60 p-6 md:p-8">
+          <div className="flex items-center justify-between">
+            <p className="font-ui text-[11px] uppercase tracking-[0.24em] text-muted-foreground">
+              Bugungi kun
+            </p>
+            <p className="font-serif text-xl tabular-nums">
+              <CountUp to={2} />/<span className="text-muted-foreground">3</span>
+            </p>
+          </div>
+          <div className="mt-6 grid grid-cols-3 gap-4">
+            <Stat label="Discipline" value={<CountUp to={74} />} />
+            <Stat label="Streak" value={<><CountUp to={12} /> <span className="text-muted-foreground text-base">kun</span></>} />
+            <Stat label="Bugungi XP" value={<><span className="text-primary">+</span><CountUp to={45} /></>} />
+          </div>
+          <ul className="mt-8 space-y-2">
+            <PreviewTask done text="20 daqiqa yurish" tag="fizik" xp="+20" />
+            <PreviewTask done text="10 daqiqa meditatsiya" tag="mental" xp="+25" />
+            <PreviewTask text="1 sahifa journal" tag="mindset" xp="+30" />
+          </ul>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Stat({ label, value }: { label: string; value: React.ReactNode }) {
+  return (
+    <div>
+      <p className="font-ui text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
+        {label}
+      </p>
+      <p className="mt-1 font-serif text-3xl tabular-nums">{value}</p>
+    </div>
+  );
+}
+
+function PreviewTask({ done, text, tag, xp }: { done?: boolean; text: string; tag: string; xp: string }) {
+  return (
+    <li className={"flex items-center justify-between rounded-md border border-border/60 bg-background p-3 " + (done ? "opacity-70" : "")}>
+      <div className="flex items-center gap-3">
+        <span className={"grid h-5 w-5 place-items-center rounded-full border " + (done ? "border-primary bg-primary text-primary-foreground" : "border-border")}>
+          {done && <Check className="h-3 w-3" />}
+        </span>
+        <span className={"font-ui text-sm " + (done ? "line-through" : "")}>{text}</span>
+        <span className="rounded-full border border-border px-2 py-0.5 font-ui text-[10px] uppercase tracking-[0.16em] text-muted-foreground">
+          {tag}
+        </span>
+      </div>
+      <span className="font-ui text-xs text-primary tabular-nums">{xp}</span>
+    </li>
+  );
+}
+
+function CountUp({ to }: { to: number }) {
+  const [n, setN] = useState(0);
+  const ref = useRef<HTMLSpanElement>(null);
+  useEffect(() => {
+    let raf = 0;
+    let started = false;
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      (entries) => {
+        if (started) return;
+        for (const e of entries) {
+          if (!e.isIntersecting) continue;
+          started = true;
+          const start = performance.now();
+          const dur = 900;
+          const tick = (t: number) => {
+            const p = Math.min(1, (t - start) / dur);
+            const eased = 1 - Math.pow(1 - p, 3);
+            setN(Math.round(to * eased));
+            if (p < 1) raf = requestAnimationFrame(tick);
+          };
+          raf = requestAnimationFrame(tick);
+        }
+      },
+      { threshold: 0.4 },
+    );
+    obs.observe(el);
+    return () => {
+      obs.disconnect();
+      cancelAnimationFrame(raf);
+    };
+  }, [to]);
+  return <span ref={ref}>{n}</span>;
+}
+
+/* ================= C.5 — Halol ijtimoiy dalil ================= */
+function SocialProof() {
+  return (
+    <section className="border-t border-border">
+      <div className="mx-auto max-w-3xl px-5 py-20 text-center">
+        <p className="font-serif text-2xl leading-relaxed text-pretty">
+          Birinchi to'lqin ichkarida. Sen ham shu safda.
+        </p>
+        <p className="mt-4 font-ui text-sm text-muted-foreground">
+          Ertangi statistika birinchi streakingdan boshlanadi.
         </p>
       </div>
     </section>
   );
 }
 
-/* ---------------- Pillars ---------------- */
-function Pillars() {
-  const icons = [Compass, Sparkles, ShieldCheck];
+/* ================= C.6 — Muammo (chuqurroq) ================= */
+function ProblemDeep() {
+  const list = [
+    "Bugungi ishni ertaga qoldirdim",
+    "Sport zaliga uch kun bordim, tashladim",
+    "Kitob 40-sahifada ochiq turibdi",
+    "Ekran vaqti kuniga olti soatdan oshdi",
+    "Tengdoshlarim ilgarilaydi, men joyimda",
+  ];
   return (
-    <section id="features" className="border-t border-border">
-      <div className="mx-auto max-w-6xl px-5 py-24">
-        <SectionHeading
-          eyebrow="Uchta ustun"
-          title={uz.pillars.heading}
-          subtitle={uz.pillars.subheading}
-        />
-        <div className="mt-14 grid gap-4 md:grid-cols-3">
-          {uz.pillars.items.map((item, idx) => {
-            const Icon = icons[idx] ?? Compass;
+    <section className="border-t border-border bg-card/30">
+      <div className="mx-auto grid max-w-6xl gap-10 px-5 py-20 md:grid-cols-2 md:items-center">
+        <div>
+          <h2 className="font-serif text-3xl leading-tight tracking-tight text-balance md:text-4xl">
+            Har dushanba yangi hayot.
+            <br />
+            <span className="text-muted-foreground">Har juma o'sha eski sen.</span>
+          </h2>
+          <p className="mt-6 max-w-xl leading-relaxed text-muted-foreground">
+            YouTube'da soatlab motivatsiya... Uch kundan keyin hammasi to'xtaydi. Senga motivatsiya emas, tizim kerak.
+          </p>
+        </div>
+        <ul className="space-y-3">
+          {list.map((l) => (
+            <li key={l} className="flex items-start gap-3 font-ui text-sm">
+              <span className="mt-2 inline-block h-px w-4 bg-destructive/60" />
+              <span className="leading-relaxed">{l}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  );
+}
+
+/* ================= C.7 — Burilish nuqtasi ================= */
+function TurningPoint() {
+  return (
+    <section className="border-t border-border">
+      <div className="mx-auto max-w-3xl px-5 py-24 text-center">
+        <h2 className="font-serif text-3xl leading-tight tracking-tight text-balance md:text-5xl">
+          Kuchli odamlar irodaga tayanmaydi.
+          <br />
+          <span className="text-primary">Tizim quradi.</span>
+        </h2>
+        <p className="mx-auto mt-6 max-w-xl leading-relaxed text-muted-foreground text-pretty">
+          Ular ertalab "nima qilay?" demaydi — reja allaqachon aniq. Life Order shu tizimni telefoningga o'rnatadi.
+        </p>
+      </div>
+    </section>
+  );
+}
+
+/* ================= C.8 — Uch ustun ================= */
+function ThreePillars() {
+  const items = [
+    {
+      n: "01",
+      icon: Sparkles,
+      title: "AI Mentor — Nadir",
+      body: "Har kuni progressingni tekshiradi. Bahona qabul qilmaydi. Keyingi qadamni aniq ko'rsatadi.",
+    },
+    {
+      n: "02",
+      icon: BarChart3,
+      title: "Intizom o'lchovi",
+      body: "Streak, bajarilish foizi, zaif kunlar, 0–100 intizom balli.",
+    },
+    {
+      n: "03",
+      icon: Target,
+      title: "Kunlik missiyalar",
+      body: "Maqsadingga mos uchta vazifa. Qisqa, aniq, bugun bajariladigan.",
+    },
+  ];
+  return (
+    <section className="border-t border-border bg-card/30">
+      <div className="mx-auto max-w-6xl px-5 py-20">
+        <div className="grid gap-4 md:grid-cols-3">
+          {items.map((i) => {
+            const Icon = i.icon;
             return (
               <article
-                key={item.tag}
-                className="glass lift rounded-[var(--radius)] p-7"
+                key={i.n}
+                className="rounded-[var(--radius)] border border-border/60 bg-background/60 p-7"
               >
                 <div className="flex items-center justify-between">
-                  <span
-                    className="grid h-10 w-10 place-items-center rounded-[10px] border border-border bg-secondary text-foreground"
-                    aria-hidden
-                  >
-                    <Icon className="h-5 w-5" />
-                  </span>
+                  <Icon className="h-5 w-5 text-primary" strokeWidth={1.6} />
                   <span className="font-ui text-xs uppercase tracking-[0.22em] text-muted-foreground">
-                    {item.tag}
+                    {i.n}
                   </span>
                 </div>
-                <h3 className="mt-6 font-serif text-2xl leading-tight">
-                  {item.title}
-                </h3>
-                <p className="mt-3 leading-relaxed text-muted-foreground">
-                  {item.body}
-                </p>
+                <h3 className="mt-6 font-serif text-2xl leading-tight">{i.title}</h3>
+                <p className="mt-3 leading-relaxed text-muted-foreground">{i.body}</p>
               </article>
             );
           })}
@@ -176,172 +413,37 @@ function Pillars() {
   );
 }
 
-/* ---------------- Nervous system (tiers) ---------------- */
-function NervousSystem() {
-  const tierColorClass: Record<string, string> = {
-    Boshlovchi: "text-muted-foreground",
-    Intizomli: "text-foreground",
-    Kuchli: "text-foam",
-    Elita: "text-primary",
-    Usta: "text-sun",
-    Apex: "text-coral",
-  };
-  return (
-    <section id="method" className="border-t border-border bg-card/30">
-      <div className="mx-auto max-w-6xl px-5 py-24">
-        <SectionHeading
-          eyebrow="Nerv tizimi"
-          title={uz.nervous.heading}
-          subtitle={uz.nervous.subheading}
-        />
-        <div className="mt-14 grid gap-8 md:grid-cols-[1.1fr_1fr]">
-          <div className="glass rounded-[var(--radius)] p-2">
-            <table className="w-full font-ui text-sm">
-              <thead>
-                <tr className="text-left text-muted-foreground">
-                  <th className="px-5 py-4 font-medium">Ball</th>
-                  <th className="px-5 py-4 font-medium">Daraja</th>
-                  <th className="px-5 py-4 font-medium">EN</th>
-                </tr>
-              </thead>
-              <tbody>
-                {uz.nervous.tiers.map((tier) => (
-                  <tr
-                    key={tier.uz}
-                    className="border-t border-border/60"
-                  >
-                    <td className="px-5 py-4 tabular-nums text-muted-foreground">
-                      {tier.range}
-                    </td>
-                    <td
-                      className={`px-5 py-4 font-serif text-base ${
-                        tierColorClass[tier.uz] ?? "text-foreground"
-                      }`}
-                    >
-                      {tier.uz}
-                    </td>
-                    <td className="px-5 py-4 text-muted-foreground">
-                      {tier.en}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-          <div className="flex flex-col justify-center gap-6">
-            <p className="font-serif text-2xl leading-tight text-pretty">
-              Discipline Score serverda hisoblanadi. Frontend faqat ko'rsatadi
-              — o'zgartira olmaydi.
-            </p>
-            <div className="rounded-[var(--radius)] border border-border bg-secondary/40 p-6">
-              <div className="mb-3 flex items-center gap-2 font-ui text-xs uppercase tracking-[0.2em] text-primary">
-                <ShieldCheck className="h-4 w-4" /> Himoya
-              </div>
-              <p className="text-sm leading-relaxed text-muted-foreground">
-                {uz.nervous.shield}
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ---------------- Mentor ---------------- */
-function Mentor() {
-  return (
-    <section id="mentor" className="border-t border-border">
-      <div className="mx-auto max-w-4xl px-5 py-24">
-        <SectionHeading eyebrow="Nadir" title={uz.mentor.heading} centered />
-        <p className="mx-auto mt-8 max-w-2xl text-center text-lg leading-relaxed text-muted-foreground text-pretty">
-          {uz.mentor.body}
-        </p>
-        <figure className="mx-auto mt-12 max-w-2xl">
-          <blockquote className="glass relative rounded-[var(--radius)] p-8 font-serif text-xl leading-relaxed">
-            <span
-              aria-hidden
-              className="absolute -left-2 -top-4 select-none font-serif text-7xl leading-none text-primary/60"
-            >
-              &ldquo;
-            </span>
-            {uz.mentor.quote}
-          </blockquote>
-          <figcaption className="mt-4 text-center font-ui text-xs uppercase tracking-[0.24em] text-muted-foreground">
-            {uz.mentor.quoteBy}
-          </figcaption>
-        </figure>
-      </div>
-    </section>
-  );
-}
-
-/* ---------------- Pricing ---------------- */
-function Pricing() {
-  const plans = [
-    { ...uz.pricing.free, tone: "free" as const },
-    { ...uz.pricing.premium, tone: "premium" as const, badge: "Tavsiya" },
+/* ================= C.9 — How it works ================= */
+function HowItWorks() {
+  const steps = [
+    {
+      n: "01",
+      title: "Beshta savolga javob ber",
+      body: "Uyqu, sport, fokus, odatlar. 60 soniyada hozirgi nuqtangni belgilaymiz.",
+    },
+    {
+      n: "02",
+      title: "Shaxsiy rejangni ol",
+      body: "AI javoblaringga qarab har kuni uchta aniq vazifa tuzadi.",
+    },
+    {
+      n: "03",
+      title: "Streakni qur",
+      body: "Har missiya XP va streak beradi. Intizom balling har hafta ko'tariladi.",
+    },
   ];
   return (
-    <section id="pricing" className="border-t border-border bg-card/30">
-      <div className="mx-auto max-w-5xl px-5 py-24">
-        <SectionHeading
-          eyebrow="Narxlar"
-          title={uz.pricing.heading}
-          subtitle={uz.pricing.subheading}
-          centered
-        />
-        <div className="mt-14 grid gap-5 md:grid-cols-2">
-          {plans.map((plan) => (
-            <div
-              key={plan.title}
-              className={
-                plan.tone === "premium"
-                  ? "relative rounded-[var(--radius)] border-2 border-primary bg-card p-8"
-                  : "relative rounded-[var(--radius)] border border-border bg-card p-8"
-              }
-              style={
-                plan.tone === "premium"
-                  ? { boxShadow: "var(--shadow-glow)" }
-                  : undefined
-              }
-            >
-              {plan.tone === "premium" && (
-                <span className="absolute -top-3 left-6 rounded-full bg-primary px-3 py-1 font-ui text-[10px] font-semibold uppercase tracking-[0.2em] text-primary-foreground">
-                  {plan.badge}
-                </span>
-              )}
-              <h3 className="font-serif text-2xl">{plan.title}</h3>
-              <div className="mt-4 flex items-baseline gap-2">
-                <span className="font-serif text-5xl tracking-tight">
-                  {plan.price}
-                </span>
-                <span className="font-ui text-sm text-muted-foreground">
-                  {plan.period}
-                </span>
-              </div>
-              <ul className="mt-8 space-y-3 font-ui text-sm">
-                {plan.features.map((feature) => (
-                  <li key={feature} className="flex items-start gap-3">
-                    <Check
-                      className={
-                        plan.tone === "premium"
-                          ? "mt-0.5 h-4 w-4 shrink-0 text-primary"
-                          : "mt-0.5 h-4 w-4 shrink-0 text-muted-foreground"
-                      }
-                    />
-                    <span>{feature}</span>
-                  </li>
-                ))}
-              </ul>
-              <Button
-                size="lg"
-                variant={plan.tone === "premium" ? "default" : "secondary"}
-                className="mt-8 w-full font-ui font-semibold"
-                asChild
-              >
-                <Link to="/auth">{plan.cta}</Link>
-              </Button>
+    <section id="how-it-works" className="border-t border-border">
+      <div className="mx-auto max-w-6xl px-5 py-20">
+        <h2 className="max-w-3xl font-serif text-3xl leading-tight tracking-tight text-balance md:text-5xl">
+          Uch qadam. Oltmish kun. Yangi natija.
+        </h2>
+        <div className="mt-14 grid gap-4 md:grid-cols-3">
+          {steps.map((s) => (
+            <div key={s.n} className="rounded-[var(--radius)] border border-border/60 bg-card/40 p-7">
+              <p className="font-ui text-xs uppercase tracking-[0.22em] text-primary">{s.n}</p>
+              <h3 className="mt-4 font-serif text-xl">{s.title}</h3>
+              <p className="mt-2 leading-relaxed text-muted-foreground">{s.body}</p>
             </div>
           ))}
         </div>
@@ -350,21 +452,224 @@ function Pricing() {
   );
 }
 
-/* ---------------- Final CTA ---------------- */
+/* ================= C.10 — 6 karta funksiyalar grid ================= */
+function FeaturesGrid() {
+  const items = [
+    { icon: Flame,     title: "Streak va intizom balli", body: "Kundalik ketma-ketlik va 0–100 intizom balli." },
+    { icon: Sparkles,  title: "AI Mentor — Nadir",        body: "Halol chat-mentor. Bo'sh maqtov yo'q." },
+    { icon: Target,    title: "Kunlik missiyalar",         body: "Har kuni uchta aniq, bugun bajariladigan vazifa." },
+    { icon: LineChart, title: "Haftalik tahlil",           body: "Kuchli kun, zaif kun, o'sish trendlari." },
+    { icon: BookOpen,  title: "Kurs va kitoblar",          body: "Odat va fokus mavzusidagi qisqa kurslar." },
+    { icon: Users,     title: "Davra — jamoa",             body: "Kanallar, Party, Leaderboard — birga o'sish." },
+  ];
+  return (
+    <section className="border-t border-border bg-card/30">
+      <div className="mx-auto max-w-6xl px-5 py-20">
+        <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
+          {items.map((i) => {
+            const Icon = i.icon;
+            return (
+              <div key={i.title} className="rounded-[var(--radius)] border border-border/60 bg-background/60 p-6">
+                <Icon className="h-5 w-5 text-primary" strokeWidth={1.6} />
+                <h3 className="mt-4 font-serif text-lg">{i.title}</h3>
+                <p className="mt-2 font-ui text-sm text-muted-foreground leading-relaxed">
+                  {i.body}
+                </p>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ================= C.11 — Erta a'zolar (halollik) ================= */
+function EarlyMembers() {
+  return (
+    <section className="border-t border-border">
+      <div className="mx-auto max-w-3xl px-5 py-20 text-center">
+        <p className="font-serif text-xl leading-relaxed text-pretty">
+          Hali tavsif yozadigan foydalanuvchi yo'q.
+        </p>
+        <p className="mt-4 font-ui text-sm text-muted-foreground leading-relaxed">
+          Life Order beta bosqichida. Soxta iqtiboslar joylashtirmaymiz — birinchi haqiqiy tavsiflar sen va boshqa erta a'zolarning 30-kunlik natijalaridan chiqadi.
+        </p>
+      </div>
+    </section>
+  );
+}
+
+/* ================= C.12 — Narxlar ================= */
+function Pricing() {
+  return (
+    <section id="pricing" className="border-t border-border bg-card/30">
+      <div className="mx-auto max-w-4xl px-5 py-20">
+        <div className="grid gap-5 md:grid-cols-2">
+          <PricingCard
+            title="Free"
+            price="0 so'm"
+            period="har doim"
+            features={[
+              "Kunlik uchta missiya",
+              "Streak va XP",
+              "Asosiy AI mentor",
+              "Davra chatiga kirish",
+            ]}
+            cta="Bepul boshlash"
+            variant="outline"
+          />
+          <PricingCard
+            title="Pro"
+            price="49 000 so'm"
+            period="oyiga · yillik obunada −40%"
+            badge="Tavsiya"
+            features={[
+              "Free rejadagi hammasi",
+              "Nadir Pro — chuqur tahlil",
+              "Cheksiz missiya va odat",
+              "Haftalik AI hisobot",
+              "Kurs va kitoblarga to'liq kirish",
+              "Ustuvor yordam",
+            ]}
+            cta="Pro rejani ko'rish"
+            variant="primary"
+          />
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function PricingCard({
+  title,
+  price,
+  period,
+  features,
+  cta,
+  variant,
+  badge,
+}: {
+  title: string;
+  price: string;
+  period: string;
+  features: string[];
+  cta: string;
+  variant: "primary" | "outline";
+  badge?: string;
+}) {
+  const priceNumMatch = price.match(/(\d[\d\s]*)/);
+  return (
+    <div
+      className={
+        "relative rounded-[var(--radius)] p-7 " +
+        (variant === "primary"
+          ? "border-2 border-primary bg-background"
+          : "border border-border bg-background")
+      }
+      style={variant === "primary" ? { boxShadow: "var(--shadow-glow)" } : undefined}
+    >
+      {badge && (
+        <span className="absolute -top-3 right-6 rounded-full bg-primary px-3 py-1 font-ui text-[10px] font-semibold uppercase tracking-[0.2em] text-primary-foreground">
+          {badge}
+        </span>
+      )}
+      <h3 className="font-serif text-2xl">{title}</h3>
+      <div className="mt-4 flex items-baseline gap-2">
+        <span className="font-serif text-4xl tracking-tight tabular-nums">
+          {priceNumMatch ? (
+            <>
+              <CountUp to={Number(priceNumMatch[1].replace(/\s/g, ""))} />
+              <span>{price.replace(priceNumMatch[1], "")}</span>
+            </>
+          ) : (
+            price
+          )}
+        </span>
+      </div>
+      <p className="mt-1 font-ui text-sm text-muted-foreground">{period}</p>
+      <ul className="mt-6 space-y-3 font-ui text-sm">
+        {features.map((f) => (
+          <li key={f} className="flex items-start gap-3">
+            <Check className={"mt-0.5 h-4 w-4 shrink-0 " + (variant === "primary" ? "text-primary" : "text-muted-foreground")} />
+            <span>{f}</span>
+          </li>
+        ))}
+      </ul>
+      <Button
+        asChild
+        size="lg"
+        variant={variant === "primary" ? "default" : "outline"}
+        className="mt-8 w-full rounded-full font-ui font-semibold"
+      >
+        <Link to="/auth">{cta}</Link>
+      </Button>
+    </div>
+  );
+}
+
+/* ================= C.13 — FAQ ================= */
+function Faq() {
+  const items = [
+    {
+      q: "Life Order nima?",
+      a: "Self-Control OS — o'z-o'zini boshqarishning operatsion tizimi. Trigger tahlili, kunlik uchta aniq qadam va halol AI mentor Nadir bir joyda birlashgan.",
+    },
+    {
+      q: "Bepulmi?",
+      a: "Ha. Free reja cheksiz ishlaydi. Karta so'ralmaydi, avtomatik to'lov yo'q.",
+    },
+    {
+      q: "Kim uchun mos?",
+      a: "O'zini o'zgartirmoqchi bo'lgan 16–30 yoshdagi har bir kishi uchun.",
+    },
+    {
+      q: "Ma'lumotlarim xavfsizmi?",
+      a: "Ha. Barcha ma'lumot shifrlangan, uchinchi tomonga sotilmaydi. Istalgan paytda o'chirish so'rovini yubor.",
+    },
+    {
+      q: "Qancha vaqt kerak?",
+      a: "Kuniga 10–15 daqiqa yetarli. Missiyalar qisqa va aniq.",
+    },
+  ];
+  return (
+    <section id="faq" className="border-t border-border">
+      <div className="mx-auto max-w-3xl px-5 py-20">
+        <h2 className="font-serif text-3xl leading-tight tracking-tight md:text-4xl">
+          Ko'p so'raladiganlar
+        </h2>
+        <Accordion type="single" collapsible defaultValue="q-0" className="mt-8">
+          {items.map((it, i) => (
+            <AccordionItem key={i} value={`q-${i}`} className="border-border/60">
+              <AccordionTrigger className="text-left font-serif text-lg">
+                {it.q}
+              </AccordionTrigger>
+              <AccordionContent className="font-ui text-sm text-muted-foreground leading-relaxed">
+                {it.a}
+              </AccordionContent>
+            </AccordionItem>
+          ))}
+        </Accordion>
+      </div>
+    </section>
+  );
+}
+
+/* ================= C.14 — Final CTA ================= */
 function FinalCta() {
   return (
-    <section id="cta" className="border-t border-border">
+    <section className="border-t border-border bg-card/30">
       <div className="mx-auto max-w-3xl px-5 py-24 text-center">
-        <h2 className="font-serif text-4xl leading-tight tracking-tight text-balance md:text-5xl">
-          {uz.cta.heading}
+        <h2 className="font-serif text-3xl leading-tight tracking-tight text-balance md:text-5xl">
+          Oltmish kundan keyingi o'zingni bugun tanla.
         </h2>
-        <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground text-pretty">
-          {uz.cta.body}
+        <p className="mx-auto mt-6 max-w-xl leading-relaxed text-muted-foreground text-pretty">
+          Bepul. Kartasiz. Birinchi missiyang 60 soniyadan keyin qo'lingda.
         </p>
         <div className="mt-9">
-          <Button size="lg" className="font-ui font-semibold" asChild>
+          <Button asChild size="xl" className="h-14 rounded-full px-8 font-ui font-semibold">
             <Link to="/auth">
-              {uz.cta.button}
+              Bepul boshlash
               <ArrowRight className="ml-1.5 h-4 w-4" />
             </Link>
           </Button>
@@ -374,77 +679,27 @@ function FinalCta() {
   );
 }
 
-/* ---------------- Footer ---------------- */
+/* ================= C.15 — Footer ================= */
 function Footer() {
   const links = [
-    { key: "terms", label: uz.footer.links.terms },
-    { key: "privacy", label: uz.footer.links.privacy },
-    { key: "refund", label: uz.footer.links.refund },
-    { key: "security", label: uz.footer.links.security },
+    { href: "/pricing", label: "Narxlar" },
+    { href: "/terms", label: "Terms" },
+    { href: "/privacy", label: "Privacy" },
+    { href: "/refund", label: "Refund" },
+    { href: "/auth", label: "Kirish" },
   ];
   return (
     <footer className="border-t border-border bg-background">
-      <div className="mx-auto grid max-w-6xl gap-6 px-5 py-12 md:grid-cols-[1fr_auto] md:items-center">
-        <div>
-          <div className="flex items-center gap-2 font-serif text-lg">
-            <LogoMark />
-            <span>{uz.brand.name}</span>
-          </div>
-          <p className="mt-3 max-w-md font-ui text-sm text-muted-foreground">
-            {uz.footer.tagline}
-          </p>
-          <p className="mt-1 font-ui text-xs text-muted-foreground/80">
-            {uz.footer.beta}
-          </p>
-        </div>
-        <nav className="flex flex-wrap items-center gap-x-6 gap-y-2 font-ui text-sm text-muted-foreground">
-          {links.map((link) => (
-            <a
-              key={link.key}
-              href={`/${link.key}`}
-              className="transition-colors hover:text-foreground"
-            >
-              {link.label}
+      <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-5 py-8 font-ui text-xs text-muted-foreground">
+        <p>© 2026 {BRAND} — Hayotingni tartibga sol</p>
+        <nav className="flex flex-wrap gap-x-5 gap-y-2">
+          {links.map((l) => (
+            <a key={l.href} href={l.href} className="min-h-11 transition-colors hover:text-foreground">
+              {l.label}
             </a>
           ))}
         </nav>
       </div>
-      <div className="border-t border-border">
-        <div className="mx-auto max-w-6xl px-5 py-5 font-ui text-xs text-muted-foreground">
-          {uz.footer.rights}
-        </div>
-      </div>
     </footer>
-  );
-}
-
-/* ---------------- Shared ---------------- */
-function SectionHeading({
-  eyebrow,
-  title,
-  subtitle,
-  centered,
-}: {
-  eyebrow?: string;
-  title: string;
-  subtitle?: string;
-  centered?: boolean;
-}) {
-  return (
-    <div className={centered ? "mx-auto max-w-2xl text-center" : "max-w-2xl"}>
-      {eyebrow && (
-        <p className="font-ui text-xs uppercase tracking-[0.28em] text-primary">
-          {eyebrow}
-        </p>
-      )}
-      <h2 className="mt-4 font-serif text-3xl leading-tight tracking-tight text-balance md:text-4xl">
-        {title}
-      </h2>
-      {subtitle && (
-        <p className="mt-4 leading-relaxed text-muted-foreground text-pretty">
-          {subtitle}
-        </p>
-      )}
-    </div>
   );
 }
