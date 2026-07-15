@@ -217,6 +217,3 @@ function HabitsPage() {
     </AppShell>
   );
 }
-
-// keep Textarea import used to allow future notes field
-export const _unused = Textarea;
