@@ -31,6 +31,7 @@ import { Route as AuthenticatedDietRouteImport } from './routes/_authenticated/d
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as AuthenticatedAnalyticsRouteImport } from './routes/_authenticated/analytics'
 import { Route as AuthenticatedAchievementsRouteImport } from './routes/_authenticated/achievements'
+import { Route as AuthenticatedCLearnRouteImport } from './routes/_authenticated/c.learn'
 import { Route as AuthenticatedCHabitsRouteImport } from './routes/_authenticated/c.habits'
 import { Route as AuthenticatedCBodyRouteImport } from './routes/_authenticated/c.body'
 
@@ -145,6 +146,11 @@ const AuthenticatedAchievementsRoute =
     path: '/achievements',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedCLearnRoute = AuthenticatedCLearnRouteImport.update({
+  id: '/c/learn',
+  path: '/c/learn',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedCHabitsRoute = AuthenticatedCHabitsRouteImport.update({
   id: '/c/habits',
   path: '/c/habits',
@@ -180,6 +186,7 @@ export interface FileRoutesByFullPath {
   '/api/chat': typeof ApiChatRoute
   '/c/body': typeof AuthenticatedCBodyRoute
   '/c/habits': typeof AuthenticatedCHabitsRoute
+  '/c/learn': typeof AuthenticatedCLearnRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -205,6 +212,7 @@ export interface FileRoutesByTo {
   '/api/chat': typeof ApiChatRoute
   '/c/body': typeof AuthenticatedCBodyRoute
   '/c/habits': typeof AuthenticatedCHabitsRoute
+  '/c/learn': typeof AuthenticatedCLearnRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -232,6 +240,7 @@ export interface FileRoutesById {
   '/api/chat': typeof ApiChatRoute
   '/_authenticated/c/body': typeof AuthenticatedCBodyRoute
   '/_authenticated/c/habits': typeof AuthenticatedCHabitsRoute
+  '/_authenticated/c/learn': typeof AuthenticatedCLearnRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -259,6 +268,7 @@ export interface FileRouteTypes {
     | '/api/chat'
     | '/c/body'
     | '/c/habits'
+    | '/c/learn'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -284,6 +294,7 @@ export interface FileRouteTypes {
     | '/api/chat'
     | '/c/body'
     | '/c/habits'
+    | '/c/learn'
   id:
     | '__root__'
     | '/'
@@ -310,6 +321,7 @@ export interface FileRouteTypes {
     | '/api/chat'
     | '/_authenticated/c/body'
     | '/_authenticated/c/habits'
+    | '/_authenticated/c/learn'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -480,6 +492,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAchievementsRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/c/learn': {
+      id: '/_authenticated/c/learn'
+      path: '/c/learn'
+      fullPath: '/c/learn'
+      preLoaderRoute: typeof AuthenticatedCLearnRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/c/habits': {
       id: '/_authenticated/c/habits'
       path: '/c/habits'
@@ -513,6 +532,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedWorkoutRoute: typeof AuthenticatedWorkoutRoute
   AuthenticatedCBodyRoute: typeof AuthenticatedCBodyRoute
   AuthenticatedCHabitsRoute: typeof AuthenticatedCHabitsRoute
+  AuthenticatedCLearnRoute: typeof AuthenticatedCLearnRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
@@ -531,6 +551,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedWorkoutRoute: AuthenticatedWorkoutRoute,
   AuthenticatedCBodyRoute: AuthenticatedCBodyRoute,
   AuthenticatedCHabitsRoute: AuthenticatedCHabitsRoute,
+  AuthenticatedCLearnRoute: AuthenticatedCLearnRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =
