@@ -31,6 +31,7 @@ import { Route as AuthenticatedDietRouteImport } from './routes/_authenticated/d
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as AuthenticatedAnalyticsRouteImport } from './routes/_authenticated/analytics'
 import { Route as AuthenticatedAchievementsRouteImport } from './routes/_authenticated/achievements'
+import { Route as AuthenticatedCBodyRouteImport } from './routes/_authenticated/c.body'
 
 const TermsRoute = TermsRouteImport.update({
   id: '/terms',
@@ -143,6 +144,11 @@ const AuthenticatedAchievementsRoute =
     path: '/achievements',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedCBodyRoute = AuthenticatedCBodyRouteImport.update({
+  id: '/c/body',
+  path: '/c/body',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -166,6 +172,7 @@ export interface FileRoutesByFullPath {
   '/settings': typeof AuthenticatedSettingsRoute
   '/workout': typeof AuthenticatedWorkoutRoute
   '/api/chat': typeof ApiChatRoute
+  '/c/body': typeof AuthenticatedCBodyRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -189,6 +196,7 @@ export interface FileRoutesByTo {
   '/settings': typeof AuthenticatedSettingsRoute
   '/workout': typeof AuthenticatedWorkoutRoute
   '/api/chat': typeof ApiChatRoute
+  '/c/body': typeof AuthenticatedCBodyRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -214,6 +222,7 @@ export interface FileRoutesById {
   '/_authenticated/settings': typeof AuthenticatedSettingsRoute
   '/_authenticated/workout': typeof AuthenticatedWorkoutRoute
   '/api/chat': typeof ApiChatRoute
+  '/_authenticated/c/body': typeof AuthenticatedCBodyRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -239,6 +248,7 @@ export interface FileRouteTypes {
     | '/settings'
     | '/workout'
     | '/api/chat'
+    | '/c/body'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -262,6 +272,7 @@ export interface FileRouteTypes {
     | '/settings'
     | '/workout'
     | '/api/chat'
+    | '/c/body'
   id:
     | '__root__'
     | '/'
@@ -286,6 +297,7 @@ export interface FileRouteTypes {
     | '/_authenticated/settings'
     | '/_authenticated/workout'
     | '/api/chat'
+    | '/_authenticated/c/body'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -456,6 +468,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAchievementsRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/c/body': {
+      id: '/_authenticated/c/body'
+      path: '/c/body'
+      fullPath: '/c/body'
+      preLoaderRoute: typeof AuthenticatedCBodyRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
@@ -473,6 +492,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedQuestsRoute: typeof AuthenticatedQuestsRoute
   AuthenticatedSettingsRoute: typeof AuthenticatedSettingsRoute
   AuthenticatedWorkoutRoute: typeof AuthenticatedWorkoutRoute
+  AuthenticatedCBodyRoute: typeof AuthenticatedCBodyRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
@@ -489,6 +509,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedQuestsRoute: AuthenticatedQuestsRoute,
   AuthenticatedSettingsRoute: AuthenticatedSettingsRoute,
   AuthenticatedWorkoutRoute: AuthenticatedWorkoutRoute,
+  AuthenticatedCBodyRoute: AuthenticatedCBodyRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =
