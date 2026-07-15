@@ -108,13 +108,17 @@ function Diet() {
       cacheControl: "3600",
       upsert: false,
     });
-    setUploading(false);
     if (error) {
+      setUploading(false);
       toast.error("Rasmni yuklab bo'lmadi.");
       return;
     }
-    const { data } = supabase.storage.from("meals").getPublicUrl(path);
-    setPendingImage(data.publicUrl);
+    // Private bucket → signed URL (1 yil)
+    const { data } = await supabase.storage
+      .from("meals")
+      .createSignedUrl(path, 60 * 60 * 24 * 365);
+    setUploading(false);
+    setPendingImage(data?.signedUrl ?? null);
     toast.success("Rasm biriktirildi.");
   }
 

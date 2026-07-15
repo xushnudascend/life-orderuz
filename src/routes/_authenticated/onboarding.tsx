@@ -1,5 +1,5 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { useMemo, useState } from "react";
+import { useEffect as useEffectHook, useMemo, useState } from "react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
@@ -138,10 +138,28 @@ function Onboarding() {
     }
   }
 
+  // Keyboard shortcut: 1-9 raqamlar bilan tez o'tish (savolga)
+  // "Tezkor: 1–N raqamlari yoki orqaga"
+  useKeyboardQuickNav({
+    total,
+    setStep,
+    goBack,
+    goNext,
+    canAdvance,
+  });
+
   return (
     <div className="min-h-screen bg-background text-foreground">
       <div className="mx-auto max-w-xl px-5 py-10">
         <ProgressBar current={step + 1} total={total} label={sectionLabel} />
+
+        <QuickNumericNav
+          total={total}
+          current={step}
+          answered={answers}
+          plan={plan}
+          onJump={(i) => setStep(i)}
+        />
 
         <div className="mt-10 animate-fade-in-up">
           {currentQuestion ? (
@@ -176,11 +194,9 @@ function Onboarding() {
             Orqaga
           </Button>
 
-          {step < sectionA && (
-            <span className="font-ui text-xs uppercase tracking-[0.22em] text-muted-foreground">
-              Savol {step + 1} / {total}
-            </span>
-          )}
+          <span className="font-ui text-xs uppercase tracking-[0.22em] text-muted-foreground">
+            Tezkor: 1–{total} raqamlari yoki orqaga
+          </span>
 
           <Button
             className="font-ui font-semibold"
@@ -195,6 +211,87 @@ function Onboarding() {
       </div>
     </div>
   );
+}
+
+/**
+ * Yuqoridagi raqamlar qatori — allaqachon javob berilgan savollarga sakraydi.
+ */
+function QuickNumericNav({
+  total,
+  current,
+  answered,
+  plan,
+  onJump,
+}: {
+  total: number;
+  current: number;
+  answered: Answers;
+  plan: 7 | 30 | null;
+  onJump: (i: number) => void;
+}) {
+  return (
+    <div className="mt-4 flex flex-wrap gap-1.5">
+      {Array.from({ length: total }, (_, i) => {
+        const q = ONBOARDING_QUESTIONS[i];
+        const isPlan = i === ONBOARDING_QUESTIONS.length;
+        const done = isPlan ? plan !== null : q ? Boolean(answered[q.key]) : false;
+        const active = i === current;
+        // Faqat: (a) hozirgi, (b) javob berilgan, yoki (c) darhol keyingi qadam
+        const reachable = done || active || i <= current + 1;
+        return (
+          <button
+            key={i}
+            type="button"
+            disabled={!reachable}
+            onClick={() => onJump(i)}
+            className={
+              "h-7 min-w-7 rounded-md border px-2 font-ui text-[11px] tabular-nums transition-colors " +
+              (active
+                ? "border-primary bg-primary/10 text-primary"
+                : done
+                  ? "border-border bg-card text-foreground hover:border-primary/40"
+                  : reachable
+                    ? "border-dashed border-border text-muted-foreground hover:text-foreground"
+                    : "border-dashed border-border/40 text-muted-foreground/40 cursor-not-allowed")
+            }
+            aria-label={`Savol ${i + 1}`}
+          >
+            {i + 1}
+          </button>
+        );
+      })}
+    </div>
+  );
+}
+
+function useKeyboardQuickNav({
+  total,
+  setStep,
+  goBack,
+  goNext,
+  canAdvance,
+}: {
+  total: number;
+  setStep: (fn: (s: number) => number) => void;
+  goBack: () => void;
+  goNext: () => void;
+  canAdvance: boolean;
+}) {
+  useEffectHook(() => {
+    function onKey(e: KeyboardEvent) {
+      const target = e.target as HTMLElement | null;
+      if (target && (target.tagName === "INPUT" || target.tagName === "TEXTAREA")) return;
+      if (e.key === "ArrowLeft") { e.preventDefault(); goBack(); return; }
+      if (e.key === "ArrowRight") { e.preventDefault(); if (canAdvance) goNext(); return; }
+      const n = Number(e.key);
+      if (Number.isFinite(n) && n >= 1 && n <= Math.min(9, total)) {
+        e.preventDefault();
+        setStep(() => n - 1);
+      }
+    }
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [total, goBack, goNext, canAdvance, setStep]);
 }
 
 function ProgressBar({

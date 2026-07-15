@@ -20,9 +20,11 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as UUsernameRouteImport } from './routes/u.$username'
 import { Route as ApiChatRouteImport } from './routes/api/chat'
 import { Route as AuthenticatedWorkoutRouteImport } from './routes/_authenticated/workout'
+import { Route as AuthenticatedTemirIntizomRouteImport } from './routes/_authenticated/temir-intizom'
 import { Route as AuthenticatedSettingsRouteImport } from './routes/_authenticated/settings'
 import { Route as AuthenticatedQuestsRouteImport } from './routes/_authenticated/quests'
 import { Route as AuthenticatedProfileRouteImport } from './routes/_authenticated/profile'
+import { Route as AuthenticatedPartyRouteImport } from './routes/_authenticated/party'
 import { Route as AuthenticatedOnboardingRouteImport } from './routes/_authenticated/onboarding'
 import { Route as AuthenticatedMentorRouteImport } from './routes/_authenticated/mentor'
 import { Route as AuthenticatedLeaderboardRouteImport } from './routes/_authenticated/leaderboard'
@@ -92,6 +94,12 @@ const AuthenticatedWorkoutRoute = AuthenticatedWorkoutRouteImport.update({
   path: '/workout',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedTemirIntizomRoute =
+  AuthenticatedTemirIntizomRouteImport.update({
+    id: '/temir-intizom',
+    path: '/temir-intizom',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedSettingsRoute = AuthenticatedSettingsRouteImport.update({
   id: '/settings',
   path: '/settings',
@@ -105,6 +113,11 @@ const AuthenticatedQuestsRoute = AuthenticatedQuestsRouteImport.update({
 const AuthenticatedProfileRoute = AuthenticatedProfileRouteImport.update({
   id: '/profile',
   path: '/profile',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedPartyRoute = AuthenticatedPartyRouteImport.update({
+  id: '/party',
+  path: '/party',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedOnboardingRoute = AuthenticatedOnboardingRouteImport.update({
@@ -199,9 +212,11 @@ export interface FileRoutesByFullPath {
   '/leaderboard': typeof AuthenticatedLeaderboardRoute
   '/mentor': typeof AuthenticatedMentorRoute
   '/onboarding': typeof AuthenticatedOnboardingRoute
+  '/party': typeof AuthenticatedPartyRoute
   '/profile': typeof AuthenticatedProfileRoute
   '/quests': typeof AuthenticatedQuestsRoute
   '/settings': typeof AuthenticatedSettingsRoute
+  '/temir-intizom': typeof AuthenticatedTemirIntizomRoute
   '/workout': typeof AuthenticatedWorkoutRoute
   '/api/chat': typeof ApiChatRoute
   '/u/$username': typeof UUsernameRoute
@@ -228,9 +243,11 @@ export interface FileRoutesByTo {
   '/leaderboard': typeof AuthenticatedLeaderboardRoute
   '/mentor': typeof AuthenticatedMentorRoute
   '/onboarding': typeof AuthenticatedOnboardingRoute
+  '/party': typeof AuthenticatedPartyRoute
   '/profile': typeof AuthenticatedProfileRoute
   '/quests': typeof AuthenticatedQuestsRoute
   '/settings': typeof AuthenticatedSettingsRoute
+  '/temir-intizom': typeof AuthenticatedTemirIntizomRoute
   '/workout': typeof AuthenticatedWorkoutRoute
   '/api/chat': typeof ApiChatRoute
   '/u/$username': typeof UUsernameRoute
@@ -259,9 +276,11 @@ export interface FileRoutesById {
   '/_authenticated/leaderboard': typeof AuthenticatedLeaderboardRoute
   '/_authenticated/mentor': typeof AuthenticatedMentorRoute
   '/_authenticated/onboarding': typeof AuthenticatedOnboardingRoute
+  '/_authenticated/party': typeof AuthenticatedPartyRoute
   '/_authenticated/profile': typeof AuthenticatedProfileRoute
   '/_authenticated/quests': typeof AuthenticatedQuestsRoute
   '/_authenticated/settings': typeof AuthenticatedSettingsRoute
+  '/_authenticated/temir-intizom': typeof AuthenticatedTemirIntizomRoute
   '/_authenticated/workout': typeof AuthenticatedWorkoutRoute
   '/api/chat': typeof ApiChatRoute
   '/u/$username': typeof UUsernameRoute
@@ -290,9 +309,11 @@ export interface FileRouteTypes {
     | '/leaderboard'
     | '/mentor'
     | '/onboarding'
+    | '/party'
     | '/profile'
     | '/quests'
     | '/settings'
+    | '/temir-intizom'
     | '/workout'
     | '/api/chat'
     | '/u/$username'
@@ -319,9 +340,11 @@ export interface FileRouteTypes {
     | '/leaderboard'
     | '/mentor'
     | '/onboarding'
+    | '/party'
     | '/profile'
     | '/quests'
     | '/settings'
+    | '/temir-intizom'
     | '/workout'
     | '/api/chat'
     | '/u/$username'
@@ -349,9 +372,11 @@ export interface FileRouteTypes {
     | '/_authenticated/leaderboard'
     | '/_authenticated/mentor'
     | '/_authenticated/onboarding'
+    | '/_authenticated/party'
     | '/_authenticated/profile'
     | '/_authenticated/quests'
     | '/_authenticated/settings'
+    | '/_authenticated/temir-intizom'
     | '/_authenticated/workout'
     | '/api/chat'
     | '/u/$username'
@@ -453,6 +478,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedWorkoutRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/temir-intizom': {
+      id: '/_authenticated/temir-intizom'
+      path: '/temir-intizom'
+      fullPath: '/temir-intizom'
+      preLoaderRoute: typeof AuthenticatedTemirIntizomRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/settings': {
       id: '/_authenticated/settings'
       path: '/settings'
@@ -472,6 +504,13 @@ declare module '@tanstack/react-router' {
       path: '/profile'
       fullPath: '/profile'
       preLoaderRoute: typeof AuthenticatedProfileRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/party': {
+      id: '/_authenticated/party'
+      path: '/party'
+      fullPath: '/party'
+      preLoaderRoute: typeof AuthenticatedPartyRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/onboarding': {
@@ -600,9 +639,11 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedLeaderboardRoute: typeof AuthenticatedLeaderboardRoute
   AuthenticatedMentorRoute: typeof AuthenticatedMentorRoute
   AuthenticatedOnboardingRoute: typeof AuthenticatedOnboardingRoute
+  AuthenticatedPartyRoute: typeof AuthenticatedPartyRoute
   AuthenticatedProfileRoute: typeof AuthenticatedProfileRoute
   AuthenticatedQuestsRoute: typeof AuthenticatedQuestsRoute
   AuthenticatedSettingsRoute: typeof AuthenticatedSettingsRoute
+  AuthenticatedTemirIntizomRoute: typeof AuthenticatedTemirIntizomRoute
   AuthenticatedWorkoutRoute: typeof AuthenticatedWorkoutRoute
   AuthenticatedCBodyRoute: typeof AuthenticatedCBodyRoute
   AuthenticatedCHabitsRoute: typeof AuthenticatedCHabitsRoute
@@ -620,9 +661,11 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedLeaderboardRoute: AuthenticatedLeaderboardRoute,
   AuthenticatedMentorRoute: AuthenticatedMentorRoute,
   AuthenticatedOnboardingRoute: AuthenticatedOnboardingRoute,
+  AuthenticatedPartyRoute: AuthenticatedPartyRoute,
   AuthenticatedProfileRoute: AuthenticatedProfileRoute,
   AuthenticatedQuestsRoute: AuthenticatedQuestsRoute,
   AuthenticatedSettingsRoute: AuthenticatedSettingsRoute,
+  AuthenticatedTemirIntizomRoute: AuthenticatedTemirIntizomRoute,
   AuthenticatedWorkoutRoute: AuthenticatedWorkoutRoute,
   AuthenticatedCBodyRoute: AuthenticatedCBodyRoute,
   AuthenticatedCHabitsRoute: AuthenticatedCHabitsRoute,

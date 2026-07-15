@@ -22,6 +22,19 @@ export const Route = createFileRoute("/_authenticated/mentor")({
 
 type Row = { id: string; role: "user" | "assistant" | "system"; content: string };
 
+type UserStats = {
+  displayName: string | null;
+  level: number;
+  totalXp: number;
+  currentStreak: number;
+  disciplineScore: number;
+  activeDays7: number;
+  habitCompletion7: number;
+  missedYesterday: boolean;
+  archetype: string | null;
+  planLength: number | null;
+};
+
 function rowToUIMessage(r: Row): UIMessage {
   return {
     id: r.id,
@@ -31,43 +44,107 @@ function rowToUIMessage(r: Row): UIMessage {
 }
 
 function extractText(m: UIMessage): string {
-  return m.parts
-    .map((p) => (p.type === "text" ? p.text : ""))
-    .join("");
+  return m.parts.map((p) => (p.type === "text" ? p.text : "")).join("");
+}
+
+async function fetchNadirStats(userId: string): Promise<UserStats> {
+  const sevenAgo = new Date();
+  sevenAgo.setUTCDate(sevenAgo.getUTCDate() - 7);
+  const yesterday = new Date();
+  yesterday.setUTCDate(yesterday.getUTCDate() - 1);
+  const y = yesterday.toISOString().slice(0, 10);
+
+  const [prof, stats, streak, logs, habits] = await Promise.all([
+    supabase
+      .from("profiles")
+      .select("display_name, archetype, plan_length_days")
+      .eq("id", userId)
+      .maybeSingle(),
+    supabase
+      .from("user_stats")
+      .select("total_xp, level, discipline_score")
+      .eq("user_id", userId)
+      .maybeSingle(),
+    supabase
+      .from("streaks")
+      .select("current_days")
+      .eq("user_id", userId)
+      .maybeSingle(),
+    supabase
+      .from("habit_logs")
+      .select("logged_date")
+      .eq("user_id", userId)
+      .gte("logged_date", sevenAgo.toISOString().slice(0, 10)),
+    supabase
+      .from("habits")
+      .select("id", { count: "exact", head: true })
+      .eq("user_id", userId)
+      .eq("is_active", true),
+  ]);
+
+  const logsData = (logs.data as { logged_date: string }[] | null) ?? [];
+  const uniqueDays = new Set(logsData.map((l) => l.logged_date));
+  const totalHabits = habits.count ?? 0;
+  const expected = totalHabits * 7;
+  const done = logsData.length;
+  const completion = expected > 0 ? Math.round((done / expected) * 100) : 0;
+  const missedYesterday =
+    totalHabits > 0 && !logsData.some((l) => l.logged_date === y);
+
+  const p = prof.data as { display_name: string | null; archetype: string | null; plan_length_days: number | null } | null;
+  const s = stats.data as { total_xp: number | null; level: number | null; discipline_score: number | null } | null;
+  const st = streak.data as { current_days: number | null } | null;
+
+  return {
+    displayName: p?.display_name ?? null,
+    level: s?.level ?? 1,
+    totalXp: s?.total_xp ?? 0,
+    currentStreak: st?.current_days ?? 0,
+    disciplineScore: s?.discipline_score ?? 0,
+    activeDays7: uniqueDays.size,
+    habitCompletion7: completion,
+    missedYesterday,
+    archetype: p?.archetype ?? null,
+    planLength: p?.plan_length_days ?? null,
+  };
 }
 
 function MentorPage() {
   const { userId } = Route.useRouteContext();
   const [initial, setInitial] = useState<UIMessage[] | null>(null);
+  const [stats, setStats] = useState<UserStats | null>(null);
   const [input, setInput] = useState("");
   const savedIdsRef = useRef<Set<string>>(new Set());
   const bottomRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     let alive = true;
-    supabase
-      .from("chat_messages")
-      .select("id, role, content")
-      .eq("user_id", userId)
-      .order("created_at", { ascending: true })
-      .then(({ data }) => {
-        if (!alive) return;
-        const rows = ((data as Row[] | null) ?? []).filter(
-          (r) => r.role !== "system",
-        );
-        rows.forEach((r) => savedIdsRef.current.add(r.id));
-        setInitial(rows.map(rowToUIMessage));
-      });
+    (async () => {
+      const [chat, s] = await Promise.all([
+        supabase
+          .from("chat_messages")
+          .select("id, role, content")
+          .eq("user_id", userId)
+          .order("created_at", { ascending: true }),
+        fetchNadirStats(userId),
+      ]);
+      if (!alive) return;
+      const rows = ((chat.data as Row[] | null) ?? []).filter((r) => r.role !== "system");
+      rows.forEach((r) => savedIdsRef.current.add(r.id));
+      setInitial(rows.map(rowToUIMessage));
+      setStats(s);
+    })();
     return () => {
       alive = false;
     };
   }, [userId]);
 
-  return initial ? (
+  return initial && stats ? (
     <MentorChat
       key={userId}
       userId={userId}
       initialMessages={initial}
+      stats={stats}
       input={input}
       setInput={setInput}
       savedIdsRef={savedIdsRef}
@@ -85,6 +162,7 @@ function MentorPage() {
 function MentorChat({
   userId,
   initialMessages,
+  stats,
   input,
   setInput,
   savedIdsRef,
@@ -92,14 +170,19 @@ function MentorChat({
 }: {
   userId: string;
   initialMessages: UIMessage[];
+  stats: UserStats;
   input: string;
   setInput: (v: string) => void;
   savedIdsRef: React.MutableRefObject<Set<string>>;
   bottomRef: React.RefObject<HTMLDivElement | null>;
 }) {
   const transport = useMemo(
-    () => new DefaultChatTransport({ api: "/api/chat" }),
-    [],
+    () =>
+      new DefaultChatTransport({
+        api: "/api/chat",
+        body: { userStats: stats },
+      }),
+    [stats],
   );
 
   const { messages, sendMessage, status, error } = useChat({
@@ -108,12 +191,9 @@ function MentorChat({
     transport,
   });
 
-  // Persist any new messages we haven't saved yet.
   useEffect(() => {
     if (status === "streaming" || status === "submitted") return;
-    const toSave = (messages as UIMessage[]).filter(
-      (m) => !savedIdsRef.current.has(m.id),
-    );
+    const toSave = (messages as UIMessage[]).filter((m) => !savedIdsRef.current.has(m.id));
     if (toSave.length === 0) return;
     (async () => {
       for (const m of toSave) {
@@ -160,14 +240,16 @@ function MentorChat({
           <p className="font-ui text-xs uppercase tracking-[0.28em] text-primary">
             AI Mentor
           </p>
-          <h1 className="font-serif text-3xl leading-tight tracking-tight">
-            Nadir
-          </h1>
+          <h1 className="font-serif text-3xl leading-tight tracking-tight">Nadir</h1>
         </div>
       </div>
 
       <p className="mt-3 max-w-xl text-muted-foreground">
         Halol savol ber. Halol javob olasan. Bo'sh maqtov yo'q.
+      </p>
+
+      <p className="mt-4 font-ui text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
+        Nadir hozir seni ko'ryapti — Daraja {stats.level} · Streak {stats.currentStreak} · Discipline {stats.disciplineScore}/100
       </p>
 
       <div className="mt-8 space-y-4 pb-4">
@@ -180,18 +262,11 @@ function MentorChat({
           const text = extractText(m);
           const isUser = m.role === "user";
           return (
-            <div
-              key={m.id}
-              className={
-                "flex " + (isUser ? "justify-end" : "justify-start")
-              }
-            >
+            <div key={m.id} className={"flex " + (isUser ? "justify-end" : "justify-start")}>
               <div
                 className={
                   "max-w-[85%] rounded-[var(--radius)] border p-4 leading-relaxed " +
-                  (isUser
-                    ? "border-primary/30 bg-primary/5"
-                    : "border-border bg-card")
+                  (isUser ? "border-primary/30 bg-primary/5" : "border-border bg-card")
                 }
               >
                 <p className="mb-1 font-ui text-[10px] uppercase tracking-[0.24em] text-muted-foreground">

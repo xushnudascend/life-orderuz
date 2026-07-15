@@ -12,6 +12,9 @@ import { useEffect, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { Toaster } from "@/components/ui/sonner";
+import { OfflineBanner } from "@/components/offline-banner";
+import { PerfDetector } from "@/components/perf-detector";
+import { THEME_INIT_SCRIPT } from "@/lib/theme";
 
 function NotFoundComponent() {
   return (
@@ -109,6 +112,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         href: "https://fonts.googleapis.com/css2?family=Karla:wght@400;500;600;700&display=swap",
       },
     ],
+    scripts: [
+      // Anti-flash tema init — SSR javobida <head>'ga inline yoziladi
+      { children: THEME_INIT_SCRIPT },
+    ],
   }),
   shellComponent: RootShell,
   component: RootComponent,
@@ -169,10 +176,10 @@ function RootComponent() {
     return () => window.removeEventListener("load", onLoad);
   }, []);
 
-
-
   return (
     <QueryClientProvider client={queryClient}>
+      <OfflineBanner />
+      <PerfDetector />
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
       <Outlet />
       <Toaster />

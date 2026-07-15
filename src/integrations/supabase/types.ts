@@ -342,6 +342,65 @@ export type Database = {
         }
         Relationships: []
       }
+      party_challenges: {
+        Row: {
+          created_at: string
+          goal: string | null
+          id: string
+          invite_code: string
+          name: string
+          owner_id: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          goal?: string | null
+          id?: string
+          invite_code?: string
+          name: string
+          owner_id: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          goal?: string | null
+          id?: string
+          invite_code?: string
+          name?: string
+          owner_id?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      party_members: {
+        Row: {
+          id: string
+          joined_at: string
+          party_id: string
+          user_id: string
+        }
+        Insert: {
+          id?: string
+          joined_at?: string
+          party_id: string
+          user_id: string
+        }
+        Update: {
+          id?: string
+          joined_at?: string
+          party_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "party_members_party_id_fkey"
+            columns: ["party_id"]
+            isOneToOne: false
+            referencedRelation: "party_challenges"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       profiles: {
         Row: {
           activity_level: Database["public"]["Enums"]["activity_level"] | null
@@ -356,6 +415,8 @@ export type Database = {
           display_name: string | null
           height_cm: number | null
           id: string
+          intizom_completed: boolean
+          intizom_start_date: string | null
           is_public: boolean
           locale: string
           notify_daily: boolean
@@ -382,6 +443,8 @@ export type Database = {
           display_name?: string | null
           height_cm?: number | null
           id: string
+          intizom_completed?: boolean
+          intizom_start_date?: string | null
           is_public?: boolean
           locale?: string
           notify_daily?: boolean
@@ -408,6 +471,8 @@ export type Database = {
           display_name?: string | null
           height_cm?: number | null
           id?: string
+          intizom_completed?: boolean
+          intizom_start_date?: string | null
           is_public?: boolean
           locale?: string
           notify_daily?: boolean

@@ -113,6 +113,27 @@ function ChannelView() {
       )}
 
       <div className="mt-8 rounded-[var(--radius)] border border-border p-4">
+        <p className="mb-3 font-ui text-[11px] uppercase tracking-[0.22em] text-muted-foreground">
+          Muhokama-boshlovchi savollar (bosib qo'yish mumkin)
+        </p>
+        <div className="mb-3 flex flex-wrap gap-2">
+          {[
+            "Bugun sizni bir qadam yaxshiroq qilgan odat qaysi?",
+            "Bu oy qancha tejadingiz? Sirini bo'lishing.",
+            "Bugungi eng katta darsingiz nima?",
+            "Kim yoki nima energiyangizni o'g'irladi?",
+            "Bir hafta keyin bugunni eslab nima deysiz?",
+          ].map((q) => (
+            <button
+              key={q}
+              type="button"
+              onClick={() => setContent(q + "\n\n")}
+              className="rounded-full border border-border bg-card px-3 py-1 font-ui text-[11px] text-muted-foreground transition-colors hover:border-primary/40 hover:text-foreground"
+            >
+              {q}
+            </button>
+          ))}
+        </div>
         <Textarea
           placeholder="Bugun sizni bir qadam yaxshiroq qilgan odat qaysi?"
           value={content}

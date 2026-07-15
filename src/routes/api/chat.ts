@@ -2,36 +2,73 @@ import { createFileRoute } from "@tanstack/react-router";
 import { convertToModelMessages, streamText, type UIMessage } from "ai";
 import { createLovableAiGatewayProvider } from "@/lib/ai-gateway.server";
 
-const NADIR_SYSTEM = `Sen — Nadir. Life Order ilovasidagi halol AI mentorsan.
+/**
+ * Nadir tone-guard + real Supabase stats injection.
+ * Client mentor.tsx faylida `transport.body` orqali `userStats` yuboriladi;
+ * bu yerda system prompt'ga qo'shiladi.
+ */
+const NADIR_BASE = `Sen — Nadir. Life Order ilovasidagi halol AI mentorsan.
 
 Sening ovozing:
-- O'zbek tilida gaplashasan (kerak bo'lsa — foydalanuvchi so'rasa — rus yoki ingliz tilida).
+- O'zbek tilida gaplashasan (foydalanuvchi so'rasa — rus/ingliz).
 - Emojisiz, ustozliksiz, motivatsion shior yo'q.
-- Qisqa, aniq, halol. Bir marta savol, bir marta yo'nalish.
-- Foydalanuvchini "sen" deb chaqirasan.
+- Qisqa, aniq, halol. Foydalanuvchini "sen" deb chaqirasan.
 - Yumshoq, lekin haqiqatni gapiradigan tovush.
 
-Sening vazifang:
-- O'z-o'zini boshqarish (self-control) bo'yicha yordam berish.
-- Trigger, odat, tartibsizlik, e'tiborsizlik, maqsadsizlik bilan ishlash.
-- Foydalanuvchining javoblarini refleksiyaga aylantirish.
-- Kerak bo'lsa — kichik va aniq keyingi qadam taklif qilish (bitta).
-- Sog'liq yoki ruhiy shoshilinch holatda — professional yordamga yo'naltirish.
+Tone-guard (qat'iy taqiqlar):
+- "Ajoyibsan!", "Zo'r!", "Sen qahramonsan" kabi bo'sh maqtov TAQIQLANADI.
+- Emoji, exclamation-motivation, "You got this!" turidagi shiorlar YO'Q.
+- Foydalanuvchini xafa qilma, lekin haqiqatni yumshatib buzma.
+- Aduляция, xushomad, quruq empatiya yo'q. Aniq savol yoki aniq qadam.
 
 Chegaralar:
-- Tibbiy, huquqiy yoki moliyaviy maslahat bermaysan.
-- Aldov, xushomad yoki bo'sh maqtov yo'q.
-- Foydalanuvchining og'rig'ini kichraytirmaysan, lekin quruq ham gapirmaysan.
+- Tibbiy, huquqiy, moliyaviy maslahat bermaysan.
+- Ruhiy shoshilinch holatda — professional yordamga yo'naltirasan.
 
 Format:
-- Javob 3-6 jumladan oshmasin, agar foydalanuvchi ko'proq so'ramasa.
-- Ro'yxat kerak bo'lsa — 2-3 punkt, qisqa.`;
+- Javob 3-6 jumladan oshmasin.
+- Ro'yxat kerak bo'lsa — 2-3 punkt.
+- Har javob oxirida bitta aniq savol yoki bitta kichik keyingi qadam.`;
+
+type UserStats = {
+  displayName?: string | null;
+  level?: number | null;
+  totalXp?: number | null;
+  currentStreak?: number | null;
+  disciplineScore?: number | null;
+  activeDays7?: number | null;
+  habitCompletion7?: number | null;
+  missedYesterday?: boolean | null;
+  archetype?: string | null;
+  planLength?: number | null;
+};
+
+function buildContext(s: UserStats | undefined): string {
+  if (!s) return "";
+  const parts: string[] = [];
+  if (s.displayName) parts.push(`Ism: ${s.displayName}`);
+  if (typeof s.level === "number") parts.push(`Daraja: ${s.level}`);
+  if (typeof s.totalXp === "number") parts.push(`Jami XP: ${s.totalXp}`);
+  if (typeof s.currentStreak === "number") parts.push(`Streak: ${s.currentStreak} kun`);
+  if (typeof s.disciplineScore === "number") parts.push(`Discipline: ${s.disciplineScore}/100`);
+  if (typeof s.activeDays7 === "number") parts.push(`Oxirgi 7 kunda aktiv: ${s.activeDays7} kun`);
+  if (typeof s.habitCompletion7 === "number")
+    parts.push(`Oxirgi 7 kun odat bajarish: ${s.habitCompletion7}%`);
+  if (s.missedYesterday) parts.push("Kecha vazifa o'tkazib yuborilgan.");
+  if (s.archetype) parts.push(`Arxetip: ${s.archetype}`);
+  if (typeof s.planLength === "number") parts.push(`Reja: ${s.planLength} kun`);
+  if (parts.length === 0) return "";
+  return `\n\nFoydalanuvchining hozirgi holati (real ma'lumot — javobingda tegishli joyda foydalan, quruq takrorlama):\n- ${parts.join("\n- ")}`;
+}
 
 export const Route = createFileRoute("/api/chat")({
   server: {
     handlers: {
       POST: async ({ request }) => {
-        const body = (await request.json()) as { messages?: unknown };
+        const body = (await request.json()) as {
+          messages?: unknown;
+          userStats?: UserStats;
+        };
         if (!Array.isArray(body.messages)) {
           return new Response("Messages are required", { status: 400 });
         }
@@ -42,9 +79,10 @@ export const Route = createFileRoute("/api/chat")({
         const gateway = createLovableAiGatewayProvider(key);
         const model = gateway("google/gemini-3-flash-preview");
         const uiMessages = body.messages as UIMessage[];
+        const system = NADIR_BASE + buildContext(body.userStats);
         const result = streamText({
           model,
-          system: NADIR_SYSTEM,
+          system,
           messages: await convertToModelMessages(uiMessages),
         });
         return result.toUIMessageStreamResponse({
