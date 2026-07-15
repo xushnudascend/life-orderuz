@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useEffect, useState, lazy, Suspense } from "react";
+import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { AppShell } from "@/components/app-shell";
 import { Button } from "@/components/ui/button";
@@ -22,23 +22,6 @@ import {
   type Archetype,
   estimateDisciplineScore,
 } from "@/lib/nervous";
-
-const MentorChat = lazy(() =>
-  import("./mentor").then((m) => ({ default: (m as { MentorEmbed?: React.FC }).MentorEmbed ?? FallbackMentor })),
-);
-
-function FallbackMentor() {
-  return (
-    <div className="p-5">
-      <p className="text-sm text-muted-foreground">
-        AI paneli yuklanmadi.{" "}
-        <Link to="/mentor" className="text-primary hover:underline">
-          Nadir sahifasini ochish
-        </Link>
-      </p>
-    </div>
-  );
-}
 
 export const Route = createFileRoute("/_authenticated/dashboard")({
   head: () => ({
