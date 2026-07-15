@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { AppShell } from "@/components/app-shell";
 import { Button } from "@/components/ui/button";
-import { Loader2, ArrowRight, Flame } from "lucide-react";
+import { Loader2, ArrowRight, Flame, Target, Award } from "lucide-react";
 import { uz } from "@/i18n";
 
 export const Route = createFileRoute("/_authenticated/dashboard")({
@@ -207,8 +207,36 @@ function Dashboard() {
         )}
       </section>
 
-      <section className="mt-10">
+      <section className="mt-10 grid gap-4 sm:grid-cols-2">
         <div className="rounded-[var(--radius)] border border-border p-6">
+          <div className="flex items-center gap-2">
+            <Target className="h-4 w-4 text-primary" />
+            <h3 className="font-serif text-xl">Vazifalar</h3>
+          </div>
+          <p className="mt-2 font-ui text-sm text-muted-foreground">
+            Bugun uchun uchta kichik topshiriq seni kutmoqda.
+          </p>
+          <Button asChild className="mt-4" variant="outline">
+            <Link to="/quests">
+              Ochish <ArrowRight className="ml-1 h-4 w-4" />
+            </Link>
+          </Button>
+        </div>
+        <div className="rounded-[var(--radius)] border border-border p-6">
+          <div className="flex items-center gap-2">
+            <Award className="h-4 w-4 text-primary" />
+            <h3 className="font-serif text-xl">Yutuqlar</h3>
+          </div>
+          <p className="mt-2 font-ui text-sm text-muted-foreground">
+            Yo'lda ochilgan medallaringni ko'r.
+          </p>
+          <Button asChild className="mt-4" variant="outline">
+            <Link to="/achievements">
+              Ko'rish <ArrowRight className="ml-1 h-4 w-4" />
+            </Link>
+          </Button>
+        </div>
+        <div className="rounded-[var(--radius)] border border-border p-6 sm:col-span-2">
           <h3 className="font-serif text-xl">Kundalik yozuv</h3>
           <p className="mt-2 font-ui text-sm text-muted-foreground">
             Bugun nimadan qochding? Nimani boshqara olding?
