@@ -1,5 +1,5 @@
 import { Link, useLocation } from "@tanstack/react-router";
-import { Home, ListChecks, BookText, User } from "lucide-react";
+import { Home, ListChecks, BookText, Sparkles, User } from "lucide-react";
 import type { ReactNode } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
@@ -8,6 +8,7 @@ import { uz } from "@/i18n";
 const NAV = [
   { to: "/dashboard", label: "Bugun", icon: Home },
   { to: "/habits", label: "Odatlar", icon: ListChecks },
+  { to: "/mentor", label: "Nadir", icon: Sparkles },
   { to: "/journal", label: "Kundalik", icon: BookText },
   { to: "/profile", label: "Profil", icon: User },
 ] as const;
