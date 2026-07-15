@@ -1,7 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { convertToModelMessages, streamText, type UIMessage } from "ai";
 import { createLovableAiGatewayProvider } from "@/lib/ai-gateway.server";
-import { rateLimit, clientIpFromRequest } from "@/lib/rate-limit";
+import { rateLimit } from "@/lib/rate-limit";
+import { verifySupabaseBearer } from "@/lib/verify-bearer.server";
 
 /**
  * Nadir tone-guard + real Supabase stats injection.
