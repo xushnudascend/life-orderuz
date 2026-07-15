@@ -177,6 +177,12 @@ function ProfilePage() {
         <Button asChild variant="outline">
           <Link to="/dashboard">Bugungi kunga qaytish</Link>
         </Button>
+        <Button asChild variant="outline">
+          <Link to="/settings">Sozlamalar</Link>
+        </Button>
+        <Button asChild variant="outline">
+          <Link to="/achievements">Yutuqlar</Link>
+        </Button>
         <Button variant="ghost" onClick={signOut}>
           Chiqish
         </Button>
