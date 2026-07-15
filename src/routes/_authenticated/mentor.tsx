@@ -114,6 +114,7 @@ function MentorChat({
     const toSave = (messages as UIMessage[]).filter(
       (m) => !savedIdsRef.current.has(m.id),
     );
+    if (toSave.length === 0) return;
     (async () => {
       for (const m of toSave) {
         const text = extractText(m);
