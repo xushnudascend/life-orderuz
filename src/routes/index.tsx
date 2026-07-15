@@ -65,13 +65,13 @@ function Header() {
             className="hidden font-ui text-muted-foreground hover:text-foreground sm:inline-flex"
             asChild
           >
-            <a href="#pricing">{t("nav.signIn")}</a>
+            <Link to="/auth">{t("nav.signIn")}</Link>
           </Button>
           <Button size="sm" className="font-ui font-semibold" asChild>
-            <a href="#cta">
+            <Link to="/auth">
               {t("nav.startFree")}
               <ArrowRight className="ml-1 h-4 w-4" />
-            </a>
+            </Link>
           </Button>
         </div>
       </div>
@@ -114,10 +114,10 @@ function Hero() {
         </p>
         <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
           <Button size="lg" className="font-ui font-semibold" asChild>
-            <a href="#cta">
+            <Link to="/auth">
               {t("hero.ctaPrimary")}
               <ArrowRight className="ml-1.5 h-4 w-4" />
-            </a>
+            </Link>
           </Button>
           <Button size="lg" variant="secondary" className="font-ui" asChild>
             <a href="#method">{t("hero.ctaSecondary")}</a>
@@ -340,7 +340,7 @@ function Pricing() {
                 className="mt-8 w-full font-ui font-semibold"
                 asChild
               >
-                <a href="#cta">{plan.cta}</a>
+                <Link to="/auth">{plan.cta}</Link>
               </Button>
             </div>
           ))}
@@ -363,10 +363,10 @@ function FinalCta() {
         </p>
         <div className="mt-9">
           <Button size="lg" className="font-ui font-semibold" asChild>
-            <a href="#cta">
+            <Link to="/auth">
               {uz.cta.button}
               <ArrowRight className="ml-1.5 h-4 w-4" />
-            </a>
+            </Link>
           </Button>
         </div>
       </div>
