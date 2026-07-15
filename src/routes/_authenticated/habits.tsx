@@ -4,9 +4,10 @@ import { supabase } from "@/integrations/supabase/client";
 import { AppShell } from "@/components/app-shell";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-
-import { Loader2, Plus, Trash2, Flame } from "lucide-react";
+import { Loader2, Plus, Trash2, Flame, ArrowRight } from "lucide-react";
+import { toast } from "sonner";
 import { uz } from "@/i18n";
+import { xpFromDifficulty } from "@/lib/nervous";
 
 export const Route = createFileRoute("/_authenticated/habits")({
   head: () => ({
@@ -25,11 +26,33 @@ type Habit = {
   xp_reward: number;
   is_active: boolean;
   sort_order: number;
+  category: string | null;
+  scheduled_for: string | null;
 };
 type Log = { habit_id: string };
 
+const CATEGORIES = [
+  { id: "body", label: "Tana" },
+  { id: "habit", label: "Odat" },
+  { id: "learn", label: "O'rganish" },
+  { id: "other", label: "Boshqa" },
+] as const;
+
+const QUICK_PICKS = [
+  "20 daqiqa o'qish",
+  "10 000 qadam",
+  "8 stakan suv",
+  "10 daqiqa meditatsiya",
+  "Ertalab mashq",
+];
+
 function today(): string {
   return new Date().toISOString().slice(0, 10);
+}
+function tomorrow(): string {
+  const d = new Date();
+  d.setDate(d.getDate() + 1);
+  return d.toISOString().slice(0, 10);
 }
 
 function HabitsPage() {
@@ -38,14 +61,15 @@ function HabitsPage() {
   const [habits, setHabits] = useState<Habit[]>([]);
   const [todayLogs, setTodayLogs] = useState<Set<string>>(new Set());
   const [newTitle, setNewTitle] = useState("");
-  const [newDesc, setNewDesc] = useState("");
+  const [difficulty, setDifficulty] = useState<1 | 2 | 3 | 4 | 5>(2);
+  const [category, setCategory] = useState<string>("habit");
   const [saving, setSaving] = useState(false);
 
   async function refresh() {
     const [{ data: hs }, { data: logs }] = await Promise.all([
       supabase
         .from("habits")
-        .select("id,title,description,xp_reward,is_active,sort_order")
+        .select("id,title,description,xp_reward,is_active,sort_order,category,scheduled_for")
         .eq("user_id", userId)
         .eq("is_active", true)
         .order("sort_order", { ascending: true })
@@ -73,19 +97,24 @@ function HabitsPage() {
     await supabase.from("habits").insert({
       user_id: userId,
       title: newTitle.trim(),
-      description: newDesc.trim() || null,
-      xp_reward: 10,
+      xp_reward: xpFromDifficulty(difficulty),
       sort_order: habits.length,
+      category,
     });
     setNewTitle("");
-    setNewDesc("");
+    setDifficulty(2);
     setSaving(false);
     refresh();
   }
 
   async function toggleToday(h: Habit) {
-    const done = todayLogs.has(h.id);
-    if (done) {
+    // Faqat bugunga rejalashtirilgan bo'lsa ish beradi (scheduled_for null => today)
+    if (h.scheduled_for && h.scheduled_for !== today()) {
+      toast.info("Bu odat boshqa kunga ko'chirilgan.");
+      return;
+    }
+    const doneNow = todayLogs.has(h.id);
+    if (doneNow) {
       await supabase
         .from("habit_logs")
         .delete()
@@ -104,7 +133,16 @@ function HabitsPage() {
         amount: h.xp_reward,
         reference_id: h.id,
       });
+      const rem = habits.length - todayLogs.size - 1;
+      if (rem === 1) toast.success("Bir qadam qoldi.");
+      else if (rem === 0) toast.success("Hammasi allaqachon belgilangan.");
     }
+    refresh();
+  }
+
+  async function moveToTomorrow(h: Habit) {
+    await supabase.from("habits").update({ scheduled_for: tomorrow() }).eq("id", h.id);
+    toast.success("Ertangi kunga ko'chirildi.");
     refresh();
   }
 
@@ -118,6 +156,15 @@ function HabitsPage() {
     [habits, todayLogs],
   );
 
+  const grouped = useMemo(() => {
+    const g: Record<string, Habit[]> = { body: [], habit: [], learn: [], other: [] };
+    for (const h of habits) {
+      const k = h.category && ["body", "habit", "learn", "other"].includes(h.category) ? h.category : "other";
+      g[k].push(h);
+    }
+    return g;
+  }, [habits]);
+
   return (
     <AppShell title="Odatlar">
       <p className="font-ui text-xs uppercase tracking-[0.28em] text-primary">
@@ -128,90 +175,170 @@ function HabitsPage() {
       </h1>
       <p className="mt-3 max-w-xl text-muted-foreground">
         Bugun: <span className="text-foreground">{doneCount}</span> /{" "}
-        {habits.length} bajarildi.
+        {habits.filter((h) => !h.scheduled_for || h.scheduled_for === today()).length} bajarildi.
       </p>
 
       <form
         onSubmit={addHabit}
-        className="mt-8 grid gap-3 rounded-[var(--radius)] border border-border p-5 md:grid-cols-[1fr_1fr_auto]"
+        className="mt-8 rounded-[var(--radius)] border border-border p-5"
       >
         <Input
-          placeholder="Yangi odat (masalan: 10 daqiqa o'qish)"
+          placeholder="Masalan, 20 daqiqa o'qish"
           value={newTitle}
           onChange={(e) => setNewTitle(e.target.value)}
           className="font-ui"
         />
-        <Input
-          placeholder="Izoh (ixtiyoriy)"
-          value={newDesc}
-          onChange={(e) => setNewDesc(e.target.value)}
-          className="font-ui"
-        />
-        <Button type="submit" disabled={saving || !newTitle.trim()}>
-          <Plus className="mr-1 h-4 w-4" /> Qo'shish
-        </Button>
+        <div className="mt-3 flex flex-wrap items-center gap-2">
+          <span className="font-ui text-xs uppercase tracking-[0.2em] text-muted-foreground">
+            Qiyinlik
+          </span>
+          {[1, 2, 3, 4, 5].map((d) => (
+            <button
+              key={d}
+              type="button"
+              onClick={() => setDifficulty(d as 1 | 2 | 3 | 4 | 5)}
+              className={
+                "h-8 w-8 rounded-full border font-ui text-sm transition-colors " +
+                (difficulty === d
+                  ? "border-primary bg-primary text-primary-foreground"
+                  : "border-border text-muted-foreground hover:text-foreground")
+              }
+            >
+              {d}
+            </button>
+          ))}
+          <span className="font-ui text-[11px] text-muted-foreground">
+            +{xpFromDifficulty(difficulty)} XP
+          </span>
+        </div>
+        <div className="mt-3 flex flex-wrap items-center gap-2">
+          <span className="font-ui text-xs uppercase tracking-[0.2em] text-muted-foreground">
+            Kategoriya
+          </span>
+          {CATEGORIES.map((c) => (
+            <button
+              key={c.id}
+              type="button"
+              onClick={() => setCategory(c.id)}
+              className={
+                "rounded-full border px-3 py-1 font-ui text-xs transition-colors " +
+                (category === c.id
+                  ? "border-primary bg-primary/10 text-primary"
+                  : "border-border text-muted-foreground hover:text-foreground")
+              }
+            >
+              {c.label}
+            </button>
+          ))}
+        </div>
+        <div className="mt-3 flex flex-wrap items-center gap-2">
+          <span className="font-ui text-xs uppercase tracking-[0.2em] text-muted-foreground">
+            Tez tanlash
+          </span>
+          {QUICK_PICKS.map((q) => (
+            <button
+              key={q}
+              type="button"
+              onClick={() => setNewTitle(q)}
+              className="rounded-full border border-border px-3 py-1 font-ui text-xs text-muted-foreground hover:text-foreground"
+            >
+              {q}
+            </button>
+          ))}
+        </div>
+        <div className="mt-4">
+          <Button type="submit" disabled={saving || !newTitle.trim()}>
+            <Plus className="mr-1 h-4 w-4" /> Qo'shish
+          </Button>
+        </div>
       </form>
 
-      <div className="mt-8 space-y-3">
+      <div className="mt-8 space-y-6">
         {loading ? (
           <div className="flex justify-center py-10">
             <Loader2 className="h-5 w-5 animate-spin text-muted-foreground" />
           </div>
         ) : habits.length === 0 ? (
           <p className="py-10 text-center text-muted-foreground">
-            Hali odat yo'q. Birinchisini yuqorida qo'shing.
+            Hali odat qo'shilmagan. Birinchi odatingdan boshlaymizmi?
           </p>
         ) : (
-          habits.map((h) => {
-            const done = todayLogs.has(h.id);
-            return (
-              <div
-                key={h.id}
-                className={
-                  "flex items-center justify-between rounded-[var(--radius)] border p-4 transition-colors " +
-                  (done
-                    ? "border-primary/40 bg-primary/5"
-                    : "border-border bg-card")
-                }
-              >
-                <button
-                  type="button"
-                  onClick={() => toggleToday(h)}
-                  className="flex flex-1 items-center gap-4 text-left"
-                >
-                  <span
-                    className={
-                      "flex h-9 w-9 items-center justify-center rounded-full border transition-colors " +
-                      (done
-                        ? "border-primary bg-primary text-primary-foreground"
-                        : "border-border text-muted-foreground")
-                    }
-                  >
-                    <Flame className="h-4 w-4" />
-                  </span>
-                  <div>
-                    <p className="font-serif text-lg">{h.title}</p>
-                    {h.description && (
-                      <p className="font-ui text-sm text-muted-foreground">
-                        {h.description}
-                      </p>
-                    )}
-                    <p className="mt-1 font-ui text-xs uppercase tracking-[0.2em] text-muted-foreground/80">
-                      +{h.xp_reward} XP
-                    </p>
-                  </div>
-                </button>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  onClick={() => removeHabit(h)}
-                  aria-label="O'chirish"
-                >
-                  <Trash2 className="h-4 w-4" />
-                </Button>
-              </div>
-            );
-          })
+          CATEGORIES.map((cat) =>
+            grouped[cat.id].length ? (
+              <section key={cat.id}>
+                <h2 className="mb-3 font-ui text-xs uppercase tracking-[0.22em] text-muted-foreground">
+                  {cat.label}
+                </h2>
+                <div className="space-y-2">
+                  {grouped[cat.id].map((h) => {
+                    const doneRow = todayLogs.has(h.id);
+                    const movedAway = h.scheduled_for && h.scheduled_for !== today();
+                    return (
+                      <div
+                        key={h.id}
+                        className={
+                          "flex items-center justify-between rounded-[var(--radius)] border p-4 transition-colors " +
+                          (doneRow
+                            ? "border-primary/40 bg-primary/5"
+                            : movedAway
+                              ? "border-dashed border-border bg-card opacity-70"
+                              : "border-border bg-card")
+                        }
+                      >
+                        <button
+                          type="button"
+                          onClick={() => toggleToday(h)}
+                          className="flex flex-1 items-center gap-4 text-left"
+                        >
+                          <span
+                            className={
+                              "flex h-9 w-9 items-center justify-center rounded-full border transition-colors " +
+                              (doneRow
+                                ? "border-primary bg-primary text-primary-foreground"
+                                : "border-border text-muted-foreground")
+                            }
+                          >
+                            <Flame className="h-4 w-4" />
+                          </span>
+                          <div className={doneRow ? "opacity-70" : ""}>
+                            <p className={"font-serif text-lg " + (doneRow ? "line-through" : "")}>
+                              {h.title}
+                            </p>
+                            <p className="mt-1 font-ui text-xs uppercase tracking-[0.2em] text-primary">
+                              +{h.xp_reward} XP
+                              {movedAway && (
+                                <span className="ml-2 text-muted-foreground">
+                                  · Ertaga
+                                </span>
+                              )}
+                            </p>
+                          </div>
+                        </button>
+                        {!doneRow && !movedAway && (
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={() => moveToTomorrow(h)}
+                            title="Ertangi kunga ko'chirish"
+                          >
+                            <ArrowRight className="h-4 w-4" />
+                          </Button>
+                        )}
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          onClick={() => removeHabit(h)}
+                          aria-label="O'chirish"
+                        >
+                          <Trash2 className="h-4 w-4" />
+                        </Button>
+                      </div>
+                    );
+                  })}
+                </div>
+              </section>
+            ) : null,
+          )
         )}
       </div>
     </AppShell>
