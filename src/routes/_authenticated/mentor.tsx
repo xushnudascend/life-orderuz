@@ -1,0 +1,247 @@
+import { createFileRoute } from "@tanstack/react-router";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { useChat } from "@ai-sdk/react";
+import { DefaultChatTransport, type UIMessage } from "ai";
+import ReactMarkdown from "react-markdown";
+import { supabase } from "@/integrations/supabase/client";
+import { AppShell } from "@/components/app-shell";
+import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
+import { Loader2, Send, Sparkles } from "lucide-react";
+import { uz } from "@/i18n";
+
+export const Route = createFileRoute("/_authenticated/mentor")({
+  head: () => ({
+    meta: [
+      { title: `Nadir — ${uz.brand.name}` },
+      { name: "robots", content: "noindex" },
+    ],
+  }),
+  component: MentorPage,
+});
+
+type Row = { id: string; role: "user" | "assistant" | "system"; content: string };
+
+function rowToUIMessage(r: Row): UIMessage {
+  return {
+    id: r.id,
+    role: r.role,
+    parts: [{ type: "text", text: r.content }],
+  } as UIMessage;
+}
+
+function extractText(m: UIMessage): string {
+  return m.parts
+    .map((p) => (p.type === "text" ? p.text : ""))
+    .join("");
+}
+
+function MentorPage() {
+  const { userId } = Route.useRouteContext();
+  const [initial, setInitial] = useState<UIMessage[] | null>(null);
+  const [input, setInput] = useState("");
+  const savedIdsRef = useRef<Set<string>>(new Set());
+  const bottomRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    let alive = true;
+    supabase
+      .from("chat_messages")
+      .select("id, role, content")
+      .eq("user_id", userId)
+      .order("created_at", { ascending: true })
+      .then(({ data }) => {
+        if (!alive) return;
+        const rows = ((data as Row[] | null) ?? []).filter(
+          (r) => r.role !== "system",
+        );
+        rows.forEach((r) => savedIdsRef.current.add(r.id));
+        setInitial(rows.map(rowToUIMessage));
+      });
+    return () => {
+      alive = false;
+    };
+  }, [userId]);
+
+  return initial ? (
+    <MentorChat
+      key={userId}
+      userId={userId}
+      initialMessages={initial}
+      input={input}
+      setInput={setInput}
+      savedIdsRef={savedIdsRef}
+      bottomRef={bottomRef}
+    />
+  ) : (
+    <AppShell title="Nadir">
+      <div className="flex justify-center py-20">
+        <Loader2 className="h-5 w-5 animate-spin text-muted-foreground" />
+      </div>
+    </AppShell>
+  );
+}
+
+function MentorChat({
+  userId,
+  initialMessages,
+  input,
+  setInput,
+  savedIdsRef,
+  bottomRef,
+}: {
+  userId: string;
+  initialMessages: UIMessage[];
+  input: string;
+  setInput: (v: string) => void;
+  savedIdsRef: React.MutableRefObject<Set<string>>;
+  bottomRef: React.RefObject<HTMLDivElement | null>;
+}) {
+  const transport = useMemo(
+    () => new DefaultChatTransport({ api: "/api/chat" }),
+    [],
+  );
+
+  const { messages, sendMessage, status, error } = useChat({
+    id: userId,
+    messages: initialMessages,
+    transport,
+  });
+
+  // Persist any new messages we haven't saved yet.
+  useEffect(() => {
+    if (status === "streaming" || status === "submitted") return;
+    const toSave = messages.filter((m) => !savedIdsRef.current.has(m.id));
+    if (toSave.length === 0) return;
+    (async () => {
+      for (const m of toSave) {
+        const text = extractText(m);
+        if (!text.trim()) continue;
+        savedIdsRef.current.add(m.id);
+        await supabase.from("chat_messages").insert({
+          user_id: userId,
+          role: m.role,
+          content: text,
+        });
+        if (m.role === "assistant") {
+          await supabase.from("xp_events").insert({
+            user_id: userId,
+            source: "journal",
+            amount: 1,
+          });
+        }
+      }
+    })();
+  }, [messages, status, userId, savedIdsRef]);
+
+  useEffect(() => {
+    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages, bottomRef]);
+
+  const busy = status === "streaming" || status === "submitted";
+
+  async function submit(e: React.FormEvent) {
+    e.preventDefault();
+    const text = input.trim();
+    if (!text || busy) return;
+    setInput("");
+    await sendMessage({ text });
+  }
+
+  return (
+    <AppShell title="Nadir">
+      <div className="flex items-center gap-3">
+        <span className="flex h-10 w-10 items-center justify-center rounded-full border border-border">
+          <Sparkles className="h-4 w-4 text-primary" />
+        </span>
+        <div>
+          <p className="font-ui text-xs uppercase tracking-[0.28em] text-primary">
+            AI Mentor
+          </p>
+          <h1 className="font-serif text-3xl leading-tight tracking-tight">
+            Nadir
+          </h1>
+        </div>
+      </div>
+
+      <p className="mt-3 max-w-xl text-muted-foreground">
+        Halol savol ber. Halol javob olasan. Bo'sh maqtov yo'q.
+      </p>
+
+      <div className="mt-8 space-y-4 pb-4">
+        {messages.length === 0 && (
+          <div className="rounded-[var(--radius)] border border-dashed border-border p-6 text-muted-foreground">
+            Bugun nima seni to'xtatyapti? Bir jumla bilan yoz.
+          </div>
+        )}
+        {messages.map((m) => {
+          const text = extractText(m);
+          const isUser = m.role === "user";
+          return (
+            <div
+              key={m.id}
+              className={
+                "flex " + (isUser ? "justify-end" : "justify-start")
+              }
+            >
+              <div
+                className={
+                  "max-w-[85%] rounded-[var(--radius)] border p-4 leading-relaxed " +
+                  (isUser
+                    ? "border-primary/30 bg-primary/5"
+                    : "border-border bg-card")
+                }
+              >
+                <p className="mb-1 font-ui text-[10px] uppercase tracking-[0.24em] text-muted-foreground">
+                  {isUser ? "Sen" : "Nadir"}
+                </p>
+                {isUser ? (
+                  <p className="whitespace-pre-wrap">{text}</p>
+                ) : (
+                  <div className="prose prose-sm dark:prose-invert max-w-none prose-p:my-2 prose-headings:font-serif">
+                    <ReactMarkdown>{text}</ReactMarkdown>
+                  </div>
+                )}
+              </div>
+            </div>
+          );
+        })}
+        {busy && (
+          <div className="flex items-center gap-2 text-sm text-muted-foreground">
+            <Loader2 className="h-4 w-4 animate-spin" />
+            Nadir o'ylayapti…
+          </div>
+        )}
+        {error && (
+          <div className="rounded-[var(--radius)] border border-destructive/40 bg-destructive/10 p-3 text-sm text-destructive">
+            Xato: {error.message}
+          </div>
+        )}
+        <div ref={bottomRef} />
+      </div>
+
+      <form
+        onSubmit={submit}
+        className="sticky bottom-24 mt-6 flex items-end gap-2 rounded-[var(--radius)] border border-border bg-background/95 p-3 backdrop-blur"
+      >
+        <Textarea
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" && !e.shiftKey) {
+              e.preventDefault();
+              submit(e as unknown as React.FormEvent);
+            }
+          }}
+          placeholder="Nadirga yoz…"
+          rows={2}
+          className="min-h-[52px] resize-none font-ui"
+          autoFocus
+        />
+        <Button type="submit" disabled={busy || !input.trim()} size="icon">
+          <Send className="h-4 w-4" />
+        </Button>
+      </form>
+    </AppShell>
+  );
+}
