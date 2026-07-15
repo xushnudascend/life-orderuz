@@ -80,7 +80,7 @@ function ProfilePage() {
 
   async function activateShield() {
     setUsingShield(true);
-    const { error } = await supabase.rpc("use_shield", { _note: null });
+    const { error } = await supabase.rpc("use_shield", {});
     setUsingShield(false);
     if (error) {
       toast.error(
