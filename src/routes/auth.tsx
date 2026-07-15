@@ -1,0 +1,240 @@
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
+import { toast } from "sonner";
+import { supabase } from "@/integrations/supabase/client";
+import { lovable } from "@/integrations/lovable";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import { ArrowLeft, Loader2 } from "lucide-react";
+import { uz } from "@/i18n";
+
+export const Route = createFileRoute("/auth")({
+  head: () => ({
+    meta: [
+      { title: `Kirish — ${uz.brand.name}` },
+      { name: "description", content: "Life Order — kirish va ro'yxatdan o'tish" },
+      { name: "robots", content: "noindex" },
+    ],
+  }),
+  component: AuthPage,
+});
+
+function AuthPage() {
+  const navigate = useNavigate();
+  const [tab, setTab] = useState<"signin" | "signup">("signup");
+  const [checking, setChecking] = useState(true);
+
+  // If already signed in → send to /dashboard (which will route to /onboarding if needed).
+  useEffect(() => {
+    let mounted = true;
+    supabase.auth.getSession().then(({ data }) => {
+      if (!mounted) return;
+      if (data.session) navigate({ to: "/dashboard", replace: true });
+      else setChecking(false);
+    });
+    return () => {
+      mounted = false;
+    };
+  }, [navigate]);
+
+  if (checking) {
+    return (
+      <div className="grid min-h-screen place-items-center bg-background">
+        <Loader2 className="h-6 w-6 animate-spin text-muted-foreground" />
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-h-screen bg-background text-foreground">
+      <div className="mx-auto max-w-md px-5 py-10">
+        <Link
+          to="/"
+          className="inline-flex items-center gap-1.5 font-ui text-sm text-muted-foreground transition-colors hover:text-foreground"
+        >
+          <ArrowLeft className="h-4 w-4" />
+          Bosh sahifa
+        </Link>
+
+        <div className="mt-10 text-center">
+          <h1 className="font-serif text-3xl leading-tight tracking-tight">
+            {uz.brand.name}
+          </h1>
+          <p className="mt-2 font-ui text-sm text-muted-foreground">
+            {uz.brand.tagline}
+          </p>
+        </div>
+
+        <div className="glass mt-8 rounded-[var(--radius)] p-6">
+          <Tabs value={tab} onValueChange={(v) => setTab(v as "signin" | "signup")}>
+            <TabsList className="grid w-full grid-cols-2 font-ui">
+              <TabsTrigger value="signup">Ro'yxatdan o'tish</TabsTrigger>
+              <TabsTrigger value="signin">Kirish</TabsTrigger>
+            </TabsList>
+            <TabsContent value="signup" className="pt-6">
+              <EmailForm mode="signup" />
+            </TabsContent>
+            <TabsContent value="signin" className="pt-6">
+              <EmailForm mode="signin" />
+            </TabsContent>
+          </Tabs>
+
+          <div className="relative my-6">
+            <div className="absolute inset-0 flex items-center">
+              <span className="w-full border-t border-border" />
+            </div>
+            <div className="relative flex justify-center">
+              <span className="bg-card px-3 font-ui text-xs uppercase tracking-[0.2em] text-muted-foreground">
+                yoki
+              </span>
+            </div>
+          </div>
+
+          <GoogleButton />
+        </div>
+
+        <p className="mt-6 text-center font-ui text-xs text-muted-foreground">
+          Davom etib, Shartlar va Maxfiylik siyosatiga rozilik bildirasiz.
+        </p>
+      </div>
+    </div>
+  );
+}
+
+function EmailForm({ mode }: { mode: "signin" | "signup" }) {
+  const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  async function onSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    if (loading) return;
+    setLoading(true);
+    try {
+      if (mode === "signup") {
+        const { error } = await supabase.auth.signUp({
+          email,
+          password,
+          options: {
+            emailRedirectTo: `${window.location.origin}/dashboard`,
+          },
+        });
+        if (error) throw error;
+        toast.success("Ro'yxatdan o'tildi. Emailingizni tekshiring.");
+        // If email confirmation is disabled, session already exists.
+        const { data } = await supabase.auth.getSession();
+        if (data.session) navigate({ to: "/dashboard", replace: true });
+      } else {
+        const { error } = await supabase.auth.signInWithPassword({ email, password });
+        if (error) throw error;
+        navigate({ to: "/dashboard", replace: true });
+      }
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : "Xato yuz berdi";
+      toast.error(translateAuthError(msg));
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  return (
+    <form onSubmit={onSubmit} className="space-y-4">
+      <div className="space-y-1.5">
+        <Label htmlFor="email">Email</Label>
+        <Input
+          id="email"
+          type="email"
+          required
+          autoComplete="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="siz@example.com"
+        />
+      </div>
+      <div className="space-y-1.5">
+        <Label htmlFor="password">Parol</Label>
+        <Input
+          id="password"
+          type="password"
+          required
+          minLength={8}
+          autoComplete={mode === "signup" ? "new-password" : "current-password"}
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          placeholder="Kamida 8 belgi"
+        />
+      </div>
+      <Button
+        type="submit"
+        className="w-full font-ui font-semibold"
+        disabled={loading}
+      >
+        {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+        {mode === "signup" ? "Hisob yaratish" : "Kirish"}
+      </Button>
+    </form>
+  );
+}
+
+function GoogleButton() {
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+  async function onClick() {
+    if (loading) return;
+    setLoading(true);
+    try {
+      const result = await lovable.auth.signInWithOAuth("google", {
+        redirect_uri: window.location.origin,
+      });
+      if (result.error) {
+        toast.error("Google orqali kirib bo'lmadi. Qayta urinib ko'ring.");
+        return;
+      }
+      if (result.redirected) return; // full-page nav
+      navigate({ to: "/dashboard", replace: true });
+    } finally {
+      setLoading(false);
+    }
+  }
+  return (
+    <Button
+      type="button"
+      variant="secondary"
+      className="w-full font-ui"
+      onClick={onClick}
+      disabled={loading}
+    >
+      {loading ? (
+        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+      ) : (
+        <GoogleIcon />
+      )}
+      Google bilan davom etish
+    </Button>
+  );
+}
+
+function GoogleIcon() {
+  return (
+    <svg viewBox="0 0 24 24" className="mr-2 h-4 w-4" aria-hidden>
+      <path
+        fill="#EA4335"
+        d="M12 10.2v3.9h5.5c-.24 1.4-1.7 4.1-5.5 4.1-3.3 0-6-2.7-6-6.1s2.7-6.1 6-6.1c1.9 0 3.2.8 3.9 1.5l2.7-2.6C16.9 3.4 14.7 2.5 12 2.5 6.8 2.5 2.5 6.8 2.5 12s4.3 9.5 9.5 9.5c5.5 0 9.1-3.9 9.1-9.3 0-.6-.1-1.1-.2-1.5H12z"
+      />
+    </svg>
+  );
+}
+
+function translateAuthError(msg: string): string {
+  const s = msg.toLowerCase();
+  if (s.includes("invalid login")) return "Email yoki parol noto'g'ri.";
+  if (s.includes("already registered") || s.includes("user already"))
+    return "Bu email allaqachon ro'yxatdan o'tgan. Kirish tabini tanlang.";
+  if (s.includes("password")) return "Parol yetarli darajada kuchli emas.";
+  if (s.includes("network") || s.includes("fetch"))
+    return "Internet aloqasi uzildi. Qayta urinib ko'ring.";
+  return msg;
+}
