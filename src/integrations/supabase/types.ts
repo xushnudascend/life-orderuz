@@ -515,6 +515,24 @@ export type Database = {
         }
         Relationships: []
       }
+      rate_limits: {
+        Row: {
+          count: number
+          key: string
+          window_start: string
+        }
+        Insert: {
+          count?: number
+          key: string
+          window_start: string
+        }
+        Update: {
+          count?: number
+          key?: string
+          window_start?: string
+        }
+        Relationships: []
+      }
       shields: {
         Row: {
           created_at: string
@@ -726,6 +744,14 @@ export type Database = {
           isOneToOne: false
           isSetofReturn: true
         }
+      }
+      rate_limit_hit: {
+        Args: { _key: string; _limit: number; _window_seconds: number }
+        Returns: {
+          allowed: boolean
+          current_count: number
+          retry_after_seconds: number
+        }[]
       }
       use_shield: {
         Args: { _note?: string }
