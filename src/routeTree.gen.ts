@@ -29,6 +29,7 @@ import { Route as AuthenticatedJournalRouteImport } from './routes/_authenticate
 import { Route as AuthenticatedHabitsRouteImport } from './routes/_authenticated/habits'
 import { Route as AuthenticatedDietRouteImport } from './routes/_authenticated/diet'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
+import { Route as AuthenticatedCommunityRouteImport } from './routes/_authenticated/community'
 import { Route as AuthenticatedAnalyticsRouteImport } from './routes/_authenticated/analytics'
 import { Route as AuthenticatedAchievementsRouteImport } from './routes/_authenticated/achievements'
 import { Route as AuthenticatedCLearnRouteImport } from './routes/_authenticated/c.learn'
@@ -135,6 +136,11 @@ const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
   path: '/dashboard',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedCommunityRoute = AuthenticatedCommunityRouteImport.update({
+  id: '/community',
+  path: '/community',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedAnalyticsRoute = AuthenticatedAnalyticsRouteImport.update({
   id: '/analytics',
   path: '/analytics',
@@ -172,6 +178,7 @@ export interface FileRoutesByFullPath {
   '/terms': typeof TermsRoute
   '/achievements': typeof AuthenticatedAchievementsRoute
   '/analytics': typeof AuthenticatedAnalyticsRoute
+  '/community': typeof AuthenticatedCommunityRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/diet': typeof AuthenticatedDietRoute
   '/habits': typeof AuthenticatedHabitsRoute
@@ -198,6 +205,7 @@ export interface FileRoutesByTo {
   '/terms': typeof TermsRoute
   '/achievements': typeof AuthenticatedAchievementsRoute
   '/analytics': typeof AuthenticatedAnalyticsRoute
+  '/community': typeof AuthenticatedCommunityRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/diet': typeof AuthenticatedDietRoute
   '/habits': typeof AuthenticatedHabitsRoute
@@ -226,6 +234,7 @@ export interface FileRoutesById {
   '/terms': typeof TermsRoute
   '/_authenticated/achievements': typeof AuthenticatedAchievementsRoute
   '/_authenticated/analytics': typeof AuthenticatedAnalyticsRoute
+  '/_authenticated/community': typeof AuthenticatedCommunityRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/_authenticated/diet': typeof AuthenticatedDietRoute
   '/_authenticated/habits': typeof AuthenticatedHabitsRoute
@@ -254,6 +263,7 @@ export interface FileRouteTypes {
     | '/terms'
     | '/achievements'
     | '/analytics'
+    | '/community'
     | '/dashboard'
     | '/diet'
     | '/habits'
@@ -280,6 +290,7 @@ export interface FileRouteTypes {
     | '/terms'
     | '/achievements'
     | '/analytics'
+    | '/community'
     | '/dashboard'
     | '/diet'
     | '/habits'
@@ -307,6 +318,7 @@ export interface FileRouteTypes {
     | '/terms'
     | '/_authenticated/achievements'
     | '/_authenticated/analytics'
+    | '/_authenticated/community'
     | '/_authenticated/dashboard'
     | '/_authenticated/diet'
     | '/_authenticated/habits'
@@ -478,6 +490,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDashboardRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/community': {
+      id: '/_authenticated/community'
+      path: '/community'
+      fullPath: '/community'
+      preLoaderRoute: typeof AuthenticatedCommunityRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/analytics': {
       id: '/_authenticated/analytics'
       path: '/analytics'
@@ -519,6 +538,7 @@ declare module '@tanstack/react-router' {
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedAchievementsRoute: typeof AuthenticatedAchievementsRoute
   AuthenticatedAnalyticsRoute: typeof AuthenticatedAnalyticsRoute
+  AuthenticatedCommunityRoute: typeof AuthenticatedCommunityRoute
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
   AuthenticatedDietRoute: typeof AuthenticatedDietRoute
   AuthenticatedHabitsRoute: typeof AuthenticatedHabitsRoute
@@ -538,6 +558,7 @@ interface AuthenticatedRouteRouteChildren {
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAchievementsRoute: AuthenticatedAchievementsRoute,
   AuthenticatedAnalyticsRoute: AuthenticatedAnalyticsRoute,
+  AuthenticatedCommunityRoute: AuthenticatedCommunityRoute,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
   AuthenticatedDietRoute: AuthenticatedDietRoute,
   AuthenticatedHabitsRoute: AuthenticatedHabitsRoute,
