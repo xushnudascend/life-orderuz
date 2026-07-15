@@ -106,6 +106,13 @@ function Onboarding() {
         juda_faol: "very_active",
       };
 
+      // Archetype tanlash — javoblar asosida
+      const { archetypeFromAnswers } = await import("@/lib/nervous");
+      const arche = archetypeFromAnswers({
+        goal: answers["profile.goal"] ?? answers["goal"] ?? "",
+        best_time: answers["profile.best_time"] ?? answers["best_time"] ?? "",
+      });
+
       const { error: profErr } = await supabase
         .from("profiles")
         .update({
@@ -115,6 +122,7 @@ function Onboarding() {
           sex: sexMap[answers["profile.sex"]] ?? null,
           activity_level: actMap[answers["profile.activity"]] ?? null,
           plan_length_days: plan,
+          archetype: arche.id,
           onboarding_completed_at: new Date().toISOString(),
         })
         .eq("id", userId);

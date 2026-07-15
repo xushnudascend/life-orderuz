@@ -17,6 +17,7 @@ import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as UUsernameRouteImport } from './routes/u.$username'
 import { Route as ApiChatRouteImport } from './routes/api/chat'
 import { Route as AuthenticatedWorkoutRouteImport } from './routes/_authenticated/workout'
 import { Route as AuthenticatedSettingsRouteImport } from './routes/_authenticated/settings'
@@ -29,8 +30,13 @@ import { Route as AuthenticatedJournalRouteImport } from './routes/_authenticate
 import { Route as AuthenticatedHabitsRouteImport } from './routes/_authenticated/habits'
 import { Route as AuthenticatedDietRouteImport } from './routes/_authenticated/diet'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
+import { Route as AuthenticatedCommunityRouteImport } from './routes/_authenticated/community'
 import { Route as AuthenticatedAnalyticsRouteImport } from './routes/_authenticated/analytics'
 import { Route as AuthenticatedAchievementsRouteImport } from './routes/_authenticated/achievements'
+import { Route as AuthenticatedCommunityChannelRouteImport } from './routes/_authenticated/community.$channel'
+import { Route as AuthenticatedCLearnRouteImport } from './routes/_authenticated/c.learn'
+import { Route as AuthenticatedCHabitsRouteImport } from './routes/_authenticated/c.habits'
+import { Route as AuthenticatedCBodyRouteImport } from './routes/_authenticated/c.body'
 
 const TermsRoute = TermsRouteImport.update({
   id: '/terms',
@@ -69,6 +75,11 @@ const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const UUsernameRoute = UUsernameRouteImport.update({
+  id: '/u/$username',
+  path: '/u/$username',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiChatRoute = ApiChatRouteImport.update({
@@ -132,6 +143,11 @@ const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
   path: '/dashboard',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedCommunityRoute = AuthenticatedCommunityRouteImport.update({
+  id: '/community',
+  path: '/community',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedAnalyticsRoute = AuthenticatedAnalyticsRouteImport.update({
   id: '/analytics',
   path: '/analytics',
@@ -143,6 +159,27 @@ const AuthenticatedAchievementsRoute =
     path: '/achievements',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedCommunityChannelRoute =
+  AuthenticatedCommunityChannelRouteImport.update({
+    id: '/$channel',
+    path: '/$channel',
+    getParentRoute: () => AuthenticatedCommunityRoute,
+  } as any)
+const AuthenticatedCLearnRoute = AuthenticatedCLearnRouteImport.update({
+  id: '/c/learn',
+  path: '/c/learn',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedCHabitsRoute = AuthenticatedCHabitsRouteImport.update({
+  id: '/c/habits',
+  path: '/c/habits',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedCBodyRoute = AuthenticatedCBodyRouteImport.update({
+  id: '/c/body',
+  path: '/c/body',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -154,6 +191,7 @@ export interface FileRoutesByFullPath {
   '/terms': typeof TermsRoute
   '/achievements': typeof AuthenticatedAchievementsRoute
   '/analytics': typeof AuthenticatedAnalyticsRoute
+  '/community': typeof AuthenticatedCommunityRouteWithChildren
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/diet': typeof AuthenticatedDietRoute
   '/habits': typeof AuthenticatedHabitsRoute
@@ -166,6 +204,11 @@ export interface FileRoutesByFullPath {
   '/settings': typeof AuthenticatedSettingsRoute
   '/workout': typeof AuthenticatedWorkoutRoute
   '/api/chat': typeof ApiChatRoute
+  '/u/$username': typeof UUsernameRoute
+  '/c/body': typeof AuthenticatedCBodyRoute
+  '/c/habits': typeof AuthenticatedCHabitsRoute
+  '/c/learn': typeof AuthenticatedCLearnRoute
+  '/community/$channel': typeof AuthenticatedCommunityChannelRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -177,6 +220,7 @@ export interface FileRoutesByTo {
   '/terms': typeof TermsRoute
   '/achievements': typeof AuthenticatedAchievementsRoute
   '/analytics': typeof AuthenticatedAnalyticsRoute
+  '/community': typeof AuthenticatedCommunityRouteWithChildren
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/diet': typeof AuthenticatedDietRoute
   '/habits': typeof AuthenticatedHabitsRoute
@@ -189,6 +233,11 @@ export interface FileRoutesByTo {
   '/settings': typeof AuthenticatedSettingsRoute
   '/workout': typeof AuthenticatedWorkoutRoute
   '/api/chat': typeof ApiChatRoute
+  '/u/$username': typeof UUsernameRoute
+  '/c/body': typeof AuthenticatedCBodyRoute
+  '/c/habits': typeof AuthenticatedCHabitsRoute
+  '/c/learn': typeof AuthenticatedCLearnRoute
+  '/community/$channel': typeof AuthenticatedCommunityChannelRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -202,6 +251,7 @@ export interface FileRoutesById {
   '/terms': typeof TermsRoute
   '/_authenticated/achievements': typeof AuthenticatedAchievementsRoute
   '/_authenticated/analytics': typeof AuthenticatedAnalyticsRoute
+  '/_authenticated/community': typeof AuthenticatedCommunityRouteWithChildren
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/_authenticated/diet': typeof AuthenticatedDietRoute
   '/_authenticated/habits': typeof AuthenticatedHabitsRoute
@@ -214,6 +264,11 @@ export interface FileRoutesById {
   '/_authenticated/settings': typeof AuthenticatedSettingsRoute
   '/_authenticated/workout': typeof AuthenticatedWorkoutRoute
   '/api/chat': typeof ApiChatRoute
+  '/u/$username': typeof UUsernameRoute
+  '/_authenticated/c/body': typeof AuthenticatedCBodyRoute
+  '/_authenticated/c/habits': typeof AuthenticatedCHabitsRoute
+  '/_authenticated/c/learn': typeof AuthenticatedCLearnRoute
+  '/_authenticated/community/$channel': typeof AuthenticatedCommunityChannelRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -227,6 +282,7 @@ export interface FileRouteTypes {
     | '/terms'
     | '/achievements'
     | '/analytics'
+    | '/community'
     | '/dashboard'
     | '/diet'
     | '/habits'
@@ -239,6 +295,11 @@ export interface FileRouteTypes {
     | '/settings'
     | '/workout'
     | '/api/chat'
+    | '/u/$username'
+    | '/c/body'
+    | '/c/habits'
+    | '/c/learn'
+    | '/community/$channel'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -250,6 +311,7 @@ export interface FileRouteTypes {
     | '/terms'
     | '/achievements'
     | '/analytics'
+    | '/community'
     | '/dashboard'
     | '/diet'
     | '/habits'
@@ -262,6 +324,11 @@ export interface FileRouteTypes {
     | '/settings'
     | '/workout'
     | '/api/chat'
+    | '/u/$username'
+    | '/c/body'
+    | '/c/habits'
+    | '/c/learn'
+    | '/community/$channel'
   id:
     | '__root__'
     | '/'
@@ -274,6 +341,7 @@ export interface FileRouteTypes {
     | '/terms'
     | '/_authenticated/achievements'
     | '/_authenticated/analytics'
+    | '/_authenticated/community'
     | '/_authenticated/dashboard'
     | '/_authenticated/diet'
     | '/_authenticated/habits'
@@ -286,6 +354,11 @@ export interface FileRouteTypes {
     | '/_authenticated/settings'
     | '/_authenticated/workout'
     | '/api/chat'
+    | '/u/$username'
+    | '/_authenticated/c/body'
+    | '/_authenticated/c/habits'
+    | '/_authenticated/c/learn'
+    | '/_authenticated/community/$channel'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -298,6 +371,7 @@ export interface RootRouteChildren {
   SecurityRoute: typeof SecurityRoute
   TermsRoute: typeof TermsRoute
   ApiChatRoute: typeof ApiChatRoute
+  UUsernameRoute: typeof UUsernameRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -356,6 +430,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/u/$username': {
+      id: '/u/$username'
+      path: '/u/$username'
+      fullPath: '/u/$username'
+      preLoaderRoute: typeof UUsernameRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/chat': {
@@ -442,6 +523,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDashboardRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/community': {
+      id: '/_authenticated/community'
+      path: '/community'
+      fullPath: '/community'
+      preLoaderRoute: typeof AuthenticatedCommunityRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/analytics': {
       id: '/_authenticated/analytics'
       path: '/analytics'
@@ -456,12 +544,55 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAchievementsRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/community/$channel': {
+      id: '/_authenticated/community/$channel'
+      path: '/$channel'
+      fullPath: '/community/$channel'
+      preLoaderRoute: typeof AuthenticatedCommunityChannelRouteImport
+      parentRoute: typeof AuthenticatedCommunityRoute
+    }
+    '/_authenticated/c/learn': {
+      id: '/_authenticated/c/learn'
+      path: '/c/learn'
+      fullPath: '/c/learn'
+      preLoaderRoute: typeof AuthenticatedCLearnRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/c/habits': {
+      id: '/_authenticated/c/habits'
+      path: '/c/habits'
+      fullPath: '/c/habits'
+      preLoaderRoute: typeof AuthenticatedCHabitsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/c/body': {
+      id: '/_authenticated/c/body'
+      path: '/c/body'
+      fullPath: '/c/body'
+      preLoaderRoute: typeof AuthenticatedCBodyRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
+
+interface AuthenticatedCommunityRouteChildren {
+  AuthenticatedCommunityChannelRoute: typeof AuthenticatedCommunityChannelRoute
+}
+
+const AuthenticatedCommunityRouteChildren: AuthenticatedCommunityRouteChildren =
+  {
+    AuthenticatedCommunityChannelRoute: AuthenticatedCommunityChannelRoute,
+  }
+
+const AuthenticatedCommunityRouteWithChildren =
+  AuthenticatedCommunityRoute._addFileChildren(
+    AuthenticatedCommunityRouteChildren,
+  )
 
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedAchievementsRoute: typeof AuthenticatedAchievementsRoute
   AuthenticatedAnalyticsRoute: typeof AuthenticatedAnalyticsRoute
+  AuthenticatedCommunityRoute: typeof AuthenticatedCommunityRouteWithChildren
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
   AuthenticatedDietRoute: typeof AuthenticatedDietRoute
   AuthenticatedHabitsRoute: typeof AuthenticatedHabitsRoute
@@ -473,11 +604,15 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedQuestsRoute: typeof AuthenticatedQuestsRoute
   AuthenticatedSettingsRoute: typeof AuthenticatedSettingsRoute
   AuthenticatedWorkoutRoute: typeof AuthenticatedWorkoutRoute
+  AuthenticatedCBodyRoute: typeof AuthenticatedCBodyRoute
+  AuthenticatedCHabitsRoute: typeof AuthenticatedCHabitsRoute
+  AuthenticatedCLearnRoute: typeof AuthenticatedCLearnRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAchievementsRoute: AuthenticatedAchievementsRoute,
   AuthenticatedAnalyticsRoute: AuthenticatedAnalyticsRoute,
+  AuthenticatedCommunityRoute: AuthenticatedCommunityRouteWithChildren,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
   AuthenticatedDietRoute: AuthenticatedDietRoute,
   AuthenticatedHabitsRoute: AuthenticatedHabitsRoute,
@@ -489,6 +624,9 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedQuestsRoute: AuthenticatedQuestsRoute,
   AuthenticatedSettingsRoute: AuthenticatedSettingsRoute,
   AuthenticatedWorkoutRoute: AuthenticatedWorkoutRoute,
+  AuthenticatedCBodyRoute: AuthenticatedCBodyRoute,
+  AuthenticatedCHabitsRoute: AuthenticatedCHabitsRoute,
+  AuthenticatedCLearnRoute: AuthenticatedCLearnRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =
@@ -504,17 +642,8 @@ const rootRouteChildren: RootRouteChildren = {
   SecurityRoute: SecurityRoute,
   TermsRoute: TermsRoute,
   ApiChatRoute: ApiChatRoute,
+  UUsernameRoute: UUsernameRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
