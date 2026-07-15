@@ -1,0 +1,16 @@
+{
+  "name": "Life Order — Hayotingni tartibga sol",
+  "short_name": "Life Order",
+  "description": "Self-Control OS — o'z-o'zini boshqarishning operatsion tizimi. Trigger tahlili, kunlik uchta qadam, halol AI mentor Nadir.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0A0A0A",
+  "theme_color": "#0A0A0A",
+  "lang": "uz",
+  "categories": ["productivity", "lifestyle", "health"],
+  "icons": [
+    { "src": "/favicon.ico", "sizes": "48x48", "type": "image/x-icon" }
+  ]
+}
