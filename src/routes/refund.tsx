@@ -7,7 +7,11 @@ export const Route = createFileRoute("/refund")({
     meta: [
       { title: `To'lovni qaytarish — ${uz.brand.name}` },
       { name: "description", content: "To'lovni qaytarish shartlari." },
+      { property: "og:title", content: `To'lovni qaytarish — ${uz.brand.name}` },
+      { property: "og:description", content: "To'lovni qaytarish shartlari." },
+      { property: "og:url", content: "https://life-orderuz.lovable.app/refund" },
     ],
+    links: [{ rel: "canonical", href: "https://life-orderuz.lovable.app/refund" }],
   }),
   component: () => (
     <LegalShell title="To'lovni qaytarish" updated="15-iyul, 2026">
