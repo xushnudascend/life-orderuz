@@ -22,7 +22,7 @@ type Profile = {
 };
 type Habit = { id: string; title: string; xp_reward: number };
 type Stats = { total_xp: number; level: number } | null;
-type Streak = { current_streak: number } | null;
+type Streak = { current_days: number } | null;
 
 function today(): string {
   return new Date().toISOString().slice(0, 10);
@@ -63,7 +63,7 @@ function Dashboard() {
         .maybeSingle(),
       supabase
         .from("streaks")
-        .select("current_streak")
+        .select("current_days")
         .eq("user_id", userId)
         .maybeSingle(),
     ]);
@@ -131,7 +131,7 @@ function Dashboard() {
         <Card label="XP" value={stats?.total_xp ?? 0} />
         <Card
           label="Streak"
-          value={`${streak?.current_streak ?? 0} kun`}
+          value={`${streak?.current_days ?? 0} kun`}
           icon={<Flame className="h-4 w-4 text-primary" />}
         />
       </div>

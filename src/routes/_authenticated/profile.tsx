@@ -26,8 +26,8 @@ type Stats = {
   level: number;
 } | null;
 type Streak = {
-  current_streak: number;
-  longest_streak: number;
+  current_days: number;
+  longest_days: number;
 } | null;
 
 function ProfilePage() {
@@ -52,7 +52,7 @@ function ProfilePage() {
         .maybeSingle(),
       supabase
         .from("streaks")
-        .select("current_streak, longest_streak")
+        .select("current_days, longest_days")
         .eq("user_id", userId)
         .maybeSingle(),
     ]).then(([p, s, st]) => {
@@ -92,7 +92,7 @@ function ProfilePage() {
             <Stat label="Umumiy XP" value={stats?.total_xp ?? 0} />
             <Stat
               label="Joriy streak"
-              value={`${streak?.current_streak ?? 0} kun`}
+              value={`${streak?.current_days ?? 0} kun`}
             />
           </div>
 
@@ -110,7 +110,7 @@ function ProfilePage() {
             />
             <Row
               label="Eng uzun streak"
-              value={`${streak?.longest_streak ?? 0} kun`}
+              value={`${streak?.longest_days ?? 0} kun`}
             />
           </div>
         </>
