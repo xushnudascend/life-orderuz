@@ -248,6 +248,21 @@ function Dashboard() {
           </Button>
         </div>
       </section>
+
+      <section className="mt-6 grid gap-3 sm:grid-cols-4">
+        <Button asChild variant="outline" size="sm">
+          <Link to="/workout">Mashg'ulot</Link>
+        </Button>
+        <Button asChild variant="outline" size="sm">
+          <Link to="/diet">Ovqatlanish</Link>
+        </Button>
+        <Button asChild variant="outline" size="sm">
+          <Link to="/analytics">Statistika</Link>
+        </Button>
+        <Button asChild variant="outline" size="sm">
+          <Link to="/leaderboard">Reyting</Link>
+        </Button>
+      </section>
     </AppShell>
   );
 }
