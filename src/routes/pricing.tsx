@@ -18,7 +18,9 @@ export const Route = createFileRoute("/pricing")({
         property: "og:description",
         content: "Life Order Free va Pro rejalari.",
       },
+      { property: "og:url", content: "https://life-orderuz.lovable.app/pricing" },
     ],
+    links: [{ rel: "canonical", href: "https://life-orderuz.lovable.app/pricing" }],
   }),
   component: Pricing,
 });
