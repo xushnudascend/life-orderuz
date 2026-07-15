@@ -71,6 +71,65 @@ export type Database = {
         }
         Relationships: []
       }
+      community_channels: {
+        Row: {
+          created_at: string
+          description: string | null
+          id: string
+          slug: string
+          sort_order: number
+          title: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          slug: string
+          sort_order?: number
+          title: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          slug?: string
+          sort_order?: number
+          title?: string
+        }
+        Relationships: []
+      }
+      community_posts: {
+        Row: {
+          channel_id: string
+          content: string
+          created_at: string
+          id: string
+          user_id: string
+        }
+        Insert: {
+          channel_id: string
+          content: string
+          created_at?: string
+          id?: string
+          user_id: string
+        }
+        Update: {
+          channel_id?: string
+          content?: string
+          created_at?: string
+          id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "community_posts_channel_id_fkey"
+            columns: ["channel_id"]
+            isOneToOne: false
+            referencedRelation: "community_channels"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       daily_quests: {
         Row: {
           completed_at: string | null
@@ -150,11 +209,13 @@ export type Database = {
       }
       habits: {
         Row: {
+          category: string
           created_at: string
           description: string | null
           frequency: string
           id: string
           is_active: boolean
+          scheduled_for: string | null
           sort_order: number
           title: string
           updated_at: string
@@ -162,11 +223,13 @@ export type Database = {
           xp_reward: number
         }
         Insert: {
+          category?: string
           created_at?: string
           description?: string | null
           frequency?: string
           id?: string
           is_active?: boolean
+          scheduled_for?: string | null
           sort_order?: number
           title: string
           updated_at?: string
@@ -174,11 +237,13 @@ export type Database = {
           xp_reward?: number
         }
         Update: {
+          category?: string
           created_at?: string
           description?: string | null
           frequency?: string
           id?: string
           is_active?: boolean
+          scheduled_for?: string | null
           sort_order?: number
           title?: string
           updated_at?: string
@@ -223,6 +288,7 @@ export type Database = {
           created_at: string
           description: string
           id: string
+          image_url: string | null
           kind: string
           logged_date: string
           user_id: string
@@ -232,6 +298,7 @@ export type Database = {
           created_at?: string
           description: string
           id?: string
+          image_url?: string | null
           kind: string
           logged_date?: string
           user_id: string
@@ -241,6 +308,7 @@ export type Database = {
           created_at?: string
           description?: string
           id?: string
+          image_url?: string | null
           kind?: string
           logged_date?: string
           user_id?: string
@@ -278,58 +346,79 @@ export type Database = {
         Row: {
           activity_level: Database["public"]["Enums"]["activity_level"] | null
           age: number | null
+          ai_mentor_enabled: boolean
+          animations_enabled: boolean
+          archetype: string | null
+          auto_shrink_on_excuse: boolean
           avatar_url: string | null
           created_at: string
           daily_reminder_time: string
           display_name: string | null
           height_cm: number | null
           id: string
+          is_public: boolean
           locale: string
           notify_daily: boolean
           notify_streak: boolean
           onboarding_completed_at: string | null
           plan_length_days: number | null
           sex: Database["public"]["Enums"]["sex"] | null
+          timezone: string
           updated_at: string
           username: string | null
+          viloyat: string | null
           weight_kg: number | null
         }
         Insert: {
           activity_level?: Database["public"]["Enums"]["activity_level"] | null
           age?: number | null
+          ai_mentor_enabled?: boolean
+          animations_enabled?: boolean
+          archetype?: string | null
+          auto_shrink_on_excuse?: boolean
           avatar_url?: string | null
           created_at?: string
           daily_reminder_time?: string
           display_name?: string | null
           height_cm?: number | null
           id: string
+          is_public?: boolean
           locale?: string
           notify_daily?: boolean
           notify_streak?: boolean
           onboarding_completed_at?: string | null
           plan_length_days?: number | null
           sex?: Database["public"]["Enums"]["sex"] | null
+          timezone?: string
           updated_at?: string
           username?: string | null
+          viloyat?: string | null
           weight_kg?: number | null
         }
         Update: {
           activity_level?: Database["public"]["Enums"]["activity_level"] | null
           age?: number | null
+          ai_mentor_enabled?: boolean
+          animations_enabled?: boolean
+          archetype?: string | null
+          auto_shrink_on_excuse?: boolean
           avatar_url?: string | null
           created_at?: string
           daily_reminder_time?: string
           display_name?: string | null
           height_cm?: number | null
           id?: string
+          is_public?: boolean
           locale?: string
           notify_daily?: boolean
           notify_streak?: boolean
           onboarding_completed_at?: string | null
           plan_length_days?: number | null
           sex?: Database["public"]["Enums"]["sex"] | null
+          timezone?: string
           updated_at?: string
           username?: string | null
+          viloyat?: string | null
           weight_kg?: number | null
         }
         Relationships: []
