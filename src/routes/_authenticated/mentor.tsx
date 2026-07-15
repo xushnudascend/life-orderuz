@@ -176,7 +176,7 @@ function MentorChat({
             Bugun nima seni to'xtatyapti? Bir jumla bilan yoz.
           </div>
         )}
-        {messages.map((m) => {
+        {(messages as UIMessage[]).map((m) => {
           const text = extractText(m);
           const isUser = m.role === "user";
           return (
