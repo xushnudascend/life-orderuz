@@ -190,7 +190,7 @@ function ProblemsGrid() {
               className="rounded-[var(--radius)] border border-border/60 bg-card/40 p-7 transition-colors hover:border-border"
             >
               <p className="font-ui text-xs uppercase tracking-[0.24em] text-primary">{i.n}</p>
-              <h3 className="mt-4 font-serif text-2xl leading-tight">{i.title}</h3>
+              <h2 className="mt-4 font-serif text-2xl leading-tight">{i.title}</h2>
               <p className="mt-3 leading-relaxed text-muted-foreground">{i.body}</p>
             </article>
           ))}
