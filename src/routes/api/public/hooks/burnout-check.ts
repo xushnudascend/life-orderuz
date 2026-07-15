@@ -43,11 +43,14 @@ export const Route = createFileRoute("/api/public/hooks/burnout-check")({
           if ((recent as any)?.count && (recent as any).count > 0) continue;
 
           // Nudge yozamiz (jadval bo'lmasa — sof no-op)
-          await admin.from("nadir_nudges" as any).insert({
-            user_id: row.user_id,
-            kind: "burnout",
-            message: "3 kun sokinlik ko'rindi. Bugun bitta kichik qadamdan boshla — nima eng ko'p to'sqinlik qildi?",
-          }).then(() => flagged++).catch(() => { /* jadval yo'q bo'lsa jim */ });
+          try {
+            const { error: insErr } = await admin.from("nadir_nudges" as any).insert({
+              user_id: row.user_id,
+              kind: "burnout",
+              message: "3 kun sokinlik ko'rindi. Bugun bitta kichik qadamdan boshla — nima eng ko'p to'sqinlik qildi?",
+            });
+            if (!insErr) flagged++;
+          } catch { /* jadval yo'q bo'lsa jim */ }
         }
 
         return Response.json({ ok: true, flagged, checked: stats?.length ?? 0 });
