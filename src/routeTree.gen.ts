@@ -17,6 +17,7 @@ import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as UUsernameRouteImport } from './routes/u.$username'
 import { Route as ApiChatRouteImport } from './routes/api/chat'
 import { Route as AuthenticatedWorkoutRouteImport } from './routes/_authenticated/workout'
 import { Route as AuthenticatedSettingsRouteImport } from './routes/_authenticated/settings'
@@ -74,6 +75,11 @@ const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const UUsernameRoute = UUsernameRouteImport.update({
+  id: '/u/$username',
+  path: '/u/$username',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiChatRoute = ApiChatRouteImport.update({
@@ -198,6 +204,7 @@ export interface FileRoutesByFullPath {
   '/settings': typeof AuthenticatedSettingsRoute
   '/workout': typeof AuthenticatedWorkoutRoute
   '/api/chat': typeof ApiChatRoute
+  '/u/$username': typeof UUsernameRoute
   '/c/body': typeof AuthenticatedCBodyRoute
   '/c/habits': typeof AuthenticatedCHabitsRoute
   '/c/learn': typeof AuthenticatedCLearnRoute
@@ -226,6 +233,7 @@ export interface FileRoutesByTo {
   '/settings': typeof AuthenticatedSettingsRoute
   '/workout': typeof AuthenticatedWorkoutRoute
   '/api/chat': typeof ApiChatRoute
+  '/u/$username': typeof UUsernameRoute
   '/c/body': typeof AuthenticatedCBodyRoute
   '/c/habits': typeof AuthenticatedCHabitsRoute
   '/c/learn': typeof AuthenticatedCLearnRoute
@@ -256,6 +264,7 @@ export interface FileRoutesById {
   '/_authenticated/settings': typeof AuthenticatedSettingsRoute
   '/_authenticated/workout': typeof AuthenticatedWorkoutRoute
   '/api/chat': typeof ApiChatRoute
+  '/u/$username': typeof UUsernameRoute
   '/_authenticated/c/body': typeof AuthenticatedCBodyRoute
   '/_authenticated/c/habits': typeof AuthenticatedCHabitsRoute
   '/_authenticated/c/learn': typeof AuthenticatedCLearnRoute
@@ -286,6 +295,7 @@ export interface FileRouteTypes {
     | '/settings'
     | '/workout'
     | '/api/chat'
+    | '/u/$username'
     | '/c/body'
     | '/c/habits'
     | '/c/learn'
@@ -314,6 +324,7 @@ export interface FileRouteTypes {
     | '/settings'
     | '/workout'
     | '/api/chat'
+    | '/u/$username'
     | '/c/body'
     | '/c/habits'
     | '/c/learn'
@@ -343,6 +354,7 @@ export interface FileRouteTypes {
     | '/_authenticated/settings'
     | '/_authenticated/workout'
     | '/api/chat'
+    | '/u/$username'
     | '/_authenticated/c/body'
     | '/_authenticated/c/habits'
     | '/_authenticated/c/learn'
@@ -359,6 +371,7 @@ export interface RootRouteChildren {
   SecurityRoute: typeof SecurityRoute
   TermsRoute: typeof TermsRoute
   ApiChatRoute: typeof ApiChatRoute
+  UUsernameRoute: typeof UUsernameRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -417,6 +430,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/u/$username': {
+      id: '/u/$username'
+      path: '/u/$username'
+      fullPath: '/u/$username'
+      preLoaderRoute: typeof UUsernameRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/chat': {
@@ -622,6 +642,7 @@ const rootRouteChildren: RootRouteChildren = {
   SecurityRoute: SecurityRoute,
   TermsRoute: TermsRoute,
   ApiChatRoute: ApiChatRoute,
+  UUsernameRoute: UUsernameRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

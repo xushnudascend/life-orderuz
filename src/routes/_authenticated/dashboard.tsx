@@ -1,10 +1,44 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useEffect, useState, lazy, Suspense } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { AppShell } from "@/components/app-shell";
 import { Button } from "@/components/ui/button";
-import { Loader2, ArrowRight, Flame, Target, Award } from "lucide-react";
+import {
+  Loader2,
+  ArrowRight,
+  Flame,
+  Sparkles,
+  ChevronDown,
+} from "lucide-react";
 import { uz } from "@/i18n";
+import { ProgressRing } from "@/components/progress-ring";
+import { RankBadge } from "@/components/rank-badge";
+import { ShieldIndicator } from "@/components/shield-indicator";
+import { ArchetypeRow } from "@/components/archetype-row";
+import {
+  circadian,
+  progressMessage,
+  ARCHETYPES,
+  type Archetype,
+  estimateDisciplineScore,
+} from "@/lib/nervous";
+
+const MentorChat = lazy(() =>
+  import("./mentor").then((m) => ({ default: (m as { MentorEmbed?: React.FC }).MentorEmbed ?? FallbackMentor })),
+);
+
+function FallbackMentor() {
+  return (
+    <div className="p-5">
+      <p className="text-sm text-muted-foreground">
+        AI paneli yuklanmadi.{" "}
+        <Link to="/mentor" className="text-primary hover:underline">
+          Nadir sahifasini ochish
+        </Link>
+      </p>
+    </div>
+  );
+}
 
 export const Route = createFileRoute("/_authenticated/dashboard")({
   head: () => ({
@@ -19,9 +53,10 @@ export const Route = createFileRoute("/_authenticated/dashboard")({
 type Profile = {
   display_name: string | null;
   plan_length_days: number | null;
+  archetype: string | null;
 };
-type Habit = { id: string; title: string; xp_reward: number };
-type Stats = { total_xp: number; level: number } | null;
+type Habit = { id: string; title: string; xp_reward: number; category: string | null };
+type Stats = { total_xp: number; level: number; discipline_score: number } | null;
 type Streak = { current_days: number } | null;
 
 function today(): string {
@@ -35,18 +70,22 @@ function Dashboard() {
   const [done, setDone] = useState<Set<string>>(new Set());
   const [stats, setStats] = useState<Stats>(null);
   const [streak, setStreak] = useState<Streak>(null);
+  const [shieldsUsed, setShieldsUsed] = useState(0);
   const [loading, setLoading] = useState(true);
+  const [aiOpen, setAiOpen] = useState(false);
 
   async function refresh() {
-    const [p, hs, logs, s, st] = await Promise.all([
+    const sevenAgo = new Date();
+    sevenAgo.setUTCDate(sevenAgo.getUTCDate() - 7);
+    const [p, hs, logs, s, st, sh] = await Promise.all([
       supabase
         .from("profiles")
-        .select("display_name, plan_length_days")
+        .select("display_name, plan_length_days, archetype")
         .eq("id", userId)
         .maybeSingle(),
       supabase
         .from("habits")
-        .select("id,title,xp_reward")
+        .select("id,title,xp_reward,category")
         .eq("user_id", userId)
         .eq("is_active", true)
         .order("sort_order", { ascending: true })
@@ -58,7 +97,7 @@ function Dashboard() {
         .eq("logged_date", today()),
       supabase
         .from("user_stats")
-        .select("total_xp, level")
+        .select("total_xp, level, discipline_score")
         .eq("user_id", userId)
         .maybeSingle(),
       supabase
@@ -66,18 +105,22 @@ function Dashboard() {
         .select("current_days")
         .eq("user_id", userId)
         .maybeSingle(),
+      supabase
+        .from("shields")
+        .select("id", { count: "exact", head: true })
+        .eq("user_id", userId)
+        .gt("used_on", sevenAgo.toISOString().slice(0, 10)),
     ]);
     setProfile((p.data as Profile | null) ?? null);
     setHabits((hs.data as Habit[] | null) ?? []);
     setDone(
       new Set(
-        ((logs.data as { habit_id: string }[] | null) ?? []).map(
-          (l) => l.habit_id,
-        ),
+        ((logs.data as { habit_id: string }[] | null) ?? []).map((l) => l.habit_id),
       ),
     );
     setStats((s.data as Stats) ?? null);
     setStreak((st.data as Streak) ?? null);
+    setShieldsUsed(sh.count ?? 0);
     setLoading(false);
   }
 
@@ -112,144 +155,224 @@ function Dashboard() {
 
   const doneCount = habits.filter((h) => done.has(h.id)).length;
   const percent = habits.length ? Math.round((doneCount / habits.length) * 100) : 0;
+  const c = circadian();
+  const archetype: Archetype | null =
+    profile?.archetype && profile.archetype in ARCHETYPES
+      ? ARCHETYPES[profile.archetype as Archetype["id"]]
+      : null;
+  const score =
+    stats?.discipline_score ??
+    estimateDisciplineScore({
+      currentStreak: streak?.current_days ?? 0,
+      totalXp: stats?.total_xp ?? 0,
+      level: stats?.level ?? 1,
+    });
+
+  const xpForNext = 100 * ((stats?.level ?? 1) + 1) ** 2;
+  const xpProgress = stats ? Math.min(100, Math.round((stats.total_xp / xpForNext) * 100)) : 0;
 
   return (
     <AppShell title="Bugun">
-      <p className="font-ui text-xs uppercase tracking-[0.28em] text-primary">
-        Bugungi kun
-      </p>
-      <h1 className="mt-3 font-serif text-4xl leading-tight tracking-tight">
-        Salom, {profile?.display_name ?? "do'st"}.
-      </h1>
-      <p className="mt-3 max-w-xl text-muted-foreground">
-        {profile?.plan_length_days ?? 7} kunlik yo'lda birinchi qadamni bugun
-        qo'yasan. Halol bo'l — faqat sen o'zingga hisob berasan.
-      </p>
-
-      <div className="mt-8 grid gap-4 sm:grid-cols-3">
-        <Card label="Daraja" value={stats?.level ?? 1} />
-        <Card label="XP" value={stats?.total_xp ?? 0} />
-        <Card
-          label="Streak"
-          value={`${streak?.current_days ?? 0} kun`}
-          icon={<Flame className="h-4 w-4 text-primary" />}
-        />
-      </div>
-
-      <section className="mt-10">
-        <div className="mb-4 flex items-end justify-between">
-          <div>
-            <h2 className="font-serif text-2xl">Bugungi odatlar</h2>
-            <p className="font-ui text-sm text-muted-foreground">
-              {doneCount} / {habits.length} — {percent}%
+      {/* HERO-BENTO */}
+      <section className="rounded-[var(--radius)] border border-border bg-gradient-to-br from-background via-background to-primary/5 p-6 sm:p-8">
+        <div className="flex flex-wrap items-start justify-between gap-4">
+          <div className="min-w-0 flex-1">
+            <p className="font-ui text-[11px] uppercase tracking-[0.28em] text-primary">
+              {c.greeting} · {c.label}
             </p>
+            <h1 className="mt-3 font-serif text-3xl leading-tight tracking-tight sm:text-4xl">
+              {(profile?.display_name ?? "do'st") + ", "}
+              <span className="text-muted-foreground">bugungi reja</span>
+            </h1>
+            <ArchetypeRow archetype={archetype} />
           </div>
-          <Button asChild variant="ghost" size="sm">
-            <Link to="/habits">
-              Boshqarish <ArrowRight className="ml-1 h-4 w-4" />
+          <div className="flex flex-col items-end gap-2">
+            <ShieldIndicator usedThisWeek={shieldsUsed} max={3} />
+            <Link to="/profile">
+              <RankBadge score={score} />
             </Link>
-          </Button>
+          </div>
         </div>
 
-        {loading ? (
-          <div className="flex justify-center py-10">
-            <Loader2 className="h-5 w-5 animate-spin text-muted-foreground" />
-          </div>
-        ) : habits.length === 0 ? (
-          <div className="rounded-[var(--radius)] border border-dashed border-border p-8 text-center">
-            <p className="text-muted-foreground">
-              Hali odat qo'shmagansan. Kichikdan boshla.
+        <div className="mt-8 grid gap-6 sm:grid-cols-[auto_1fr] sm:items-center">
+          <ProgressRing value={doneCount} total={Math.max(1, habits.length)} />
+          <div className="min-w-0">
+            <div className="flex items-baseline justify-between gap-3">
+              <p className="font-ui text-xs uppercase tracking-[0.22em] text-muted-foreground">
+                Daraja {stats?.level ?? 1}
+              </p>
+              <p className="font-ui text-[11px] text-muted-foreground">
+                {stats?.total_xp ?? 0} / {xpForNext} XP
+              </p>
+            </div>
+            <div className="mt-2 h-2 w-full overflow-hidden rounded-full bg-border">
+              <div
+                className="h-full bg-primary transition-all"
+                style={{ width: `${xpProgress}%` }}
+              />
+            </div>
+            <p className="mt-4 font-ui text-sm text-foreground/80">
+              {progressMessage(percent)}
             </p>
-            <Button asChild className="mt-4">
-              <Link to="/habits">Birinchi odatni qo'shish</Link>
-            </Button>
+            <div className="mt-3 flex items-center gap-2 font-ui text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
+              <Flame className="h-3.5 w-3.5 text-primary" />
+              Streak: <span className="text-foreground">{streak?.current_days ?? 0}</span> kun
+            </div>
           </div>
-        ) : (
-          <div className="space-y-2">
-            {habits.map((h) => {
-              const isDone = done.has(h.id);
-              return (
-                <button
-                  key={h.id}
-                  onClick={() => toggle(h)}
-                  className={
-                    "flex w-full items-center justify-between rounded-[var(--radius)] border p-4 text-left transition-colors " +
-                    (isDone
-                      ? "border-primary/40 bg-primary/5"
-                      : "border-border bg-card hover:border-foreground/20")
-                  }
-                >
-                  <div className="flex items-center gap-4">
-                    <span
-                      className={
-                        "flex h-9 w-9 items-center justify-center rounded-full border transition-colors " +
-                        (isDone
-                          ? "border-primary bg-primary text-primary-foreground"
-                          : "border-border text-muted-foreground")
-                      }
-                    >
-                      <Flame className="h-4 w-4" />
-                    </span>
-                    <div>
-                      <p className="font-serif text-lg">{h.title}</p>
-                      <p className="font-ui text-xs uppercase tracking-[0.2em] text-muted-foreground/80">
-                        +{h.xp_reward} XP
-                      </p>
-                    </div>
-                  </div>
-                  <span className="font-ui text-xs uppercase tracking-[0.22em] text-muted-foreground">
-                    {isDone ? "Bajarildi" : "Belgilash"}
-                  </span>
-                </button>
-              );
-            })}
+        </div>
+      </section>
+
+      {/* AI Co-Pilot lazy panel */}
+      <section className="mt-6 rounded-[var(--radius)] border border-border">
+        <button
+          type="button"
+          onClick={() => setAiOpen((v) => !v)}
+          className="flex w-full items-center justify-between px-5 py-4 text-left"
+          aria-expanded={aiOpen}
+        >
+          <span className="flex items-center gap-2 font-serif text-lg">
+            <Sparkles className="h-4 w-4 text-primary" />
+            AI yordami
+          </span>
+          <ChevronDown
+            className={"h-4 w-4 text-muted-foreground transition-transform " + (aiOpen ? "rotate-180" : "")}
+          />
+        </button>
+        {aiOpen && (
+          <div className="border-t border-border">
+            <Suspense
+              fallback={
+                <div className="flex justify-center py-8">
+                  <Loader2 className="h-4 w-4 animate-spin text-muted-foreground" />
+                </div>
+              }
+            >
+              <div className="p-5">
+                <p className="text-sm text-muted-foreground">
+                  Nadir bilan chuqurroq gaplashish uchun{" "}
+                  <Link to="/mentor" className="text-primary hover:underline">
+                    to'liq sahifani och
+                  </Link>
+                  .
+                </p>
+              </div>
+            </Suspense>
           </div>
         )}
       </section>
 
-      <section className="mt-10 grid gap-4 sm:grid-cols-2">
-        <div className="rounded-[var(--radius)] border border-border p-6">
-          <div className="flex items-center gap-2">
-            <Target className="h-4 w-4 text-primary" />
-            <h3 className="font-serif text-xl">Vazifalar</h3>
+      {/* Habits & mini analytics */}
+      <div className="mt-8 grid gap-6 md:grid-cols-6">
+        <section className="md:col-span-4">
+          <div className="mb-4 flex items-end justify-between">
+            <div>
+              <h2 className="font-serif text-2xl">Bugungi odatlar</h2>
+              <p className="font-ui text-sm text-muted-foreground">
+                {doneCount} / {habits.length} — {percent}%
+              </p>
+            </div>
+            <Button asChild variant="ghost" size="sm">
+              <Link to="/habits">
+                Boshqarish <ArrowRight className="ml-1 h-4 w-4" />
+              </Link>
+            </Button>
           </div>
-          <p className="mt-2 font-ui text-sm text-muted-foreground">
-            Bugun uchun uchta kichik topshiriq seni kutmoqda.
-          </p>
-          <Button asChild className="mt-4" variant="outline">
-            <Link to="/quests">
-              Ochish <ArrowRight className="ml-1 h-4 w-4" />
-            </Link>
-          </Button>
-        </div>
-        <div className="rounded-[var(--radius)] border border-border p-6">
-          <div className="flex items-center gap-2">
-            <Award className="h-4 w-4 text-primary" />
-            <h3 className="font-serif text-xl">Yutuqlar</h3>
-          </div>
-          <p className="mt-2 font-ui text-sm text-muted-foreground">
-            Yo'lda ochilgan medallaringni ko'r.
-          </p>
-          <Button asChild className="mt-4" variant="outline">
-            <Link to="/achievements">
-              Ko'rish <ArrowRight className="ml-1 h-4 w-4" />
-            </Link>
-          </Button>
-        </div>
-        <div className="rounded-[var(--radius)] border border-border p-6 sm:col-span-2">
-          <h3 className="font-serif text-xl">Kundalik yozuv</h3>
-          <p className="mt-2 font-ui text-sm text-muted-foreground">
-            Bugun nimadan qochding? Nimani boshqara olding?
-          </p>
-          <Button asChild className="mt-4" variant="outline">
-            <Link to="/journal">
-              Yozishni ochish <ArrowRight className="ml-1 h-4 w-4" />
-            </Link>
-          </Button>
-        </div>
-      </section>
 
-      <section className="mt-6 grid gap-3 sm:grid-cols-4">
+          {loading ? (
+            <div className="flex justify-center py-10">
+              <Loader2 className="h-5 w-5 animate-spin text-muted-foreground" />
+            </div>
+          ) : habits.length === 0 ? (
+            <div className="rounded-[var(--radius)] border border-dashed border-border p-8 text-center">
+              <p className="text-muted-foreground">
+                Hozircha odat yo'q. Sun'iy intellekt shaxsiy reja tuzib bersinmi?
+              </p>
+              <Button asChild className="mt-4">
+                <Link to="/onboarding">Shaxsiy reja tuzish</Link>
+              </Button>
+            </div>
+          ) : (
+            <div className="space-y-2">
+              {habits.map((h) => {
+                const isDone = done.has(h.id);
+                return (
+                  <button
+                    key={h.id}
+                    onClick={() => toggle(h)}
+                    className={
+                      "flex w-full items-center justify-between rounded-[var(--radius)] border p-4 text-left transition-colors " +
+                      (isDone
+                        ? "border-primary/40 bg-primary/5"
+                        : "border-border bg-card hover:border-foreground/20")
+                    }
+                  >
+                    <div className="flex items-center gap-4">
+                      <span
+                        className={
+                          "flex h-9 w-9 items-center justify-center rounded-full border transition-colors " +
+                          (isDone
+                            ? "border-primary bg-primary text-primary-foreground"
+                            : "border-border text-muted-foreground")
+                        }
+                      >
+                        <Flame className="h-4 w-4" />
+                      </span>
+                      <div className={isDone ? "opacity-70" : ""}>
+                        <p className={"font-serif text-lg " + (isDone ? "line-through" : "")}>
+                          {h.title}
+                        </p>
+                        <p className="font-ui text-xs uppercase tracking-[0.2em] text-primary">
+                          +{h.xp_reward} XP
+                        </p>
+                      </div>
+                    </div>
+                    <span className="font-ui text-xs uppercase tracking-[0.22em] text-muted-foreground">
+                      {isDone ? "Bajarildi" : "Belgilash"}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+          )}
+        </section>
+
+        <aside className="md:col-span-2">
+          <div className="rounded-[var(--radius)] border border-border p-5">
+            <p className="font-ui text-[11px] uppercase tracking-[0.22em] text-muted-foreground">
+              Hafta XP
+            </p>
+            <p className="mt-2 font-serif text-3xl">{stats?.total_xp ?? 0}</p>
+            <Button asChild variant="ghost" size="sm" className="mt-3 -ml-2">
+              <Link to="/analytics">
+                Batafsil <ArrowRight className="ml-1 h-4 w-4" />
+              </Link>
+            </Button>
+          </div>
+
+          <div className="mt-4 rounded-[var(--radius)] border border-border p-5">
+            <p className="font-ui text-[11px] uppercase tracking-[0.22em] text-muted-foreground">
+              Kunlik jadval
+            </p>
+            <ul className="mt-3 space-y-2 font-ui text-sm">
+              <li className="flex justify-between border-b border-border/60 pb-1.5">
+                <span className="text-muted-foreground">05:00–09:00</span>
+                <span>Peak — eng qiyin ish</span>
+              </li>
+              <li className="flex justify-between border-b border-border/60 pb-1.5">
+                <span className="text-muted-foreground">12:00–15:00</span>
+                <span>Steady — reja tekshir</span>
+              </li>
+              <li className="flex justify-between">
+                <span className="text-muted-foreground">18:00–22:00</span>
+                <span>Micro — 2 daq. qadam</span>
+              </li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+
+      {/* Quick access */}
+      <section className="mt-8 grid gap-3 sm:grid-cols-4">
         <Button asChild variant="outline" size="sm">
           <Link to="/workout">Mashg'ulot</Link>
         </Button>
@@ -257,34 +380,12 @@ function Dashboard() {
           <Link to="/diet">Ovqatlanish</Link>
         </Button>
         <Button asChild variant="outline" size="sm">
-          <Link to="/analytics">Statistika</Link>
+          <Link to="/quests">Vazifalar</Link>
         </Button>
         <Button asChild variant="outline" size="sm">
           <Link to="/leaderboard">Reyting</Link>
         </Button>
       </section>
     </AppShell>
-  );
-}
-
-function Card({
-  label,
-  value,
-  icon,
-}: {
-  label: string;
-  value: string | number;
-  icon?: React.ReactNode;
-}) {
-  return (
-    <div className="rounded-[var(--radius)] border border-border p-5">
-      <div className="flex items-center justify-between">
-        <p className="font-ui text-xs uppercase tracking-[0.22em] text-muted-foreground">
-          {label}
-        </p>
-        {icon}
-      </div>
-      <p className="mt-2 font-serif text-3xl">{value}</p>
-    </div>
   );
 }
