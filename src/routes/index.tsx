@@ -119,13 +119,13 @@ function Hero() {
             Life Order — o'z-o'zini boshqarishning operatsion tizimi. Trigger tahlili, kunlik uchta aniq qadam, halol AI mentor Nadir. 60 soniyada tashxis. Kartasiz.
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <Button asChild size="xl" className="h-12 rounded-full font-ui font-semibold">
+            <Button asChild size="lg" className="h-12 rounded-full font-ui font-semibold">
               <Link to="/auth">
                 60 soniyada tashxis olish
                 <ArrowRight className="ml-1.5 h-4 w-4" />
               </Link>
             </Button>
-            <Button asChild variant="ghost" size="xl" className="h-12 rounded-full font-ui">
+            <Button asChild variant="ghost" size="lg" className="h-12 rounded-full font-ui">
               <a href="#how-it-works">Qanday ishlaydi?</a>
             </Button>
           </div>
@@ -667,7 +667,7 @@ function FinalCta() {
           Bepul. Kartasiz. Birinchi missiyang 60 soniyadan keyin qo'lingda.
         </p>
         <div className="mt-9">
-          <Button asChild size="xl" className="h-14 rounded-full px-8 font-ui font-semibold">
+          <Button asChild size="lg" className="h-14 rounded-full px-8 font-ui font-semibold">
             <Link to="/auth">
               Bepul boshlash
               <ArrowRight className="ml-1.5 h-4 w-4" />
