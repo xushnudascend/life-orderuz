@@ -250,10 +250,13 @@ export type Database = {
           age: number | null
           avatar_url: string | null
           created_at: string
+          daily_reminder_time: string
           display_name: string | null
           height_cm: number | null
           id: string
           locale: string
+          notify_daily: boolean
+          notify_streak: boolean
           onboarding_completed_at: string | null
           plan_length_days: number | null
           sex: Database["public"]["Enums"]["sex"] | null
@@ -266,10 +269,13 @@ export type Database = {
           age?: number | null
           avatar_url?: string | null
           created_at?: string
+          daily_reminder_time?: string
           display_name?: string | null
           height_cm?: number | null
           id: string
           locale?: string
+          notify_daily?: boolean
+          notify_streak?: boolean
           onboarding_completed_at?: string | null
           plan_length_days?: number | null
           sex?: Database["public"]["Enums"]["sex"] | null
@@ -282,10 +288,13 @@ export type Database = {
           age?: number | null
           avatar_url?: string | null
           created_at?: string
+          daily_reminder_time?: string
           display_name?: string | null
           height_cm?: number | null
           id?: string
           locale?: string
+          notify_daily?: boolean
+          notify_streak?: boolean
           onboarding_completed_at?: string | null
           plan_length_days?: number | null
           sex?: Database["public"]["Enums"]["sex"] | null

@@ -18,6 +18,7 @@ import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ApiChatRouteImport } from './routes/api/chat'
+import { Route as AuthenticatedSettingsRouteImport } from './routes/_authenticated/settings'
 import { Route as AuthenticatedQuestsRouteImport } from './routes/_authenticated/quests'
 import { Route as AuthenticatedProfileRouteImport } from './routes/_authenticated/profile'
 import { Route as AuthenticatedOnboardingRouteImport } from './routes/_authenticated/onboarding'
@@ -70,6 +71,11 @@ const ApiChatRoute = ApiChatRouteImport.update({
   id: '/api/chat',
   path: '/api/chat',
   getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedSettingsRoute = AuthenticatedSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedQuestsRoute = AuthenticatedQuestsRouteImport.update({
   id: '/quests',
@@ -129,6 +135,7 @@ export interface FileRoutesByFullPath {
   '/onboarding': typeof AuthenticatedOnboardingRoute
   '/profile': typeof AuthenticatedProfileRoute
   '/quests': typeof AuthenticatedQuestsRoute
+  '/settings': typeof AuthenticatedSettingsRoute
   '/api/chat': typeof ApiChatRoute
 }
 export interface FileRoutesByTo {
@@ -147,6 +154,7 @@ export interface FileRoutesByTo {
   '/onboarding': typeof AuthenticatedOnboardingRoute
   '/profile': typeof AuthenticatedProfileRoute
   '/quests': typeof AuthenticatedQuestsRoute
+  '/settings': typeof AuthenticatedSettingsRoute
   '/api/chat': typeof ApiChatRoute
 }
 export interface FileRoutesById {
@@ -167,6 +175,7 @@ export interface FileRoutesById {
   '/_authenticated/onboarding': typeof AuthenticatedOnboardingRoute
   '/_authenticated/profile': typeof AuthenticatedProfileRoute
   '/_authenticated/quests': typeof AuthenticatedQuestsRoute
+  '/_authenticated/settings': typeof AuthenticatedSettingsRoute
   '/api/chat': typeof ApiChatRoute
 }
 export interface FileRouteTypes {
@@ -187,6 +196,7 @@ export interface FileRouteTypes {
     | '/onboarding'
     | '/profile'
     | '/quests'
+    | '/settings'
     | '/api/chat'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -205,6 +215,7 @@ export interface FileRouteTypes {
     | '/onboarding'
     | '/profile'
     | '/quests'
+    | '/settings'
     | '/api/chat'
   id:
     | '__root__'
@@ -224,6 +235,7 @@ export interface FileRouteTypes {
     | '/_authenticated/onboarding'
     | '/_authenticated/profile'
     | '/_authenticated/quests'
+    | '/_authenticated/settings'
     | '/api/chat'
   fileRoutesById: FileRoutesById
 }
@@ -304,6 +316,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiChatRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/settings': {
+      id: '/_authenticated/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof AuthenticatedSettingsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/quests': {
       id: '/_authenticated/quests'
       path: '/quests'
@@ -372,6 +391,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedOnboardingRoute: typeof AuthenticatedOnboardingRoute
   AuthenticatedProfileRoute: typeof AuthenticatedProfileRoute
   AuthenticatedQuestsRoute: typeof AuthenticatedQuestsRoute
+  AuthenticatedSettingsRoute: typeof AuthenticatedSettingsRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
@@ -383,6 +403,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedOnboardingRoute: AuthenticatedOnboardingRoute,
   AuthenticatedProfileRoute: AuthenticatedProfileRoute,
   AuthenticatedQuestsRoute: AuthenticatedQuestsRoute,
+  AuthenticatedSettingsRoute: AuthenticatedSettingsRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =
