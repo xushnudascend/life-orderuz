@@ -446,6 +446,29 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      check_achievements: { Args: { _user_id: string }; Returns: undefined }
+      ensure_daily_quests: {
+        Args: never
+        Returns: {
+          completed_at: string | null
+          created_at: string
+          description: string | null
+          difficulty: number
+          id: string
+          quest_date: string
+          status: Database["public"]["Enums"]["quest_status"]
+          title: string
+          updated_at: string
+          user_id: string
+          xp_reward: number
+        }[]
+        SetofOptions: {
+          from: "*"
+          to: "daily_quests"
+          isOneToOne: false
+          isSetofReturn: true
+        }
+      }
       use_shield: {
         Args: { _note?: string }
         Returns: {
