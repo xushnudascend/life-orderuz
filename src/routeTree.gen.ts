@@ -18,14 +18,18 @@ import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ApiChatRouteImport } from './routes/api/chat'
+import { Route as AuthenticatedWorkoutRouteImport } from './routes/_authenticated/workout'
 import { Route as AuthenticatedSettingsRouteImport } from './routes/_authenticated/settings'
 import { Route as AuthenticatedQuestsRouteImport } from './routes/_authenticated/quests'
 import { Route as AuthenticatedProfileRouteImport } from './routes/_authenticated/profile'
 import { Route as AuthenticatedOnboardingRouteImport } from './routes/_authenticated/onboarding'
 import { Route as AuthenticatedMentorRouteImport } from './routes/_authenticated/mentor'
+import { Route as AuthenticatedLeaderboardRouteImport } from './routes/_authenticated/leaderboard'
 import { Route as AuthenticatedJournalRouteImport } from './routes/_authenticated/journal'
 import { Route as AuthenticatedHabitsRouteImport } from './routes/_authenticated/habits'
+import { Route as AuthenticatedDietRouteImport } from './routes/_authenticated/diet'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
+import { Route as AuthenticatedAnalyticsRouteImport } from './routes/_authenticated/analytics'
 import { Route as AuthenticatedAchievementsRouteImport } from './routes/_authenticated/achievements'
 
 const TermsRoute = TermsRouteImport.update({
@@ -72,6 +76,11 @@ const ApiChatRoute = ApiChatRouteImport.update({
   path: '/api/chat',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedWorkoutRoute = AuthenticatedWorkoutRouteImport.update({
+  id: '/workout',
+  path: '/workout',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedSettingsRoute = AuthenticatedSettingsRouteImport.update({
   id: '/settings',
   path: '/settings',
@@ -97,6 +106,12 @@ const AuthenticatedMentorRoute = AuthenticatedMentorRouteImport.update({
   path: '/mentor',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedLeaderboardRoute =
+  AuthenticatedLeaderboardRouteImport.update({
+    id: '/leaderboard',
+    path: '/leaderboard',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedJournalRoute = AuthenticatedJournalRouteImport.update({
   id: '/journal',
   path: '/journal',
@@ -107,9 +122,19 @@ const AuthenticatedHabitsRoute = AuthenticatedHabitsRouteImport.update({
   path: '/habits',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedDietRoute = AuthenticatedDietRouteImport.update({
+  id: '/diet',
+  path: '/diet',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedAnalyticsRoute = AuthenticatedAnalyticsRouteImport.update({
+  id: '/analytics',
+  path: '/analytics',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedAchievementsRoute =
@@ -128,14 +153,18 @@ export interface FileRoutesByFullPath {
   '/security': typeof SecurityRoute
   '/terms': typeof TermsRoute
   '/achievements': typeof AuthenticatedAchievementsRoute
+  '/analytics': typeof AuthenticatedAnalyticsRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/diet': typeof AuthenticatedDietRoute
   '/habits': typeof AuthenticatedHabitsRoute
   '/journal': typeof AuthenticatedJournalRoute
+  '/leaderboard': typeof AuthenticatedLeaderboardRoute
   '/mentor': typeof AuthenticatedMentorRoute
   '/onboarding': typeof AuthenticatedOnboardingRoute
   '/profile': typeof AuthenticatedProfileRoute
   '/quests': typeof AuthenticatedQuestsRoute
   '/settings': typeof AuthenticatedSettingsRoute
+  '/workout': typeof AuthenticatedWorkoutRoute
   '/api/chat': typeof ApiChatRoute
 }
 export interface FileRoutesByTo {
@@ -147,14 +176,18 @@ export interface FileRoutesByTo {
   '/security': typeof SecurityRoute
   '/terms': typeof TermsRoute
   '/achievements': typeof AuthenticatedAchievementsRoute
+  '/analytics': typeof AuthenticatedAnalyticsRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/diet': typeof AuthenticatedDietRoute
   '/habits': typeof AuthenticatedHabitsRoute
   '/journal': typeof AuthenticatedJournalRoute
+  '/leaderboard': typeof AuthenticatedLeaderboardRoute
   '/mentor': typeof AuthenticatedMentorRoute
   '/onboarding': typeof AuthenticatedOnboardingRoute
   '/profile': typeof AuthenticatedProfileRoute
   '/quests': typeof AuthenticatedQuestsRoute
   '/settings': typeof AuthenticatedSettingsRoute
+  '/workout': typeof AuthenticatedWorkoutRoute
   '/api/chat': typeof ApiChatRoute
 }
 export interface FileRoutesById {
@@ -168,14 +201,18 @@ export interface FileRoutesById {
   '/security': typeof SecurityRoute
   '/terms': typeof TermsRoute
   '/_authenticated/achievements': typeof AuthenticatedAchievementsRoute
+  '/_authenticated/analytics': typeof AuthenticatedAnalyticsRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
+  '/_authenticated/diet': typeof AuthenticatedDietRoute
   '/_authenticated/habits': typeof AuthenticatedHabitsRoute
   '/_authenticated/journal': typeof AuthenticatedJournalRoute
+  '/_authenticated/leaderboard': typeof AuthenticatedLeaderboardRoute
   '/_authenticated/mentor': typeof AuthenticatedMentorRoute
   '/_authenticated/onboarding': typeof AuthenticatedOnboardingRoute
   '/_authenticated/profile': typeof AuthenticatedProfileRoute
   '/_authenticated/quests': typeof AuthenticatedQuestsRoute
   '/_authenticated/settings': typeof AuthenticatedSettingsRoute
+  '/_authenticated/workout': typeof AuthenticatedWorkoutRoute
   '/api/chat': typeof ApiChatRoute
 }
 export interface FileRouteTypes {
@@ -189,14 +226,18 @@ export interface FileRouteTypes {
     | '/security'
     | '/terms'
     | '/achievements'
+    | '/analytics'
     | '/dashboard'
+    | '/diet'
     | '/habits'
     | '/journal'
+    | '/leaderboard'
     | '/mentor'
     | '/onboarding'
     | '/profile'
     | '/quests'
     | '/settings'
+    | '/workout'
     | '/api/chat'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -208,14 +249,18 @@ export interface FileRouteTypes {
     | '/security'
     | '/terms'
     | '/achievements'
+    | '/analytics'
     | '/dashboard'
+    | '/diet'
     | '/habits'
     | '/journal'
+    | '/leaderboard'
     | '/mentor'
     | '/onboarding'
     | '/profile'
     | '/quests'
     | '/settings'
+    | '/workout'
     | '/api/chat'
   id:
     | '__root__'
@@ -228,14 +273,18 @@ export interface FileRouteTypes {
     | '/security'
     | '/terms'
     | '/_authenticated/achievements'
+    | '/_authenticated/analytics'
     | '/_authenticated/dashboard'
+    | '/_authenticated/diet'
     | '/_authenticated/habits'
     | '/_authenticated/journal'
+    | '/_authenticated/leaderboard'
     | '/_authenticated/mentor'
     | '/_authenticated/onboarding'
     | '/_authenticated/profile'
     | '/_authenticated/quests'
     | '/_authenticated/settings'
+    | '/_authenticated/workout'
     | '/api/chat'
   fileRoutesById: FileRoutesById
 }
@@ -316,6 +365,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiChatRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/workout': {
+      id: '/_authenticated/workout'
+      path: '/workout'
+      fullPath: '/workout'
+      preLoaderRoute: typeof AuthenticatedWorkoutRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/settings': {
       id: '/_authenticated/settings'
       path: '/settings'
@@ -351,6 +407,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedMentorRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/leaderboard': {
+      id: '/_authenticated/leaderboard'
+      path: '/leaderboard'
+      fullPath: '/leaderboard'
+      preLoaderRoute: typeof AuthenticatedLeaderboardRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/journal': {
       id: '/_authenticated/journal'
       path: '/journal'
@@ -365,11 +428,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedHabitsRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/diet': {
+      id: '/_authenticated/diet'
+      path: '/diet'
+      fullPath: '/diet'
+      preLoaderRoute: typeof AuthenticatedDietRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/dashboard': {
       id: '/_authenticated/dashboard'
       path: '/dashboard'
       fullPath: '/dashboard'
       preLoaderRoute: typeof AuthenticatedDashboardRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/analytics': {
+      id: '/_authenticated/analytics'
+      path: '/analytics'
+      fullPath: '/analytics'
+      preLoaderRoute: typeof AuthenticatedAnalyticsRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/achievements': {
@@ -384,26 +461,34 @@ declare module '@tanstack/react-router' {
 
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedAchievementsRoute: typeof AuthenticatedAchievementsRoute
+  AuthenticatedAnalyticsRoute: typeof AuthenticatedAnalyticsRoute
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
+  AuthenticatedDietRoute: typeof AuthenticatedDietRoute
   AuthenticatedHabitsRoute: typeof AuthenticatedHabitsRoute
   AuthenticatedJournalRoute: typeof AuthenticatedJournalRoute
+  AuthenticatedLeaderboardRoute: typeof AuthenticatedLeaderboardRoute
   AuthenticatedMentorRoute: typeof AuthenticatedMentorRoute
   AuthenticatedOnboardingRoute: typeof AuthenticatedOnboardingRoute
   AuthenticatedProfileRoute: typeof AuthenticatedProfileRoute
   AuthenticatedQuestsRoute: typeof AuthenticatedQuestsRoute
   AuthenticatedSettingsRoute: typeof AuthenticatedSettingsRoute
+  AuthenticatedWorkoutRoute: typeof AuthenticatedWorkoutRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAchievementsRoute: AuthenticatedAchievementsRoute,
+  AuthenticatedAnalyticsRoute: AuthenticatedAnalyticsRoute,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
+  AuthenticatedDietRoute: AuthenticatedDietRoute,
   AuthenticatedHabitsRoute: AuthenticatedHabitsRoute,
   AuthenticatedJournalRoute: AuthenticatedJournalRoute,
+  AuthenticatedLeaderboardRoute: AuthenticatedLeaderboardRoute,
   AuthenticatedMentorRoute: AuthenticatedMentorRoute,
   AuthenticatedOnboardingRoute: AuthenticatedOnboardingRoute,
   AuthenticatedProfileRoute: AuthenticatedProfileRoute,
   AuthenticatedQuestsRoute: AuthenticatedQuestsRoute,
   AuthenticatedSettingsRoute: AuthenticatedSettingsRoute,
+  AuthenticatedWorkoutRoute: AuthenticatedWorkoutRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =

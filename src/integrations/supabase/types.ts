@@ -217,6 +217,36 @@ export type Database = {
         }
         Relationships: []
       }
+      meals: {
+        Row: {
+          calories: number | null
+          created_at: string
+          description: string
+          id: string
+          kind: string
+          logged_date: string
+          user_id: string
+        }
+        Insert: {
+          calories?: number | null
+          created_at?: string
+          description: string
+          id?: string
+          kind: string
+          logged_date?: string
+          user_id: string
+        }
+        Update: {
+          calories?: number | null
+          created_at?: string
+          description?: string
+          id?: string
+          kind?: string
+          logged_date?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       onboarding_answers: {
         Row: {
           answer_value: string
@@ -420,6 +450,36 @@ export type Database = {
         }
         Relationships: []
       }
+      workouts: {
+        Row: {
+          created_at: string
+          duration_min: number
+          id: string
+          kind: string
+          logged_date: string
+          notes: string | null
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          duration_min?: number
+          id?: string
+          kind: string
+          logged_date?: string
+          notes?: string | null
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          duration_min?: number
+          id?: string
+          kind?: string
+          logged_date?: string
+          notes?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
       xp_events: {
         Row: {
           amount: number
@@ -452,7 +512,15 @@ export type Database = {
       }
     }
     Views: {
-      [_ in never]: never
+      leaderboard_public: {
+        Row: {
+          display_name: string | null
+          level: number | null
+          total_xp: number | null
+          user_id: string | null
+        }
+        Relationships: []
+      }
     }
     Functions: {
       check_achievements: { Args: { _user_id: string }; Returns: undefined }
