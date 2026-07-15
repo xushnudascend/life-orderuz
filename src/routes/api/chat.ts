@@ -67,9 +67,12 @@ export const Route = createFileRoute("/api/chat")({
   server: {
     handlers: {
       POST: async ({ request }) => {
-        // Ad-hoc rate limit: 20 chat req / IP / minute.
-        const ip = clientIpFromRequest(request);
-        const rl = await rateLimit({ key: `chat:${ip}`, limit: 20, windowSeconds: 60 });
+        // Require authenticated Supabase user before touching the paid AI gateway.
+        const auth = await verifySupabaseBearer(request);
+        if (!auth.ok) return auth.response;
+
+        // Ad-hoc rate limit: 20 chat req / user / minute.
+        const rl = await rateLimit({ key: `chat:${auth.userId}`, limit: 20, windowSeconds: 60 });
         if (!rl.allowed) {
           return new Response("Too many requests", {
             status: 429,
