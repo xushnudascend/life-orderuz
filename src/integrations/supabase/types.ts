@@ -315,6 +315,33 @@ export type Database = {
         }
         Relationships: []
       }
+      nadir_nudges: {
+        Row: {
+          created_at: string
+          id: string
+          kind: string
+          message: string
+          read_at: string | null
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          kind: string
+          message: string
+          read_at?: string | null
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          kind?: string
+          message?: string
+          read_at?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
       onboarding_answers: {
         Row: {
           answer_value: string

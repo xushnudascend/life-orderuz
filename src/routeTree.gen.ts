@@ -35,10 +35,14 @@ import { Route as AuthenticatedDashboardRouteImport } from './routes/_authentica
 import { Route as AuthenticatedCommunityRouteImport } from './routes/_authenticated/community'
 import { Route as AuthenticatedAnalyticsRouteImport } from './routes/_authenticated/analytics'
 import { Route as AuthenticatedAchievementsRouteImport } from './routes/_authenticated/achievements'
+import { Route as ApiAiWeeklyReportRouteImport } from './routes/api/ai.weekly-report'
+import { Route as ApiAiMicroInsightRouteImport } from './routes/api/ai.micro-insight'
+import { Route as ApiAiGeneratePlanRouteImport } from './routes/api/ai.generate-plan'
 import { Route as AuthenticatedCommunityChannelRouteImport } from './routes/_authenticated/community.$channel'
 import { Route as AuthenticatedCLearnRouteImport } from './routes/_authenticated/c.learn'
 import { Route as AuthenticatedCHabitsRouteImport } from './routes/_authenticated/c.habits'
 import { Route as AuthenticatedCBodyRouteImport } from './routes/_authenticated/c.body'
+import { Route as ApiPublicHooksBurnoutCheckRouteImport } from './routes/api/public/hooks/burnout-check'
 
 const TermsRoute = TermsRouteImport.update({
   id: '/terms',
@@ -172,6 +176,21 @@ const AuthenticatedAchievementsRoute =
     path: '/achievements',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const ApiAiWeeklyReportRoute = ApiAiWeeklyReportRouteImport.update({
+  id: '/api/ai/weekly-report',
+  path: '/api/ai/weekly-report',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAiMicroInsightRoute = ApiAiMicroInsightRouteImport.update({
+  id: '/api/ai/micro-insight',
+  path: '/api/ai/micro-insight',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAiGeneratePlanRoute = ApiAiGeneratePlanRouteImport.update({
+  id: '/api/ai/generate-plan',
+  path: '/api/ai/generate-plan',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AuthenticatedCommunityChannelRoute =
   AuthenticatedCommunityChannelRouteImport.update({
     id: '/$channel',
@@ -193,6 +212,12 @@ const AuthenticatedCBodyRoute = AuthenticatedCBodyRouteImport.update({
   path: '/c/body',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const ApiPublicHooksBurnoutCheckRoute =
+  ApiPublicHooksBurnoutCheckRouteImport.update({
+    id: '/api/public/hooks/burnout-check',
+    path: '/api/public/hooks/burnout-check',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -224,6 +249,10 @@ export interface FileRoutesByFullPath {
   '/c/habits': typeof AuthenticatedCHabitsRoute
   '/c/learn': typeof AuthenticatedCLearnRoute
   '/community/$channel': typeof AuthenticatedCommunityChannelRoute
+  '/api/ai/generate-plan': typeof ApiAiGeneratePlanRoute
+  '/api/ai/micro-insight': typeof ApiAiMicroInsightRoute
+  '/api/ai/weekly-report': typeof ApiAiWeeklyReportRoute
+  '/api/public/hooks/burnout-check': typeof ApiPublicHooksBurnoutCheckRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -255,6 +284,10 @@ export interface FileRoutesByTo {
   '/c/habits': typeof AuthenticatedCHabitsRoute
   '/c/learn': typeof AuthenticatedCLearnRoute
   '/community/$channel': typeof AuthenticatedCommunityChannelRoute
+  '/api/ai/generate-plan': typeof ApiAiGeneratePlanRoute
+  '/api/ai/micro-insight': typeof ApiAiMicroInsightRoute
+  '/api/ai/weekly-report': typeof ApiAiWeeklyReportRoute
+  '/api/public/hooks/burnout-check': typeof ApiPublicHooksBurnoutCheckRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -288,6 +321,10 @@ export interface FileRoutesById {
   '/_authenticated/c/habits': typeof AuthenticatedCHabitsRoute
   '/_authenticated/c/learn': typeof AuthenticatedCLearnRoute
   '/_authenticated/community/$channel': typeof AuthenticatedCommunityChannelRoute
+  '/api/ai/generate-plan': typeof ApiAiGeneratePlanRoute
+  '/api/ai/micro-insight': typeof ApiAiMicroInsightRoute
+  '/api/ai/weekly-report': typeof ApiAiWeeklyReportRoute
+  '/api/public/hooks/burnout-check': typeof ApiPublicHooksBurnoutCheckRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -321,6 +358,10 @@ export interface FileRouteTypes {
     | '/c/habits'
     | '/c/learn'
     | '/community/$channel'
+    | '/api/ai/generate-plan'
+    | '/api/ai/micro-insight'
+    | '/api/ai/weekly-report'
+    | '/api/public/hooks/burnout-check'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -352,6 +393,10 @@ export interface FileRouteTypes {
     | '/c/habits'
     | '/c/learn'
     | '/community/$channel'
+    | '/api/ai/generate-plan'
+    | '/api/ai/micro-insight'
+    | '/api/ai/weekly-report'
+    | '/api/public/hooks/burnout-check'
   id:
     | '__root__'
     | '/'
@@ -384,6 +429,10 @@ export interface FileRouteTypes {
     | '/_authenticated/c/habits'
     | '/_authenticated/c/learn'
     | '/_authenticated/community/$channel'
+    | '/api/ai/generate-plan'
+    | '/api/ai/micro-insight'
+    | '/api/ai/weekly-report'
+    | '/api/public/hooks/burnout-check'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -397,6 +446,10 @@ export interface RootRouteChildren {
   TermsRoute: typeof TermsRoute
   ApiChatRoute: typeof ApiChatRoute
   UUsernameRoute: typeof UUsernameRoute
+  ApiAiGeneratePlanRoute: typeof ApiAiGeneratePlanRoute
+  ApiAiMicroInsightRoute: typeof ApiAiMicroInsightRoute
+  ApiAiWeeklyReportRoute: typeof ApiAiWeeklyReportRoute
+  ApiPublicHooksBurnoutCheckRoute: typeof ApiPublicHooksBurnoutCheckRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -583,6 +636,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAchievementsRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/api/ai/weekly-report': {
+      id: '/api/ai/weekly-report'
+      path: '/api/ai/weekly-report'
+      fullPath: '/api/ai/weekly-report'
+      preLoaderRoute: typeof ApiAiWeeklyReportRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/ai/micro-insight': {
+      id: '/api/ai/micro-insight'
+      path: '/api/ai/micro-insight'
+      fullPath: '/api/ai/micro-insight'
+      preLoaderRoute: typeof ApiAiMicroInsightRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/ai/generate-plan': {
+      id: '/api/ai/generate-plan'
+      path: '/api/ai/generate-plan'
+      fullPath: '/api/ai/generate-plan'
+      preLoaderRoute: typeof ApiAiGeneratePlanRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/_authenticated/community/$channel': {
       id: '/_authenticated/community/$channel'
       path: '/$channel'
@@ -610,6 +684,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/c/body'
       preLoaderRoute: typeof AuthenticatedCBodyRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/api/public/hooks/burnout-check': {
+      id: '/api/public/hooks/burnout-check'
+      path: '/api/public/hooks/burnout-check'
+      fullPath: '/api/public/hooks/burnout-check'
+      preLoaderRoute: typeof ApiPublicHooksBurnoutCheckRouteImport
+      parentRoute: typeof rootRouteImport
     }
   }
 }
@@ -686,17 +767,11 @@ const rootRouteChildren: RootRouteChildren = {
   TermsRoute: TermsRoute,
   ApiChatRoute: ApiChatRoute,
   UUsernameRoute: UUsernameRoute,
+  ApiAiGeneratePlanRoute: ApiAiGeneratePlanRoute,
+  ApiAiMicroInsightRoute: ApiAiMicroInsightRoute,
+  ApiAiWeeklyReportRoute: ApiAiWeeklyReportRoute,
+  ApiPublicHooksBurnoutCheckRoute: ApiPublicHooksBurnoutCheckRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
