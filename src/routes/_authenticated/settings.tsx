@@ -6,9 +6,11 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
-import { Loader2, Bell, User as UserIcon, ShieldAlert } from "lucide-react";
+import { Loader2, Bell, User as UserIcon, ShieldAlert, Sparkles, Languages, Clock, Wand2, HelpCircle } from "lucide-react";
 import { toast } from "sonner";
 import { uz } from "@/i18n";
+import { TIMEZONES } from "@/lib/nervous";
+import { getLocale, setLocale as setLoc, type Locale } from "@/i18n";
 
 export const Route = createFileRoute("/_authenticated/settings")({
   head: () => ({
@@ -25,6 +27,11 @@ type Prefs = {
   notify_daily: boolean;
   notify_streak: boolean;
   daily_reminder_time: string;
+  timezone: string;
+  animations_enabled: boolean;
+  ai_mentor_enabled: boolean;
+  auto_shrink_on_excuse: boolean;
+  is_public: boolean;
 };
 
 function Settings() {
@@ -32,12 +39,15 @@ function Settings() {
   const [prefs, setPrefs] = useState<Prefs | null>(null);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
+  const [locale, setLocaleState] = useState<Locale>(getLocale());
 
   useEffect(() => {
     (async () => {
       const { data } = await supabase
         .from("profiles")
-        .select("display_name, notify_daily, notify_streak, daily_reminder_time")
+        .select(
+          "display_name, notify_daily, notify_streak, daily_reminder_time, timezone, animations_enabled, ai_mentor_enabled, auto_shrink_on_excuse, is_public",
+        )
         .eq("id", userId)
         .maybeSingle();
       setPrefs(
@@ -45,7 +55,12 @@ function Settings() {
           display_name: "",
           notify_daily: true,
           notify_streak: true,
-          daily_reminder_time: "09:00",
+          daily_reminder_time: "09:00:00",
+          timezone: "Asia/Tashkent",
+          animations_enabled: true,
+          ai_mentor_enabled: true,
+          auto_shrink_on_excuse: true,
+          is_public: false,
         },
       );
       setLoading(false);
@@ -62,14 +77,16 @@ function Settings() {
         notify_daily: prefs.notify_daily,
         notify_streak: prefs.notify_streak,
         daily_reminder_time: prefs.daily_reminder_time,
+        timezone: prefs.timezone,
+        animations_enabled: prefs.animations_enabled,
+        ai_mentor_enabled: prefs.ai_mentor_enabled,
+        auto_shrink_on_excuse: prefs.auto_shrink_on_excuse,
+        is_public: prefs.is_public,
       })
       .eq("id", userId);
     setSaving(false);
-    if (error) {
-      toast.error("Saqlab bo'lmadi");
-    } else {
-      toast.success("Sozlamalar saqlandi");
-    }
+    if (error) toast.error("Saqlab bo'lmadi");
+    else toast.success("Sozlamalar saqlandi");
   }
 
   async function requestBrowserNotifications() {
@@ -83,11 +100,13 @@ function Settings() {
   }
 
   async function exportData() {
-    const [habits, journal, chats, stats] = await Promise.all([
+    const [habits, journal, chats, stats, meals, workouts] = await Promise.all([
       supabase.from("habits").select("*").eq("user_id", userId),
       supabase.from("journal_entries").select("*").eq("user_id", userId),
       supabase.from("chat_messages").select("*").eq("user_id", userId),
       supabase.from("user_stats").select("*").eq("user_id", userId),
+      supabase.from("meals").select("*").eq("user_id", userId),
+      supabase.from("workouts").select("*").eq("user_id", userId),
     ]);
     const blob = new Blob(
       [
@@ -98,6 +117,8 @@ function Settings() {
             journal: journal.data,
             chats: chats.data,
             stats: stats.data,
+            meals: meals.data,
+            workouts: workouts.data,
           },
           null,
           2,
@@ -134,40 +155,43 @@ function Settings() {
 
       <section className="mt-10 space-y-6">
         <Card icon={<UserIcon className="h-4 w-4 text-primary" />} title="Profil">
-          <div className="space-y-2">
-            <Label htmlFor="name">Ismingiz</Label>
-            <Input
-              id="name"
-              value={prefs.display_name ?? ""}
-              onChange={(e) =>
-                setPrefs({ ...prefs, display_name: e.target.value })
+          <div className="space-y-4">
+            <div className="space-y-2">
+              <Label htmlFor="name">Ismingiz</Label>
+              <Input
+                id="name"
+                value={prefs.display_name ?? ""}
+                onChange={(e) => setPrefs({ ...prefs, display_name: e.target.value })}
+              />
+            </div>
+            <Row
+              label="Ochiq profil"
+              hint={
+                prefs.is_public
+                  ? "Profil ochiq. Hamma ko'ra oladi."
+                  : "Profil yopiq. Faqat siz ko'rasiz."
               }
-            />
+            >
+              <Switch
+                checked={prefs.is_public}
+                onCheckedChange={(v) => setPrefs({ ...prefs, is_public: v })}
+              />
+            </Row>
           </div>
         </Card>
 
         <Card icon={<Bell className="h-4 w-4 text-primary" />} title="Bildirishnomalar">
           <div className="space-y-4">
-            <Row
-              label="Kunlik eslatma"
-              hint="Har kuni belgilangan vaqtda"
-            >
+            <Row label="Kunlik eslatma" hint="Har kuni belgilangan vaqtda">
               <Switch
                 checked={prefs.notify_daily}
-                onCheckedChange={(v) =>
-                  setPrefs({ ...prefs, notify_daily: v })
-                }
+                onCheckedChange={(v) => setPrefs({ ...prefs, notify_daily: v })}
               />
             </Row>
-            <Row
-              label="Streak ogohlantirishi"
-              hint="Streak yo'qolayotganda"
-            >
+            <Row label="Streak ogohlantirishi" hint="Streak yo'qolayotganda">
               <Switch
                 checked={prefs.notify_streak}
-                onCheckedChange={(v) =>
-                  setPrefs({ ...prefs, notify_streak: v })
-                }
+                onCheckedChange={(v) => setPrefs({ ...prefs, notify_streak: v })}
               />
             </Row>
             <div className="space-y-2">
@@ -177,10 +201,7 @@ function Settings() {
                 type="time"
                 value={prefs.daily_reminder_time.slice(0, 5)}
                 onChange={(e) =>
-                  setPrefs({
-                    ...prefs,
-                    daily_reminder_time: e.target.value + ":00",
-                  })
+                  setPrefs({ ...prefs, daily_reminder_time: e.target.value + ":00" })
                 }
                 className="max-w-[160px]"
               />
@@ -188,6 +209,79 @@ function Settings() {
             <Button variant="outline" size="sm" onClick={requestBrowserNotifications}>
               Brauzer bildirishnomalariga ruxsat
             </Button>
+          </div>
+        </Card>
+
+        <Card icon={<Sparkles className="h-4 w-4 text-primary" />} title="AI mentor">
+          <Row
+            label="Nadir bilan chuqurroq gaplashish"
+            hint="Yoqilsa — dashboard'da AI paneli faol bo'ladi"
+          >
+            <Switch
+              checked={prefs.ai_mentor_enabled}
+              onCheckedChange={(v) => setPrefs({ ...prefs, ai_mentor_enabled: v })}
+            />
+          </Row>
+        </Card>
+
+        <Card icon={<Wand2 className="h-4 w-4 text-primary" />} title="Animatsiyalar">
+          <Row
+            label="Barcha effektlar"
+            hint={prefs.animations_enabled ? "Animatsiyalar yoqilgan" : "Animatsiyalar o'chirilgan"}
+          >
+            <Switch
+              checked={prefs.animations_enabled}
+              onCheckedChange={(v) => setPrefs({ ...prefs, animations_enabled: v })}
+            />
+          </Row>
+        </Card>
+
+        <Card icon={<HelpCircle className="h-4 w-4 text-primary" />} title="Moslashish">
+          <Row
+            label="Bahona chiqqanda vazifani avtomatik kichraytiradi"
+            hint="Sizni jazolamaydi — moslashadi"
+          >
+            <Switch
+              checked={prefs.auto_shrink_on_excuse}
+              onCheckedChange={(v) => setPrefs({ ...prefs, auto_shrink_on_excuse: v })}
+            />
+          </Row>
+        </Card>
+
+        <Card icon={<Clock className="h-4 w-4 text-primary" />} title="Vaqt zonasi">
+          <select
+            value={prefs.timezone}
+            onChange={(e) => setPrefs({ ...prefs, timezone: e.target.value })}
+            className="h-9 w-full max-w-md rounded-md border border-input bg-background px-3 text-sm"
+          >
+            {TIMEZONES.map((t) => (
+              <option key={t.id} value={t.id}>
+                {t.label}
+              </option>
+            ))}
+          </select>
+        </Card>
+
+        <Card icon={<Languages className="h-4 w-4 text-primary" />} title="Til">
+          <div className="flex flex-wrap gap-2">
+            {(["uz", "ru", "en"] as Locale[]).map((l) => (
+              <button
+                key={l}
+                onClick={() => {
+                  setLoc(l);
+                  setLocaleState(l);
+                  toast.success("Til o'zgartirildi");
+                }}
+                className={
+                  "rounded-full border px-3 py-1 font-ui text-xs uppercase tracking-[0.18em] transition-colors " +
+                  (locale === l
+                    ? "border-primary bg-primary/10 text-primary"
+                    : "border-border text-muted-foreground hover:text-foreground")
+                }
+              >
+                {l === "uz" ? "O'zbek" : l === "ru" ? "Русский" : "English"}
+              </button>
+            ))}
           </div>
         </Card>
 
@@ -200,6 +294,15 @@ function Settings() {
               Ma'lumotlarni yuklab olish
             </Button>
           </div>
+        </Card>
+
+        <Card icon={<HelpCircle className="h-4 w-4 text-primary" />} title="Biz bilan bog'lanish">
+          <p className="text-sm text-muted-foreground">
+            Savol yoki taklif bo'lsa:{" "}
+            <a href="mailto:hello@lifeorder.uz" className="text-primary hover:underline">
+              hello@lifeorder.uz
+            </a>
+          </p>
         </Card>
 
         <div className="flex justify-end">
