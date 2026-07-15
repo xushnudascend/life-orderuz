@@ -1,9 +1,12 @@
 import { Link, useLocation } from "@tanstack/react-router";
 import { Home, ListChecks, BookText, Sparkles, User } from "lucide-react";
 import type { ReactNode } from "react";
+import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { uz } from "@/i18n";
+import { BottomNav } from "@/components/bottom-nav";
+import { ARCHETYPES, type Archetype } from "@/lib/nervous";
 
 const NAV = [
   { to: "/dashboard", label: "Bugun", icon: Home },
@@ -21,6 +24,26 @@ export function AppShell({
   children: ReactNode;
 }) {
   const location = useLocation();
+  const [archetype, setArchetype] = useState<Archetype | null>(null);
+
+  useEffect(() => {
+    let alive = true;
+    (async () => {
+      const { data: userData } = await supabase.auth.getUser();
+      if (!userData.user) return;
+      const { data } = await supabase
+        .from("profiles")
+        .select("archetype")
+        .eq("id", userData.user.id)
+        .maybeSingle();
+      if (!alive) return;
+      const key = (data as { archetype?: string } | null)?.archetype;
+      if (key && key in ARCHETYPES) setArchetype(ARCHETYPES[key as Archetype["id"]]);
+    })();
+    return () => {
+      alive = false;
+    };
+  }, []);
 
   async function signOut() {
     await supabase.auth.signOut();
@@ -28,15 +51,36 @@ export function AppShell({
   }
 
   return (
-    <div className="min-h-screen bg-background text-foreground animate-fade-in pb-24">
+    <div className="min-h-screen bg-background text-foreground animate-fade-in pb-24 md:pb-10">
       <header className="border-b border-border">
         <div className="mx-auto flex h-16 max-w-4xl items-center justify-between px-5">
           <Link to="/" className="font-serif text-lg">
             {uz.brand.name}
           </Link>
+          <nav className="hidden items-center gap-1 md:flex">
+            {NAV.map((n) => {
+              const active =
+                location.pathname === n.to ||
+                location.pathname.startsWith(n.to + "/");
+              return (
+                <Link
+                  key={n.to}
+                  to={n.to}
+                  className={
+                    "rounded-md px-3 py-1.5 font-ui text-xs uppercase tracking-[0.2em] transition-colors " +
+                    (active
+                      ? "text-foreground"
+                      : "text-muted-foreground hover:text-foreground")
+                  }
+                >
+                  {n.label}
+                </Link>
+              );
+            })}
+          </nav>
           <div className="flex items-center gap-2">
             {title && (
-              <span className="hidden font-ui text-xs uppercase tracking-[0.24em] text-muted-foreground sm:inline">
+              <span className="hidden font-ui text-xs uppercase tracking-[0.24em] text-muted-foreground lg:inline">
                 {title}
               </span>
             )}
@@ -54,31 +98,7 @@ export function AppShell({
 
       <main className="mx-auto max-w-4xl px-5 py-10">{children}</main>
 
-      <nav className="fixed bottom-0 left-0 right-0 z-40 border-t border-border bg-background/85 backdrop-blur">
-        <div className="mx-auto flex max-w-4xl items-stretch justify-around px-2">
-          {NAV.map((item) => {
-            const active =
-              location.pathname === item.to ||
-              location.pathname.startsWith(item.to + "/");
-            const Icon = item.icon;
-            return (
-              <Link
-                key={item.to}
-                to={item.to}
-                className={
-                  "flex flex-1 flex-col items-center gap-1 py-3 font-ui text-[11px] uppercase tracking-[0.18em] transition-colors " +
-                  (active
-                    ? "text-foreground"
-                    : "text-muted-foreground hover:text-foreground")
-                }
-              >
-                <Icon className="h-5 w-5" strokeWidth={1.6} />
-                <span>{item.label}</span>
-              </Link>
-            );
-          })}
-        </div>
-      </nav>
+      <BottomNav recommendedTab={archetype?.preferredTab} />
     </div>
   );
 }
