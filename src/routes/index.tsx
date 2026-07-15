@@ -20,8 +20,17 @@ import {
 } from "lucide-react";
 
 const BRAND = "Life Order";
+const SITE_URL = "https://life-orderuz.lovable.app";
 const ONE_LINER =
-  "Life Order — o'z-o'zini boshqarishning operatsion tizimi. Trigger tahlili, kunlik uchta aniq qadam, halol AI mentor Nadir. 60 soniyada tashxis. Kartasiz.";
+  "Life Order — o'z-o'zini boshqarish OS. Trigger, kunlik uchta qadam, halol AI mentor Nadir. 60 soniyada tashxis, kartasiz.";
+
+const FAQ_ITEMS: { q: string; a: string }[] = [
+  { q: "Life Order nima?", a: "Self-Control OS — o'z-o'zini boshqarishning operatsion tizimi. Trigger tahlili, kunlik uchta aniq qadam va halol AI mentor Nadir bir joyda birlashgan." },
+  { q: "Bepulmi?", a: "Ha. Free reja cheksiz ishlaydi. Karta so'ralmaydi, avtomatik to'lov yo'q." },
+  { q: "Kim uchun mos?", a: "O'zini o'zgartirmoqchi bo'lgan 16–30 yoshdagi har bir kishi uchun." },
+  { q: "Ma'lumotlarim xavfsizmi?", a: "Ha. Barcha ma'lumot shifrlangan, uchinchi tomonga sotilmaydi. Istalgan paytda o'chirish so'rovini yubor." },
+  { q: "Qancha vaqt kerak?", a: "Kuniga 10–15 daqiqa yetarli. Missiyalar qisqa va aniq." },
+];
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -30,6 +39,22 @@ export const Route = createFileRoute("/")({
       { name: "description", content: ONE_LINER },
       { property: "og:title", content: `${BRAND} — Hayotingni tartibga sol` },
       { property: "og:description", content: ONE_LINER },
+      { property: "og:url", content: `${SITE_URL}/` },
+    ],
+    links: [{ rel: "canonical", href: `${SITE_URL}/` }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: FAQ_ITEMS.map((it) => ({
+            "@type": "Question",
+            name: it.q,
+            acceptedAnswer: { "@type": "Answer", text: it.a },
+          })),
+        }),
+      },
     ],
   }),
   component: Landing,
@@ -190,7 +215,7 @@ function ProblemsGrid() {
               className="rounded-[var(--radius)] border border-border/60 bg-card/40 p-7 transition-colors hover:border-border"
             >
               <p className="font-ui text-xs uppercase tracking-[0.24em] text-primary">{i.n}</p>
-              <h3 className="mt-4 font-serif text-2xl leading-tight">{i.title}</h3>
+              <h2 className="mt-4 font-serif text-2xl leading-tight">{i.title}</h2>
               <p className="mt-3 leading-relaxed text-muted-foreground">{i.body}</p>
             </article>
           ))}

@@ -7,7 +7,11 @@ export const Route = createFileRoute("/privacy")({
     meta: [
       { title: `Maxfiylik siyosati — ${uz.brand.name}` },
       { name: "description", content: "Ma'lumotlaringizni qanday saqlaymiz va himoyalaymiz." },
+      { property: "og:title", content: `Maxfiylik siyosati — ${uz.brand.name}` },
+      { property: "og:description", content: "Ma'lumotlaringizni qanday saqlaymiz va himoyalaymiz." },
+      { property: "og:url", content: "https://life-orderuz.lovable.app/privacy" },
     ],
+    links: [{ rel: "canonical", href: "https://life-orderuz.lovable.app/privacy" }],
   }),
   component: () => (
     <LegalShell title="Maxfiylik siyosati" updated="15-iyul, 2026">

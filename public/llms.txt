@@ -1,0 +1,19 @@
+# Life Order
+
+> Self-Control OS — o'z-o'zini boshqarishning operatsion tizimi. Trigger tahlili, kunlik uchta aniq qadam va halol AI mentor Nadir bir joyda.
+
+Life Order — bepul boshlanadigan, kartasiz, o'zbek tilida ishlaydigan shaxsiy rivojlanish super-app. Streak, XP, intizom balli va haftalik AI hisobot bilan odat qurish tizimi.
+
+## Pages
+
+- [Bosh sahifa](/): Life Order haqida umumiy tanishuv va 60 soniyalik tashxis.
+- [Narxlar](/pricing): Free va Pro rejalar, xususiyatlar taqqoslash.
+- [Hayot sohalari qo'llanmasi](/blog/hayot-sohalari): Odatlarni kategoriyalash uchun 8 asosiy hayot sohasi.
+- [Foydalanish shartlari](/terms): Xizmatdan foydalanish shartlari.
+- [Maxfiylik siyosati](/privacy): Ma'lumotlarni saqlash va himoya siyosati.
+- [To'lovni qaytarish](/refund): Refund shartlari.
+- [Xavfsizlik](/security): Akkount va ma'lumot xavfsizligi.
+
+## Optional
+
+- [Kirish](/auth): Ro'yxatdan o'tish va kirish sahifasi.

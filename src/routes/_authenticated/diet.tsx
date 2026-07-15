@@ -272,7 +272,7 @@ function Diet() {
                     </p>
                   </div>
                 </div>
-                <Button variant="ghost" size="sm" onClick={() => del(r.id)}>
+                <Button variant="ghost" size="sm" onClick={() => del(r.id)} aria-label="O'chirish">
                   <Trash2 className="h-4 w-4" />
                 </Button>
               </div>

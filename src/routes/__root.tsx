@@ -76,8 +76,12 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   );
 }
 
+const SITE_URL = "https://life-orderuz.lovable.app";
 const DESCRIPTION =
-  "Self-Control OS — o'z-o'zini boshqarishning operatsion tizimi. Trigger tahlili, kunlik uchta aniq qadam, halol AI mentor Nadir. 60 soniyada tashxis. Kartasiz.";
+  "Life Order — o'z-o'zini boshqarish OS. Trigger tahlili, kunlik uchta qadam va halol AI mentor Nadir. 60 soniyada tashxis, kartasiz.";
+const TITLE = "Life Order — Motivatsiya tugaydi. Tizim qoladi";
+const OG_IMAGE =
+  "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/b42cdfab-e69a-4d7f-bbe4-846f5657aa60";
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
   head: () => ({
@@ -85,22 +89,19 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1, viewport-fit=cover" },
       { name: "theme-color", content: "#0A0A0A" },
-      { title: "Life Order — Motivatsiya tugaydi. Tizim qoladi" },
+      { title: TITLE },
       { name: "description", content: DESCRIPTION },
       { name: "author", content: "Life Order" },
       { property: "og:site_name", content: "Life Order" },
-      { property: "og:title", content: "Life Order — Motivatsiya tugaydi. Tizim qoladi" },
+      { property: "og:title", content: TITLE },
       { property: "og:description", content: DESCRIPTION },
       { property: "og:type", content: "website" },
       { property: "og:locale", content: "uz_UZ" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Life Order — Motivatsiya tugaydi. Tizim qoladi" },
+      { name: "twitter:title", content: TITLE },
       { name: "twitter:description", content: DESCRIPTION },
-      { name: "description", content: "Life Order - O'zbekistondagi birinchi o'zbek yoshlari uchun shaxsiy rivojlanish bo'yicha super app" },
-      { property: "og:description", content: "Life Order - O'zbekistondagi birinchi o'zbek yoshlari uchun shaxsiy rivojlanish bo'yicha super app" },
-      { name: "twitter:description", content: "Life Order - O'zbekistondagi birinchi o'zbek yoshlari uchun shaxsiy rivojlanish bo'yicha super app" },
-      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/b42cdfab-e69a-4d7f-bbe4-846f5657aa60" },
-      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/b42cdfab-e69a-4d7f-bbe4-846f5657aa60" },
+      { property: "og:image", content: OG_IMAGE },
+      { name: "twitter:image", content: OG_IMAGE },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
@@ -120,6 +121,26 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     scripts: [
       // Anti-flash tema init — SSR javobida <head>'ga inline yoziladi
       { children: THEME_INIT_SCRIPT },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "Organization",
+              name: "Life Order",
+              url: SITE_URL,
+              logo: `${SITE_URL}/favicon.ico`,
+            },
+            {
+              "@type": "WebSite",
+              name: "Life Order",
+              url: SITE_URL,
+              inLanguage: "uz-UZ",
+            },
+          ],
+        }),
+      },
     ],
   }),
   shellComponent: RootShell,

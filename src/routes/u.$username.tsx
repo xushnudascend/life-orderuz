@@ -37,6 +37,23 @@ export const Route = createFileRoute("/u/$username")({
       { title: `@${params.username} — ${uz.brand.name}` },
       { name: "description", content: `${params.username} — Life Order profil.` },
       { property: "og:title", content: `@${params.username} — ${uz.brand.name}` },
+      { property: "og:description", content: `${params.username} — Life Order profil.` },
+      { property: "og:url", content: `https://life-orderuz.lovable.app/u/${params.username}` },
+    ],
+    links: [{ rel: "canonical", href: `https://life-orderuz.lovable.app/u/${params.username}` }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "ProfilePage",
+          mainEntity: {
+            "@type": "Person",
+            name: params.username,
+            url: `https://life-orderuz.lovable.app/u/${params.username}`,
+          },
+        }),
+      },
     ],
   }),
   component: PublicProfile,

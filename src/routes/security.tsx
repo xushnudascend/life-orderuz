@@ -7,7 +7,11 @@ export const Route = createFileRoute("/security")({
     meta: [
       { title: `Xavfsizlik — ${uz.brand.name}` },
       { name: "description", content: "Ma'lumotlar va akkount xavfsizligi." },
+      { property: "og:title", content: `Xavfsizlik — ${uz.brand.name}` },
+      { property: "og:description", content: "Ma'lumotlar va akkount xavfsizligi." },
+      { property: "og:url", content: "https://life-orderuz.lovable.app/security" },
     ],
+    links: [{ rel: "canonical", href: "https://life-orderuz.lovable.app/security" }],
   }),
   component: () => (
     <LegalShell title="Xavfsizlik" updated="15-iyul, 2026">
