@@ -29,6 +29,7 @@ type Stats = {
 type Streak = {
   current_days: number;
   longest_days: number;
+  freeze_active_until: string | null;
 } | null;
 
 function ProfilePage() {
