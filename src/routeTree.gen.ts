@@ -19,6 +19,7 @@ import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as UUsernameRouteImport } from './routes/u.$username'
+import { Route as BlogHayotSohalariRouteImport } from './routes/blog.hayot-sohalari'
 import { Route as ApiChatRouteImport } from './routes/api/chat'
 import { Route as AuthenticatedWorkoutRouteImport } from './routes/_authenticated/workout'
 import { Route as AuthenticatedTemirIntizomRouteImport } from './routes/_authenticated/temir-intizom'
@@ -93,6 +94,11 @@ const IndexRoute = IndexRouteImport.update({
 const UUsernameRoute = UUsernameRouteImport.update({
   id: '/u/$username',
   path: '/u/$username',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BlogHayotSohalariRoute = BlogHayotSohalariRouteImport.update({
+  id: '/blog/hayot-sohalari',
+  path: '/blog/hayot-sohalari',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiChatRoute = ApiChatRouteImport.update({
@@ -257,6 +263,7 @@ export interface FileRoutesByFullPath {
   '/temir-intizom': typeof AuthenticatedTemirIntizomRoute
   '/workout': typeof AuthenticatedWorkoutRoute
   '/api/chat': typeof ApiChatRoute
+  '/blog/hayot-sohalari': typeof BlogHayotSohalariRoute
   '/u/$username': typeof UUsernameRoute
   '/c/body': typeof AuthenticatedCBodyRoute
   '/c/habits': typeof AuthenticatedCHabitsRoute
@@ -294,6 +301,7 @@ export interface FileRoutesByTo {
   '/temir-intizom': typeof AuthenticatedTemirIntizomRoute
   '/workout': typeof AuthenticatedWorkoutRoute
   '/api/chat': typeof ApiChatRoute
+  '/blog/hayot-sohalari': typeof BlogHayotSohalariRoute
   '/u/$username': typeof UUsernameRoute
   '/c/body': typeof AuthenticatedCBodyRoute
   '/c/habits': typeof AuthenticatedCHabitsRoute
@@ -333,6 +341,7 @@ export interface FileRoutesById {
   '/_authenticated/temir-intizom': typeof AuthenticatedTemirIntizomRoute
   '/_authenticated/workout': typeof AuthenticatedWorkoutRoute
   '/api/chat': typeof ApiChatRoute
+  '/blog/hayot-sohalari': typeof BlogHayotSohalariRoute
   '/u/$username': typeof UUsernameRoute
   '/_authenticated/c/body': typeof AuthenticatedCBodyRoute
   '/_authenticated/c/habits': typeof AuthenticatedCHabitsRoute
@@ -372,6 +381,7 @@ export interface FileRouteTypes {
     | '/temir-intizom'
     | '/workout'
     | '/api/chat'
+    | '/blog/hayot-sohalari'
     | '/u/$username'
     | '/c/body'
     | '/c/habits'
@@ -409,6 +419,7 @@ export interface FileRouteTypes {
     | '/temir-intizom'
     | '/workout'
     | '/api/chat'
+    | '/blog/hayot-sohalari'
     | '/u/$username'
     | '/c/body'
     | '/c/habits'
@@ -447,6 +458,7 @@ export interface FileRouteTypes {
     | '/_authenticated/temir-intizom'
     | '/_authenticated/workout'
     | '/api/chat'
+    | '/blog/hayot-sohalari'
     | '/u/$username'
     | '/_authenticated/c/body'
     | '/_authenticated/c/habits'
@@ -470,6 +482,7 @@ export interface RootRouteChildren {
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   TermsRoute: typeof TermsRoute
   ApiChatRoute: typeof ApiChatRoute
+  BlogHayotSohalariRoute: typeof BlogHayotSohalariRoute
   UUsernameRoute: typeof UUsernameRoute
   ApiAiGeneratePlanRoute: typeof ApiAiGeneratePlanRoute
   ApiAiMicroInsightRoute: typeof ApiAiMicroInsightRoute
@@ -548,6 +561,13 @@ declare module '@tanstack/react-router' {
       path: '/u/$username'
       fullPath: '/u/$username'
       preLoaderRoute: typeof UUsernameRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog/hayot-sohalari': {
+      id: '/blog/hayot-sohalari'
+      path: '/blog/hayot-sohalari'
+      fullPath: '/blog/hayot-sohalari'
+      preLoaderRoute: typeof BlogHayotSohalariRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/chat': {
@@ -807,6 +827,7 @@ const rootRouteChildren: RootRouteChildren = {
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   TermsRoute: TermsRoute,
   ApiChatRoute: ApiChatRoute,
+  BlogHayotSohalariRoute: BlogHayotSohalariRoute,
   UUsernameRoute: UUsernameRoute,
   ApiAiGeneratePlanRoute: ApiAiGeneratePlanRoute,
   ApiAiMicroInsightRoute: ApiAiMicroInsightRoute,
