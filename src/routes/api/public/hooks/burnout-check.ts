@@ -11,9 +11,19 @@ export const Route = createFileRoute("/api/public/hooks/burnout-check")({
   server: {
     handlers: {
       POST: async ({ request }) => {
-        const apikey = request.headers.get("apikey");
-        const expected = process.env.SUPABASE_PUBLISHABLE_KEY || process.env.SUPABASE_ANON_KEY;
-        if (!apikey || !expected || apikey !== expected) {
+        // Authenticate via dedicated CRON_SECRET (NOT the public Supabase anon key).
+        // The pg_cron job supplies this in an `x-cron-secret` header.
+        const provided = request.headers.get("x-cron-secret") ?? "";
+        const expected = process.env.CRON_SECRET ?? "";
+        if (!expected || provided.length !== expected.length) {
+          return new Response("Unauthorized", { status: 401 });
+        }
+        // Constant-time compare
+        let diff = 0;
+        for (let i = 0; i < expected.length; i++) {
+          diff |= provided.charCodeAt(i) ^ expected.charCodeAt(i);
+        }
+        if (diff !== 0) {
           return new Response("Unauthorized", { status: 401 });
         }
 

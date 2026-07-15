@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { generateText } from "ai";
 import { createLovableAiGatewayProvider } from "@/lib/ai-gateway.server";
+import { verifySupabaseBearer } from "@/lib/verify-bearer.server";
 import { z } from "zod";
 
 const bodySchema = z.object({
@@ -12,6 +13,8 @@ export const Route = createFileRoute("/api/ai/micro-insight")({
   server: {
     handlers: {
       POST: async ({ request }) => {
+        const auth = await verifySupabaseBearer(request);
+        if (!auth.ok) return auth.response;
         const parsed = bodySchema.safeParse(await request.json().catch(() => null));
         if (!parsed.success) return new Response("Bad Request", { status: 400 });
         const key = process.env.LOVABLE_API_KEY;
