@@ -2,7 +2,8 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { AppShell } from "@/components/app-shell";
-import { Loader2 } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Loader2, Download, FileText } from "lucide-react";
 import {
   Bar,
   BarChart,
@@ -12,12 +13,13 @@ import {
   YAxis,
   CartesianGrid,
 } from "recharts";
+import { toast } from "sonner";
 import { uz } from "@/i18n";
 
 export const Route = createFileRoute("/_authenticated/analytics")({
   head: () => ({
     meta: [
-      { title: `Statistika — ${uz.brand.name}` },
+      { title: `Analitika hisoboti — ${uz.brand.name}` },
       { name: "robots", content: "noindex" },
     ],
   }),
@@ -41,6 +43,10 @@ function Analytics() {
   const { userId } = Route.useRouteContext();
   const [data, setData] = useState<Point[]>([]);
   const [totals, setTotals] = useState({ xp: 0, habits: 0, journal: 0 });
+  const [strongestDay, setStrongestDay] = useState<string>("—");
+  const [weakestDay, setWeakestDay] = useState<string>("—");
+  const [thisWeek, setThisWeek] = useState(0);
+  const [lastWeek, setLastWeek] = useState(0);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -89,17 +95,73 @@ function Analytics() {
         habits: pts.reduce((s, p) => s + p.habits, 0),
         journal: journals.data?.length ?? 0,
       });
+      const strong = pts.slice(-7).reduce((a, b) => (b.xp > a.xp ? b : a), pts[0] ?? { day: "—", xp: 0, habits: 0 });
+      const weak  = pts.slice(-7).reduce((a, b) => (b.xp < a.xp ? b : a), pts[0] ?? { day: "—", xp: 0, habits: 0 });
+      setStrongestDay(strong.day);
+      setWeakestDay(weak.day);
+      setThisWeek(pts.slice(-7).reduce((s, p) => s + p.xp, 0));
+      setLastWeek(pts.slice(0, 7).reduce((s, p) => s + p.xp, 0));
       setLoading(false);
     })();
   }, [userId]);
 
+  function exportCsv() {
+    const rows = ["day,xp,habits", ...data.map((p) => `${p.day},${p.xp},${p.habits}`)];
+    const blob = new Blob([rows.join("\n")], { type: "text/csv;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `life-order-analytics-${new Date().toISOString().slice(0, 10)}.csv`;
+    a.click();
+    URL.revokeObjectURL(url);
+    toast.success("CSV eksport tayyor.");
+  }
+
+  function exportPdf() {
+    // Minimal PDF via window.print — foydalanuvchi "Save as PDF" tanlaydi
+    const html = `<!doctype html><html><head><meta charset="utf-8"><title>Life Order — Analitika</title>
+<style>
+  body{font-family:system-ui,-apple-system,sans-serif;padding:32px;color:#111}
+  h1{font-size:28px;margin:0 0 8px}
+  .sub{color:#666;margin-bottom:24px;font-size:13px}
+  table{width:100%;border-collapse:collapse;margin-top:12px}
+  td,th{border-bottom:1px solid #ddd;padding:8px 6px;text-align:left;font-size:13px}
+  th{color:#666;font-weight:600}
+  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:16px 0 24px}
+  .card{border:1px solid #ddd;border-radius:8px;padding:12px}
+  .label{color:#666;font-size:11px;text-transform:uppercase;letter-spacing:.12em}
+  .val{font-size:22px;margin-top:4px}
+</style></head><body>
+<h1>Analitika hisoboti</h1>
+<p class="sub">Life Order · ${new Date().toLocaleDateString("uz-UZ")}</p>
+<div class="stats">
+  <div class="card"><div class="label">XP (14 kun)</div><div class="val">${totals.xp}</div></div>
+  <div class="card"><div class="label">Bajarilgan odat</div><div class="val">${totals.habits}</div></div>
+  <div class="card"><div class="label">Jami kundalik</div><div class="val">${totals.journal}</div></div>
+</div>
+<p><strong>Kuchli kun:</strong> ${strongestDay} · <strong>Eng zaif kun:</strong> ${weakestDay}</p>
+<p><strong>Bu hafta:</strong> ${thisWeek} XP · <strong>O'tgan hafta:</strong> ${lastWeek} XP</p>
+<h3>Kunlar bo'yicha</h3>
+<table><thead><tr><th>Sana</th><th>XP</th><th>Odat</th></tr></thead>
+<tbody>${data.map((p) => `<tr><td>${p.day}</td><td>${p.xp}</td><td>${p.habits}</td></tr>`).join("")}</tbody></table>
+</body></html>`;
+    const w = window.open("", "_blank");
+    if (!w) return toast.error("Popup bloklandi.");
+    w.document.write(html);
+    w.document.close();
+    setTimeout(() => {
+      w.print();
+      toast.success("PDF tayyor.");
+    }, 300);
+  }
+
   return (
-    <AppShell title="Statistika">
+    <AppShell title="Analitika hisoboti">
       <p className="font-ui text-xs uppercase tracking-[0.28em] text-primary">
         Oxirgi 14 kun
       </p>
       <h1 className="mt-3 font-serif text-4xl leading-tight tracking-tight">
-        Sening yo'ling.
+        Analitika hisoboti.
       </h1>
 
       {loading ? (
@@ -109,12 +171,26 @@ function Analytics() {
       ) : (
         <>
           <div className="mt-8 grid gap-4 sm:grid-cols-3">
-            <Stat label="XP (14 kun)" value={totals.xp} />
-            <Stat label="Bajarilgan odat" value={totals.habits} />
+            <Stat label="Jami XP" value={totals.xp} />
+            <Stat label="Aktiv kunlar" value={data.filter((p) => p.xp > 0).length} />
+            <Stat label="Bu hafta" value={thisWeek} hint={`O'tgan: ${lastWeek}`} />
+          </div>
+          <div className="mt-4 grid gap-4 sm:grid-cols-3">
+            <Stat label="Kuchli kun" value={strongestDay} />
+            <Stat label="Eng zaif kun" value={weakestDay} />
             <Stat label="Jami kundalik" value={totals.journal} />
           </div>
 
-          <section className="mt-10 rounded-[var(--radius)] border border-border p-5">
+          <div className="mt-6 flex gap-2">
+            <Button onClick={exportCsv} variant="outline" size="sm">
+              <Download className="mr-1 h-4 w-4" /> CSV eksport
+            </Button>
+            <Button onClick={exportPdf} variant="outline" size="sm">
+              <FileText className="mr-1 h-4 w-4" /> PDF eksport
+            </Button>
+          </div>
+
+          <section className="mt-8 rounded-[var(--radius)] border border-border p-5">
             <h2 className="mb-4 font-serif text-xl">XP kunlar bo'yicha</h2>
             <div className="h-64 w-full">
               <ResponsiveContainer width="100%" height="100%">
@@ -161,13 +237,14 @@ function Analytics() {
   );
 }
 
-function Stat({ label, value }: { label: string; value: number }) {
+function Stat({ label, value, hint }: { label: string; value: number | string; hint?: string }) {
   return (
     <div className="rounded-[var(--radius)] border border-border p-5">
       <p className="font-ui text-xs uppercase tracking-[0.22em] text-muted-foreground">
         {label}
       </p>
       <p className="mt-2 font-serif text-3xl">{value}</p>
+      {hint && <p className="mt-1 font-ui text-[11px] text-muted-foreground">{hint}</p>}
     </div>
   );
 }
