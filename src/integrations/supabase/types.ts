@@ -446,6 +446,23 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      use_shield: {
+        Args: { _note?: string }
+        Returns: {
+          created_at: string
+          id: string
+          note: string | null
+          reason: Database["public"]["Enums"]["shield_reason"]
+          used_on: string
+          user_id: string
+        }
+        SetofOptions: {
+          from: "*"
+          to: "shields"
+          isOneToOne: true
+          isSetofReturn: false
+        }
+      }
       xp_to_level: { Args: { _xp: number }; Returns: number }
     }
     Enums: {
