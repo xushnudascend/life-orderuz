@@ -3,7 +3,8 @@ import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { AppShell } from "@/components/app-shell";
 import { Button } from "@/components/ui/button";
-import { Loader2 } from "lucide-react";
+import { Loader2, Shield } from "lucide-react";
+import { toast } from "sonner";
 import { uz } from "@/i18n";
 
 export const Route = createFileRoute("/_authenticated/profile")({
@@ -26,8 +27,9 @@ type Stats = {
   level: number;
 } | null;
 type Streak = {
-  current_streak: number;
-  longest_streak: number;
+  current_days: number;
+  longest_days: number;
+  freeze_active_until: string | null;
 } | null;
 
 function ProfilePage() {
@@ -35,11 +37,14 @@ function ProfilePage() {
   const [profile, setProfile] = useState<Profile | null>(null);
   const [stats, setStats] = useState<Stats>(null);
   const [streak, setStreak] = useState<Streak>(null);
+  const [shieldsUsed, setShieldsUsed] = useState(0);
   const [loading, setLoading] = useState(true);
+  const [usingShield, setUsingShield] = useState(false);
 
-  useEffect(() => {
-    let alive = true;
-    Promise.all([
+  async function refresh() {
+    const sevenAgo = new Date();
+    sevenAgo.setUTCDate(sevenAgo.getUTCDate() - 7);
+    const [p, s, st, sh] = await Promise.all([
       supabase
         .from("profiles")
         .select("display_name, plan_length_days, onboarding_completed_at")
@@ -52,20 +57,42 @@ function ProfilePage() {
         .maybeSingle(),
       supabase
         .from("streaks")
-        .select("current_streak, longest_streak")
+        .select("current_days, longest_days, freeze_active_until")
         .eq("user_id", userId)
         .maybeSingle(),
-    ]).then(([p, s, st]) => {
-      if (!alive) return;
-      setProfile((p.data as Profile | null) ?? null);
-      setStats((s.data as Stats) ?? null);
-      setStreak((st.data as Streak) ?? null);
-      setLoading(false);
-    });
-    return () => {
-      alive = false;
-    };
+      supabase
+        .from("shields")
+        .select("id", { count: "exact", head: true })
+        .eq("user_id", userId)
+        .gt("used_on", sevenAgo.toISOString().slice(0, 10)),
+    ]);
+    setProfile((p.data as Profile | null) ?? null);
+    setStats((s.data as Stats) ?? null);
+    setStreak((st.data as Streak) ?? null);
+    setShieldsUsed(sh.count ?? 0);
+    setLoading(false);
+  }
+
+  useEffect(() => {
+    refresh();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userId]);
+
+  async function activateShield() {
+    setUsingShield(true);
+    const { error } = await supabase.rpc("use_shield", {});
+    setUsingShield(false);
+    if (error) {
+      toast.error(
+        error.message.includes("shield_limit_reached")
+          ? "Bu haftada shield ishlatib bo'lingan."
+          : "Shield'ni faollashtirib bo'lmadi.",
+      );
+      return;
+    }
+    toast.success("Shield faol. Bugungi bo'sh kun uchun streak saqlanadi.");
+    refresh();
+  }
 
   async function signOut() {
     await supabase.auth.signOut();
@@ -92,7 +119,7 @@ function ProfilePage() {
             <Stat label="Umumiy XP" value={stats?.total_xp ?? 0} />
             <Stat
               label="Joriy streak"
-              value={`${streak?.current_streak ?? 0} kun`}
+              value={`${streak?.current_days ?? 0} kun`}
             />
           </div>
 
@@ -110,8 +137,38 @@ function ProfilePage() {
             />
             <Row
               label="Eng uzun streak"
-              value={`${streak?.longest_streak ?? 0} kun`}
+              value={`${streak?.longest_days ?? 0} kun`}
             />
+          </div>
+
+          <div className="mt-6 flex items-center justify-between rounded-[var(--radius)] border border-border p-5">
+            <div className="flex items-center gap-3">
+              <span className="flex h-10 w-10 items-center justify-center rounded-full border border-border">
+                <Shield className="h-4 w-4 text-primary" />
+              </span>
+              <div>
+                <p className="font-serif text-lg">Shield</p>
+                <p className="font-ui text-xs text-muted-foreground">
+                  Haftada 1 marta — bo'sh kun uchun streak saqlanadi.
+                  {streak?.freeze_active_until && (
+                    <>
+                      {" "}Faol:{" "}
+                      {new Date(streak.freeze_active_until).toLocaleDateString(
+                        "uz-UZ",
+                      )}
+                    </>
+                  )}
+                </p>
+              </div>
+            </div>
+            <Button
+              onClick={activateShield}
+              disabled={usingShield || shieldsUsed >= 1}
+              variant="outline"
+              size="sm"
+            >
+              {shieldsUsed >= 1 ? "Ishlatildi" : "Faollashtirish"}
+            </Button>
           </div>
         </>
       )}
