@@ -7,7 +7,11 @@ export const Route = createFileRoute("/terms")({
     meta: [
       { title: `Foydalanish shartlari — ${uz.brand.name}` },
       { name: "description", content: "Life Order xizmatidan foydalanish shartlari." },
+      { property: "og:title", content: `Foydalanish shartlari — ${uz.brand.name}` },
+      { property: "og:description", content: "Life Order xizmatidan foydalanish shartlari." },
+      { property: "og:url", content: "https://life-orderuz.lovable.app/terms" },
     ],
+    links: [{ rel: "canonical", href: "https://life-orderuz.lovable.app/terms" }],
   }),
   component: () => (
     <LegalShell title="Foydalanish shartlari" updated="15-iyul, 2026">
