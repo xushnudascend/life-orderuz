@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { Link } from "@tanstack/react-router";
 import type { ReactNode } from "react";
 import { uz } from "@/i18n";
 
@@ -36,15 +36,10 @@ export function LegalShell({
         <p className="mt-2 text-sm text-muted-foreground">
           Yangilangan: {updated}
         </p>
-        <div className="prose prose-invert mt-10 max-w-none space-y-5 text-[15px] leading-relaxed text-foreground/90 [&_h2]:font-serif [&_h2]:text-2xl [&_h2]:mt-8 [&_h2]:mb-2">
+        <div className="mt-10 space-y-5 text-[15px] leading-relaxed text-foreground/90">
           {children}
         </div>
       </main>
     </div>
   );
 }
-
-// Empty route so this file compiles standalone (not used as page)
-export const Route = createFileRoute("/_legal-shell" as never)({
-  component: () => null,
-});
