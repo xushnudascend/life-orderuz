@@ -37,7 +37,9 @@ function ProfilePage() {
   const [profile, setProfile] = useState<Profile | null>(null);
   const [stats, setStats] = useState<Stats>(null);
   const [streak, setStreak] = useState<Streak>(null);
+  const [shieldsUsed, setShieldsUsed] = useState(0);
   const [loading, setLoading] = useState(true);
+  const [usingShield, setUsingShield] = useState(false);
 
   useEffect(() => {
     let alive = true;
