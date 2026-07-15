@@ -111,8 +111,9 @@ function MentorChat({
   // Persist any new messages we haven't saved yet.
   useEffect(() => {
     if (status === "streaming" || status === "submitted") return;
-    const toSave = messages.filter((m) => !savedIdsRef.current.has(m.id));
-    if (toSave.length === 0) return;
+    const toSave = (messages as UIMessage[]).filter(
+      (m) => !savedIdsRef.current.has(m.id),
+    );
     (async () => {
       for (const m of toSave) {
         const text = extractText(m);
