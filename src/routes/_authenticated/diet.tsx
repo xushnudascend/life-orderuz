@@ -1,13 +1,14 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { AppShell } from "@/components/app-shell";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Loader2, Utensils, Trash2 } from "lucide-react";
+import { Loader2, Utensils, Trash2, Camera, Calculator } from "lucide-react";
 import { toast } from "sonner";
 import { uz } from "@/i18n";
+import { PremiumLock } from "@/components/premium-lock";
 
 export const Route = createFileRoute("/_authenticated/diet")({
   head: () => ({
@@ -19,8 +20,23 @@ export const Route = createFileRoute("/_authenticated/diet")({
   component: Diet,
 });
 
-type Row = { id: string; kind: string; description: string; calories: number | null; logged_date: string };
+type Row = {
+  id: string;
+  kind: string;
+  description: string;
+  calories: number | null;
+  logged_date: string;
+  image_url: string | null;
+};
 const KINDS = ["Nonushta", "Tushlik", "Kechki ovqat", "Yengil ovqat"];
+
+/** Mifflin–St Jeor formulasi */
+function mifflin(sex: "male" | "female", weightKg: number, heightCm: number, age: number, activity: number): number {
+  const base = sex === "male"
+    ? 10 * weightKg + 6.25 * heightCm - 5 * age + 5
+    : 10 * weightKg + 6.25 * heightCm - 5 * age - 161;
+  return Math.round(base * activity);
+}
 
 function Diet() {
   const { userId } = Route.useRouteContext();
@@ -29,15 +45,35 @@ function Diet() {
   const [kind, setKind] = useState(KINDS[0]);
   const [desc, setDesc] = useState("");
   const [cal, setCal] = useState<string>("");
+  const [uploading, setUploading] = useState(false);
+  const [pendingImage, setPendingImage] = useState<string | null>(null);
+  const fileRef = useRef<HTMLInputElement>(null);
+
+  // Kaloriya kalkulyator
+  const [profile, setProfile] = useState<{
+    sex: string | null;
+    height_cm: number | null;
+    weight_kg: number | null;
+    age: number | null;
+    activity_level: string | null;
+  } | null>(null);
 
   async function refresh() {
-    const { data } = await supabase
-      .from("meals")
-      .select("id,kind,description,calories,logged_date")
-      .eq("user_id", userId)
-      .order("logged_date", { ascending: false })
-      .limit(30);
+    const [{ data }, { data: p }] = await Promise.all([
+      supabase
+        .from("meals")
+        .select("id,kind,description,calories,logged_date,image_url")
+        .eq("user_id", userId)
+        .order("logged_date", { ascending: false })
+        .limit(30),
+      supabase
+        .from("profiles")
+        .select("sex, height_cm, weight_kg, age, activity_level")
+        .eq("id", userId)
+        .maybeSingle(),
+    ]);
     setRows((data as Row[] | null) ?? []);
+    setProfile(p as typeof profile);
     setLoading(false);
   }
 
@@ -46,6 +82,42 @@ function Diet() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userId]);
 
+  const dailyTarget = useMemo(() => {
+    if (!profile?.sex || !profile.height_cm || !profile.weight_kg || !profile.age) return null;
+    const map: Record<string, number> = {
+      sedentary: 1.2,
+      light: 1.375,
+      moderate: 1.55,
+      active: 1.725,
+      very_active: 1.9,
+    };
+    const act = map[profile.activity_level ?? ""] ?? 1.375;
+    return mifflin(profile.sex as "male" | "female", Number(profile.weight_kg), Number(profile.height_cm), profile.age, act);
+  }, [profile]);
+
+  async function pickImage(f: File | null | undefined) {
+    if (!f) return;
+    if (f.size > 5 * 1024 * 1024) {
+      toast.error("Rasm 5MB dan kichik bo'lsin.");
+      return;
+    }
+    setUploading(true);
+    const ext = f.name.split(".").pop() || "jpg";
+    const path = `${userId}/${crypto.randomUUID()}.${ext}`;
+    const { error } = await supabase.storage.from("meals").upload(path, f, {
+      cacheControl: "3600",
+      upsert: false,
+    });
+    setUploading(false);
+    if (error) {
+      toast.error("Rasmni yuklab bo'lmadi.");
+      return;
+    }
+    const { data } = supabase.storage.from("meals").getPublicUrl(path);
+    setPendingImage(data.publicUrl);
+    toast.success("Rasm biriktirildi.");
+  }
+
   async function add() {
     if (!desc.trim()) return;
     const { error } = await supabase.from("meals").insert({
@@ -53,11 +125,14 @@ function Diet() {
       kind,
       description: desc.trim(),
       calories: cal ? Number(cal) : null,
+      image_url: pendingImage,
     });
     if (error) return toast.error("Saqlab bo'lmadi");
     setDesc("");
     setCal("");
-    toast.success("Yozuv qo'shildi");
+    setPendingImage(null);
+    if (fileRef.current) fileRef.current.value = "";
+    toast.success("Ovqat jurnalga qo'shildi.");
     refresh();
   }
 
@@ -79,9 +154,23 @@ function Diet() {
       <h1 className="mt-3 font-serif text-4xl leading-tight tracking-tight">
         Ovqatlanish kundaligi.
       </h1>
-      <p className="mt-3 text-muted-foreground">
-        Bugun jami: <span className="text-foreground">{todayCal} kkal</span>
-      </p>
+
+      <div className="mt-4 flex flex-wrap items-center gap-3 text-muted-foreground">
+        <span>
+          Bugun jami:{" "}
+          <span className="text-foreground">{todayCal} kkal</span>
+        </span>
+        {dailyTarget ? (
+          <span className="rounded-full border border-primary/40 bg-primary/5 px-2.5 py-1 font-ui text-[11px] uppercase tracking-[0.2em] text-primary">
+            <Calculator className="mr-1 inline h-3 w-3" />
+            Maqsad: {dailyTarget} kkal
+          </span>
+        ) : (
+          <span className="text-xs">
+            Bo'y, vazn va yoshni kiriting.
+          </span>
+        )}
+      </div>
 
       <div className="mt-8 grid gap-3 rounded-[var(--radius)] border border-border p-5 sm:grid-cols-[160px_1fr_120px_auto]">
         <div>
@@ -108,6 +197,42 @@ function Diet() {
         <div className="flex items-end">
           <Button onClick={add} className="w-full">Qo'shish</Button>
         </div>
+        <div className="sm:col-span-4">
+          <input
+            ref={fileRef}
+            type="file"
+            accept="image/*"
+            onChange={(e) => pickImage(e.target.files?.[0])}
+            className="hidden"
+            id="mealimg"
+          />
+          <div className="flex items-center gap-3">
+            <Button
+              type="button"
+              variant="outline"
+              size="sm"
+              onClick={() => fileRef.current?.click()}
+              disabled={uploading}
+            >
+              <Camera className="mr-1 h-4 w-4" />
+              {uploading ? "Yuklanmoqda..." : "Rasm qo'shish"}
+            </Button>
+            <p className="font-ui text-xs text-muted-foreground">
+              Rasm 5MB dan kichik bo'lsin.
+            </p>
+            {pendingImage && (
+              <img
+                src={pendingImage}
+                alt=""
+                className="ml-auto h-10 w-10 rounded-md object-cover"
+              />
+            )}
+          </div>
+        </div>
+      </div>
+
+      <div className="mt-6">
+        <PremiumLock title="AI ovqat tahlili Premium a'zolar uchun." />
       </div>
 
       <section className="mt-8">
@@ -126,7 +251,15 @@ function Diet() {
                 className="flex items-center justify-between rounded-[var(--radius)] border border-border bg-card p-4"
               >
                 <div className="flex items-center gap-3">
-                  <Utensils className="h-4 w-4 text-primary" />
+                  {r.image_url ? (
+                    <img
+                      src={r.image_url}
+                      alt=""
+                      className="h-12 w-12 rounded-md object-cover"
+                    />
+                  ) : (
+                    <Utensils className="h-4 w-4 text-primary" />
+                  )}
                   <div>
                     <p className="font-serif text-lg">{r.description}</p>
                     <p className="font-ui text-xs uppercase tracking-[0.18em] text-muted-foreground/80">
