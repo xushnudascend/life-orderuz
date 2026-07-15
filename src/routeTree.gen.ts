@@ -35,6 +35,7 @@ import { Route as AuthenticatedDashboardRouteImport } from './routes/_authentica
 import { Route as AuthenticatedCommunityRouteImport } from './routes/_authenticated/community'
 import { Route as AuthenticatedAnalyticsRouteImport } from './routes/_authenticated/analytics'
 import { Route as AuthenticatedAchievementsRouteImport } from './routes/_authenticated/achievements'
+import { Route as ApiPublicConfigRouteImport } from './routes/api/public/config'
 import { Route as ApiAiWeeklyReportRouteImport } from './routes/api/ai.weekly-report'
 import { Route as ApiAiMicroInsightRouteImport } from './routes/api/ai.micro-insight'
 import { Route as ApiAiGeneratePlanRouteImport } from './routes/api/ai.generate-plan'
@@ -176,6 +177,11 @@ const AuthenticatedAchievementsRoute =
     path: '/achievements',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const ApiPublicConfigRoute = ApiPublicConfigRouteImport.update({
+  id: '/api/public/config',
+  path: '/api/public/config',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiAiWeeklyReportRoute = ApiAiWeeklyReportRouteImport.update({
   id: '/api/ai/weekly-report',
   path: '/api/ai/weekly-report',
@@ -252,6 +258,7 @@ export interface FileRoutesByFullPath {
   '/api/ai/generate-plan': typeof ApiAiGeneratePlanRoute
   '/api/ai/micro-insight': typeof ApiAiMicroInsightRoute
   '/api/ai/weekly-report': typeof ApiAiWeeklyReportRoute
+  '/api/public/config': typeof ApiPublicConfigRoute
   '/api/public/hooks/burnout-check': typeof ApiPublicHooksBurnoutCheckRoute
 }
 export interface FileRoutesByTo {
@@ -287,6 +294,7 @@ export interface FileRoutesByTo {
   '/api/ai/generate-plan': typeof ApiAiGeneratePlanRoute
   '/api/ai/micro-insight': typeof ApiAiMicroInsightRoute
   '/api/ai/weekly-report': typeof ApiAiWeeklyReportRoute
+  '/api/public/config': typeof ApiPublicConfigRoute
   '/api/public/hooks/burnout-check': typeof ApiPublicHooksBurnoutCheckRoute
 }
 export interface FileRoutesById {
@@ -324,6 +332,7 @@ export interface FileRoutesById {
   '/api/ai/generate-plan': typeof ApiAiGeneratePlanRoute
   '/api/ai/micro-insight': typeof ApiAiMicroInsightRoute
   '/api/ai/weekly-report': typeof ApiAiWeeklyReportRoute
+  '/api/public/config': typeof ApiPublicConfigRoute
   '/api/public/hooks/burnout-check': typeof ApiPublicHooksBurnoutCheckRoute
 }
 export interface FileRouteTypes {
@@ -361,6 +370,7 @@ export interface FileRouteTypes {
     | '/api/ai/generate-plan'
     | '/api/ai/micro-insight'
     | '/api/ai/weekly-report'
+    | '/api/public/config'
     | '/api/public/hooks/burnout-check'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -396,6 +406,7 @@ export interface FileRouteTypes {
     | '/api/ai/generate-plan'
     | '/api/ai/micro-insight'
     | '/api/ai/weekly-report'
+    | '/api/public/config'
     | '/api/public/hooks/burnout-check'
   id:
     | '__root__'
@@ -432,6 +443,7 @@ export interface FileRouteTypes {
     | '/api/ai/generate-plan'
     | '/api/ai/micro-insight'
     | '/api/ai/weekly-report'
+    | '/api/public/config'
     | '/api/public/hooks/burnout-check'
   fileRoutesById: FileRoutesById
 }
@@ -449,6 +461,7 @@ export interface RootRouteChildren {
   ApiAiGeneratePlanRoute: typeof ApiAiGeneratePlanRoute
   ApiAiMicroInsightRoute: typeof ApiAiMicroInsightRoute
   ApiAiWeeklyReportRoute: typeof ApiAiWeeklyReportRoute
+  ApiPublicConfigRoute: typeof ApiPublicConfigRoute
   ApiPublicHooksBurnoutCheckRoute: typeof ApiPublicHooksBurnoutCheckRoute
 }
 
@@ -636,6 +649,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAchievementsRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/api/public/config': {
+      id: '/api/public/config'
+      path: '/api/public/config'
+      fullPath: '/api/public/config'
+      preLoaderRoute: typeof ApiPublicConfigRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/ai/weekly-report': {
       id: '/api/ai/weekly-report'
       path: '/api/ai/weekly-report'
@@ -770,18 +790,9 @@ const rootRouteChildren: RootRouteChildren = {
   ApiAiGeneratePlanRoute: ApiAiGeneratePlanRoute,
   ApiAiMicroInsightRoute: ApiAiMicroInsightRoute,
   ApiAiWeeklyReportRoute: ApiAiWeeklyReportRoute,
+  ApiPublicConfigRoute: ApiPublicConfigRoute,
   ApiPublicHooksBurnoutCheckRoute: ApiPublicHooksBurnoutCheckRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
