@@ -140,6 +140,36 @@ function ProfilePage() {
               value={`${streak?.longest_days ?? 0} kun`}
             />
           </div>
+
+          <div className="mt-6 flex items-center justify-between rounded-[var(--radius)] border border-border p-5">
+            <div className="flex items-center gap-3">
+              <span className="flex h-10 w-10 items-center justify-center rounded-full border border-border">
+                <Shield className="h-4 w-4 text-primary" />
+              </span>
+              <div>
+                <p className="font-serif text-lg">Shield</p>
+                <p className="font-ui text-xs text-muted-foreground">
+                  Haftada 1 marta — bo'sh kun uchun streak saqlanadi.
+                  {streak?.freeze_active_until && (
+                    <>
+                      {" "}Faol:{" "}
+                      {new Date(streak.freeze_active_until).toLocaleDateString(
+                        "uz-UZ",
+                      )}
+                    </>
+                  )}
+                </p>
+              </div>
+            </div>
+            <Button
+              onClick={activateShield}
+              disabled={usingShield || shieldsUsed >= 1}
+              variant="outline"
+              size="sm"
+            >
+              {shieldsUsed >= 1 ? "Ishlatildi" : "Faollashtirish"}
+            </Button>
+          </div>
         </>
       )}
 
