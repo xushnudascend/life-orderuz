@@ -41,9 +41,10 @@ function ProfilePage() {
   const [loading, setLoading] = useState(true);
   const [usingShield, setUsingShield] = useState(false);
 
-  useEffect(() => {
-    let alive = true;
-    Promise.all([
+  async function refresh() {
+    const sevenAgo = new Date();
+    sevenAgo.setUTCDate(sevenAgo.getUTCDate() - 7);
+    const [p, s, st, sh] = await Promise.all([
       supabase
         .from("profiles")
         .select("display_name, plan_length_days, onboarding_completed_at")
@@ -56,20 +57,42 @@ function ProfilePage() {
         .maybeSingle(),
       supabase
         .from("streaks")
-        .select("current_days, longest_days")
+        .select("current_days, longest_days, freeze_active_until")
         .eq("user_id", userId)
         .maybeSingle(),
-    ]).then(([p, s, st]) => {
-      if (!alive) return;
-      setProfile((p.data as Profile | null) ?? null);
-      setStats((s.data as Stats) ?? null);
-      setStreak((st.data as Streak) ?? null);
-      setLoading(false);
-    });
-    return () => {
-      alive = false;
-    };
+      supabase
+        .from("shields")
+        .select("id", { count: "exact", head: true })
+        .eq("user_id", userId)
+        .gt("used_on", sevenAgo.toISOString().slice(0, 10)),
+    ]);
+    setProfile((p.data as Profile | null) ?? null);
+    setStats((s.data as Stats) ?? null);
+    setStreak((st.data as Streak) ?? null);
+    setShieldsUsed(sh.count ?? 0);
+    setLoading(false);
+  }
+
+  useEffect(() => {
+    refresh();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userId]);
+
+  async function activateShield() {
+    setUsingShield(true);
+    const { error } = await supabase.rpc("use_shield", { _note: null });
+    setUsingShield(false);
+    if (error) {
+      toast.error(
+        error.message.includes("shield_limit_reached")
+          ? "Bu haftada shield ishlatib bo'lingan."
+          : "Shield'ni faollashtirib bo'lmadi.",
+      );
+      return;
+    }
+    toast.success("Shield faol. Bugungi bo'sh kun uchun streak saqlanadi.");
+    refresh();
+  }
 
   async function signOut() {
     await supabase.auth.signOut();
