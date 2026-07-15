@@ -3,7 +3,7 @@ import type { Dict } from "./uz";
 /**
  * Ruscha tarjima — asosiy kalitlar. Yetishmagan kalitlar uzbekchaga qaytadi.
  */
-export const ru: Dict = {
+const _ru = {
   brand: {
     name: "Life Order",
     tagline: "Приведи свою жизнь в порядок",
@@ -106,3 +106,4 @@ export const ru: Dict = {
     rights: "© 2026 Life Order. Все права защищены.",
   },
 };
+export const ru = _ru as unknown as Dict;
