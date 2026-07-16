@@ -187,22 +187,27 @@ function EmailForm({ mode, next }: { mode: "signin" | "signup"; next: string }) 
   );
 }
 
-function GoogleButton() {
-  const navigate = useNavigate();
+function GoogleButton({ next }: { next: string }) {
   const [loading, setLoading] = useState(false);
   async function onClick() {
     if (loading) return;
     setLoading(true);
     try {
+      // Return to /auth with the same `next` so this page can navigate onward
+      // after the session is set.
+      const redirectUri =
+        next === "/dashboard"
+          ? window.location.origin
+          : `${window.location.origin}/auth?next=${encodeURIComponent(next)}`;
       const result = await lovable.auth.signInWithOAuth("google", {
-        redirect_uri: window.location.origin,
+        redirect_uri: redirectUri,
       });
       if (result.error) {
         toast.error("Google orqali kirib bo'lmadi. Qayta urinib ko'ring.");
         return;
       }
       if (result.redirected) return; // full-page nav
-      navigate({ to: "/dashboard", replace: true });
+      window.location.replace(next);
     } finally {
       setLoading(false);
     }
