@@ -1,4 +1,4 @@
-import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
@@ -30,7 +30,8 @@ export const Route = createFileRoute("/auth")({
 });
 
 function AuthPage() {
-  const navigate = useNavigate();
+  // No router navigation here — use window.location so the `_authenticated`
+  // route's client-only gate re-runs after sign-in.
   const { next } = Route.useSearch();
   const [tab, setTab] = useState<"signin" | "signup">("signup");
   const [checking, setChecking] = useState(true);
