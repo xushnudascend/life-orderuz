@@ -10,7 +10,15 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { ArrowLeft, Loader2 } from "lucide-react";
 import { uz } from "@/i18n";
 
+function sanitizeNext(next: unknown): string {
+  if (typeof next !== "string" || !next.startsWith("/") || next.startsWith("//")) return "/dashboard";
+  return next;
+}
+
 export const Route = createFileRoute("/auth")({
+  validateSearch: (s: Record<string, unknown>) => ({
+    next: sanitizeNext(s.next),
+  }),
   head: () => ({
     meta: [
       { title: `Kirish — ${uz.brand.name}` },
