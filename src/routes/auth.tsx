@@ -1,4 +1,4 @@
-import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
@@ -10,7 +10,15 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { ArrowLeft, Loader2 } from "lucide-react";
 import { uz } from "@/i18n";
 
+function sanitizeNext(next: unknown): string {
+  if (typeof next !== "string" || !next.startsWith("/") || next.startsWith("//")) return "/dashboard";
+  return next;
+}
+
 export const Route = createFileRoute("/auth")({
+  validateSearch: (s: Record<string, unknown>) => ({
+    next: sanitizeNext(s.next),
+  }),
   head: () => ({
     meta: [
       { title: `Kirish — ${uz.brand.name}` },
@@ -22,22 +30,24 @@ export const Route = createFileRoute("/auth")({
 });
 
 function AuthPage() {
-  const navigate = useNavigate();
+  // No router navigation here — use window.location so the `_authenticated`
+  // route's client-only gate re-runs after sign-in.
+  const { next } = Route.useSearch();
   const [tab, setTab] = useState<"signin" | "signup">("signup");
   const [checking, setChecking] = useState(true);
 
-  // If already signed in → send to /dashboard (which will route to /onboarding if needed).
+  // If already signed in → return to `next` (defaults to /dashboard).
   useEffect(() => {
     let mounted = true;
     supabase.auth.getSession().then(({ data }) => {
       if (!mounted) return;
-      if (data.session) navigate({ to: "/dashboard", replace: true });
+      if (data.session) window.location.replace(next);
       else setChecking(false);
     });
     return () => {
       mounted = false;
     };
-  }, [navigate]);
+  }, [next]);
 
   if (checking) {
     return (
@@ -74,10 +84,10 @@ function AuthPage() {
               <TabsTrigger value="signin">Kirish</TabsTrigger>
             </TabsList>
             <TabsContent value="signup" className="pt-6">
-              <EmailForm mode="signup" />
+              <EmailForm mode="signup" next={next} />
             </TabsContent>
             <TabsContent value="signin" className="pt-6">
-              <EmailForm mode="signin" />
+              <EmailForm mode="signin" next={next} />
             </TabsContent>
           </Tabs>
 
@@ -92,7 +102,7 @@ function AuthPage() {
             </div>
           </div>
 
-          <GoogleButton />
+          <GoogleButton next={next} />
         </div>
 
         <p className="mt-6 text-center font-ui text-xs text-muted-foreground">
@@ -103,8 +113,7 @@ function AuthPage() {
   );
 }
 
-function EmailForm({ mode }: { mode: "signin" | "signup" }) {
-  const navigate = useNavigate();
+function EmailForm({ mode, next }: { mode: "signin" | "signup"; next: string }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -119,18 +128,18 @@ function EmailForm({ mode }: { mode: "signin" | "signup" }) {
           email,
           password,
           options: {
-            emailRedirectTo: `${window.location.origin}/dashboard`,
+            emailRedirectTo: `${window.location.origin}${next}`,
           },
         });
         if (error) throw error;
         toast.success("Ro'yxatdan o'tildi. Emailingizni tekshiring.");
         // If email confirmation is disabled, session already exists.
         const { data } = await supabase.auth.getSession();
-        if (data.session) navigate({ to: "/dashboard", replace: true });
+        if (data.session) window.location.replace(next);
       } else {
         const { error } = await supabase.auth.signInWithPassword({ email, password });
         if (error) throw error;
-        navigate({ to: "/dashboard", replace: true });
+        window.location.replace(next);
       }
     } catch (err) {
       const msg = err instanceof Error ? err.message : "Xato yuz berdi";
@@ -179,22 +188,27 @@ function EmailForm({ mode }: { mode: "signin" | "signup" }) {
   );
 }
 
-function GoogleButton() {
-  const navigate = useNavigate();
+function GoogleButton({ next }: { next: string }) {
   const [loading, setLoading] = useState(false);
   async function onClick() {
     if (loading) return;
     setLoading(true);
     try {
+      // Return to /auth with the same `next` so this page can navigate onward
+      // after the session is set.
+      const redirectUri =
+        next === "/dashboard"
+          ? window.location.origin
+          : `${window.location.origin}/auth?next=${encodeURIComponent(next)}`;
       const result = await lovable.auth.signInWithOAuth("google", {
-        redirect_uri: window.location.origin,
+        redirect_uri: redirectUri,
       });
       if (result.error) {
         toast.error("Google orqali kirib bo'lmadi. Qayta urinib ko'ring.");
         return;
       }
       if (result.redirected) return; // full-page nav
-      navigate({ to: "/dashboard", replace: true });
+      window.location.replace(next);
     } finally {
       setLoading(false);
     }
