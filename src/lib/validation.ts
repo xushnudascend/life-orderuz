@@ -59,7 +59,7 @@ export const chatRequestSchema = z.object({
     role: z.enum(["system", "user", "assistant"]),
     content: z.union([z.string(), z.array(z.any())]),
   })).min(1).max(50),
-  userStats: z.record(z.any()).optional(),
+  userStats: z.record(z.string(), z.any()).optional(),
 });
 
 // Auth

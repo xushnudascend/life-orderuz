@@ -86,7 +86,7 @@ function Consent() {
 
   const clientName = details?.client?.name ?? "Tashqi ilova";
   const redirectUri = details?.client?.redirect_uri;
-  const scopes = (details?.scope ?? "").split(/\s+/).filter(Boolean);
+  const scopes: string[] = (details?.scope ?? "").split(/\s+/).filter(Boolean);
 
   return (
     <main className="grid min-h-screen place-items-center bg-background px-6 text-foreground">
