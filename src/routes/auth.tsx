@@ -31,21 +31,22 @@ export const Route = createFileRoute("/auth")({
 
 function AuthPage() {
   const navigate = useNavigate();
+  const { next } = Route.useSearch();
   const [tab, setTab] = useState<"signin" | "signup">("signup");
   const [checking, setChecking] = useState(true);
 
-  // If already signed in → send to /dashboard (which will route to /onboarding if needed).
+  // If already signed in → return to `next` (defaults to /dashboard).
   useEffect(() => {
     let mounted = true;
     supabase.auth.getSession().then(({ data }) => {
       if (!mounted) return;
-      if (data.session) navigate({ to: "/dashboard", replace: true });
+      if (data.session) window.location.replace(next);
       else setChecking(false);
     });
     return () => {
       mounted = false;
     };
-  }, [navigate]);
+  }, [navigate, next]);
 
   if (checking) {
     return (
