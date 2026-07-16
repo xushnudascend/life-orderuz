@@ -47,7 +47,7 @@ function AuthPage() {
     return () => {
       mounted = false;
     };
-  }, [navigate, next]);
+  }, [next]);
 
   if (checking) {
     return (
