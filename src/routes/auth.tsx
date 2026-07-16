@@ -83,10 +83,10 @@ function AuthPage() {
               <TabsTrigger value="signin">Kirish</TabsTrigger>
             </TabsList>
             <TabsContent value="signup" className="pt-6">
-              <EmailForm mode="signup" />
+              <EmailForm mode="signup" next={next} />
             </TabsContent>
             <TabsContent value="signin" className="pt-6">
-              <EmailForm mode="signin" />
+              <EmailForm mode="signin" next={next} />
             </TabsContent>
           </Tabs>
 
@@ -101,7 +101,7 @@ function AuthPage() {
             </div>
           </div>
 
-          <GoogleButton />
+          <GoogleButton next={next} />
         </div>
 
         <p className="mt-6 text-center font-ui text-xs text-muted-foreground">
@@ -112,8 +112,7 @@ function AuthPage() {
   );
 }
 
-function EmailForm({ mode }: { mode: "signin" | "signup" }) {
-  const navigate = useNavigate();
+function EmailForm({ mode, next }: { mode: "signin" | "signup"; next: string }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -128,18 +127,18 @@ function EmailForm({ mode }: { mode: "signin" | "signup" }) {
           email,
           password,
           options: {
-            emailRedirectTo: `${window.location.origin}/dashboard`,
+            emailRedirectTo: `${window.location.origin}${next}`,
           },
         });
         if (error) throw error;
         toast.success("Ro'yxatdan o'tildi. Emailingizni tekshiring.");
         // If email confirmation is disabled, session already exists.
         const { data } = await supabase.auth.getSession();
-        if (data.session) navigate({ to: "/dashboard", replace: true });
+        if (data.session) window.location.replace(next);
       } else {
         const { error } = await supabase.auth.signInWithPassword({ email, password });
         if (error) throw error;
-        navigate({ to: "/dashboard", replace: true });
+        window.location.replace(next);
       }
     } catch (err) {
       const msg = err instanceof Error ? err.message : "Xato yuz berdi";
