@@ -15,6 +15,9 @@ export const Route = createFileRoute("/blog/motivatsiya-tuzogi")({
       { property: "og:description", content: DESCRIPTION },
       { property: "og:type", content: "article" },
       { property: "og:url", content: `${SITE_URL}${PATH}` },
+      { property: "og:image", content: `${SITE_URL}/og/blog-motivatsiya.jpg` },
+      { property: "twitter:card", content: "summary_large_image" },
+      { property: "twitter:image", content: `${SITE_URL}/og/blog-motivatsiya.jpg` },
     ],
     links: [{ rel: "canonical", href: `${SITE_URL}${PATH}` }],
     scripts: [
@@ -29,6 +32,7 @@ export const Route = createFileRoute("/blog/motivatsiya-tuzogi")({
           author: { "@type": "Organization", name: "Life Order" },
           publisher: { "@type": "Organization", name: "Life Order" },
           mainEntityOfPage: `${SITE_URL}${PATH}`,
+          image: `${SITE_URL}/og/blog-motivatsiya.jpg`,
         }),
       },
     ],

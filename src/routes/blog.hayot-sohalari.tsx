@@ -26,6 +26,9 @@ export const Route = createFileRoute("/blog/hayot-sohalari")({
       { property: "og:description", content: DESCRIPTION },
       { property: "og:type", content: "article" },
       { property: "og:url", content: `${SITE_URL}${PATH}` },
+      { property: "og:image", content: `${SITE_URL}/og/blog-hayot-sohalari.jpg` },
+      { property: "twitter:card", content: "summary_large_image" },
+      { property: "twitter:image", content: `${SITE_URL}/og/blog-hayot-sohalari.jpg` },
     ],
     links: [{ rel: "canonical", href: `${SITE_URL}${PATH}` }],
     scripts: [
@@ -40,6 +43,7 @@ export const Route = createFileRoute("/blog/hayot-sohalari")({
           author: { "@type": "Organization", name: "Life Order" },
           publisher: { "@type": "Organization", name: "Life Order" },
           mainEntityOfPage: `${SITE_URL}${PATH}`,
+          image: `${SITE_URL}/og/blog-hayot-sohalari.jpg`,
         }),
       },
     ],
