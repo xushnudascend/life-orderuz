@@ -22,15 +22,35 @@ import {
 const BRAND = "Life Order";
 const SITE_URL = "https://life-orderuz.lovable.app";
 const ONE_LINER =
-  "Life Order — o'z-o'zini boshqarish OS. Trigger, kunlik uchta qadam, halol AI mentor Nadir. 60 soniyada tashxis, kartasiz.";
+  "Life Order — xulq-atvor dizayni asosidagi o'z-o'zini boshqarish tizimi. Trigger tashxisi, kunlik uchta mikro-qadam va halol AI mentor Nadir. Miyyaning odat halqasini qayta quradi. 60 soniyada boshla, kartasiz.";
 
 const FAQ_ITEMS: { q: string; a: string }[] = [
-  { q: "Life Order nima?", a: "Self-Control OS — o'z-o'zini boshqarishning operatsion tizimi. Trigger tahlili, kunlik uchta aniq qadam va halol AI mentor Nadir bir joyda birlashgan." },
-  { q: "Bepulmi?", a: "Ha. Free reja cheksiz ishlaydi. Karta so'ralmaydi, avtomatik to'lov yo'q." },
-  { q: "Kim uchun mos?", a: "O'zini o'zgartirmoqchi bo'lgan 16–30 yoshdagi har bir kishi uchun." },
-  { q: "Ma'lumotlarim xavfsizmi?", a: "Ha. Barcha ma'lumot shifrlangan, uchinchi tomonga sotilmaydi. Istalgan paytda o'chirish so'rovini yubor." },
-  { q: "Qancha vaqt kerak?", a: "Kuniga 10–15 daqiqa yetarli. Missiyalar qisqa va aniq." },
+  {
+    q: "Life Order aslida nima?",
+    a: "Bu — motivatsion ilova emas, xulq-atvor tizimi. Stanford'ning Behavior Design (BJ Fogg) va identity-based habits (James Clear) tamoyillari asosida qurilgan: trigger → mikro-harakat → tasdiq. Motivatsiya to'lqinlariga tayanmaydi.",
+  },
+  {
+    q: "Nega motivatsion video va kurslardan farq qiladi?",
+    a: "Motivatsiya — hissiyot. Hissiyot 72 soatda so'nadi (affective forecasting tadqiqotlari). Life Order o'rniga takrorlanadigan mikro-harakatlarni o'rnatadi — miyyada bazal ganglii orqali avtomatlashadi. Phillippa Lally (UCL, 2010) tadqiqotiga ko'ra, odat o'rtacha 66 kunda ildiz otadi.",
+  },
+  {
+    q: "Bepulmi? Kartaga bog'lash kerakmi?",
+    a: "Ha, bepul. Free reja doimiy — karta so'ralmaydi, avtomatik to'lov yo'q. Bu ongli qaror: qaramlik emas, tanlov iqtisodini himoya qilamiz.",
+  },
+  {
+    q: "Kim uchun mos?",
+    a: "16–30 yosh oralig'idagi, o'zida telefon qaramligi, prokrastinatsiya yoki tarqoq diqqatni tan olgan har bir kishi uchun. Kim o'zini o'zgartirishga tayyor, lekin qaydan boshlashni bilmaydi.",
+  },
+  {
+    q: "Ma'lumotlarim xavfsizmi?",
+    a: "Ha. Ma'lumot shifrlangan, reklamachilarga sotilmaydi, uchinchi tomon trekerlari yo'q. Istalgan paytda hisobingni va tarixingni bir bosishda o'chirishing mumkin.",
+  },
+  {
+    q: "Qancha vaqt talab qilinadi?",
+    a: "Kuniga 10–15 daqiqa. Ataylab qisqa: BJ Fogg Tiny Habits usuli — mikro-harakat yengil bo'lsa, miyya qarshilik ko'rsatmaydi va takror avtomatlashadi.",
+  },
 ];
+
 
 export const Route = createFileRoute("/")({
   head: () => ({
