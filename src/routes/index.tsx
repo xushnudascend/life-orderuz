@@ -626,12 +626,13 @@ function Pricing() {
           <PricingCard
             title="Free"
             price="0 so'm"
-            period="har doim"
+            period="doimiy · karta so'ralmaydi"
             features={[
-              "Kunlik uchta missiya",
-              "Streak va XP",
-              "Asosiy AI mentor",
-              "Davra chatiga kirish",
+              "Kunlik 3 ta mikro-missiya",
+              "Streak, XP, intizom balli",
+              "Nadir bilan asosiy suhbat",
+              "Davra kanallariga kirish",
+              "Trigger tashxisi va 7/30-kunlik protokol",
             ]}
             cta="Bepul boshlash"
             variant="outline"
@@ -639,17 +640,17 @@ function Pricing() {
           <PricingCard
             title="Pro"
             price="49 000 so'm"
-            period="oyiga · yillik obunada −40%"
-            badge="Tavsiya"
+            period="oyiga · yillikda −40%"
+            badge="Chuqurroq ish"
             features={[
               "Free rejadagi hammasi",
-              "Nadir Pro — chuqur tahlil",
-              "Cheksiz missiya va odat",
-              "Haftalik AI hisobot",
-              "Kurs va kitoblarga to'liq kirish",
-              "Ustuvor yordam",
+              "Nadir Pro — kengroq kontekst va tahlil",
+              "Cheksiz missiya va odat kuzatuvi",
+              "Haftalik shaxsiy AI hisobot",
+              "Barcha bilim protokollari",
+              "Ustuvor yordam · 24 soatda javob",
             ]}
-            cta="Pro rejani ko'rish"
+            cta="Pro rejaga o'tish"
             variant="primary"
           />
         </div>
