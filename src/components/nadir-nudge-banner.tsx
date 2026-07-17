@@ -15,7 +15,7 @@ export function NadirNudgeBanner({ userId }: { userId: string }) {
         .from("nadir_nudges")
         .select("id, kind, message")
         .eq("user_id", userId)
-        .is("resolved_at", null)
+        .is("read_at", null)
         .order("created_at", { ascending: false })
         .limit(1)
         .maybeSingle();
