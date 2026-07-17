@@ -6,8 +6,8 @@ import {
   useNavigate,
 } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { Loader2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
+
 
 /**
  * Authenticated layout.
@@ -38,10 +38,7 @@ function AuthenticatedShell() {
   const navigate = useNavigate();
   const cacheKey = `lo:onboarded:${userId}`;
   const cached = typeof window !== "undefined" && window.localStorage.getItem(cacheKey) === "1";
-  const [state, setState] = useState<
-    | { status: "loading" }
-    | { status: "ready"; onboarded: boolean }
-  >(cached ? { status: "ready", onboarded: true } : { status: "loading" });
+  const [onboarded, setOnboarded] = useState<boolean | null>(cached ? true : null);
 
   useEffect(() => {
     let alive = true;
@@ -50,42 +47,33 @@ function AuthenticatedShell() {
       .select("onboarding_completed_at")
       .eq("id", userId)
       .maybeSingle()
-      .then(({ data, error }) => {
+      .then(({ data }) => {
         if (!alive) return;
-        if (error) {
-          console.error("[auth] profile fetch failed", error);
-        }
-        const onboarded = Boolean(data?.onboarding_completed_at);
-        if (onboarded) window.localStorage.setItem(cacheKey, "1");
+        const ok = Boolean(data?.onboarding_completed_at);
+        if (ok) window.localStorage.setItem(cacheKey, "1");
         else window.localStorage.removeItem(cacheKey);
-        setState({ status: "ready", onboarded });
+        setOnboarded(ok);
       });
     return () => {
       alive = false;
     };
-  }, [userId]);
+  }, [userId, cacheKey]);
 
   const isOnOnboarding = location.pathname.startsWith("/onboarding");
-  const needsOnboarding =
-    state.status === "ready" && !state.onboarded && !isOnOnboarding;
-  const shouldLeaveOnboarding =
-    state.status === "ready" && state.onboarded && isOnOnboarding;
 
   useEffect(() => {
-    if (needsOnboarding) {
+    if (onboarded === false && !isOnOnboarding) {
       navigate({ to: "/onboarding", replace: true });
-    } else if (shouldLeaveOnboarding) {
+    } else if (onboarded === true && isOnOnboarding) {
       navigate({ to: "/dashboard", replace: true });
     }
-  }, [needsOnboarding, shouldLeaveOnboarding, navigate]);
+  }, [onboarded, isOnOnboarding, navigate]);
 
-  if (state.status === "loading" || needsOnboarding || shouldLeaveOnboarding) {
-    return (
-      <div className="grid min-h-screen place-items-center bg-background">
-        <Loader2 className="h-6 w-6 animate-spin text-muted-foreground" />
-      </div>
-    );
-  }
+  // Never show a full-screen spinner: render children immediately.
+  // Onboarding gate flips silently in the background.
+  if (onboarded === false && !isOnOnboarding) return null;
+  if (onboarded === true && isOnOnboarding) return null;
 
   return <Outlet />;
 }
+
