@@ -93,19 +93,25 @@ function Landing() {
       <SiteHeader />
       <main>
         <Hero />
+        <TrustStrip />
         <ProductPreview />
         <ProofStrip />
+        <CostOfDrift />
         <Pillars />
         <HowItWorks />
+        <ForWhom />
         <Features />
         <Testimonials />
         <Science />
+        <FounderNote />
         <Traction />
         <Pricing />
+        <Guarantee />
         <Faq />
         <FinalCta />
       </main>
       <SiteFooter />
+      <StickyMobileCta />
     </div>
   );
 }
