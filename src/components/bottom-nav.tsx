@@ -24,7 +24,7 @@ export function BottomNav({
       className="fixed bottom-0 left-0 right-0 z-40 border-t border-border bg-background/90 backdrop-blur md:hidden"
       aria-label="Asosiy navigatsiya"
     >
-      <div className="mx-auto flex max-w-4xl items-stretch justify-around px-1">
+      <div className="mx-auto flex max-w-6xl items-stretch justify-around px-1">
         {TABS.map((t) => {
           const active = t.match.some(
             (m) => location.pathname === m || location.pathname.startsWith(m + "/"),

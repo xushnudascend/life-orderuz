@@ -104,7 +104,7 @@ function Landing() {
 function Header() {
   return (
     <header className="sticky top-0 z-40 h-14 border-b border-border bg-background/80 backdrop-blur-sm">
-      <div className="mx-auto flex h-full max-w-6xl items-center justify-between px-5">
+      <div className="mx-auto flex h-full max-w-7xl items-center justify-between px-5">
         <Link to="/" className="flex items-center gap-2">
           <LogoMark />
           <span className="font-serif text-lg font-bold tracking-tight">{BRAND}</span>
@@ -145,7 +145,7 @@ function Hero() {
             "radial-gradient(ellipse 60% 60% at 50% 0%, hsl(var(--primary) / 0.10), transparent 60%)",
         }}
       />
-      <div className="relative mx-auto grid max-w-6xl gap-10 px-5 pb-20 pt-16 md:grid-cols-[1.15fr_1fr] md:items-center md:pt-24">
+      <div className="relative mx-auto grid max-w-7xl gap-10 px-5 pb-20 pt-16 md:grid-cols-[1.15fr_1fr] md:items-center md:pt-24">
         <div>
           <p className="flex items-center gap-2 font-ui text-[11px] uppercase tracking-[0.24em] text-muted-foreground">
             <span className="inline-block h-1.5 w-1.5 rounded-full bg-primary" />
@@ -202,7 +202,7 @@ function HeroOrnament() {
 function DashboardPreview() {
   return (
     <section className="border-t border-border bg-card/30">
-      <div className="mx-auto max-w-4xl px-5 py-20">
+      <div className="mx-auto max-w-6xl px-5 py-20">
         <div className="rounded-[var(--radius)] border border-border bg-background/60 p-6 md:p-8">
           <div className="flex items-center justify-between">
             <p className="font-ui text-[11px] uppercase tracking-[0.24em] text-muted-foreground">
@@ -316,7 +316,7 @@ function ThreePillars() {
   ];
   return (
     <section className="border-t border-border bg-card/30">
-      <div className="mx-auto max-w-6xl px-5 py-20">
+      <div className="mx-auto max-w-7xl px-5 py-20">
         <div className="grid gap-4 md:grid-cols-3">
           {items.map((i) => {
             const Icon = i.icon;
@@ -363,7 +363,7 @@ function HowItWorks() {
   ];
   return (
     <section id="how-it-works" className="border-t border-border">
-      <div className="mx-auto max-w-6xl px-5 py-20">
+      <div className="mx-auto max-w-7xl px-5 py-20">
         <h2 className="max-w-3xl font-serif text-3xl leading-tight tracking-tight text-balance md:text-5xl">
           Uch qadam. Yangi arxitektura.
         </h2>
@@ -393,7 +393,7 @@ function FeaturesGrid() {
   ];
   return (
     <section className="border-t border-border bg-card/30">
-      <div className="mx-auto max-w-6xl px-5 py-20">
+      <div className="mx-auto max-w-7xl px-5 py-20">
         <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
           {items.map((i) => {
             const Icon = i.icon;
@@ -417,7 +417,7 @@ function FeaturesGrid() {
 function Pricing() {
   return (
     <section id="pricing" className="border-t border-border bg-card/30">
-      <div className="mx-auto max-w-4xl px-5 py-20">
+      <div className="mx-auto max-w-6xl px-5 py-20">
         <div className="grid gap-5 md:grid-cols-2">
           <PricingCard
             title="Free"
@@ -581,7 +581,7 @@ function Footer() {
   ];
   return (
     <footer className="border-t border-border bg-background">
-      <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-5 py-8 font-ui text-xs text-muted-foreground">
+      <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4 px-5 py-8 font-ui text-xs text-muted-foreground">
         <p>© 2026 {BRAND}</p>
         <nav className="flex flex-wrap gap-x-5 gap-y-2">
           {links.map((l) => (
