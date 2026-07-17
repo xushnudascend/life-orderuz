@@ -45,6 +45,8 @@ function Onboarding() {
   const [step, setStep] = useState(0);
   const [plan, setPlan] = useState<7 | 30 | null>(null);
   const [saving, setSaving] = useState(false);
+  const [ahaNudge, setAhaNudge] = useState<string | null>(null);
+  const [archetypeName, setArchetypeName] = useState<string>("");
 
   const isFinalStep = step === bQuestions.length;
   const currentB: OnboardingQuestion | null = isFinalStep ? null : bQuestions[step];
