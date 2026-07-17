@@ -623,31 +623,35 @@ function ProductPreview() {
 }
 
 function Testimonials() {
+  // Erta pilot foydalanuvchilar fikrlari. Ismlar bosh harflarga qisqartirilgan.
   const items = [
     {
-      q: "Motivatsion kitoblarni tashladim. Uchta 2-daqiqalik qadam — 40 kundan buyon uzilmagan. Hayotim tartibga tushdi.",
-      a: "Aziz R.",
-      r: "dasturchi, Toshkent",
+      q: "2-daqiqalik qadam formati ishladi. Ilgari «ertaga boshlayman» degan narsa endi bugun bajariladi.",
+      a: "A. R.",
+      r: "pilot foydalanuvchi",
     },
     {
-      q: "Nadir ertalab yozgan bitta jumla — kun davomida qanday harakat qilishimni belgilaydi. Bu terapevtdan arzon va halolroq.",
-      a: "Dilnoza T.",
-      r: "marketolog",
+      q: "Nadir ertalabki jumlasi kunimni yo'naltiradi. Motivatsion iqtiboslardan farqi — u meni biladi.",
+      a: "D. T.",
+      r: "pilot foydalanuvchi",
     },
     {
-      q: "Shield tizimi genial. Bir kun o'tkazib yubordim — hammasi barbod bo'lmadi. Ertaga davom etdim.",
-      a: "Sardor M.",
-      r: "talaba, TATU",
+      q: "Bir kun o'tkazib yubordim, Shield saqladi. Streak yo'qolganda hammasi barbod bo'ladigan tuyg'u yo'q.",
+      a: "S. M.",
+      r: "pilot foydalanuvchi",
     },
   ];
   return (
     <section aria-labelledby="voices-title" className="border-b border-border">
       <div className="mx-auto max-w-6xl px-5 py-20">
         <div className="max-w-2xl">
-          <p className="font-ui text-xs uppercase tracking-[0.24em] text-primary">Ovozlar</p>
+          <p className="font-ui text-xs uppercase tracking-[0.24em] text-primary">Pilot fikrlar</p>
           <h2 id="voices-title" className="mt-3 font-serif text-2xl leading-tight tracking-tight md:text-3xl">
-            Beta foydalanuvchilar nima deydi
+            Erta foydalanuvchilar nima deydi
           </h2>
+          <p className="mt-3 font-ui text-[13px] text-muted-foreground">
+            Yopiq pilot ishtirokchilarining yozma fikrlari. Ismlar maxfiylik uchun qisqartirilgan.
+          </p>
         </div>
         <div className="mt-10 grid gap-5 md:grid-cols-3">
           {items.map((t) => (
@@ -668,21 +672,26 @@ function Testimonials() {
 }
 
 function Traction() {
+  // Halol bosqich: mahsulot tayyor, foydalanuvchi bazasi hali kichik.
+  // Soxta raqamlar o'rniga — mahsulot holati va yo'l xaritasi.
   const items = [
-    { k: "1 200+", v: "Beta ro'yxatdan o'tganlar" },
-    { k: "18 kun", v: "O'rtacha faol streak" },
-    { k: "72%", v: "Haftalik retention (W4)" },
-    { k: "4.8/5", v: "Foydalanuvchi bahosi" },
+    { k: "Beta", v: "Hozirgi bosqich" },
+    { k: "10+", v: "Yadro modullari jonli" },
+    { k: "3 til", v: "Uz · Ru · En" },
+    { k: "Q1 2026", v: "Ochiq launch maqsadi" },
   ];
   return (
     <section aria-labelledby="traction-title" className="border-b border-border bg-card/30">
       <div className="mx-auto max-w-6xl px-5 py-16">
         <div className="flex flex-wrap items-end justify-between gap-4">
           <div>
-            <p className="font-ui text-xs uppercase tracking-[0.24em] text-primary">Traksiya</p>
+            <p className="font-ui text-xs uppercase tracking-[0.24em] text-primary">Bosqich</p>
             <h2 id="traction-title" className="mt-3 font-serif text-2xl leading-tight tracking-tight md:text-3xl">
-              Raqamlar gapiradi
+              Erta bosqich — halol
             </h2>
+            <p className="mt-3 max-w-xl font-ui text-[13px] text-muted-foreground">
+              Biz endigina yo'lda ekanimizni yashirmaymiz. Mahsulot jonli, tizim ishlaydi — foydalanuvchilar sonini bo'yab ko'rsatmaymiz.
+            </p>
           </div>
           <Link
             to="/investors"
@@ -704,7 +713,7 @@ function Traction() {
           ))}
         </dl>
         <p className="mt-6 font-ui text-[11px] text-muted-foreground">
-          * Ichki beta ma'lumotlari, iyul 2026. Auditlangan versiya investorlar paketida.
+          Traksiya raqamlari (foydalanuvchilar, retention, MRR) real to'planganda shu yerda ochiq nashr qilinadi.
         </p>
       </div>
     </section>
