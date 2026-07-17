@@ -3,9 +3,9 @@ import type { ReactNode } from "react";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
-import { uz } from "@/i18n";
 import { BottomNav } from "@/components/bottom-nav";
 import { SidebarNav } from "@/components/sidebar-nav";
+import { CommandBar } from "@/components/command-bar";
 import { ARCHETYPES, type Archetype } from "@/lib/nervous";
 import { LogOut } from "lucide-react";
 
