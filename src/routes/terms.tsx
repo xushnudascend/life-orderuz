@@ -3,16 +3,20 @@ import { LegalShell } from "@/components/legal-shell";
 import { uz } from "@/i18n";
 
 export const Route = createFileRoute("/terms")({
-  head: () => ({
-    meta: [
-      { title: `Foydalanish shartlari — ${uz.brand.name}` },
-      { name: "description", content: "Life Order xizmatidan foydalanish shartlari." },
-      { property: "og:title", content: `Foydalanish shartlari — ${uz.brand.name}` },
-      { property: "og:description", content: "Life Order xizmatidan foydalanish shartlari." },
-      { property: "og:url", content: "https://life-orderuz.lovable.app/terms" },
-    ],
-    links: [{ rel: "canonical", href: "https://life-orderuz.lovable.app/terms" }],
-  }),
+  head: () => {
+    const desc =
+      "Life Order xizmatidan foydalanish shartlari: xizmat tavsifi, foydalanuvchi majburiyatlari, Pro obuna to'lovlari, bekor qilish tartibi va javobgarlik chegaralari.";
+    return {
+      meta: [
+        { title: `Foydalanish shartlari — ${uz.brand.name}` },
+        { name: "description", content: desc },
+        { property: "og:title", content: `Foydalanish shartlari — ${uz.brand.name}` },
+        { property: "og:description", content: desc },
+        { property: "og:url", content: "https://life-orderuz.lovable.app/terms" },
+      ],
+      links: [{ rel: "canonical", href: "https://life-orderuz.lovable.app/terms" }],
+    };
+  },
   component: () => (
     <LegalShell title="Foydalanish shartlari" updated="15-iyul, 2026">
       <p>

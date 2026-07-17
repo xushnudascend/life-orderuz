@@ -3,16 +3,20 @@ import { LegalShell } from "@/components/legal-shell";
 import { uz } from "@/i18n";
 
 export const Route = createFileRoute("/security")({
-  head: () => ({
-    meta: [
-      { title: `Xavfsizlik — ${uz.brand.name}` },
-      { name: "description", content: "Ma'lumotlar va akkount xavfsizligi." },
-      { property: "og:title", content: `Xavfsizlik — ${uz.brand.name}` },
-      { property: "og:description", content: "Ma'lumotlar va akkount xavfsizligi." },
-      { property: "og:url", content: "https://life-orderuz.lovable.app/security" },
-    ],
-    links: [{ rel: "canonical", href: "https://life-orderuz.lovable.app/security" }],
-  }),
+  head: () => {
+    const desc =
+      "Life Order akkount va ma'lumotlar xavfsizligi: bcrypt parol xeshlash, Google kirish, Row-Level Security, buzilgan parol tekshiruvi va zaifliklarni xabar berish tartibi.";
+    return {
+      meta: [
+        { title: `Xavfsizlik — ${uz.brand.name}` },
+        { name: "description", content: desc },
+        { property: "og:title", content: `Xavfsizlik — ${uz.brand.name}` },
+        { property: "og:description", content: desc },
+        { property: "og:url", content: "https://life-orderuz.lovable.app/security" },
+      ],
+      links: [{ rel: "canonical", href: "https://life-orderuz.lovable.app/security" }],
+    };
+  },
   component: () => (
     <LegalShell title="Xavfsizlik" updated="15-iyul, 2026">
       <p>
