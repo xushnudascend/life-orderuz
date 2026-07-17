@@ -169,23 +169,3 @@ function Step({
     </div>
   );
 }
-
-function FactCard({ k, v }: { k: string; v: string }) {
-  return (
-    <div className="rounded-[var(--radius)] border border-border bg-background/30 p-4">
-      <p className="font-serif text-2xl tabular-nums">{k}</p>
-      <p className="mt-1 font-ui text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
-        {v}
-      </p>
-    </div>
-  );
-}
-
-function TipLine({ text }: { text: string }) {
-  return (
-    <li className="flex items-start gap-2.5">
-      <Repeat className="mt-0.5 h-3.5 w-3.5 shrink-0 text-primary" />
-      <span className="leading-relaxed text-foreground/90">{text}</span>
-    </li>
-  );
-}
