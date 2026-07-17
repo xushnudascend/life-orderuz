@@ -20,6 +20,7 @@ import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as UUsernameRouteImport } from './routes/u.$username'
+import { Route as ShareMilestoneRouteImport } from './routes/share.milestone'
 import { Route as BlogHayotSohalariRouteImport } from './routes/blog.hayot-sohalari'
 import { Route as ApiChatRouteImport } from './routes/api/chat'
 import { Route as AuthenticatedWorkoutRouteImport } from './routes/_authenticated/workout'
@@ -104,6 +105,11 @@ const IndexRoute = IndexRouteImport.update({
 const UUsernameRoute = UUsernameRouteImport.update({
   id: '/u/$username',
   path: '/u/$username',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ShareMilestoneRoute = ShareMilestoneRouteImport.update({
+  id: '/share/milestone',
+  path: '/share/milestone',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BlogHayotSohalariRoute = BlogHayotSohalariRouteImport.update({
@@ -300,6 +306,7 @@ export interface FileRoutesByFullPath {
   '/workout': typeof AuthenticatedWorkoutRoute
   '/api/chat': typeof ApiChatRoute
   '/blog/hayot-sohalari': typeof BlogHayotSohalariRoute
+  '/share/milestone': typeof ShareMilestoneRoute
   '/u/$username': typeof UUsernameRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
@@ -343,6 +350,7 @@ export interface FileRoutesByTo {
   '/workout': typeof AuthenticatedWorkoutRoute
   '/api/chat': typeof ApiChatRoute
   '/blog/hayot-sohalari': typeof BlogHayotSohalariRoute
+  '/share/milestone': typeof ShareMilestoneRoute
   '/u/$username': typeof UUsernameRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
@@ -388,6 +396,7 @@ export interface FileRoutesById {
   '/_authenticated/workout': typeof AuthenticatedWorkoutRoute
   '/api/chat': typeof ApiChatRoute
   '/blog/hayot-sohalari': typeof BlogHayotSohalariRoute
+  '/share/milestone': typeof ShareMilestoneRoute
   '/u/$username': typeof UUsernameRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
@@ -433,6 +442,7 @@ export interface FileRouteTypes {
     | '/workout'
     | '/api/chat'
     | '/blog/hayot-sohalari'
+    | '/share/milestone'
     | '/u/$username'
     | '/.lovable/oauth/consent'
     | '/.mcp/invoke-tool/$tool'
@@ -476,6 +486,7 @@ export interface FileRouteTypes {
     | '/workout'
     | '/api/chat'
     | '/blog/hayot-sohalari'
+    | '/share/milestone'
     | '/u/$username'
     | '/.lovable/oauth/consent'
     | '/.mcp/invoke-tool/$tool'
@@ -520,6 +531,7 @@ export interface FileRouteTypes {
     | '/_authenticated/workout'
     | '/api/chat'
     | '/blog/hayot-sohalari'
+    | '/share/milestone'
     | '/u/$username'
     | '/.lovable/oauth/consent'
     | '/.mcp/invoke-tool/$tool'
@@ -549,6 +561,7 @@ export interface RootRouteChildren {
   Char91DotwellKnownChar93OauthProtectedResourceRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   ApiChatRoute: typeof ApiChatRoute
   BlogHayotSohalariRoute: typeof BlogHayotSohalariRoute
+  ShareMilestoneRoute: typeof ShareMilestoneRoute
   UUsernameRoute: typeof UUsernameRoute
   DotlovableOauthConsentRoute: typeof DotlovableOauthConsentRoute
   Char91DotmcpChar93InvokeToolToolRoute: typeof Char91DotmcpChar93InvokeToolToolRoute
@@ -636,6 +649,13 @@ declare module '@tanstack/react-router' {
       path: '/u/$username'
       fullPath: '/u/$username'
       preLoaderRoute: typeof UUsernameRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/share/milestone': {
+      id: '/share/milestone'
+      path: '/share/milestone'
+      fullPath: '/share/milestone'
+      preLoaderRoute: typeof ShareMilestoneRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/blog/hayot-sohalari': {
@@ -935,6 +955,7 @@ const rootRouteChildren: RootRouteChildren = {
     Char91DotwellKnownChar93OauthProtectedResourceRoute,
   ApiChatRoute: ApiChatRoute,
   BlogHayotSohalariRoute: BlogHayotSohalariRoute,
+  ShareMilestoneRoute: ShareMilestoneRoute,
   UUsernameRoute: UUsernameRoute,
   DotlovableOauthConsentRoute: DotlovableOauthConsentRoute,
   Char91DotmcpChar93InvokeToolToolRoute: Char91DotmcpChar93InvokeToolToolRoute,
