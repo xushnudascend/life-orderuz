@@ -52,7 +52,7 @@ export const Route = createFileRoute("/pricing")({
 
 function Pricing() {
   return (
-    <div className="min-h-screen bg-background text-foreground animate-fade-in">
+    <div className="min-h-dvh bg-background text-foreground animate-fade-in">
       <SiteHeader
         nav={[
           { href: "/", label: "Bosh sahifa" },
@@ -65,11 +65,47 @@ function Pricing() {
         <Hero />
         <Plans />
         <Compare />
+        <LocalPayments />
         <Faq />
         <FinalCta />
       </main>
       <SiteFooter />
     </div>
+  );
+}
+
+function LocalPayments() {
+  const methods: { name: string; note: string }[] = [
+    { name: "Click", note: "UzCard / Humo · to'g'ridan-to'g'ri" },
+    { name: "Payme", note: "Barcha O'zbekiston kartalari" },
+    { name: "Uzum Bank", note: "Uzum ilovasi orqali" },
+    { name: "Xalqaro karta", note: "Visa / Mastercard (Stripe)" },
+  ];
+  return (
+    <section className="border-b border-border">
+      <div className="mx-auto max-w-3xl px-5 py-16">
+        <p className="font-ui text-[11px] uppercase tracking-[0.24em] text-primary">
+          To'lov usullari
+        </p>
+        <h2 className="mt-3 font-serif text-2xl leading-tight tracking-tight md:text-3xl">
+          Mahalliy karta bilan Pro'ni ochish
+        </h2>
+        <p className="mt-4 max-w-2xl font-ui text-sm text-muted-foreground leading-relaxed">
+          O'zbekiston foydalanuvchilari uchun Click va Payme orqali to'lov qo'llab-quvvatlanadi. Xalqaro foydalanuvchilar Visa/Mastercard ishlatishlari mumkin. Barcha to'lovlar SSL orqali shifrlangan, karta ma'lumotlari saqlanmaydi.
+        </p>
+        <div className="mt-8 grid gap-3 sm:grid-cols-2">
+          {methods.map((m) => (
+            <div key={m.name} className="rounded-[var(--radius)] border border-border/60 bg-card/40 p-4">
+              <p className="font-serif text-base font-semibold text-foreground">{m.name}</p>
+              <p className="mt-1 font-ui text-xs text-muted-foreground">{m.note}</p>
+            </div>
+          ))}
+        </div>
+        <p className="mt-6 font-ui text-xs text-muted-foreground">
+          14 kunlik to'lovni qaytarish kafolati. Istalgan paytda bekor qilish.
+        </p>
+      </div>
+    </section>
   );
 }
 

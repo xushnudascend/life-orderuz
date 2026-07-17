@@ -22,7 +22,10 @@ import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as UUsernameRouteImport } from './routes/u.$username'
 import { Route as ShareMilestoneRouteImport } from './routes/share.milestone'
+import { Route as BlogTungiRitualRouteImport } from './routes/blog.tungi-ritual'
+import { Route as BlogMotivatsiyaTuzogiRouteImport } from './routes/blog.motivatsiya-tuzogi'
 import { Route as BlogHayotSohalariRouteImport } from './routes/blog.hayot-sohalari'
+import { Route as Blog66KunQoidasiRouteImport } from './routes/blog.66-kun-qoidasi'
 import { Route as ApiChatRouteImport } from './routes/api/chat'
 import { Route as AuthenticatedWorkoutRouteImport } from './routes/_authenticated/workout'
 import { Route as AuthenticatedTemirIntizomRouteImport } from './routes/_authenticated/temir-intizom'
@@ -118,9 +121,24 @@ const ShareMilestoneRoute = ShareMilestoneRouteImport.update({
   path: '/share/milestone',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BlogTungiRitualRoute = BlogTungiRitualRouteImport.update({
+  id: '/blog/tungi-ritual',
+  path: '/blog/tungi-ritual',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BlogMotivatsiyaTuzogiRoute = BlogMotivatsiyaTuzogiRouteImport.update({
+  id: '/blog/motivatsiya-tuzogi',
+  path: '/blog/motivatsiya-tuzogi',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BlogHayotSohalariRoute = BlogHayotSohalariRouteImport.update({
   id: '/blog/hayot-sohalari',
   path: '/blog/hayot-sohalari',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const Blog66KunQoidasiRoute = Blog66KunQoidasiRouteImport.update({
+  id: '/blog/66-kun-qoidasi',
+  path: '/blog/66-kun-qoidasi',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiChatRoute = ApiChatRouteImport.update({
@@ -312,7 +330,10 @@ export interface FileRoutesByFullPath {
   '/temir-intizom': typeof AuthenticatedTemirIntizomRoute
   '/workout': typeof AuthenticatedWorkoutRoute
   '/api/chat': typeof ApiChatRoute
+  '/blog/66-kun-qoidasi': typeof Blog66KunQoidasiRoute
   '/blog/hayot-sohalari': typeof BlogHayotSohalariRoute
+  '/blog/motivatsiya-tuzogi': typeof BlogMotivatsiyaTuzogiRoute
+  '/blog/tungi-ritual': typeof BlogTungiRitualRoute
   '/share/milestone': typeof ShareMilestoneRoute
   '/u/$username': typeof UUsernameRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
@@ -357,7 +378,10 @@ export interface FileRoutesByTo {
   '/temir-intizom': typeof AuthenticatedTemirIntizomRoute
   '/workout': typeof AuthenticatedWorkoutRoute
   '/api/chat': typeof ApiChatRoute
+  '/blog/66-kun-qoidasi': typeof Blog66KunQoidasiRoute
   '/blog/hayot-sohalari': typeof BlogHayotSohalariRoute
+  '/blog/motivatsiya-tuzogi': typeof BlogMotivatsiyaTuzogiRoute
+  '/blog/tungi-ritual': typeof BlogTungiRitualRoute
   '/share/milestone': typeof ShareMilestoneRoute
   '/u/$username': typeof UUsernameRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
@@ -404,7 +428,10 @@ export interface FileRoutesById {
   '/_authenticated/temir-intizom': typeof AuthenticatedTemirIntizomRoute
   '/_authenticated/workout': typeof AuthenticatedWorkoutRoute
   '/api/chat': typeof ApiChatRoute
+  '/blog/66-kun-qoidasi': typeof Blog66KunQoidasiRoute
   '/blog/hayot-sohalari': typeof BlogHayotSohalariRoute
+  '/blog/motivatsiya-tuzogi': typeof BlogMotivatsiyaTuzogiRoute
+  '/blog/tungi-ritual': typeof BlogTungiRitualRoute
   '/share/milestone': typeof ShareMilestoneRoute
   '/u/$username': typeof UUsernameRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
@@ -451,7 +478,10 @@ export interface FileRouteTypes {
     | '/temir-intizom'
     | '/workout'
     | '/api/chat'
+    | '/blog/66-kun-qoidasi'
     | '/blog/hayot-sohalari'
+    | '/blog/motivatsiya-tuzogi'
+    | '/blog/tungi-ritual'
     | '/share/milestone'
     | '/u/$username'
     | '/.lovable/oauth/consent'
@@ -496,7 +526,10 @@ export interface FileRouteTypes {
     | '/temir-intizom'
     | '/workout'
     | '/api/chat'
+    | '/blog/66-kun-qoidasi'
     | '/blog/hayot-sohalari'
+    | '/blog/motivatsiya-tuzogi'
+    | '/blog/tungi-ritual'
     | '/share/milestone'
     | '/u/$username'
     | '/.lovable/oauth/consent'
@@ -542,7 +575,10 @@ export interface FileRouteTypes {
     | '/_authenticated/temir-intizom'
     | '/_authenticated/workout'
     | '/api/chat'
+    | '/blog/66-kun-qoidasi'
     | '/blog/hayot-sohalari'
+    | '/blog/motivatsiya-tuzogi'
+    | '/blog/tungi-ritual'
     | '/share/milestone'
     | '/u/$username'
     | '/.lovable/oauth/consent'
@@ -573,7 +609,10 @@ export interface RootRouteChildren {
   Char91DotmcpChar93ListToolsRoute: typeof Char91DotmcpChar93ListToolsRoute
   Char91DotwellKnownChar93OauthProtectedResourceRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   ApiChatRoute: typeof ApiChatRoute
+  Blog66KunQoidasiRoute: typeof Blog66KunQoidasiRoute
   BlogHayotSohalariRoute: typeof BlogHayotSohalariRoute
+  BlogMotivatsiyaTuzogiRoute: typeof BlogMotivatsiyaTuzogiRoute
+  BlogTungiRitualRoute: typeof BlogTungiRitualRoute
   ShareMilestoneRoute: typeof ShareMilestoneRoute
   UUsernameRoute: typeof UUsernameRoute
   DotlovableOauthConsentRoute: typeof DotlovableOauthConsentRoute
@@ -678,11 +717,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ShareMilestoneRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/blog/tungi-ritual': {
+      id: '/blog/tungi-ritual'
+      path: '/blog/tungi-ritual'
+      fullPath: '/blog/tungi-ritual'
+      preLoaderRoute: typeof BlogTungiRitualRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog/motivatsiya-tuzogi': {
+      id: '/blog/motivatsiya-tuzogi'
+      path: '/blog/motivatsiya-tuzogi'
+      fullPath: '/blog/motivatsiya-tuzogi'
+      preLoaderRoute: typeof BlogMotivatsiyaTuzogiRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/blog/hayot-sohalari': {
       id: '/blog/hayot-sohalari'
       path: '/blog/hayot-sohalari'
       fullPath: '/blog/hayot-sohalari'
       preLoaderRoute: typeof BlogHayotSohalariRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog/66-kun-qoidasi': {
+      id: '/blog/66-kun-qoidasi'
+      path: '/blog/66-kun-qoidasi'
+      fullPath: '/blog/66-kun-qoidasi'
+      preLoaderRoute: typeof Blog66KunQoidasiRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/chat': {
@@ -975,7 +1035,10 @@ const rootRouteChildren: RootRouteChildren = {
   Char91DotwellKnownChar93OauthProtectedResourceRoute:
     Char91DotwellKnownChar93OauthProtectedResourceRoute,
   ApiChatRoute: ApiChatRoute,
+  Blog66KunQoidasiRoute: Blog66KunQoidasiRoute,
   BlogHayotSohalariRoute: BlogHayotSohalariRoute,
+  BlogMotivatsiyaTuzogiRoute: BlogMotivatsiyaTuzogiRoute,
+  BlogTungiRitualRoute: BlogTungiRitualRoute,
   ShareMilestoneRoute: ShareMilestoneRoute,
   UUsernameRoute: UUsernameRoute,
   DotlovableOauthConsentRoute: DotlovableOauthConsentRoute,

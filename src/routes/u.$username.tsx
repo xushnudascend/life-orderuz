@@ -80,7 +80,7 @@ function PublicProfile() {
     streak: { current_days: number; longest_days: number } | null;
   };
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-dvh bg-background text-foreground">
       <div className="mx-auto max-w-2xl px-5 py-10">
         <Button asChild variant="ghost" size="sm">
           <Link to="/">
