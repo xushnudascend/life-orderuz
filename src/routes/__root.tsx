@@ -15,6 +15,7 @@ import { Toaster } from "@/components/ui/sonner";
 import { OfflineBanner } from "@/components/offline-banner";
 import { PerfDetector } from "@/components/perf-detector";
 import { THEME_INIT_SCRIPT } from "@/lib/theme";
+import { initSentry } from "@/lib/sentry";
 
 function NotFoundComponent() {
   return (
@@ -193,6 +194,7 @@ function RootComponent() {
   }, []);
 
   useEffect(() => {
+    initSentry();
     if (typeof window === "undefined") return;
     if (!("serviceWorker" in navigator)) return;
     if (import.meta.env.DEV) return;
