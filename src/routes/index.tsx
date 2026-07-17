@@ -136,10 +136,11 @@ function Hero() {
             Self-Control OS · Beta
           </p>
           <h1 className="mt-5 font-serif text-4xl leading-[1.05] tracking-tight text-balance sm:text-5xl md:text-6xl">
-            Motivatsiya tugaydi.
-            <br />
-            <span className="text-muted-foreground">Tizim qoladi.</span>
+            Life Order — o'z-o'zini boshqarish OS
           </h1>
+          <p className="mt-4 font-serif text-2xl leading-tight text-muted-foreground sm:text-3xl">
+            Motivatsiya tugaydi. Tizim qoladi.
+          </p>
           <p className="mt-6 max-w-xl text-base leading-relaxed text-muted-foreground text-pretty md:text-lg">
             Life Order — o'z-o'zini boshqarishning operatsion tizimi. Trigger tahlili, kunlik uchta aniq qadam, halol AI mentor Nadir. 60 soniyada tashxis. Kartasiz.
           </p>

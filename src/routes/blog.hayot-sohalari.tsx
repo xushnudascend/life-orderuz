@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 
 const SITE_URL = "https://life-orderuz.lovable.app";
 const PATH = "/blog/hayot-sohalari";
-const TITLE = "Hayotning 8 sohasi — odatlaringni qanday tuzish kerak";
+const TITLE = "Hayotning 8 sohasi — odat qurish qo'llanmasi";
 const DESCRIPTION =
   "Hayotning 8 asosiy sohasi: sog'liq, karyera, ruhiy holat, munosabatlar va boshqalar — odat qurishda muvozanat uchun qo'llanma.";
 
@@ -20,7 +20,7 @@ const AREAS: { n: string; title: string; body: string }[] = [
 export const Route = createFileRoute("/blog/hayot-sohalari")({
   head: () => ({
     meta: [
-      { title: `${TITLE} — Life Order` },
+      { title: `${TITLE} · Life Order` },
       { name: "description", content: DESCRIPTION },
       { property: "og:title", content: TITLE },
       { property: "og:description", content: DESCRIPTION },

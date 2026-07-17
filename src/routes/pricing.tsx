@@ -43,8 +43,11 @@ function Pricing() {
           Narxlar
         </p>
         <h1 className="mt-3 font-serif text-5xl leading-tight tracking-tight">
-          Halol narx. Yashirin to'lov yo'q.
+          Life Order narxlar va rejalari
         </h1>
+        <p className="mt-3 font-serif text-2xl text-muted-foreground">
+          Halol narx. Yashirin to'lov yo'q.
+        </p>
         <p className="mt-4 max-w-xl text-muted-foreground">
           Bepul boshla. Kerak bo'lsa — kengaytir. Har qanday paytda bekor
           qilishing mumkin.
