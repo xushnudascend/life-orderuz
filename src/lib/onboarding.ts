@@ -13,7 +13,7 @@ export type OnboardingQuestion = {
   section: "A" | "B";
   prompt: string;
   helper?: string;
-  type: "single" | "number" | "select";
+  type: "single" | "number" | "select" | "multi";
   options?: OnboardingOption[];
   min?: number;
   max?: number;
