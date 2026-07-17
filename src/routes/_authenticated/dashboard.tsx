@@ -20,6 +20,7 @@ import { ShieldIndicator } from "@/components/shield-indicator";
 import { ArchetypeRow } from "@/components/archetype-row";
 import { DailyTimetable } from "@/components/daily-timetable";
 import { ProfileCompletionCard } from "@/components/profile-completion-card";
+import { Panel, PanelHeader, PanelValue } from "@/components/panel";
 import {
   circadian,
   progressMessage,
@@ -175,185 +176,227 @@ function Dashboard() {
   }
 
   return (
-    <AppShell title="Bugun">
+    <AppShell title="Bosh sahifa">
       <ProfileCompletionCard missing={missing} />
 
-      {/* HERO-BENTO */}
-      <section className="rounded-[var(--radius)] border border-border bg-gradient-to-br from-background via-background to-primary/5 p-5 sm:p-8">
-        <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
-          <div className="min-w-0 flex-1">
-            <p className="font-ui text-[11px] uppercase tracking-[0.28em] text-primary">
-              {c.greeting} · {c.label}
-            </p>
-            <h1 className="mt-3 break-words font-serif text-2xl leading-tight tracking-tight sm:text-4xl">
-              {profile?.display_name?.trim()
-                ? `${profile.display_name}, `
-                : "Bugungi "}
-              <span className="text-muted-foreground">reja</span>
-            </h1>
-            <ArchetypeRow archetype={archetype} />
+      {/* Salom + kontekst */}
+      <div className="mb-5 flex flex-col gap-2 sm:mb-6 sm:flex-row sm:items-end sm:justify-between">
+        <div className="min-w-0">
+          <p className="font-ui text-[11px] font-semibold uppercase tracking-[0.24em] text-primary">
+            {c.greeting} · {c.label}
+          </p>
+          <h1 className="mt-1.5 font-serif text-2xl font-semibold tracking-tight sm:text-3xl">
+            {profile?.display_name?.trim()
+              ? `${profile.display_name}, `
+              : "Bugungi "}
+            <span className="text-muted-foreground">reja</span>
+          </h1>
+          <ArchetypeRow archetype={archetype} />
+        </div>
+        <p className="font-ui text-xs text-muted-foreground sm:text-right">
+          {progressMessage(percent)}
+        </p>
+      </div>
+
+      {/* KPI qatori */}
+      <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+        <Panel>
+          <PanelHeader eyebrow="Bugun" />
+          <PanelValue
+            value={`${doneCount}/${habits.length || 0}`}
+            caption={`${percent}% bajarildi`}
+            trend={percent >= 70 ? "up" : "flat"}
+          />
+        </Panel>
+        <Panel>
+          <PanelHeader eyebrow="Streak" />
+          <PanelValue
+            value={
+              <span className="inline-flex items-center gap-1.5">
+                <Flame className="h-5 w-5 text-primary" />
+                {streak?.current_days ?? 0}
+              </span>
+            }
+            caption="ketma-ket kun"
+          />
+        </Panel>
+        <Panel>
+          <PanelHeader eyebrow={`Daraja ${stats?.level ?? 1}`} />
+          <PanelValue
+            value={`${stats?.total_xp ?? 0} XP`}
+            caption={`${xpProgress}% keyingi darajaga`}
+          />
+          <div className="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-border">
+            <div
+              className="h-full bg-primary transition-all"
+              style={{ width: `${xpProgress}%` }}
+            />
           </div>
-          <div className="flex flex-row items-center gap-2 sm:flex-col sm:items-end">
+        </Panel>
+        <Panel>
+          <PanelHeader
+            eyebrow="Himoya"
+            action={
+              <Link
+                to="/profile"
+                className="font-ui text-[10px] uppercase tracking-[0.2em] text-muted-foreground hover:text-primary"
+              >
+                Rank
+              </Link>
+            }
+          />
+          <div className="mt-2 flex items-center justify-between gap-2">
             <ShieldIndicator usedThisWeek={shieldsUsed} max={3} />
-            <Link to="/profile">
-              <RankBadge score={score} />
-            </Link>
+            <RankBadge score={score} />
           </div>
-        </div>
+        </Panel>
+      </div>
 
-        <div className="mt-8 grid gap-6 sm:grid-cols-[auto_1fr] sm:items-center">
-          <ProgressRing value={doneCount} total={Math.max(1, habits.length)} />
-          <div className="min-w-0">
-            <div className="flex items-baseline justify-between gap-3">
-              <p className="font-ui text-xs uppercase tracking-[0.22em] text-muted-foreground">
-                Daraja {stats?.level ?? 1}
-              </p>
-              <p className="font-ui text-[11px] text-muted-foreground">
-                {stats?.total_xp ?? 0} / {xpForNext} XP
-              </p>
-            </div>
-            <div className="mt-2 h-2 w-full overflow-hidden rounded-full bg-border">
-              <div
-                className="h-full bg-primary transition-all"
-                style={{ width: `${xpProgress}%` }}
-              />
-            </div>
-            <p className="mt-4 font-ui text-sm text-foreground/80">
-              {progressMessage(percent)}
-            </p>
-            <div className="mt-3 flex items-center gap-2 font-ui text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
-              <Flame className="h-3.5 w-3.5 text-primary" />
-              Streak: <span className="text-foreground">{streak?.current_days ?? 0}</span> kun
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Habits & mini analytics */}
-      <div className="mt-8 grid gap-6 md:grid-cols-6">
-        <section className="md:col-span-4">
-          <div className="mb-4 flex items-end justify-between">
-            <div>
-              <h2 className="font-serif text-2xl">Bugungi odatlar</h2>
-              <p className="font-ui text-sm text-muted-foreground">
+      {/* Asosiy grid */}
+      <div className="mt-4 grid gap-3 lg:grid-cols-12">
+        {/* Habits */}
+        <Panel className="lg:col-span-7">
+          <PanelHeader
+            eyebrow="Bugungi odatlar"
+            title={
+              <p className="font-serif text-lg font-semibold">
                 {doneCount} / {habits.length} — {percent}%
               </p>
-            </div>
-            <Button asChild variant="ghost" size="sm">
-              <Link to="/habits">
-                Boshqarish <ArrowRight className="ml-1 h-4 w-4" />
-              </Link>
-            </Button>
-          </div>
+            }
+            action={
+              <Button asChild variant="ghost" size="sm" className="h-8">
+                <Link to="/habits">
+                  Boshqarish <ArrowRight className="ml-1 h-3.5 w-3.5" />
+                </Link>
+              </Button>
+            }
+          />
 
           {!loaded ? (
-            <div className="space-y-2" aria-hidden>
-              {[0, 1, 2].map((i) => (
+            <div className="mt-3 space-y-1.5" aria-hidden>
+              {[0, 1, 2, 3].map((i) => (
                 <div
                   key={i}
-                  className="h-[68px] w-full animate-pulse rounded-[var(--radius)] border border-border bg-card"
+                  className="h-12 w-full animate-pulse rounded-md border border-border bg-background/40"
                 />
               ))}
             </div>
           ) : habits.length === 0 ? (
-            <div className="rounded-[var(--radius)] border border-dashed border-border p-8 text-center">
-              <p className="text-muted-foreground">
+            <div className="mt-4 rounded-md border border-dashed border-border p-6 text-center">
+              <p className="font-ui text-sm text-muted-foreground">
                 Hozircha odat yo'q. Sun'iy intellekt shaxsiy reja tuzib bersinmi?
               </p>
-              <Button asChild className="mt-4">
+              <Button asChild size="sm" className="mt-3">
                 <Link to="/onboarding">Shaxsiy reja tuzish</Link>
               </Button>
             </div>
           ) : (
-            <div className="space-y-2">
+            <ul className="mt-3 space-y-1">
               {habits.map((h) => {
                 const isDone = done.has(h.id);
                 return (
-                  <button
-                    key={h.id}
-                    onClick={() => toggle(h)}
-                    aria-pressed={isDone}
-                    className={
-                      "group flex w-full items-center gap-4 rounded-[var(--radius)] border p-4 text-left transition-all active:scale-[0.99] " +
-                      (isDone
-                        ? "border-primary/40 bg-primary/5"
-                        : "border-border bg-card hover:border-foreground/30 hover:bg-card/80")
-                    }
-                  >
-                    <span
+                  <li key={h.id}>
+                    <button
+                      onClick={() => toggle(h)}
+                      aria-pressed={isDone}
                       className={
-                        "flex h-10 w-10 shrink-0 items-center justify-center rounded-full border transition-colors " +
+                        "tap group flex w-full items-center gap-3 rounded-md border px-3 py-2 text-left transition-all active:scale-[0.995] " +
                         (isDone
-                          ? "border-primary bg-primary text-primary-foreground"
-                          : "border-border text-muted-foreground group-hover:border-primary/60 group-hover:text-primary")
+                          ? "border-primary/40 bg-primary/[0.06]"
+                          : "border-border bg-background/30 hover:border-primary/40 hover:bg-background/60")
                       }
                     >
-                      {isDone ? <Check className="h-5 w-5" /> : <Flame className="h-5 w-5" />}
-                    </span>
-                    <div className={"min-w-0 flex-1 " + (isDone ? "opacity-70" : "")}>
-                      <p className={"truncate font-serif text-lg " + (isDone ? "line-through" : "")}>
+                      <span
+                        className={
+                          "flex h-7 w-7 shrink-0 items-center justify-center rounded-full border transition-colors " +
+                          (isDone
+                            ? "border-primary bg-primary text-primary-foreground"
+                            : "border-border text-muted-foreground group-hover:border-primary/60 group-hover:text-primary")
+                        }
+                      >
+                        {isDone ? (
+                          <Check className="h-3.5 w-3.5" strokeWidth={3} />
+                        ) : (
+                          <Flame className="h-3.5 w-3.5" />
+                        )}
+                      </span>
+                      <span
+                        className={
+                          "min-w-0 flex-1 truncate font-ui text-sm " +
+                          (isDone ? "text-muted-foreground line-through" : "text-foreground")
+                        }
+                      >
                         {h.title}
-                      </p>
-                      <p className="font-ui text-xs uppercase tracking-[0.2em] text-primary">
-                        +{h.xp_reward} XP
-                      </p>
-                    </div>
-                    <span
-                      className={
-                        "hidden shrink-0 font-ui text-[11px] uppercase tracking-[0.22em] sm:inline " +
-                        (isDone ? "text-primary" : "text-muted-foreground")
-                      }
-                    >
-                      {isDone ? "Bajarildi" : "Belgilash"}
-                    </span>
-                  </button>
+                      </span>
+                      <span className="shrink-0 font-ui text-[11px] font-semibold uppercase tracking-[0.18em] text-primary">
+                        +{h.xp_reward}
+                      </span>
+                    </button>
+                  </li>
                 );
               })}
-            </div>
+            </ul>
           )}
+        </Panel>
 
-        </section>
-
-        <aside className="md:col-span-2 space-y-4">
-          <div className="rounded-[var(--radius)] border border-border p-5">
-            <div className="flex items-center justify-between">
-              <p className="font-ui text-[11px] uppercase tracking-[0.22em] text-muted-foreground">
-                Hafta XP
+        {/* Progress ring + XP */}
+        <Panel className="lg:col-span-5">
+          <PanelHeader eyebrow="Kun progressi" />
+          <div className="mt-3 grid grid-cols-[auto_1fr] items-center gap-4">
+            <ProgressRing value={doneCount} total={Math.max(1, habits.length)} />
+            <div className="min-w-0">
+              <p className="font-ui text-xs uppercase tracking-[0.2em] text-muted-foreground">
+                Daraja {stats?.level ?? 1}
               </p>
+              <p className="mt-1 font-serif text-xl font-semibold tabular-nums">
+                {stats?.total_xp ?? 0}{" "}
+                <span className="text-sm text-muted-foreground">/ {xpForNext} XP</span>
+              </p>
+              <div className="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-border">
+                <div
+                  className="h-full bg-primary transition-all"
+                  style={{ width: `${xpProgress}%` }}
+                />
+              </div>
               <Link
                 to="/analytics"
-                className="font-ui text-[11px] uppercase tracking-[0.2em] text-muted-foreground transition-colors hover:text-foreground"
+                className="mt-3 inline-flex items-center gap-1 font-ui text-xs uppercase tracking-[0.2em] text-muted-foreground transition-colors hover:text-primary"
               >
-                Batafsil →
+                Batafsil tahlil <ArrowRight className="h-3 w-3" />
               </Link>
             </div>
-            <p className="mt-2 font-serif text-3xl">{stats?.total_xp ?? 0}</p>
           </div>
+        </Panel>
 
+        {/* Timetable */}
+        <div className="lg:col-span-7">
           <DailyTimetable />
-        </aside>
-      </div>
+        </div>
 
-      {/* Quick access */}
-      <section className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-4">
-        {[
-          { to: "/workout", label: "Mashg'ulot", icon: Dumbbell },
-          { to: "/diet", label: "Ovqatlanish", icon: Salad },
-          { to: "/quests", label: "Vazifalar", icon: Target },
-          { to: "/mentor", label: "Nadir", icon: Sparkles },
-        ].map(({ to, label, icon: Icon }) => (
-          <Link
-            key={to}
-            to={to}
-            className="group flex items-center gap-3 rounded-[var(--radius)] border border-border bg-card p-4 transition-all hover:-translate-y-0.5 hover:border-primary/50 hover:bg-card/80"
-          >
-            <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-border text-muted-foreground transition-colors group-hover:border-primary group-hover:text-primary">
-              <Icon className="h-4 w-4" />
-            </span>
-            <span className="font-ui text-sm font-medium">{label}</span>
-          </Link>
-        ))}
-      </section>
+        {/* Quick access */}
+        <Panel className="lg:col-span-5">
+          <PanelHeader eyebrow="Tezkor kirish" />
+          <div className="mt-3 grid grid-cols-2 gap-2">
+            {[
+              { to: "/workout", label: "Mashg'ulot", icon: Dumbbell },
+              { to: "/diet", label: "Ovqatlanish", icon: Salad },
+              { to: "/quests", label: "Vazifalar", icon: Target },
+              { to: "/mentor", label: "Nadir", icon: Sparkles },
+            ].map(({ to, label, icon: Icon }) => (
+              <Link
+                key={to}
+                to={to}
+                className="tap group flex items-center gap-2.5 rounded-md border border-border bg-background/30 px-3 py-2.5 transition-all hover:-translate-y-0.5 hover:border-primary/50 hover:bg-background/60"
+              >
+                <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-border text-muted-foreground transition-colors group-hover:border-primary group-hover:text-primary">
+                  <Icon className="h-3.5 w-3.5" />
+                </span>
+                <span className="font-ui text-sm font-medium">{label}</span>
+              </Link>
+            ))}
+          </div>
+        </Panel>
+      </div>
     </AppShell>
   );
 }

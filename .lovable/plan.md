@@ -1,85 +1,86 @@
+# UI Rebuild — Obsidian Green, Dashboard, Max Density
 
-## Vaziyat
+## Visual system
 
-4 ta PDF megaprompt (jami ~2500 satr) "Life Order" (avval Ascend) — o'zbek yoshlari uchun self-control OS. Bu **kamida 25–40 sahifa, ~15 edge function, to'liq Supabase sxemasi, i18n, PWA, testlar, xavfsizlik** talab qiladigan katta loyiha. Bitta xabarda hammasini yopib bo'lmaydi — sifatsiz, buzuq va xavfsiz-emas kod chiqadi. Shu sabab **fazalarga bo'lib** quramiz. Har fazadan keyin siz ko'rib, tasdiqlaysiz.
+- **Palette**: chuqur qora asos + terminal yashil aksent
+  - `--background: 150 8% 4%` (deep charcoal-green)
+  - `--card: 150 8% 6%` / `--muted: 150 6% 10%`
+  - `--border: 150 8% 14%`
+  - `--primary: 142 76% 45%` (rich green, not neon)
+  - `--primary-glow: 142 90% 55%`
+  - `--foreground: 150 6% 92%`
+- **Fonts**: Sora (headings, UI), Manrope (body) — Google Fonts orqali `__root.tsx`da
+- **Radius**: `0.5rem` (dashboard uslubi — kichikroq, aniqroq)
+- **Density**: tight paddings (`p-3`/`p-4`), `text-sm` default, ko'proq ma'lumot ko'rinadi
 
-## Umumiy stek (barcha fazalarda qat'iy)
+## Layout: Dashboard shell
 
-- TanStack Start (loyihada allaqachon o'rnatilgan — React Router DOM emas, PDF'dagi eslatmadan farq qiladi)
-- Tailwind + shadcn/ui, HSL semantik tokenlar (`--background`, `--primary` = `72 100% 50%` chartreuse-sariq)
-- Lovable Cloud (Supabase) — RLS har bir jadvalda majburiy
-- Lovable AI Gateway — `ai-mentor`, `ai-analyzer` va boshqa AI oqimlari uchun
-- i18n: o'zbek asosiy til, keyin ru/en
-- Serif (Times) display + Karla UI matni, 14px radius, "Obsidian" qora tema standart
+Yangi `AppShell` (autentifikatsiyalangan sahifalar uchun):
 
-## Fazalar
+```text
++-------------------------------------------+
+| Topbar: brand · breadcrumb · search · me  |  56px sticky
++---------+---------------------------------+
+| Sidebar | Main content                    |
+| 220px   |                                 |
+| Bosh    |   dense grid, panels            |
+| Tana    |                                 |
+| Odatlar |                                 |
+| Nadir   |                                 |
+| ...     |                                 |
++---------+---------------------------------+
+```
 
-### Faza 1 — Fundament + Landing (shu turnda quraman)
-- Dizayn tizimi: `src/styles.css`da 3 ta tema (Obsidian qora, Light, Blue) HSL tokenlar, soyalar, animatsiyalar (`fade-in`, `route-in`, `data-reveal`), `prefers-reduced-motion`
-- Tipografiya: Times serif + Karla sans, root'da font linklari
-- shadcn baza komponentlari mavjud (Button, Card, Dialog, Tabs, Sheet, Sonner)
-- `/` marshruti — Landing sahifasi: hero ("Self-Control OS — o'z-o'zini boshqarishning operatsion tizimi..."), 3 ta asosiy feature bloki, "Nadir" mentor tanishtiruvi, pricing teaser, CTA "Boshlash" → `/auth`
-- SEO: `head()` unikal title/description/og
-- i18n skeleton: `src/i18n/uz.ts`, `t()` helper (react-i18next `bun add` bilan)
-- PWA manifest + favicon placeholder
+- Desktop: sticky sidebar (220px), scrollable main
+- Tablet: collapsible sidebar (icon-only 64px)
+- Mobile: sidebar → bottom-nav (mavjud, polish)
 
-### Faza 2 — Auth + Onboarding
-- Lovable Cloud'ni yoqib, `/auth` (email+parol, Google, Apple)
-- `profiles` jadvali + `handle_new_user` trigger
-- `/onboarding`: A (yosh/jins/bo'y/vazn/aktivlik + BMI) → B (trigger savollari) → reja davomiyligi (7/30 kun)
-- `OnboardingGate` wrapper: `_authenticated` layout ostida
-- Muhim: `answers` har doim o'zbekcha manba matnda saqlanadi
+## Dashboard sahifasi — max density
 
-### Faza 3 — Nerv tizimi (XP/Streak/Discipline/Shield)
-- Sxema: `xp_events`, `user_stats`, `streaks`, `shields`, `achievements`, `user_achievements`, `daily_quests`
-- **SECURITY DEFINER** funksiyalari: `award_xp()`, `user_rank()`, `apply_shield()` — client to'g'ridan-to'g'ri yoza olmaydi
-- Discipline Score 6-daraja tier (`Boshlovchi` → `Apex`)
-- Sirkadian holat helperlari
+12-column grid, information-rich panels:
 
-### Faza 4 — Dashboard + Habits + Journal
-- `/dashboard`: HubToday, HubAdvisor, bugungi 3 qadam, streak/shield ko'rsatkichi
-- `/habits`: CRUD, qiyinlik 1–5, kunlik check-in → `award_xp` chaqiradi
-- `/journal`: matn + kayfiyat kuzatuvi
-- BottomNav (faqat authenticated + onboarded)
+```text
++------ Hero strip (streak · level · XP · shields · rank) ------+
++----- Progress ring --+-- Today's habits (compact list) -------+
++--- Weekly chart -----+-- Circadian timetable (now indicator) -+
++--- Quests (3 up) ----+-- Journal preview --+-- AI insight ----+
++--- Quick actions grid: workout / diet / quests / mentor ------+
+```
 
-### Faza 5 — AI Mentor "Nadir"
-- Edge function `ai-mentor` (Lovable AI Gateway, `google/gemini-2.5-flash`)
-- `ai-analyzer` (kunlik, session-locked, keshlangan)
-- `ai-micro-insight`, `generate-daily-quests`
-- Nadir personasi: halol, murosasiz, aduляция yo'q
+- Har bir panel: `border`, `bg-card`, `p-4`, eyebrow (uppercase 11px), value (2xl), micro-caption
+- Habit item — 1 qatorda: checkbox · nom · +XP · tick action
 
-### Faza 6 — Workout + Diet + Analytics
-- `/workout`, `/diet` — asosiy CRUD + AI tavsiya
-- `/analytics` — Recharts, haftalik hisobot
+## Global UX polish (barcha sahifalar)
 
-### Faza 7 — Community + Leaderboard + Profile
-- `/community`, `/community/party`, `/leaderboard`, `/profile`, `/u/:username`
-- Ommaviy profil viewer
+- Topbar sticky + backdrop-blur, active route left-border yashil chiziq (sidebar)
+- Kbd shortcut `⌘K` — search palette (yo'nalish, keyingi turda)
+- Toast pozitsiya: top-center, kompakt
+- Skeletonlar — full-screen spinner o'rniga
+- Focus rings: yashil `--ring`
+- Custom scrollbar
+- `.tap` (44px) mobil, `.card-hover` interaktiv panellar
 
-### Faza 8 — Monetizatsiya + PWA + Xavfsizlik yakunlash
-- Paddle (yoki Stripe fallback), `/pricing`, `/checkout/success`
-- `freeTierLimits` markazlashgan konfiguratsiya
-- Service worker, offline sahifasi
-- CSP headers, security regression testlari
-- `/terms`, `/privacy`, `/refund`, `/security`
+## Sahifalar (bir uslubda)
 
-### Faza 9 — Sozlamalar + Bildirishnomalar + Kurslar + Sayqallash
-- `/settings`, `/notifications`, `/courses/:id`, `/c/:slug`
-- Push + (ixtiyoriy) Telegram integratsiyasi
-- E2E Playwright, Lighthouse CI
+Barcha `_authenticated/*` sahifalari yangi `<PageHeader eyebrow title actions>` +
+`<PanelGrid>` primitivlariga o'tadi. Landing (`/`) va `pricing` — yangi
+palitra/font, lekin tuzilishi o'zgarmaydi (foydalanuvchi so'ramagan).
 
-## Muhim savol siz uchun
+## Technical
 
-PDF'da `react-router-dom` va Render.com hosting yozilgan. Bu loyiha esa **TanStack Start** ustida (Lovable'ning yangi standart steki, SSR bilan). Men PDF'ning **niyati va spetsifikatsiyasini** (ranglar, sahifalar, xavfsizlik, AI oqimlari, ohang) to'liq bajaraman, lekin **routing/SSR uchun TanStack Start**da qolaman — bu Lovable Cloud bilan mahkam integratsiya. Rozimi?
+- `src/styles.css`: yangi tokenlar, sidebar utility'lari
+- `src/routes/__root.tsx`: Sora + Manrope link tag'lari, family metadata
+- `src/components/app-shell.tsx`: to'liq qayta yozish (topbar + sidebar + main)
+- `src/components/sidebar-nav.tsx`: yangi (desktop sidebar)
+- `src/components/bottom-nav.tsx`: yashil primary bilan
+- `src/components/page-header.tsx`: yangi umumiy sarlavha
+- `src/components/panel.tsx`: yangi (eyebrow/title/value/caption bilan card)
+- `src/routes/_authenticated/dashboard.tsx`: bento-grid qayta tartib
+- Boshqa `_authenticated/*` sahifalari: `AppShell` yangi shell'ni oladi, ichki
+  kontent shu turda o'zgartirilmaydi (keyingi turlarda alohida polish)
 
-## Bugun nima bo'ladi
+## Scope guardrails
 
-Bu reja tasdiqlangach, **Faza 1**ni to'liq bajaraman (dizayn tizimi + Landing + i18n skeleton + PWA manifest). Keyin siz ko'rib, "Faza 2 ga o't" desangiz davom etamiz.
-
-## Texnik detallar (dev uchun)
-
-- Marshrutlar TanStack file-based, `src/routes/`ga joylashadi
-- Ranglar: `hsl(var(--primary))` — hech qachon `bg-black`/`text-white`
-- Serverdagi maxfiy kalitlar faqat `.server.ts` fayllarida
-- Har bir jadvalda `GRANT` + `RLS` + policy — public schema qoidasiga rioya
-- `xp_events`, `user_achievements` — faqat SECURITY DEFINER orqali yoziladi
+- Ma'lumot va biznes-logika **o'zgarmaydi** — faqat visual va layout
+- Landing/pricing — tokenlar yangilanadi, tuzilish saqlanadi
+- Onboarding — polish, ammo qadamlar/sarlavhalar o'zgarmaydi
