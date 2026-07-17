@@ -1,5 +1,5 @@
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { useEffect as useEffectHook, useMemo, useState } from "react";
+import { createFileRoute } from "@tanstack/react-router";
+import { useMemo, useState } from "react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
@@ -24,27 +24,32 @@ export const Route = createFileRoute("/_authenticated/onboarding")({
   component: Onboarding,
 });
 
-type Answers = Record<string, string>;
+/**
+ * Javob qiymati:
+ *  - single/number: string
+ *  - multi: string[] (DBga vergul bilan saqlanadi)
+ */
+type AnswerValue = string | string[];
+type Answers = Record<string, AnswerValue>;
 
 function Onboarding() {
-  const navigate = useNavigate();
   const { userId } = Route.useRouteContext();
-  const total = ONBOARDING_QUESTIONS.length + 1; // +1 for plan-duration step
+
+  // Ketma-ketlik: avval B bo'lim (naqsh) — 4 ta savol alohida qadamlarda.
+  // Oxirgi qadam — A bo'lim (5 ta savol) + reja davomiyligi bitta sahifada.
+  const bQuestions = sectionQuestions("B");
+  const aQuestions = sectionQuestions("A");
+  const total = bQuestions.length + 1; // B + 1 combined page
+
   const [answers, setAnswers] = useState<Answers>({});
   const [step, setStep] = useState(0);
   const [plan, setPlan] = useState<7 | 30 | null>(null);
   const [saving, setSaving] = useState(false);
 
-  const currentQuestion: OnboardingQuestion | null =
-    step < ONBOARDING_QUESTIONS.length ? ONBOARDING_QUESTIONS[step] : null;
-  const isPlanStep = step === ONBOARDING_QUESTIONS.length;
+  const isFinalStep = step === bQuestions.length;
+  const currentB: OnboardingQuestion | null = isFinalStep ? null : bQuestions[step];
 
-  const sectionA = sectionQuestions("A").length;
-  const sectionLabel = currentQuestion
-    ? currentQuestion.section === "A"
-      ? "A · Sen haqingda"
-      : "B · Naqshing"
-    : "Reja davomiyligi";
+  const sectionLabel = currentB ? "B · Naqshing" : "A · Sen haqingda + Reja";
 
   const bmi = useMemo(() => {
     const h = Number(answers["profile.height_cm"]);
@@ -52,12 +57,26 @@ function Onboarding() {
     return calcBMI(h, w);
   }, [answers]);
 
-  const canAdvance = currentQuestion
-    ? Boolean(answers[currentQuestion.key])
-    : plan !== null;
+  function isAnswered(q: OnboardingQuestion): boolean {
+    const v = answers[q.key];
+    if (q.type === "multi") return Array.isArray(v) && v.length > 0;
+    return typeof v === "string" && v.length > 0;
+  }
 
-  function setAnswer(key: string, value: string) {
+  const canAdvance = currentB
+    ? isAnswered(currentB)
+    : aQuestions.every(isAnswered) && plan !== null;
+
+  function setAnswer(key: string, value: AnswerValue) {
     setAnswers((prev) => ({ ...prev, [key]: value }));
+  }
+
+  function toggleMulti(key: string, val: string) {
+    setAnswers((prev) => {
+      const cur = Array.isArray(prev[key]) ? (prev[key] as string[]) : [];
+      const next = cur.includes(val) ? cur.filter((x) => x !== val) : [...cur, val];
+      return { ...prev, [key]: next };
+    });
   }
 
   function goBack() {
@@ -74,18 +93,16 @@ function Onboarding() {
     if (saving) return;
     setSaving(true);
     try {
-      // 1) Save all answers (source Uzbek strings)
-      const rows = Object.entries(answers).map(([question_key, answer_value]) => ({
+      const rows = Object.entries(answers).map(([question_key, val]) => ({
         user_id: userId,
         question_key,
-        answer_value,
+        answer_value: Array.isArray(val) ? val.join(",") : val,
       }));
       const { error: ansErr } = await supabase
         .from("onboarding_answers")
         .upsert(rows, { onConflict: "user_id,question_key" });
       if (ansErr) throw ansErr;
 
-      // 2) Update profile physical fields + plan + completion
       const ageNum = Number(answers["profile.age"]);
       const heightNum = Number(answers["profile.height_cm"]);
       const weightNum = Number(answers["profile.weight_kg"]);
@@ -106,12 +123,15 @@ function Onboarding() {
         juda_faol: "very_active",
       };
 
-      // Archetype tanlash — javoblar asosida
       const { archetypeFromAnswers } = await import("@/lib/nervous");
+      const energyTime = answers["trigger.energy_time"];
       const arche = archetypeFromAnswers({
-        goal: answers["profile.goal"] ?? answers["goal"] ?? "",
-        best_time: answers["profile.best_time"] ?? answers["best_time"] ?? "",
+        goal: "",
+        best_time: typeof energyTime === "string" ? energyTime : "",
       });
+
+      const sexVal = answers["profile.sex"];
+      const actVal = answers["profile.activity"];
 
       const { error: profErr } = await supabase
         .from("profiles")
@@ -119,8 +139,8 @@ function Onboarding() {
           age: Number.isFinite(ageNum) ? ageNum : null,
           height_cm: Number.isFinite(heightNum) ? heightNum : null,
           weight_kg: Number.isFinite(weightNum) ? weightNum : null,
-          sex: sexMap[answers["profile.sex"]] ?? null,
-          activity_level: actMap[answers["profile.activity"]] ?? null,
+          sex: typeof sexVal === "string" ? sexMap[sexVal] ?? null : null,
+          activity_level: typeof actVal === "string" ? actMap[actVal] ?? null : null,
           plan_length_days: plan,
           archetype: arche.id,
           onboarding_completed_at: new Date().toISOString(),
@@ -129,57 +149,70 @@ function Onboarding() {
       if (profErr) throw profErr;
 
       toast.success("Tashxis tugadi. Yo'l tuzildi.");
-      navigate({ to: "/dashboard", replace: true });
+      // Hard nav — _authenticated layout profilni qaytadan o'qishi shart,
+      // aks holda eski state onboarded=false qolib, /onboarding'ga qaytaradi.
+      window.location.assign("/dashboard");
     } catch (err) {
       const msg = err instanceof Error ? err.message : "Saqlanmadi";
       toast.error(msg);
-    } finally {
       setSaving(false);
     }
   }
-
-  // Keyboard shortcut: 1-9 raqamlar bilan tez o'tish (savolga)
-  // "Tezkor: 1–N raqamlari yoki orqaga"
-  useKeyboardQuickNav({
-    total,
-    setStep,
-    goBack,
-    goNext,
-    canAdvance,
-  });
 
   return (
     <div className="min-h-screen bg-background text-foreground">
       <div className="mx-auto max-w-xl px-5 py-10">
         <ProgressBar current={step + 1} total={total} label={sectionLabel} />
 
-        <QuickNumericNav
-          total={total}
-          current={step}
-          answered={answers}
-          plan={plan}
-          onJump={(i) => setStep(i)}
-        />
+        <div className="mt-4 flex flex-wrap gap-1.5">
+          {Array.from({ length: total }, (_, i) => {
+            const done =
+              i < bQuestions.length
+                ? isAnswered(bQuestions[i])
+                : aQuestions.every(isAnswered) && plan !== null;
+            const active = i === step;
+            const reachable = done || active || i <= step + 1;
+            return (
+              <button
+                key={i}
+                type="button"
+                disabled={!reachable}
+                onClick={() => reachable && setStep(i)}
+                className={
+                  "h-7 min-w-7 rounded-md border px-2 font-ui text-[11px] tabular-nums transition-colors " +
+                  (active
+                    ? "border-primary bg-primary/10 text-primary"
+                    : done
+                      ? "border-border bg-card text-foreground hover:border-primary/40"
+                      : reachable
+                        ? "border-dashed border-border text-muted-foreground hover:text-foreground"
+                        : "border-dashed border-border/40 text-muted-foreground/40 cursor-not-allowed")
+                }
+                aria-label={`Qadam ${i + 1}`}
+              >
+                {i + 1}
+              </button>
+            );
+          })}
+        </div>
 
         <div className="mt-10 animate-fade-in-up">
-          {currentQuestion ? (
+          {currentB ? (
             <QuestionCard
-              q={currentQuestion}
-              value={answers[currentQuestion.key]}
-              onChange={(v) => setAnswer(currentQuestion.key, v)}
-              extra={
-                currentQuestion.key === "profile.weight_kg" && bmi ? (
-                  <p className="mt-3 font-ui text-xs text-muted-foreground">
-                    BMI: <span className="text-foreground">{bmi}</span>{" "}
-                    <span className="text-muted-foreground/80">
-                      ({bmiLabel(bmi)})
-                    </span>
-                  </p>
-                ) : null
-              }
+              q={currentB}
+              value={answers[currentB.key]}
+              onChange={(v) => setAnswer(currentB.key, v)}
+              onToggleMulti={(v) => toggleMulti(currentB.key, v)}
             />
           ) : (
-            <PlanCard plan={plan} onChange={setPlan} />
+            <FinalPage
+              questions={aQuestions}
+              answers={answers}
+              onChange={(k, v) => setAnswer(k, v)}
+              bmi={bmi}
+              plan={plan}
+              onPlanChange={setPlan}
+            />
           )}
         </div>
 
@@ -188,15 +221,11 @@ function Onboarding() {
             variant="ghost"
             className="font-ui"
             onClick={goBack}
-            disabled={step === 0}
+            disabled={step === 0 || saving}
           >
             <ArrowLeft className="mr-1.5 h-4 w-4" />
             Orqaga
           </Button>
-
-          <span className="font-ui text-xs uppercase tracking-[0.22em] text-muted-foreground">
-            Tezkor: 1–{total} raqamlari yoki orqaga
-          </span>
 
           <Button
             className="font-ui font-semibold"
@@ -204,94 +233,13 @@ function Onboarding() {
             disabled={!canAdvance || saving}
           >
             {saving && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-            {isPlanStep ? "Yo'lni tuzish" : "Davom etish"}
-            {!isPlanStep && <ArrowRight className="ml-1.5 h-4 w-4" />}
+            {isFinalStep ? "Yo'lni tuzish" : "Davom etish"}
+            {!isFinalStep && <ArrowRight className="ml-1.5 h-4 w-4" />}
           </Button>
         </div>
       </div>
     </div>
   );
-}
-
-/**
- * Yuqoridagi raqamlar qatori — allaqachon javob berilgan savollarga sakraydi.
- */
-function QuickNumericNav({
-  total,
-  current,
-  answered,
-  plan,
-  onJump,
-}: {
-  total: number;
-  current: number;
-  answered: Answers;
-  plan: 7 | 30 | null;
-  onJump: (i: number) => void;
-}) {
-  return (
-    <div className="mt-4 flex flex-wrap gap-1.5">
-      {Array.from({ length: total }, (_, i) => {
-        const q = ONBOARDING_QUESTIONS[i];
-        const isPlan = i === ONBOARDING_QUESTIONS.length;
-        const done = isPlan ? plan !== null : q ? Boolean(answered[q.key]) : false;
-        const active = i === current;
-        // Faqat: (a) hozirgi, (b) javob berilgan, yoki (c) darhol keyingi qadam
-        const reachable = done || active || i <= current + 1;
-        return (
-          <button
-            key={i}
-            type="button"
-            disabled={!reachable}
-            onClick={() => onJump(i)}
-            className={
-              "h-7 min-w-7 rounded-md border px-2 font-ui text-[11px] tabular-nums transition-colors " +
-              (active
-                ? "border-primary bg-primary/10 text-primary"
-                : done
-                  ? "border-border bg-card text-foreground hover:border-primary/40"
-                  : reachable
-                    ? "border-dashed border-border text-muted-foreground hover:text-foreground"
-                    : "border-dashed border-border/40 text-muted-foreground/40 cursor-not-allowed")
-            }
-            aria-label={`Savol ${i + 1}`}
-          >
-            {i + 1}
-          </button>
-        );
-      })}
-    </div>
-  );
-}
-
-function useKeyboardQuickNav({
-  total,
-  setStep,
-  goBack,
-  goNext,
-  canAdvance,
-}: {
-  total: number;
-  setStep: (fn: (s: number) => number) => void;
-  goBack: () => void;
-  goNext: () => void;
-  canAdvance: boolean;
-}) {
-  useEffectHook(() => {
-    function onKey(e: KeyboardEvent) {
-      const target = e.target as HTMLElement | null;
-      if (target && (target.tagName === "INPUT" || target.tagName === "TEXTAREA")) return;
-      if (e.key === "ArrowLeft") { e.preventDefault(); goBack(); return; }
-      if (e.key === "ArrowRight") { e.preventDefault(); if (canAdvance) goNext(); return; }
-      const n = Number(e.key);
-      if (Number.isFinite(n) && n >= 1 && n <= Math.min(9, total)) {
-        e.preventDefault();
-        setStep(() => n - 1);
-      }
-    }
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [total, goBack, goNext, canAdvance, setStep]);
 }
 
 function ProgressBar({
@@ -328,12 +276,12 @@ function QuestionCard({
   q,
   value,
   onChange,
-  extra,
+  onToggleMulti,
 }: {
   q: OnboardingQuestion;
-  value: string | undefined;
+  value: AnswerValue | undefined;
   onChange: (v: string) => void;
-  extra?: React.ReactNode;
+  onToggleMulti: (v: string) => void;
 }) {
   return (
     <div>
@@ -353,7 +301,7 @@ function QuestionCard({
               inputMode="numeric"
               min={q.min}
               max={q.max}
-              value={value ?? ""}
+              value={typeof value === "string" ? value : ""}
               onChange={(e) => onChange(e.target.value)}
               className="w-40 font-serif text-3xl h-auto py-3"
               autoFocus
@@ -365,104 +313,181 @@ function QuestionCard({
             )}
           </div>
         ) : (
-          <div className="space-y-2">
-            {q.options?.map((opt) => {
-              const selected = value === opt.value;
-              return (
-                <button
-                  key={opt.value}
-                  type="button"
-                  onClick={() => onChange(opt.value)}
-                  className={
-                    selected
-                      ? "flex w-full items-center justify-between rounded-[var(--radius)] border-2 border-primary bg-primary/5 px-5 py-4 text-left font-ui text-sm transition-all"
-                      : "lift flex w-full items-center justify-between rounded-[var(--radius)] border border-border bg-card px-5 py-4 text-left font-ui text-sm transition-colors hover:border-foreground/30"
-                  }
-                >
-                  <span className={selected ? "text-foreground" : "text-foreground/90"}>
-                    {opt.label}
-                  </span>
-                  <span
-                    aria-hidden
-                    className={
-                      selected
-                        ? "grid h-5 w-5 place-items-center rounded-full bg-primary"
-                        : "h-5 w-5 rounded-full border border-border"
-                    }
-                  >
-                    {selected && (
-                      <span className="block h-1.5 w-1.5 rounded-full bg-primary-foreground" />
-                    )}
-                  </span>
-                </button>
-              );
-            })}
-          </div>
+          <OptionList q={q} value={value} onChange={onChange} onToggleMulti={onToggleMulti} />
         )}
-        {extra}
-      </div>
-      <div className="mt-6">
-        <Label className="font-ui text-xs uppercase tracking-[0.22em] text-muted-foreground">
-          Kalit: {q.key}
-        </Label>
       </div>
     </div>
   );
 }
 
-function PlanCard({
-  plan,
+function OptionList({
+  q,
+  value,
   onChange,
+  onToggleMulti,
 }: {
-  plan: 7 | 30 | null;
-  onChange: (v: 7 | 30) => void;
+  q: OnboardingQuestion;
+  value: AnswerValue | undefined;
+  onChange: (v: string) => void;
+  onToggleMulti: (v: string) => void;
 }) {
-  const options: { value: 7 | 30; title: string; body: string; tag: string }[] = [
-    {
-      value: 7,
-      tag: "Tez sprint",
-      title: "7 kun",
-      body: "Bir haftalik intensiv boshlash — kichik odatlar, tez natija.",
-    },
-    {
-      value: 30,
-      tag: "To'liq o'zgarish",
-      title: "30 kun",
-      body: "Bir oy davomida chuqur qayta qurish — odatlar tanaga singiydi.",
-    },
-  ];
+  const isMulti = q.type === "multi";
+  const selectedArr = isMulti && Array.isArray(value) ? value : [];
+  const selectedStr = !isMulti && typeof value === "string" ? value : "";
+
   return (
-    <div>
-      <h2 className="font-serif text-3xl leading-tight tracking-tight text-balance">
-        Reja davomiyligini tanla
-      </h2>
-      <p className="mt-3 font-ui text-sm leading-relaxed text-muted-foreground">
-        Har ikkisi ham ishlaydi. Farqi — bosim va tezlikda.
-      </p>
-      <div className="mt-8 grid gap-3 md:grid-cols-2">
-        {options.map((opt) => {
-          const selected = plan === opt.value;
-          return (
-            <button
-              key={opt.value}
-              type="button"
-              onClick={() => onChange(opt.value)}
+    <div className="space-y-2">
+      {q.options?.map((opt) => {
+        const selected = isMulti
+          ? selectedArr.includes(opt.value)
+          : selectedStr === opt.value;
+        return (
+          <button
+            key={opt.value}
+            type="button"
+            onClick={() => (isMulti ? onToggleMulti(opt.value) : onChange(opt.value))}
+            className={
+              selected
+                ? "flex w-full items-center justify-between rounded-[var(--radius)] border-2 border-primary bg-primary/5 px-5 py-4 text-left font-ui text-sm transition-all"
+                : "lift flex w-full items-center justify-between rounded-[var(--radius)] border border-border bg-card px-5 py-4 text-left font-ui text-sm transition-colors hover:border-foreground/30"
+            }
+          >
+            <span className={selected ? "text-foreground" : "text-foreground/90"}>
+              {opt.label}
+            </span>
+            <span
+              aria-hidden
               className={
                 selected
-                  ? "rounded-[var(--radius)] border-2 border-primary bg-primary/5 p-6 text-left"
-                  : "lift rounded-[var(--radius)] border border-border bg-card p-6 text-left"
+                  ? isMulti
+                    ? "grid h-5 w-5 place-items-center rounded-[4px] bg-primary"
+                    : "grid h-5 w-5 place-items-center rounded-full bg-primary"
+                  : isMulti
+                    ? "h-5 w-5 rounded-[4px] border border-border"
+                    : "h-5 w-5 rounded-full border border-border"
               }
             >
-              <span className="font-ui text-xs uppercase tracking-[0.22em] text-primary">
-                {opt.tag}
-              </span>
-              <h3 className="mt-3 font-serif text-2xl">{opt.title}</h3>
-              <p className="mt-2 font-ui text-sm text-muted-foreground">
-                {opt.body}
-              </p>
-            </button>
-          );
-        })}
+              {selected && (
+                <span
+                  className={
+                    isMulti
+                      ? "block h-2 w-2 rounded-[1px] bg-primary-foreground"
+                      : "block h-1.5 w-1.5 rounded-full bg-primary-foreground"
+                  }
+                />
+              )}
+            </span>
+          </button>
+        );
+      })}
+    </div>
+  );
+}
+
+function FinalPage({
+  questions,
+  answers,
+  onChange,
+  bmi,
+  plan,
+  onPlanChange,
+}: {
+  questions: OnboardingQuestion[];
+  answers: Answers;
+  onChange: (key: string, value: AnswerValue) => void;
+  bmi: number | null;
+  plan: 7 | 30 | null;
+  onPlanChange: (p: 7 | 30) => void;
+}) {
+  return (
+    <div className="space-y-10">
+      <div>
+        <h2 className="font-serif text-3xl leading-tight tracking-tight text-balance">
+          Sen haqingda oxirgi ma'lumot
+        </h2>
+        <p className="mt-3 font-ui text-sm leading-relaxed text-muted-foreground">
+          Barcha savollarga javob ber — ovqatlanish va mashqlar rejasi shu asosda tuziladi.
+        </p>
+      </div>
+
+      <div className="space-y-8">
+        {questions.map((q) => (
+          <div key={q.key} className="border-b border-border/40 pb-6 last:border-0">
+            <Label className="font-ui text-sm font-medium text-foreground">
+              {q.prompt}
+            </Label>
+            {q.helper && (
+              <p className="mt-1 font-ui text-xs text-muted-foreground">{q.helper}</p>
+            )}
+            <div className="mt-4">
+              {q.type === "number" ? (
+                <div className="flex items-baseline gap-3">
+                  <Input
+                    type="number"
+                    inputMode="numeric"
+                    min={q.min}
+                    max={q.max}
+                    value={typeof answers[q.key] === "string" ? (answers[q.key] as string) : ""}
+                    onChange={(e) => onChange(q.key, e.target.value)}
+                    className="w-32 font-serif text-2xl h-auto py-2"
+                  />
+                  {q.suffix && (
+                    <span className="font-ui text-sm text-muted-foreground">
+                      {q.suffix}
+                    </span>
+                  )}
+                  {q.key === "profile.weight_kg" && bmi && (
+                    <span className="font-ui text-xs text-muted-foreground ml-2">
+                      BMI: <span className="text-foreground">{bmi}</span> ({bmiLabel(bmi)})
+                    </span>
+                  )}
+                </div>
+              ) : (
+                <OptionList
+                  q={q}
+                  value={answers[q.key]}
+                  onChange={(v) => onChange(q.key, v)}
+                  onToggleMulti={() => {}}
+                />
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div>
+        <h3 className="font-serif text-2xl leading-tight tracking-tight">
+          Reja davomiyligi
+        </h3>
+        <p className="mt-2 font-ui text-sm text-muted-foreground">
+          Har ikkisi ham ishlaydi. Farqi — bosim va tezlikda.
+        </p>
+        <div className="mt-6 grid gap-3 md:grid-cols-2">
+          {([
+            { value: 7 as const, tag: "Tez sprint", title: "7 kun", body: "Bir haftalik intensiv boshlash — kichik odatlar, tez natija." },
+            { value: 30 as const, tag: "To'liq o'zgarish", title: "30 kun", body: "Bir oy davomida chuqur qayta qurish — odatlar tanaga singiydi." },
+          ]).map((opt) => {
+            const selected = plan === opt.value;
+            return (
+              <button
+                key={opt.value}
+                type="button"
+                onClick={() => onPlanChange(opt.value)}
+                className={
+                  selected
+                    ? "rounded-[var(--radius)] border-2 border-primary bg-primary/5 p-6 text-left"
+                    : "lift rounded-[var(--radius)] border border-border bg-card p-6 text-left"
+                }
+              >
+                <span className="font-ui text-xs uppercase tracking-[0.22em] text-primary">
+                  {opt.tag}
+                </span>
+                <h4 className="mt-3 font-serif text-2xl">{opt.title}</h4>
+                <p className="mt-2 font-ui text-sm text-muted-foreground">{opt.body}</p>
+              </button>
+            );
+          })}
+        </div>
       </div>
     </div>
   );
