@@ -5,9 +5,9 @@ import { uz } from "@/i18n";
 type NavLink = { href: string; label: string };
 
 const DEFAULT_NAV: NavLink[] = [
-  { href: "/#how", label: "Qanday" },
   { href: "/#science", label: "Ilm" },
   { href: "/pricing", label: "Narx" },
+  { href: "/blog/66-kun-qoidasi", label: "Blog" },
   { href: "/investors", label: "Investorlar" },
   { href: "/#faq", label: "Savollar" },
 ];
