@@ -418,19 +418,19 @@ function ThreePillars() {
       n: "01",
       icon: Sparkles,
       title: "AI Mentor — Nadir",
-      body: "Har kuni progressingni tekshiradi. Bahona qabul qilmaydi. Keyingi qadamni aniq ko'rsatadi.",
+      body: "Halol koch: bahona qabul qilmaydi, bo'sh maqtov aytmaydi. Sokratik savol usuli bilan seni javob topishga majbur qiladi (metakognitiv treuning).",
     },
     {
       n: "02",
       icon: BarChart3,
       title: "Intizom o'lchovi",
-      body: "Streak, bajarilish foizi, zaif kunlar, 0–100 intizom balli.",
+      body: "Streak, bajarilish foizi, zaif kunlar, 0–100 bal. O'lchash — o'zgarishning shartidir (Hawthorne effekti + o'z-o'zini monitoring, Kanfer 1970).",
     },
     {
       n: "03",
       icon: Target,
-      title: "Kunlik missiyalar",
-      body: "Maqsadingga mos uchta vazifa. Qisqa, aniq, bugun bajariladigan.",
+      title: "Mikro-missiyalar",
+      body: "Kuniga 3 ta 2–15 daqiqalik harakat. BJ Fogg Tiny Habits: kichik + oson = takrorlanadi = avtomatlashadi.",
     },
   ];
   return (
