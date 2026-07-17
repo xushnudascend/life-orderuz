@@ -89,15 +89,6 @@ function BodyCategory() {
         />
       </div>
 
-      {/* Tavsiya paneli */}
-      <Panel className="mt-6">
-        <PanelHeader eyebrow="Bugun uchun" />
-        <div className="mt-3 grid gap-3 sm:grid-cols-3">
-          <TipRow n="01" text="Ertalab 500 ml suv — kofegacha." />
-          <TipRow n="02" text="20 daq. tez yurish — kunning istalgan payti." />
-          <TipRow n="03" text="Uxlashdan 1 soat oldin ekran o'chirilsin." />
-        </div>
-      </Panel>
     </AppShell>
   );
 }
