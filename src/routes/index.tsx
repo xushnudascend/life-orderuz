@@ -90,11 +90,14 @@ function Landing() {
       <SiteHeader />
       <main>
         <Hero />
+        <ProductPreview />
         <ProofStrip />
         <Pillars />
         <HowItWorks />
         <Features />
+        <Testimonials />
         <Science />
+        <Traction />
         <Pricing />
         <Faq />
         <FinalCta />
