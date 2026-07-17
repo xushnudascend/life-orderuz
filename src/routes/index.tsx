@@ -512,28 +512,3 @@ function SectionHeader({
   );
 }
 
-function Footer() {
-  const links = [
-    { href: "/pricing", label: "Narxlar" },
-    { href: "/blog/hayot-sohalari", label: "Blog" },
-    { href: "/security", label: "Xavfsizlik" },
-    { href: "/terms", label: "Terms" },
-    { href: "/privacy", label: "Privacy" },
-    { href: "/refund", label: "Refund" },
-    { href: "/auth", label: "Kirish" },
-  ];
-  return (
-    <footer>
-      <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-5 py-8 font-ui text-xs text-muted-foreground">
-        <p>© 2026 {BRAND} · Toshkent</p>
-        <nav className="flex flex-wrap gap-x-5 gap-y-2">
-          {links.map((l) => (
-            <a key={l.href} href={l.href} className="transition-colors hover:text-foreground">
-              {l.label}
-            </a>
-          ))}
-        </nav>
-      </div>
-    </footer>
-  );
-}
