@@ -374,7 +374,9 @@ function Dashboard() {
 
         {/* Timetable */}
         <div className="lg:col-span-7">
-          <DailyTimetable />
+          <ErrorBoundary boundary="dashboard_daily_timetable">
+            <DailyTimetable />
+          </ErrorBoundary>
         </div>
 
         {/* Quick access */}
