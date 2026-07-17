@@ -157,10 +157,10 @@ function Hero() {
             Behavior Design · Habit Science · Beta
           </p>
           <h1 className="mt-5 font-serif text-4xl leading-[1.05] tracking-tight text-balance sm:text-5xl md:text-6xl">
-            Motivatsiya emas — miyya arxitekturasi.
+            Motivatsiya tugaydi. <span className="text-muted-foreground">Tizim qoladi.</span>
           </h1>
           <p className="mt-4 font-serif text-2xl leading-tight text-muted-foreground sm:text-3xl">
-            Iroda tugaydi. Tizim qoladi.
+            Iroda emas — miyya arxitekturasi.
           </p>
           <p className="mt-6 max-w-xl text-base leading-relaxed text-muted-foreground text-pretty md:text-lg">
             Life Order xulq-atvor dizayni (Stanford Behavior Design Lab) va odatlar ilmiga tayanadi: trigger → mikro-harakat → tasdiq. Har kuni uchta aniq qadam, halol AI mentor Nadir. Ikki oy — va o'zingni tanimaysan. 60 soniyada boshla, kartasiz.
