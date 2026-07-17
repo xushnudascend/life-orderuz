@@ -290,10 +290,6 @@ function Dashboard() {
               <p className="font-ui text-sm text-muted-foreground">
                 Hozircha odat yo'q. Sun'iy intellekt shaxsiy reja tuzib bersinmi?
               </p>
-            <div className="mt-4 rounded-md border border-dashed border-border p-6 text-center">
-              <p className="font-ui text-sm text-muted-foreground">
-                Hozircha odat yo'q. Sun'iy intellekt shaxsiy reja tuzib bersinmi?
-              </p>
               <Button asChild size="sm" className="mt-3">
                 <Link to="/onboarding">Shaxsiy reja tuzish</Link>
               </Button>
