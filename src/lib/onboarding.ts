@@ -79,9 +79,9 @@ export const ONBOARDING_QUESTIONS: OnboardingQuestion[] = [
   {
     key: "trigger.core",
     section: "B",
-    prompt: "Sen o'zingda qaysi muammoni ko'ryapsan? Eng haqiqiy javob bering.",
-    helper: "Nadir shu javobga qarab yo'l tuzadi. Ko'p variant tanlash mumkin emas — bittasi.",
-    type: "single",
+    prompt: "Sen o'zingda qaysi muammolarni ko'ryapsan?",
+    helper: "Bir nechta variantni tanlashing mumkin — nechta tegishli bo'lsa.",
+    type: "multi",
     options: [
       { value: "telefon_qaramlik", label: "Telefon va ijtimoiy tarmoqqa qaramlik" },
       { value: "kechiktirish", label: "Har narsani ertaga qoldirish (prokrastinatsiya)" },
@@ -93,8 +93,9 @@ export const ONBOARDING_QUESTIONS: OnboardingQuestion[] = [
   {
     key: "trigger.morning",
     section: "B",
-    prompt: "Ertalab uyg'onganingda birinchi qilgan ishing?",
-    type: "single",
+    prompt: "Ertalab uyg'onganingda odatda nima qilasan?",
+    helper: "Bir nechta variantni tanlashing mumkin.",
+    type: "multi",
     options: [
       { value: "telefon", label: "Telefonni olaman — 30+ daqiqa yotib qolaman" },
       { value: "namoz", label: "Ibodat/duo qilaman, keyin turaman" },
@@ -107,7 +108,8 @@ export const ONBOARDING_QUESTIONS: OnboardingQuestion[] = [
     key: "trigger.evening",
     section: "B",
     prompt: "Kechqurun uyquga qanday borasan?",
-    type: "single",
+    helper: "Bir nechta variantni tanlashing mumkin.",
+    type: "multi",
     options: [
       { value: "telefon_bilan", label: "Telefon aralashib ketaman, allamahalgacha" },
       { value: "kitob", label: "Kitob o'qib uxlayman" },
