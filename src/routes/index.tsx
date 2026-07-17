@@ -105,33 +105,40 @@ function Landing() {
 }
 
 
-function Header() {
+function ProofStrip() {
+  const items = [
+    { k: "43%", v: "kunlik xulq — odat", src: "Wood, USC 2019" },
+    { k: "66 kun", v: "o'rtacha avtomatlashuv", src: "Lally, UCL 2010" },
+    { k: "1%", v: "kunlik yaxshilanish", src: "J. Clear, 2018" },
+    { k: "B=MAP", v: "xulq formulasi", src: "BJ Fogg, Stanford" },
+  ];
   return (
-    <header className="sticky top-0 z-40 h-14 border-b border-border bg-background/80 backdrop-blur-sm">
-      <div className="mx-auto flex h-full max-w-6xl items-center justify-between px-5">
-        <Link to="/" className="flex items-center gap-2">
-          <span
-            aria-hidden
-            className="grid h-7 w-7 place-items-center rounded-[10px] bg-primary text-primary-foreground"
-          >
-            <span className="font-serif text-[15px] font-semibold leading-none">L</span>
-          </span>
-          <span className="font-serif text-lg font-bold tracking-tight">{BRAND}</span>
-        </Link>
-        <nav className="hidden items-center gap-6 md:flex font-ui text-sm text-muted-foreground">
-          <a href="#how" className="hover:text-foreground transition-colors">Qanday ishlaydi</a>
-          <a href="#features" className="hover:text-foreground transition-colors">Imkoniyatlar</a>
-          <a href="#science" className="hover:text-foreground transition-colors">Ilm</a>
-          <a href="#pricing" className="hover:text-foreground transition-colors">Narx</a>
-          <a href="#faq" className="hover:text-foreground transition-colors">Savollar</a>
-        </nav>
-        <Button asChild size="sm" className="rounded-full font-ui font-semibold">
-          <Link to="/auth">Boshlash</Link>
-        </Button>
+    <section className="border-b border-border bg-card/40">
+      <div className="mx-auto max-w-6xl px-5 py-10">
+        <p className="text-center font-ui text-[11px] uppercase tracking-[0.28em] text-muted-foreground">
+          Ilmiy asos · peer-reviewed manba
+        </p>
+        <dl className="mt-6 grid grid-cols-2 gap-6 md:grid-cols-4">
+          {items.map((s) => (
+            <div key={s.k} className="text-center">
+              <dt className="font-serif text-2xl tracking-tight tabular-nums md:text-3xl">
+                {s.k}
+              </dt>
+              <dd className="mt-1 font-ui text-[13px] leading-tight text-foreground/80">
+                {s.v}
+              </dd>
+              <p className="mt-1.5 font-ui text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
+                {s.src}
+              </p>
+            </div>
+          ))}
+        </dl>
       </div>
-    </header>
+    </section>
   );
 }
+
+
 
 function Hero() {
   return (
