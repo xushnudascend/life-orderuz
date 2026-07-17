@@ -54,57 +54,61 @@
   --color-sun: hsl(var(--sun));
   --color-kelp: hsl(var(--kelp));
 
-  --font-serif: "Times New Roman", Times, Georgia, ui-serif, serif;
-  --font-sans: "Karla", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Sora", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
   --font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
 }
 
-/* ---------- "Obsidian" — default dark theme ---------- */
+/* ---------- "Obsidian Green" — default dark theme ---------- */
 :root {
-  --radius: 0.875rem;
+  --radius: 0.5rem;
 
-  --background: 0 0% 4%;
-  --foreground: 0 0% 90%;
-  --card: 0 0% 6%;
-  --card-foreground: 0 0% 92%;
-  --popover: 0 0% 7%;
-  --popover-foreground: 0 0% 92%;
+  --background: 150 8% 4%;
+  --foreground: 150 6% 92%;
+  --card: 150 8% 6%;
+  --card-foreground: 150 6% 94%;
+  --popover: 150 8% 7%;
+  --popover-foreground: 150 6% 94%;
 
-  --primary: 72 100% 50%;
-  --primary-foreground: 0 0% 5%;
-  --primary-glow: 68 100% 60%;
+  --primary: 142 76% 45%;
+  --primary-foreground: 150 20% 4%;
+  --primary-glow: 142 90% 55%;
 
-  --secondary: 0 0% 10%;
-  --secondary-foreground: 0 0% 90%;
-  --muted: 0 0% 9%;
-  --muted-foreground: 0 0% 60%;
-  --accent: 0 0% 14%;
-  --accent-foreground: 0 0% 92%;
+  --secondary: 150 8% 10%;
+  --secondary-foreground: 150 6% 92%;
+  --muted: 150 6% 9%;
+  --muted-foreground: 150 5% 60%;
+  --accent: 150 10% 14%;
+  --accent-foreground: 150 6% 94%;
 
-  --destructive: 0 84% 60%;
+  --destructive: 0 72% 55%;
   --destructive-foreground: 0 0% 98%;
-  --success: 142 71% 45%;
-  --success-foreground: 0 0% 98%;
+  --success: 142 76% 45%;
+  --success-foreground: 150 20% 4%;
 
-  --border: 0 0% 14%;
-  --input: 0 0% 12%;
-  --ring: 72 100% 50%;
+  --border: 150 8% 14%;
+  --input: 150 8% 12%;
+  --ring: 142 76% 45%;
 
-  /* Ocean-inspired accent scale */
-  --abyss: 220 45% 6%;
-  --deep: 215 40% 12%;
-  --tide: 205 45% 22%;
-  --surf: 195 55% 45%;
-  --foam: 190 40% 78%;
-  --pearl: 30 20% 92%;
+  /* Sidebar */
+  --sidebar-width: 15rem;
+  --sidebar-width-icon: 4rem;
+
+  /* Ocean-inspired accent scale (legacy) */
+  --abyss: 150 30% 5%;
+  --deep: 150 25% 10%;
+  --tide: 145 30% 22%;
+  --surf: 142 55% 45%;
+  --foam: 142 30% 78%;
+  --pearl: 150 10% 92%;
   --coral: 12 88% 62%;
   --sun: 42 95% 58%;
-  --kelp: 145 30% 30%;
+  --kelp: 145 40% 30%;
 
-  --shadow-glow: 0 0 40px hsl(72 100% 55% / 0.15);
-  --shadow-soft: 0 8px 32px -12px hsl(0 0% 0% / 0.7);
-  --shadow-card: 0 1px 0 hsl(0 0% 100% / 0.04) inset,
-    0 8px 24px -12px hsl(0 0% 0% / 0.6);
+  --shadow-glow: 0 0 40px hsl(142 76% 50% / 0.18);
+  --shadow-soft: 0 8px 32px -12px hsl(150 30% 0% / 0.75);
+  --shadow-card: 0 1px 0 hsl(150 20% 100% / 0.04) inset,
+    0 8px 24px -12px hsl(150 30% 0% / 0.65);
 }
 
 /* ---------- "Aurora" — light monochrome theme ---------- */
