@@ -191,6 +191,7 @@ function Dashboard() {
   return (
     <AppShell title="Bosh sahifa">
       <ProfileCompletionCard missing={missing} />
+      <NadirNudgeBanner userId={userId} />
 
       {/* Salom + kontekst */}
       <div className="mb-5 flex flex-col gap-2 sm:mb-6 sm:flex-row sm:items-end sm:justify-between">
