@@ -5,7 +5,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { ArrowLeft, ArrowRight, Loader2 } from "lucide-react";
+import { ArrowLeft, ArrowRight, Loader2, Sparkles } from "lucide-react";
 import {
   ONBOARDING_QUESTIONS,
   bmiLabel,
@@ -45,6 +45,8 @@ function Onboarding() {
   const [step, setStep] = useState(0);
   const [plan, setPlan] = useState<7 | 30 | null>(null);
   const [saving, setSaving] = useState(false);
+  const [ahaNudge, setAhaNudge] = useState<string | null>(null);
+  const [archetypeName, setArchetypeName] = useState<string>("");
 
   const isFinalStep = step === bQuestions.length;
   const currentB: OnboardingQuestion | null = isFinalStep ? null : bQuestions[step];
@@ -149,6 +151,47 @@ function Onboarding() {
       if (profErr) throw profErr;
 
       toast.success("Tashxis tugadi. Yo'l tuzildi.");
+      setArchetypeName(arche.id);
+
+      // "Aha!" — shaxsiy nudge (best-effort, xatolarda dashbordga to'g'ridan-to'g'ri o'tamiz)
+      try {
+        const { data: sess } = await supabase.auth.getSession();
+        const token = sess.session?.access_token;
+        if (token && plan) {
+          const triggerKeys = bQuestions.map((q) => q.key);
+          const triggers: string[] = [];
+          for (const k of triggerKeys) {
+            const v = answers[k];
+            if (Array.isArray(v)) triggers.push(...v);
+            else if (typeof v === "string" && v) triggers.push(v);
+          }
+          const res = await fetch("/api/ai/onboarding-nudge", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify({
+              archetype: arche.id,
+              energyTime:
+                typeof energyTime === "string" ? energyTime : "",
+              planDays: plan,
+              triggers: triggers.slice(0, 10),
+            }),
+          });
+          if (res.ok) {
+            const j = (await res.json()) as { nudge?: string };
+            if (j.nudge) {
+              setAhaNudge(j.nudge);
+              setSaving(false);
+              return;
+            }
+          }
+        }
+      } catch {
+        // ignore — fall through to redirect
+      }
+
       // Hard nav — _authenticated layout profilni qaytadan o'qishi shart,
       // aks holda eski state onboarded=false qolib, /onboarding'ga qaytaradi.
       window.location.assign("/dashboard");
@@ -159,9 +202,44 @@ function Onboarding() {
     }
   }
 
+  if (ahaNudge) {
+    return (
+      <div className="min-h-dvh bg-background text-foreground">
+        <div className="mx-auto max-w-xl px-5 py-16">
+          <div className="animate-fade-in-up rounded-2xl border border-primary/30 bg-card/60 p-8 shadow-[0_0_60px_-20px_hsl(var(--primary)/0.35)] backdrop-blur">
+            <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-primary/40 bg-primary/10 px-3 py-1 font-ui text-[11px] uppercase tracking-[0.24em] text-primary">
+              <Sparkles className="h-3.5 w-3.5" />
+              Nadir sen uchun
+            </div>
+            <h1 className="mb-2 font-display text-2xl leading-tight tracking-tight sm:text-3xl">
+              Aha — yo'ling tayyor.
+            </h1>
+            {archetypeName && (
+              <p className="mb-6 font-ui text-xs uppercase tracking-[0.22em] text-muted-foreground">
+                Arxetip · {archetypeName}
+              </p>
+            )}
+            <div className="whitespace-pre-line rounded-xl border border-border/60 bg-background/60 p-5 font-body text-[15px] leading-relaxed text-foreground">
+              {ahaNudge}
+            </div>
+            <Button
+              className="mt-8 w-full font-ui font-semibold"
+              size="lg"
+              onClick={() => window.location.assign("/dashboard")}
+            >
+              Boshlaymiz
+              <ArrowRight className="ml-2 h-4 w-4" />
+            </Button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-dvh bg-background text-foreground">
       <div className="mx-auto max-w-xl px-5 py-10">
+
         <ProgressBar current={step + 1} total={total} label={sectionLabel} />
 
         <div className="mt-4 flex flex-wrap gap-1.5">

@@ -48,6 +48,7 @@ import { Route as Char91DotwellKnownChar93OauthProtectedResourceRouteImport } fr
 import { Route as Char91DotmcpChar93ListToolsRouteImport } from './routes/[.mcp]/list-tools'
 import { Route as ApiPublicConfigRouteImport } from './routes/api/public/config'
 import { Route as ApiAiWeeklyReportRouteImport } from './routes/api/ai.weekly-report'
+import { Route as ApiAiOnboardingNudgeRouteImport } from './routes/api/ai.onboarding-nudge'
 import { Route as ApiAiMicroInsightRouteImport } from './routes/api/ai.micro-insight'
 import { Route as ApiAiGeneratePlanRouteImport } from './routes/api/ai.generate-plan'
 import { Route as AuthenticatedCommunityChannelRouteImport } from './routes/_authenticated/community.$channel'
@@ -257,6 +258,11 @@ const ApiAiWeeklyReportRoute = ApiAiWeeklyReportRouteImport.update({
   path: '/api/ai/weekly-report',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiAiOnboardingNudgeRoute = ApiAiOnboardingNudgeRouteImport.update({
+  id: '/api/ai/onboarding-nudge',
+  path: '/api/ai/onboarding-nudge',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiAiMicroInsightRoute = ApiAiMicroInsightRouteImport.update({
   id: '/api/ai/micro-insight',
   path: '/api/ai/micro-insight',
@@ -351,6 +357,7 @@ export interface FileRoutesByFullPath {
   '/community/$channel': typeof AuthenticatedCommunityChannelRoute
   '/api/ai/generate-plan': typeof ApiAiGeneratePlanRoute
   '/api/ai/micro-insight': typeof ApiAiMicroInsightRoute
+  '/api/ai/onboarding-nudge': typeof ApiAiOnboardingNudgeRoute
   '/api/ai/weekly-report': typeof ApiAiWeeklyReportRoute
   '/api/public/config': typeof ApiPublicConfigRoute
   '/api/public/hooks/burnout-check': typeof ApiPublicHooksBurnoutCheckRoute
@@ -400,6 +407,7 @@ export interface FileRoutesByTo {
   '/community/$channel': typeof AuthenticatedCommunityChannelRoute
   '/api/ai/generate-plan': typeof ApiAiGeneratePlanRoute
   '/api/ai/micro-insight': typeof ApiAiMicroInsightRoute
+  '/api/ai/onboarding-nudge': typeof ApiAiOnboardingNudgeRoute
   '/api/ai/weekly-report': typeof ApiAiWeeklyReportRoute
   '/api/public/config': typeof ApiPublicConfigRoute
   '/api/public/hooks/burnout-check': typeof ApiPublicHooksBurnoutCheckRoute
@@ -451,6 +459,7 @@ export interface FileRoutesById {
   '/_authenticated/community/$channel': typeof AuthenticatedCommunityChannelRoute
   '/api/ai/generate-plan': typeof ApiAiGeneratePlanRoute
   '/api/ai/micro-insight': typeof ApiAiMicroInsightRoute
+  '/api/ai/onboarding-nudge': typeof ApiAiOnboardingNudgeRoute
   '/api/ai/weekly-report': typeof ApiAiWeeklyReportRoute
   '/api/public/config': typeof ApiPublicConfigRoute
   '/api/public/hooks/burnout-check': typeof ApiPublicHooksBurnoutCheckRoute
@@ -502,6 +511,7 @@ export interface FileRouteTypes {
     | '/community/$channel'
     | '/api/ai/generate-plan'
     | '/api/ai/micro-insight'
+    | '/api/ai/onboarding-nudge'
     | '/api/ai/weekly-report'
     | '/api/public/config'
     | '/api/public/hooks/burnout-check'
@@ -551,6 +561,7 @@ export interface FileRouteTypes {
     | '/community/$channel'
     | '/api/ai/generate-plan'
     | '/api/ai/micro-insight'
+    | '/api/ai/onboarding-nudge'
     | '/api/ai/weekly-report'
     | '/api/public/config'
     | '/api/public/hooks/burnout-check'
@@ -601,6 +612,7 @@ export interface FileRouteTypes {
     | '/_authenticated/community/$channel'
     | '/api/ai/generate-plan'
     | '/api/ai/micro-insight'
+    | '/api/ai/onboarding-nudge'
     | '/api/ai/weekly-report'
     | '/api/public/config'
     | '/api/public/hooks/burnout-check'
@@ -632,6 +644,7 @@ export interface RootRouteChildren {
   Char91DotmcpChar93InvokeToolToolRoute: typeof Char91DotmcpChar93InvokeToolToolRoute
   ApiAiGeneratePlanRoute: typeof ApiAiGeneratePlanRoute
   ApiAiMicroInsightRoute: typeof ApiAiMicroInsightRoute
+  ApiAiOnboardingNudgeRoute: typeof ApiAiOnboardingNudgeRoute
   ApiAiWeeklyReportRoute: typeof ApiAiWeeklyReportRoute
   ApiPublicConfigRoute: typeof ApiPublicConfigRoute
   ApiPublicHooksBurnoutCheckRoute: typeof ApiPublicHooksBurnoutCheckRoute
@@ -912,6 +925,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiAiWeeklyReportRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/ai/onboarding-nudge': {
+      id: '/api/ai/onboarding-nudge'
+      path: '/api/ai/onboarding-nudge'
+      fullPath: '/api/ai/onboarding-nudge'
+      preLoaderRoute: typeof ApiAiOnboardingNudgeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/ai/micro-insight': {
       id: '/api/ai/micro-insight'
       path: '/api/ai/micro-insight'
@@ -1066,6 +1086,7 @@ const rootRouteChildren: RootRouteChildren = {
   Char91DotmcpChar93InvokeToolToolRoute: Char91DotmcpChar93InvokeToolToolRoute,
   ApiAiGeneratePlanRoute: ApiAiGeneratePlanRoute,
   ApiAiMicroInsightRoute: ApiAiMicroInsightRoute,
+  ApiAiOnboardingNudgeRoute: ApiAiOnboardingNudgeRoute,
   ApiAiWeeklyReportRoute: ApiAiWeeklyReportRoute,
   ApiPublicConfigRoute: ApiPublicConfigRoute,
   ApiPublicHooksBurnoutCheckRoute: ApiPublicHooksBurnoutCheckRoute,
