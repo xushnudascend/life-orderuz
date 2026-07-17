@@ -758,10 +758,10 @@ function FinalCta() {
     <section className="border-t border-border bg-card/30">
       <div className="mx-auto max-w-3xl px-5 py-24 text-center">
         <h2 className="font-serif text-3xl leading-tight tracking-tight text-balance md:text-5xl">
-          Oltmish kundan keyingi o'zingni bugun tanla.
+          Bugungi qaror — 66 kundan keyingi identifikatsiya.
         </h2>
         <p className="mx-auto mt-6 max-w-xl leading-relaxed text-muted-foreground text-pretty">
-          Bepul. Kartasiz. Birinchi missiyang 60 soniyadan keyin qo'lingda.
+          Motivatsiya kutish — kutmagan avtobusni kutish. Life Order boshqacha: 60 soniyada tashxis, bugun kechqurun birinchi mikro-harakat. Bepul, kartasiz, chiqib ketish bir bosishda.
         </p>
         <div className="mt-9">
           <Button asChild size="lg" className="h-14 rounded-full px-8 font-ui font-semibold">
