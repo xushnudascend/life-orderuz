@@ -6,7 +6,6 @@ import {
   Target,
   ShieldCheck,
   ArrowRight,
-  Repeat,
   Zap,
   Anchor,
   Brain,
