@@ -5,7 +5,12 @@ import { AppShell } from "@/components/app-shell";
 import { Button } from "@/components/ui/button";
 import {
   ArrowRight,
+  Check,
+  Dumbbell,
   Flame,
+  Salad,
+  Sparkles,
+  Target,
 } from "lucide-react";
 
 import { uz } from "@/i18n";
