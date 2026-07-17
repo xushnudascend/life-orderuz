@@ -130,6 +130,30 @@ export type Database = {
           },
         ]
       }
+      daily_login_bonus: {
+        Row: {
+          claimed_on: string
+          created_at: string
+          id: string
+          user_id: string
+          xp_awarded: number
+        }
+        Insert: {
+          claimed_on?: string
+          created_at?: string
+          id?: string
+          user_id: string
+          xp_awarded?: number
+        }
+        Update: {
+          claimed_on?: string
+          created_at?: string
+          id?: string
+          user_id?: string
+          xp_awarded?: number
+        }
+        Relationships: []
+      }
       daily_quests: {
         Row: {
           completed_at: string | null
@@ -451,6 +475,7 @@ export type Database = {
           onboarding_completed_at: string | null
           plan_length_days: number | null
           sex: Database["public"]["Enums"]["sex"] | null
+          subscription_tier: string
           timezone: string
           updated_at: string
           username: string | null
@@ -479,6 +504,7 @@ export type Database = {
           onboarding_completed_at?: string | null
           plan_length_days?: number | null
           sex?: Database["public"]["Enums"]["sex"] | null
+          subscription_tier?: string
           timezone?: string
           updated_at?: string
           username?: string | null
@@ -507,6 +533,7 @@ export type Database = {
           onboarding_completed_at?: string | null
           plan_length_days?: number | null
           sex?: Database["public"]["Enums"]["sex"] | null
+          subscription_tier?: string
           timezone?: string
           updated_at?: string
           username?: string | null
@@ -723,6 +750,13 @@ export type Database = {
     }
     Functions: {
       check_achievements: { Args: { _user_id: string }; Returns: undefined }
+      claim_daily_login_bonus: {
+        Args: never
+        Returns: {
+          awarded: boolean
+          xp: number
+        }[]
+      }
       ensure_daily_quests: {
         Args: never
         Returns: {
