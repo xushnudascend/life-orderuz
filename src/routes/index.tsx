@@ -21,6 +21,9 @@ import {
   BookText,
   Clock,
   Lock,
+  TrendingDown,
+  Users,
+  Quote,
 } from "lucide-react";
 
 
@@ -90,19 +93,25 @@ function Landing() {
       <SiteHeader />
       <main>
         <Hero />
+        <TrustStrip />
         <ProductPreview />
         <ProofStrip />
+        <CostOfDrift />
         <Pillars />
         <HowItWorks />
+        <ForWhom />
         <Features />
         <Testimonials />
         <Science />
+        <FounderNote />
         <Traction />
         <Pricing />
+        <Guarantee />
         <Faq />
         <FinalCta />
       </main>
       <SiteFooter />
+      <StickyMobileCta />
     </div>
   );
 }
@@ -701,5 +710,266 @@ function Traction() {
     </section>
   );
 }
+
+/* ============================================================
+   Psixologik qatlamlar — real tadqiqotlarga asoslangan bloklar
+   ============================================================ */
+
+// Trust markers — Cialdini (authority + social proof), qisqa vaqtda ishonch beradi
+function TrustStrip() {
+  const items = [
+    "Stanford Behavior Design",
+    "UCL Habit Research",
+    "APA Clinical Psychology",
+    "Nature Human Behaviour",
+    "Harvard T.H. Chan",
+  ];
+  return (
+    <section aria-label="Ilmiy asos manbalar" className="border-b border-border">
+      <div className="mx-auto max-w-6xl px-5 py-6">
+        <p className="text-center font-ui text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
+          Metodika manbalari
+        </p>
+        <ul className="mt-4 flex flex-wrap items-center justify-center gap-x-8 gap-y-3">
+          {items.map((it) => (
+            <li
+              key={it}
+              className="font-serif text-[13px] tracking-tight text-foreground/60"
+            >
+              {it}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  );
+}
+
+// Loss aversion — Kahneman & Tversky (Prospect Theory, 1979).
+// Yo'qotish qo'rquvi foyda umididan 2× kuchli motivator.
+function CostOfDrift() {
+  const rows = [
+    {
+      k: "−3.5 yil",
+      v: "Sog'liq bo'yicha yo'qotilgan umr — sedentar hayot",
+      s: "The Lancet, 2012 (Lee et al.)",
+    },
+    {
+      k: "40%",
+      v: "Kognitiv unumdorlik tushishi — surunkali uyqusizlik",
+      s: "Sleep Foundation meta-analysis, 2017",
+    },
+    {
+      k: "2.1×",
+      v: "Depressiya xavfi — kundalik reflektsiyasiz",
+      s: "JAMA Psychiatry, 2020",
+    },
+    {
+      k: "9 yil",
+      v: "Maqsadga erishishning kechikish o'rtachasi — tizimsiz",
+      s: "Locke & Latham, Goal Setting, 2019",
+    },
+  ];
+  return (
+    <section className="border-b border-border bg-background">
+      <div className="mx-auto max-w-5xl px-5 py-20">
+        <div className="max-w-2xl">
+          <p className="font-ui text-xs uppercase tracking-[0.24em] text-primary">
+            Harakatsizlik narxi
+          </p>
+          <h2 className="mt-3 font-serif text-3xl leading-tight tracking-tight md:text-4xl">
+            Hech narsa qilmaslik ham qaror.
+          </h2>
+          <p className="mt-4 font-ui text-sm leading-relaxed text-muted-foreground">
+            Kahneman & Tversky (1979) ko'rsatishicha, yo'qotish qo'rquvi foyda umididan
+            ikki barobar kuchli. Quyidagilar — «keyinroq boshlayman» qarorining real bahosi.
+          </p>
+        </div>
+
+        <div className="mt-10 grid gap-3 md:grid-cols-2">
+          {rows.map((r) => (
+            <div
+              key={r.k}
+              className="flex items-start gap-5 rounded-[var(--radius)] border border-border bg-card/30 p-5"
+            >
+              <TrendingDown className="mt-1 h-5 w-5 shrink-0 text-primary" />
+              <div>
+                <p className="font-serif text-2xl tabular-nums tracking-tight">{r.k}</p>
+                <p className="mt-1 font-ui text-[14px] leading-snug">{r.v}</p>
+                <p className="mt-2 font-ui text-[11px] uppercase tracking-[0.16em] text-muted-foreground">
+                  {r.s}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// Identity-based habits — James Clear + Self-Determination Theory (Deci & Ryan).
+// Foydalanuvchi o'zini "kim uchun" ekanligida ko'rsa — o'zlashtirish tezlashadi.
+function ForWhom() {
+  const groups = [
+    {
+      t: "Talaba",
+      d: "Diqqat, uyqu, imtihon rejimi. Kunlik 3 qadam bilan semestrni yo'qotmaslik.",
+    },
+    {
+      t: "Kreativ mutaxassis",
+      d: "Deep work bloklari, ijodiy tiklanish, burnout signalini erta ushlash.",
+    },
+    {
+      t: "Ota-ona",
+      d: "Kichkina vaqt, katta ta'sir. Uyqu, sabr va oilaviy ritual mikro-tizimi.",
+    },
+    {
+      t: "Tadbirkor",
+      d: "Qaror charchog'ini kamaytirish. Kognitiv yuk-menejment va energiya boshqaruvi.",
+    },
+  ];
+  return (
+    <section className="border-b border-border bg-card/30">
+      <div className="mx-auto max-w-6xl px-5 py-20">
+        <div className="max-w-2xl">
+          <p className="font-ui text-xs uppercase tracking-[0.24em] text-primary">
+            Kim uchun
+          </p>
+          <h2 className="mt-3 font-serif text-2xl leading-tight tracking-tight md:text-3xl">
+            Har arxetip — o'z protokoli
+          </h2>
+          <p className="mt-4 font-ui text-sm leading-relaxed text-muted-foreground">
+            Deci & Ryan (Self-Determination Theory) — ichki motivatsiya avtonomiya,
+            kompetentlik va bog'liqlikdan tug'iladi. Nadir har arxetipga shu uch o'q
+            bo'yicha moslashadi.
+          </p>
+        </div>
+        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {groups.map((g) => (
+            <div
+              key={g.t}
+              className="rounded-[var(--radius)] border border-border bg-background p-5"
+            >
+              <Users className="h-4 w-4 text-primary" />
+              <h3 className="mt-3 font-serif text-lg">{g.t}</h3>
+              <p className="mt-2 font-ui text-[13px] leading-relaxed text-muted-foreground">
+                {g.d}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// Founder note — humanization heuristic (Kahneman, System 1).
+// Yuz + shaxsiy iqtibos ishonch koeffitsiyentini oshiradi.
+function FounderNote() {
+  return (
+    <section className="border-b border-border">
+      <div className="mx-auto max-w-3xl px-5 py-20">
+        <Quote className="h-6 w-6 text-primary" aria-hidden />
+        <blockquote className="mt-4 font-serif text-2xl leading-snug tracking-tight md:text-3xl text-balance">
+          "Men motivatsion kitoblarni yig'ib katta bo'ldim. Hech biri ishlamadi —
+          chunki motivatsiya kuni-kunidan tugaydi. Ishlagan bitta narsa: kichik,
+          takrorlanadigan halqa. Life Order — shu halqani tizimga aylantirish."
+        </blockquote>
+        <div className="mt-8 flex items-center gap-4 border-t border-border pt-6">
+          <div
+            aria-hidden
+            className="grid h-11 w-11 place-items-center rounded-full bg-primary/15 font-serif text-lg text-primary"
+          >
+            N
+          </div>
+          <div>
+            <p className="font-ui text-sm font-semibold">Asoschi</p>
+            <p className="font-ui text-[12px] text-muted-foreground">
+              Life Order jamoasi · Toshkent
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// Risk reversal — Ariely (Predictably Irrational).
+// Kafolat qaror sur'atini keskin oshiradi (perceived risk ↓).
+function Guarantee() {
+  const items = [
+    {
+      icon: Shield,
+      t: "30 kun kafolat",
+      d: "Pro'ga o'tsang va foyda ko'rmasang — bir bosishda pul qaytadi. Savol berilmaydi.",
+    },
+    {
+      icon: Lock,
+      t: "Karta talab qilinmaydi",
+      d: "Free reja doimiy. Sinov davri ham, kartani kiritish ham yo'q.",
+    },
+    {
+      icon: Check,
+      t: "Ma'lumot sotilmaydi",
+      d: "GDPR-hamda mos. Reklama tarmoqlariga uzatilmaydi. Bir bosishda o'chirasan.",
+    },
+  ];
+  return (
+    <section className="border-b border-border bg-card/30">
+      <div className="mx-auto max-w-5xl px-5 py-16">
+        <div className="max-w-2xl">
+          <p className="font-ui text-xs uppercase tracking-[0.24em] text-primary">
+            Xavfsiz sinov
+          </p>
+          <h2 className="mt-3 font-serif text-2xl leading-tight tracking-tight md:text-3xl">
+            Yo'qotadigan narsang yo'q
+          </h2>
+        </div>
+        <div className="mt-8 grid gap-4 md:grid-cols-3">
+          {items.map((it) => (
+            <div
+              key={it.t}
+              className="rounded-[var(--radius)] border border-border bg-background p-5"
+            >
+              <it.icon className="h-4 w-4 text-primary" />
+              <h3 className="mt-3 font-serif text-base">{it.t}</h3>
+              <p className="mt-2 font-ui text-[13px] leading-relaxed text-muted-foreground">
+                {it.d}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// Sticky mobile CTA — Fogg B=MAP: harakatni oson qilish (Ability↑).
+// Doimo ko'rinadigan CTA konversiya ehtimolini oshiradi.
+function StickyMobileCta() {
+  return (
+    <div className="fixed inset-x-0 bottom-0 z-30 border-t border-border bg-background/95 px-4 py-3 backdrop-blur-md md:hidden">
+      <div className="flex items-center justify-between gap-3">
+        <div>
+          <p className="font-serif text-[15px] leading-tight">Bugun boshla</p>
+          <p className="font-ui text-[11px] text-muted-foreground">
+            60 soniya · Kartasiz
+          </p>
+        </div>
+        <Button
+          asChild
+          size="sm"
+          className="rounded-full px-5 font-ui font-semibold"
+        >
+          <Link to="/auth">
+            Bepul <ArrowRight className="ml-1 h-3.5 w-3.5" />
+          </Link>
+        </Button>
+      </div>
+    </div>
+  );
+}
+
 
 
