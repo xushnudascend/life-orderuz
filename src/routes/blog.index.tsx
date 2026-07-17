@@ -79,10 +79,8 @@ function BlogIndex() {
 
         <div className="mt-12 grid gap-4 md:grid-cols-2">
           {POSTS.map((p) => (
-            <Link
+            <a
               key={p.slug}
-              to="/blog/$slug" as any
-              params={{ slug: p.slug } as any}
               href={`/blog/${p.slug}`}
               className="group rounded-[var(--radius)] border border-border/60 bg-card/40 p-6 transition-all hover:border-primary/40 hover:bg-card/60"
             >
@@ -97,7 +95,7 @@ function BlogIndex() {
               <p className="mt-3 font-ui text-sm leading-relaxed text-muted-foreground text-pretty">
                 {p.excerpt}
               </p>
-            </Link>
+            </a>
           ))}
         </div>
       </main>
