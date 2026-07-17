@@ -20,6 +20,7 @@ import { Route as InvestorsRouteImport } from './routes/investors'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as BlogIndexRouteImport } from './routes/blog.index'
 import { Route as UUsernameRouteImport } from './routes/u.$username'
 import { Route as ShareMilestoneRouteImport } from './routes/share.milestone'
 import { Route as BlogTungiRitualRouteImport } from './routes/blog.tungi-ritual'
@@ -109,6 +110,11 @@ const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BlogIndexRoute = BlogIndexRouteImport.update({
+  id: '/blog/',
+  path: '/blog/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const UUsernameRoute = UUsernameRouteImport.update({
@@ -336,6 +342,7 @@ export interface FileRoutesByFullPath {
   '/blog/tungi-ritual': typeof BlogTungiRitualRoute
   '/share/milestone': typeof ShareMilestoneRoute
   '/u/$username': typeof UUsernameRoute
+  '/blog/': typeof BlogIndexRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/c/body': typeof AuthenticatedCBodyRoute
@@ -384,6 +391,7 @@ export interface FileRoutesByTo {
   '/blog/tungi-ritual': typeof BlogTungiRitualRoute
   '/share/milestone': typeof ShareMilestoneRoute
   '/u/$username': typeof UUsernameRoute
+  '/blog': typeof BlogIndexRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/c/body': typeof AuthenticatedCBodyRoute
@@ -434,6 +442,7 @@ export interface FileRoutesById {
   '/blog/tungi-ritual': typeof BlogTungiRitualRoute
   '/share/milestone': typeof ShareMilestoneRoute
   '/u/$username': typeof UUsernameRoute
+  '/blog/': typeof BlogIndexRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/_authenticated/c/body': typeof AuthenticatedCBodyRoute
@@ -484,6 +493,7 @@ export interface FileRouteTypes {
     | '/blog/tungi-ritual'
     | '/share/milestone'
     | '/u/$username'
+    | '/blog/'
     | '/.lovable/oauth/consent'
     | '/.mcp/invoke-tool/$tool'
     | '/c/body'
@@ -532,6 +542,7 @@ export interface FileRouteTypes {
     | '/blog/tungi-ritual'
     | '/share/milestone'
     | '/u/$username'
+    | '/blog'
     | '/.lovable/oauth/consent'
     | '/.mcp/invoke-tool/$tool'
     | '/c/body'
@@ -581,6 +592,7 @@ export interface FileRouteTypes {
     | '/blog/tungi-ritual'
     | '/share/milestone'
     | '/u/$username'
+    | '/blog/'
     | '/.lovable/oauth/consent'
     | '/.mcp/invoke-tool/$tool'
     | '/_authenticated/c/body'
@@ -615,6 +627,7 @@ export interface RootRouteChildren {
   BlogTungiRitualRoute: typeof BlogTungiRitualRoute
   ShareMilestoneRoute: typeof ShareMilestoneRoute
   UUsernameRoute: typeof UUsernameRoute
+  BlogIndexRoute: typeof BlogIndexRoute
   DotlovableOauthConsentRoute: typeof DotlovableOauthConsentRoute
   Char91DotmcpChar93InvokeToolToolRoute: typeof Char91DotmcpChar93InvokeToolToolRoute
   ApiAiGeneratePlanRoute: typeof ApiAiGeneratePlanRoute
@@ -701,6 +714,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog/': {
+      id: '/blog/'
+      path: '/blog'
+      fullPath: '/blog/'
+      preLoaderRoute: typeof BlogIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/u/$username': {
@@ -1041,6 +1061,7 @@ const rootRouteChildren: RootRouteChildren = {
   BlogTungiRitualRoute: BlogTungiRitualRoute,
   ShareMilestoneRoute: ShareMilestoneRoute,
   UUsernameRoute: UUsernameRoute,
+  BlogIndexRoute: BlogIndexRoute,
   DotlovableOauthConsentRoute: DotlovableOauthConsentRoute,
   Char91DotmcpChar93InvokeToolToolRoute: Char91DotmcpChar93InvokeToolToolRoute,
   ApiAiGeneratePlanRoute: ApiAiGeneratePlanRoute,
