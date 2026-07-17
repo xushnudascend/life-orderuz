@@ -21,6 +21,7 @@ import { ArchetypeRow } from "@/components/archetype-row";
 import { DailyTimetable } from "@/components/daily-timetable";
 import { ProfileCompletionCard } from "@/components/profile-completion-card";
 import { Panel, PanelHeader, PanelValue } from "@/components/panel";
+import { ErrorBoundary } from "@/components/error-boundary";
 import {
   circadian,
   progressMessage,
@@ -273,12 +274,15 @@ function Dashboard() {
           />
 
           {!loaded ? (
-            <div className="mt-3 space-y-1.5" aria-hidden>
+            <div
+              className="mt-3 space-y-1.5"
+              role="status"
+              aria-live="polite"
+              aria-busy="true"
+            >
+              <span className="sr-only">Bugungi odatlar yuklanmoqda…</span>
               {[0, 1, 2, 3].map((i) => (
-                <div
-                  key={i}
-                  className="h-12 w-full animate-pulse rounded-md border border-border bg-background/40"
-                />
+                <div key={i} className="skeleton h-12 w-full" aria-hidden />
               ))}
             </div>
           ) : habits.length === 0 ? (
@@ -370,7 +374,9 @@ function Dashboard() {
 
         {/* Timetable */}
         <div className="lg:col-span-7">
-          <DailyTimetable />
+          <ErrorBoundary boundary="dashboard_daily_timetable">
+            <DailyTimetable />
+          </ErrorBoundary>
         </div>
 
         {/* Quick access */}
