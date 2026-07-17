@@ -572,12 +572,12 @@ function ScienceBase() {
 /* ================= C.10 — 6 karta funksiyalar grid ================= */
 function FeaturesGrid() {
   const items = [
-    { icon: Flame,     title: "Streak va intizom balli", body: "Kundalik ketma-ketlik va 0–100 intizom balli." },
-    { icon: Sparkles,  title: "AI Mentor — Nadir",        body: "Halol chat-mentor. Bo'sh maqtov yo'q." },
-    { icon: Target,    title: "Kunlik missiyalar",         body: "Har kuni uchta aniq, bugun bajariladigan vazifa." },
-    { icon: LineChart, title: "Haftalik tahlil",           body: "Kuchli kun, zaif kun, o'sish trendlari." },
-    { icon: BookOpen,  title: "Kurs va kitoblar",          body: "Odat va fokus mavzusidagi qisqa kurslar." },
-    { icon: Users,     title: "Davra — jamoa",             body: "Kanallar, Party, Leaderboard — birga o'sish." },
+    { icon: Flame,     title: "Streak — variabel mukofot",  body: "BF Skinner tamoyili: kutilgan mukofot dofamin chiqaradi. Streak — bu senga tegishli, buzilishi og'ir bo'lgan aktiv." },
+    { icon: Sparkles,  title: "AI Mentor — Nadir",           body: "Sokratik metod bilan ishlaydi: javob bermaydi — savol beradi. Metakognitiv treuning. Halol koch, bo'sh maqtov yo'q." },
+    { icon: Target,    title: "Mikro-missiyalar",             body: "2–15 daqiqalik harakat. Fogg qoidasi: kichik + oson = takrorlanadi. Miyya qarshilik ko'rsatmaydi." },
+    { icon: LineChart, title: "Haftalik tahlil",              body: "O'z-o'zini monitoring — o'zgarishning eng kuchli faktori (Michie et al., 2009 meta-tahlili). Kuchli kun, zaif kun, trend." },
+    { icon: BookOpen,  title: "Bilim protokollari",           body: "Odat, fokus, uyqu bo'yicha qisqa, ilmiy asosli kurslar. Nazariya emas — bugun qo'llash uchun." },
+    { icon: Users,     title: "Davra — social accountability", body: "Cialdini: majburiyat + omma > yolg'iz iroda. Kanallar, Party, Leaderboard — halol o'sish maydoni." },
   ];
   return (
     <section className="border-t border-border bg-card/30">
