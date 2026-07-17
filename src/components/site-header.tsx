@@ -7,7 +7,7 @@ type NavLink = { href: string; label: string };
 const DEFAULT_NAV: NavLink[] = [
   { href: "/#science", label: "Ilm" },
   { href: "/pricing", label: "Narx" },
-  { href: "/blog/66-kun-qoidasi", label: "Blog" },
+  { href: "/blog", label: "Blog" },
   { href: "/investors", label: "Investorlar" },
   { href: "/#faq", label: "Savollar" },
 ];
