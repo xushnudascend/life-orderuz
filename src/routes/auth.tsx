@@ -30,11 +30,8 @@ export const Route = createFileRoute("/auth")({
 });
 
 function AuthPage() {
-  // No router navigation here — use window.location so the `_authenticated`
-  // route's client-only gate re-runs after sign-in.
   const { next } = Route.useSearch();
   const [tab, setTab] = useState<"signin" | "signup">("signup");
-  const [checking, setChecking] = useState(true);
 
   // If already signed in → return to `next` (defaults to /dashboard).
   useEffect(() => {
@@ -42,23 +39,30 @@ function AuthPage() {
     supabase.auth.getSession().then(({ data }) => {
       if (!mounted) return;
       if (data.session) window.location.replace(next);
-      else setChecking(false);
     });
     return () => {
       mounted = false;
     };
   }, [next]);
 
-  if (checking) {
-    return (
-      <div className="grid min-h-screen place-items-center bg-background">
-        <Loader2 className="h-6 w-6 animate-spin text-muted-foreground" />
-      </div>
-    );
-  }
-
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="relative min-h-screen overflow-hidden bg-background text-foreground">
+      {/* Animated ambient background */}
+      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
+        <div className="absolute -top-32 -left-24 h-[420px] w-[420px] rounded-full bg-primary/20 blur-3xl lo-float-a" />
+        <div className="absolute top-1/3 -right-32 h-[380px] w-[380px] rounded-full bg-primary/10 blur-3xl lo-float-b" />
+        <div className="absolute -bottom-32 left-1/3 h-[360px] w-[360px] rounded-full bg-primary/15 blur-3xl lo-float-c" />
+        <div className="absolute inset-0 opacity-[0.04] [background-image:radial-gradient(hsl(var(--foreground))_1px,transparent_1px)] [background-size:22px_22px]" />
+      </div>
+      <style>{`
+        @keyframes lo-float-a { 0%,100% { transform: translate(0,0) scale(1);} 50% { transform: translate(40px,30px) scale(1.08);} }
+        @keyframes lo-float-b { 0%,100% { transform: translate(0,0) scale(1);} 50% { transform: translate(-30px,20px) scale(1.05);} }
+        @keyframes lo-float-c { 0%,100% { transform: translate(0,0) scale(1);} 50% { transform: translate(20px,-30px) scale(1.1);} }
+        .lo-float-a { animation: lo-float-a 14s ease-in-out infinite; }
+        .lo-float-b { animation: lo-float-b 18s ease-in-out infinite; }
+        .lo-float-c { animation: lo-float-c 22s ease-in-out infinite; }
+      `}</style>
+
       <div className="mx-auto max-w-md px-5 py-10">
         <Link
           to="/"

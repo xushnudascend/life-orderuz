@@ -53,7 +53,7 @@ export function AppShell({
   return (
     <div className="min-h-screen bg-background text-foreground animate-fade-in pb-24 md:pb-10">
       <header className="border-b border-border">
-        <div className="mx-auto flex h-16 max-w-4xl items-center justify-between px-5">
+        <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5">
           <Link to="/" className="font-serif text-lg">
             {uz.brand.name}
           </Link>
@@ -96,7 +96,7 @@ export function AppShell({
         </div>
       </header>
 
-      <main className="mx-auto max-w-4xl px-5 py-10">{children}</main>
+      <main className="mx-auto max-w-6xl px-5 py-10">{children}</main>
 
       <BottomNav recommendedTab={archetype?.preferredTab} />
     </div>

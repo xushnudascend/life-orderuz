@@ -4,10 +4,10 @@ import { supabase } from "@/integrations/supabase/client";
 import { AppShell } from "@/components/app-shell";
 import { Button } from "@/components/ui/button";
 import {
-  Loader2,
   ArrowRight,
   Flame,
 } from "lucide-react";
+
 import { uz } from "@/i18n";
 import { ProgressRing } from "@/components/progress-ring";
 import { RankBadge } from "@/components/rank-badge";
@@ -59,7 +59,8 @@ function Dashboard() {
   const [stats, setStats] = useState<Stats>(null);
   const [streak, setStreak] = useState<Streak>(null);
   const [shieldsUsed, setShieldsUsed] = useState(0);
-  const [loading, setLoading] = useState(true);
+  const [loaded, setLoaded] = useState(false);
+
 
   async function refresh() {
     const sevenAgo = new Date();
@@ -108,7 +109,7 @@ function Dashboard() {
     setStats((s.data as Stats) ?? null);
     setStreak((st.data as Streak) ?? null);
     setShieldsUsed(sh.count ?? 0);
-    setLoading(false);
+    setLoaded(true);
   }
 
   useEffect(() => {
@@ -240,9 +241,14 @@ function Dashboard() {
             </Button>
           </div>
 
-          {loading ? (
-            <div className="flex justify-center py-10">
-              <Loader2 className="h-5 w-5 animate-spin text-muted-foreground" />
+          {!loaded ? (
+            <div className="space-y-2" aria-hidden>
+              {[0, 1, 2].map((i) => (
+                <div
+                  key={i}
+                  className="h-[68px] w-full animate-pulse rounded-[var(--radius)] border border-border bg-card"
+                />
+              ))}
             </div>
           ) : habits.length === 0 ? (
             <div className="rounded-[var(--radius)] border border-dashed border-border p-8 text-center">
@@ -296,6 +302,7 @@ function Dashboard() {
               })}
             </div>
           )}
+
         </section>
 
         <aside className="md:col-span-2">
