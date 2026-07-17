@@ -93,9 +93,8 @@ export const ONBOARDING_QUESTIONS: OnboardingQuestion[] = [
   {
     key: "trigger.morning",
     section: "B",
-    prompt: "Ertalab uyg'onganingda odatda nima qilasan?",
-    helper: "Bir nechta variantni tanlashing mumkin.",
-    type: "multi",
+    prompt: "Ertalab uyg'onganingda birinchi qilgan ishing?",
+    type: "single",
     options: [
       { value: "telefon", label: "Telefonni olaman — 30+ daqiqa yotib qolaman" },
       { value: "namoz", label: "Ibodat/duo qilaman, keyin turaman" },
@@ -108,8 +107,7 @@ export const ONBOARDING_QUESTIONS: OnboardingQuestion[] = [
     key: "trigger.evening",
     section: "B",
     prompt: "Kechqurun uyquga qanday borasan?",
-    helper: "Bir nechta variantni tanlashing mumkin.",
-    type: "multi",
+    type: "single",
     options: [
       { value: "telefon_bilan", label: "Telefon aralashib ketaman, allamahalgacha" },
       { value: "kitob", label: "Kitob o'qib uxlayman" },
