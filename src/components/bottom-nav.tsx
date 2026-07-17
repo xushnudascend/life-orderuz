@@ -21,7 +21,7 @@ export function BottomNav({
   const location = useLocation();
   return (
     <nav
-      className="fixed bottom-0 left-0 right-0 z-40 border-t border-border bg-background/90 backdrop-blur md:hidden"
+      className="fixed bottom-0 left-0 right-0 z-40 border-t border-border/70 bg-background/85 pb-[env(safe-area-inset-bottom)] backdrop-blur-xl supports-[backdrop-filter]:bg-background/70 md:hidden"
       aria-label="Asosiy navigatsiya"
     >
       <div className="mx-auto flex max-w-6xl items-stretch justify-around px-1">
@@ -35,23 +35,27 @@ export function BottomNav({
             <Link
               key={t.to}
               to={t.to}
+              aria-current={active ? "page" : undefined}
               className={
-                "relative flex min-h-[58px] flex-1 flex-col items-center justify-center gap-1 py-2 font-ui text-[10px] uppercase tracking-[0.16em] transition-colors " +
+                "tap relative flex flex-1 flex-col items-center justify-center gap-1 py-2 font-ui text-[10px] uppercase tracking-[0.16em] transition-colors " +
                 (active
-                  ? "text-foreground"
+                  ? "text-primary"
                   : "text-muted-foreground hover:text-foreground")
               }
             >
               {active && (
-                <span className="absolute top-0 h-0.5 w-8 rounded-full bg-primary" />
+                <span
+                  aria-hidden
+                  className="absolute top-0 h-[3px] w-9 rounded-full bg-primary shadow-[0_0_12px_hsl(var(--primary)/0.6)]"
+                />
               )}
-              <Icon
-                className="h-5 w-5"
-                strokeWidth={active ? 2 : 1.6}
-              />
+              <Icon className="h-5 w-5" strokeWidth={active ? 2.2 : 1.6} />
               <span>{t.label}</span>
               {recommended && (
-                <span className="absolute right-3 top-2 h-1.5 w-1.5 rounded-full bg-primary" />
+                <span
+                  aria-hidden
+                  className="absolute right-3 top-2 h-1.5 w-1.5 animate-pulse rounded-full bg-primary"
+                />
               )}
             </Link>
           );

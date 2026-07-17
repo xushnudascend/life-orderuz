@@ -167,6 +167,11 @@
     border-color: hsl(var(--border));
   }
 
+  html {
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+  }
+
   html,
   body {
     overflow-x: clip;
@@ -197,11 +202,54 @@
     height: auto;
   }
 
+  ::selection {
+    background: hsl(var(--primary) / 0.35);
+    color: hsl(var(--foreground));
+  }
+
   :focus-visible {
     outline: 2px solid hsl(var(--ring));
     outline-offset: 2px;
     border-radius: calc(var(--radius) - 6px);
   }
+
+  /* Interactive affordance */
+  button:not(:disabled),
+  a[href],
+  [role="button"]:not([aria-disabled="true"]) {
+    cursor: pointer;
+  }
+
+  button:disabled,
+  [aria-disabled="true"] {
+    cursor: not-allowed;
+  }
+
+  /* Custom scrollbar (desktop only) */
+  @media (pointer: fine) {
+    ::-webkit-scrollbar { width: 10px; height: 10px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb {
+      background: hsl(var(--border));
+      border-radius: 999px;
+      border: 2px solid hsl(var(--background));
+    }
+    ::-webkit-scrollbar-thumb:hover { background: hsl(var(--muted-foreground) / 0.6); }
+  }
+}
+
+/* ---------- UX utilities ---------- */
+@utility tap {
+  min-height: 44px;
+  touch-action: manipulation;
+}
+
+@utility card-hover {
+  transition: transform 180ms ease, border-color 180ms ease, background-color 180ms ease;
+}
+.card-hover:hover {
+  transform: translateY(-1px);
+  border-color: hsl(var(--primary) / 0.5);
 }
 
 /* ---------- Animations (nozik va maqsadli) ---------- */
