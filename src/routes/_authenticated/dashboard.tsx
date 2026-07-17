@@ -318,7 +318,7 @@ function Dashboard() {
       </div>
 
       {/* Quick access */}
-      <section className="mt-8 grid gap-3 sm:grid-cols-3 md:grid-cols-6">
+      <section className="mt-8 grid gap-3 grid-cols-2 sm:grid-cols-4">
         <Button asChild variant="outline" size="sm">
           <Link to="/workout">Mashg'ulot</Link>
         </Button>
@@ -329,13 +329,7 @@ function Dashboard() {
           <Link to="/quests">Vazifalar</Link>
         </Button>
         <Button asChild variant="outline" size="sm">
-          <Link to="/temir-intizom">21 kun</Link>
-        </Button>
-        <Button asChild variant="outline" size="sm">
-          <Link to="/party">Party</Link>
-        </Button>
-        <Button asChild variant="outline" size="sm">
-          <Link to="/leaderboard">Reyting</Link>
+          <Link to="/mentor">Nadir</Link>
         </Button>
       </section>
     </AppShell>
