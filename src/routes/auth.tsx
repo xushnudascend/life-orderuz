@@ -169,16 +169,28 @@ function EmailForm({ mode, next }: { mode: "signin" | "signup"; next: string }) 
       </div>
       <div className="space-y-1.5">
         <Label htmlFor="password">Parol</Label>
-        <Input
-          id="password"
-          type="password"
-          required
-          minLength={8}
-          autoComplete={mode === "signup" ? "new-password" : "current-password"}
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder="Kamida 8 belgi"
-        />
+        <div className="relative">
+          <Input
+            id="password"
+            type={showPassword ? "text" : "password"}
+            required
+            minLength={8}
+            autoComplete={mode === "signup" ? "new-password" : "current-password"}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Kamida 8 belgi"
+            className="pr-10"
+          />
+          <button
+            type="button"
+            onClick={() => setShowPassword((v) => !v)}
+            className="absolute inset-y-0 right-0 flex items-center px-3 text-muted-foreground transition-colors hover:text-foreground focus:outline-none focus-visible:text-foreground"
+            aria-label={showPassword ? "Parolni yashirish" : "Parolni ko'rsatish"}
+            tabIndex={-1}
+          >
+            {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+          </button>
+        </div>
       </div>
       <Button
         type="submit"
