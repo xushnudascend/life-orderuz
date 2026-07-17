@@ -528,22 +528,6 @@ function FeaturesGrid() {
   );
 }
 
-/* ================= C.11 — Erta a'zolar (halollik) ================= */
-function EarlyMembers() {
-  return (
-    <section className="border-t border-border">
-      <div className="mx-auto max-w-3xl px-5 py-20 text-center">
-        <p className="font-serif text-xl leading-relaxed text-pretty">
-          Iqtiboslar sotib olinmagan. Raqamlar bo'yalgan emas.
-        </p>
-        <p className="mt-4 font-ui text-sm text-muted-foreground leading-relaxed">
-          Life Order beta bosqichida. Ijtimoiy dalil qurish — vaqt talab qiladi. Birinchi haqiqiy tavsiflar — sen va erta a'zolarning 30-kunlik natijalaridan chiqadi. Bo'sh gap emas, o'lchangan o'zgarish.
-        </p>
-      </div>
-    </section>
-  );
-}
-
 /* ================= C.12 — Narxlar ================= */
 function Pricing() {
   return (
