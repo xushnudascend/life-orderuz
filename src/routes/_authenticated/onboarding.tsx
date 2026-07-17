@@ -399,96 +399,188 @@ function FinalPage({
   plan: 7 | 30 | null;
   onPlanChange: (p: 7 | 30) => void;
 }) {
+  // Har bir savol yig'ilib turadi — ustiga bossa ochiladi.
+  // Boshida — birinchi javob berilmagan savol avtomatik ochiladi.
+  const firstUnanswered =
+    questions.find((q) => {
+      const v = answers[q.key];
+      return !(typeof v === "string" && v.length > 0) && !(Array.isArray(v) && v.length > 0);
+    })?.key ?? (plan === null ? "__plan__" : questions[0].key);
+
+  const [openKey, setOpenKey] = useState<string | null>(firstUnanswered);
+
+  function toggle(key: string) {
+    setOpenKey((cur) => (cur === key ? null : key));
+  }
+
+  function summary(q: OnboardingQuestion): string {
+    const v = answers[q.key];
+    if (q.type === "number") {
+      if (typeof v !== "string" || !v) return "—";
+      return `${v}${q.suffix ? " " + q.suffix : ""}`;
+    }
+    if (typeof v !== "string" || !v) return "—";
+    return q.options?.find((o) => o.value === v)?.label ?? v;
+  }
+
   return (
-    <div className="space-y-10">
+    <div className="space-y-6">
       <div>
-        <h2 className="font-serif text-3xl leading-tight tracking-tight text-balance">
+        <h2 className="font-serif text-2xl leading-tight tracking-tight text-balance sm:text-3xl">
           Sen haqingda oxirgi ma'lumot
         </h2>
-        <p className="mt-3 font-ui text-sm leading-relaxed text-muted-foreground">
-          Barcha savollarga javob ber — ovqatlanish va mashqlar rejasi shu asosda tuziladi.
+        <p className="mt-2 font-ui text-sm leading-relaxed text-muted-foreground">
+          Har bir qatorga bosib, javobingni yoz. Kerak bo'lsa qaytadan ochib tahrirlaysan.
         </p>
       </div>
 
-      <div className="space-y-8">
-        {questions.map((q) => (
-          <div key={q.key} className="border-b border-border/40 pb-6 last:border-0">
-            <Label className="font-ui text-sm font-medium text-foreground">
-              {q.prompt}
-            </Label>
-            {q.helper && (
-              <p className="mt-1 font-ui text-xs text-muted-foreground">{q.helper}</p>
-            )}
-            <div className="mt-4">
-              {q.type === "number" ? (
-                <div className="flex items-baseline gap-3">
-                  <Input
-                    type="number"
-                    inputMode="numeric"
-                    min={q.min}
-                    max={q.max}
-                    value={typeof answers[q.key] === "string" ? (answers[q.key] as string) : ""}
-                    onChange={(e) => onChange(q.key, e.target.value)}
-                    className="w-32 font-serif text-2xl h-auto py-2"
-                  />
-                  {q.suffix && (
-                    <span className="font-ui text-sm text-muted-foreground">
-                      {q.suffix}
-                    </span>
-                  )}
-                  {q.key === "profile.weight_kg" && bmi && (
-                    <span className="font-ui text-xs text-muted-foreground ml-2">
-                      BMI: <span className="text-foreground">{bmi}</span> ({bmiLabel(bmi)})
-                    </span>
+      <div className="divide-y divide-border/40 overflow-hidden rounded-[var(--radius)] border border-border/60 bg-card/30">
+        {questions.map((q) => {
+          const isOpen = openKey === q.key;
+          const answered = summary(q) !== "—";
+          return (
+            <div key={q.key}>
+              <button
+                type="button"
+                onClick={() => toggle(q.key)}
+                className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left transition-colors hover:bg-card/60"
+                aria-expanded={isOpen}
+              >
+                <div className="min-w-0 flex-1">
+                  <p className="font-ui text-sm font-medium text-foreground">{q.prompt}</p>
+                  <p
+                    className={
+                      "mt-1 truncate font-ui text-xs " +
+                      (answered ? "text-primary" : "text-muted-foreground")
+                    }
+                  >
+                    {summary(q)}
+                  </p>
+                </div>
+                <span
+                  aria-hidden
+                  className={
+                    "shrink-0 font-ui text-lg text-muted-foreground transition-transform " +
+                    (isOpen ? "rotate-45" : "")
+                  }
+                >
+                  +
+                </span>
+              </button>
+              {isOpen && (
+                <div className="border-t border-border/40 px-5 pb-5 pt-4 animate-fade-in">
+                  {q.type === "number" ? (
+                    <div className="flex items-baseline gap-3">
+                      <Input
+                        type="number"
+                        inputMode="numeric"
+                        min={q.min}
+                        max={q.max}
+                        value={typeof answers[q.key] === "string" ? (answers[q.key] as string) : ""}
+                        onChange={(e) => onChange(q.key, e.target.value)}
+                        className="w-32 font-serif text-2xl h-auto py-2"
+                        autoFocus
+                      />
+                      {q.suffix && (
+                        <span className="font-ui text-sm text-muted-foreground">{q.suffix}</span>
+                      )}
+                      {q.key === "profile.weight_kg" && bmi && (
+                        <span className="font-ui text-xs text-muted-foreground ml-2">
+                          BMI: <span className="text-foreground">{bmi}</span> ({bmiLabel(bmi)})
+                        </span>
+                      )}
+                    </div>
+                  ) : (
+                    <OptionList
+                      q={q}
+                      value={answers[q.key]}
+                      onChange={(v) => {
+                        onChange(q.key, v);
+                        setOpenKey(null); // tanlangach yopib qo'yamiz — qulaylik uchun
+                      }}
+                      onToggleMulti={() => {}}
+                    />
                   )}
                 </div>
-              ) : (
-                <OptionList
-                  q={q}
-                  value={answers[q.key]}
-                  onChange={(v) => onChange(q.key, v)}
-                  onToggleMulti={() => {}}
-                />
               )}
             </div>
-          </div>
-        ))}
-      </div>
+          );
+        })}
 
-      <div>
-        <h3 className="font-serif text-2xl leading-tight tracking-tight">
-          Reja davomiyligi
-        </h3>
-        <p className="mt-2 font-ui text-sm text-muted-foreground">
-          Har ikkisi ham ishlaydi. Farqi — bosim va tezlikda.
-        </p>
-        <div className="mt-6 grid gap-3 md:grid-cols-2">
-          {([
-            { value: 7 as const, tag: "Tez sprint", title: "7 kun", body: "Bir haftalik intensiv boshlash — kichik odatlar, tez natija." },
-            { value: 30 as const, tag: "To'liq o'zgarish", title: "30 kun", body: "Bir oy davomida chuqur qayta qurish — odatlar tanaga singiydi." },
-          ]).map((opt) => {
-            const selected = plan === opt.value;
-            return (
+        {/* Reja davomiyligi — xuddi savolga o'xshab yig'iladigan qator */}
+        {(() => {
+          const isOpen = openKey === "__plan__";
+          const planLabel = plan === 7 ? "7 kun — Tez sprint" : plan === 30 ? "30 kun — To'liq o'zgarish" : "—";
+          const answered = plan !== null;
+          return (
+            <div>
               <button
-                key={opt.value}
                 type="button"
-                onClick={() => onPlanChange(opt.value)}
-                className={
-                  selected
-                    ? "rounded-[var(--radius)] border-2 border-primary bg-primary/5 p-6 text-left"
-                    : "lift rounded-[var(--radius)] border border-border bg-card p-6 text-left"
-                }
+                onClick={() => toggle("__plan__")}
+                className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left transition-colors hover:bg-card/60"
+                aria-expanded={isOpen}
               >
-                <span className="font-ui text-xs uppercase tracking-[0.22em] text-primary">
-                  {opt.tag}
+                <div className="min-w-0 flex-1">
+                  <p className="font-ui text-sm font-medium text-foreground">Reja davomiyligi</p>
+                  <p
+                    className={
+                      "mt-1 truncate font-ui text-xs " +
+                      (answered ? "text-primary" : "text-muted-foreground")
+                    }
+                  >
+                    {planLabel}
+                  </p>
+                </div>
+                <span
+                  aria-hidden
+                  className={
+                    "shrink-0 font-ui text-lg text-muted-foreground transition-transform " +
+                    (isOpen ? "rotate-45" : "")
+                  }
+                >
+                  +
                 </span>
-                <h4 className="mt-3 font-serif text-2xl">{opt.title}</h4>
-                <p className="mt-2 font-ui text-sm text-muted-foreground">{opt.body}</p>
               </button>
-            );
-          })}
-        </div>
+              {isOpen && (
+                <div className="border-t border-border/40 px-5 pb-5 pt-4 animate-fade-in">
+                  <div className="grid gap-3 sm:grid-cols-2">
+                    {(
+                      [
+                        { value: 7 as const, tag: "Tez sprint", title: "7 kun", body: "Bir haftalik intensiv — tez natija." },
+                        { value: 30 as const, tag: "To'liq o'zgarish", title: "30 kun", body: "Chuqurroq qayta qurish — odat singiydi." },
+                      ]
+                    ).map((opt) => {
+                      const selected = plan === opt.value;
+                      return (
+                        <button
+                          key={opt.value}
+                          type="button"
+                          onClick={() => {
+                            onPlanChange(opt.value);
+                            setOpenKey(null);
+                          }}
+                          className={
+                            selected
+                              ? "rounded-[var(--radius)] border-2 border-primary bg-primary/5 p-4 text-left"
+                              : "lift rounded-[var(--radius)] border border-border bg-card p-4 text-left"
+                          }
+                        >
+                          <span className="font-ui text-[10px] uppercase tracking-[0.22em] text-primary">
+                            {opt.tag}
+                          </span>
+                          <h4 className="mt-2 font-serif text-xl">{opt.title}</h4>
+                          <p className="mt-1 font-ui text-xs text-muted-foreground">{opt.body}</p>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
+            </div>
+          );
+        })()}
       </div>
     </div>
   );
 }
+
