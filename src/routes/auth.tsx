@@ -47,7 +47,7 @@ function AuthPage() {
   }, [next]);
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-background text-foreground">
+    <div className="relative min-min-h-dvh overflow-hidden bg-background text-foreground">
       {/* Animated ambient background */}
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
         <div className="absolute -top-24 -left-24 h-[380px] w-[380px] rounded-full bg-primary/50 opacity-70 blur-[90px] lo-float-a" />

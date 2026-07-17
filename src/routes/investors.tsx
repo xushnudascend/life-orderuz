@@ -48,7 +48,7 @@ export const Route = createFileRoute("/investors")({
 
 function InvestorsPage() {
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-min-h-dvh bg-background text-foreground">
       {/* Sticky top badge */}
       <div className="sticky top-0 z-40 border-b border-border bg-background/80 backdrop-blur">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-3">
