@@ -93,9 +93,6 @@ function Pricing() {
           />
         </div>
 
-        <p className="mt-10 text-center text-xs text-muted-foreground">
-          To'lov integratsiyasi keyingi qadamda faollashtiriladi.
-        </p>
       </main>
       <footer className="border-t border-border">
         <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-4 px-5 py-6 text-sm text-muted-foreground">
