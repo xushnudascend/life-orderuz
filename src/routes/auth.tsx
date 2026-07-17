@@ -138,7 +138,6 @@ function EmailForm({ mode, next }: { mode: "signin" | "signup"; next: string }) 
           window.location.replace(next);
         } else {
           toast.success("Ro'yxatdan o'tildi. Endi kirishingiz mumkin.");
-          setTab("signin");
         }
       } else {
         const { error } = await supabase.auth.signInWithPassword({ email, password });
