@@ -51,13 +51,13 @@ export function AppShell({
   }
 
   return (
-    <div className="min-h-screen bg-background text-foreground animate-fade-in pb-24 md:pb-10">
-      <header className="border-b border-border">
+    <div className="min-h-screen bg-background text-foreground animate-fade-in pb-[calc(6rem+env(safe-area-inset-bottom))] md:pb-10">
+      <header className="sticky top-0 z-30 border-b border-border/70 bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5">
-          <Link to="/" className="font-serif text-lg">
+          <Link to="/" className="font-serif text-lg tracking-tight transition-opacity hover:opacity-80">
             {uz.brand.name}
           </Link>
-          <nav className="hidden items-center gap-1 md:flex">
+          <nav className="hidden items-center gap-1 md:flex" aria-label="Asosiy">
             {NAV.map((n) => {
               const active =
                 location.pathname === n.to ||
@@ -67,13 +67,19 @@ export function AppShell({
                   key={n.to}
                   to={n.to}
                   className={
-                    "rounded-md px-3 py-1.5 font-ui text-xs uppercase tracking-[0.2em] transition-colors " +
+                    "relative rounded-md px-3 py-1.5 font-ui text-xs uppercase tracking-[0.2em] transition-colors " +
                     (active
                       ? "text-foreground"
                       : "text-muted-foreground hover:text-foreground")
                   }
                 >
                   {n.label}
+                  {active && (
+                    <span
+                      aria-hidden
+                      className="absolute inset-x-3 -bottom-[17px] h-[2px] rounded-full bg-primary"
+                    />
+                  )}
                 </Link>
               );
             })}
@@ -96,7 +102,7 @@ export function AppShell({
         </div>
       </header>
 
-      <main className="mx-auto max-w-6xl px-5 py-10">{children}</main>
+      <main className="mx-auto max-w-6xl px-5 py-8 md:py-10 animate-route-in">{children}</main>
 
       <BottomNav recommendedTab={archetype?.preferredTab} />
     </div>
