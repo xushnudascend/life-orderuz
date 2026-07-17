@@ -154,30 +154,30 @@ function Hero() {
         <div>
           <p className="flex items-center gap-2 font-ui text-[11px] uppercase tracking-[0.24em] text-muted-foreground">
             <span className="inline-block h-1.5 w-1.5 rounded-full bg-primary" />
-            Self-Control OS · Beta
+            Behavior Design · Habit Science · Beta
           </p>
           <h1 className="mt-5 font-serif text-4xl leading-[1.05] tracking-tight text-balance sm:text-5xl md:text-6xl">
-            Life Order — o'z-o'zini boshqarish OS
+            Motivatsiya emas — miyya arxitekturasi.
           </h1>
           <p className="mt-4 font-serif text-2xl leading-tight text-muted-foreground sm:text-3xl">
-            Motivatsiya tugaydi. Tizim qoladi.
+            Iroda tugaydi. Tizim qoladi.
           </p>
           <p className="mt-6 max-w-xl text-base leading-relaxed text-muted-foreground text-pretty md:text-lg">
-            Life Order — o'z-o'zini boshqarishning operatsion tizimi. Trigger tahlili, kunlik uchta aniq qadam, halol AI mentor Nadir. 60 soniyada tashxis. Kartasiz.
+            Life Order xulq-atvor dizayni (Stanford Behavior Design Lab) va odatlar ilmiga tayanadi: trigger → mikro-harakat → tasdiq. Har kuni uchta aniq qadam, halol AI mentor Nadir. Ikki oy — va o'zingni tanimaysan. 60 soniyada boshla, kartasiz.
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <Button asChild size="lg" className="h-12 rounded-full font-ui font-semibold">
               <Link to="/auth">
-                60 soniyada tashxis olish
+                Bepul tashxis olish
                 <ArrowRight className="ml-1.5 h-4 w-4" />
               </Link>
             </Button>
             <Button asChild variant="ghost" size="lg" className="h-12 rounded-full font-ui">
-              <a href="#how-it-works">Qanday ishlaydi?</a>
+              <a href="#how-it-works">Ilmiy asosini ko'r</a>
             </Button>
           </div>
           <p className="mt-5 font-ui text-xs text-muted-foreground">
-            Kartasiz · Istalgan paytda to'xtatasan · O'zbek tilida
+            Kartasiz · Reklama trekerlari yo'q · O'zbek tilida
           </p>
         </div>
         <HeroOrnament />
