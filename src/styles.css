@@ -59,56 +59,56 @@
   --font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
 }
 
-/* ---------- "Obsidian Green" — default dark theme ---------- */
+/* ---------- "Obsidian" — default dark theme (amber accent) ---------- */
 :root {
   --radius: 0.5rem;
 
-  --background: 150 8% 4%;
-  --foreground: 150 6% 92%;
-  --card: 150 8% 6%;
-  --card-foreground: 150 6% 94%;
-  --popover: 150 8% 7%;
-  --popover-foreground: 150 6% 94%;
+  --background: 240 6% 5%;
+  --foreground: 40 15% 94%;
+  --card: 240 6% 7%;
+  --card-foreground: 40 15% 95%;
+  --popover: 240 6% 8%;
+  --popover-foreground: 40 15% 95%;
 
-  --primary: 142 76% 45%;
-  --primary-foreground: 150 20% 4%;
-  --primary-glow: 142 90% 55%;
+  --primary: 38 92% 58%;
+  --primary-foreground: 240 10% 6%;
+  --primary-glow: 42 96% 65%;
 
-  --secondary: 150 8% 10%;
-  --secondary-foreground: 150 6% 92%;
-  --muted: 150 6% 9%;
-  --muted-foreground: 150 5% 60%;
-  --accent: 150 10% 14%;
-  --accent-foreground: 150 6% 94%;
+  --secondary: 240 5% 11%;
+  --secondary-foreground: 40 15% 94%;
+  --muted: 240 5% 10%;
+  --muted-foreground: 240 5% 62%;
+  --accent: 240 6% 14%;
+  --accent-foreground: 40 15% 95%;
 
   --destructive: 0 72% 55%;
   --destructive-foreground: 0 0% 98%;
-  --success: 142 76% 45%;
+  --success: 142 70% 45%;
   --success-foreground: 150 20% 4%;
 
-  --border: 150 8% 14%;
-  --input: 150 8% 12%;
-  --ring: 142 76% 45%;
+  --border: 240 5% 15%;
+  --input: 240 5% 13%;
+  --ring: 38 92% 58%;
 
   /* Sidebar */
   --sidebar-width: 15rem;
   --sidebar-width-icon: 4rem;
 
-  /* Ocean-inspired accent scale (legacy) */
-  --abyss: 150 30% 5%;
-  --deep: 150 25% 10%;
-  --tide: 145 30% 22%;
-  --surf: 142 55% 45%;
-  --foam: 142 30% 78%;
-  --pearl: 150 10% 92%;
+  /* Legacy accent scale */
+  --abyss: 240 10% 5%;
+  --deep: 240 8% 10%;
+  --tide: 30 25% 22%;
+  --surf: 38 80% 55%;
+  --foam: 40 30% 82%;
+  --pearl: 40 15% 94%;
   --coral: 12 88% 62%;
   --sun: 42 95% 58%;
-  --kelp: 145 40% 30%;
+  --kelp: 30 40% 30%;
 
-  --shadow-glow: 0 0 40px hsl(142 76% 50% / 0.18);
-  --shadow-soft: 0 8px 32px -12px hsl(150 30% 0% / 0.75);
-  --shadow-card: 0 1px 0 hsl(150 20% 100% / 0.04) inset,
-    0 8px 24px -12px hsl(150 30% 0% / 0.65);
+  --shadow-glow: 0 0 40px hsl(38 92% 58% / 0.18);
+  --shadow-soft: 0 8px 32px -12px hsl(240 30% 0% / 0.75);
+  --shadow-card: 0 1px 0 hsl(40 20% 100% / 0.04) inset,
+    0 8px 24px -12px hsl(240 30% 0% / 0.65);
 }
 
 /* ---------- "Aurora" — light monochrome theme ---------- */
