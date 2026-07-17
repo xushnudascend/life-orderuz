@@ -141,40 +141,56 @@ function Hero() {
     <section className="relative overflow-hidden">
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-0 h-[560px]"
+        className="pointer-events-none absolute inset-x-0 top-0 h-[720px]"
         style={{
           background:
-            "radial-gradient(ellipse 60% 60% at 50% 0%, hsl(var(--primary) / 0.10), transparent 60%)",
+            "radial-gradient(ellipse 70% 55% at 50% 0%, hsl(var(--primary) / 0.12), transparent 62%)",
         }}
       />
-      <div className="relative mx-auto grid max-w-6xl gap-10 px-5 pb-20 pt-16 md:grid-cols-[1.15fr_1fr] md:items-center md:pt-24">
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 opacity-[0.035] mix-blend-overlay"
+        style={{
+          backgroundImage:
+            "radial-gradient(circle at 1px 1px, hsl(var(--foreground)) 1px, transparent 0)",
+          backgroundSize: "24px 24px",
+        }}
+      />
+      <div className="relative mx-auto grid max-w-6xl gap-14 px-5 pb-24 pt-20 md:grid-cols-[1.2fr_1fr] md:items-center md:pt-28">
         <div>
-          <p className="flex items-center gap-2 font-ui text-[11px] uppercase tracking-[0.24em] text-muted-foreground">
-            <span className="inline-block h-1.5 w-1.5 rounded-full bg-primary" />
-            Behavior Design · Habit Science · Beta
+          <p className="flex items-center gap-3 font-ui text-[10px] font-medium uppercase tracking-[0.32em] text-muted-foreground">
+            <span className="inline-block h-px w-8 bg-primary" />
+            Behavior Design · Habit Science
           </p>
-          <h1 className="mt-5 font-serif text-4xl leading-[1.05] tracking-tight text-balance sm:text-5xl md:text-6xl">
-            Motivatsiya tugaydi. <span className="text-muted-foreground">Tizim qoladi.</span>
+          <h1 className="mt-7 font-serif text-[3.25rem] leading-[0.98] tracking-[-0.03em] text-balance sm:text-6xl md:text-[5.5rem]">
+            Motivatsiya tugaydi.
+            <br />
+            <span className="italic text-muted-foreground">Tizim</span>{" "}
+            <span className="text-foreground">qoladi.</span>
           </h1>
-          <p className="mt-4 font-serif text-2xl leading-tight text-muted-foreground sm:text-3xl">
+          <p className="mt-6 max-w-xl font-serif text-2xl leading-[1.25] italic text-muted-foreground sm:text-[1.7rem]">
             Iroda emas — miyya arxitekturasi.
           </p>
-          <p className="mt-6 max-w-xl text-base leading-relaxed text-muted-foreground text-pretty md:text-lg">
-            Life Order xulq-atvor dizayni (Stanford Behavior Design Lab) va odatlar ilmiga tayanadi: trigger → mikro-harakat → tasdiq. Har kuni uchta aniq qadam, halol AI mentor Nadir. Ikki oy — va o'zingni tanimaysan. 60 soniyada boshla, kartasiz.
+          <p className="mt-8 max-w-xl font-ui text-[15px] leading-[1.7] text-muted-foreground text-pretty md:text-base">
+            Life Order xulq-atvor dizayni va odatlar ilmiga tayanadi: trigger → mikro-harakat → tasdiq. Har kuni uchta aniq qadam, halol AI mentor Nadir. Ikki oy — va o'zingni tanimaysan.
           </p>
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <Button asChild size="lg" className="h-12 rounded-full font-ui font-semibold">
+          <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center">
+            <Button asChild size="lg" className="h-12 rounded-full px-6 font-ui font-semibold">
               <Link to="/auth">
                 Bepul tashxis olish
                 <ArrowRight className="ml-1.5 h-4 w-4" />
               </Link>
             </Button>
-            <Button asChild variant="ghost" size="lg" className="h-12 rounded-full font-ui">
-              <a href="#how-it-works">Ilmiy asosini ko'r</a>
-            </Button>
+            <a
+              href="#how-it-works"
+              className="group inline-flex items-center gap-2 font-ui text-sm text-muted-foreground transition-colors hover:text-foreground"
+            >
+              Ilmiy asosini ko'r
+              <span className="inline-block h-px w-6 bg-current transition-all group-hover:w-10" />
+            </a>
           </div>
-          <p className="mt-5 font-ui text-xs text-muted-foreground">
-            Kartasiz · Reklama trekerlari yo'q · O'zbek tilida
+          <p className="mt-6 font-ui text-[11px] uppercase tracking-[0.24em] text-muted-foreground">
+            60 soniya · Kartasiz · O'zbek tilida
           </p>
         </div>
         <HeroOrnament />
@@ -188,20 +204,27 @@ function HeroOrnament() {
     <div className="relative hidden aspect-square items-center justify-center md:flex">
       <div
         aria-hidden
-        className="absolute inset-0 rounded-full opacity-40"
+        className="absolute inset-0 rounded-full opacity-30"
         style={{
           background:
-            "conic-gradient(from 0deg, hsl(var(--primary) / 0.35), transparent 55%)",
-          animation: "lo-spin-slow 24s linear infinite",
+            "conic-gradient(from 210deg, hsl(var(--primary) / 0.45), transparent 55%)",
+          animation: "lo-spin-slow 32s linear infinite",
         }}
       />
-      <div className="relative h-56 w-56 rounded-full border border-primary/40 bg-card/40" />
-      <div className="absolute h-40 w-40 rounded-full border border-border" />
-      <div className="absolute h-24 w-24 rounded-full border border-border/60" />
+      <div className="absolute h-72 w-72 rounded-full border border-primary/25" />
+      <div className="absolute h-56 w-56 rounded-full border border-border" />
+      <div className="absolute h-40 w-40 rounded-full border border-border/60" />
+      <div className="relative grid h-24 w-24 place-items-center rounded-full border border-primary/40 bg-card/60 backdrop-blur-sm">
+        <span className="font-serif text-4xl italic text-primary">L</span>
+      </div>
+      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 font-ui text-[10px] uppercase tracking-[0.32em] text-muted-foreground">
+        Life · Order
+      </div>
       <style>{`@keyframes lo-spin-slow{to{transform:rotate(360deg)}}`}</style>
     </div>
   );
 }
+
 
 /* ================= C.3 — Problems grid ================= */
 function ProblemsGrid() {
