@@ -54,9 +54,10 @@
   --color-sun: hsl(var(--sun));
   --color-kelp: hsl(var(--kelp));
 
-  --font-serif: "Times New Roman", Times, Georgia, ui-serif, serif;
+  --font-serif: "Instrument Serif", "Times New Roman", Georgia, ui-serif, serif;
   --font-sans: "Karla", ui-sans-serif, system-ui, sans-serif;
   --font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
+
 }
 
 /* ---------- "Obsidian" — default dark theme ---------- */
@@ -183,8 +184,10 @@
 
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-serif);
-    letter-spacing: -0.015em;
+    letter-spacing: -0.02em;
+    font-weight: 400;
   }
+
 
   /* UI micro-text uses Karla */
   button, input, select, textarea, label,
