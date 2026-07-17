@@ -88,14 +88,10 @@ function Landing() {
         <Hero />
         <ProblemsGrid />
         <DashboardPreview />
-        <SocialProof />
-        <ProblemDeep />
-        <TurningPoint />
         <ThreePillars />
         <HowItWorks />
         <ScienceBase />
         <FeaturesGrid />
-        <EarlyMembers />
         <Pricing />
         <Faq />
         <FinalCta />
@@ -104,6 +100,7 @@ function Landing() {
     </div>
   );
 }
+
 
 /* ================= C.1 — Header ================= */
 function Header() {
