@@ -43,13 +43,10 @@ function Pricing() {
           Narxlar
         </p>
         <h1 className="mt-3 font-serif text-5xl leading-tight tracking-tight">
-          Halol narx. Yashirin to'lov yo'q.
+          Halol narx.
         </h1>
         <p className="mt-3 font-serif text-2xl text-muted-foreground">
-          Free — doimiy. Pro — ixtiyoriy, kerak bo'lsa.
-        </p>
-        <p className="mt-4 max-w-xl text-muted-foreground">
-          Bepul reja karta so'ramaydi. Pro — kengroq kontekst kerak bo'lganda. Istalgan paytda bir bosishda bekor qilinadi. Reklama trekerlari yo'q — sen mahsulot emassan.
+          Free — doimiy. Pro — kerak bo'lsa.
         </p>
 
         <div className="mt-12 grid gap-6 md:grid-cols-2">
