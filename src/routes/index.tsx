@@ -93,6 +93,7 @@ function Landing() {
         <TurningPoint />
         <ThreePillars />
         <HowItWorks />
+        <ScienceBase />
         <FeaturesGrid />
         <EarlyMembers />
         <Pricing />
