@@ -274,15 +274,22 @@ function Dashboard() {
           />
 
           {!loaded ? (
-            <div className="mt-3 space-y-1.5" aria-hidden>
+            <div
+              className="mt-3 space-y-1.5"
+              role="status"
+              aria-live="polite"
+              aria-busy="true"
+            >
+              <span className="sr-only">Bugungi odatlar yuklanmoqda…</span>
               {[0, 1, 2, 3].map((i) => (
-                <div
-                  key={i}
-                  className="h-12 w-full animate-pulse rounded-md border border-border bg-background/40"
-                />
+                <div key={i} className="skeleton h-12 w-full" aria-hidden />
               ))}
             </div>
           ) : habits.length === 0 ? (
+            <div className="mt-4 rounded-md border border-dashed border-border p-6 text-center">
+              <p className="font-ui text-sm text-muted-foreground">
+                Hozircha odat yo'q. Sun'iy intellekt shaxsiy reja tuzib bersinmi?
+              </p>
             <div className="mt-4 rounded-md border border-dashed border-border p-6 text-center">
               <p className="font-ui text-sm text-muted-foreground">
                 Hozircha odat yo'q. Sun'iy intellekt shaxsiy reja tuzib bersinmi?
