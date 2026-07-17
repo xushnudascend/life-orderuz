@@ -55,9 +55,9 @@ const FAQ_ITEMS: { q: string; a: string }[] = [
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: `${BRAND} — Hayotingni tartibga sol` },
+      { title: `${BRAND} — Motivatsiya emas, tizim. Miyyani qayta dasturla.` },
       { name: "description", content: ONE_LINER },
-      { property: "og:title", content: `${BRAND} — Hayotingni tartibga sol` },
+      { property: "og:title", content: `${BRAND} — Motivatsiya emas, tizim. Miyyani qayta dasturla.` },
       { property: "og:description", content: ONE_LINER },
       { property: "og:url", content: `${SITE_URL}/` },
     ],
