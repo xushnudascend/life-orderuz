@@ -151,6 +151,47 @@ function Onboarding() {
       if (profErr) throw profErr;
 
       toast.success("Tashxis tugadi. Yo'l tuzildi.");
+      setArchetypeName(arche.id);
+
+      // "Aha!" — shaxsiy nudge (best-effort, xatolarda dashbordga to'g'ridan-to'g'ri o'tamiz)
+      try {
+        const { data: sess } = await supabase.auth.getSession();
+        const token = sess.session?.access_token;
+        if (token && plan) {
+          const triggerKeys = bQuestions.map((q) => q.key);
+          const triggers: string[] = [];
+          for (const k of triggerKeys) {
+            const v = answers[k];
+            if (Array.isArray(v)) triggers.push(...v);
+            else if (typeof v === "string" && v) triggers.push(v);
+          }
+          const res = await fetch("/api/ai/onboarding-nudge", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify({
+              archetype: arche.id,
+              energyTime:
+                typeof energyTime === "string" ? energyTime : "",
+              planDays: plan,
+              triggers: triggers.slice(0, 10),
+            }),
+          });
+          if (res.ok) {
+            const j = (await res.json()) as { nudge?: string };
+            if (j.nudge) {
+              setAhaNudge(j.nudge);
+              setSaving(false);
+              return;
+            }
+          }
+        }
+      } catch {
+        // ignore — fall through to redirect
+      }
+
       // Hard nav — _authenticated layout profilni qaytadan o'qishi shart,
       // aks holda eski state onboarded=false qolib, /onboarding'ga qaytaradi.
       window.location.assign("/dashboard");
