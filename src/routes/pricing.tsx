@@ -73,25 +73,6 @@ function Pricing() {
   );
 }
 
-  return (
-    <header className="sticky top-0 z-40 h-14 border-b border-border bg-background/80 backdrop-blur-sm">
-      <div className="mx-auto flex h-full max-w-6xl items-center justify-between px-5">
-        <Link to="/" className="flex items-center gap-2">
-          <span
-            aria-hidden
-            className="grid h-7 w-7 place-items-center rounded-[10px] bg-primary text-primary-foreground"
-          >
-            <span className="font-serif text-[15px] font-semibold leading-none">L</span>
-          </span>
-          <span className="font-serif text-lg font-bold tracking-tight">{uz.brand.name}</span>
-        </Link>
-        <Button asChild variant="ghost" size="sm">
-          <Link to="/auth">Kirish</Link>
-        </Button>
-      </div>
-    </header>
-  );
-}
 
 function Hero() {
   return (
