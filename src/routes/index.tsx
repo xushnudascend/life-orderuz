@@ -87,9 +87,10 @@ export const Route = createFileRoute("/")({
 function Landing() {
   return (
     <div className="min-h-screen bg-background text-foreground animate-fade-in">
-      <Header />
+      <SiteHeader />
       <main>
         <Hero />
+        <ProofStrip />
         <Pillars />
         <HowItWorks />
         <Features />
@@ -98,10 +99,11 @@ function Landing() {
         <Faq />
         <FinalCta />
       </main>
-      <Footer />
+      <SiteFooter />
     </div>
   );
 }
+
 
 function Header() {
   return (
