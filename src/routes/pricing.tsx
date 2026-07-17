@@ -1,5 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
+import { SiteHeader } from "@/components/site-header";
+import { SiteFooter } from "@/components/site-footer";
 import {
   Accordion,
   AccordionContent,
@@ -9,6 +11,7 @@ import {
 import { Check, ArrowRight, X } from "lucide-react";
 import { uz } from "@/i18n";
 import { freeTierLimits, proTierLimits, pricing } from "@/lib/limits";
+
 
 const SITE_URL = "https://life-orderuz.lovable.app";
 const DESC =
@@ -50,7 +53,14 @@ export const Route = createFileRoute("/pricing")({
 function Pricing() {
   return (
     <div className="min-h-screen bg-background text-foreground animate-fade-in">
-      <Header />
+      <SiteHeader
+        nav={[
+          { href: "/", label: "Bosh sahifa" },
+          { href: "/#science", label: "Ilm" },
+          { href: "/#faq", label: "Savollar" },
+        ]}
+        cta={{ label: "Kirish", to: "/auth" }}
+      />
       <main>
         <Hero />
         <Plans />
@@ -58,31 +68,11 @@ function Pricing() {
         <Faq />
         <FinalCta />
       </main>
-      <Footer />
+      <SiteFooter />
     </div>
   );
 }
 
-function Header() {
-  return (
-    <header className="sticky top-0 z-40 h-14 border-b border-border bg-background/80 backdrop-blur-sm">
-      <div className="mx-auto flex h-full max-w-6xl items-center justify-between px-5">
-        <Link to="/" className="flex items-center gap-2">
-          <span
-            aria-hidden
-            className="grid h-7 w-7 place-items-center rounded-[10px] bg-primary text-primary-foreground"
-          >
-            <span className="font-serif text-[15px] font-semibold leading-none">L</span>
-          </span>
-          <span className="font-serif text-lg font-bold tracking-tight">{uz.brand.name}</span>
-        </Link>
-        <Button asChild variant="ghost" size="sm">
-          <Link to="/auth">Kirish</Link>
-        </Button>
-      </div>
-    </header>
-  );
-}
 
 function Hero() {
   return (
@@ -319,18 +309,3 @@ function FinalCta() {
   );
 }
 
-function Footer() {
-  return (
-    <footer>
-      <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-5 py-8 font-ui text-xs text-muted-foreground">
-        <p>© {new Date().getFullYear()} {uz.brand.name}</p>
-        <nav className="flex flex-wrap gap-x-5 gap-y-2">
-          <Link to="/terms" className="hover:text-foreground">Terms</Link>
-          <Link to="/privacy" className="hover:text-foreground">Privacy</Link>
-          <Link to="/refund" className="hover:text-foreground">Refund</Link>
-          <Link to="/security" className="hover:text-foreground">Xavfsizlik</Link>
-        </nav>
-      </div>
-    </footer>
-  );
-}
