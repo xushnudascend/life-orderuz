@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import { ArrowLeft, Loader2 } from "lucide-react";
+import { ArrowLeft, Eye, EyeOff, Loader2 } from "lucide-react";
 import { uz } from "@/i18n";
 
 function sanitizeNext(next: unknown): string {
@@ -116,6 +116,7 @@ function AuthPage() {
 function EmailForm({ mode, next }: { mode: "signin" | "signup"; next: string }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
 
   async function onSubmit(e: React.FormEvent) {
@@ -128,14 +129,14 @@ function EmailForm({ mode, next }: { mode: "signin" | "signup"; next: string }) 
           email,
           password,
           options: {
-            emailRedirectTo: `${window.location.origin}${next}`,
+            emailRedirectTo: `${window.location.origin}/onboarding`,
           },
         });
         if (error) throw error;
-        // Auto-confirm yoqilgan: sessiya darhol yaratiladi
         const { data } = await supabase.auth.getSession();
         if (data.session) {
-          window.location.replace(next);
+          // Yangi hisob — to'g'ridan-to'g'ri onboarding'ga
+          window.location.replace("/onboarding");
         } else {
           toast.success("Ro'yxatdan o'tildi. Endi kirishingiz mumkin.");
         }
