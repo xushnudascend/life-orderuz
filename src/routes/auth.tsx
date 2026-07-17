@@ -132,10 +132,14 @@ function EmailForm({ mode, next }: { mode: "signin" | "signup"; next: string }) 
           },
         });
         if (error) throw error;
-        toast.success("Ro'yxatdan o'tildi. Emailingizni tekshiring.");
-        // If email confirmation is disabled, session already exists.
+        // Auto-confirm yoqilgan: sessiya darhol yaratiladi
         const { data } = await supabase.auth.getSession();
-        if (data.session) window.location.replace(next);
+        if (data.session) {
+          window.location.replace(next);
+        } else {
+          toast.success("Ro'yxatdan o'tildi. Endi kirishingiz mumkin.");
+          setTab("signin");
+        }
       } else {
         const { error } = await supabase.auth.signInWithPassword({ email, password });
         if (error) throw error;
