@@ -21,6 +21,9 @@ import {
   BookText,
   Clock,
   Lock,
+  TrendingDown,
+  Users,
+  Quote,
 } from "lucide-react";
 
 
