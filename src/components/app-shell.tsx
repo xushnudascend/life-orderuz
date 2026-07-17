@@ -1,20 +1,13 @@
-import { Link, useLocation } from "@tanstack/react-router";
-import { Home, ListChecks, BookText, Sparkles, User } from "lucide-react";
+import { Link } from "@tanstack/react-router";
 import type { ReactNode } from "react";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { uz } from "@/i18n";
 import { BottomNav } from "@/components/bottom-nav";
+import { SidebarNav } from "@/components/sidebar-nav";
 import { ARCHETYPES, type Archetype } from "@/lib/nervous";
-
-const NAV = [
-  { to: "/dashboard", label: "Bugun", icon: Home },
-  { to: "/habits", label: "Odatlar", icon: ListChecks },
-  { to: "/mentor", label: "Nadir", icon: Sparkles },
-  { to: "/journal", label: "Kundalik", icon: BookText },
-  { to: "/profile", label: "Profil", icon: User },
-] as const;
+import { LogOut } from "lucide-react";
 
 export function AppShell({
   title,
@@ -23,8 +16,8 @@ export function AppShell({
   title?: string;
   children: ReactNode;
 }) {
-  const location = useLocation();
   const [archetype, setArchetype] = useState<Archetype | null>(null);
+  const [name, setName] = useState<string | null>(null);
 
   useEffect(() => {
     let alive = true;
@@ -33,11 +26,13 @@ export function AppShell({
       if (!userData.user) return;
       const { data } = await supabase
         .from("profiles")
-        .select("archetype")
+        .select("archetype, display_name")
         .eq("id", userData.user.id)
         .maybeSingle();
       if (!alive) return;
       const key = (data as { archetype?: string } | null)?.archetype;
+      const dn = (data as { display_name?: string } | null)?.display_name ?? null;
+      setName(dn);
       if (key && key in ARCHETYPES) setArchetype(ARCHETYPES[key as Archetype["id"]]);
     })();
     return () => {
@@ -50,59 +45,62 @@ export function AppShell({
     window.location.href = "/auth";
   }
 
-  return (
-    <div className="min-h-screen bg-background text-foreground animate-fade-in pb-[calc(6rem+env(safe-area-inset-bottom))] md:pb-10">
-      <header className="sticky top-0 z-30 border-b border-border/70 bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5">
-          <Link to="/" className="font-serif text-lg tracking-tight transition-opacity hover:opacity-80">
-            {uz.brand.name}
-          </Link>
-          <nav className="hidden items-center gap-1 md:flex" aria-label="Asosiy">
-            {NAV.map((n) => {
-              const active =
-                location.pathname === n.to ||
-                location.pathname.startsWith(n.to + "/");
-              return (
-                <Link
-                  key={n.to}
-                  to={n.to}
-                  className={
-                    "relative rounded-md px-3 py-1.5 font-ui text-xs uppercase tracking-[0.2em] transition-colors " +
-                    (active
-                      ? "text-foreground"
-                      : "text-muted-foreground hover:text-foreground")
-                  }
-                >
-                  {n.label}
-                  {active && (
-                    <span
-                      aria-hidden
-                      className="absolute inset-x-3 -bottom-[17px] h-[2px] rounded-full bg-primary"
-                    />
-                  )}
-                </Link>
-              );
-            })}
-          </nav>
-          <div className="flex items-center gap-2">
-            {title && (
-              <span className="hidden font-ui text-xs uppercase tracking-[0.24em] text-muted-foreground lg:inline">
-                {title}
-              </span>
-            )}
-            <Button
-              variant="ghost"
-              size="sm"
-              className="font-ui text-muted-foreground hover:text-foreground"
-              onClick={signOut}
-            >
-              Chiqish
-            </Button>
-          </div>
-        </div>
-      </header>
+  const initial = (name?.trim()?.[0] ?? "L").toUpperCase();
 
-      <main className="mx-auto max-w-6xl px-5 py-8 md:py-10 animate-route-in">{children}</main>
+  return (
+    <div className="min-h-screen bg-background text-foreground">
+      <SidebarNav />
+
+      <div
+        className="md:pl-[var(--sidebar-width)]"
+        style={{ paddingBottom: "calc(6rem + env(safe-area-inset-bottom))" }}
+      >
+        {/* Topbar */}
+        <header className="sticky top-0 z-20 border-b border-border/70 bg-background/80 backdrop-blur">
+          <div className="mx-auto flex h-14 max-w-[1400px] items-center justify-between gap-3 px-4 sm:px-6">
+            <Link
+              to="/"
+              className="font-serif text-base font-semibold tracking-tight md:hidden"
+            >
+              Life<span className="text-primary">.</span>Order
+            </Link>
+            <div className="hidden min-w-0 md:block">
+              {title && (
+                <p className="font-ui text-[11px] font-semibold uppercase tracking-[0.24em] text-muted-foreground">
+                  {title}
+                </p>
+              )}
+              <p className="truncate font-serif text-sm text-foreground/80">
+                {uz.brand.tagline}
+              </p>
+            </div>
+
+            <div className="flex items-center gap-2">
+              <Link
+                to="/profile"
+                className="flex h-9 w-9 items-center justify-center rounded-full border border-border bg-card font-ui text-sm font-semibold text-foreground transition-colors hover:border-primary/50 hover:text-primary"
+                aria-label="Profil"
+              >
+                {initial}
+              </Link>
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={signOut}
+                className="font-ui text-muted-foreground hover:text-foreground"
+                aria-label="Chiqish"
+              >
+                <LogOut className="h-4 w-4 sm:mr-1.5" />
+                <span className="hidden sm:inline">Chiqish</span>
+              </Button>
+            </div>
+          </div>
+        </header>
+
+        <main className="mx-auto max-w-[1400px] px-4 py-6 sm:px-6 sm:py-8 animate-route-in">
+          {children}
+        </main>
+      </div>
 
       <BottomNav recommendedTab={archetype?.preferredTab} />
     </div>
