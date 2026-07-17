@@ -48,19 +48,19 @@ function AuthPage() {
   return (
     <div className="relative min-h-screen overflow-hidden bg-background text-foreground">
       {/* Animated ambient background */}
-      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute -top-32 -left-24 h-[420px] w-[420px] rounded-full bg-primary/20 blur-3xl lo-float-a" />
-        <div className="absolute top-1/3 -right-32 h-[380px] w-[380px] rounded-full bg-primary/10 blur-3xl lo-float-b" />
-        <div className="absolute -bottom-32 left-1/3 h-[360px] w-[360px] rounded-full bg-primary/15 blur-3xl lo-float-c" />
-        <div className="absolute inset-0 opacity-[0.04] [background-image:radial-gradient(hsl(var(--foreground))_1px,transparent_1px)] [background-size:22px_22px]" />
+      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+        <div className="absolute -top-24 -left-24 h-[380px] w-[380px] rounded-full bg-primary/50 opacity-70 blur-[90px] lo-float-a" />
+        <div className="absolute top-1/4 -right-24 h-[340px] w-[340px] rounded-full bg-primary/40 opacity-70 blur-[90px] lo-float-b" />
+        <div className="absolute -bottom-24 left-1/4 h-[360px] w-[360px] rounded-full bg-primary/45 opacity-70 blur-[90px] lo-float-c" />
+        <div className="absolute inset-0 opacity-[0.05] [background-image:radial-gradient(hsl(var(--foreground))_1px,transparent_1px)] [background-size:22px_22px]" />
       </div>
       <style>{`
-        @keyframes lo-float-a { 0%,100% { transform: translate(0,0) scale(1);} 50% { transform: translate(40px,30px) scale(1.08);} }
-        @keyframes lo-float-b { 0%,100% { transform: translate(0,0) scale(1);} 50% { transform: translate(-30px,20px) scale(1.05);} }
-        @keyframes lo-float-c { 0%,100% { transform: translate(0,0) scale(1);} 50% { transform: translate(20px,-30px) scale(1.1);} }
-        .lo-float-a { animation: lo-float-a 14s ease-in-out infinite; }
-        .lo-float-b { animation: lo-float-b 18s ease-in-out infinite; }
-        .lo-float-c { animation: lo-float-c 22s ease-in-out infinite; }
+        @keyframes lo-float-a { 0%,100% { transform: translate(0,0) scale(1);} 50% { transform: translate(80px,60px) scale(1.15);} }
+        @keyframes lo-float-b { 0%,100% { transform: translate(0,0) scale(1);} 50% { transform: translate(-70px,50px) scale(1.12);} }
+        @keyframes lo-float-c { 0%,100% { transform: translate(0,0) scale(1);} 50% { transform: translate(60px,-70px) scale(1.18);} }
+        .lo-float-a { animation: lo-float-a 10s ease-in-out infinite; }
+        .lo-float-b { animation: lo-float-b 13s ease-in-out infinite; }
+        .lo-float-c { animation: lo-float-c 16s ease-in-out infinite; }
       `}</style>
 
       <div className="mx-auto max-w-md px-5 py-10">
