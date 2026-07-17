@@ -36,10 +36,12 @@ function AuthenticatedShell() {
   const { userId } = Route.useRouteContext();
   const location = useLocation();
   const navigate = useNavigate();
+  const cacheKey = `lo:onboarded:${userId}`;
+  const cached = typeof window !== "undefined" && window.localStorage.getItem(cacheKey) === "1";
   const [state, setState] = useState<
     | { status: "loading" }
     | { status: "ready"; onboarded: boolean }
-  >({ status: "loading" });
+  >(cached ? { status: "ready", onboarded: true } : { status: "loading" });
 
   useEffect(() => {
     let alive = true;
@@ -53,10 +55,10 @@ function AuthenticatedShell() {
         if (error) {
           console.error("[auth] profile fetch failed", error);
         }
-        setState({
-          status: "ready",
-          onboarded: Boolean(data?.onboarding_completed_at),
-        });
+        const onboarded = Boolean(data?.onboarding_completed_at);
+        if (onboarded) window.localStorage.setItem(cacheKey, "1");
+        else window.localStorage.removeItem(cacheKey);
+        setState({ status: "ready", onboarded });
       });
     return () => {
       alive = false;
