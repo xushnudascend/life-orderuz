@@ -14,6 +14,8 @@ import {
   Lock,
   Globe,
   Mail,
+  Download,
+  FileText,
 } from "lucide-react";
 import { uz } from "@/i18n";
 
