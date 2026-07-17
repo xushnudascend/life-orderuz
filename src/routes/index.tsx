@@ -88,14 +88,10 @@ function Landing() {
         <Hero />
         <ProblemsGrid />
         <DashboardPreview />
-        <SocialProof />
-        <ProblemDeep />
-        <TurningPoint />
         <ThreePillars />
         <HowItWorks />
         <ScienceBase />
         <FeaturesGrid />
-        <EarlyMembers />
         <Pricing />
         <Faq />
         <FinalCta />
@@ -104,6 +100,7 @@ function Landing() {
     </div>
   );
 }
+
 
 /* ================= C.1 — Header ================= */
 function Header() {
@@ -341,76 +338,6 @@ function CountUp({ to }: { to: number }) {
   return <span ref={ref}>{n}</span>;
 }
 
-/* ================= C.5 — Halol ijtimoiy dalil ================= */
-function SocialProof() {
-  return (
-    <section className="border-t border-border">
-      <div className="mx-auto max-w-3xl px-5 py-20 text-center">
-        <p className="font-serif text-2xl leading-relaxed text-pretty">
-          Birinchi to'lqin ichkarida. Sen ham shu safda.
-        </p>
-        <p className="mt-4 font-ui text-sm text-muted-foreground">
-          Soxta iqtiboslar, soxta raqamlar yo'q. Birinchi ijtimoiy dalil — sening 30-kunlik natijang bo'ladi.
-        </p>
-      </div>
-    </section>
-  );
-}
-
-/* ================= C.6 — Muammo (chuqurroq) ================= */
-function ProblemDeep() {
-  const list = [
-    "Bugungi vazifani ertaga surdim (yana)",
-    "Sport zaliga 4 kun bordim, 5-kuni tashladim",
-    "Kitob 40-sahifada — 3 oydan beri",
-    "Ekran vaqti kuniga 6+ soat",
-    "Tengdoshlarim oldga ketmoqda, men joyimda",
-    "Rejalar aniq — bajarish esa yo'q",
-  ];
-  return (
-    <section className="border-t border-border bg-card/30">
-      <div className="mx-auto grid max-w-6xl gap-10 px-5 py-20 md:grid-cols-2 md:items-center">
-        <div>
-          <h2 className="font-serif text-3xl leading-tight tracking-tight text-balance md:text-4xl">
-            Har dushanba yangi hayot.
-            <br />
-            <span className="text-muted-foreground">Har juma o'sha eski sen.</span>
-          </h2>
-          <p className="mt-6 max-w-xl leading-relaxed text-muted-foreground">
-            Muammo — irodangda emas. Muammo — miyya ehtiyot rejim (default mode) tanlaganida. Motivatsion kontent bir necha kunda so'nadi (hedonic adaptation). Doimiy o'zgarish uchun kontent emas — arxitektura kerak.
-          </p>
-        </div>
-        <ul className="space-y-3">
-          {list.map((l) => (
-            <li key={l} className="flex items-start gap-3 font-ui text-sm">
-              <span className="mt-2 inline-block h-px w-4 bg-destructive/60" />
-              <span className="leading-relaxed">{l}</span>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </section>
-  );
-}
-
-/* ================= C.7 — Burilish nuqtasi ================= */
-function TurningPoint() {
-  return (
-    <section className="border-t border-border">
-      <div className="mx-auto max-w-3xl px-5 py-24 text-center">
-        <h2 className="font-serif text-3xl leading-tight tracking-tight text-balance md:text-5xl">
-          Muvaffaqiyatli odamlar irodaga tayanmaydi.
-          <br />
-          <span className="text-primary">Ular muhitni loyihalaydi.</span>
-        </h2>
-        <p className="mx-auto mt-6 max-w-xl leading-relaxed text-muted-foreground text-pretty">
-          Duke University tadqiqoti (Wendy Wood, 2019): kundalik xatti-harakatning <span className="text-foreground">43%</span> — ongli qaror emas, avtomatik odat. Ular ertalab "nima qilay?" demaydi — trigger allaqachon o'rnatilgan. Life Order shu arxitekturani telefoningga o'rnatadi.
-        </p>
-      </div>
-    </section>
-  );
-}
-
 /* ================= C.8 — Uch ustun ================= */
 function ThreePillars() {
   const items = [
@@ -596,22 +523,6 @@ function FeaturesGrid() {
             );
           })}
         </div>
-      </div>
-    </section>
-  );
-}
-
-/* ================= C.11 — Erta a'zolar (halollik) ================= */
-function EarlyMembers() {
-  return (
-    <section className="border-t border-border">
-      <div className="mx-auto max-w-3xl px-5 py-20 text-center">
-        <p className="font-serif text-xl leading-relaxed text-pretty">
-          Iqtiboslar sotib olinmagan. Raqamlar bo'yalgan emas.
-        </p>
-        <p className="mt-4 font-ui text-sm text-muted-foreground leading-relaxed">
-          Life Order beta bosqichida. Ijtimoiy dalil qurish — vaqt talab qiladi. Birinchi haqiqiy tavsiflar — sen va erta a'zolarning 30-kunlik natijalaridan chiqadi. Bo'sh gap emas, o'lchangan o'zgarish.
-        </p>
       </div>
     </section>
   );
