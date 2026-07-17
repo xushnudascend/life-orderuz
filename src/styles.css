@@ -329,7 +329,75 @@ html[data-motion="reduce"] *::after {
   animation: none !important;
   transition: none !important;
 }
-html[data-perf="low"] .glass {
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
+
+/* Reduced transparency — ko'rish qobiliyati past foydalanuvchilar uchun */
+@media (prefers-reduced-transparency: reduce) {
+  .glass,
+  .backdrop-blur,
+  .backdrop-blur-sm,
+  .backdrop-blur-md,
+  .backdrop-blur-lg,
+  .backdrop-blur-xl {
+    backdrop-filter: none !important;
+    background-color: hsl(var(--card)) !important;
+  }
+}
+
+/* High contrast — WCAG AAA yaqin foydalanuvchilar uchun */
+@media (prefers-contrast: more) {
+  :root {
+    --border: 150 8% 30%;
+    --muted-foreground: 150 6% 75%;
+  }
+  .light {
+    --border: 30 12% 60%;
+    --muted-foreground: 0 0% 25%;
+  }
+  :focus-visible {
+    outline-width: 3px !important;
+  }
+}
+
+/* Past darajadagi qurilmalar — blur, glow va gradyentlarni soddalashtiramiz */
+html[data-perf="low"] .glass,
+html[data-perf="low"] .backdrop-blur,
+html[data-perf="low"] .backdrop-blur-sm,
+html[data-perf="low"] .backdrop-blur-md,
+html[data-perf="low"] .backdrop-blur-lg,
+html[data-perf="low"] .backdrop-blur-xl {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  background-color: hsl(var(--card) / 0.96) !important;
+}
+html[data-perf="low"] [class*="shadow-[0_0"] {
+  box-shadow: none !important;
+}
+html[data-perf="low"] .animate-fade-in-up,
+html[data-perf="low"] .animate-scale-in {
+  animation: lo-fade-in 180ms ease-out both !important;
+}
+
+/* GPU-ga qulay dashboard skeleton — CPU o'rniga transform bilan pulsatsiya */
+@keyframes lo-shimmer {
+  0% { opacity: 0.55; }
+  50% { opacity: 0.85; }
+  100% { opacity: 0.55; }
+}
+.skeleton {
+  background-color: hsl(var(--muted) / 0.5);
+  border-radius: calc(var(--radius) - 2px);
+  animation: lo-shimmer 1.4s ease-in-out infinite;
+  will-change: opacity;
+}
+html[data-perf="low"] .skeleton { animation: none; opacity: 0.7; }
+
+/* Screen-reader only utility (Tailwind bilan mos) */
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }

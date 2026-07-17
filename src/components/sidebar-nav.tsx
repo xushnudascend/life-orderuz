@@ -113,14 +113,14 @@ export function SidebarNav() {
       </div>
 
       <nav className="flex-1 space-y-5 overflow-y-auto px-3 py-4">
-        <Section items={PRIMARY} pathname={pathname} />
-        <Section label="Ko'proq" items={SECONDARY} pathname={pathname} />
+        <Section label="Asosiy" items={PRIMARY} pathname={pathname} />
+        <Section label="Sog'liq va o'sish" items={SECONDARY} pathname={pathname} />
         <Section label="Hisob" items={ACCOUNT} pathname={pathname} />
       </nav>
 
       <div className="border-t border-border/70 px-4 py-3">
         <p className="font-ui text-[10px] uppercase tracking-[0.22em] text-muted-foreground/70">
-          Maslahat
+          Bugungi eslatma
         </p>
         <p className="mt-1 font-ui text-[11px] text-muted-foreground">
           Bugun bitta kichik qadam qo'y — streak saqlansin.

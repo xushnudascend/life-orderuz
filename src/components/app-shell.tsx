@@ -6,6 +6,8 @@ import { Button } from "@/components/ui/button";
 import { BottomNav } from "@/components/bottom-nav";
 import { SidebarNav } from "@/components/sidebar-nav";
 import { CommandBar } from "@/components/command-bar";
+import { SkipLink } from "@/components/skip-link";
+import { ErrorBoundary } from "@/components/error-boundary";
 import { ARCHETYPES, type Archetype } from "@/lib/nervous";
 import { LogOut } from "lucide-react";
 
