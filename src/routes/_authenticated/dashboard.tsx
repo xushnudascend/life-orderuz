@@ -174,13 +174,13 @@ function Dashboard() {
       <ProfileCompletionCard missing={missing} />
 
       {/* HERO-BENTO */}
-      <section className="rounded-[var(--radius)] border border-border bg-gradient-to-br from-background via-background to-primary/5 p-6 sm:p-8">
-        <div className="flex flex-wrap items-start justify-between gap-4">
+      <section className="rounded-[var(--radius)] border border-border bg-gradient-to-br from-background via-background to-primary/5 p-5 sm:p-8">
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
           <div className="min-w-0 flex-1">
             <p className="font-ui text-[11px] uppercase tracking-[0.28em] text-primary">
               {c.greeting} · {c.label}
             </p>
-            <h1 className="mt-3 font-serif text-3xl leading-tight tracking-tight sm:text-4xl">
+            <h1 className="mt-3 break-words font-serif text-2xl leading-tight tracking-tight sm:text-4xl">
               {profile?.display_name?.trim()
                 ? `${profile.display_name}, `
                 : "Bugungi "}
@@ -188,7 +188,7 @@ function Dashboard() {
             </h1>
             <ArchetypeRow archetype={archetype} />
           </div>
-          <div className="flex flex-col items-end gap-2">
+          <div className="flex flex-row items-center gap-2 sm:flex-col sm:items-end">
             <ShieldIndicator usedThisWeek={shieldsUsed} max={3} />
             <Link to="/profile">
               <RankBadge score={score} />
