@@ -51,24 +51,32 @@ export function AppShell({
 
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <SkipLink />
       <SidebarNav />
 
       <div
         className="md:pl-[var(--sidebar-width)]"
         style={{ paddingBottom: "calc(6rem + env(safe-area-inset-bottom))" }}
       >
-        {/* Topbar */}
-        <header className="sticky top-0 z-20 border-b border-border/70 bg-background/80 backdrop-blur">
+        {/* Topbar — yengil, blur past-perf'da o'chadi */}
+        <header
+          className="sticky top-0 z-20 border-b border-border/70 bg-background/90 supports-[backdrop-filter]:bg-background/70 backdrop-blur"
+          role="banner"
+        >
           <div className="mx-auto flex h-14 max-w-[1400px] items-center justify-between gap-3 px-4 sm:px-6">
             <Link
               to="/"
               className="font-serif text-base font-semibold tracking-tight md:hidden"
+              aria-label="Life Order — bosh sahifa"
             >
               Life<span className="text-primary">.</span>Order
             </Link>
             <div className="hidden min-w-0 items-center gap-3 md:flex">
               {title && (
-                <p className="font-ui text-[11px] font-semibold uppercase tracking-[0.24em] text-muted-foreground">
+                <p
+                  className="font-ui text-[11px] font-semibold uppercase tracking-[0.24em] text-muted-foreground"
+                  aria-live="polite"
+                >
                   {title}
                 </p>
               )}
@@ -79,7 +87,7 @@ export function AppShell({
               <Link
                 to="/profile"
                 className="flex h-9 w-9 items-center justify-center rounded-full border border-border bg-card font-ui text-sm font-semibold text-foreground transition-colors hover:border-primary/50 hover:text-primary"
-                aria-label="Profil"
+                aria-label={name ? `Profil — ${name}` : "Profil"}
               >
                 {initial}
               </Link>
@@ -88,17 +96,21 @@ export function AppShell({
                 size="sm"
                 onClick={signOut}
                 className="font-ui text-muted-foreground hover:text-foreground"
-                aria-label="Chiqish"
+                aria-label="Hisobdan chiqish"
               >
-                <LogOut className="h-4 w-4 sm:mr-1.5" />
+                <LogOut className="h-4 w-4 sm:mr-1.5" aria-hidden />
                 <span className="hidden sm:inline">Chiqish</span>
               </Button>
             </div>
           </div>
         </header>
 
-        <main className="mx-auto max-w-[1400px] px-4 py-6 sm:px-6 sm:py-8 animate-route-in">
-          {children}
+        <main
+          id="main-content"
+          tabIndex={-1}
+          className="mx-auto max-w-[1400px] px-4 py-6 sm:px-6 sm:py-8 animate-route-in focus:outline-none"
+        >
+          <ErrorBoundary boundary="app_shell_main">{children}</ErrorBoundary>
         </main>
       </div>
 
