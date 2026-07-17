@@ -43,14 +43,13 @@ function Pricing() {
           Narxlar
         </p>
         <h1 className="mt-3 font-serif text-5xl leading-tight tracking-tight">
-          Life Order narxlar va rejalari
+          Halol narx. Yashirin to'lov yo'q.
         </h1>
         <p className="mt-3 font-serif text-2xl text-muted-foreground">
-          Halol narx. Yashirin to'lov yo'q.
+          Free — doimiy. Pro — ixtiyoriy, kerak bo'lsa.
         </p>
         <p className="mt-4 max-w-xl text-muted-foreground">
-          Bepul boshla. Kerak bo'lsa — kengaytir. Har qanday paytda bekor
-          qilishing mumkin.
+          Bepul reja karta so'ramaydi. Pro — kengroq kontekst kerak bo'lganda. Istalgan paytda bir bosishda bekor qilinadi. Reklama trekerlari yo'q — sen mahsulot emassan.
         </p>
 
         <div className="mt-12 grid gap-6 md:grid-cols-2">

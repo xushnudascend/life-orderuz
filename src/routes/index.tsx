@@ -22,22 +22,42 @@ import {
 const BRAND = "Life Order";
 const SITE_URL = "https://life-orderuz.lovable.app";
 const ONE_LINER =
-  "Life Order — o'z-o'zini boshqarish OS. Trigger, kunlik uchta qadam, halol AI mentor Nadir. 60 soniyada tashxis, kartasiz.";
+  "Life Order — xulq-atvor dizayni asosidagi o'z-o'zini boshqarish tizimi. Trigger tashxisi, kunlik uchta mikro-qadam va halol AI mentor Nadir. Miyyaning odat halqasini qayta quradi. 60 soniyada boshla, kartasiz.";
 
 const FAQ_ITEMS: { q: string; a: string }[] = [
-  { q: "Life Order nima?", a: "Self-Control OS — o'z-o'zini boshqarishning operatsion tizimi. Trigger tahlili, kunlik uchta aniq qadam va halol AI mentor Nadir bir joyda birlashgan." },
-  { q: "Bepulmi?", a: "Ha. Free reja cheksiz ishlaydi. Karta so'ralmaydi, avtomatik to'lov yo'q." },
-  { q: "Kim uchun mos?", a: "O'zini o'zgartirmoqchi bo'lgan 16–30 yoshdagi har bir kishi uchun." },
-  { q: "Ma'lumotlarim xavfsizmi?", a: "Ha. Barcha ma'lumot shifrlangan, uchinchi tomonga sotilmaydi. Istalgan paytda o'chirish so'rovini yubor." },
-  { q: "Qancha vaqt kerak?", a: "Kuniga 10–15 daqiqa yetarli. Missiyalar qisqa va aniq." },
+  {
+    q: "Life Order aslida nima?",
+    a: "Bu — motivatsion ilova emas, xulq-atvor tizimi. Stanford'ning Behavior Design (BJ Fogg) va identity-based habits (James Clear) tamoyillari asosida qurilgan: trigger → mikro-harakat → tasdiq. Motivatsiya to'lqinlariga tayanmaydi.",
+  },
+  {
+    q: "Nega motivatsion video va kurslardan farq qiladi?",
+    a: "Motivatsiya — hissiyot. Hissiyot 72 soatda so'nadi (affective forecasting tadqiqotlari). Life Order o'rniga takrorlanadigan mikro-harakatlarni o'rnatadi — miyyada bazal ganglii orqali avtomatlashadi. Phillippa Lally (UCL, 2010) tadqiqotiga ko'ra, odat o'rtacha 66 kunda ildiz otadi.",
+  },
+  {
+    q: "Bepulmi? Kartaga bog'lash kerakmi?",
+    a: "Ha, bepul. Free reja doimiy — karta so'ralmaydi, avtomatik to'lov yo'q. Bu ongli qaror: qaramlik emas, tanlov iqtisodini himoya qilamiz.",
+  },
+  {
+    q: "Kim uchun mos?",
+    a: "16–30 yosh oralig'idagi, o'zida telefon qaramligi, prokrastinatsiya yoki tarqoq diqqatni tan olgan har bir kishi uchun. Kim o'zini o'zgartirishga tayyor, lekin qaydan boshlashni bilmaydi.",
+  },
+  {
+    q: "Ma'lumotlarim xavfsizmi?",
+    a: "Ha. Ma'lumot shifrlangan, reklamachilarga sotilmaydi, uchinchi tomon trekerlari yo'q. Istalgan paytda hisobingni va tarixingni bir bosishda o'chirishing mumkin.",
+  },
+  {
+    q: "Qancha vaqt talab qilinadi?",
+    a: "Kuniga 10–15 daqiqa. Ataylab qisqa: BJ Fogg Tiny Habits usuli — mikro-harakat yengil bo'lsa, miyya qarshilik ko'rsatmaydi va takror avtomatlashadi.",
+  },
 ];
+
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: `${BRAND} — Hayotingni tartibga sol` },
+      { title: `${BRAND} — Motivatsiya emas, tizim. Miyyani qayta dasturla.` },
       { name: "description", content: ONE_LINER },
-      { property: "og:title", content: `${BRAND} — Hayotingni tartibga sol` },
+      { property: "og:title", content: `${BRAND} — Motivatsiya emas, tizim. Miyyani qayta dasturla.` },
       { property: "og:description", content: ONE_LINER },
       { property: "og:url", content: `${SITE_URL}/` },
     ],
@@ -73,6 +93,7 @@ function Landing() {
         <TurningPoint />
         <ThreePillars />
         <HowItWorks />
+        <ScienceBase />
         <FeaturesGrid />
         <EarlyMembers />
         <Pricing />
@@ -133,30 +154,30 @@ function Hero() {
         <div>
           <p className="flex items-center gap-2 font-ui text-[11px] uppercase tracking-[0.24em] text-muted-foreground">
             <span className="inline-block h-1.5 w-1.5 rounded-full bg-primary" />
-            Self-Control OS · Beta
+            Behavior Design · Habit Science · Beta
           </p>
           <h1 className="mt-5 font-serif text-4xl leading-[1.05] tracking-tight text-balance sm:text-5xl md:text-6xl">
-            Life Order — o'z-o'zini boshqarish OS
+            Motivatsiya emas — miyya arxitekturasi.
           </h1>
           <p className="mt-4 font-serif text-2xl leading-tight text-muted-foreground sm:text-3xl">
-            Motivatsiya tugaydi. Tizim qoladi.
+            Iroda tugaydi. Tizim qoladi.
           </p>
           <p className="mt-6 max-w-xl text-base leading-relaxed text-muted-foreground text-pretty md:text-lg">
-            Life Order — o'z-o'zini boshqarishning operatsion tizimi. Trigger tahlili, kunlik uchta aniq qadam, halol AI mentor Nadir. 60 soniyada tashxis. Kartasiz.
+            Life Order xulq-atvor dizayni (Stanford Behavior Design Lab) va odatlar ilmiga tayanadi: trigger → mikro-harakat → tasdiq. Har kuni uchta aniq qadam, halol AI mentor Nadir. Ikki oy — va o'zingni tanimaysan. 60 soniyada boshla, kartasiz.
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <Button asChild size="lg" className="h-12 rounded-full font-ui font-semibold">
               <Link to="/auth">
-                60 soniyada tashxis olish
+                Bepul tashxis olish
                 <ArrowRight className="ml-1.5 h-4 w-4" />
               </Link>
             </Button>
             <Button asChild variant="ghost" size="lg" className="h-12 rounded-full font-ui">
-              <a href="#how-it-works">Qanday ishlaydi?</a>
+              <a href="#how-it-works">Ilmiy asosini ko'r</a>
             </Button>
           </div>
           <p className="mt-5 font-ui text-xs text-muted-foreground">
-            Kartasiz · Istalgan paytda to'xtatasan · O'zbek tilida
+            Kartasiz · Reklama trekerlari yo'q · O'zbek tilida
           </p>
         </div>
         <HeroOrnament />
@@ -190,20 +211,20 @@ function ProblemsGrid() {
   const items = [
     {
       n: "01",
-      title: "Telefon qaramligi",
+      title: "Dofamin halqasi",
       body:
-        "Cheksiz scroll seni maqsadlaringdan uzoqlashtiradi. Ekran vaqtini nazoratga ol.",
+        "Har swipe — kutilmagan mukofot. Miyya bu naqshni saqlaydi (Schultz, 1997). Life Order shu halqani tanib, uni foydali harakatga ulaydi.",
     },
     {
       n: "02",
-      title: "Kechiktirish odati",
-      body: "Ertaga emas, hozir. Mikro-qadam bilan boshlash — halqani sindiradi.",
+      title: "Kechiktirish (akrasia)",
+      body: "Uzoq foyda vs bugungi qulaylik — miyya bugunni tanlaydi (temporal discounting). Mikro-qadam — 2 daqiqalik — qarshilikni sindiradi.",
     },
     {
       n: "03",
-      title: "Tartibsiz kun",
+      title: "Qaror charchog'i",
       body:
-        "Xaosni tizimga aylantir. Har kuni uchta aniq vazifa, aniq javobgarlik.",
+        "Kuniga 35 000 ta qaror miyya resursini tugatadi. Life Order 3 ta muhim qaror qoldiradi, qolganini avtomatlashtiradi.",
     },
   ];
   return (
@@ -329,7 +350,7 @@ function SocialProof() {
           Birinchi to'lqin ichkarida. Sen ham shu safda.
         </p>
         <p className="mt-4 font-ui text-sm text-muted-foreground">
-          Ertangi statistika birinchi streakingdan boshlanadi.
+          Soxta iqtiboslar, soxta raqamlar yo'q. Birinchi ijtimoiy dalil — sening 30-kunlik natijang bo'ladi.
         </p>
       </div>
     </section>
@@ -339,11 +360,12 @@ function SocialProof() {
 /* ================= C.6 — Muammo (chuqurroq) ================= */
 function ProblemDeep() {
   const list = [
-    "Bugungi ishni ertaga qoldirdim",
-    "Sport zaliga uch kun bordim, tashladim",
-    "Kitob 40-sahifada ochiq turibdi",
-    "Ekran vaqti kuniga olti soatdan oshdi",
-    "Tengdoshlarim ilgarilaydi, men joyimda",
+    "Bugungi vazifani ertaga surdim (yana)",
+    "Sport zaliga 4 kun bordim, 5-kuni tashladim",
+    "Kitob 40-sahifada — 3 oydan beri",
+    "Ekran vaqti kuniga 6+ soat",
+    "Tengdoshlarim oldga ketmoqda, men joyimda",
+    "Rejalar aniq — bajarish esa yo'q",
   ];
   return (
     <section className="border-t border-border bg-card/30">
@@ -355,7 +377,7 @@ function ProblemDeep() {
             <span className="text-muted-foreground">Har juma o'sha eski sen.</span>
           </h2>
           <p className="mt-6 max-w-xl leading-relaxed text-muted-foreground">
-            YouTube'da soatlab motivatsiya... Uch kundan keyin hammasi to'xtaydi. Senga motivatsiya emas, tizim kerak.
+            Muammo — irodangda emas. Muammo — miyya ehtiyot rejim (default mode) tanlaganida. Motivatsion kontent bir necha kunda so'nadi (hedonic adaptation). Doimiy o'zgarish uchun kontent emas — arxitektura kerak.
           </p>
         </div>
         <ul className="space-y-3">
@@ -377,12 +399,12 @@ function TurningPoint() {
     <section className="border-t border-border">
       <div className="mx-auto max-w-3xl px-5 py-24 text-center">
         <h2 className="font-serif text-3xl leading-tight tracking-tight text-balance md:text-5xl">
-          Kuchli odamlar irodaga tayanmaydi.
+          Muvaffaqiyatli odamlar irodaga tayanmaydi.
           <br />
-          <span className="text-primary">Tizim quradi.</span>
+          <span className="text-primary">Ular muhitni loyihalaydi.</span>
         </h2>
         <p className="mx-auto mt-6 max-w-xl leading-relaxed text-muted-foreground text-pretty">
-          Ular ertalab "nima qilay?" demaydi — reja allaqachon aniq. Life Order shu tizimni telefoningga o'rnatadi.
+          Duke University tadqiqoti (Wendy Wood, 2019): kundalik xatti-harakatning <span className="text-foreground">43%</span> — ongli qaror emas, avtomatik odat. Ular ertalab "nima qilay?" demaydi — trigger allaqachon o'rnatilgan. Life Order shu arxitekturani telefoningga o'rnatadi.
         </p>
       </div>
     </section>
@@ -396,19 +418,19 @@ function ThreePillars() {
       n: "01",
       icon: Sparkles,
       title: "AI Mentor — Nadir",
-      body: "Har kuni progressingni tekshiradi. Bahona qabul qilmaydi. Keyingi qadamni aniq ko'rsatadi.",
+      body: "Halol koch: bahona qabul qilmaydi, bo'sh maqtov aytmaydi. Sokratik savol usuli bilan seni javob topishga majbur qiladi (metakognitiv treuning).",
     },
     {
       n: "02",
       icon: BarChart3,
       title: "Intizom o'lchovi",
-      body: "Streak, bajarilish foizi, zaif kunlar, 0–100 intizom balli.",
+      body: "Streak, bajarilish foizi, zaif kunlar, 0–100 bal. O'lchash — o'zgarishning shartidir (Hawthorne effekti + o'z-o'zini monitoring, Kanfer 1970).",
     },
     {
       n: "03",
       icon: Target,
-      title: "Kunlik missiyalar",
-      body: "Maqsadingga mos uchta vazifa. Qisqa, aniq, bugun bajariladigan.",
+      title: "Mikro-missiyalar",
+      body: "Kuniga 3 ta 2–15 daqiqalik harakat. BJ Fogg Tiny Habits: kichik + oson = takrorlanadi = avtomatlashadi.",
     },
   ];
   return (
@@ -444,25 +466,25 @@ function HowItWorks() {
   const steps = [
     {
       n: "01",
-      title: "Beshta savolga javob ber",
-      body: "Uyqu, sport, fokus, odatlar. 60 soniyada hozirgi nuqtangni belgilaymiz.",
+      title: "Trigger tashxisi (60 soniya)",
+      body: "9 ta ilmiy savol — uyqu, dofamin manbalari, prokrastinatsiya naqshi, energiya vaqti. Miyyangning zaif nuqtasini topamiz.",
     },
     {
       n: "02",
-      title: "Shaxsiy rejangni ol",
-      body: "AI javoblaringga qarab har kuni uchta aniq vazifa tuzadi.",
+      title: "Shaxsiy protokol",
+      body: "Nadir javoblaringga qarab implementation intention (Gollwitzer, 1999) tuzadi: \"Agar X bo'lsa — men Y qilaman\". Bu shakl bajarilishni 2–3 barobar oshiradi.",
     },
     {
       n: "03",
-      title: "Streakni qur",
-      body: "Har missiya XP va streak beradi. Intizom balling har hafta ko'tariladi.",
+      title: "Takror, tasdiq, avtomatlashuv",
+      body: "Har mikro-harakat XP va streak beradi — bazal ganglii bu naqshni tan oladi. UCL tadqiqoti: o'rtacha 66 kunda odat avtomatlashadi.",
     },
   ];
   return (
     <section id="how-it-works" className="border-t border-border">
       <div className="mx-auto max-w-6xl px-5 py-20">
         <h2 className="max-w-3xl font-serif text-3xl leading-tight tracking-tight text-balance md:text-5xl">
-          Uch qadam. Oltmish kun. Yangi natija.
+          Uch qadam. Oltmish olti kun. Yangi arxitektura.
         </h2>
         <div className="mt-14 grid gap-4 md:grid-cols-3">
           {steps.map((s) => (
@@ -478,15 +500,84 @@ function HowItWorks() {
   );
 }
 
+/* ================= C.9b — Ilmiy asos ================= */
+function ScienceBase() {
+  const refs = [
+    {
+      tag: "Behavior Design",
+      title: "B = MAP",
+      body: "BJ Fogg (Stanford, 2019): xatti-harakat = Motivatsiya × Qobiliyat × Prompt. Motivatsiya beqaror — biz Prompt va Ability'ni loyihalaymiz.",
+    },
+    {
+      tag: "Identity habits",
+      title: "1% qoidasi",
+      body: "James Clear \"Atomic Habits\" (2018): odat — ovoz berish. Har bajarilgan mikro-harakat \"men shundayman\" identifikatsiyasini mustahkamlaydi.",
+    },
+    {
+      tag: "UCL, 2010",
+      title: "66 kun",
+      body: "Phillippa Lally et al. — European Journal of Social Psychology: yangi odat avtomatlashuvi o'rtacha 66 kun (oraliq 18–254). Bir-ikki o'tkazib yuborish naqshni buzmaydi.",
+    },
+    {
+      tag: "Implementation intention",
+      title: "Agar X — men Y",
+      body: "Peter Gollwitzer (1999): oldindan tuzilgan \"if-then\" reja bajarilish darajasini 2–3 barobar oshiradi (200+ tadqiqot meta-tahlili).",
+    },
+    {
+      tag: "Neyrobiologiya",
+      title: "Dofamin naqshi",
+      body: "Wolfram Schultz (1997): dofamin mukofotning o'zi emas — mukofot bashoratidan chiqadi. Streak vizualizatsiyasi shu mexanizmni foydali yo'nalishga buradi.",
+    },
+    {
+      tag: "Duke, 2019",
+      title: "43%",
+      body: "Wendy Wood: kundalik xatti-harakatning 43 foizi ongli qaror emas — odat. Uzoq muddatli o'zgarish ong emas, kontekst dizayni orqali quriladi.",
+    },
+  ];
+  return (
+    <section className="border-t border-border bg-card/30">
+      <div className="mx-auto max-w-6xl px-5 py-20">
+        <div className="max-w-2xl">
+          <p className="font-ui text-xs uppercase tracking-[0.24em] text-primary">
+            Ilmiy asos
+          </p>
+          <h2 className="mt-3 font-serif text-3xl leading-tight tracking-tight text-balance md:text-4xl">
+            Motivatsion sitatalar emas. Peer-reviewed tadqiqotlar.
+          </h2>
+          <p className="mt-4 leading-relaxed text-muted-foreground">
+            Life Order'ning har bir mexanizmi ortida — inson ongi, qaror qabul qilishi va miyya plastikligi bo'yicha o'nlab yillik tadqiqot bor. Buni bilishing shart emas — sistema ishlashi uchun. Lekin nima ustida qurilganini ko'rsatamiz.
+          </p>
+        </div>
+        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {refs.map((r) => (
+            <article
+              key={r.title}
+              className="rounded-[var(--radius)] border border-border/60 bg-background/60 p-6"
+            >
+              <p className="font-ui text-[10px] uppercase tracking-[0.22em] text-primary">
+                {r.tag}
+              </p>
+              <h3 className="mt-3 font-serif text-xl leading-tight">{r.title}</h3>
+              <p className="mt-2 font-ui text-sm leading-relaxed text-muted-foreground">
+                {r.body}
+              </p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 /* ================= C.10 — 6 karta funksiyalar grid ================= */
 function FeaturesGrid() {
   const items = [
-    { icon: Flame,     title: "Streak va intizom balli", body: "Kundalik ketma-ketlik va 0–100 intizom balli." },
-    { icon: Sparkles,  title: "AI Mentor — Nadir",        body: "Halol chat-mentor. Bo'sh maqtov yo'q." },
-    { icon: Target,    title: "Kunlik missiyalar",         body: "Har kuni uchta aniq, bugun bajariladigan vazifa." },
-    { icon: LineChart, title: "Haftalik tahlil",           body: "Kuchli kun, zaif kun, o'sish trendlari." },
-    { icon: BookOpen,  title: "Kurs va kitoblar",          body: "Odat va fokus mavzusidagi qisqa kurslar." },
-    { icon: Users,     title: "Davra — jamoa",             body: "Kanallar, Party, Leaderboard — birga o'sish." },
+    { icon: Flame,     title: "Streak — variabel mukofot",  body: "BF Skinner tamoyili: kutilgan mukofot dofamin chiqaradi. Streak — bu senga tegishli, buzilishi og'ir bo'lgan aktiv." },
+    { icon: Sparkles,  title: "AI Mentor — Nadir",           body: "Sokratik metod bilan ishlaydi: javob bermaydi — savol beradi. Metakognitiv treuning. Halol koch, bo'sh maqtov yo'q." },
+    { icon: Target,    title: "Mikro-missiyalar",             body: "2–15 daqiqalik harakat. Fogg qoidasi: kichik + oson = takrorlanadi. Miyya qarshilik ko'rsatmaydi." },
+    { icon: LineChart, title: "Haftalik tahlil",              body: "O'z-o'zini monitoring — o'zgarishning eng kuchli faktori (Michie et al., 2009 meta-tahlili). Kuchli kun, zaif kun, trend." },
+    { icon: BookOpen,  title: "Bilim protokollari",           body: "Odat, fokus, uyqu bo'yicha qisqa, ilmiy asosli kurslar. Nazariya emas — bugun qo'llash uchun." },
+    { icon: Users,     title: "Davra — social accountability", body: "Cialdini: majburiyat + omma > yolg'iz iroda. Kanallar, Party, Leaderboard — halol o'sish maydoni." },
   ];
   return (
     <section className="border-t border-border bg-card/30">
@@ -516,10 +607,10 @@ function EarlyMembers() {
     <section className="border-t border-border">
       <div className="mx-auto max-w-3xl px-5 py-20 text-center">
         <p className="font-serif text-xl leading-relaxed text-pretty">
-          Hali tavsif yozadigan foydalanuvchi yo'q.
+          Iqtiboslar sotib olinmagan. Raqamlar bo'yalgan emas.
         </p>
         <p className="mt-4 font-ui text-sm text-muted-foreground leading-relaxed">
-          Life Order beta bosqichida. Soxta iqtiboslar joylashtirmaymiz — birinchi haqiqiy tavsiflar sen va boshqa erta a'zolarning 30-kunlik natijalaridan chiqadi.
+          Life Order beta bosqichida. Ijtimoiy dalil qurish — vaqt talab qiladi. Birinchi haqiqiy tavsiflar — sen va erta a'zolarning 30-kunlik natijalaridan chiqadi. Bo'sh gap emas, o'lchangan o'zgarish.
         </p>
       </div>
     </section>
@@ -535,12 +626,13 @@ function Pricing() {
           <PricingCard
             title="Free"
             price="0 so'm"
-            period="har doim"
+            period="doimiy · karta so'ralmaydi"
             features={[
-              "Kunlik uchta missiya",
-              "Streak va XP",
-              "Asosiy AI mentor",
-              "Davra chatiga kirish",
+              "Kunlik 3 ta mikro-missiya",
+              "Streak, XP, intizom balli",
+              "Nadir bilan asosiy suhbat",
+              "Davra kanallariga kirish",
+              "Trigger tashxisi va 7/30-kunlik protokol",
             ]}
             cta="Bepul boshlash"
             variant="outline"
@@ -548,17 +640,17 @@ function Pricing() {
           <PricingCard
             title="Pro"
             price="49 000 so'm"
-            period="oyiga · yillik obunada −40%"
-            badge="Tavsiya"
+            period="oyiga · yillikda −40%"
+            badge="Chuqurroq ish"
             features={[
               "Free rejadagi hammasi",
-              "Nadir Pro — chuqur tahlil",
-              "Cheksiz missiya va odat",
-              "Haftalik AI hisobot",
-              "Kurs va kitoblarga to'liq kirish",
-              "Ustuvor yordam",
+              "Nadir Pro — kengroq kontekst va tahlil",
+              "Cheksiz missiya va odat kuzatuvi",
+              "Haftalik shaxsiy AI hisobot",
+              "Barcha bilim protokollari",
+              "Ustuvor yordam · 24 soatda javob",
             ]}
-            cta="Pro rejani ko'rish"
+            cta="Pro rejaga o'tish"
             variant="primary"
           />
         </div>
@@ -636,28 +728,7 @@ function PricingCard({
 
 /* ================= C.13 — FAQ ================= */
 function Faq() {
-  const items = [
-    {
-      q: "Life Order nima?",
-      a: "Self-Control OS — o'z-o'zini boshqarishning operatsion tizimi. Trigger tahlili, kunlik uchta aniq qadam va halol AI mentor Nadir bir joyda birlashgan.",
-    },
-    {
-      q: "Bepulmi?",
-      a: "Ha. Free reja cheksiz ishlaydi. Karta so'ralmaydi, avtomatik to'lov yo'q.",
-    },
-    {
-      q: "Kim uchun mos?",
-      a: "O'zini o'zgartirmoqchi bo'lgan 16–30 yoshdagi har bir kishi uchun.",
-    },
-    {
-      q: "Ma'lumotlarim xavfsizmi?",
-      a: "Ha. Barcha ma'lumot shifrlangan, uchinchi tomonga sotilmaydi. Istalgan paytda o'chirish so'rovini yubor.",
-    },
-    {
-      q: "Qancha vaqt kerak?",
-      a: "Kuniga 10–15 daqiqa yetarli. Missiyalar qisqa va aniq.",
-    },
-  ];
+  const items = FAQ_ITEMS;
   return (
     <section id="faq" className="border-t border-border">
       <div className="mx-auto max-w-3xl px-5 py-20">
@@ -687,10 +758,10 @@ function FinalCta() {
     <section className="border-t border-border bg-card/30">
       <div className="mx-auto max-w-3xl px-5 py-24 text-center">
         <h2 className="font-serif text-3xl leading-tight tracking-tight text-balance md:text-5xl">
-          Oltmish kundan keyingi o'zingni bugun tanla.
+          Bugungi qaror — 66 kundan keyingi identifikatsiya.
         </h2>
         <p className="mx-auto mt-6 max-w-xl leading-relaxed text-muted-foreground text-pretty">
-          Bepul. Kartasiz. Birinchi missiyang 60 soniyadan keyin qo'lingda.
+          Motivatsiya kutish — kutmagan avtobusni kutish. Life Order boshqacha: 60 soniyada tashxis, bugun kechqurun birinchi mikro-harakat. Bepul, kartasiz, chiqib ketish bir bosishda.
         </p>
         <div className="mt-9">
           <Button asChild size="lg" className="h-14 rounded-full px-8 font-ui font-semibold">
