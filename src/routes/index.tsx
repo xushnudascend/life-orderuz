@@ -466,25 +466,25 @@ function HowItWorks() {
   const steps = [
     {
       n: "01",
-      title: "Beshta savolga javob ber",
-      body: "Uyqu, sport, fokus, odatlar. 60 soniyada hozirgi nuqtangni belgilaymiz.",
+      title: "Trigger tashxisi (60 soniya)",
+      body: "9 ta ilmiy savol — uyqu, dofamin manbalari, prokrastinatsiya naqshi, energiya vaqti. Miyyangning zaif nuqtasini topamiz.",
     },
     {
       n: "02",
-      title: "Shaxsiy rejangni ol",
-      body: "AI javoblaringga qarab har kuni uchta aniq vazifa tuzadi.",
+      title: "Shaxsiy protokol",
+      body: "Nadir javoblaringga qarab implementation intention (Gollwitzer, 1999) tuzadi: \"Agar X bo'lsa — men Y qilaman\". Bu shakl bajarilishni 2–3 barobar oshiradi.",
     },
     {
       n: "03",
-      title: "Streakni qur",
-      body: "Har missiya XP va streak beradi. Intizom balling har hafta ko'tariladi.",
+      title: "Takror, tasdiq, avtomatlashuv",
+      body: "Har mikro-harakat XP va streak beradi — bazal ganglii bu naqshni tan oladi. UCL tadqiqoti: o'rtacha 66 kunda odat avtomatlashadi.",
     },
   ];
   return (
     <section id="how-it-works" className="border-t border-border">
       <div className="mx-auto max-w-6xl px-5 py-20">
         <h2 className="max-w-3xl font-serif text-3xl leading-tight tracking-tight text-balance md:text-5xl">
-          Uch qadam. Oltmish kun. Yangi natija.
+          Uch qadam. Oltmish olti kun. Yangi arxitektura.
         </h2>
         <div className="mt-14 grid gap-4 md:grid-cols-3">
           {steps.map((s) => (
@@ -493,6 +493,75 @@ function HowItWorks() {
               <h3 className="mt-4 font-serif text-xl">{s.title}</h3>
               <p className="mt-2 leading-relaxed text-muted-foreground">{s.body}</p>
             </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ================= C.9b — Ilmiy asos ================= */
+function ScienceBase() {
+  const refs = [
+    {
+      tag: "Behavior Design",
+      title: "B = MAP",
+      body: "BJ Fogg (Stanford, 2019): xatti-harakat = Motivatsiya × Qobiliyat × Prompt. Motivatsiya beqaror — biz Prompt va Ability'ni loyihalaymiz.",
+    },
+    {
+      tag: "Identity habits",
+      title: "1% qoidasi",
+      body: "James Clear \"Atomic Habits\" (2018): odat — ovoz berish. Har bajarilgan mikro-harakat \"men shundayman\" identifikatsiyasini mustahkamlaydi.",
+    },
+    {
+      tag: "UCL, 2010",
+      title: "66 kun",
+      body: "Phillippa Lally et al. — European Journal of Social Psychology: yangi odat avtomatlashuvi o'rtacha 66 kun (oraliq 18–254). Bir-ikki o'tkazib yuborish naqshni buzmaydi.",
+    },
+    {
+      tag: "Implementation intention",
+      title: "Agar X — men Y",
+      body: "Peter Gollwitzer (1999): oldindan tuzilgan \"if-then\" reja bajarilish darajasini 2–3 barobar oshiradi (200+ tadqiqot meta-tahlili).",
+    },
+    {
+      tag: "Neyrobiologiya",
+      title: "Dofamin naqshi",
+      body: "Wolfram Schultz (1997): dofamin mukofotning o'zi emas — mukofot bashoratidan chiqadi. Streak vizualizatsiyasi shu mexanizmni foydali yo'nalishga buradi.",
+    },
+    {
+      tag: "Duke, 2019",
+      title: "43%",
+      body: "Wendy Wood: kundalik xatti-harakatning 43 foizi ongli qaror emas — odat. Uzoq muddatli o'zgarish ong emas, kontekst dizayni orqali quriladi.",
+    },
+  ];
+  return (
+    <section className="border-t border-border bg-card/30">
+      <div className="mx-auto max-w-6xl px-5 py-20">
+        <div className="max-w-2xl">
+          <p className="font-ui text-xs uppercase tracking-[0.24em] text-primary">
+            Ilmiy asos
+          </p>
+          <h2 className="mt-3 font-serif text-3xl leading-tight tracking-tight text-balance md:text-4xl">
+            Motivatsion sitatalar emas. Peer-reviewed tadqiqotlar.
+          </h2>
+          <p className="mt-4 leading-relaxed text-muted-foreground">
+            Life Order'ning har bir mexanizmi ortida — inson ongi, qaror qabul qilishi va miyya plastikligi bo'yicha o'nlab yillik tadqiqot bor. Buni bilishing shart emas — sistema ishlashi uchun. Lekin nima ustida qurilganini ko'rsatamiz.
+          </p>
+        </div>
+        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {refs.map((r) => (
+            <article
+              key={r.title}
+              className="rounded-[var(--radius)] border border-border/60 bg-background/60 p-6"
+            >
+              <p className="font-ui text-[10px] uppercase tracking-[0.22em] text-primary">
+                {r.tag}
+              </p>
+              <h3 className="mt-3 font-serif text-xl leading-tight">{r.title}</h3>
+              <p className="mt-2 font-ui text-sm leading-relaxed text-muted-foreground">
+                {r.body}
+              </p>
+            </article>
           ))}
         </div>
       </div>
