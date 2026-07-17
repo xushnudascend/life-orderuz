@@ -102,45 +102,20 @@ function LearnCategory() {
         </div>
       </Panel>
 
-      {/* Ilmiy asos */}
-      <div className="mt-6 grid gap-3 sm:grid-cols-3">
-        <FactCard
-          k="Yozma refleksiya"
-          v="Pennebaker (Texas): 3 kun × 15 daqiqa yozuv — stress markerlari pasayadi."
-        />
-        <FactCard
-          k="Metacognition"
-          v="O'zingni tomosha qilish — muammoni hal qilish tezligini 20-30% oshiradi."
-        />
-        <FactCard
-          k="AI mentor"
-          v="Doimiy javob beruvchi mentor — o'z-o'zini nazorat halqasini yopadi."
-        />
+      <div className="mt-6 flex flex-wrap gap-2">
+        <Link
+          to="/journal"
+          className="inline-flex items-center gap-1.5 rounded-full border border-border px-3 py-1.5 font-ui text-[11px] font-semibold uppercase tracking-[0.2em] hover:border-primary/50 hover:text-primary transition-colors"
+        >
+          Yozuv qo'shish <ArrowRight className="h-3 w-3" />
+        </Link>
+        <Link
+          to="/mentor"
+          className="inline-flex items-center gap-1.5 rounded-full border border-border px-3 py-1.5 font-ui text-[11px] font-semibold uppercase tracking-[0.2em] hover:border-primary/50 hover:text-primary transition-colors"
+        >
+          Nadir bilan <ArrowRight className="h-3 w-3" />
+        </Link>
       </div>
-
-      {/* Amaliy maslahat */}
-      <Panel className="mt-6">
-        <PanelHeader eyebrow="Bugun uchun" />
-        <ul className="mt-3 space-y-2 font-ui text-sm">
-          <TipLine text="Kundalikni uxlashdan 30 daq. oldin yoz — miya tunga tayyorlanadi." />
-          <TipLine text="Nadir bilan haftada 1 marta 'haftaga baho' suhbatini o't." />
-          <TipLine text="Statistikada 3 kun ketma-ket pasayish ko'rsang — dam olish kuni tanla." />
-        </ul>
-        <div className="mt-4 flex flex-wrap gap-2">
-          <Link
-            to="/journal"
-            className="inline-flex items-center gap-1.5 rounded-full border border-border px-3 py-1.5 font-ui text-[11px] font-semibold uppercase tracking-[0.2em] hover:border-primary/50 hover:text-primary transition-colors"
-          >
-            Yozuv qo'shish <ArrowRight className="h-3 w-3" />
-          </Link>
-          <Link
-            to="/mentor"
-            className="inline-flex items-center gap-1.5 rounded-full border border-border px-3 py-1.5 font-ui text-[11px] font-semibold uppercase tracking-[0.2em] hover:border-primary/50 hover:text-primary transition-colors"
-          >
-            Nadir bilan <ArrowRight className="h-3 w-3" />
-          </Link>
-        </div>
-      </Panel>
     </AppShell>
   );
 }
