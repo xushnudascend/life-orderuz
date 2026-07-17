@@ -52,7 +52,7 @@ export const Route = createFileRoute("/pricing")({
 
 function Pricing() {
   return (
-    <div className="min-min-h-dvh bg-background text-foreground animate-fade-in">
+    <div className="min-h-dvh bg-background text-foreground animate-fade-in">
       <SiteHeader
         nav={[
           { href: "/", label: "Bosh sahifa" },

@@ -50,7 +50,7 @@ export function AppShell({
   const initial = (name?.trim()?.[0] ?? "L").toUpperCase();
 
   return (
-    <div className="min-min-h-dvh bg-background text-foreground">
+    <div className="min-h-dvh bg-background text-foreground">
       <SkipLink />
       <SidebarNav />
 

@@ -13,7 +13,7 @@ export function LegalShell({
   children: ReactNode;
 }) {
   return (
-    <div className="min-min-h-dvh bg-background text-foreground animate-fade-in">
+    <div className="min-h-dvh bg-background text-foreground animate-fade-in">
       <header className="sticky top-0 z-40 h-14 border-b border-border bg-background/85 backdrop-blur-md">
         <div className="mx-auto flex h-full max-w-6xl items-center justify-between px-5">
           <Link to="/" className="flex items-center gap-2.5">

@@ -49,7 +49,7 @@ export const Route = createFileRoute("/blog/hayot-sohalari")({
 
 function AspectsGuide() {
   return (
-    <div className="min-min-h-dvh bg-background text-foreground animate-fade-in">
+    <div className="min-h-dvh bg-background text-foreground animate-fade-in">
       <header className="border-b border-border">
         <div className="mx-auto flex h-14 max-w-3xl items-center justify-between px-5">
           <Link to="/" className="font-serif text-lg font-bold tracking-tight">

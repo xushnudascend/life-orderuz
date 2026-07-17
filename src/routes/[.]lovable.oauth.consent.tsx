@@ -46,7 +46,7 @@ export const Route = createFileRoute("/.lovable/oauth/consent")({
   },
   component: Consent,
   errorComponent: ({ error }) => (
-    <main className="grid min-min-h-dvh place-items-center bg-background px-6 text-foreground">
+    <main className="grid min-h-dvh place-items-center bg-background px-6 text-foreground">
       <div className="max-w-md text-center">
         <h1 className="font-serif text-2xl">Ulanish so'rovi yuklanmadi</h1>
         <p className="mt-3 text-sm text-muted-foreground">
@@ -89,7 +89,7 @@ function Consent() {
   const scopes: string[] = (details?.scope ?? "").split(/\s+/).filter(Boolean);
 
   return (
-    <main className="grid min-min-h-dvh place-items-center bg-background px-6 text-foreground">
+    <main className="grid min-h-dvh place-items-center bg-background px-6 text-foreground">
       <div className="glass w-full max-w-md rounded-[var(--radius)] p-8">
         <p className="font-ui text-[11px] uppercase tracking-[0.28em] text-primary">Ruxsat berish</p>
         <h1 className="mt-3 font-serif text-3xl leading-tight tracking-tight">

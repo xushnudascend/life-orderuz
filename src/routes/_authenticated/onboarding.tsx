@@ -160,7 +160,7 @@ function Onboarding() {
   }
 
   return (
-    <div className="min-min-h-dvh bg-background text-foreground">
+    <div className="min-h-dvh bg-background text-foreground">
       <div className="mx-auto max-w-xl px-5 py-10">
         <ProgressBar current={step + 1} total={total} label={sectionLabel} />
 
