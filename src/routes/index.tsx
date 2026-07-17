@@ -350,7 +350,7 @@ function SocialProof() {
           Birinchi to'lqin ichkarida. Sen ham shu safda.
         </p>
         <p className="mt-4 font-ui text-sm text-muted-foreground">
-          Ertangi statistika birinchi streakingdan boshlanadi.
+          Soxta iqtiboslar, soxta raqamlar yo'q. Birinchi ijtimoiy dalil — sening 30-kunlik natijang bo'ladi.
         </p>
       </div>
     </section>
