@@ -121,6 +121,17 @@ function Dashboard() {
 
   useEffect(() => {
     refresh();
+    // Daily login bonus — silent auto-claim once per day
+    supabase.rpc("claim_daily_login_bonus" as never).then(({ data }) => {
+      const row = Array.isArray(data) ? data[0] : data;
+      const awarded = (row as { awarded?: boolean } | null)?.awarded;
+      const xp = (row as { xp?: number } | null)?.xp ?? 0;
+      if (awarded && xp > 0) {
+        import("sonner").then(({ toast }) => {
+          toast.success(`+${xp} XP kunlik bonus`);
+        });
+      }
+    });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userId]);
 
