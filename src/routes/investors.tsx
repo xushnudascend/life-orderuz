@@ -61,12 +61,21 @@ function InvestorsPage() {
           <span className="hidden sm:inline font-ui text-[10px] font-semibold uppercase tracking-[0.24em] text-primary">
             Investor deck · Konfidensial
           </span>
-          <a
-            href="mailto:investors@life-order.uz"
-            className="inline-flex items-center gap-1.5 rounded-full border border-primary/50 bg-primary/10 px-3 py-1.5 font-ui text-[11px] font-semibold uppercase tracking-[0.2em] text-primary hover:bg-primary/20 transition-colors"
-          >
-            <Mail className="h-3 w-3" /> Bog'lanish
-          </a>
+          <div className="flex items-center gap-2">
+            <a
+              href="/investor/life-order-deck.pptx"
+              download
+              className="inline-flex items-center gap-1.5 rounded-full bg-primary px-3 py-1.5 font-ui text-[11px] font-semibold uppercase tracking-[0.2em] text-primary-foreground hover:opacity-90 transition-opacity"
+            >
+              <Download className="h-3 w-3" /> Deck
+            </a>
+            <a
+              href="mailto:investors@life-order.uz"
+              className="inline-flex items-center gap-1.5 rounded-full border border-primary/50 bg-primary/10 px-3 py-1.5 font-ui text-[11px] font-semibold uppercase tracking-[0.2em] text-primary hover:bg-primary/20 transition-colors"
+            >
+              <Mail className="h-3 w-3" /> Bog'lanish
+            </a>
+          </div>
         </div>
       </div>
 
