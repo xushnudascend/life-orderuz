@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import { ArrowLeft, Loader2 } from "lucide-react";
+import { ArrowLeft, Eye, EyeOff, Loader2 } from "lucide-react";
 import { uz } from "@/i18n";
 
 function sanitizeNext(next: unknown): string {
@@ -116,6 +116,7 @@ function AuthPage() {
 function EmailForm({ mode, next }: { mode: "signin" | "signup"; next: string }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
 
   async function onSubmit(e: React.FormEvent) {
@@ -128,14 +129,14 @@ function EmailForm({ mode, next }: { mode: "signin" | "signup"; next: string }) 
           email,
           password,
           options: {
-            emailRedirectTo: `${window.location.origin}${next}`,
+            emailRedirectTo: `${window.location.origin}/onboarding`,
           },
         });
         if (error) throw error;
-        // Auto-confirm yoqilgan: sessiya darhol yaratiladi
         const { data } = await supabase.auth.getSession();
         if (data.session) {
-          window.location.replace(next);
+          // Yangi hisob — to'g'ridan-to'g'ri onboarding'ga
+          window.location.replace("/onboarding");
         } else {
           toast.success("Ro'yxatdan o'tildi. Endi kirishingiz mumkin.");
         }
@@ -168,16 +169,28 @@ function EmailForm({ mode, next }: { mode: "signin" | "signup"; next: string }) 
       </div>
       <div className="space-y-1.5">
         <Label htmlFor="password">Parol</Label>
-        <Input
-          id="password"
-          type="password"
-          required
-          minLength={8}
-          autoComplete={mode === "signup" ? "new-password" : "current-password"}
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder="Kamida 8 belgi"
-        />
+        <div className="relative">
+          <Input
+            id="password"
+            type={showPassword ? "text" : "password"}
+            required
+            minLength={8}
+            autoComplete={mode === "signup" ? "new-password" : "current-password"}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Kamida 8 belgi"
+            className="pr-10"
+          />
+          <button
+            type="button"
+            onClick={() => setShowPassword((v) => !v)}
+            className="absolute inset-y-0 right-0 flex items-center px-3 text-muted-foreground transition-colors hover:text-foreground focus:outline-none focus-visible:text-foreground"
+            aria-label={showPassword ? "Parolni yashirish" : "Parolni ko'rsatish"}
+            tabIndex={-1}
+          >
+            {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+          </button>
+        </div>
       </div>
       <Button
         type="submit"

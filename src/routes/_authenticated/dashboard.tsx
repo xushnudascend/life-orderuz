@@ -7,8 +7,6 @@ import {
   Loader2,
   ArrowRight,
   Flame,
-  Sparkles,
-  ChevronDown,
 } from "lucide-react";
 import { uz } from "@/i18n";
 import { ProgressRing } from "@/components/progress-ring";
@@ -62,7 +60,6 @@ function Dashboard() {
   const [streak, setStreak] = useState<Streak>(null);
   const [shieldsUsed, setShieldsUsed] = useState(0);
   const [loading, setLoading] = useState(true);
-  const [aiOpen, setAiOpen] = useState(false);
 
   async function refresh() {
     const sevenAgo = new Date();
@@ -183,8 +180,10 @@ function Dashboard() {
               {c.greeting} · {c.label}
             </p>
             <h1 className="mt-3 font-serif text-3xl leading-tight tracking-tight sm:text-4xl">
-              {(profile?.display_name ?? "do'st") + ", "}
-              <span className="text-muted-foreground">bugungi reja</span>
+              {profile?.display_name?.trim()
+                ? `${profile.display_name}, `
+                : "Bugungi "}
+              <span className="text-muted-foreground">reja</span>
             </h1>
             <ArchetypeRow archetype={archetype} />
           </div>
@@ -222,35 +221,6 @@ function Dashboard() {
             </div>
           </div>
         </div>
-      </section>
-
-      {/* AI Co-Pilot lazy panel */}
-      <section className="mt-6 rounded-[var(--radius)] border border-border">
-        <button
-          type="button"
-          onClick={() => setAiOpen((v) => !v)}
-          className="flex w-full items-center justify-between px-5 py-4 text-left"
-          aria-expanded={aiOpen}
-        >
-          <span className="flex items-center gap-2 font-serif text-lg">
-            <Sparkles className="h-4 w-4 text-primary" />
-            AI yordami
-          </span>
-          <ChevronDown
-            className={"h-4 w-4 text-muted-foreground transition-transform " + (aiOpen ? "rotate-180" : "")}
-          />
-        </button>
-        {aiOpen && (
-          <div className="border-t border-border p-5">
-            <p className="text-sm text-muted-foreground">
-              Nadir bilan chuqurroq gaplashish uchun{" "}
-              <Link to="/mentor" className="text-primary hover:underline">
-                to'liq sahifani och
-              </Link>
-              .
-            </p>
-          </div>
-        )}
       </section>
 
       {/* Habits & mini analytics */}
@@ -348,7 +318,7 @@ function Dashboard() {
       </div>
 
       {/* Quick access */}
-      <section className="mt-8 grid gap-3 sm:grid-cols-3 md:grid-cols-6">
+      <section className="mt-8 grid gap-3 grid-cols-2 sm:grid-cols-4">
         <Button asChild variant="outline" size="sm">
           <Link to="/workout">Mashg'ulot</Link>
         </Button>
@@ -359,13 +329,7 @@ function Dashboard() {
           <Link to="/quests">Vazifalar</Link>
         </Button>
         <Button asChild variant="outline" size="sm">
-          <Link to="/temir-intizom">21 kun</Link>
-        </Button>
-        <Button asChild variant="outline" size="sm">
-          <Link to="/party">Party</Link>
-        </Button>
-        <Button asChild variant="outline" size="sm">
-          <Link to="/leaderboard">Reyting</Link>
+          <Link to="/mentor">Nadir</Link>
         </Button>
       </section>
     </AppShell>
