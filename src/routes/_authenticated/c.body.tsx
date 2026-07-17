@@ -147,13 +147,3 @@ function Pillar({
   );
 }
 
-function TipRow({ n, text }: { n: string; text: string }) {
-  return (
-    <div className="flex items-start gap-2.5">
-      <span className="font-ui text-[10px] font-semibold uppercase tracking-[0.2em] text-primary">
-        {n}
-      </span>
-      <p className="font-ui text-[13px] leading-relaxed">{text}</p>
-    </div>
-  );
-}
