@@ -3,9 +3,9 @@ import type { ReactNode } from "react";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
-import { uz } from "@/i18n";
 import { BottomNav } from "@/components/bottom-nav";
 import { SidebarNav } from "@/components/sidebar-nav";
+import { CommandBar } from "@/components/command-bar";
 import { ARCHETYPES, type Archetype } from "@/lib/nervous";
 import { LogOut } from "lucide-react";
 
@@ -64,15 +64,13 @@ export function AppShell({
             >
               Life<span className="text-primary">.</span>Order
             </Link>
-            <div className="hidden min-w-0 md:block">
+            <div className="hidden min-w-0 items-center gap-3 md:flex">
               {title && (
                 <p className="font-ui text-[11px] font-semibold uppercase tracking-[0.24em] text-muted-foreground">
                   {title}
                 </p>
               )}
-              <p className="truncate font-serif text-sm text-foreground/80">
-                {uz.brand.tagline}
-              </p>
+              <CommandBar />
             </div>
 
             <div className="flex items-center gap-2">

@@ -1,16 +1,16 @@
 import { Link, useLocation } from "@tanstack/react-router";
-import { Compass, HeartPulse, Flame, GraduationCap, Users } from "lucide-react";
+import { Compass, ListChecks, Sparkles, BookText, User } from "lucide-react";
 
 /**
- * 5 tab bottom nav (MEGA-PROMPT 1-bo'lim).
- * Faqat mobil ( md:hidden ) — desktop'da header-nav ishlatiladi.
+ * 5 tab bottom nav — sidebar bilan bir uslub.
+ * Faqat mobil ( md:hidden ).
  */
 const TABS = [
-  { to: "/dashboard", label: "Bosh",       icon: Compass,        match: ["/dashboard", "/analytics"] },
-  { to: "/c/body",    label: "Tana",       icon: HeartPulse,     match: ["/c/body", "/workout", "/diet"] },
-  { to: "/c/habits",  label: "Odatlar",    icon: Flame,          match: ["/c/habits", "/habits", "/quests"] },
-  { to: "/c/learn",   label: "O'rganish",  icon: GraduationCap,  match: ["/c/learn", "/journal"] },
-  { to: "/community", label: "Davra",      icon: Users,          match: ["/community"] },
+  { to: "/dashboard", label: "Bosh",     icon: Compass,    match: ["/dashboard", "/analytics"] },
+  { to: "/habits",    label: "Odatlar",  icon: ListChecks, match: ["/habits", "/quests", "/c/habits"] },
+  { to: "/mentor",    label: "Nadir",    icon: Sparkles,   match: ["/mentor"] },
+  { to: "/journal",   label: "Kundalik", icon: BookText,   match: ["/journal", "/c/learn"] },
+  { to: "/profile",   label: "Men",      icon: User,       match: ["/profile", "/settings", "/achievements"] },
 ] as const;
 
 export function BottomNav({
