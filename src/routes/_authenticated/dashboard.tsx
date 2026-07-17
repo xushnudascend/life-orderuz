@@ -20,6 +20,7 @@ import { ShieldIndicator } from "@/components/shield-indicator";
 import { ArchetypeRow } from "@/components/archetype-row";
 import { DailyTimetable } from "@/components/daily-timetable";
 import { ProfileCompletionCard } from "@/components/profile-completion-card";
+import { NadirNudgeBanner } from "@/components/nadir-nudge-banner";
 import { Panel, PanelHeader, PanelValue } from "@/components/panel";
 import { ErrorBoundary } from "@/components/error-boundary";
 import {
