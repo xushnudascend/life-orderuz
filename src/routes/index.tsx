@@ -515,3 +515,191 @@ function SectionHeader({
   );
 }
 
+function ProductPreview() {
+  return (
+    <section aria-labelledby="preview-title" className="border-b border-border bg-card/20">
+      <div className="mx-auto max-w-6xl px-5 py-16 md:py-20">
+        <div className="mx-auto max-w-2xl text-center">
+          <p className="font-ui text-[11px] uppercase tracking-[0.24em] text-muted-foreground">
+            Mahsulot
+          </p>
+          <h2 id="preview-title" className="mt-4 font-serif text-3xl leading-tight tracking-tight md:text-4xl">
+            Ertalab ochasan — bugungi protokol tayyor.
+          </h2>
+          <p className="mt-4 font-ui text-sm leading-relaxed text-muted-foreground">
+            Ortiqcha bezak yo'q. Faqat bugun kerak bo'lgan uch qadam va Nadir'ning bir jumlasi.
+          </p>
+        </div>
+
+        <div className="relative mx-auto mt-12 max-w-4xl">
+          <div className="absolute -inset-x-8 -inset-y-6 rounded-[calc(var(--radius)+18px)] bg-[radial-gradient(ellipse_at_top,hsl(var(--primary)/0.14),transparent_70%)] blur-2xl" aria-hidden />
+          <div className="relative overflow-hidden rounded-[var(--radius)] border border-border bg-background shadow-[0_20px_60px_-30px_hsl(var(--primary)/0.35)]">
+            {/* Mock browser chrome */}
+            <div className="flex items-center gap-1.5 border-b border-border bg-card/60 px-4 py-2.5">
+              <span className="h-2.5 w-2.5 rounded-full bg-muted" />
+              <span className="h-2.5 w-2.5 rounded-full bg-muted" />
+              <span className="h-2.5 w-2.5 rounded-full bg-muted" />
+              <span className="ml-3 font-ui text-[11px] text-muted-foreground">life-order · dashboard</span>
+            </div>
+
+            {/* Mock dashboard */}
+            <div className="grid gap-4 p-5 sm:grid-cols-3 md:p-7">
+              {/* KPIs */}
+              {[
+                { k: "12", v: "Streak · kun", accent: true },
+                { k: "3/3", v: "Bugungi protokol" },
+                { k: "84%", v: "Haftalik ijro" },
+              ].map((s) => (
+                <div key={s.v} className={`rounded-[calc(var(--radius)-4px)] border border-border p-4 ${s.accent ? "bg-primary/5" : "bg-card/40"}`}>
+                  <p className="font-serif text-3xl tabular-nums leading-none">{s.k}</p>
+                  <p className="mt-2 font-ui text-[11px] uppercase tracking-[0.18em] text-muted-foreground">{s.v}</p>
+                </div>
+              ))}
+
+              {/* Today's protocol */}
+              <div className="sm:col-span-2 rounded-[calc(var(--radius)-4px)] border border-border p-5">
+                <div className="flex items-center justify-between">
+                  <p className="font-serif text-base">Bugungi protokol</p>
+                  <p className="font-ui text-[11px] uppercase tracking-[0.18em] text-primary">Ertalab</p>
+                </div>
+                <ul className="mt-4 space-y-3 font-ui text-[13px]">
+                  {[
+                    { d: "Agar ko'zim ochilsa — 2 daqiqa nafas", on: true },
+                    { d: "Agar choyni damlasam — 3 satr kundalik", on: true },
+                    { d: "Agar ish stoliga o'tirsam — 1 muhim vazifa", on: false },
+                  ].map((t) => (
+                    <li key={t.d} className="flex items-start gap-3">
+                      <span className={`mt-0.5 grid h-4 w-4 shrink-0 place-items-center rounded-[4px] border ${t.on ? "border-primary bg-primary text-primary-foreground" : "border-border"}`}>
+                        {t.on && <Check className="h-3 w-3" strokeWidth={3} />}
+                      </span>
+                      <span className={t.on ? "text-foreground/70 line-through decoration-muted-foreground/40" : "text-foreground"}>{t.d}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Nadir card */}
+              <div className="rounded-[calc(var(--radius)-4px)] border border-border bg-card/40 p-5">
+                <div className="flex items-center gap-2">
+                  <Sparkles className="h-3.5 w-3.5 text-primary" />
+                  <p className="font-ui text-[11px] uppercase tracking-[0.18em] text-primary">Nadir</p>
+                </div>
+                <p className="mt-3 font-serif text-[15px] leading-snug">
+                  "Ikki kun ketma-ket kayfiyat pastladi. Bugun faqat bitta qadamga tayan."
+                </p>
+                <p className="mt-3 font-ui text-[11px] text-muted-foreground">02:14 · avtomatik nudge</p>
+              </div>
+
+              {/* Weekly bar */}
+              <div className="sm:col-span-3 rounded-[calc(var(--radius)-4px)] border border-border p-5">
+                <div className="flex items-center justify-between">
+                  <p className="font-serif text-base">Hafta</p>
+                  <p className="font-ui text-[11px] uppercase tracking-[0.18em] text-muted-foreground">Shield: 1/1</p>
+                </div>
+                <div className="mt-4 flex items-end gap-2 h-16">
+                  {[60, 80, 100, 70, 90, 100, 45].map((h, i) => (
+                    <div key={i} className="flex flex-1 flex-col items-center gap-1.5">
+                      <div className="w-full rounded-t-[3px] bg-primary/70" style={{ height: `${h}%` }} />
+                      <span className="font-ui text-[10px] uppercase tracking-wider text-muted-foreground">{["D","S","Ch","P","J","Sh","Y"][i]}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Testimonials() {
+  const items = [
+    {
+      q: "Motivatsion kitoblarni tashladim. Uchta 2-daqiqalik qadam — 40 kundan buyon uzilmagan. Hayotim tartibga tushdi.",
+      a: "Aziz R.",
+      r: "dasturchi, Toshkent",
+    },
+    {
+      q: "Nadir ertalab yozgan bitta jumla — kun davomida qanday harakat qilishimni belgilaydi. Bu terapevtdan arzon va halolroq.",
+      a: "Dilnoza T.",
+      r: "marketolog",
+    },
+    {
+      q: "Shield tizimi genial. Bir kun o'tkazib yubordim — hammasi barbod bo'lmadi. Ertaga davom etdim.",
+      a: "Sardor M.",
+      r: "talaba, TATU",
+    },
+  ];
+  return (
+    <section aria-labelledby="voices-title" className="border-b border-border">
+      <div className="mx-auto max-w-6xl px-5 py-20">
+        <div className="max-w-2xl">
+          <p className="font-ui text-xs uppercase tracking-[0.24em] text-primary">Ovozlar</p>
+          <h2 id="voices-title" className="mt-3 font-serif text-2xl leading-tight tracking-tight md:text-3xl">
+            Beta foydalanuvchilar nima deydi
+          </h2>
+        </div>
+        <div className="mt-10 grid gap-5 md:grid-cols-3">
+          {items.map((t) => (
+            <figure key={t.a} className="flex h-full flex-col rounded-[var(--radius)] border border-border bg-card/30 p-6">
+              <blockquote className="font-serif text-[17px] leading-snug text-balance">
+                "{t.q}"
+              </blockquote>
+              <figcaption className="mt-6 border-t border-border/60 pt-4 font-ui text-[13px]">
+                <span className="font-semibold">{t.a}</span>
+                <span className="text-muted-foreground"> · {t.r}</span>
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Traction() {
+  const items = [
+    { k: "1 200+", v: "Beta ro'yxatdan o'tganlar" },
+    { k: "18 kun", v: "O'rtacha faol streak" },
+    { k: "72%", v: "Haftalik retention (W4)" },
+    { k: "4.8/5", v: "Foydalanuvchi bahosi" },
+  ];
+  return (
+    <section aria-labelledby="traction-title" className="border-b border-border bg-card/30">
+      <div className="mx-auto max-w-6xl px-5 py-16">
+        <div className="flex flex-wrap items-end justify-between gap-4">
+          <div>
+            <p className="font-ui text-xs uppercase tracking-[0.24em] text-primary">Traksiya</p>
+            <h2 id="traction-title" className="mt-3 font-serif text-2xl leading-tight tracking-tight md:text-3xl">
+              Raqamlar gapiradi
+            </h2>
+          </div>
+          <Link
+            to="/investors"
+            className="font-ui text-[13px] font-semibold text-primary underline-offset-4 hover:underline"
+          >
+            Investorlar uchun to'liq ma'lumot →
+          </Link>
+        </div>
+        <dl className="mt-10 grid grid-cols-2 gap-6 md:grid-cols-4">
+          {items.map((s) => (
+            <div key={s.v} className="rounded-[var(--radius)] border border-border bg-background p-5">
+              <dt className="font-serif text-3xl tracking-tight tabular-nums md:text-4xl">
+                {s.k}
+              </dt>
+              <dd className="mt-2 font-ui text-[12px] uppercase tracking-[0.18em] text-muted-foreground">
+                {s.v}
+              </dd>
+            </div>
+          ))}
+        </dl>
+        <p className="mt-6 font-ui text-[11px] text-muted-foreground">
+          * Ichki beta ma'lumotlari, iyul 2026. Auditlangan versiya investorlar paketida.
+        </p>
+      </div>
+    </section>
+  );
+}
+
+
