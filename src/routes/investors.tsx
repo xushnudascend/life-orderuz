@@ -412,6 +412,13 @@ function InvestorsPage() {
             >
               <Mail className="h-4 w-4" /> investors@life-order.uz
             </a>
+            <a
+              href="/investor/life-order-deck.pptx"
+              download
+              className="inline-flex items-center gap-2 rounded-full border border-border px-6 py-3 font-ui text-sm font-semibold hover:border-primary/50 hover:text-primary transition-colors"
+            >
+              <Download className="h-4 w-4" /> Deck yuklash
+            </a>
             <Link
               to="/"
               className="inline-flex items-center gap-2 rounded-full border border-border px-6 py-3 font-ui text-sm font-semibold hover:border-primary/50 hover:text-primary transition-colors"
