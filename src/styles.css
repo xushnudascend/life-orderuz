@@ -54,7 +54,7 @@
   --color-sun: hsl(var(--sun));
   --color-kelp: hsl(var(--kelp));
 
-  --font-serif: "Instrument Serif", "Times New Roman", Georgia, ui-serif, serif;
+  --font-serif: "Times New Roman", Times, Georgia, ui-serif, serif;
   --font-sans: "Karla", ui-sans-serif, system-ui, sans-serif;
   --font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
 
