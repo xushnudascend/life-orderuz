@@ -75,34 +75,41 @@ function Pricing() {
 }
 
 function LocalPayments() {
-  const methods: { name: string; note: string }[] = [
-    { name: "Click", note: "UzCard / Humo · to'g'ridan-to'g'ri" },
-    { name: "Payme", note: "Barcha O'zbekiston kartalari" },
-    { name: "Uzum Bank", note: "Uzum ilovasi orqali" },
-    { name: "Xalqaro karta", note: "Visa / Mastercard (Stripe)" },
+  const methods: { name: string; note: string; status: string }[] = [
+    { name: "Click", note: "UzCard / Humo", status: "Tez orada" },
+    { name: "Payme", note: "O'zbekiston kartalari", status: "Tez orada" },
+    { name: "Uzum Bank", note: "Uzum ilovasi orqali", status: "Tez orada" },
+    { name: "Visa / Mastercard", note: "Xalqaro to'lovlar", status: "Ulanmoqda" },
   ];
   return (
     <section className="border-b border-border">
       <div className="mx-auto max-w-3xl px-5 py-16">
         <p className="font-ui text-[11px] uppercase tracking-[0.24em] text-primary">
-          To'lov usullari
+          To'lov usullari · Roadmap
         </p>
         <h2 className="mt-3 font-serif text-2xl leading-tight tracking-tight md:text-3xl">
-          Mahalliy karta bilan Pro'ni ochish
+          Pro tez orada ochiladi
         </h2>
         <p className="mt-4 max-w-2xl font-ui text-sm text-muted-foreground leading-relaxed">
-          O'zbekiston foydalanuvchilari uchun Click va Payme orqali to'lov qo'llab-quvvatlanadi. Xalqaro foydalanuvchilar Visa/Mastercard ishlatishlari mumkin. Barcha to'lovlar SSL orqali shifrlangan, karta ma'lumotlari saqlanmaydi.
+          Hozircha Free rejim to'liq ochiq — kartasiz, tekin. Pro obuna va mahalliy to'lov usullari (Click, Payme, Uzum) ulanish jarayonida. Tayyor bo'lganda ro'yxatdagilar birinchi bo'lib xabar oladi.
         </p>
         <div className="mt-8 grid gap-3 sm:grid-cols-2">
           {methods.map((m) => (
             <div key={m.name} className="rounded-[var(--radius)] border border-border/60 bg-card/40 p-4">
-              <p className="font-serif text-base font-semibold text-foreground">{m.name}</p>
-              <p className="mt-1 font-ui text-xs text-muted-foreground">{m.note}</p>
+              <div className="flex items-start justify-between gap-3">
+                <div>
+                  <p className="font-serif text-base font-semibold text-foreground">{m.name}</p>
+                  <p className="mt-1 font-ui text-xs text-muted-foreground">{m.note}</p>
+                </div>
+                <span className="shrink-0 rounded-full border border-border/60 bg-background px-2 py-0.5 font-ui text-[10px] uppercase tracking-wider text-muted-foreground">
+                  {m.status}
+                </span>
+              </div>
             </div>
           ))}
         </div>
         <p className="mt-6 font-ui text-xs text-muted-foreground">
-          14 kunlik to'lovni qaytarish kafolati. Istalgan paytda bekor qilish.
+          Pro ochilganda 14 kunlik to'lovni qaytarish kafolati va istalgan paytda bekor qilish imkoni bo'ladi.
         </p>
       </div>
     </section>
