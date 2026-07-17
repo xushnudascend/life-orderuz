@@ -53,7 +53,14 @@ export const Route = createFileRoute("/pricing")({
 function Pricing() {
   return (
     <div className="min-h-screen bg-background text-foreground animate-fade-in">
-      <Header />
+      <SiteHeader
+        nav={[
+          { href: "/", label: "Bosh sahifa" },
+          { href: "/#science", label: "Ilm" },
+          { href: "/#faq", label: "Savollar" },
+        ]}
+        cta={{ label: "Kirish", to: "/auth" }}
+      />
       <main>
         <Hero />
         <Plans />
@@ -61,12 +68,11 @@ function Pricing() {
         <Faq />
         <FinalCta />
       </main>
-      <Footer />
+      <SiteFooter />
     </div>
   );
 }
 
-function Header() {
   return (
     <header className="sticky top-0 z-40 h-14 border-b border-border bg-background/80 backdrop-blur-sm">
       <div className="mx-auto flex h-full max-w-6xl items-center justify-between px-5">
