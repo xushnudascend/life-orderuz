@@ -360,11 +360,12 @@ function SocialProof() {
 /* ================= C.6 — Muammo (chuqurroq) ================= */
 function ProblemDeep() {
   const list = [
-    "Bugungi ishni ertaga qoldirdim",
-    "Sport zaliga uch kun bordim, tashladim",
-    "Kitob 40-sahifada ochiq turibdi",
-    "Ekran vaqti kuniga olti soatdan oshdi",
-    "Tengdoshlarim ilgarilaydi, men joyimda",
+    "Bugungi vazifani ertaga surdim (yana)",
+    "Sport zaliga 4 kun bordim, 5-kuni tashladim",
+    "Kitob 40-sahifada — 3 oydan beri",
+    "Ekran vaqti kuniga 6+ soat",
+    "Tengdoshlarim oldga ketmoqda, men joyimda",
+    "Rejalar aniq — bajarish esa yo'q",
   ];
   return (
     <section className="border-t border-border bg-card/30">
@@ -376,7 +377,7 @@ function ProblemDeep() {
             <span className="text-muted-foreground">Har juma o'sha eski sen.</span>
           </h2>
           <p className="mt-6 max-w-xl leading-relaxed text-muted-foreground">
-            YouTube'da soatlab motivatsiya... Uch kundan keyin hammasi to'xtaydi. Senga motivatsiya emas, tizim kerak.
+            Muammo — irodangda emas. Muammo — miyya ehtiyot rejim (default mode) tanlaganida. Motivatsion kontent bir necha kunda so'nadi (hedonic adaptation). Doimiy o'zgarish uchun kontent emas — arxitektura kerak.
           </p>
         </div>
         <ul className="space-y-3">
