@@ -6,7 +6,6 @@ import {
   Target,
   ShieldCheck,
   ArrowRight,
-  Repeat,
   Zap,
   Anchor,
   Brain,
@@ -96,31 +95,14 @@ function HabitsCategory() {
         </div>
       </Panel>
 
-      {/* Ilmiy asos */}
-      <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-        <FactCard k="66 kun" v="O'rtacha vaqt (Lally, UCL 2010)" />
-        <FactCard k="18-254" v="Diapazon — murakkablikka qarab" />
-        <FactCard k="43%" v="Kunlik xulq — odat (Wood, USC)" />
-        <FactCard k="2 daq" v="Boshlash uchun minimal hajm (Fogg)" />
+      <div className="mt-6">
+        <Link
+          to="/habits"
+          className="inline-flex items-center gap-1.5 font-ui text-[11px] font-semibold uppercase tracking-[0.2em] text-primary hover:gap-2 transition-all"
+        >
+          Odatlarni boshqarish <ArrowRight className="h-3 w-3" />
+        </Link>
       </div>
-
-      {/* Maslahat */}
-      <Panel className="mt-6">
-        <PanelHeader eyebrow="Amaliy" />
-        <ul className="mt-3 space-y-2 font-ui text-sm">
-          <TipLine text="Yangi odat qo'shsang — mavjud odatga bog'la ('kofedan keyin men…')." />
-          <TipLine text="Bir vaqtda 3 tadan ko'p yangi odat kiritma — irodangni bo'lib tashlaydi." />
-          <TipLine text="Zanjir uzilsa, keyingi kuni albatta qayt. 1 kun — xato. 2 kun — yangi odat." />
-        </ul>
-        <div className="mt-4">
-          <Link
-            to="/habits"
-            className="inline-flex items-center gap-1.5 font-ui text-[11px] font-semibold uppercase tracking-[0.2em] text-primary hover:gap-2 transition-all"
-          >
-            Odatlarni boshqarish <ArrowRight className="h-3 w-3" />
-          </Link>
-        </div>
-      </Panel>
     </AppShell>
   );
 }
@@ -184,25 +166,5 @@ function Step({
         {body}
       </p>
     </div>
-  );
-}
-
-function FactCard({ k, v }: { k: string; v: string }) {
-  return (
-    <div className="rounded-[var(--radius)] border border-border bg-background/30 p-4">
-      <p className="font-serif text-2xl tabular-nums">{k}</p>
-      <p className="mt-1 font-ui text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
-        {v}
-      </p>
-    </div>
-  );
-}
-
-function TipLine({ text }: { text: string }) {
-  return (
-    <li className="flex items-start gap-2.5">
-      <Repeat className="mt-0.5 h-3.5 w-3.5 shrink-0 text-primary" />
-      <span className="leading-relaxed text-foreground/90">{text}</span>
-    </li>
   );
 }

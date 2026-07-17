@@ -1,6 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { AppShell } from "@/components/app-shell";
-import { Panel, PanelHeader } from "@/components/panel";
 import {
   HeartPulse,
   Dumbbell,
@@ -89,15 +88,6 @@ function BodyCategory() {
         />
       </div>
 
-      {/* Tavsiya paneli */}
-      <Panel className="mt-6">
-        <PanelHeader eyebrow="Bugun uchun" />
-        <div className="mt-3 grid gap-3 sm:grid-cols-3">
-          <TipRow n="01" text="Ertalab 500 ml suv — kofegacha." />
-          <TipRow n="02" text="20 daq. tez yurish — kunning istalgan payti." />
-          <TipRow n="03" text="Uxlashdan 1 soat oldin ekran o'chirilsin." />
-        </div>
-      </Panel>
     </AppShell>
   );
 }
@@ -157,13 +147,3 @@ function Pillar({
   );
 }
 
-function TipRow({ n, text }: { n: string; text: string }) {
-  return (
-    <div className="flex items-start gap-2.5">
-      <span className="font-ui text-[10px] font-semibold uppercase tracking-[0.2em] text-primary">
-        {n}
-      </span>
-      <p className="font-ui text-[13px] leading-relaxed">{text}</p>
-    </div>
-  );
-}
