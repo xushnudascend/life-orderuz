@@ -23,6 +23,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as UUsernameRouteImport } from './routes/u.$username'
 import { Route as ShareMilestoneRouteImport } from './routes/share.milestone'
 import { Route as BlogTungiRitualRouteImport } from './routes/blog.tungi-ritual'
+import { Route as BlogMotivatsiyaTuzogiRouteImport } from './routes/blog.motivatsiya-tuzogi'
 import { Route as BlogHayotSohalariRouteImport } from './routes/blog.hayot-sohalari'
 import { Route as Blog66KunQoidasiRouteImport } from './routes/blog.66-kun-qoidasi'
 import { Route as ApiChatRouteImport } from './routes/api/chat'
@@ -123,6 +124,11 @@ const ShareMilestoneRoute = ShareMilestoneRouteImport.update({
 const BlogTungiRitualRoute = BlogTungiRitualRouteImport.update({
   id: '/blog/tungi-ritual',
   path: '/blog/tungi-ritual',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BlogMotivatsiyaTuzogiRoute = BlogMotivatsiyaTuzogiRouteImport.update({
+  id: '/blog/motivatsiya-tuzogi',
+  path: '/blog/motivatsiya-tuzogi',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BlogHayotSohalariRoute = BlogHayotSohalariRouteImport.update({
@@ -326,6 +332,7 @@ export interface FileRoutesByFullPath {
   '/api/chat': typeof ApiChatRoute
   '/blog/66-kun-qoidasi': typeof Blog66KunQoidasiRoute
   '/blog/hayot-sohalari': typeof BlogHayotSohalariRoute
+  '/blog/motivatsiya-tuzogi': typeof BlogMotivatsiyaTuzogiRoute
   '/blog/tungi-ritual': typeof BlogTungiRitualRoute
   '/share/milestone': typeof ShareMilestoneRoute
   '/u/$username': typeof UUsernameRoute
@@ -373,6 +380,7 @@ export interface FileRoutesByTo {
   '/api/chat': typeof ApiChatRoute
   '/blog/66-kun-qoidasi': typeof Blog66KunQoidasiRoute
   '/blog/hayot-sohalari': typeof BlogHayotSohalariRoute
+  '/blog/motivatsiya-tuzogi': typeof BlogMotivatsiyaTuzogiRoute
   '/blog/tungi-ritual': typeof BlogTungiRitualRoute
   '/share/milestone': typeof ShareMilestoneRoute
   '/u/$username': typeof UUsernameRoute
@@ -422,6 +430,7 @@ export interface FileRoutesById {
   '/api/chat': typeof ApiChatRoute
   '/blog/66-kun-qoidasi': typeof Blog66KunQoidasiRoute
   '/blog/hayot-sohalari': typeof BlogHayotSohalariRoute
+  '/blog/motivatsiya-tuzogi': typeof BlogMotivatsiyaTuzogiRoute
   '/blog/tungi-ritual': typeof BlogTungiRitualRoute
   '/share/milestone': typeof ShareMilestoneRoute
   '/u/$username': typeof UUsernameRoute
@@ -471,6 +480,7 @@ export interface FileRouteTypes {
     | '/api/chat'
     | '/blog/66-kun-qoidasi'
     | '/blog/hayot-sohalari'
+    | '/blog/motivatsiya-tuzogi'
     | '/blog/tungi-ritual'
     | '/share/milestone'
     | '/u/$username'
@@ -518,6 +528,7 @@ export interface FileRouteTypes {
     | '/api/chat'
     | '/blog/66-kun-qoidasi'
     | '/blog/hayot-sohalari'
+    | '/blog/motivatsiya-tuzogi'
     | '/blog/tungi-ritual'
     | '/share/milestone'
     | '/u/$username'
@@ -566,6 +577,7 @@ export interface FileRouteTypes {
     | '/api/chat'
     | '/blog/66-kun-qoidasi'
     | '/blog/hayot-sohalari'
+    | '/blog/motivatsiya-tuzogi'
     | '/blog/tungi-ritual'
     | '/share/milestone'
     | '/u/$username'
@@ -599,6 +611,7 @@ export interface RootRouteChildren {
   ApiChatRoute: typeof ApiChatRoute
   Blog66KunQoidasiRoute: typeof Blog66KunQoidasiRoute
   BlogHayotSohalariRoute: typeof BlogHayotSohalariRoute
+  BlogMotivatsiyaTuzogiRoute: typeof BlogMotivatsiyaTuzogiRoute
   BlogTungiRitualRoute: typeof BlogTungiRitualRoute
   ShareMilestoneRoute: typeof ShareMilestoneRoute
   UUsernameRoute: typeof UUsernameRoute
@@ -709,6 +722,13 @@ declare module '@tanstack/react-router' {
       path: '/blog/tungi-ritual'
       fullPath: '/blog/tungi-ritual'
       preLoaderRoute: typeof BlogTungiRitualRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog/motivatsiya-tuzogi': {
+      id: '/blog/motivatsiya-tuzogi'
+      path: '/blog/motivatsiya-tuzogi'
+      fullPath: '/blog/motivatsiya-tuzogi'
+      preLoaderRoute: typeof BlogMotivatsiyaTuzogiRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/blog/hayot-sohalari': {
@@ -1017,6 +1037,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiChatRoute: ApiChatRoute,
   Blog66KunQoidasiRoute: Blog66KunQoidasiRoute,
   BlogHayotSohalariRoute: BlogHayotSohalariRoute,
+  BlogMotivatsiyaTuzogiRoute: BlogMotivatsiyaTuzogiRoute,
   BlogTungiRitualRoute: BlogTungiRitualRoute,
   ShareMilestoneRoute: ShareMilestoneRoute,
   UUsernameRoute: UUsernameRoute,
