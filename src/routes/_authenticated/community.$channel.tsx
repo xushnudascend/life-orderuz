@@ -180,7 +180,7 @@ function ChannelView() {
                   <p className="mt-2 whitespace-pre-wrap font-ui text-sm">{p.content}</p>
                 </div>
                 {p.user_id === userId && (
-                  <Button variant="ghost" size="icon" onClick={() => del(p.id)}>
+                  <Button variant="ghost" size="icon" aria-label="Xabarni o&apos;chirish" onClick={() => del(p.id)}>
                     <Trash2 className="h-4 w-4" />
                   </Button>
                 )}

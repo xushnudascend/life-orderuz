@@ -313,9 +313,8 @@ function MentorChat({
           placeholder="Nadirga yoz…"
           rows={2}
           className="min-h-[52px] resize-none font-ui"
-          autoFocus
         />
-        <Button type="submit" disabled={busy || !input.trim()} size="icon">
+        <Button type="submit" disabled={busy || !input.trim()} size="icon" aria-label="Xabar yuborish">
           <Send className="h-4 w-4" />
         </Button>
       </form>
