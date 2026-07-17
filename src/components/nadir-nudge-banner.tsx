@@ -30,7 +30,7 @@ export function NadirNudgeBanner({ userId }: { userId: string }) {
     if (!nudge) return;
     await supabase
       .from("nadir_nudges")
-      .update({ resolved_at: new Date().toISOString() })
+      .update({ read_at: new Date().toISOString() })
       .eq("id", nudge.id);
     setNudge(null);
   }
