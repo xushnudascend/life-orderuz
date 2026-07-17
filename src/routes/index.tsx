@@ -211,20 +211,20 @@ function ProblemsGrid() {
   const items = [
     {
       n: "01",
-      title: "Telefon qaramligi",
+      title: "Dofamin halqasi",
       body:
-        "Cheksiz scroll seni maqsadlaringdan uzoqlashtiradi. Ekran vaqtini nazoratga ol.",
+        "Har swipe — kutilmagan mukofot. Miyya bu naqshni saqlaydi (Schultz, 1997). Life Order shu halqani tanib, uni foydali harakatga ulaydi.",
     },
     {
       n: "02",
-      title: "Kechiktirish odati",
-      body: "Ertaga emas, hozir. Mikro-qadam bilan boshlash — halqani sindiradi.",
+      title: "Kechiktirish (akrasia)",
+      body: "Uzoq foyda vs bugungi qulaylik — miyya bugunni tanlaydi (temporal discounting). Mikro-qadam — 2 daqiqalik — qarshilikni sindiradi.",
     },
     {
       n: "03",
-      title: "Tartibsiz kun",
+      title: "Qaror charchog'i",
       body:
-        "Xaosni tizimga aylantir. Har kuni uchta aniq vazifa, aniq javobgarlik.",
+        "Kuniga 35 000 ta qaror miyya resursini tugatadi. Life Order 3 ta muhim qaror qoldiradi, qolganini avtomatlashtiradi.",
     },
   ];
   return (
