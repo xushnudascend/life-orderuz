@@ -14,6 +14,8 @@ import {
   Lock,
   Globe,
   Mail,
+  Download,
+  FileText,
 } from "lucide-react";
 import { uz } from "@/i18n";
 
@@ -59,12 +61,21 @@ function InvestorsPage() {
           <span className="hidden sm:inline font-ui text-[10px] font-semibold uppercase tracking-[0.24em] text-primary">
             Investor deck · Konfidensial
           </span>
-          <a
-            href="mailto:investors@life-order.uz"
-            className="inline-flex items-center gap-1.5 rounded-full border border-primary/50 bg-primary/10 px-3 py-1.5 font-ui text-[11px] font-semibold uppercase tracking-[0.2em] text-primary hover:bg-primary/20 transition-colors"
-          >
-            <Mail className="h-3 w-3" /> Bog'lanish
-          </a>
+          <div className="flex items-center gap-2">
+            <a
+              href="/investor/life-order-deck.pptx"
+              download
+              className="inline-flex items-center gap-1.5 rounded-full bg-primary px-3 py-1.5 font-ui text-[11px] font-semibold uppercase tracking-[0.2em] text-primary-foreground hover:opacity-90 transition-opacity"
+            >
+              <Download className="h-3 w-3" /> Deck
+            </a>
+            <a
+              href="mailto:investors@life-order.uz"
+              className="inline-flex items-center gap-1.5 rounded-full border border-primary/50 bg-primary/10 px-3 py-1.5 font-ui text-[11px] font-semibold uppercase tracking-[0.2em] text-primary hover:bg-primary/20 transition-colors"
+            >
+              <Mail className="h-3 w-3" /> Bog'lanish
+            </a>
+          </div>
         </div>
       </div>
 
@@ -93,6 +104,33 @@ function InvestorsPage() {
             <MicroStat k="43%" v="Kunlik xulq — odat (Wood, USC)" />
             <MicroStat k="$4.2B" v="Global habits/wellness bozori 2025" />
           </div>
+
+          {/* Primary CTAs — deck download */}
+          <div className="mt-10 flex flex-wrap items-center gap-3">
+            <a
+              href="/investor/life-order-deck.pptx"
+              download
+              className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 font-ui text-sm font-semibold text-primary-foreground hover:opacity-90 transition-opacity"
+            >
+              <Download className="h-4 w-4" /> Investor deck (.pptx)
+            </a>
+            <a
+              href="/investor/life-order-infographic.pdf"
+              download
+              className="inline-flex items-center gap-2 rounded-full border border-border px-6 py-3 font-ui text-sm font-semibold hover:border-primary/50 hover:text-primary transition-colors"
+            >
+              <FileText className="h-4 w-4" /> 1-betli infografika (PDF)
+            </a>
+            <a
+              href="mailto:investors@life-order.uz"
+              className="inline-flex items-center gap-2 rounded-full border border-border px-6 py-3 font-ui text-sm font-semibold hover:border-primary/50 hover:text-primary transition-colors"
+            >
+              <Mail className="h-4 w-4" /> 30 daqiqalik suhbat
+            </a>
+          </div>
+          <p className="mt-3 font-ui text-[11px] text-muted-foreground">
+            Konfidensial · Faqat investor va sherik uchun · 12 slayd · ~280 KB
+          </p>
         </section>
 
         {/* Muammo */}
@@ -373,6 +411,13 @@ function InvestorsPage() {
               className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 font-ui text-sm font-semibold text-primary-foreground hover:opacity-90 transition-opacity"
             >
               <Mail className="h-4 w-4" /> investors@life-order.uz
+            </a>
+            <a
+              href="/investor/life-order-deck.pptx"
+              download
+              className="inline-flex items-center gap-2 rounded-full border border-border px-6 py-3 font-ui text-sm font-semibold hover:border-primary/50 hover:text-primary transition-colors"
+            >
+              <Download className="h-4 w-4" /> Deck yuklash
             </a>
             <Link
               to="/"
