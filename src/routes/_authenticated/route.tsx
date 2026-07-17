@@ -3,6 +3,7 @@ import {
   Outlet,
   redirect,
   useLocation,
+  useNavigate,
 } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Loader2 } from "lucide-react";
@@ -14,7 +15,7 @@ import { supabase } from "@/integrations/supabase/client";
  * ssr:false — session is in browser localStorage, unreachable from the server.
  * beforeLoad gate: requires a Supabase user, else → /auth.
  * Onboarding routing: reads profile.onboarding_completed_at inside the
- * component (avoids two round-trips in beforeLoad).
+ * component and navigates via useNavigate (avoid throwing during render).
  */
 export const Route = createFileRoute("/_authenticated")({
   ssr: false,
@@ -34,6 +35,7 @@ export const Route = createFileRoute("/_authenticated")({
 function AuthenticatedShell() {
   const { userId } = Route.useRouteContext();
   const location = useLocation();
+  const navigate = useNavigate();
   const [state, setState] = useState<
     | { status: "loading" }
     | { status: "ready"; onboarded: boolean }
@@ -46,8 +48,11 @@ function AuthenticatedShell() {
       .select("onboarding_completed_at")
       .eq("id", userId)
       .maybeSingle()
-      .then(({ data }) => {
+      .then(({ data, error }) => {
         if (!alive) return;
+        if (error) {
+          console.error("[auth] profile fetch failed", error);
+        }
         setState({
           status: "ready",
           onboarded: Boolean(data?.onboarding_completed_at),
@@ -56,22 +61,28 @@ function AuthenticatedShell() {
     return () => {
       alive = false;
     };
-  }, [userId, location.pathname]);
+  }, [userId]);
 
-  if (state.status === "loading") {
+  const isOnOnboarding = location.pathname.startsWith("/onboarding");
+  const needsOnboarding =
+    state.status === "ready" && !state.onboarded && !isOnOnboarding;
+  const shouldLeaveOnboarding =
+    state.status === "ready" && state.onboarded && isOnOnboarding;
+
+  useEffect(() => {
+    if (needsOnboarding) {
+      navigate({ to: "/onboarding", replace: true });
+    } else if (shouldLeaveOnboarding) {
+      navigate({ to: "/dashboard", replace: true });
+    }
+  }, [needsOnboarding, shouldLeaveOnboarding, navigate]);
+
+  if (state.status === "loading" || needsOnboarding || shouldLeaveOnboarding) {
     return (
       <div className="grid min-h-screen place-items-center bg-background">
         <Loader2 className="h-6 w-6 animate-spin text-muted-foreground" />
       </div>
     );
-  }
-
-  const isOnOnboarding = location.pathname.startsWith("/onboarding");
-  if (!state.onboarded && !isOnOnboarding) {
-    throw redirect({ to: "/onboarding" });
-  }
-  if (state.onboarded && isOnOnboarding) {
-    throw redirect({ to: "/dashboard" });
   }
 
   return <Outlet />;
