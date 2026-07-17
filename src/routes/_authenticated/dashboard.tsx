@@ -272,34 +272,38 @@ function Dashboard() {
                   <button
                     key={h.id}
                     onClick={() => toggle(h)}
+                    aria-pressed={isDone}
                     className={
-                      "flex w-full items-center justify-between rounded-[var(--radius)] border p-4 text-left transition-colors " +
+                      "group flex w-full items-center gap-4 rounded-[var(--radius)] border p-4 text-left transition-all active:scale-[0.99] " +
                       (isDone
                         ? "border-primary/40 bg-primary/5"
-                        : "border-border bg-card hover:border-foreground/20")
+                        : "border-border bg-card hover:border-foreground/30 hover:bg-card/80")
                     }
                   >
-                    <div className="flex items-center gap-4">
-                      <span
-                        className={
-                          "flex h-9 w-9 items-center justify-center rounded-full border transition-colors " +
-                          (isDone
-                            ? "border-primary bg-primary text-primary-foreground"
-                            : "border-border text-muted-foreground")
-                        }
-                      >
-                        <Flame className="h-4 w-4" />
-                      </span>
-                      <div className={isDone ? "opacity-70" : ""}>
-                        <p className={"font-serif text-lg " + (isDone ? "line-through" : "")}>
-                          {h.title}
-                        </p>
-                        <p className="font-ui text-xs uppercase tracking-[0.2em] text-primary">
-                          +{h.xp_reward} XP
-                        </p>
-                      </div>
+                    <span
+                      className={
+                        "flex h-10 w-10 shrink-0 items-center justify-center rounded-full border transition-colors " +
+                        (isDone
+                          ? "border-primary bg-primary text-primary-foreground"
+                          : "border-border text-muted-foreground group-hover:border-primary/60 group-hover:text-primary")
+                      }
+                    >
+                      {isDone ? <Check className="h-5 w-5" /> : <Flame className="h-5 w-5" />}
+                    </span>
+                    <div className={"min-w-0 flex-1 " + (isDone ? "opacity-70" : "")}>
+                      <p className={"truncate font-serif text-lg " + (isDone ? "line-through" : "")}>
+                        {h.title}
+                      </p>
+                      <p className="font-ui text-xs uppercase tracking-[0.2em] text-primary">
+                        +{h.xp_reward} XP
+                      </p>
                     </div>
-                    <span className="font-ui text-xs uppercase tracking-[0.22em] text-muted-foreground">
+                    <span
+                      className={
+                        "hidden shrink-0 font-ui text-[11px] uppercase tracking-[0.22em] sm:inline " +
+                        (isDone ? "text-primary" : "text-muted-foreground")
+                      }
+                    >
                       {isDone ? "Bajarildi" : "Belgilash"}
                     </span>
                   </button>
@@ -310,39 +314,45 @@ function Dashboard() {
 
         </section>
 
-        <aside className="md:col-span-2">
+        <aside className="md:col-span-2 space-y-4">
           <div className="rounded-[var(--radius)] border border-border p-5">
-            <p className="font-ui text-[11px] uppercase tracking-[0.22em] text-muted-foreground">
-              Hafta XP
-            </p>
-            <p className="mt-2 font-serif text-3xl">{stats?.total_xp ?? 0}</p>
-            <Button asChild variant="ghost" size="sm" className="mt-3 -ml-2">
-              <Link to="/analytics">
-                Batafsil <ArrowRight className="ml-1 h-4 w-4" />
+            <div className="flex items-center justify-between">
+              <p className="font-ui text-[11px] uppercase tracking-[0.22em] text-muted-foreground">
+                Hafta XP
+              </p>
+              <Link
+                to="/analytics"
+                className="font-ui text-[11px] uppercase tracking-[0.2em] text-muted-foreground transition-colors hover:text-foreground"
+              >
+                Batafsil →
               </Link>
-            </Button>
+            </div>
+            <p className="mt-2 font-serif text-3xl">{stats?.total_xp ?? 0}</p>
           </div>
 
-          <div className="mt-4">
-            <DailyTimetable />
-          </div>
+          <DailyTimetable />
         </aside>
       </div>
 
       {/* Quick access */}
-      <section className="mt-8 grid gap-3 grid-cols-2 sm:grid-cols-4">
-        <Button asChild variant="outline" size="sm">
-          <Link to="/workout">Mashg'ulot</Link>
-        </Button>
-        <Button asChild variant="outline" size="sm">
-          <Link to="/diet">Ovqatlanish</Link>
-        </Button>
-        <Button asChild variant="outline" size="sm">
-          <Link to="/quests">Vazifalar</Link>
-        </Button>
-        <Button asChild variant="outline" size="sm">
-          <Link to="/mentor">Nadir</Link>
-        </Button>
+      <section className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-4">
+        {[
+          { to: "/workout", label: "Mashg'ulot", icon: Dumbbell },
+          { to: "/diet", label: "Ovqatlanish", icon: Salad },
+          { to: "/quests", label: "Vazifalar", icon: Target },
+          { to: "/mentor", label: "Nadir", icon: Sparkles },
+        ].map(({ to, label, icon: Icon }) => (
+          <Link
+            key={to}
+            to={to}
+            className="group flex items-center gap-3 rounded-[var(--radius)] border border-border bg-card p-4 transition-all hover:-translate-y-0.5 hover:border-primary/50 hover:bg-card/80"
+          >
+            <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-border text-muted-foreground transition-colors group-hover:border-primary group-hover:text-primary">
+              <Icon className="h-4 w-4" />
+            </span>
+            <span className="font-ui text-sm font-medium">{label}</span>
+          </Link>
+        ))}
       </section>
     </AppShell>
   );
