@@ -22,6 +22,7 @@ import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as UUsernameRouteImport } from './routes/u.$username'
 import { Route as ShareMilestoneRouteImport } from './routes/share.milestone'
+import { Route as BlogTungiRitualRouteImport } from './routes/blog.tungi-ritual'
 import { Route as BlogHayotSohalariRouteImport } from './routes/blog.hayot-sohalari'
 import { Route as Blog66KunQoidasiRouteImport } from './routes/blog.66-kun-qoidasi'
 import { Route as ApiChatRouteImport } from './routes/api/chat'
@@ -117,6 +118,11 @@ const UUsernameRoute = UUsernameRouteImport.update({
 const ShareMilestoneRoute = ShareMilestoneRouteImport.update({
   id: '/share/milestone',
   path: '/share/milestone',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BlogTungiRitualRoute = BlogTungiRitualRouteImport.update({
+  id: '/blog/tungi-ritual',
+  path: '/blog/tungi-ritual',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BlogHayotSohalariRoute = BlogHayotSohalariRouteImport.update({
@@ -320,6 +326,7 @@ export interface FileRoutesByFullPath {
   '/api/chat': typeof ApiChatRoute
   '/blog/66-kun-qoidasi': typeof Blog66KunQoidasiRoute
   '/blog/hayot-sohalari': typeof BlogHayotSohalariRoute
+  '/blog/tungi-ritual': typeof BlogTungiRitualRoute
   '/share/milestone': typeof ShareMilestoneRoute
   '/u/$username': typeof UUsernameRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
@@ -366,6 +373,7 @@ export interface FileRoutesByTo {
   '/api/chat': typeof ApiChatRoute
   '/blog/66-kun-qoidasi': typeof Blog66KunQoidasiRoute
   '/blog/hayot-sohalari': typeof BlogHayotSohalariRoute
+  '/blog/tungi-ritual': typeof BlogTungiRitualRoute
   '/share/milestone': typeof ShareMilestoneRoute
   '/u/$username': typeof UUsernameRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
@@ -414,6 +422,7 @@ export interface FileRoutesById {
   '/api/chat': typeof ApiChatRoute
   '/blog/66-kun-qoidasi': typeof Blog66KunQoidasiRoute
   '/blog/hayot-sohalari': typeof BlogHayotSohalariRoute
+  '/blog/tungi-ritual': typeof BlogTungiRitualRoute
   '/share/milestone': typeof ShareMilestoneRoute
   '/u/$username': typeof UUsernameRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
@@ -462,6 +471,7 @@ export interface FileRouteTypes {
     | '/api/chat'
     | '/blog/66-kun-qoidasi'
     | '/blog/hayot-sohalari'
+    | '/blog/tungi-ritual'
     | '/share/milestone'
     | '/u/$username'
     | '/.lovable/oauth/consent'
@@ -508,6 +518,7 @@ export interface FileRouteTypes {
     | '/api/chat'
     | '/blog/66-kun-qoidasi'
     | '/blog/hayot-sohalari'
+    | '/blog/tungi-ritual'
     | '/share/milestone'
     | '/u/$username'
     | '/.lovable/oauth/consent'
@@ -555,6 +566,7 @@ export interface FileRouteTypes {
     | '/api/chat'
     | '/blog/66-kun-qoidasi'
     | '/blog/hayot-sohalari'
+    | '/blog/tungi-ritual'
     | '/share/milestone'
     | '/u/$username'
     | '/.lovable/oauth/consent'
@@ -587,6 +599,7 @@ export interface RootRouteChildren {
   ApiChatRoute: typeof ApiChatRoute
   Blog66KunQoidasiRoute: typeof Blog66KunQoidasiRoute
   BlogHayotSohalariRoute: typeof BlogHayotSohalariRoute
+  BlogTungiRitualRoute: typeof BlogTungiRitualRoute
   ShareMilestoneRoute: typeof ShareMilestoneRoute
   UUsernameRoute: typeof UUsernameRoute
   DotlovableOauthConsentRoute: typeof DotlovableOauthConsentRoute
@@ -689,6 +702,13 @@ declare module '@tanstack/react-router' {
       path: '/share/milestone'
       fullPath: '/share/milestone'
       preLoaderRoute: typeof ShareMilestoneRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog/tungi-ritual': {
+      id: '/blog/tungi-ritual'
+      path: '/blog/tungi-ritual'
+      fullPath: '/blog/tungi-ritual'
+      preLoaderRoute: typeof BlogTungiRitualRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/blog/hayot-sohalari': {
@@ -997,6 +1017,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiChatRoute: ApiChatRoute,
   Blog66KunQoidasiRoute: Blog66KunQoidasiRoute,
   BlogHayotSohalariRoute: BlogHayotSohalariRoute,
+  BlogTungiRitualRoute: BlogTungiRitualRoute,
   ShareMilestoneRoute: ShareMilestoneRoute,
   UUsernameRoute: UUsernameRoute,
   DotlovableOauthConsentRoute: DotlovableOauthConsentRoute,
