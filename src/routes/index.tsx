@@ -728,28 +728,7 @@ function PricingCard({
 
 /* ================= C.13 — FAQ ================= */
 function Faq() {
-  const items = [
-    {
-      q: "Life Order nima?",
-      a: "Self-Control OS — o'z-o'zini boshqarishning operatsion tizimi. Trigger tahlili, kunlik uchta aniq qadam va halol AI mentor Nadir bir joyda birlashgan.",
-    },
-    {
-      q: "Bepulmi?",
-      a: "Ha. Free reja cheksiz ishlaydi. Karta so'ralmaydi, avtomatik to'lov yo'q.",
-    },
-    {
-      q: "Kim uchun mos?",
-      a: "O'zini o'zgartirmoqchi bo'lgan 16–30 yoshdagi har bir kishi uchun.",
-    },
-    {
-      q: "Ma'lumotlarim xavfsizmi?",
-      a: "Ha. Barcha ma'lumot shifrlangan, uchinchi tomonga sotilmaydi. Istalgan paytda o'chirish so'rovini yubor.",
-    },
-    {
-      q: "Qancha vaqt kerak?",
-      a: "Kuniga 10–15 daqiqa yetarli. Missiyalar qisqa va aniq.",
-    },
-  ];
+  const items = FAQ_ITEMS;
   return (
     <section id="faq" className="border-t border-border">
       <div className="mx-auto max-w-3xl px-5 py-20">
