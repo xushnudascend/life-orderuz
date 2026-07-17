@@ -309,18 +309,3 @@ function FinalCta() {
   );
 }
 
-function Footer() {
-  return (
-    <footer>
-      <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-5 py-8 font-ui text-xs text-muted-foreground">
-        <p>© {new Date().getFullYear()} {uz.brand.name}</p>
-        <nav className="flex flex-wrap gap-x-5 gap-y-2">
-          <Link to="/terms" className="hover:text-foreground">Terms</Link>
-          <Link to="/privacy" className="hover:text-foreground">Privacy</Link>
-          <Link to="/refund" className="hover:text-foreground">Refund</Link>
-          <Link to="/security" className="hover:text-foreground">Xavfsizlik</Link>
-        </nav>
-      </div>
-    </footer>
-  );
-}
