@@ -399,12 +399,12 @@ function TurningPoint() {
     <section className="border-t border-border">
       <div className="mx-auto max-w-3xl px-5 py-24 text-center">
         <h2 className="font-serif text-3xl leading-tight tracking-tight text-balance md:text-5xl">
-          Kuchli odamlar irodaga tayanmaydi.
+          Muvaffaqiyatli odamlar irodaga tayanmaydi.
           <br />
-          <span className="text-primary">Tizim quradi.</span>
+          <span className="text-primary">Ular muhitni loyihalaydi.</span>
         </h2>
         <p className="mx-auto mt-6 max-w-xl leading-relaxed text-muted-foreground text-pretty">
-          Ular ertalab "nima qilay?" demaydi — reja allaqachon aniq. Life Order shu tizimni telefoningga o'rnatadi.
+          Duke University tadqiqoti (Wendy Wood, 2019): kundalik xatti-harakatning <span className="text-foreground">43%</span> — ongli qaror emas, avtomatik odat. Ular ertalab "nima qilay?" demaydi — trigger allaqachon o'rnatilgan. Life Order shu arxitekturani telefoningga o'rnatadi.
         </p>
       </div>
     </section>
