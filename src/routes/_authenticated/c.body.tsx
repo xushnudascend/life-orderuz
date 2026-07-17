@@ -1,6 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { AppShell } from "@/components/app-shell";
-import { Panel, PanelHeader } from "@/components/panel";
 import {
   HeartPulse,
   Dumbbell,
