@@ -83,7 +83,7 @@ function InvestorsPage() {
         {/* Hero */}
         <section className="mb-20">
           <p className="font-ui text-[11px] font-semibold uppercase tracking-[0.28em] text-primary">
-            Seed round · Q1 2026
+            Pre-seed · 18 oylik reja
           </p>
           <h1 className="mt-4 font-serif text-4xl font-semibold tracking-tight sm:text-6xl">
             Motivatsiya tugaydi.
@@ -91,18 +91,17 @@ function InvestorsPage() {
             <span className="text-primary">Tizim qoladi.</span>
           </h1>
           <p className="mt-6 max-w-2xl font-ui text-lg leading-relaxed text-muted-foreground">
-            Life Order — O'rta Osiyoda birinchi xulq-atvor fani (behavioral science)
-            asosidagi shaxsiy operatsion tizim. Foydalanuvchi 60 soniyada tashxis
-            oladi, kunlik 3 mikro-qadam va AI mentor Nadir bilan haqiqiy o'zgarishga
-            keladi.
+            Life Order — O'zbekistonda xulq-atvor fani (behavioral science) asosidagi
+            shaxsiy operatsion tizim. Beta bosqichida, solo asoschi.
+            <span className="text-foreground font-semibold"> $20 000 pre-seed — 12% ulush evaziga, 18 oylik runway.</span>
           </p>
 
-          {/* Micro-metrics */}
+          {/* Micro-metrics — faqat isbotlangan raqamlar */}
           <div className="mt-10 grid gap-4 sm:grid-cols-4">
-            <MicroStat k="90M+" v="MDH potentsial foydalanuvchi" />
             <MicroStat k="66 kun" v="O'rtacha odat shakllanish (Lally, UCL)" />
             <MicroStat k="43%" v="Kunlik xulq — odat (Wood, USC)" />
-            <MicroStat k="$4.2B" v="Global habits/wellness bozori 2025" />
+            <MicroStat k="90M+" v="MDH smartfon foydalanuvchilari" />
+            <MicroStat k="Beta" v="Mahsulot holati · Q1 2026 launch" />
           </div>
 
           {/* Primary CTAs — deck download */}
@@ -129,7 +128,7 @@ function InvestorsPage() {
             </a>
           </div>
           <p className="mt-3 font-ui text-[11px] text-muted-foreground">
-            Konfidensial · Faqat investor va sherik uchun · 12 slayd · ~280 KB
+            Konfidensial · Faqat investor va sherik uchun · Halol raqamlar, mock yo'q
           </p>
         </section>
 
