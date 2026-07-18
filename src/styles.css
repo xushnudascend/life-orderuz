@@ -401,3 +401,71 @@ html[data-perf="low"] .skeleton { animation: none; opacity: 0.7; }
   white-space: nowrap;
   border: 0;
 }
+
+/* ---------- Global polish (sitewide UX refinements) ---------- */
+
+html {
+  scroll-behavior: smooth;
+  -webkit-tap-highlight-color: transparent;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: "ss01", "cv11", "kern";
+  overflow-wrap: break-word;
+}
+
+body {
+  min-height: 100dvh;
+  overscroll-behavior-y: none;
+}
+
+/* Native selection reflects brand accent */
+::selection {
+  background: hsl(var(--primary) / 0.28);
+  color: hsl(var(--foreground));
+}
+
+/* Custom scrollbar — subtle, on-brand */
+@supports selector(::-webkit-scrollbar) {
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--muted-foreground) / 0.22);
+    border-radius: 999px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--muted-foreground) / 0.4);
+    background-clip: padding-box;
+    border: 2px solid transparent;
+  }
+}
+* { scrollbar-width: thin; scrollbar-color: hsl(var(--muted-foreground) / 0.28) transparent; }
+
+/* Uniform focus ring on all interactive elements */
+:where(a, button, input, select, textarea, [role="button"], [tabindex]):focus-visible {
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: 2px;
+  border-radius: calc(var(--radius) - 2px);
+}
+
+/* Respect prefers-reduced-motion sitewide */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Prevent iOS input zoom (must stay >= 16px on small screens) */
+@media (max-width: 640px) {
+  input, select, textarea { font-size: max(16px, 1rem); }
+}
+
+/* Image defaults — never overflow, always stay crisp */
+img, video, svg { max-width: 100%; height: auto; }
+img { image-rendering: -webkit-optimize-contrast; }
