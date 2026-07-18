@@ -266,40 +266,34 @@ function InvestorsPage() {
           </div>
         </Section>
 
-        {/* Traksiya */}
-        <Section eyebrow="06 · Traksiya" title="Q1 2026 uchun maqsadlar">
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            <TargetCard
-              icon={Users}
-              k="5 000"
-              v="Ro'yxatdan o'tgan foydalanuvchi"
-              period="Q1 2026"
-            />
-            <TargetCard
-              icon={TrendingUp}
-              k="35%"
-              v="14 kunlik retention"
-              period="Q1 2026"
-            />
-            <TargetCard
-              icon={Rocket}
-              k="500"
-              v="Pro obunachi"
-              period="Q2 2026"
-            />
-            <TargetCard
-              icon={BarChart3}
-              k="$3K MRR"
-              v="Oylik takrorlanuvchi daromad"
-              period="Q2 2026"
-            />
+        {/* Traksiya — halol holat */}
+        <Section eyebrow="06 · Hozirgi holat" title="Traksiya — halol">
+          <div className="rounded-[var(--radius)] border border-border bg-card p-6">
+            <ul className="space-y-3 font-ui text-sm leading-relaxed">
+              <li className="flex gap-3">
+                <span className="text-primary font-semibold">•</span>
+                <span><span className="text-foreground font-semibold">Mahsulot:</span> Beta — 14+ modul ishlab bo'lgan (dashboard, odat, jurnal, AI mentor, MCP integratsiya, PWA).</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="text-primary font-semibold">•</span>
+                <span><span className="text-foreground font-semibold">Foydalanuvchilar:</span> Yopiq pilot bosqichida. Ommaviy raqamlar hali e'lon qilinmayapti — shaffoflik uchun.</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="text-primary font-semibold">•</span>
+                <span><span className="text-foreground font-semibold">Daromad:</span> $0 — hali monetizatsiya yo'q. Free tarif ochiq, Pro Q1 2026'da.</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="text-primary font-semibold">•</span>
+                <span><span className="text-foreground font-semibold">Jamoa:</span> 1 asoschi (mahsulot + injener + dizayn). Investment bilan 1 injener + marketing byudjeti.</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="text-primary font-semibold">•</span>
+                <span><span className="text-foreground font-semibold">Xarajat:</span> ~$50/oy (Cloudflare + Supabase + AI gateway). Deyarli 0 burn.</span>
+              </li>
+            </ul>
           </div>
-          <p className="mt-6 font-ui text-sm text-muted-foreground leading-relaxed max-w-3xl">
-            <span className="text-foreground font-semibold">Eslatma:</span>{" "}
-            Ko'rsatkichlar — hozirgi traksiya emas, prognoz maqsadlar. Mahsulot
-            ishga tushirish bosqichida. Har hafta yangilanadi.
-          </p>
         </Section>
+
 
         {/* Product proof — mahsulot ishonchliligi */}
         <Section
