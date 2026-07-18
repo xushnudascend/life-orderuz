@@ -337,54 +337,77 @@ function InvestorsPage() {
         </Section>
 
         {/* Ask */}
-        <Section eyebrow="09 · So'rov" title="Seed round — $150K">
+        <Section eyebrow="09 · So'rov" title="Pre-seed — $20 000">
           <div className="rounded-[var(--radius)] border border-primary/40 bg-primary/5 p-8">
-            <div className="grid gap-6 sm:grid-cols-2">
+            <div className="grid gap-6 sm:grid-cols-3">
               <div>
                 <p className="font-ui text-[11px] font-semibold uppercase tracking-[0.24em] text-primary">
                   Miqdor
                 </p>
-                <p className="mt-2 font-serif text-4xl font-semibold">$150 000</p>
+                <p className="mt-2 font-serif text-4xl font-semibold">$20 000</p>
                 <p className="mt-1 font-ui text-sm text-muted-foreground">
-                  SAFE · 12 oy runway
+                  Bir martalik pre-seed
                 </p>
               </div>
               <div>
                 <p className="font-ui text-[11px] font-semibold uppercase tracking-[0.24em] text-primary">
-                  Taqsimot
+                  Ulush
                 </p>
-                <ul className="mt-2 space-y-1.5 font-ui text-sm">
-                  <li>• 45% — Mahsulot va AI xarajatlari</li>
-                  <li>• 30% — Marketing va foydalanuvchi jalb qilish</li>
-                  <li>• 15% — Jamoa (2 injener + 1 dizayner)</li>
-                  <li>• 10% — Operatsion va yuridik</li>
-                </ul>
+                <p className="mt-2 font-serif text-4xl font-semibold">12%</p>
+                <p className="mt-1 font-ui text-sm text-muted-foreground">
+                  Kompaniya baholovi ~$167K
+                </p>
               </div>
+              <div>
+                <p className="font-ui text-[11px] font-semibold uppercase tracking-[0.24em] text-primary">
+                  Runway
+                </p>
+                <p className="mt-2 font-serif text-4xl font-semibold">18 oy</p>
+                <p className="mt-1 font-ui text-sm text-muted-foreground">
+                  ~$1 100 / oy o'rtacha
+                </p>
+              </div>
+            </div>
+            <div className="mt-8 border-t border-primary/20 pt-6">
+              <p className="font-ui text-[11px] font-semibold uppercase tracking-[0.24em] text-primary">
+                Taqsimot (18 oy)
+              </p>
+              <ul className="mt-3 grid gap-1.5 sm:grid-cols-2 font-ui text-sm">
+                <li>• 40% ($8 000) — Marketing va foydalanuvchi jalb qilish</li>
+                <li>• 25% ($5 000) — AI, infratuzilma, servis xarajatlari</li>
+                <li>• 20% ($4 000) — Kontraktor (dizayn/injener yordami)</li>
+                <li>• 10% ($2 000) — Yuridik, ro'yxatdan o'tish, litsenziyalar</li>
+                <li>• 5% ($1 000) — Zaxira / kutilmagan xarajat</li>
+              </ul>
             </div>
           </div>
         </Section>
 
         {/* Roadmap */}
-        <Section eyebrow="10 · Roadmap" title="12 oylik yo'l xarita">
+        <Section eyebrow="10 · Roadmap" title="18 oylik yo'l xarita">
           <div className="space-y-3">
             <RoadmapRow
-              period="Q1 2026"
-              milestone="Public launch · 5 000 foydalanuvchi · Uzbekistonda"
+              period="0–3 oy"
+              milestone="Public launch · Uzbekistonda beta yopiq guruhdan chiqish · Landing SEO"
             />
             <RoadmapRow
-              period="Q2 2026"
-              milestone="Pro monetizatsiya · $3K MRR · Rossiya bozoriga chiqish"
+              period="3–6 oy"
+              milestone="Birinchi 1 000 faol foydalanuvchi · Pro tarif ishga tushirish (Click/Payme)"
             />
             <RoadmapRow
-              period="Q3 2026"
-              milestone="B2B pilotlar · 3 kompaniya · Team plan"
+              period="6–12 oy"
+              milestone="5 000 foydalanuvchi · Birinchi $1K MRR · Rus tilida to'liq versiya"
             />
             <RoadmapRow
-              period="Q4 2026"
-              milestone="Series A tayyorlik · 25 000 foydalanuvchi · $15K MRR"
+              period="12–18 oy"
+              milestone="B2B pilot (2–3 kompaniya) · Series A/seed uchun metrikalar tayyor"
             />
           </div>
+          <p className="mt-6 font-ui text-xs text-muted-foreground leading-relaxed max-w-3xl">
+            Bu — prognoz, kafolat emas. Har bir bosqich hisobot bilan. Investor har chorak natija ko'radi.
+          </p>
         </Section>
+
 
         {/* CTA */}
         <section className="mt-24 rounded-[var(--radius)] border border-border bg-card p-10 text-center">
