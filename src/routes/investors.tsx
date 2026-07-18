@@ -35,7 +35,7 @@ export const Route = createFileRoute("/investors")({
       {
         property: "og:description",
         content:
-          "MDH bozorida 90M+ potentsial foydalanuvchi. Xulq-atvor fani + AI + geymifikatsiya. Q1 2026 uchun seed round.",
+          "$20 000 pre-seed · 12% ulush · 18 oylik reja. Xulq-atvor fani + AI + geymifikatsiya. Beta bosqichida.",
       },
       { property: "og:url", content: CANONICAL },
       { property: "og:type", content: "website" },
