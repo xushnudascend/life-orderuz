@@ -20,6 +20,7 @@ export function AppShell({
 }) {
   const [archetype, setArchetype] = useState<Archetype | null>(null);
   const [name, setName] = useState<string | null>(null);
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
     let alive = true;
@@ -42,6 +43,13 @@ export function AppShell({
     };
   }, []);
 
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 4);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   async function signOut() {
     await supabase.auth.signOut();
     window.location.href = "/auth";
@@ -58,27 +66,41 @@ export function AppShell({
         className="md:pl-[var(--sidebar-width)]"
         style={{ paddingBottom: "calc(6rem + env(safe-area-inset-bottom))" }}
       >
-        {/* Topbar — yengil, blur past-perf'da o'chadi */}
+        {/* Topbar — scroll'da yengil soya, blur past-perf'da o'chadi */}
         <header
-          className="sticky top-0 z-20 border-b border-border/70 bg-background/90 supports-[backdrop-filter]:bg-background/70 backdrop-blur"
+          className={
+            "sticky top-0 z-20 border-b bg-background/90 supports-[backdrop-filter]:bg-background/70 backdrop-blur transition-[border-color,box-shadow] duration-300 " +
+            (scrolled
+              ? "border-border shadow-[0_6px_20px_-14px_hsl(240_30%_0%/0.6)]"
+              : "border-border/40")
+          }
           role="banner"
         >
           <div className="mx-auto flex h-14 max-w-[1400px] items-center justify-between gap-3 px-4 sm:px-6">
             <Link
               to="/"
-              className="font-serif text-base font-semibold tracking-tight md:hidden"
+              className="flex items-center gap-2 font-serif text-base font-semibold tracking-tight md:hidden"
               aria-label="Life Order — bosh sahifa"
             >
+              <span
+                aria-hidden
+                className="grid h-6 w-6 place-items-center rounded-[8px] bg-primary text-primary-foreground shadow-[0_0_12px_hsl(var(--primary)/0.4)]"
+              >
+                <span className="text-[12px] font-bold leading-none">L</span>
+              </span>
               Life<span className="text-primary">.</span>Order
             </Link>
             <div className="hidden min-w-0 items-center gap-3 md:flex">
               {title && (
-                <p
-                  className="font-ui text-[11px] font-semibold uppercase tracking-[0.24em] text-muted-foreground"
-                  aria-live="polite"
-                >
-                  {title}
-                </p>
+                <div className="flex items-center gap-2" aria-live="polite">
+                  <span
+                    aria-hidden
+                    className="h-1.5 w-1.5 rounded-full bg-primary shadow-[0_0_8px_hsl(var(--primary)/0.7)]"
+                  />
+                  <p className="font-ui text-[11px] font-semibold uppercase tracking-[0.24em] text-muted-foreground">
+                    {title}
+                  </p>
+                </div>
               )}
               <CommandBar />
             </div>

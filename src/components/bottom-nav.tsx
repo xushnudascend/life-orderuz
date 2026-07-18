@@ -37,24 +37,33 @@ export function BottomNav({
               to={t.to}
               aria-current={active ? "page" : undefined}
               className={
-                "tap relative flex flex-1 flex-col items-center justify-center gap-1 py-2 font-ui text-[10px] uppercase tracking-[0.16em] transition-colors " +
+                "tap relative flex flex-1 flex-col items-center justify-center gap-1 py-2 font-ui text-[10px] uppercase tracking-[0.16em] transition-all duration-200 " +
                 (active
                   ? "text-primary"
-                  : "text-muted-foreground hover:text-foreground")
+                  : "text-muted-foreground hover:text-foreground active:scale-[0.97]")
               }
             >
               {active && (
-                <span
-                  aria-hidden
-                  className="absolute top-0 h-[3px] w-9 rounded-full bg-primary shadow-[0_0_12px_hsl(var(--primary)/0.6)]"
-                />
+                <>
+                  <span
+                    aria-hidden
+                    className="absolute top-0 h-[3px] w-9 rounded-full bg-primary shadow-[0_0_12px_hsl(var(--primary)/0.7)]"
+                  />
+                  <span
+                    aria-hidden
+                    className="absolute inset-x-3 top-1.5 -z-10 h-9 rounded-lg bg-primary/[0.07]"
+                  />
+                </>
               )}
-              <Icon className="h-5 w-5" strokeWidth={active ? 2.2 : 1.6} />
+              <Icon
+                className={"h-5 w-5 transition-transform " + (active ? "scale-[1.05]" : "")}
+                strokeWidth={active ? 2.2 : 1.6}
+              />
               <span>{t.label}</span>
               {recommended && (
                 <span
                   aria-hidden
-                  className="absolute right-3 top-2 h-1.5 w-1.5 animate-pulse rounded-full bg-primary"
+                  className="absolute right-3 top-2 h-1.5 w-1.5 animate-pulse rounded-full bg-primary shadow-[0_0_8px_hsl(var(--primary)/0.8)]"
                 />
               )}
             </Link>
