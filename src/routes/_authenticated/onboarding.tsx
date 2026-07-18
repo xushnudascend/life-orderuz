@@ -382,8 +382,8 @@ function QuestionCard({
               value={typeof value === "string" ? value : ""}
               onChange={(e) => onChange(e.target.value)}
               className="w-40 font-serif text-3xl h-auto py-3"
-              autoFocus
             />
+
             {q.suffix && (
               <span className="font-ui text-sm text-muted-foreground">
                 {q.suffix}
@@ -557,8 +557,8 @@ function FinalPage({
                         value={typeof answers[q.key] === "string" ? (answers[q.key] as string) : ""}
                         onChange={(e) => onChange(q.key, e.target.value)}
                         className="w-32 font-serif text-2xl h-auto py-2"
-                        autoFocus
                       />
+
                       {q.suffix && (
                         <span className="font-ui text-sm text-muted-foreground">{q.suffix}</span>
                       )}
