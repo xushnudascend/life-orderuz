@@ -20,6 +20,7 @@ export function AppShell({
 }) {
   const [archetype, setArchetype] = useState<Archetype | null>(null);
   const [name, setName] = useState<string | null>(null);
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
     let alive = true;
@@ -40,6 +41,13 @@ export function AppShell({
     return () => {
       alive = false;
     };
+  }, []);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 4);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   async function signOut() {
