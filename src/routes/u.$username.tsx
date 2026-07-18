@@ -91,7 +91,14 @@ function PublicProfile() {
         <div className="mt-8 flex items-center gap-4">
           <div className="flex h-16 w-16 items-center justify-center overflow-hidden rounded-full border border-border bg-card">
             {prof.avatar_url ? (
-              <img src={prof.avatar_url} alt="" className="h-full w-full object-cover" />
+              <img
+                src={prof.avatar_url}
+                alt={`${prof.display_name ?? prof.username} profil rasmi`}
+                loading="lazy"
+                decoding="async"
+                className="h-full w-full object-cover"
+              />
+
             ) : (
               <UserIcon className="h-6 w-6 text-muted-foreground" />
             )}
