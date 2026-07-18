@@ -35,7 +35,7 @@ export const Route = createFileRoute("/investors")({
       {
         property: "og:description",
         content:
-          "MDH bozorida 90M+ potentsial foydalanuvchi. Xulq-atvor fani + AI + geymifikatsiya. Q1 2026 uchun seed round.",
+          "$20 000 pre-seed · 12% ulush · 18 oylik reja. Xulq-atvor fani + AI + geymifikatsiya. Beta bosqichida.",
       },
       { property: "og:url", content: CANONICAL },
       { property: "og:type", content: "website" },
@@ -83,7 +83,7 @@ function InvestorsPage() {
         {/* Hero */}
         <section className="mb-20">
           <p className="font-ui text-[11px] font-semibold uppercase tracking-[0.28em] text-primary">
-            Seed round · Q1 2026
+            Pre-seed · 18 oylik reja
           </p>
           <h1 className="mt-4 font-serif text-4xl font-semibold tracking-tight sm:text-6xl">
             Motivatsiya tugaydi.
@@ -91,18 +91,17 @@ function InvestorsPage() {
             <span className="text-primary">Tizim qoladi.</span>
           </h1>
           <p className="mt-6 max-w-2xl font-ui text-lg leading-relaxed text-muted-foreground">
-            Life Order — O'rta Osiyoda birinchi xulq-atvor fani (behavioral science)
-            asosidagi shaxsiy operatsion tizim. Foydalanuvchi 60 soniyada tashxis
-            oladi, kunlik 3 mikro-qadam va AI mentor Nadir bilan haqiqiy o'zgarishga
-            keladi.
+            Life Order — O'zbekistonda xulq-atvor fani (behavioral science) asosidagi
+            shaxsiy operatsion tizim. Beta bosqichida, solo asoschi.
+            <span className="text-foreground font-semibold"> $20 000 pre-seed — 12% ulush evaziga, 18 oylik runway.</span>
           </p>
 
-          {/* Micro-metrics */}
+          {/* Micro-metrics — faqat isbotlangan raqamlar */}
           <div className="mt-10 grid gap-4 sm:grid-cols-4">
-            <MicroStat k="90M+" v="MDH potentsial foydalanuvchi" />
             <MicroStat k="66 kun" v="O'rtacha odat shakllanish (Lally, UCL)" />
             <MicroStat k="43%" v="Kunlik xulq — odat (Wood, USC)" />
-            <MicroStat k="$4.2B" v="Global habits/wellness bozori 2025" />
+            <MicroStat k="90M+" v="MDH smartfon foydalanuvchilari" />
+            <MicroStat k="Beta" v="Mahsulot holati · Q1 2026 launch" />
           </div>
 
           {/* Primary CTAs — deck download */}
@@ -129,7 +128,7 @@ function InvestorsPage() {
             </a>
           </div>
           <p className="mt-3 font-ui text-[11px] text-muted-foreground">
-            Konfidensial · Faqat investor va sherik uchun · 12 slayd · ~280 KB
+            Konfidensial · Faqat investor va sherik uchun · Halol raqamlar, mock yo'q
           </p>
         </section>
 
@@ -261,46 +260,43 @@ function InvestorsPage() {
             />
           </div>
           <div className="mt-6 grid gap-3 sm:grid-cols-3">
-            <MicroStat k="~10%" v="Free → Pro konversiya (industry: 3-5%)" />
-            <MicroStat k="588 000" v="ARPU yillik so'm (Pro)" />
-            <MicroStat k=">75%" v="Marja (SaaS, ~4% AI xarajati)" />
+            <MicroStat k="Maqsad 5–8%" v="Free → Pro konversiya (industry: 3–5%)" />
+            <MicroStat k="588 000 so'm" v="Rejalashtirilgan yillik ARPU (Pro)" />
+            <MicroStat k="~$50/oy" v="Hozirgi umumiy infratuzilma xarajati" />
+          </div>
+          <p className="mt-4 font-ui text-[11px] text-muted-foreground">
+            Konversiya va ARPU — prognoz. Hozircha to'lovlar hali qabul qilinmayapti.
+          </p>
+        </Section>
+
+        {/* Traksiya — halol holat */}
+        <Section eyebrow="06 · Hozirgi holat" title="Traksiya — halol">
+          <div className="rounded-[var(--radius)] border border-border bg-card p-6">
+            <ul className="space-y-3 font-ui text-sm leading-relaxed">
+              <li className="flex gap-3">
+                <span className="text-primary font-semibold">•</span>
+                <span><span className="text-foreground font-semibold">Mahsulot:</span> Beta — 14+ modul ishlab bo'lgan (dashboard, odat, jurnal, AI mentor, MCP integratsiya, PWA).</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="text-primary font-semibold">•</span>
+                <span><span className="text-foreground font-semibold">Foydalanuvchilar:</span> Yopiq pilot bosqichida. Ommaviy raqamlar hali e'lon qilinmayapti — shaffoflik uchun.</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="text-primary font-semibold">•</span>
+                <span><span className="text-foreground font-semibold">Daromad:</span> $0 — hali monetizatsiya yo'q. Free tarif ochiq, Pro Q1 2026'da.</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="text-primary font-semibold">•</span>
+                <span><span className="text-foreground font-semibold">Jamoa:</span> 1 asoschi (mahsulot + injener + dizayn). Investment bilan 1 injener + marketing byudjeti.</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="text-primary font-semibold">•</span>
+                <span><span className="text-foreground font-semibold">Xarajat:</span> ~$50/oy (Cloudflare + Supabase + AI gateway). Deyarli 0 burn.</span>
+              </li>
+            </ul>
           </div>
         </Section>
 
-        {/* Traksiya */}
-        <Section eyebrow="06 · Traksiya" title="Q1 2026 uchun maqsadlar">
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            <TargetCard
-              icon={Users}
-              k="5 000"
-              v="Ro'yxatdan o'tgan foydalanuvchi"
-              period="Q1 2026"
-            />
-            <TargetCard
-              icon={TrendingUp}
-              k="35%"
-              v="14 kunlik retention"
-              period="Q1 2026"
-            />
-            <TargetCard
-              icon={Rocket}
-              k="500"
-              v="Pro obunachi"
-              period="Q2 2026"
-            />
-            <TargetCard
-              icon={BarChart3}
-              k="$3K MRR"
-              v="Oylik takrorlanuvchi daromad"
-              period="Q2 2026"
-            />
-          </div>
-          <p className="mt-6 font-ui text-sm text-muted-foreground leading-relaxed max-w-3xl">
-            <span className="text-foreground font-semibold">Eslatma:</span>{" "}
-            Ko'rsatkichlar — hozirgi traksiya emas, prognoz maqsadlar. Mahsulot
-            ishga tushirish bosqichida. Har hafta yangilanadi.
-          </p>
-        </Section>
 
         {/* Product proof — mahsulot ishonchliligi */}
         <Section
@@ -344,54 +340,77 @@ function InvestorsPage() {
         </Section>
 
         {/* Ask */}
-        <Section eyebrow="09 · So'rov" title="Seed round — $150K">
+        <Section eyebrow="09 · So'rov" title="Pre-seed — $20 000">
           <div className="rounded-[var(--radius)] border border-primary/40 bg-primary/5 p-8">
-            <div className="grid gap-6 sm:grid-cols-2">
+            <div className="grid gap-6 sm:grid-cols-3">
               <div>
                 <p className="font-ui text-[11px] font-semibold uppercase tracking-[0.24em] text-primary">
                   Miqdor
                 </p>
-                <p className="mt-2 font-serif text-4xl font-semibold">$150 000</p>
+                <p className="mt-2 font-serif text-4xl font-semibold">$20 000</p>
                 <p className="mt-1 font-ui text-sm text-muted-foreground">
-                  SAFE · 12 oy runway
+                  Bir martalik pre-seed
                 </p>
               </div>
               <div>
                 <p className="font-ui text-[11px] font-semibold uppercase tracking-[0.24em] text-primary">
-                  Taqsimot
+                  Ulush
                 </p>
-                <ul className="mt-2 space-y-1.5 font-ui text-sm">
-                  <li>• 45% — Mahsulot va AI xarajatlari</li>
-                  <li>• 30% — Marketing va foydalanuvchi jalb qilish</li>
-                  <li>• 15% — Jamoa (2 injener + 1 dizayner)</li>
-                  <li>• 10% — Operatsion va yuridik</li>
-                </ul>
+                <p className="mt-2 font-serif text-4xl font-semibold">12%</p>
+                <p className="mt-1 font-ui text-sm text-muted-foreground">
+                  Kompaniya baholovi ~$167K
+                </p>
               </div>
+              <div>
+                <p className="font-ui text-[11px] font-semibold uppercase tracking-[0.24em] text-primary">
+                  Runway
+                </p>
+                <p className="mt-2 font-serif text-4xl font-semibold">18 oy</p>
+                <p className="mt-1 font-ui text-sm text-muted-foreground">
+                  ~$1 100 / oy o'rtacha
+                </p>
+              </div>
+            </div>
+            <div className="mt-8 border-t border-primary/20 pt-6">
+              <p className="font-ui text-[11px] font-semibold uppercase tracking-[0.24em] text-primary">
+                Taqsimot (18 oy)
+              </p>
+              <ul className="mt-3 grid gap-1.5 sm:grid-cols-2 font-ui text-sm">
+                <li>• 40% ($8 000) — Marketing va foydalanuvchi jalb qilish</li>
+                <li>• 25% ($5 000) — AI, infratuzilma, servis xarajatlari</li>
+                <li>• 20% ($4 000) — Kontraktor (dizayn/injener yordami)</li>
+                <li>• 10% ($2 000) — Yuridik, ro'yxatdan o'tish, litsenziyalar</li>
+                <li>• 5% ($1 000) — Zaxira / kutilmagan xarajat</li>
+              </ul>
             </div>
           </div>
         </Section>
 
         {/* Roadmap */}
-        <Section eyebrow="10 · Roadmap" title="12 oylik yo'l xarita">
+        <Section eyebrow="10 · Roadmap" title="18 oylik yo'l xarita">
           <div className="space-y-3">
             <RoadmapRow
-              period="Q1 2026"
-              milestone="Public launch · 5 000 foydalanuvchi · Uzbekistonda"
+              period="0–3 oy"
+              milestone="Public launch · Uzbekistonda beta yopiq guruhdan chiqish · Landing SEO"
             />
             <RoadmapRow
-              period="Q2 2026"
-              milestone="Pro monetizatsiya · $3K MRR · Rossiya bozoriga chiqish"
+              period="3–6 oy"
+              milestone="Birinchi 1 000 faol foydalanuvchi · Pro tarif ishga tushirish (Click/Payme)"
             />
             <RoadmapRow
-              period="Q3 2026"
-              milestone="B2B pilotlar · 3 kompaniya · Team plan"
+              period="6–12 oy"
+              milestone="5 000 foydalanuvchi · Birinchi $1K MRR · Rus tilida to'liq versiya"
             />
             <RoadmapRow
-              period="Q4 2026"
-              milestone="Series A tayyorlik · 25 000 foydalanuvchi · $15K MRR"
+              period="12–18 oy"
+              milestone="B2B pilot (2–3 kompaniya) · Series A/seed uchun metrikalar tayyor"
             />
           </div>
+          <p className="mt-6 font-ui text-xs text-muted-foreground leading-relaxed max-w-3xl">
+            Bu — prognoz, kafolat emas. Har bir bosqich hisobot bilan. Investor har chorak natija ko'radi.
+          </p>
         </Section>
+
 
         {/* CTA */}
         <section className="mt-24 rounded-[var(--radius)] border border-border bg-card p-10 text-center">
