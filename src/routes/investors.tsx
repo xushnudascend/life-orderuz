@@ -260,10 +260,13 @@ function InvestorsPage() {
             />
           </div>
           <div className="mt-6 grid gap-3 sm:grid-cols-3">
-            <MicroStat k="~10%" v="Free → Pro konversiya (industry: 3-5%)" />
-            <MicroStat k="588 000" v="ARPU yillik so'm (Pro)" />
-            <MicroStat k=">75%" v="Marja (SaaS, ~4% AI xarajati)" />
+            <MicroStat k="Maqsad 5–8%" v="Free → Pro konversiya (industry: 3–5%)" />
+            <MicroStat k="588 000 so'm" v="Rejalashtirilgan yillik ARPU (Pro)" />
+            <MicroStat k="~$50/oy" v="Hozirgi umumiy infratuzilma xarajati" />
           </div>
+          <p className="mt-4 font-ui text-[11px] text-muted-foreground">
+            Konversiya va ARPU — prognoz. Hozircha to'lovlar hali qabul qilinmayapti.
+          </p>
         </Section>
 
         {/* Traksiya — halol holat */}
