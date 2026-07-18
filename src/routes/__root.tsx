@@ -90,6 +90,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1, viewport-fit=cover" },
       { name: "theme-color", content: "#0A0A0A" },
+      { name: "color-scheme", content: "dark light" },
+      { name: "application-name", content: "Life Order" },
+      { name: "apple-mobile-web-app-capable", content: "yes" },
+      { name: "apple-mobile-web-app-status-bar-style", content: "black-translucent" },
+      { name: "apple-mobile-web-app-title", content: "Life Order" },
+      { name: "mobile-web-app-capable", content: "yes" },
+      { name: "format-detection", content: "telephone=no" },
       { title: TITLE },
       { name: "description", content: DESCRIPTION },
       { name: "author", content: "Life Order" },
@@ -107,7 +114,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     ],
     links: [
       { rel: "stylesheet", href: appCss },
-      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      { rel: "icon", href: "/favicon.ico", type: "image/x-icon", sizes: "48x48" },
+      { rel: "icon", href: "/icon-192.png", type: "image/png", sizes: "192x192" },
+      { rel: "icon", href: "/icon-512.png", type: "image/png", sizes: "512x512" },
+      { rel: "apple-touch-icon", href: "/apple-touch-icon.png", sizes: "180x180" },
       { rel: "manifest", href: "/manifest.webmanifest" },
       { rel: "alternate", hrefLang: "uz", href: SITE_URL },
       { rel: "alternate", hrefLang: "x-default", href: SITE_URL },
@@ -199,9 +209,51 @@ function RootComponent() {
     initSentry();
     if (typeof window === "undefined") return;
     if (!("serviceWorker" in navigator)) return;
-    if (import.meta.env.DEV) return;
+
+    const host = window.location.hostname;
+    const isPreviewHost =
+      host.startsWith("id-preview--") ||
+      host.startsWith("preview--") ||
+      host === "lovableproject.com" ||
+      host.endsWith(".lovableproject.com") ||
+      host === "lovableproject-dev.com" ||
+      host.endsWith(".lovableproject-dev.com") ||
+      host === "beta.lovable.dev" ||
+      host.endsWith(".beta.lovable.dev");
+    const inIframe = window.self !== window.top;
+    const killSwitch = new URLSearchParams(window.location.search).get("sw") === "off";
+
+    if (!import.meta.env.PROD || isPreviewHost || inIframe || killSwitch) {
+      // Ensure no stale worker keeps serving cached HTML in preview/dev.
+      navigator.serviceWorker
+        .getRegistrations()
+        .then((regs) => regs.forEach((r) => r.unregister().catch(() => {})))
+        .catch(() => {});
+      return;
+    }
+
     const onLoad = () => {
-      navigator.serviceWorker.register("/sw.js").catch(() => {});
+      navigator.serviceWorker
+        .register("/sw.js", { scope: "/" })
+        .then((reg) => {
+          // If a new worker takes control, refresh once to load fresh HTML.
+          let refreshed = false;
+          navigator.serviceWorker.addEventListener("controllerchange", () => {
+            if (refreshed) return;
+            refreshed = true;
+            window.location.reload();
+          });
+          reg.addEventListener("updatefound", () => {
+            const nw = reg.installing;
+            if (!nw) return;
+            nw.addEventListener("statechange", () => {
+              if (nw.state === "installed" && navigator.serviceWorker.controller) {
+                nw.postMessage("SKIP_WAITING");
+              }
+            });
+          });
+        })
+        .catch(() => {});
     };
     window.addEventListener("load", onLoad);
     return () => window.removeEventListener("load", onLoad);
