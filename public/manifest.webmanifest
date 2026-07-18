@@ -1,16 +1,55 @@
 {
   "name": "Life Order — Hayotingni tartibga sol",
   "short_name": "Life Order",
-  "description": "Self-Control OS — o'z-o'zini boshqarishning operatsion tizimi. Trigger tahlili, kunlik uchta qadam, halol AI mentor Nadir.",
-  "start_url": "/",
+  "description": "Self-Control OS — o'z-o'zini boshqarish operatsion tizimi. Trigger tahlili, kunlik uchta qadam, halol AI mentor Nadir.",
+  "id": "/",
+  "start_url": "/?source=pwa",
   "scope": "/",
   "display": "standalone",
+  "display_override": ["standalone", "minimal-ui"],
   "orientation": "portrait",
   "background_color": "#0A0A0A",
   "theme_color": "#0A0A0A",
   "lang": "uz",
+  "dir": "ltr",
   "categories": ["productivity", "lifestyle", "health"],
   "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/icon-maskable-192.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable" },
+    { "src": "/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" },
+    { "src": "/apple-touch-icon.png", "sizes": "180x180", "type": "image/png", "purpose": "any" },
     { "src": "/favicon.ico", "sizes": "48x48", "type": "image/x-icon" }
-  ]
+  ],
+  "shortcuts": [
+    {
+      "name": "Dashboard",
+      "short_name": "Dashboard",
+      "description": "Bugungi streak va quest",
+      "url": "/dashboard?source=pwa-shortcut",
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Kundalik",
+      "short_name": "Journal",
+      "description": "Tezkor yozuv qo'shish",
+      "url": "/journal?source=pwa-shortcut",
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Nadir bilan suhbat",
+      "short_name": "Mentor",
+      "description": "AI mentor bilan gaplash",
+      "url": "/mentor?source=pwa-shortcut",
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Odatlar",
+      "short_name": "Habits",
+      "description": "Odatlarni log qilish",
+      "url": "/habits?source=pwa-shortcut",
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }]
+    }
+  ],
+  "prefer_related_applications": false
 }
