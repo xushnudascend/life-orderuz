@@ -4,6 +4,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { AppShell } from "@/components/app-shell";
 import { PageHero } from "@/components/page-hero";
 import { Button } from "@/components/ui/button";
+import { Panel, PanelHeader, PanelValue } from "@/components/panel";
 import { Loader2, Download, FileText } from "lucide-react";
 import {
   Bar,
@@ -190,9 +191,12 @@ function Analytics() {
             </Button>
           </div>
 
-          <section className="mt-8 rounded-[var(--radius)] border border-border p-5">
-            <h2 className="mb-4 font-serif text-xl">XP kunlar bo'yicha</h2>
-            <div className="h-64 w-full">
+          <Panel as="section" className="mt-8">
+            <PanelHeader
+              eyebrow="Kunlar bo'yicha"
+              title={<p className="font-serif text-lg font-semibold">XP dinamikasi</p>}
+            />
+            <div className="mt-4 h-64 w-full">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={data}>
                   <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
@@ -209,11 +213,14 @@ function Analytics() {
                 </BarChart>
               </ResponsiveContainer>
             </div>
-          </section>
+          </Panel>
 
-          <section className="mt-6 rounded-[var(--radius)] border border-border p-5">
-            <h2 className="mb-4 font-serif text-xl">Odatlar</h2>
-            <div className="h-56 w-full">
+          <Panel as="section" className="mt-4">
+            <PanelHeader
+              eyebrow="Odatlar"
+              title={<p className="font-serif text-lg font-semibold">Bajarilgan odatlar</p>}
+            />
+            <div className="mt-4 h-56 w-full">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={data}>
                   <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
@@ -230,7 +237,7 @@ function Analytics() {
                 </BarChart>
               </ResponsiveContainer>
             </div>
-          </section>
+          </Panel>
         </>
       )}
     </AppShell>
@@ -239,12 +246,9 @@ function Analytics() {
 
 function Stat({ label, value, hint }: { label: string; value: number | string; hint?: string }) {
   return (
-    <div className="rounded-[var(--radius)] border border-border p-5">
-      <p className="font-ui text-xs uppercase tracking-[0.22em] text-muted-foreground">
-        {label}
-      </p>
-      <p className="mt-2 font-serif text-3xl">{value}</p>
-      {hint && <p className="mt-1 font-ui text-[11px] text-muted-foreground">{hint}</p>}
-    </div>
+    <Panel>
+      <PanelHeader eyebrow={label} />
+      <PanelValue value={value} caption={hint} />
+    </Panel>
   );
 }

@@ -4,6 +4,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { AppShell } from "@/components/app-shell";
 import { PageHero } from "@/components/page-hero";
 import { Button } from "@/components/ui/button";
+import { Panel } from "@/components/panel";
 import { Loader2, Check, Target } from "lucide-react";
 import { uz } from "@/i18n";
 
@@ -87,13 +88,11 @@ function Quests() {
           {quests.map((q) => {
             const isDone = q.status === "completed";
             return (
-              <div
+              <Panel
                 key={q.id}
                 className={
-                  "flex items-start justify-between gap-4 rounded-[var(--radius)] border p-5 transition-colors " +
-                  (isDone
-                    ? "border-primary/40 bg-primary/5"
-                    : "border-border bg-card")
+                  "flex items-start justify-between gap-4 " +
+                  (isDone ? "border-primary/40 bg-primary/5" : "")
                 }
               >
                 <div className="flex items-start gap-4">
@@ -131,7 +130,7 @@ function Quests() {
                 >
                   {isDone ? "Bajarildi" : busy === q.id ? "..." : "Bajardim"}
                 </Button>
-              </div>
+              </Panel>
             );
           })}
         </div>
