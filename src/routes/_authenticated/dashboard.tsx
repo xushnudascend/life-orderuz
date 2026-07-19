@@ -73,6 +73,7 @@ function Dashboard() {
   const [streak, setStreak] = useState<Streak>(null);
   const [shieldsUsed, setShieldsUsed] = useState(0);
   const [loaded, setLoaded] = useState(false);
+  const [milestone, setMilestone] = useState<number | null>(null);
 
 
   async function refresh() {
