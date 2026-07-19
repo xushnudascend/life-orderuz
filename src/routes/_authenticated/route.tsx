@@ -7,6 +7,7 @@ import {
 } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
+import { DailyQuoteModal } from "@/components/daily-quote-modal";
 
 
 /**
@@ -74,6 +75,11 @@ function AuthenticatedShell() {
   if (onboarded === false && !isOnOnboarding) return null;
   if (onboarded === true && isOnOnboarding) return null;
 
-  return <Outlet />;
+  return (
+    <>
+      <Outlet />
+      <DailyQuoteModal />
+    </>
+  );
 }
 

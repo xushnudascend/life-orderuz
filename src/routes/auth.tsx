@@ -174,7 +174,12 @@ function EmailForm({ mode, next }: { mode: "signin" | "signup"; next: string }) 
         />
       </div>
       <div className="space-y-1.5">
-        <Label htmlFor="password">Parol</Label>
+        <div className="flex items-center justify-between">
+          <Label htmlFor="password">Parol</Label>
+          {mode === "signin" && (
+            <ForgotPasswordLink email={email} />
+          )}
+        </div>
         <div className="relative">
           <Input
             id="password"
@@ -207,6 +212,40 @@ function EmailForm({ mode, next }: { mode: "signin" | "signup"; next: string }) 
         {mode === "signup" ? "Hisob yaratish" : "Kirish"}
       </Button>
     </form>
+  );
+}
+
+function ForgotPasswordLink({ email }: { email: string }) {
+  const [busy, setBusy] = useState(false);
+  async function send() {
+    if (busy) return;
+    if (!email.trim()) {
+      toast.error("Avval emailingizni kiriting");
+      return;
+    }
+    setBusy(true);
+    try {
+      const { error } = await supabase.auth.resetPasswordForEmail(email.trim(), {
+        redirectTo: `${window.location.origin}/reset-password`,
+      });
+      if (error) throw error;
+      toast.success("Tiklash havolasi emailga yuborildi.");
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : "Xato yuz berdi";
+      toast.error(msg);
+    } finally {
+      setBusy(false);
+    }
+  }
+  return (
+    <button
+      type="button"
+      onClick={send}
+      disabled={busy}
+      className="font-ui text-[11px] uppercase tracking-[0.18em] text-muted-foreground hover:text-primary disabled:opacity-50"
+    >
+      {busy ? "Yuborilmoqda..." : "Parolni unutdim"}
+    </button>
   );
 }
 

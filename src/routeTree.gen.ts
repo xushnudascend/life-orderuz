@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as TermsRouteImport } from './routes/terms'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as SecurityRouteImport } from './routes/security'
+import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as RefundRouteImport } from './routes/refund'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as PricingRouteImport } from './routes/pricing'
@@ -23,6 +24,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as BlogIndexRouteImport } from './routes/blog.index'
 import { Route as UUsernameRouteImport } from './routes/u.$username'
 import { Route as ShareMilestoneRouteImport } from './routes/share.milestone'
+import { Route as CheckoutSuccessRouteImport } from './routes/checkout.success'
 import { Route as BlogTungiRitualRouteImport } from './routes/blog.tungi-ritual'
 import { Route as BlogMotivatsiyaTuzogiRouteImport } from './routes/blog.motivatsiya-tuzogi'
 import { Route as BlogHayotSohalariRouteImport } from './routes/blog.hayot-sohalari'
@@ -72,6 +74,11 @@ const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
 const SecurityRoute = SecurityRouteImport.update({
   id: '/security',
   path: '/security',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResetPasswordRoute = ResetPasswordRouteImport.update({
+  id: '/reset-password',
+  path: '/reset-password',
   getParentRoute: () => rootRouteImport,
 } as any)
 const RefundRoute = RefundRouteImport.update({
@@ -126,6 +133,11 @@ const UUsernameRoute = UUsernameRouteImport.update({
 const ShareMilestoneRoute = ShareMilestoneRouteImport.update({
   id: '/share/milestone',
   path: '/share/milestone',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CheckoutSuccessRoute = CheckoutSuccessRouteImport.update({
+  id: '/checkout/success',
+  path: '/checkout/success',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BlogTungiRitualRoute = BlogTungiRitualRouteImport.update({
@@ -320,6 +332,7 @@ export interface FileRoutesByFullPath {
   '/pricing': typeof PricingRoute
   '/privacy': typeof PrivacyRoute
   '/refund': typeof RefundRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/security': typeof SecurityRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
@@ -346,6 +359,7 @@ export interface FileRoutesByFullPath {
   '/blog/hayot-sohalari': typeof BlogHayotSohalariRoute
   '/blog/motivatsiya-tuzogi': typeof BlogMotivatsiyaTuzogiRoute
   '/blog/tungi-ritual': typeof BlogTungiRitualRoute
+  '/checkout/success': typeof CheckoutSuccessRoute
   '/share/milestone': typeof ShareMilestoneRoute
   '/u/$username': typeof UUsernameRoute
   '/blog/': typeof BlogIndexRoute
@@ -370,6 +384,7 @@ export interface FileRoutesByTo {
   '/pricing': typeof PricingRoute
   '/privacy': typeof PrivacyRoute
   '/refund': typeof RefundRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/security': typeof SecurityRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
@@ -396,6 +411,7 @@ export interface FileRoutesByTo {
   '/blog/hayot-sohalari': typeof BlogHayotSohalariRoute
   '/blog/motivatsiya-tuzogi': typeof BlogMotivatsiyaTuzogiRoute
   '/blog/tungi-ritual': typeof BlogTungiRitualRoute
+  '/checkout/success': typeof CheckoutSuccessRoute
   '/share/milestone': typeof ShareMilestoneRoute
   '/u/$username': typeof UUsernameRoute
   '/blog': typeof BlogIndexRoute
@@ -422,6 +438,7 @@ export interface FileRoutesById {
   '/pricing': typeof PricingRoute
   '/privacy': typeof PrivacyRoute
   '/refund': typeof RefundRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/security': typeof SecurityRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
@@ -448,6 +465,7 @@ export interface FileRoutesById {
   '/blog/hayot-sohalari': typeof BlogHayotSohalariRoute
   '/blog/motivatsiya-tuzogi': typeof BlogMotivatsiyaTuzogiRoute
   '/blog/tungi-ritual': typeof BlogTungiRitualRoute
+  '/checkout/success': typeof CheckoutSuccessRoute
   '/share/milestone': typeof ShareMilestoneRoute
   '/u/$username': typeof UUsernameRoute
   '/blog/': typeof BlogIndexRoute
@@ -474,6 +492,7 @@ export interface FileRouteTypes {
     | '/pricing'
     | '/privacy'
     | '/refund'
+    | '/reset-password'
     | '/security'
     | '/sitemap.xml'
     | '/terms'
@@ -500,6 +519,7 @@ export interface FileRouteTypes {
     | '/blog/hayot-sohalari'
     | '/blog/motivatsiya-tuzogi'
     | '/blog/tungi-ritual'
+    | '/checkout/success'
     | '/share/milestone'
     | '/u/$username'
     | '/blog/'
@@ -524,6 +544,7 @@ export interface FileRouteTypes {
     | '/pricing'
     | '/privacy'
     | '/refund'
+    | '/reset-password'
     | '/security'
     | '/sitemap.xml'
     | '/terms'
@@ -550,6 +571,7 @@ export interface FileRouteTypes {
     | '/blog/hayot-sohalari'
     | '/blog/motivatsiya-tuzogi'
     | '/blog/tungi-ritual'
+    | '/checkout/success'
     | '/share/milestone'
     | '/u/$username'
     | '/blog'
@@ -575,6 +597,7 @@ export interface FileRouteTypes {
     | '/pricing'
     | '/privacy'
     | '/refund'
+    | '/reset-password'
     | '/security'
     | '/sitemap.xml'
     | '/terms'
@@ -601,6 +624,7 @@ export interface FileRouteTypes {
     | '/blog/hayot-sohalari'
     | '/blog/motivatsiya-tuzogi'
     | '/blog/tungi-ritual'
+    | '/checkout/success'
     | '/share/milestone'
     | '/u/$username'
     | '/blog/'
@@ -627,6 +651,7 @@ export interface RootRouteChildren {
   PricingRoute: typeof PricingRoute
   PrivacyRoute: typeof PrivacyRoute
   RefundRoute: typeof RefundRoute
+  ResetPasswordRoute: typeof ResetPasswordRoute
   SecurityRoute: typeof SecurityRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   TermsRoute: typeof TermsRoute
@@ -637,6 +662,7 @@ export interface RootRouteChildren {
   BlogHayotSohalariRoute: typeof BlogHayotSohalariRoute
   BlogMotivatsiyaTuzogiRoute: typeof BlogMotivatsiyaTuzogiRoute
   BlogTungiRitualRoute: typeof BlogTungiRitualRoute
+  CheckoutSuccessRoute: typeof CheckoutSuccessRoute
   ShareMilestoneRoute: typeof ShareMilestoneRoute
   UUsernameRoute: typeof UUsernameRoute
   BlogIndexRoute: typeof BlogIndexRoute
@@ -671,6 +697,13 @@ declare module '@tanstack/react-router' {
       path: '/security'
       fullPath: '/security'
       preLoaderRoute: typeof SecurityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reset-password': {
+      id: '/reset-password'
+      path: '/reset-password'
+      fullPath: '/reset-password'
+      preLoaderRoute: typeof ResetPasswordRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/refund': {
@@ -748,6 +781,13 @@ declare module '@tanstack/react-router' {
       path: '/share/milestone'
       fullPath: '/share/milestone'
       preLoaderRoute: typeof ShareMilestoneRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/checkout/success': {
+      id: '/checkout/success'
+      path: '/checkout/success'
+      fullPath: '/checkout/success'
+      preLoaderRoute: typeof CheckoutSuccessRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/blog/tungi-ritual': {
@@ -1068,6 +1108,7 @@ const rootRouteChildren: RootRouteChildren = {
   PricingRoute: PricingRoute,
   PrivacyRoute: PrivacyRoute,
   RefundRoute: RefundRoute,
+  ResetPasswordRoute: ResetPasswordRoute,
   SecurityRoute: SecurityRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   TermsRoute: TermsRoute,
@@ -1079,6 +1120,7 @@ const rootRouteChildren: RootRouteChildren = {
   BlogHayotSohalariRoute: BlogHayotSohalariRoute,
   BlogMotivatsiyaTuzogiRoute: BlogMotivatsiyaTuzogiRoute,
   BlogTungiRitualRoute: BlogTungiRitualRoute,
+  CheckoutSuccessRoute: CheckoutSuccessRoute,
   ShareMilestoneRoute: ShareMilestoneRoute,
   UUsernameRoute: UUsernameRoute,
   BlogIndexRoute: BlogIndexRoute,

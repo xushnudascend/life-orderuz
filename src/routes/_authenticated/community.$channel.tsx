@@ -4,9 +4,10 @@ import { supabase } from "@/integrations/supabase/client";
 import { AppShell } from "@/components/app-shell";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { Loader2, ArrowLeft, Send, Trash2 } from "lucide-react";
+import { Loader2, ArrowLeft, Send, Trash2, MessageSquare } from "lucide-react";
 import { toast } from "sonner";
 import { uz } from "@/i18n";
+import { PostComments } from "@/components/post-comments";
 
 export const Route = createFileRoute("/_authenticated/community/$channel")({
   head: () => ({
@@ -178,6 +179,10 @@ function ChannelView() {
                     </span>
                   </p>
                   <p className="mt-2 whitespace-pre-wrap font-ui text-sm">{p.content}</p>
+                  <p className="mt-3 inline-flex items-center gap-1 font-ui text-[10px] uppercase tracking-[0.22em] text-muted-foreground/70">
+                    <MessageSquare className="h-3 w-3" /> Izohlar
+                  </p>
+                  <PostComments postId={p.id} userId={userId} />
                 </div>
                 {p.user_id === userId && (
                   <Button variant="ghost" size="icon" aria-label="Xabarni o&apos;chirish" onClick={() => del(p.id)}>
