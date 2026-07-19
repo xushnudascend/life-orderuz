@@ -5,11 +5,6 @@ import { Input } from "@/components/ui/input";
 import { Send, Trash2 } from "lucide-react";
 import { toast } from "sonner";
 
-// Table `post_comments` is created via migration; generated types refresh
-// asynchronously, so we cast the client only where this table is used.
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const sb = supabase as any;
-
 type Comment = {
   id: string;
   user_id: string;
@@ -25,7 +20,7 @@ export function PostComments({ postId, userId }: { postId: string; userId: strin
   const [busy, setBusy] = useState(false);
 
   async function load() {
-    const { data } = await sb.from("post_comments")
+    const { data } = await supabase.from("post_comments")
       .select("id, user_id, post_id, content, created_at")
       .eq("post_id", postId)
       .order("created_at", { ascending: true })
@@ -65,7 +60,7 @@ export function PostComments({ postId, userId }: { postId: string; userId: strin
     const content = text.trim();
     if (!content) return;
     setBusy(true);
-    const { error } = await sb.from("post_comments").insert({
+    const { error } = await supabase.from("post_comments").insert({
       post_id: postId,
       user_id: userId,
       content,
@@ -79,7 +74,7 @@ export function PostComments({ postId, userId }: { postId: string; userId: strin
   }
 
   async function remove(id: string) {
-    await sb.from("post_comments").delete().eq("id", id);
+    await supabase.from("post_comments").delete().eq("id", id);
   }
 
   return (
