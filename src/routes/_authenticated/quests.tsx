@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { AppShell } from "@/components/app-shell";
+import { PageHero } from "@/components/page-hero";
 import { Button } from "@/components/ui/button";
 import { Loader2, Check, Target } from "lucide-react";
 import { uz } from "@/i18n";
@@ -67,15 +68,11 @@ function Quests() {
 
   return (
     <AppShell title="Vazifalar">
-      <p className="font-ui text-xs uppercase tracking-[0.28em] text-primary">
-        Bugungi vazifalar
-      </p>
-      <h1 className="mt-3 font-serif text-4xl leading-tight tracking-tight">
-        Kichik qadamlar.
-      </h1>
-      <p className="mt-3 max-w-xl text-muted-foreground">
-        Har kuni uchta kichik vazifa. Bajargan sari XP orttirasan.
-      </p>
+      <PageHero
+        eyebrow="Bugungi vazifalar"
+        title="Kichik qadamlar."
+        subtitle="Har kuni uchta kichik vazifa. Bajargan sari XP orttirasan."
+      />
 
       <p className="mt-6 font-ui text-sm text-muted-foreground">
         {done} / {quests.length} bajarildi

@@ -2,6 +2,7 @@ import { createFileRoute, Link, Outlet, useLocation } from "@tanstack/react-rout
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { AppShell } from "@/components/app-shell";
+import { PageHero } from "@/components/page-hero";
 import { Loader2, Hash } from "lucide-react";
 import { uz } from "@/i18n";
 
@@ -39,15 +40,11 @@ function CommunityLayout() {
 
   return (
     <AppShell title="Davra">
-      <p className="font-ui text-xs uppercase tracking-[0.28em] text-primary">
-        Jamoa
-      </p>
-      <h1 className="mt-3 font-serif text-4xl leading-tight tracking-tight">
-        Davra.
-      </h1>
-      <p className="mt-3 max-w-xl text-muted-foreground">
-        Kanallar, chaqiriqlar, kitobxonlar. Bir yo'lda emassan.
-      </p>
+      <PageHero
+        eyebrow="Jamoa"
+        title="Davra."
+        subtitle="Kanallar, chaqiriqlar, kitobxonlar. Bir yo'lda emassan."
+      />
 
       {loading ? (
         <div className="flex justify-center py-16">

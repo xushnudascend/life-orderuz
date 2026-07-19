@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { AppShell } from "@/components/app-shell";
+import { PageHero } from "@/components/page-hero";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -152,12 +153,11 @@ function Diet() {
 
   return (
     <AppShell title="Ovqatlanish">
-      <p className="font-ui text-xs uppercase tracking-[0.28em] text-primary">
-        Bugungi ovqat
-      </p>
-      <h1 className="mt-3 font-serif text-4xl leading-tight tracking-tight">
-        Ovqatlanish kundaligi.
-      </h1>
+      <PageHero
+        eyebrow="Bugungi ovqat"
+        title="Ovqatlanish kundaligi."
+        subtitle="Nima yeyayotganingni ko'r — nima o'zgartirish kerakligini bil."
+      />
 
       <div className="mt-4 flex flex-wrap items-center gap-3 text-muted-foreground">
         <span>

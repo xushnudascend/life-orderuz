@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { AppShell } from "@/components/app-shell";
+import { PageHero } from "@/components/page-hero";
 import { Button } from "@/components/ui/button";
 import { Loader2, Download, FileText } from "lucide-react";
 import {
@@ -157,12 +158,11 @@ function Analytics() {
 
   return (
     <AppShell title="Analitika hisoboti">
-      <p className="font-ui text-xs uppercase tracking-[0.28em] text-primary">
-        Oxirgi 14 kun
-      </p>
-      <h1 className="mt-3 font-serif text-4xl leading-tight tracking-tight">
-        Analitika hisoboti.
-      </h1>
+      <PageHero
+        eyebrow="Oxirgi 14 kun"
+        title="Analitika hisoboti."
+        subtitle="O'zingdagi tendensiyalarni ko'rish — o'zgarishning birinchi qadami."
+      />
 
       {loading ? (
         <div className="flex justify-center py-16">
