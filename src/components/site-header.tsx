@@ -8,7 +8,7 @@ const DEFAULT_NAV: NavLink[] = [
   { href: "/#science", label: "Ilm" },
   { href: "/pricing", label: "Narx" },
   { href: "/blog", label: "Blog" },
-  { href: "/investors", label: "Investorlar" },
+  
   { href: "/#faq", label: "Savollar" },
 ];
 
