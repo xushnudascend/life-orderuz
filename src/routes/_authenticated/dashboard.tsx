@@ -11,7 +11,9 @@ import {
   Salad,
   Sparkles,
   Target,
+  Sprout,
 } from "lucide-react";
+import { EmptyState } from "@/components/empty-state";
 
 import { uz } from "@/i18n";
 import { ProgressRing } from "@/components/progress-ring";
