@@ -257,14 +257,15 @@ function Diet() {
             <Loader2 className="h-5 w-5 animate-spin text-muted-foreground" />
           </div>
         ) : rows.length === 0 ? (
-          <p className="text-sm text-muted-foreground">Hali yozuv yo'q.</p>
+          <EmptyState
+            icon={<Utensils className="h-5 w-5" />}
+            title="Bugungi ovqat yozilmagan"
+            description="Yozib qo'yish — kichik e'tibor. E'tibor esa vaqt o'tib eng katta o'zgarishga aylanadi."
+          />
         ) : (
           <div className="space-y-2">
             {rows.map((r) => (
-              <div
-                key={r.id}
-                className="flex items-center justify-between rounded-[var(--radius)] border border-border bg-card p-4"
-              >
+              <Panel key={r.id} as="article" className="flex items-center justify-between p-4">
                 <div className="flex items-center gap-3">
                   {r.image_url ? (
                     <img
@@ -286,7 +287,7 @@ function Diet() {
                 <Button variant="ghost" size="sm" onClick={() => del(r.id)} aria-label="O'chirish">
                   <Trash2 className="h-4 w-4" />
                 </Button>
-              </div>
+              </Panel>
             ))}
           </div>
         )}
