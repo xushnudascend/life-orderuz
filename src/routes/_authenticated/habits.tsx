@@ -9,6 +9,7 @@ import { Input } from "@/components/ui/input";
 import { Loader2, Plus, Trash2, Flame, ArrowRight } from "lucide-react";
 import { toast } from "sonner";
 import { uz } from "@/i18n";
+import { Panel, PanelHeader } from "@/components/panel";
 import { xpFromDifficulty } from "@/lib/nervous";
 
 export const Route = createFileRoute("/_authenticated/habits")({
@@ -180,80 +181,87 @@ function HabitsPage() {
         }
       />
 
-      <form
-        onSubmit={addHabit}
-        className="mt-8 rounded-[var(--radius)] border border-border p-5"
-      >
-        <Input
-          placeholder="Masalan, 20 daqiqa o'qish"
-          value={newTitle}
-          onChange={(e) => setNewTitle(e.target.value)}
-          className="font-ui"
+      <Panel as="section" className="mt-8">
+        <PanelHeader
+          eyebrow="Yangi odat"
+          title={
+            <p className="font-serif text-lg font-semibold">
+              Kichik boshla — miya qarshiligini yengil kes
+            </p>
+          }
         />
-        <div className="mt-3 flex flex-wrap items-center gap-2">
-          <span className="font-ui text-xs uppercase tracking-[0.2em] text-muted-foreground">
-            Qiyinlik
-          </span>
-          {[1, 2, 3, 4, 5].map((d) => (
-            <button
-              key={d}
-              type="button"
-              onClick={() => setDifficulty(d as 1 | 2 | 3 | 4 | 5)}
-              className={
-                "h-8 w-8 rounded-full border font-ui text-sm transition-colors " +
-                (difficulty === d
-                  ? "border-primary bg-primary text-primary-foreground"
-                  : "border-border text-muted-foreground hover:text-foreground")
-              }
-            >
-              {d}
-            </button>
-          ))}
-          <span className="font-ui text-[11px] text-muted-foreground">
-            +{xpFromDifficulty(difficulty)} XP
-          </span>
-        </div>
-        <div className="mt-3 flex flex-wrap items-center gap-2">
-          <span className="font-ui text-xs uppercase tracking-[0.2em] text-muted-foreground">
-            Kategoriya
-          </span>
-          {CATEGORIES.map((c) => (
-            <button
-              key={c.id}
-              type="button"
-              onClick={() => setCategory(c.id)}
-              className={
-                "rounded-full border px-3 py-1 font-ui text-xs transition-colors " +
-                (category === c.id
-                  ? "border-primary bg-primary/10 text-primary"
-                  : "border-border text-muted-foreground hover:text-foreground")
-              }
-            >
-              {c.label}
-            </button>
-          ))}
-        </div>
-        <div className="mt-3 flex flex-wrap items-center gap-2">
-          <span className="font-ui text-xs uppercase tracking-[0.2em] text-muted-foreground">
-            Tez tanlash
-          </span>
-          {QUICK_PICKS.map((q) => (
-            <button
-              key={q}
-              type="button"
-              onClick={() => setNewTitle(q)}
-              className="rounded-full border border-border px-3 py-1 font-ui text-xs text-muted-foreground hover:text-foreground"
-            >
-              {q}
-            </button>
-          ))}
-        </div>
-        <div className="mt-4">
-          <Button type="submit" disabled={saving || !newTitle.trim()}>
-            <Plus className="mr-1 h-4 w-4" /> Qo'shish
-          </Button>
-        </div>
-      </form>
+        <form onSubmit={addHabit} className="mt-4 space-y-3">
+          <Input
+            placeholder="Masalan, 20 daqiqa o'qish"
+            value={newTitle}
+            onChange={(e) => setNewTitle(e.target.value)}
+            className="font-ui"
+          />
+          <div className="flex flex-wrap items-center gap-2">
+            <span className="font-ui text-xs uppercase tracking-[0.2em] text-muted-foreground">
+              Qiyinlik
+            </span>
+            {[1, 2, 3, 4, 5].map((d) => (
+              <button
+                key={d}
+                type="button"
+                onClick={() => setDifficulty(d as 1 | 2 | 3 | 4 | 5)}
+                className={
+                  "h-8 w-8 rounded-full border font-ui text-sm transition-colors " +
+                  (difficulty === d
+                    ? "border-primary bg-primary text-primary-foreground"
+                    : "border-border text-muted-foreground hover:text-foreground")
+                }
+              >
+                {d}
+              </button>
+            ))}
+            <span className="font-ui text-[11px] text-muted-foreground">
+              +{xpFromDifficulty(difficulty)} XP
+            </span>
+          </div>
+          <div className="flex flex-wrap items-center gap-2">
+            <span className="font-ui text-xs uppercase tracking-[0.2em] text-muted-foreground">
+              Kategoriya
+            </span>
+            {CATEGORIES.map((c) => (
+              <button
+                key={c.id}
+                type="button"
+                onClick={() => setCategory(c.id)}
+                className={
+                  "rounded-full border px-3 py-1 font-ui text-xs transition-colors " +
+                  (category === c.id
+                    ? "border-primary bg-primary/10 text-primary"
+                    : "border-border text-muted-foreground hover:text-foreground")
+                }
+              >
+                {c.label}
+              </button>
+            ))}
+          </div>
+          <div className="flex flex-wrap items-center gap-2">
+            <span className="font-ui text-xs uppercase tracking-[0.2em] text-muted-foreground">
+              Tez tanlash
+            </span>
+            {QUICK_PICKS.map((q) => (
+              <button
+                key={q}
+                type="button"
+                onClick={() => setNewTitle(q)}
+                className="rounded-full border border-border px-3 py-1 font-ui text-xs text-muted-foreground hover:text-foreground"
+              >
+                {q}
+              </button>
+            ))}
+          </div>
+          <div className="pt-1">
+            <Button type="submit" disabled={saving || !newTitle.trim()}>
+              <Plus className="mr-1 h-4 w-4" /> Qo'shish
+            </Button>
+          </div>
+        </form>
+      </Panel>
 
       <div className="mt-8 space-y-6">
         {loading ? (

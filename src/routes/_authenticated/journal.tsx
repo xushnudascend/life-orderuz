@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Loader2, Trash2, BookOpen } from "lucide-react";
 import { uz } from "@/i18n";
+import { Panel, PanelHeader } from "@/components/panel";
 
 export const Route = createFileRoute("/_authenticated/journal")({
   head: () => ({
@@ -92,41 +93,48 @@ function JournalPage() {
         subtitle="Bugun o'zing bilan halol gaplash. Faqat sen o'qiysan."
       />
 
-      <form
-        onSubmit={save}
-        className="mt-8 space-y-4 rounded-[var(--radius)] border border-border p-5"
-      >
-        <Textarea
-          value={content}
-          onChange={(e) => setContent(e.target.value)}
-          placeholder="Bugun nima bo'ldi? Nimadan qochding? Nimani boshqara oldingmi?"
-          rows={5}
-          className="font-ui resize-none"
+      <Panel as="section" className="mt-8">
+        <PanelHeader
+          eyebrow="Yangi yozuv"
+          title={
+            <p className="font-serif text-lg font-semibold">
+              Bugungi ichki manzarangni yoz
+            </p>
+          }
         />
-        <div className="flex items-center justify-between gap-3">
-          <div className="flex gap-2">
-            {MOODS.map((m) => (
-              <button
-                type="button"
-                key={m.v}
-                onClick={() => setMood(m.v)}
-                className={
-                  "flex h-9 w-9 items-center justify-center rounded-full border text-lg transition-colors " +
-                  (mood === m.v
-                    ? "border-primary bg-primary/10"
-                    : "border-border hover:border-foreground/30")
-                }
-                aria-label={`Kayfiyat ${m.v}`}
-              >
-                {m.label}
-              </button>
-            ))}
+        <form onSubmit={save} className="mt-4 space-y-4">
+          <Textarea
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
+            placeholder="Bugun nima bo'ldi? Nimadan qochding? Nimani boshqara oldingmi?"
+            rows={5}
+            className="font-ui resize-none"
+          />
+          <div className="flex items-center justify-between gap-3">
+            <div className="flex gap-2">
+              {MOODS.map((m) => (
+                <button
+                  type="button"
+                  key={m.v}
+                  onClick={() => setMood(m.v)}
+                  className={
+                    "flex h-9 w-9 items-center justify-center rounded-full border text-lg transition-colors " +
+                    (mood === m.v
+                      ? "border-primary bg-primary/10"
+                      : "border-border hover:border-foreground/30")
+                  }
+                  aria-label={`Kayfiyat ${m.v}`}
+                >
+                  {m.label}
+                </button>
+              ))}
+            </div>
+            <Button type="submit" disabled={saving || !content.trim()}>
+              Saqlash
+            </Button>
           </div>
-          <Button type="submit" disabled={saving || !content.trim()}>
-            Saqlash
-          </Button>
-        </div>
-      </form>
+        </form>
+      </Panel>
 
       <div className="mt-10 space-y-3">
         {loading ? (
@@ -144,10 +152,7 @@ function JournalPage() {
           entries.map((e) => {
             const m = MOODS.find((x) => x.v === e.mood);
             return (
-              <article
-                key={e.id}
-                className="rounded-[var(--radius)] border border-border bg-card p-5"
-              >
+              <Panel as="article" key={e.id}>
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
                     <span className="font-ui text-xs uppercase tracking-[0.22em] text-muted-foreground">
@@ -170,7 +175,7 @@ function JournalPage() {
                 <p className="mt-3 whitespace-pre-wrap leading-relaxed">
                   {e.content}
                 </p>
-              </article>
+              </Panel>
             );
           })
         )}
