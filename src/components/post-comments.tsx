@@ -25,8 +25,7 @@ export function PostComments({ postId, userId }: { postId: string; userId: strin
   const [busy, setBusy] = useState(false);
 
   async function load() {
-    const { data } = await supabase
-      .from("post_comments")
+    const { data } = await sb.from("post_comments")
       .select("id, user_id, post_id, content, created_at")
       .eq("post_id", postId)
       .order("created_at", { ascending: true })
@@ -66,7 +65,7 @@ export function PostComments({ postId, userId }: { postId: string; userId: strin
     const content = text.trim();
     if (!content) return;
     setBusy(true);
-    const { error } = await supabase.from("post_comments").insert({
+    const { error } = await sb.from("post_comments").insert({
       post_id: postId,
       user_id: userId,
       content,
@@ -80,7 +79,7 @@ export function PostComments({ postId, userId }: { postId: string; userId: strin
   }
 
   async function remove(id: string) {
-    await supabase.from("post_comments").delete().eq("id", id);
+    await sb.from("post_comments").delete().eq("id", id);
   }
 
   return (
