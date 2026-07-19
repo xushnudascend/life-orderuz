@@ -1,8 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useLocation } from "@tanstack/react-router";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { Sparkles } from "lucide-react";
+import { Sparkles, X } from "lucide-react";
 
 const QUOTES = [
   { t: "Sen bo'la oladigan eng yaxshi versiyang bo'l.", a: "Mark Avreliy" },
@@ -13,17 +12,17 @@ const QUOTES = [
   { t: "Kichik odat — katta taqdir.", a: "James Clear" },
   { t: "Bugun qilgan ishing ertangi seni yaratadi.", a: "Life Order" },
   { t: "Motivatsiya tugaydi. Tizim qoladi.", a: "Life Order" },
-  { t: "Ish qilmasang, hech narsa o'zgarmaydi.", a: "Marcus Aurelius" },
   { t: "Kichik qadamlar — ulkan sayohatning boshlanishi.", a: "Lao Tszi" },
 ];
 
-const SKIP = ["/onboarding", "/auth", "/reset-password", "/pricing"];
+const SKIP = ["/onboarding", "/auth", "/reset-password", "/pricing", "/checkout"];
 
 export function DailyQuoteModal() {
   const [open, setOpen] = useState(false);
   const [q, setQ] = useState(QUOTES[0]);
   const { pathname } = useLocation();
   const prev = useRef<HTMLElement | null>(null);
+  const closeRef = useRef<HTMLButtonElement | null>(null);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -36,34 +35,65 @@ export function DailyQuoteModal() {
     window.localStorage.setItem("lo:daily-quote", today);
   }, [pathname]);
 
-  function handleChange(next: boolean) {
-    setOpen(next);
-    if (!next && prev.current && document.body.contains(prev.current)) {
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") close();
+    };
+    document.addEventListener("keydown", onKey);
+    closeRef.current?.focus();
+    return () => document.removeEventListener("keydown", onKey);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [open]);
+
+  function close() {
+    setOpen(false);
+    if (prev.current && document.body.contains(prev.current)) {
       requestAnimationFrame(() => prev.current?.focus());
     }
   }
 
+  if (!open) return null;
+
   return (
-    <Dialog open={open} onOpenChange={handleChange}>
-      <DialogContent className="max-w-md" aria-describedby="daily-quote-desc">
-        <DialogHeader>
-          <DialogTitle className="flex items-center gap-2 font-serif">
-            <Sparkles className="h-5 w-5 text-primary" /> Bugungi iqtibos
-          </DialogTitle>
-          <DialogDescription id="daily-quote-desc" className="sr-only">
-            Kunlik motivatsion iqtibos
-          </DialogDescription>
-        </DialogHeader>
-        <div className="py-4 text-center">
-          <p className="font-serif text-xl leading-relaxed">"{q.t}"</p>
-          <p className="mt-3 font-ui text-xs uppercase tracking-[0.28em] text-muted-foreground">
+    <div
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="daily-quote-title"
+      className="fixed inset-0 z-[100] flex items-center justify-center bg-background/80 backdrop-blur-sm p-4"
+    >
+      <div
+        className="relative w-full max-w-md rounded-[var(--radius)] border border-border bg-card p-6 shadow-2xl animate-in fade-in zoom-in-95"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <button
+          ref={closeRef}
+          onClick={close}
+          aria-label="Yopish"
+          className="absolute right-3 top-3 rounded-md p-1 text-muted-foreground hover:bg-secondary hover:text-foreground"
+        >
+          <X className="h-4 w-4" />
+        </button>
+        <div className="flex items-center gap-2">
+          <Sparkles className="h-5 w-5 text-primary" />
+          <h2 id="daily-quote-title" className="font-ui text-[11px] uppercase tracking-[0.28em] text-muted-foreground">
+            Bugungi iqtibos
+          </h2>
+        </div>
+        <div className="py-6 text-center">
+          <p className="font-serif text-2xl leading-snug">"{q.t}"</p>
+          <p className="mt-4 font-ui text-[11px] uppercase tracking-[0.28em] text-muted-foreground">
             — {q.a}
           </p>
         </div>
-        <Button onClick={() => handleChange(false)} autoFocus className="w-full">
-          Boshladik
-        </Button>
-      </DialogContent>
-    </Dialog>
+        <Button onClick={close} className="w-full">Boshladik</Button>
+      </div>
+      <button
+        aria-hidden
+        tabIndex={-1}
+        className="absolute inset-0 -z-10"
+        onClick={close}
+      />
+    </div>
   );
 }

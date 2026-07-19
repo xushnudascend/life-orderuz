@@ -19,14 +19,13 @@ function CheckoutSuccessPage() {
   const { isPro, loading } = useSubscription();
 
   useEffect(() => {
-    // Optimistic: try confetti if motion preference allows.
     (async () => {
       try {
-        const [{ celebrate }, { motionAllowed }] = await Promise.all([
+        const [{ celebrate }, { isReducedMotion }] = await Promise.all([
           import("@/lib/celebrate"),
           import("@/lib/motion-pref"),
         ]);
-        if (motionAllowed()) celebrate();
+        if (!isReducedMotion()) celebrate();
       } catch {
         /* noop */
       }

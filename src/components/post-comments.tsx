@@ -5,6 +5,14 @@ import { Input } from "@/components/ui/input";
 import { Send, Trash2 } from "lucide-react";
 import { toast } from "sonner";
 
+// Table `post_comments` created via migration; generated types refresh async.
+// Cast the client where the table is referenced to keep TS happy in between.
+const sb = supabase as unknown as {
+  from: (table: string) => ReturnType<typeof supabase.from>;
+  channel: typeof supabase.channel;
+  removeChannel: typeof supabase.removeChannel;
+};
+
 type Comment = {
   id: string;
   user_id: string;
