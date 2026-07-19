@@ -153,12 +153,11 @@ function Diet() {
 
   return (
     <AppShell title="Ovqatlanish">
-      <p className="font-ui text-xs uppercase tracking-[0.28em] text-primary">
-        Bugungi ovqat
-      </p>
-      <h1 className="mt-3 font-serif text-4xl leading-tight tracking-tight">
-        Ovqatlanish kundaligi.
-      </h1>
+      <PageHero
+        eyebrow="Bugungi ovqat"
+        title="Ovqatlanish kundaligi."
+        subtitle="Nima yeyayotganingni ko'r — nima o'zgartirish kerakligini bil."
+      />
 
       <div className="mt-4 flex flex-wrap items-center gap-3 text-muted-foreground">
         <span>
