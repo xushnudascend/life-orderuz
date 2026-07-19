@@ -4,6 +4,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { AppShell } from "@/components/app-shell";
 import { PageHero } from "@/components/page-hero";
 import { EmptyState } from "@/components/empty-state";
+import { Panel } from "@/components/panel";
 import { Loader2, Hash } from "lucide-react";
 import { uz } from "@/i18n";
 
@@ -61,20 +62,21 @@ function CommunityLayout() {
       ) : (
         <div className="mt-8 space-y-2">
           {channels.map((c) => (
-            <Link
-              key={c.id}
-              to="/community/$channel"
-              params={{ channel: c.slug }}
-              className="flex items-start gap-4 rounded-[var(--radius)] border border-border bg-card p-4 transition-colors hover:border-foreground/20"
-            >
-              <Hash className="mt-1 h-5 w-5 text-primary" />
-              <div>
-                <p className="font-serif text-xl">{c.title}</p>
-                {c.description && (
-                  <p className="font-ui text-sm text-muted-foreground">{c.description}</p>
-                )}
-              </div>
-            </Link>
+            <Panel key={c.id} interactive className="p-0">
+              <Link
+                to="/community/$channel"
+                params={{ channel: c.slug }}
+                className="flex items-start gap-4 p-4"
+              >
+                <Hash className="mt-1 h-5 w-5 text-primary" />
+                <div>
+                  <p className="font-serif text-xl">{c.title}</p>
+                  {c.description && (
+                    <p className="font-ui text-sm text-muted-foreground">{c.description}</p>
+                  )}
+                </div>
+              </Link>
+            </Panel>
           ))}
         </div>
       )}

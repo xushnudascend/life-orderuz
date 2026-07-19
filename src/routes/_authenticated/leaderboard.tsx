@@ -3,6 +3,7 @@ import { useEffect, useMemo, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { AppShell } from "@/components/app-shell";
 import { PageHero } from "@/components/page-hero";
+import { Panel } from "@/components/panel";
 import { Button } from "@/components/ui/button";
 import { Loader2, Trophy, MapPin } from "lucide-react";
 import { toast } from "sonner";
@@ -133,13 +134,12 @@ function Leaderboard() {
           {filtered.map((r, i) => {
             const isMe = r.user_id === userId;
             return (
-              <li
+              <Panel
                 key={r.user_id}
+                as="article"
                 className={
-                  "flex items-center justify-between rounded-[var(--radius)] border p-4 " +
-                  (isMe
-                    ? "border-primary/50 bg-primary/5"
-                    : "border-border bg-card")
+                  "flex items-center justify-between p-4 " +
+                  (isMe ? "border-primary/50 bg-primary/5" : "")
                 }
               >
                 <div className="flex items-center gap-4">
@@ -160,8 +160,8 @@ function Leaderboard() {
                     </p>
                   </div>
                 </div>
-                <p className="font-serif text-xl">{r.total_xp} XP</p>
-              </li>
+                <p className="font-serif text-xl tabular-nums">{r.total_xp} XP</p>
+              </Panel>
             );
           })}
         </ol>

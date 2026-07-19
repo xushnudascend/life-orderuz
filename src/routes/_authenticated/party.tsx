@@ -4,6 +4,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { AppShell } from "@/components/app-shell";
 import { PageHero } from "@/components/page-hero";
 import { EmptyState } from "@/components/empty-state";
+import { Panel, PanelHeader } from "@/components/panel";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -154,11 +155,16 @@ function PartyPage() {
 
       {/* Create + Join */}
       <section className="mt-8 grid gap-4 md:grid-cols-2">
-        <div className="rounded-[var(--radius)] border border-border p-5">
-          <h2 className="mb-4 flex items-center gap-2 font-serif text-xl">
-            <Plus className="h-4 w-4 text-primary" /> Yangi party
-          </h2>
-          <div className="space-y-3">
+        <Panel className="p-5">
+          <PanelHeader
+            eyebrow="Yangi party"
+            title={
+              <h2 className="flex items-center gap-2 font-serif text-xl">
+                <Plus className="h-4 w-4 text-primary" /> Guruh yarat
+              </h2>
+            }
+          />
+          <div className="mt-4 space-y-3">
             <div>
               <Label htmlFor="pname">Nom</Label>
               <Input id="pname" value={name} onChange={(e) => setName(e.target.value)} placeholder="Masalan, Ertalab Klub" />
@@ -169,13 +175,18 @@ function PartyPage() {
             </div>
             <Button onClick={createParty}>Yaratish</Button>
           </div>
-        </div>
+        </Panel>
 
-        <div className="rounded-[var(--radius)] border border-border p-5">
-          <h2 className="mb-4 flex items-center gap-2 font-serif text-xl">
-            <Users className="h-4 w-4 text-primary" /> Taklif kodi bilan qo'shilish
-          </h2>
-          <div className="space-y-3">
+        <Panel className="p-5">
+          <PanelHeader
+            eyebrow="Qo'shilish"
+            title={
+              <h2 className="flex items-center gap-2 font-serif text-xl">
+                <Users className="h-4 w-4 text-primary" /> Taklif kodi
+              </h2>
+            }
+          />
+          <div className="mt-4 space-y-3">
             <Input
               value={inviteCode}
               onChange={(e) => setInviteCode(e.target.value)}
@@ -184,7 +195,7 @@ function PartyPage() {
             />
             <Button variant="outline" onClick={joinByCode}>Qo'shilish</Button>
           </div>
-        </div>
+        </Panel>
       </section>
 
       {/* Parties list */}
@@ -207,7 +218,9 @@ function PartyPage() {
               const isOwner = p.owner_id === userId;
               const list = members[p.id] ?? [];
               return (
-                <div key={p.id} className="rounded-[var(--radius)] border border-border bg-card p-5">
+                <Panel key={p.id} as="article" className="p-5">
+
+
                   <div className="flex items-start justify-between gap-3">
                     <div>
                       <p className="font-serif text-2xl">{p.name}</p>
@@ -251,7 +264,7 @@ function PartyPage() {
                       ))}
                     </ul>
                   </div>
-                </div>
+                </Panel>
               );
             })}
           </div>
