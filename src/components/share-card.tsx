@@ -71,7 +71,7 @@ export function ShareCard({
         await nav.share({
           files: [file],
           title: "Mening Life Order natijalarim",
-          text: `Daraja ${level} · ${currentStreak} kunlik streak · ${tier.uz}`,
+          text: `Daraja ${level} · ${currentStreak} kunlik seriya · ${tier.uz}`,
         });
         toast.success("Natija Davraga joylandi.");
       } else {

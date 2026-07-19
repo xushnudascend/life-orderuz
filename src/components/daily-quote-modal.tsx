@@ -16,10 +16,13 @@ const QUOTES = [
 ];
 
 const SKIP = ["/onboarding", "/auth", "/reset-password", "/pricing", "/checkout"];
+const DAILY_KEY = "lo:daily-quote";
+const DISABLED_KEY = "lo:daily-quote-disabled";
 
 export function DailyQuoteModal() {
   const [open, setOpen] = useState(false);
   const [q, setQ] = useState(QUOTES[0]);
+  const [dontShow, setDontShow] = useState(false);
   const { pathname } = useLocation();
   const prev = useRef<HTMLElement | null>(null);
   const closeRef = useRef<HTMLButtonElement | null>(null);
@@ -27,12 +30,13 @@ export function DailyQuoteModal() {
   useEffect(() => {
     if (typeof window === "undefined") return;
     if (SKIP.some((p) => pathname === p || pathname.startsWith(p + "/"))) return;
+    if (window.localStorage.getItem(DISABLED_KEY) === "1") return;
     const today = new Date().toDateString();
-    if (window.localStorage.getItem("lo:daily-quote") === today) return;
+    if (window.localStorage.getItem(DAILY_KEY) === today) return;
     setQ(QUOTES[Math.floor(Math.random() * QUOTES.length)]);
     prev.current = (document.activeElement as HTMLElement) ?? null;
     setOpen(true);
-    window.localStorage.setItem("lo:daily-quote", today);
+    window.localStorage.setItem(DAILY_KEY, today);
   }, [pathname]);
 
   useEffect(() => {
@@ -47,6 +51,9 @@ export function DailyQuoteModal() {
   }, [open]);
 
   function close() {
+    if (dontShow && typeof window !== "undefined") {
+      window.localStorage.setItem(DISABLED_KEY, "1");
+    }
     setOpen(false);
     if (prev.current && document.body.contains(prev.current)) {
       requestAnimationFrame(() => prev.current?.focus());
@@ -87,6 +94,15 @@ export function DailyQuoteModal() {
           </p>
         </div>
         <Button onClick={close} className="w-full">Boshladik</Button>
+        <label className="mt-3 flex cursor-pointer items-center justify-center gap-2 font-ui text-[11px] text-muted-foreground hover:text-foreground">
+          <input
+            type="checkbox"
+            checked={dontShow}
+            onChange={(e) => setDontShow(e.target.checked)}
+            className="h-3.5 w-3.5 accent-primary"
+          />
+          Boshqa ko'rsatma
+        </label>
       </div>
       <button
         aria-hidden
