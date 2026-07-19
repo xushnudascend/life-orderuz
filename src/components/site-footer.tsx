@@ -14,7 +14,7 @@ const COLUMNS: { title: string; links: { href: string; label: string }[] }[] = [
   {
     title: "Kompaniya",
     links: [
-      { href: "/investors", label: "Investorlar" },
+      
       { href: "/blog/hayot-sohalari", label: "Blog" },
       { href: "/security", label: "Xavfsizlik" },
     ],
