@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { AppShell } from "@/components/app-shell";
 import { PageHero } from "@/components/page-hero";
+import { EmptyState } from "@/components/empty-state";
 import { Loader2, Hash } from "lucide-react";
 import { uz } from "@/i18n";
 
@@ -51,7 +52,12 @@ function CommunityLayout() {
           <Loader2 className="h-5 w-5 animate-spin text-muted-foreground" />
         </div>
       ) : channels.length === 0 ? (
-        <p className="mt-8 text-sm text-muted-foreground">Kanallar topilmadi.</p>
+        <EmptyState
+          icon={<Hash className="h-5 w-5" />}
+          title="Kanallar hali ochilmagan"
+          description="Tez orada — kitobxonlik, streak partnyorlik va tematik davralar shu yerda paydo bo'ladi."
+        />
+
       ) : (
         <div className="mt-8 space-y-2">
           {channels.map((c) => (

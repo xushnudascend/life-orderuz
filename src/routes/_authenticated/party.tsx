@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { AppShell } from "@/components/app-shell";
 import { PageHero } from "@/components/page-hero";
+import { EmptyState } from "@/components/empty-state";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -194,7 +195,12 @@ function PartyPage() {
             <Loader2 className="h-5 w-5 animate-spin text-muted-foreground" />
           </div>
         ) : parties.length === 0 ? (
-          <p className="text-sm text-muted-foreground">Hali guruh yo'q. Yuqoridagi kartalar bilan boshla.</p>
+          <EmptyState
+            icon={<Users className="h-5 w-5" />}
+            title="Hali guruhing yo'q"
+            description="Yuqoridan yangi guruh yarat yoki do'sting bergan taklif kodini kirit. Kichik doira — kuchli hisobdorlik."
+          />
+
         ) : (
           <div className="space-y-4">
             {parties.map((p) => {

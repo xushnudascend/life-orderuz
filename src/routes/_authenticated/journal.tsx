@@ -3,9 +3,10 @@ import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { AppShell } from "@/components/app-shell";
 import { PageHero } from "@/components/page-hero";
+import { EmptyState } from "@/components/empty-state";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { Loader2, Trash2 } from "lucide-react";
+import { Loader2, Trash2, BookOpen } from "lucide-react";
 import { uz } from "@/i18n";
 
 export const Route = createFileRoute("/_authenticated/journal")({
@@ -133,9 +134,12 @@ function JournalPage() {
             <Loader2 className="h-5 w-5 animate-spin text-muted-foreground" />
           </div>
         ) : entries.length === 0 ? (
-          <p className="py-10 text-center text-muted-foreground">
-            Hozircha yozuv yo'q.
-          </p>
+          <EmptyState
+            icon={<BookOpen className="h-5 w-5" />}
+            title="Hozircha yozuv yo'q"
+            description="Bugungi kayfiyatingni yoz. Fikrni qog'ozga tushirsang, u ustidan nazorat qo'ling ostiga o'tadi."
+          />
+
         ) : (
           entries.map((e) => {
             const m = MOODS.find((x) => x.v === e.mood);
