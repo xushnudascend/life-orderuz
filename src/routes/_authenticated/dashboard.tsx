@@ -267,7 +267,7 @@ function Dashboard() {
         <Panel>
           <PanelHeader eyebrow={`Daraja ${stats?.level ?? 1}`} />
           <PanelValue
-            value={`${stats?.total_xp ?? 0} XP`}
+            value={<><CountUpNumber value={stats?.total_xp ?? 0} once="dash-xp" /> XP</>}
             caption={`${xpProgress}% keyingi darajaga`}
           />
           <div className="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-border">
