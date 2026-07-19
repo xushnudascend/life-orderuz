@@ -264,7 +264,7 @@ function PartyPage() {
                       ))}
                     </ul>
                   </div>
-                </div>
+                </Panel>
               );
             })}
           </div>
