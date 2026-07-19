@@ -693,12 +693,6 @@ function Traction() {
               Biz endigina yo'lda ekanimizni yashirmaymiz. Mahsulot jonli, tizim ishlaydi — foydalanuvchilar sonini bo'yab ko'rsatmaymiz.
             </p>
           </div>
-          <Link
-            to="/investors"
-            className="font-ui text-[13px] font-semibold text-primary underline-offset-4 hover:underline"
-          >
-            Investorlar uchun to'liq ma'lumot →
-          </Link>
         </div>
         <dl className="mt-10 grid grid-cols-2 gap-6 md:grid-cols-4">
           {items.map((s) => (
