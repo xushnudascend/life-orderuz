@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { AppShell } from "@/components/app-shell";
 import { PageHero } from "@/components/page-hero";
+import { EmptyState } from "@/components/empty-state";
 import { Loader2, Hash } from "lucide-react";
 import { uz } from "@/i18n";
 
