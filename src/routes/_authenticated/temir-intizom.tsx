@@ -116,15 +116,11 @@ function TemirIntizom() {
 
   return (
     <AppShell title="Temir Intizom">
-      <p className="font-ui text-xs uppercase tracking-[0.28em] text-primary">
-        21 kunlik yo'l
-      </p>
-      <h1 className="mt-3 font-serif text-4xl leading-tight tracking-tight">
-        Temir Intizom.
-      </h1>
-      <p className="mt-3 max-w-xl text-muted-foreground">
-        Har kuni kamida bitta odat bajarasan. 21 kun to'xtamasa — u sening bir qismingga aylanadi.
-      </p>
+      <PageHero
+        eyebrow="21 kunlik yo'l"
+        title="Temir Intizom."
+        subtitle="Har kuni kamida bitta odat bajarasan. 21 kun to'xtamasa — u sening bir qismingga aylanadi."
+      />
 
       {loading ? (
         <div className="flex justify-center py-16">
