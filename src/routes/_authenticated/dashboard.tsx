@@ -269,7 +269,7 @@ function Dashboard() {
       </div>
 
       {/* Asosiy grid */}
-      <div className="mt-4 grid gap-3 lg:grid-cols-12">
+      <div className="mt-4 grid gap-3 sm:gap-4 lg:grid-cols-12">
         {/* Habits */}
         <Panel className="lg:col-span-7">
           <PanelHeader
