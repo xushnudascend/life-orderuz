@@ -274,12 +274,12 @@ function ProfilePage() {
 
 function Stat({ label, value }: { label: string; value: string | number }) {
   return (
-    <div className="rounded-[var(--radius)] border border-border p-5">
-      <p className="font-ui text-xs uppercase tracking-[0.22em] text-muted-foreground">
+    <Panel className="p-5">
+      <p className="font-ui text-[10px] font-semibold uppercase tracking-[0.22em] text-muted-foreground">
         {label}
       </p>
-      <p className="mt-2 font-serif text-3xl">{value}</p>
-    </div>
+      <p className="mt-2 font-serif text-3xl tabular-nums">{value}</p>
+    </Panel>
   );
 }
 
