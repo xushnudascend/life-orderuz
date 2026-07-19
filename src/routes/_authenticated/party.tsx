@@ -217,7 +217,9 @@ function PartyPage() {
             {parties.map((p) => {
               const isOwner = p.owner_id === userId;
               const list = members[p.id] ?? [];
+              return (
                 <Panel key={p.id} as="article" className="p-5">
+
 
                   <div className="flex items-start justify-between gap-3">
                     <div>
