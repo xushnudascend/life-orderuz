@@ -348,7 +348,7 @@ function Dashboard() {
                 return (
                   <li key={h.id}>
                     <button
-                      onClick={() => toggle(h)}
+                      onClick={(ev) => toggle(h, ev)}
                       aria-pressed={isDone}
                       className={
                         "tap group flex w-full items-center gap-3 rounded-md border px-3 py-2 text-left transition-all active:scale-[0.995] " +
