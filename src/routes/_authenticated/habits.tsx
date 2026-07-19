@@ -260,9 +260,12 @@ function HabitsPage() {
             <Loader2 className="h-5 w-5 animate-spin text-muted-foreground" />
           </div>
         ) : habits.length === 0 ? (
-          <p className="py-10 text-center text-muted-foreground">
-            Hali odat qo'shilmagan. Birinchi odatingdan boshlaymizmi?
-          </p>
+          <EmptyState
+            icon={<Flame className="h-5 w-5" />}
+            title="Hali odat qo'shilmagan"
+            description="Kichkina va aniq bir odatdan boshla — masalan '2 daqiqa nafas mashqi'. Kichik boshlanish uzoq davom etadi."
+          />
+
         ) : (
           CATEGORIES.map((cat) =>
             grouped[cat.id].length ? (
