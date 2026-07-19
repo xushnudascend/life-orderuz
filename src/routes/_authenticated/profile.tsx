@@ -14,6 +14,7 @@ import { ShareCard } from "@/components/share-card";
 import { estimateDisciplineScore } from "@/lib/nervous";
 import { Panel, PanelHeader } from "@/components/panel";
 import { PageHero } from "@/components/page-hero";
+import { CountUpNumber } from "@/components/count-up-number";
 
 export const Route = createFileRoute("/_authenticated/profile")({
   head: () => ({
