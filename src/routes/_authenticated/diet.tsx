@@ -3,6 +3,8 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { AppShell } from "@/components/app-shell";
 import { PageHero } from "@/components/page-hero";
+import { Panel, PanelHeader } from "@/components/panel";
+import { EmptyState } from "@/components/empty-state";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -176,64 +178,73 @@ function Diet() {
         )}
       </div>
 
-      <div className="mt-8 grid gap-3 rounded-[var(--radius)] border border-border p-5 sm:grid-cols-[160px_1fr_120px_auto]">
-        <div>
-          <Label htmlFor="mkind">Vaqti</Label>
-          <select
-            id="mkind"
-            value={kind}
-            onChange={(e) => setKind(e.target.value)}
-            className="mt-1 h-9 w-full rounded-md border border-input bg-background px-3 text-sm"
-          >
-            {KINDS.map((k) => (
-              <option key={k} value={k}>{k}</option>
-            ))}
-          </select>
-        </div>
-        <div>
-          <Label htmlFor="desc">Nima yeding?</Label>
-          <Input id="desc" value={desc} onChange={(e) => setDesc(e.target.value)} />
-        </div>
-        <div>
-          <Label htmlFor="cal">Kkal</Label>
-          <Input id="cal" type="number" min={0} value={cal} onChange={(e) => setCal(e.target.value)} />
-        </div>
-        <div className="flex items-end">
-          <Button onClick={add} className="w-full">Qo'shish</Button>
-        </div>
-        <div className="sm:col-span-4">
-          <input
-            ref={fileRef}
-            type="file"
-            accept="image/*"
-            onChange={(e) => pickImage(e.target.files?.[0])}
-            className="hidden"
-            id="mealimg"
-          />
-          <div className="flex items-center gap-3">
-            <Button
-              type="button"
-              variant="outline"
-              size="sm"
-              onClick={() => fileRef.current?.click()}
-              disabled={uploading}
+      <Panel className="mt-8 p-5">
+
+        <PanelHeader
+          eyebrow="Yangi yozuv"
+          title={
+            <h2 className="font-serif text-xl">Bugun nima yeding?</h2>
+          }
+        />
+        <div className="mt-4 grid gap-3 sm:grid-cols-[160px_1fr_120px_auto]">
+          <div>
+            <Label htmlFor="mkind">Vaqti</Label>
+            <select
+              id="mkind"
+              value={kind}
+              onChange={(e) => setKind(e.target.value)}
+              className="mt-1 h-9 w-full rounded-md border border-input bg-background px-3 text-sm"
             >
-              <Camera className="mr-1 h-4 w-4" />
-              {uploading ? "Yuklanmoqda..." : "Rasm qo'shish"}
-            </Button>
-            <p className="font-ui text-xs text-muted-foreground">
-              Rasm 5MB dan kichik bo'lsin.
-            </p>
-            {pendingImage && (
-              <img
-                src={pendingImage}
-                alt=""
-                className="ml-auto h-10 w-10 rounded-md object-cover"
-              />
-            )}
+              {KINDS.map((k) => (
+                <option key={k} value={k}>{k}</option>
+              ))}
+            </select>
+          </div>
+          <div>
+            <Label htmlFor="desc">Nima yeding?</Label>
+            <Input id="desc" value={desc} onChange={(e) => setDesc(e.target.value)} />
+          </div>
+          <div>
+            <Label htmlFor="cal">Kkal</Label>
+            <Input id="cal" type="number" min={0} value={cal} onChange={(e) => setCal(e.target.value)} />
+          </div>
+          <div className="flex items-end">
+            <Button onClick={add} className="w-full">Qo'shish</Button>
+          </div>
+          <div className="sm:col-span-4">
+            <input
+              ref={fileRef}
+              type="file"
+              accept="image/*"
+              onChange={(e) => pickImage(e.target.files?.[0])}
+              className="hidden"
+              id="mealimg"
+            />
+            <div className="flex items-center gap-3">
+              <Button
+                type="button"
+                variant="outline"
+                size="sm"
+                onClick={() => fileRef.current?.click()}
+                disabled={uploading}
+              >
+                <Camera className="mr-1 h-4 w-4" />
+                {uploading ? "Yuklanmoqda..." : "Rasm qo'shish"}
+              </Button>
+              <p className="font-ui text-xs text-muted-foreground">
+                Rasm 5MB dan kichik bo'lsin.
+              </p>
+              {pendingImage && (
+                <img
+                  src={pendingImage}
+                  alt=""
+                  className="ml-auto h-10 w-10 rounded-md object-cover"
+                />
+              )}
+            </div>
           </div>
         </div>
-      </div>
+      </Panel>
 
       <div className="mt-6">
         <PremiumLock title="AI ovqat tahlili Premium a'zolar uchun." />
@@ -246,14 +257,15 @@ function Diet() {
             <Loader2 className="h-5 w-5 animate-spin text-muted-foreground" />
           </div>
         ) : rows.length === 0 ? (
-          <p className="text-sm text-muted-foreground">Hali yozuv yo'q.</p>
+          <EmptyState
+            icon={<Utensils className="h-5 w-5" />}
+            title="Bugungi ovqat yozilmagan"
+            description="Yozib qo'yish — kichik e'tibor. E'tibor esa vaqt o'tib eng katta o'zgarishga aylanadi."
+          />
         ) : (
           <div className="space-y-2">
             {rows.map((r) => (
-              <div
-                key={r.id}
-                className="flex items-center justify-between rounded-[var(--radius)] border border-border bg-card p-4"
-              >
+              <Panel key={r.id} as="article" className="flex items-center justify-between p-4">
                 <div className="flex items-center gap-3">
                   {r.image_url ? (
                     <img
@@ -275,7 +287,7 @@ function Diet() {
                 <Button variant="ghost" size="sm" onClick={() => del(r.id)} aria-label="O'chirish">
                   <Trash2 className="h-4 w-4" />
                 </Button>
-              </div>
+              </Panel>
             ))}
           </div>
         )}

@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { AppShell } from "@/components/app-shell";
 import { PageHero } from "@/components/page-hero";
+import { Panel, PanelHeader } from "@/components/panel";
+import { EmptyState } from "@/components/empty-state";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -78,29 +80,36 @@ function Workout() {
         subtitle="Kichik jismoniy harakat — ruhiy holatingni ham tiklaydi."
       />
 
-      <div className="mt-8 grid gap-3 rounded-[var(--radius)] border border-border p-5 sm:grid-cols-[1fr_120px_auto]">
-        <div>
-          <Label htmlFor="kind">Turi</Label>
-          <Input id="kind" value={kind} onChange={(e) => setKind(e.target.value)} />
+      <Panel className="mt-8 p-5">
+
+        <PanelHeader
+          eyebrow="Yangi mashg'ulot"
+          title={<h2 className="font-serif text-xl">Bugun qanday harakat qilding?</h2>}
+        />
+        <div className="mt-4 grid gap-3 sm:grid-cols-[1fr_120px_auto]">
+          <div>
+            <Label htmlFor="kind">Turi</Label>
+            <Input id="kind" value={kind} onChange={(e) => setKind(e.target.value)} />
+          </div>
+          <div>
+            <Label htmlFor="dur">Daqiqa</Label>
+            <Input
+              id="dur"
+              type="number"
+              min={1}
+              value={duration}
+              onChange={(e) => setDuration(Number(e.target.value))}
+            />
+          </div>
+          <div className="flex items-end">
+            <Button onClick={add} className="w-full">Qo'shish</Button>
+          </div>
+          <div className="sm:col-span-3">
+            <Label htmlFor="notes">Izoh (ixtiyoriy)</Label>
+            <Input id="notes" value={notes} onChange={(e) => setNotes(e.target.value)} />
+          </div>
         </div>
-        <div>
-          <Label htmlFor="dur">Daqiqa</Label>
-          <Input
-            id="dur"
-            type="number"
-            min={1}
-            value={duration}
-            onChange={(e) => setDuration(Number(e.target.value))}
-          />
-        </div>
-        <div className="flex items-end">
-          <Button onClick={add} className="w-full">Qo'shish</Button>
-        </div>
-        <div className="sm:col-span-3">
-          <Label htmlFor="notes">Izoh (ixtiyoriy)</Label>
-          <Input id="notes" value={notes} onChange={(e) => setNotes(e.target.value)} />
-        </div>
-      </div>
+      </Panel>
 
       <section className="mt-8">
         <h2 className="mb-3 font-serif text-2xl">Tarix</h2>
@@ -109,14 +118,15 @@ function Workout() {
             <Loader2 className="h-5 w-5 animate-spin text-muted-foreground" />
           </div>
         ) : rows.length === 0 ? (
-          <p className="text-sm text-muted-foreground">Hali yozuv yo'q.</p>
+          <EmptyState
+            icon={<Dumbbell className="h-5 w-5" />}
+            title="Hali yozuv yo'q"
+            description="10 daqiqa yurish ham hisoblanadi. Kichik harakat — miyada dofamin va aniqlik ochiladi."
+          />
         ) : (
           <div className="space-y-2">
             {rows.map((r) => (
-              <div
-                key={r.id}
-                className="flex items-center justify-between rounded-[var(--radius)] border border-border bg-card p-4"
-              >
+              <Panel key={r.id} as="article" className="flex items-center justify-between p-4">
                 <div className="flex items-center gap-3">
                   <Dumbbell className="h-4 w-4 text-primary" />
                   <div>
@@ -127,10 +137,10 @@ function Workout() {
                     {r.notes && <p className="mt-1 text-sm text-muted-foreground">{r.notes}</p>}
                   </div>
                 </div>
-                <Button variant="ghost" size="sm" onClick={() => del(r.id)}>
+                <Button variant="ghost" size="sm" onClick={() => del(r.id)} aria-label="O'chirish">
                   <Trash2 className="h-4 w-4" />
                 </Button>
-              </div>
+              </Panel>
             ))}
           </div>
         )}
