@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { convertToModelMessages, streamText, type UIMessage } from "ai";
 import { createLovableAiGatewayProvider } from "@/lib/ai-gateway.server";
 import { rateLimit } from "@/lib/rate-limit";
+import { enforceAiDailyBudget } from "@/lib/ai-budget";
 import { verifySupabaseBearer } from "@/lib/verify-bearer.server";
 
 /**
@@ -79,6 +80,9 @@ export const Route = createFileRoute("/api/chat")({
             headers: { "Retry-After": String(rl.retryAfter) },
           });
         }
+        // Per-user daily AI cost cap.
+        const budget = await enforceAiDailyBudget(auth.userId, "chat");
+        if (!budget.ok) return budget.response;
         const body = (await request.json()) as {
           messages?: unknown;
           userStats?: UserStats;

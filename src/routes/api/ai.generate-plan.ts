@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { generateText } from "ai";
 import { createLovableAiGatewayProvider } from "@/lib/ai-gateway.server";
 import { verifySupabaseBearer } from "@/lib/verify-bearer.server";
+import { enforceAiDailyBudget } from "@/lib/ai-budget";
 import { z } from "zod";
 
 const bodySchema = z.object({
@@ -17,6 +18,8 @@ export const Route = createFileRoute("/api/ai/generate-plan")({
       POST: async ({ request }) => {
         const auth = await verifySupabaseBearer(request);
         if (!auth.ok) return auth.response;
+        const budget = await enforceAiDailyBudget(auth.userId, "generate-plan");
+        if (!budget.ok) return budget.response;
         const parsed = bodySchema.safeParse(await request.json().catch(() => null));
         if (!parsed.success) return new Response("Bad Request", { status: 400 });
         const key = process.env.LOVABLE_API_KEY;
