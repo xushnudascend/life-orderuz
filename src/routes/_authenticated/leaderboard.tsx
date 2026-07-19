@@ -81,15 +81,11 @@ function Leaderboard() {
 
   return (
     <AppShell title="Reyting">
-      <p className="font-ui text-xs uppercase tracking-[0.28em] text-primary">
-        Reyting
-      </p>
-      <h1 className="mt-3 font-serif text-4xl leading-tight tracking-tight">
-        Eng qat'iyatlilar.
-      </h1>
-      <p className="mt-3 max-w-xl text-muted-foreground">
-        Avval o'z viloyating bilan raqobatlash — keyin butun O'zbekiston.
-      </p>
+      <PageHero
+        eyebrow="Reyting"
+        title="Eng qat'iyatlilar."
+        subtitle="Avval o'z viloyating bilan raqobatlash — keyin butun O'zbekiston."
+      />
 
       <div className="mt-6 flex flex-wrap items-center gap-3">
         <MapPin className="h-4 w-4 text-primary" />
