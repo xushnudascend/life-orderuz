@@ -5,11 +5,6 @@ import { Input } from "@/components/ui/input";
 import { Send, Trash2 } from "lucide-react";
 import { toast } from "sonner";
 
-// Table `post_comments` is created via migration; generated types refresh
-// asynchronously, so we cast the client only where this table is used.
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const sb = supabase as any;
-
 type Comment = {
   id: string;
   user_id: string;

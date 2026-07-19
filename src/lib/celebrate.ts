@@ -1,17 +1,17 @@
-import confetti from "canvas-confetti";
 import { isReducedMotion } from "./motion-pref";
 
 /**
  * Confetti burst — respects reduced-motion.
+ * canvas-confetti is dynamically imported so it never lands in the main bundle.
  */
-export function celebrate(intensity: "small" | "big" = "small") {
-  if (isReducedMotion()) return;
+export async function celebrate(intensity: "small" | "big" = "small") {
+  if (isReducedMotion() || typeof window === "undefined") return;
+  const { default: confetti } = await import("canvas-confetti");
   const count = intensity === "big" ? 160 : 60;
   confetti({
     particleCount: count,
     spread: intensity === "big" ? 90 : 60,
     origin: { y: 0.7 },
-    // Amber-forward brand palette
     colors: ["#f59e0b", "#fbbf24", "#fde68a", "#22c55e", "#e5e7eb"],
     scalar: intensity === "big" ? 1.1 : 0.85,
     disableForReducedMotion: true,
