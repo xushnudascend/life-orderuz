@@ -51,7 +51,12 @@ function CommunityLayout() {
           <Loader2 className="h-5 w-5 animate-spin text-muted-foreground" />
         </div>
       ) : channels.length === 0 ? (
-        <p className="mt-8 text-sm text-muted-foreground">Kanallar topilmadi.</p>
+        <EmptyState
+          icon={<Hash className="h-5 w-5" />}
+          title="Kanallar hali ochilmagan"
+          description="Tez orada — kitobxonlik, streak partnyorlik va tematik davralar shu yerda paydo bo'ladi."
+        />
+
       ) : (
         <div className="mt-8 space-y-2">
           {channels.map((c) => (
