@@ -58,15 +58,11 @@ function Achievements() {
 
   return (
     <AppShell title="Yutuqlar">
-      <p className="font-ui text-xs uppercase tracking-[0.28em] text-primary">
-        Sening yo'ling
-      </p>
-      <h1 className="mt-3 font-serif text-4xl leading-tight tracking-tight">
-        Yutuqlar.
-      </h1>
-      <p className="mt-3 max-w-xl text-muted-foreground">
-        Har bir kichik g'alaba muhim. Ular ortidagi kunlar — asosiy narsa.
-      </p>
+      <PageHero
+        eyebrow="Sening yo'ling"
+        title="Yutuqlar."
+        subtitle="Har bir kichik g'alaba muhim. Ular ortidagi kunlar — asosiy narsa."
+      />
 
       {loading ? (
         <div className="flex justify-center py-10">
