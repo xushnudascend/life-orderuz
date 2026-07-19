@@ -178,8 +178,8 @@ function Diet() {
         )}
       </div>
 
-      <div className="mt-8 grid gap-3 rounded-[var(--radius)] border border-border p-5 sm:grid-cols-[160px_1fr_120px_auto]">
       <Panel className="mt-8 p-5">
+
         <PanelHeader
           eyebrow="Yangi yozuv"
           title={
