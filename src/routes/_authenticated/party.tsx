@@ -145,15 +145,11 @@ function PartyPage() {
 
   return (
     <AppShell title="Party Challenge">
-      <p className="font-ui text-xs uppercase tracking-[0.28em] text-primary">
-        Hisobdorlik guruhi
-      </p>
-      <h1 className="mt-3 font-serif text-4xl leading-tight tracking-tight">
-        Party Challenge.
-      </h1>
-      <p className="mt-3 max-w-xl text-muted-foreground">
-        Kichik guruh — kuchli ta'sir. 3-5 kishilik hisobdorlik davrasi tuz va streaklaringni birga saqlanglar.
-      </p>
+      <PageHero
+        eyebrow="Hisobdorlik guruhi"
+        title="Party Challenge."
+        subtitle="Kichik guruh — kuchli ta'sir. 3-5 kishilik hisobdorlik davrasi tuz va streaklaringni birga saqlanglar."
+      />
 
       {/* Create + Join */}
       <section className="mt-8 grid gap-4 md:grid-cols-2">
