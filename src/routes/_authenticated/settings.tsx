@@ -12,6 +12,7 @@ import { uz } from "@/i18n";
 import { TIMEZONES } from "@/lib/nervous";
 import { getLocale, setLocale as setLoc, type Locale } from "@/i18n";
 import { ThemeSwitcher } from "@/components/theme-switcher";
+import { PageHero } from "@/components/page-hero";
 
 export const Route = createFileRoute("/_authenticated/settings")({
   head: () => ({
@@ -147,14 +148,13 @@ function Settings() {
 
   return (
     <AppShell title="Sozlamalar">
-      <p className="font-ui text-xs uppercase tracking-[0.28em] text-primary">
-        Sozlamalar
-      </p>
-      <h1 className="mt-3 font-serif text-4xl leading-tight tracking-tight">
-        Ilovani o'zingga moslashtir.
-      </h1>
+      <PageHero
+        eyebrow="Sozlamalar"
+        title="Ilovani o'zingga moslashtir."
+        subtitle="Bildirishnomalar, til, mavzu va profilingni bir joyda boshqar."
+      />
 
-      <section className="mt-10 space-y-6">
+      <section className="mt-2 space-y-6">
         <Card icon={<UserIcon className="h-4 w-4 text-primary" />} title="Profil">
           <div className="space-y-4">
             <div className="space-y-2">
