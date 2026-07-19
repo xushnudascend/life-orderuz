@@ -194,7 +194,12 @@ function PartyPage() {
             <Loader2 className="h-5 w-5 animate-spin text-muted-foreground" />
           </div>
         ) : parties.length === 0 ? (
-          <p className="text-sm text-muted-foreground">Hali guruh yo'q. Yuqoridagi kartalar bilan boshla.</p>
+          <EmptyState
+            icon={<Users className="h-5 w-5" />}
+            title="Hali guruhing yo'q"
+            description="Yuqoridan yangi guruh yarat yoki do'sting bergan taklif kodini kirit. Kichik doira — kuchli hisobdorlik."
+          />
+
         ) : (
           <div className="space-y-4">
             {parties.map((p) => {
