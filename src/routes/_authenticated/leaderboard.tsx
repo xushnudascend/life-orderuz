@@ -3,6 +3,7 @@ import { useEffect, useMemo, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { AppShell } from "@/components/app-shell";
 import { PageHero } from "@/components/page-hero";
+import { Panel } from "@/components/panel";
 import { Button } from "@/components/ui/button";
 import { Loader2, Trophy, MapPin } from "lucide-react";
 import { toast } from "sonner";
