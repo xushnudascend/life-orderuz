@@ -3,9 +3,10 @@ import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { AppShell } from "@/components/app-shell";
 import { PageHero } from "@/components/page-hero";
+import { EmptyState } from "@/components/empty-state";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { Loader2, Trash2 } from "lucide-react";
+import { Loader2, Trash2, BookOpen } from "lucide-react";
 import { uz } from "@/i18n";
 
 export const Route = createFileRoute("/_authenticated/journal")({
