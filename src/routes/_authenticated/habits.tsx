@@ -165,18 +165,18 @@ function HabitsPage() {
     return g;
   }, [habits]);
 
+  const todayCount = habits.filter((h) => !h.scheduled_for || h.scheduled_for === today()).length;
   return (
     <AppShell title="Odatlar">
-      <p className="font-ui text-xs uppercase tracking-[0.28em] text-primary">
-        Kunlik ritm
-      </p>
-      <h1 className="mt-3 font-serif text-4xl leading-tight tracking-tight">
-        Odatlar
-      </h1>
-      <p className="mt-3 max-w-xl text-muted-foreground">
-        Bugun: <span className="text-foreground">{doneCount}</span> /{" "}
-        {habits.filter((h) => !h.scheduled_for || h.scheduled_for === today()).length} bajarildi.
-      </p>
+      <PageHero
+        eyebrow="Kunlik ritm"
+        title="Odatlar"
+        subtitle={
+          <>
+            Bugun: <span className="text-foreground">{doneCount}</span> / {todayCount} bajarildi. Kichik takror — katta o'zgarish.
+          </>
+        }
+      />
 
       <form
         onSubmit={addHabit}
