@@ -72,12 +72,11 @@ function Workout() {
 
   return (
     <AppShell title="Mashg'ulot">
-      <p className="font-ui text-xs uppercase tracking-[0.28em] text-primary">
-        Jismoniy tayyorgarlik
-      </p>
-      <h1 className="mt-3 font-serif text-4xl leading-tight tracking-tight">
-        Bugungi mashg'ulot.
-      </h1>
+      <PageHero
+        eyebrow="Jismoniy tayyorgarlik"
+        title="Bugungi mashg'ulot."
+        subtitle="Kichik jismoniy harakat — ruhiy holatingni ham tiklaydi."
+      />
 
       <div className="mt-8 grid gap-3 rounded-[var(--radius)] border border-border p-5 sm:grid-cols-[1fr_120px_auto]">
         <div>
