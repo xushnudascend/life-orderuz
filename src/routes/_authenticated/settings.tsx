@@ -44,6 +44,7 @@ function Settings() {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [locale, setLocaleState] = useState<Locale>(getLocale());
+  const [motionPref, setMotionPrefState] = useState<MotionPref>(getMotionPref());
 
   useEffect(() => {
     (async () => {
