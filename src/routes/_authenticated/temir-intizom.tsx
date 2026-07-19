@@ -129,15 +129,21 @@ function TemirIntizom() {
           <Loader2 className="h-5 w-5 animate-spin text-muted-foreground" />
         </div>
       ) : !startDate ? (
-        <div className="mt-10 rounded-[var(--radius)] border border-dashed border-border p-8 text-center">
-          <p className="text-muted-foreground">Yo'l hali boshlanmagan.</p>
-          <Button className="mt-4" onClick={start}>
-            <Flame className="mr-1 h-4 w-4" /> Bugundan boshlash
-          </Button>
+        <div className="mt-10">
+          <EmptyState
+            icon={<Flame className="h-5 w-5" />}
+            title="Yo'l hali boshlanmagan"
+            description="21 kunlik yo'l — miyaning yangi naqshni qabul qilishi uchun kerak bo'lgan minimal davr. Bugundan boshla."
+            action={
+              <Button onClick={start}>
+                <Flame className="mr-1 h-4 w-4" /> Bugundan boshlash
+              </Button>
+            }
+          />
         </div>
       ) : (
         <>
-          <div className="mt-8 rounded-[var(--radius)] border border-border p-5">
+          <Panel className="mt-8 p-5">
             <div className="flex items-center justify-between gap-3">
               <div>
                 <p className="font-ui text-[11px] uppercase tracking-[0.22em] text-muted-foreground">
@@ -164,10 +170,10 @@ function TemirIntizom() {
                 Yakunlandi · Endi bu sen
               </p>
             )}
-          </div>
+          </Panel>
 
           {/* 21 day grid */}
-          <section className="mt-6 rounded-[var(--radius)] border border-border p-5">
+          <Panel as="section" className="mt-6 p-5">
             <div className="grid grid-cols-7 gap-2">
               {days.map((d) => {
                 const cls = d.done
@@ -192,26 +198,24 @@ function TemirIntizom() {
                 );
               })}
             </div>
-          </section>
+          </Panel>
 
           {/* Milestones */}
           <section className="mt-6 space-y-2">
             {MILESTONES.map((m) => {
               const reached = doneCount >= m.day;
               return (
-                <div
+                <Panel
                   key={m.day}
-                  className={
-                    "rounded-[var(--radius)] border p-4 " +
-                    (reached ? "border-primary/40 bg-primary/5" : "border-border bg-card")
-                  }
+                  as="article"
+                  className={"p-4 " + (reached ? "border-primary/40 bg-primary/5" : "")}
                 >
                   <p className="font-ui text-[11px] uppercase tracking-[0.22em] text-muted-foreground">
                     Kun {m.day} · {reached ? "erishildi" : "kutilmoqda"}
                   </p>
                   <p className="mt-1 font-serif text-lg">{m.label}</p>
                   <p className="mt-1 text-sm text-muted-foreground">{m.body}</p>
-                </div>
+                </Panel>
               );
             })}
           </section>
