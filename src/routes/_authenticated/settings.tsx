@@ -13,6 +13,7 @@ import { TIMEZONES } from "@/lib/nervous";
 import { getLocale, setLocale as setLoc, type Locale } from "@/i18n";
 import { ThemeSwitcher } from "@/components/theme-switcher";
 import { PageHero } from "@/components/page-hero";
+import { Panel, PanelHeader } from "@/components/panel";
 
 export const Route = createFileRoute("/_authenticated/settings")({
   head: () => ({
@@ -333,13 +334,17 @@ function Card({
   children: React.ReactNode;
 }) {
   return (
-    <div className="rounded-[var(--radius)] border border-border p-6">
-      <div className="mb-4 flex items-center gap-2">
-        {icon}
-        <h2 className="font-serif text-xl">{title}</h2>
-      </div>
-      {children}
-    </div>
+    <Panel className="p-6">
+      <PanelHeader
+        title={
+          <div className="flex items-center gap-2">
+            {icon}
+            <h2 className="font-serif text-xl leading-tight">{title}</h2>
+          </div>
+        }
+      />
+      <div className="mt-4">{children}</div>
+    </Panel>
   );
 }
 
