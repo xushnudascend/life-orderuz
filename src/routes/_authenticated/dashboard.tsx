@@ -11,7 +11,9 @@ import {
   Salad,
   Sparkles,
   Target,
+  Sprout,
 } from "lucide-react";
+import { EmptyState } from "@/components/empty-state";
 
 import { uz } from "@/i18n";
 import { ProgressRing } from "@/components/progress-ring";
@@ -213,7 +215,7 @@ function Dashboard() {
       </div>
 
       {/* KPI qatori */}
-      <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+      <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-4">
         <Panel>
           <PanelHeader eyebrow="Bugun" />
           <PanelValue
@@ -267,7 +269,7 @@ function Dashboard() {
       </div>
 
       {/* Asosiy grid */}
-      <div className="mt-4 grid gap-3 lg:grid-cols-12">
+      <div className="mt-4 grid gap-3 sm:gap-4 lg:grid-cols-12">
         {/* Habits */}
         <Panel className="lg:col-span-7">
           <PanelHeader
@@ -299,14 +301,18 @@ function Dashboard() {
               ))}
             </div>
           ) : habits.length === 0 ? (
-            <div className="mt-4 rounded-md border border-dashed border-border p-6 text-center">
-              <p className="font-ui text-sm text-muted-foreground">
-                Hozircha odat yo'q. Sun'iy intellekt shaxsiy reja tuzib bersinmi?
-              </p>
-              <Button asChild size="sm" className="mt-3">
-                <Link to="/onboarding">Shaxsiy reja tuzish</Link>
-              </Button>
-            </div>
+            <EmptyState
+              className="mt-4"
+              icon={<Sprout className="h-5 w-5" />}
+              title="Bugundan boshlab bitta kichik odat"
+              description="Miya katta o'zgarishlarga qarshilik qiladi. 2 daqiqalik odatdan boshlang — Nadir siz uchun shaxsiy reja tuzib beradi."
+              action={
+                <Button asChild size="sm">
+                  <Link to="/onboarding">Shaxsiy reja tuzish</Link>
+                </Button>
+              }
+            />
+
           ) : (
             <ul className="mt-3 space-y-1">
               {habits.map((h) => {
