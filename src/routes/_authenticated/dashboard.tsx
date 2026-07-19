@@ -450,6 +450,9 @@ function Dashboard() {
           </div>
         </Panel>
       </div>
+      {milestone !== null && (
+        <StreakMilestone days={milestone} onDismiss={() => setMilestone(null)} />
+      )}
     </AppShell>
   );
 }
