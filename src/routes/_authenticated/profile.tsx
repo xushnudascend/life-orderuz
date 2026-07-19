@@ -131,30 +131,25 @@ function ProfilePage() {
 
   return (
     <AppShell title="Profil">
-      <p className="font-ui text-xs uppercase tracking-[0.28em] text-primary">
-        Sen
-      </p>
-      <div className="mt-3 flex flex-wrap items-center gap-3">
-        <h1 className="font-serif text-4xl leading-tight tracking-tight">
-          {profile?.display_name ?? "Foydalanuvchi"}
-        </h1>
-        <RankBadge score={score} />
-      </div>
-      {profile?.username && (
-        <p className="mt-2 font-ui text-xs text-muted-foreground">
-          @{profile.username}
-          {profile.is_public && (
-            <>
-              {" · "}
-              <Link
-                to="/u/$username"
-                params={{ username: profile.username }}
-                className="text-primary hover:underline"
-              >
-                Ochiq profilni ko'rish
-              </Link>
-            </>
-          )}
+      <PageHero
+        eyebrow="Sen"
+        title={profile?.display_name ?? "Foydalanuvchi"}
+        subtitle={
+          profile?.username
+            ? `@${profile.username}`
+            : "Rankingni, streakni va shieldni bir joyda ko'r."
+        }
+        actions={<RankBadge score={score} />}
+      />
+      {profile?.username && profile.is_public && (
+        <p className="-mt-4 font-ui text-xs text-muted-foreground">
+          <Link
+            to="/u/$username"
+            params={{ username: profile.username }}
+            className="text-primary hover:underline"
+          >
+            Ochiq profilni ko'rish →
+          </Link>
         </p>
       )}
 
@@ -174,24 +169,32 @@ function ProfilePage() {
             <ShieldIndicator usedThisWeek={shieldsUsed} max={3} />
           </div>
 
-          <div className="mt-6 space-y-3 rounded-[var(--radius)] border border-border p-5">
-            <Row label="Reja" value={`${profile?.plan_length_days ?? 7} kun`} />
-            <Row
-              label="Onboarding"
-              value={
-                profile?.onboarding_completed_at
-                  ? new Date(profile.onboarding_completed_at).toLocaleDateString("uz-UZ")
-                  : "—"
+          <Panel className="mt-6 p-5">
+            <PanelHeader eyebrow="Umumiy" title={<h2 className="font-serif text-lg">Rejang</h2>} />
+            <div className="mt-4 space-y-3">
+              <Row label="Reja" value={`${profile?.plan_length_days ?? 7} kun`} />
+              <Row
+                label="Onboarding"
+                value={
+                  profile?.onboarding_completed_at
+                    ? new Date(profile.onboarding_completed_at).toLocaleDateString("uz-UZ")
+                    : "—"
+                }
+              />
+              <Row label="Eng uzun streak" value={`${streak?.longest_days ?? 0} kun`} />
+            </div>
+          </Panel>
+
+          <Panel className="mt-6 p-5">
+            <PanelHeader
+              eyebrow="Ochiq profil"
+              title={
+                <Label htmlFor="uname" className="font-serif text-lg">
+                  Username
+                </Label>
               }
             />
-            <Row label="Eng uzun streak" value={`${streak?.longest_days ?? 0} kun`} />
-          </div>
-
-          <div className="mt-6 rounded-[var(--radius)] border border-border p-5">
-            <Label htmlFor="uname" className="mb-2 block">
-              Username (ochiq profil URL)
-            </Label>
-            <div className="flex gap-2">
+            <div className="mt-4 flex gap-2">
               <Input
                 id="uname"
                 placeholder="masalan: aziz"
@@ -206,35 +209,37 @@ function ProfilePage() {
             <p className="mt-2 font-ui text-xs text-muted-foreground">
               Faqat kichik harflar, raqamlar, ostki chiziq. Kamida 3 belgi.
             </p>
-          </div>
+          </Panel>
 
-          <div className="mt-6 flex items-center justify-between rounded-[var(--radius)] border border-border p-5">
-            <div className="flex items-center gap-3">
-              <span className="flex h-10 w-10 items-center justify-center rounded-full border border-border">
-                <Shield className="h-4 w-4 text-primary" />
-              </span>
-              <div>
-                <p className="font-serif text-lg">Shield</p>
-                <p className="font-ui text-xs text-muted-foreground">
-                  Haftada 1 marta — bo'sh kun uchun streak saqlanadi.
-                  {streak?.freeze_active_until && (
-                    <>
-                      {" "}Faol:{" "}
-                      {new Date(streak.freeze_active_until).toLocaleDateString("uz-UZ")}
-                    </>
-                  )}
-                </p>
+          <Panel className="mt-6 p-5">
+            <div className="flex items-center justify-between gap-4">
+              <div className="flex items-center gap-3">
+                <span className="flex h-10 w-10 items-center justify-center rounded-full border border-border">
+                  <Shield className="h-4 w-4 text-primary" />
+                </span>
+                <div>
+                  <p className="font-serif text-lg">Shield</p>
+                  <p className="font-ui text-xs text-muted-foreground">
+                    Haftada 1 marta — bo'sh kun uchun streak saqlanadi.
+                    {streak?.freeze_active_until && (
+                      <>
+                        {" "}Faol:{" "}
+                        {new Date(streak.freeze_active_until).toLocaleDateString("uz-UZ")}
+                      </>
+                    )}
+                  </p>
+                </div>
               </div>
+              <Button
+                onClick={activateShield}
+                disabled={usingShield || shieldsUsed >= 1}
+                variant="outline"
+                size="sm"
+              >
+                {shieldsUsed >= 1 ? "Ishlatildi" : "Faollashtirish"}
+              </Button>
             </div>
-            <Button
-              onClick={activateShield}
-              disabled={usingShield || shieldsUsed >= 1}
-              variant="outline"
-              size="sm"
-            >
-              {shieldsUsed >= 1 ? "Ishlatildi" : "Faollashtirish"}
-            </Button>
-          </div>
+          </Panel>
 
           <section className="mt-10">
             <h2 className="mb-3 font-serif text-2xl">Natijalarni ulash</h2>
