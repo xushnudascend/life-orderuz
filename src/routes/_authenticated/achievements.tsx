@@ -4,6 +4,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { AppShell } from "@/components/app-shell";
 import { PageHero } from "@/components/page-hero";
 import { Loader2, Award, Lock } from "lucide-react";
+import { Panel } from "@/components/panel";
 import { uz } from "@/i18n";
 
 export const Route = createFileRoute("/_authenticated/achievements")({
@@ -73,13 +74,11 @@ function Achievements() {
           {all.map((a) => {
             const got = unlocked.has(a.id);
             return (
-              <div
+              <Panel
                 key={a.id}
                 className={
-                  "flex items-start gap-4 rounded-[var(--radius)] border p-5 " +
-                  (got
-                    ? "border-border bg-card"
-                    : "border-dashed border-border/60 bg-transparent opacity-70")
+                  "flex items-start gap-4 " +
+                  (got ? "" : "border-dashed border-border/60 bg-transparent opacity-70")
                 }
               >
                 <span
@@ -99,7 +98,7 @@ function Achievements() {
                     {a.tier} · +{a.xp_reward} XP
                   </p>
                 </div>
-              </div>
+              </Panel>
             );
           })}
         </div>
