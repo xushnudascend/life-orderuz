@@ -134,9 +134,12 @@ function JournalPage() {
             <Loader2 className="h-5 w-5 animate-spin text-muted-foreground" />
           </div>
         ) : entries.length === 0 ? (
-          <p className="py-10 text-center text-muted-foreground">
-            Hozircha yozuv yo'q.
-          </p>
+          <EmptyState
+            icon={<BookOpen className="h-5 w-5" />}
+            title="Hozircha yozuv yo'q"
+            description="Bugungi kayfiyatingni yoz. Fikrni qog'ozga tushirsang, u ustidan nazorat qo'ling ostiga o'tadi."
+          />
+
         ) : (
           entries.map((e) => {
             const m = MOODS.find((x) => x.v === e.mood);
