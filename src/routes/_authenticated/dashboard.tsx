@@ -25,6 +25,9 @@ import { ProfileCompletionCard } from "@/components/profile-completion-card";
 import { NadirNudgeBanner } from "@/components/nadir-nudge-banner";
 import { Panel, PanelHeader, PanelValue } from "@/components/panel";
 import { ErrorBoundary } from "@/components/error-boundary";
+import { CountUpNumber } from "@/components/count-up-number";
+import { StreakMilestone } from "@/components/streak-milestone";
+import { celebrate, floatXp } from "@/lib/celebrate";
 import {
   circadian,
   progressMessage,
@@ -70,6 +73,7 @@ function Dashboard() {
   const [streak, setStreak] = useState<Streak>(null);
   const [shieldsUsed, setShieldsUsed] = useState(0);
   const [loaded, setLoaded] = useState(false);
+  const [milestone, setMilestone] = useState<number | null>(null);
 
 
   async function refresh() {
@@ -138,8 +142,9 @@ function Dashboard() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userId]);
 
-  async function toggle(h: Habit) {
-    if (done.has(h.id)) {
+  async function toggle(h: Habit, ev?: React.MouseEvent) {
+    const wasDone = done.has(h.id);
+    if (wasDone) {
       await supabase
         .from("habit_logs")
         .delete()
@@ -158,8 +163,31 @@ function Dashboard() {
         amount: h.xp_reward,
         reference_id: h.id,
       });
+      // Micro-reward feedback
+      if (ev) {
+        const rect = (ev.currentTarget as HTMLElement).getBoundingClientRect();
+        floatXp(rect.right - 24, rect.top + rect.height / 2, h.xp_reward);
+      }
     }
-    refresh();
+    const prevStreak = streak?.current_days ?? 0;
+    await refresh();
+    // Trigger streak milestone celebration when crossing 3 / 7 / 21 / 30 / 60 / 100 / 365
+    const MARKS = [3, 7, 21, 30, 60, 100, 365];
+    // Read latest streak after refresh
+    const { data: st } = await supabase
+      .from("streaks")
+      .select("current_days")
+      .eq("user_id", userId)
+      .maybeSingle();
+    const now = (st as { current_days: number } | null)?.current_days ?? 0;
+    if (!wasDone && now > prevStreak && MARKS.includes(now)) {
+      setMilestone(now);
+      celebrate(now >= 30 ? "big" : "small");
+    } else if (!wasDone) {
+      // small perimeter confetti when finishing all of today
+      const doneNow = habits.filter((x) => done.has(x.id) || x.id === h.id).length;
+      if (doneNow === habits.length && habits.length > 0) celebrate("big");
+    }
   }
 
   const doneCount = habits.filter((h) => done.has(h.id)).length;
@@ -239,7 +267,7 @@ function Dashboard() {
         <Panel>
           <PanelHeader eyebrow={`Daraja ${stats?.level ?? 1}`} />
           <PanelValue
-            value={`${stats?.total_xp ?? 0} XP`}
+            value={<><CountUpNumber value={stats?.total_xp ?? 0} once="dash-xp" /> XP</>}
             caption={`${xpProgress}% keyingi darajaga`}
           />
           <div className="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-border">
@@ -320,7 +348,7 @@ function Dashboard() {
                 return (
                   <li key={h.id}>
                     <button
-                      onClick={() => toggle(h)}
+                      onClick={(ev) => toggle(h, ev)}
                       aria-pressed={isDone}
                       className={
                         "tap group flex w-full items-center gap-3 rounded-md border px-3 py-2 text-left transition-all active:scale-[0.995] " +
@@ -422,6 +450,9 @@ function Dashboard() {
           </div>
         </Panel>
       </div>
+      {milestone !== null && (
+        <StreakMilestone days={milestone} onDismiss={() => setMilestone(null)} />
+      )}
     </AppShell>
   );
 }

@@ -14,6 +14,7 @@ import { ShareCard } from "@/components/share-card";
 import { estimateDisciplineScore } from "@/lib/nervous";
 import { Panel, PanelHeader } from "@/components/panel";
 import { PageHero } from "@/components/page-hero";
+import { CountUpNumber } from "@/components/count-up-number";
 
 export const Route = createFileRoute("/_authenticated/profile")({
   head: () => ({
@@ -273,12 +274,15 @@ function ProfilePage() {
 }
 
 function Stat({ label, value }: { label: string; value: string | number }) {
+  const isNumber = typeof value === "number";
   return (
     <Panel className="p-5">
       <p className="font-ui text-[10px] font-semibold uppercase tracking-[0.22em] text-muted-foreground">
         {label}
       </p>
-      <p className="mt-2 font-serif text-3xl tabular-nums">{value}</p>
+      <p className="mt-2 font-serif text-3xl tabular-nums">
+        {isNumber ? <CountUpNumber value={value} once={`profile-${label}`} /> : value}
+      </p>
     </Panel>
   );
 }

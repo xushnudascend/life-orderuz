@@ -14,6 +14,7 @@ import { getLocale, setLocale as setLoc, type Locale } from "@/i18n";
 import { ThemeSwitcher } from "@/components/theme-switcher";
 import { PageHero } from "@/components/page-hero";
 import { Panel, PanelHeader } from "@/components/panel";
+import { getMotionPref, setMotionPref, type MotionPref } from "@/lib/motion-pref";
 
 export const Route = createFileRoute("/_authenticated/settings")({
   head: () => ({
@@ -43,6 +44,7 @@ function Settings() {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [locale, setLocaleState] = useState<Locale>(getLocale());
+  const [motionPref, setMotionPrefState] = useState<MotionPref>(getMotionPref());
 
   useEffect(() => {
     (async () => {
@@ -234,16 +236,47 @@ function Settings() {
         </Card>
 
         <Card icon={<Wand2 className="h-4 w-4 text-primary" />} title="Animatsiyalar">
-          <Row
-            label="Barcha effektlar"
-            hint={prefs.animations_enabled ? "Animatsiyalar yoqilgan" : "Animatsiyalar o'chirilgan"}
-          >
-            <Switch
-              checked={prefs.animations_enabled}
-              onCheckedChange={(v) => setPrefs({ ...prefs, animations_enabled: v })}
-            />
-          </Row>
+          <div className="space-y-4">
+            <Row
+              label="Barcha effektlar"
+              hint={prefs.animations_enabled ? "Animatsiyalar yoqilgan" : "Animatsiyalar o'chirilgan"}
+            >
+              <Switch
+                checked={prefs.animations_enabled}
+                onCheckedChange={(v) => setPrefs({ ...prefs, animations_enabled: v })}
+              />
+            </Row>
+            <div className="space-y-2">
+              <p className="font-ui text-sm">Harakatlanish darajasi</p>
+              <p className="text-xs text-muted-foreground">
+                <code>auto</code> — qurilma sozlamasiga ergashadi. Tinch ish uchun <code>kamaytirilgan</code> tanlang.
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {(["auto", "reduce", "full"] as const).map((p) => {
+                  const active = motionPref === p;
+                  return (
+                    <button
+                      key={p}
+                      onClick={() => {
+                        setMotionPrefState(p);
+                        setMotionPref(p);
+                      }}
+                      className={
+                        "rounded-full border px-3 py-1 font-ui text-xs uppercase tracking-[0.18em] transition-colors " +
+                        (active
+                          ? "border-primary bg-primary/10 text-primary"
+                          : "border-border text-muted-foreground hover:text-foreground")
+                      }
+                    >
+                      {p === "auto" ? "Auto" : p === "reduce" ? "Kamaytirilgan" : "To'liq"}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
         </Card>
+
 
         <Card icon={<HelpCircle className="h-4 w-4 text-primary" />} title="Moslashish">
           <Row
