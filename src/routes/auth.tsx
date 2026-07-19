@@ -31,7 +31,8 @@ export const Route = createFileRoute("/auth")({
 });
 
 function AuthPage() {
-  const { next } = Route.useSearch();
+  const search = Route.useSearch();
+  const next = search.next ?? "/dashboard";
   const [tab, setTab] = useState<"signin" | "signup">("signup");
 
   // If already signed in → return to `next` (defaults to /dashboard).
