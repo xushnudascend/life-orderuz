@@ -12,6 +12,7 @@ import { uz } from "@/i18n";
 import { TIMEZONES } from "@/lib/nervous";
 import { getLocale, setLocale as setLoc, type Locale } from "@/i18n";
 import { ThemeSwitcher } from "@/components/theme-switcher";
+import { PageHero } from "@/components/page-hero";
 
 export const Route = createFileRoute("/_authenticated/settings")({
   head: () => ({
