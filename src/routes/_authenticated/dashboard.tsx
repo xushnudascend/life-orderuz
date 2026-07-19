@@ -142,8 +142,9 @@ function Dashboard() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userId]);
 
-  async function toggle(h: Habit) {
-    if (done.has(h.id)) {
+  async function toggle(h: Habit, ev?: React.MouseEvent) {
+    const wasDone = done.has(h.id);
+    if (wasDone) {
       await supabase
         .from("habit_logs")
         .delete()
@@ -162,8 +163,31 @@ function Dashboard() {
         amount: h.xp_reward,
         reference_id: h.id,
       });
+      // Micro-reward feedback
+      if (ev) {
+        const rect = (ev.currentTarget as HTMLElement).getBoundingClientRect();
+        floatXp(rect.right - 24, rect.top + rect.height / 2, h.xp_reward);
+      }
     }
-    refresh();
+    const prevStreak = streak?.current_days ?? 0;
+    await refresh();
+    // Trigger streak milestone celebration when crossing 3 / 7 / 21 / 30 / 60 / 100 / 365
+    const MARKS = [3, 7, 21, 30, 60, 100, 365];
+    // Read latest streak after refresh
+    const { data: st } = await supabase
+      .from("streaks")
+      .select("current_days")
+      .eq("user_id", userId)
+      .maybeSingle();
+    const now = (st as { current_days: number } | null)?.current_days ?? 0;
+    if (!wasDone && now > prevStreak && MARKS.includes(now)) {
+      setMilestone(now);
+      celebrate(now >= 30 ? "big" : "small");
+    } else if (!wasDone) {
+      // small perimeter confetti when finishing all of today
+      const doneNow = habits.filter((x) => done.has(x.id) || x.id === h.id).length;
+      if (doneNow === habits.length && habits.length > 0) celebrate("big");
+    }
   }
 
   const doneCount = habits.filter((h) => done.has(h.id)).length;
