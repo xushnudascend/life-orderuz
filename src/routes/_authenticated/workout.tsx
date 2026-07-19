@@ -80,8 +80,8 @@ function Workout() {
         subtitle="Kichik jismoniy harakat — ruhiy holatingni ham tiklaydi."
       />
 
-      <div className="mt-8 grid gap-3 rounded-[var(--radius)] border border-border p-5 sm:grid-cols-[1fr_120px_auto]">
       <Panel className="mt-8 p-5">
+
         <PanelHeader
           eyebrow="Yangi mashg'ulot"
           title={<h2 className="font-serif text-xl">Bugun qanday harakat qilding?</h2>}
