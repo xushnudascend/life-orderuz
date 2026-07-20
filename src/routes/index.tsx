@@ -227,7 +227,7 @@ function Pillars() {
           {items.map((it) => (
             <div key={it.title} className="rounded-[var(--radius)] border border-border p-6">
               <it.icon className="h-5 w-5 text-primary" />
-              <h3 className="mt-4 font-serif text-xl">{it.title}</h3>
+              <h2 className="mt-4 font-serif text-xl">{it.title}</h2>
               <p className="mt-2 font-ui text-sm leading-relaxed text-muted-foreground">
                 {it.body}
               </p>
