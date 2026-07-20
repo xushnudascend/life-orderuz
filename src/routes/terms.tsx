@@ -3,7 +3,7 @@ import { LegalShell } from "@/components/legal-shell";
 import { uz } from "@/i18n";
 
 const DESC =
-  "Life Order foydalanish shartlari: xizmat tavsifi, hisob va yosh cheklovi, tarkib egaligi, to'lovlar, bekor qilish, javobgarlik chegaralari va nizolarni hal qilish tartibi.";
+  "Life Order foydalanish shartlari: xizmat tavsifi, hisob va yosh cheklovi, to'lovlar, bekor qilish, javobgarlik chegaralari va nizolar tartibi.";
 
 export const Route = createFileRoute("/terms")({
   head: () => ({

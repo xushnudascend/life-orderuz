@@ -23,7 +23,20 @@ export const Route = createFileRoute("/auth")({
   head: () => ({
     meta: [
       { title: `Kirish — ${uz.brand.name}` },
-      { name: "description", content: "Life Order — kirish va ro'yxatdan o'tish" },
+      {
+        name: "description",
+        content:
+          "Life Order hisobingizga kiring yoki bepul ro'yxatdan o'ting — odat, kundalik va Nadir AI mentor bir joyda.",
+      },
+      {
+        property: "og:title",
+        content: `Kirish — ${uz.brand.name}`,
+      },
+      {
+        property: "og:description",
+        content:
+          "Life Order hisobingizga kiring yoki bepul ro'yxatdan o'ting — odat, kundalik va Nadir AI mentor bir joyda.",
+      },
       { name: "robots", content: "noindex" },
     ],
   }),

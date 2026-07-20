@@ -3,7 +3,7 @@ import { LegalShell } from "@/components/legal-shell";
 import { uz } from "@/i18n";
 
 const DESC =
-  "Life Order maxfiylik siyosati: qanday ma'lumot yig'amiz, qayerda saqlaymiz, kim ko'ra oladi, huquqlaringiz (yuklab olish, o'chirish) va ma'lumot saqlash muddatlari.";
+  "Life Order maxfiylik siyosati: qanday ma'lumot yig'amiz, qayerda saqlaymiz, kim ko'ra oladi va foydalanuvchi huquqlari (yuklab olish, o'chirish).";
 
 export const Route = createFileRoute("/privacy")({
   head: () => ({

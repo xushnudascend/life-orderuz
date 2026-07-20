@@ -2,9 +2,9 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 
 const SITE_URL = "https://life-orderuz.lovable.app";
 const PATH = "/blog/66-kun-qoidasi";
-const TITLE = "66 kun qoidasi — odat qachon avtomatlashadi (UCL tadqiqoti)";
+const TITLE = "66 kun qoidasi — odat qachon avtomatlashadi";
 const DESCRIPTION =
-  "Phillippa Lally (UCL, 2010) tadqiqoti: odat o'rtacha 66 kunda avtomatlashadi. Diapazon: 18-254 kun. Nima uchun 21 kun afsona — va nima ishlaydi.";
+  "Phillippa Lally (UCL, 2010) tadqiqoti: odat o'rtacha 66 kunda avtomatlashadi. Diapazon 18–254 kun. Nega 21 kun afsona — va nima ishlaydi.";
 
 export const Route = createFileRoute("/blog/66-kun-qoidasi")({
   head: () => ({

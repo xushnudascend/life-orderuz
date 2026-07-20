@@ -16,12 +16,13 @@ export const Route = createFileRoute("/sitemap.xml")({
         const entries: SitemapEntry[] = [
           { path: "/", changefreq: "weekly", priority: "1.0" },
           { path: "/pricing", changefreq: "monthly", priority: "0.8" },
+          { path: "/auth", changefreq: "yearly", priority: "0.4" },
           { path: "/blog", changefreq: "weekly", priority: "0.7" },
           { path: "/blog/hayot-sohalari", changefreq: "monthly", priority: "0.7" },
           { path: "/blog/66-kun-qoidasi", changefreq: "monthly", priority: "0.7" },
           { path: "/blog/tungi-ritual", changefreq: "monthly", priority: "0.7" },
           { path: "/blog/motivatsiya-tuzogi", changefreq: "monthly", priority: "0.7" },
-          
+
           { path: "/terms", changefreq: "yearly", priority: "0.3" },
           { path: "/privacy", changefreq: "yearly", priority: "0.3" },
           { path: "/refund", changefreq: "yearly", priority: "0.3" },
