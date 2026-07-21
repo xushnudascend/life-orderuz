@@ -182,8 +182,12 @@ function HowItWorks() {
       <div className="mx-auto max-w-5xl px-5 py-14 md:py-20">
         <SectionHeader eyebrow="Jarayon" title="4 bosqichli halqa" />
         <div className="mt-10 grid gap-px overflow-hidden rounded-[var(--radius)] border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
-          {steps.map((s) => (
-            <div key={s.n} className="bg-background p-5">
+          {steps.map((s, i) => (
+            <Reveal
+              key={s.n}
+              delay={i * 90}
+              className="cell-hover bg-background p-5"
+            >
               <p className="font-ui text-xs uppercase tracking-[0.22em] text-primary">
                 {s.n}
               </p>
@@ -191,7 +195,7 @@ function HowItWorks() {
               <p className="mt-2 font-ui text-[13px] leading-relaxed text-muted-foreground">
                 {s.body}
               </p>
-            </div>
+            </Reveal>
           ))}
         </div>
       </div>
