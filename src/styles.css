@@ -618,7 +618,7 @@ html[data-perf="low"] .sheen::after { animation: none; display: none; }
   z-index: 1;
 }
 .tilt-card:hover .tilt-card__inner::before { opacity: 1; }
-html[data-perf="low"] .tilt-card__inner,
+html[data-perf="low"] .tilt-card__inner { transform: none !important; transition: none !important; }
 @media (prefers-reduced-motion: reduce) {
   .tilt-card__inner { transform: none !important; transition: none !important; }
 }
