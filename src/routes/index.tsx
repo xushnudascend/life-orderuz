@@ -250,7 +250,7 @@ function ExpandableStat({
       type="button"
       onClick={() => setOpen((o) => !o)}
       aria-expanded={open}
-      className="group text-left rounded-[var(--radius)] border border-border bg-background/60 p-4 transition hover:border-primary/40 hover:bg-background focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
+      className="group text-left h-full w-full rounded-[var(--radius)] border border-border bg-background/60 p-4 transition hover:border-primary/40 hover:bg-background focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
     >
       <div className="flex items-baseline justify-between gap-2">
         <dt className="font-serif text-2xl tracking-tight tabular-nums md:text-3xl">
@@ -403,7 +403,7 @@ function ExpandableFeature({
       type="button"
       onClick={() => setOpen((o) => !o)}
       aria-expanded={open}
-      className="group text-left rounded-[var(--radius)] border border-border bg-background p-5 transition hover:border-primary/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
+      className="group text-left h-full w-full rounded-[var(--radius)] border border-border bg-background p-5 transition hover:border-primary/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
     >
       <div className="flex items-start justify-between gap-2">
         <Icon className="h-4 w-4 text-primary" />
@@ -446,7 +446,7 @@ function ExpandableCard({
       type="button"
       onClick={() => setOpen((o) => !o)}
       aria-expanded={open}
-      className="relative text-left rounded-[var(--radius)] border border-border p-5 transition hover:border-primary/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
+      className="relative text-left h-full w-full rounded-[var(--radius)] border border-border p-5 transition hover:border-primary/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
     >
       <div className="flex items-start justify-between gap-2">
         <p className="font-ui text-xs uppercase tracking-[0.22em] text-primary">
