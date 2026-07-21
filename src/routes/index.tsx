@@ -99,31 +99,40 @@ function Landing() {
 
 function Hero() {
   return (
-    <section className="border-b border-border">
-      <div className="mx-auto max-w-3xl px-5 pb-16 pt-16 text-center md:pb-24 md:pt-28">
-        <p className="font-ui text-[11px] uppercase tracking-[0.24em] text-muted-foreground">
+    <section className="relative overflow-hidden border-b border-border">
+      {/* Ambient halo — extremely subtle */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute left-1/2 top-1/2 -z-0 h-[520px] w-[520px] -translate-x-1/2 -translate-y-1/2 rounded-full halo-drift"
+        style={{
+          background:
+            "radial-gradient(closest-side, hsl(var(--primary) / 0.10), transparent 70%)",
+        }}
+      />
+      <div className="relative mx-auto max-w-3xl px-5 pb-16 pt-16 text-center md:pb-24 md:pt-28">
+        <p className="rise-1 font-ui text-[11px] uppercase tracking-[0.24em] text-muted-foreground">
           Xulq-atvor tizimi · Beta
         </p>
         <h1 className="mt-5 font-serif text-[36px] leading-[1.05] tracking-tight text-balance sm:text-5xl md:text-6xl">
-          Motivatsiya tugaydi.
+          <span className="rise-2 inline-block">Motivatsiya tugaydi.</span>
           <br />
-          <span className="text-muted-foreground">Tizim qoladi.</span>
+          <span className="rise-3 inline-block text-muted-foreground">Tizim qoladi.</span>
         </h1>
-        <p className="mx-auto mt-5 max-w-md text-[15px] leading-relaxed text-muted-foreground text-pretty">
+        <p className="rise-4 mx-auto mt-5 max-w-md text-[15px] leading-relaxed text-muted-foreground text-pretty">
           Kuniga uchta 2-daqiqalik qadam. Nadir AI mentor sen uchun shaxsiy protokol tuzadi.
         </p>
-        <div className="mt-8 flex flex-col items-stretch gap-2.5 sm:flex-row sm:items-center sm:justify-center sm:gap-3">
-          <Button asChild size="lg" className="h-12 rounded-full px-6 font-ui font-semibold">
+        <div className="rise-4 mt-8 flex flex-col items-stretch gap-2.5 sm:flex-row sm:items-center sm:justify-center sm:gap-3">
+          <Button asChild size="lg" className="group h-12 rounded-full px-6 font-ui font-semibold">
             <Link to="/auth">
               Bepul boshlash
-              <ArrowRight className="ml-1.5 h-4 w-4" />
+              <ArrowRight className="cta-arrow ml-1.5 h-4 w-4" />
             </Link>
           </Button>
           <Button asChild size="lg" variant="ghost" className="h-12 rounded-full px-5 font-ui">
             <a href="#how">Qanday ishlaydi</a>
           </Button>
         </div>
-        <p className="mt-5 font-ui text-xs text-muted-foreground">
+        <p className="rise-4 mt-5 font-ui text-xs text-muted-foreground">
           60 soniyada · Kartasiz · O'zbek tilida
         </p>
       </div>
