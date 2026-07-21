@@ -91,22 +91,14 @@ function Landing() {
   return (
     <div className="min-h-dvh bg-background text-foreground animate-fade-in">
       <SiteHeader />
-      <main>
+      <main className="pb-20 md:pb-0">
         <Hero />
-        <TrustStrip />
-        <ProductPreview />
         <ProofStrip />
-        <CostOfDrift />
-        <Pillars />
+        <ProductPreview />
         <HowItWorks />
-        <ForWhom />
         <Features />
         <Testimonials />
-        <Science />
-        <FounderNote />
-        <Traction />
         <Pricing />
-        <Guarantee />
         <Faq />
         <FinalCta />
       </main>
@@ -115,6 +107,7 @@ function Landing() {
     </div>
   );
 }
+
 
 
 function ProofStrip() {
@@ -155,19 +148,18 @@ function ProofStrip() {
 function Hero() {
   return (
     <section className="relative overflow-hidden border-b border-border">
-      <div className="mx-auto max-w-4xl px-5 pb-16 pt-20 text-center md:pt-28">
+      <div className="mx-auto max-w-4xl px-5 pb-12 pt-14 text-center md:pb-16 md:pt-24">
         <p className="font-ui text-[11px] uppercase tracking-[0.24em] text-muted-foreground">
           Beta · Xulq-atvor tizimi
         </p>
-        <h1 className="mt-6 font-serif text-4xl leading-[1.05] tracking-tight text-balance sm:text-5xl md:text-6xl">
+        <h1 className="mt-5 font-serif text-[34px] leading-[1.05] tracking-tight text-balance sm:text-5xl md:text-6xl">
           Motivatsiya tugaydi.<br />
           <span className="text-muted-foreground">Tizim qoladi.</span>
         </h1>
-        <p className="mx-auto mt-6 max-w-xl leading-relaxed text-muted-foreground text-pretty">
-          Kuniga uchta 2-daqiqalik qadam. Nadir AI mentor — sening ma'lumotlaringga qarab
-          shaxsiy protokol tuzadi. Streak, XP, Shield — naqsh mustahkamlanguncha.
+        <p className="mx-auto mt-5 max-w-lg text-[15px] leading-relaxed text-muted-foreground text-pretty sm:text-base">
+          Kuniga uchta 2-daqiqalik qadam. Nadir AI mentor sen uchun shaxsiy protokol tuzadi.
         </p>
-        <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+        <div className="mt-7 flex flex-col items-stretch gap-2.5 sm:flex-row sm:items-center sm:justify-center sm:gap-3">
           <Button asChild size="lg" className="h-12 rounded-full px-6 font-ui font-semibold">
             <Link to="/auth">
               Bepul boshlash
@@ -181,26 +173,11 @@ function Hero() {
         <p className="mt-4 font-ui text-xs text-muted-foreground">
           60 soniyada · Kartasiz · O'zbek tilida
         </p>
-
-        {/* Micro stats */}
-        <dl className="mx-auto mt-14 grid max-w-2xl grid-cols-3 gap-6 border-t border-border pt-8 text-center">
-          {[
-            { k: "2 daq", v: "Mikro-harakat" },
-            { k: "66 kun", v: "O'rtacha odat" },
-            { k: "3×/kun", v: "Tasdiq halqasi" },
-          ].map((s) => (
-            <div key={s.k}>
-              <dt className="font-serif text-2xl tabular-nums">{s.k}</dt>
-              <dd className="mt-1 font-ui text-xs uppercase tracking-[0.18em] text-muted-foreground">
-                {s.v}
-              </dd>
-            </div>
-          ))}
-        </dl>
       </div>
     </section>
   );
 }
+
 
 function Pillars() {
   const items = [
@@ -264,7 +241,7 @@ function HowItWorks() {
   ];
   return (
     <section id="how" className="border-b border-border">
-      <div className="mx-auto max-w-5xl px-5 py-20">
+      <div className="mx-auto max-w-5xl px-5 py-14 md:py-20">
         <SectionHeader
           eyebrow="Jarayon"
           title="4 bosqichli halqa"
@@ -287,23 +264,21 @@ function HowItWorks() {
 function Features() {
   const items = [
     { icon: Sparkles, title: "Nadir AI mentor", body: "Sening ma'lumotlaring bilan gaplashadi. Umumiy maslahat emas — shaxsiy javob." },
-    { icon: Flame, title: "Streak va XP", body: "Har bajarilgan mikro-qadam ballanadi. Yopilmagan kun — Shield sarflaydi, streak saqlanadi." },
-    { icon: Shield, title: "Shield tizimi", body: "Haftada 1 kun \"kechirim\" — bitta xato butun mehnatni yo'q qilmaydi. 7 kunlik earn-back oynasi." },
-    { icon: BookText, title: "Kundalik + kayfiyat", body: "3 satrlik kunlik yozuv. Nadir kayfiyat pastligini sezsa — muloyim nudge yuboradi." },
-    { icon: Clock, title: "Sirkadian jadval", body: "Ertalab, kunduz, kech — har blokka moslashgan qadam. Biologik ritmga qarshi bormaymiz." },
-    { icon: BarChart3, title: "Haftalik hisobot", body: "AI tuzgan tahlil: qaysi odat mustahkam, qaysi qulayapti, keyingi hafta uchun 1 ta tuzatish." },
-    { icon: Target, title: "Quest tizimi", body: "Haftalik maqsad → kunlik mikro-qadam. Katta niyat kichkina harakatga aylanadi." },
-    { icon: Lock, title: "Xavfsiz va shaxsiy", body: "RLS izolyatsiya, TLS shifrlash. Ma'lumotlar sotilmaydi, reklama uchun ishlatilmaydi." },
+    { icon: Flame, title: "Streak va XP", body: "Har bajarilgan mikro-qadam ballanadi. Ketma-ket kunlar zanjiri o'sib boradi." },
+    { icon: Shield, title: "Shield tizimi", body: "Haftada 1 kun kechirim — bitta xato butun mehnatni yo'q qilmaydi." },
+    { icon: BookText, title: "Kundalik + kayfiyat", body: "3 satrlik yozuv. Nadir kayfiyat pastligini sezsa — muloyim nudge yuboradi." },
+    { icon: Clock, title: "Sirkadian jadval", body: "Ertalab, kunduz, kech — har blokka moslashgan qadam. Biologik ritmga hamnafas." },
+    { icon: BarChart3, title: "Haftalik hisobot", body: "AI tahlili: qaysi odat mustahkam, qayerda susayapsan, keyingi hafta uchun 1 tuzatish." },
   ];
   return (
     <section id="features" className="border-b border-border bg-card/30">
-      <div className="mx-auto max-w-6xl px-5 py-20">
+      <div className="mx-auto max-w-6xl px-5 py-14 md:py-20">
         <SectionHeader
           eyebrow="Nima bor"
-          title="8 ta asosiy modul"
+          title="Asosiy modullar"
           sub="Har biri bir maqsad uchun. Bezak emas — mexanizm."
         />
-        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-8 grid gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3">
           {items.map((f) => (
             <div key={f.title} className="rounded-[var(--radius)] border border-border bg-background p-5">
               <f.icon className="h-4 w-4 text-primary" />
@@ -344,7 +319,7 @@ function Science() {
   ];
   return (
     <section id="science" className="border-b border-border">
-      <div className="mx-auto max-w-5xl px-5 py-20">
+      <div className="mx-auto max-w-5xl px-5 py-14 md:py-20">
         <SectionHeader
           eyebrow="Ilmiy asos"
           title="Sinalgan tadqiqotga tayanadi"
@@ -369,7 +344,7 @@ function Science() {
 function Pricing() {
   return (
     <section id="pricing" className="border-b border-border">
-      <div className="mx-auto max-w-4xl px-5 py-20">
+      <div className="mx-auto max-w-4xl px-5 py-14 md:py-20">
         <SectionHeader
           eyebrow="Narx"
           title="Bepul boshla, xohlasang chuqurlash"
@@ -463,7 +438,7 @@ function PricingCard({
 function Faq() {
   return (
     <section id="faq" className="border-b border-border">
-      <div className="mx-auto max-w-2xl px-5 py-20">
+      <div className="mx-auto max-w-2xl px-5 py-14 md:py-20">
         <SectionHeader eyebrow="Savollar" title="Ko'p so'raladi" />
         <Accordion type="single" collapsible defaultValue="q-0" className="mt-8">
           {FAQ_ITEMS.map((it, i) => (
@@ -485,7 +460,7 @@ function Faq() {
 function FinalCta() {
   return (
     <section className="border-b border-border">
-      <div className="mx-auto max-w-3xl px-5 py-20 text-center">
+      <div className="mx-auto max-w-3xl px-5 py-14 md:py-20 text-center">
         <h2 className="font-serif text-3xl leading-tight tracking-tight md:text-4xl">
           Ertaga emas, bugun bitta kichkina qadam.
         </h2>
@@ -643,7 +618,7 @@ function Testimonials() {
   ];
   return (
     <section aria-labelledby="voices-title" className="border-b border-border">
-      <div className="mx-auto max-w-6xl px-5 py-20">
+      <div className="mx-auto max-w-6xl px-5 py-14 md:py-20">
         <div className="max-w-2xl">
           <p className="font-ui text-xs uppercase tracking-[0.24em] text-primary">Pilot fikrlar</p>
           <h2 id="voices-title" className="mt-3 font-serif text-2xl leading-tight tracking-tight md:text-3xl">
@@ -775,7 +750,7 @@ function CostOfDrift() {
   ];
   return (
     <section className="border-b border-border bg-background">
-      <div className="mx-auto max-w-5xl px-5 py-20">
+      <div className="mx-auto max-w-5xl px-5 py-14 md:py-20">
         <div className="max-w-2xl">
           <p className="font-ui text-xs uppercase tracking-[0.24em] text-primary">
             Harakatsizlik narxi
@@ -834,7 +809,7 @@ function ForWhom() {
   ];
   return (
     <section className="border-b border-border bg-card/30">
-      <div className="mx-auto max-w-6xl px-5 py-20">
+      <div className="mx-auto max-w-6xl px-5 py-14 md:py-20">
         <div className="max-w-2xl">
           <p className="font-ui text-xs uppercase tracking-[0.24em] text-primary">
             Kim uchun
@@ -872,7 +847,7 @@ function ForWhom() {
 function FounderNote() {
   return (
     <section className="border-b border-border">
-      <div className="mx-auto max-w-3xl px-5 py-20">
+      <div className="mx-auto max-w-3xl px-5 py-14 md:py-20">
         <Quote className="h-6 w-6 text-primary" aria-hidden />
         <blockquote className="mt-4 font-serif text-2xl leading-snug tracking-tight md:text-3xl text-balance">
           "Men motivatsion kitoblarni yig'ib katta bo'ldim. Hech biri ishlamadi —
