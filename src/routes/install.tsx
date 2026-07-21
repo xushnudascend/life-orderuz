@@ -34,7 +34,7 @@ function InstallPage() {
         <PageHero
           eyebrow="O'rnatish"
           title="Telefoningizda haqiqiy ilova sifatida"
-          description="Life Order — Progressive Web App. Brauzersiz, ikonka bilan, offline ishlaydi."
+          subtitle="Life Order — Progressive Web App. Brauzersiz, ikonka bilan, offline ishlaydi."
         />
 
         <div className="mt-8 space-y-4">
