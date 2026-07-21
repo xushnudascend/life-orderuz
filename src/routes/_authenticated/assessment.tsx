@@ -1,5 +1,5 @@
 import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import { useServerFn } from "@tanstack/react-start";
 import { toast } from "sonner";
 import { ArrowLeft, ArrowRight, Loader2, Sparkles, Target, ShieldCheck, Flame } from "lucide-react";
@@ -41,17 +41,20 @@ function AssessmentPage() {
     [current],
   );
 
+  const finalizingRef = useRef(false);
+
   function setAnswer(key: string, val: number) {
-    setAnswers((prev) => ({ ...prev, [key]: val }));
+    const next = { ...answers, [key]: val };
+    setAnswers(next);
     // auto-advance 300ms after tap (dopamine RPE — anticipation)
     setTimeout(() => {
-      setStep((s) => {
-        if (s + 1 >= total) {
-          void finalize({ ...answers, [key]: val });
-          return s;
-        }
-        return s + 1;
-      });
+      if (step + 1 >= total) {
+        if (finalizingRef.current) return;
+        finalizingRef.current = true;
+        void finalize(next);
+      } else {
+        setStep((s) => (s + 1 >= total ? s : s + 1));
+      }
     }, 280);
   }
 
@@ -68,6 +71,7 @@ function AssessmentPage() {
     } catch (e) {
       const msg = e instanceof Error ? e.message : "Xatolik";
       toast.error(msg);
+      finalizingRef.current = false;
       setPhase("questions");
     }
   }
