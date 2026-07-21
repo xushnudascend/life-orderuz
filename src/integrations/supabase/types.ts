@@ -843,6 +843,68 @@ export type Database = {
         }
         Relationships: []
       }
+      season_participants: {
+        Row: {
+          created_at: string
+          id: string
+          season_id: string
+          season_xp: number
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          season_id: string
+          season_xp?: number
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          season_id?: string
+          season_xp?: number
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "season_participants_season_id_fkey"
+            columns: ["season_id"]
+            isOneToOne: false
+            referencedRelation: "seasons"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      seasons: {
+        Row: {
+          created_at: string
+          ends_at: string
+          id: string
+          name: string
+          starts_at: string
+          theme: string | null
+        }
+        Insert: {
+          created_at?: string
+          ends_at: string
+          id?: string
+          name: string
+          starts_at: string
+          theme?: string | null
+        }
+        Update: {
+          created_at?: string
+          ends_at?: string
+          id?: string
+          name?: string
+          starts_at?: string
+          theme?: string | null
+        }
+        Relationships: []
+      }
       shields: {
         Row: {
           created_at: string
@@ -959,6 +1021,51 @@ export type Database = {
         }
         Relationships: []
       }
+      weekly_challenges: {
+        Row: {
+          completed_at: string | null
+          created_at: string
+          description: string | null
+          id: string
+          progress: number
+          status: string
+          target: number
+          title: string
+          updated_at: string
+          user_id: string
+          week_start: string
+          xp_reward: number
+        }
+        Insert: {
+          completed_at?: string | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          progress?: number
+          status?: string
+          target?: number
+          title: string
+          updated_at?: string
+          user_id: string
+          week_start: string
+          xp_reward?: number
+        }
+        Update: {
+          completed_at?: string | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          progress?: number
+          status?: string
+          target?: number
+          title?: string
+          updated_at?: string
+          user_id?: string
+          week_start?: string
+          xp_reward?: number
+        }
+        Relationships: []
+      }
       workouts: {
         Row: {
           created_at: string
@@ -1060,6 +1167,29 @@ export type Database = {
           to: "daily_quests"
           isOneToOne: false
           isSetofReturn: true
+        }
+      }
+      ensure_weekly_challenge: {
+        Args: never
+        Returns: {
+          completed_at: string | null
+          created_at: string
+          description: string | null
+          id: string
+          progress: number
+          status: string
+          target: number
+          title: string
+          updated_at: string
+          user_id: string
+          week_start: string
+          xp_reward: number
+        }
+        SetofOptions: {
+          from: "*"
+          to: "weekly_challenges"
+          isOneToOne: true
+          isSetofReturn: false
         }
       }
       get_peer_mirror: {
