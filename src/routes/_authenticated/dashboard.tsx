@@ -23,6 +23,7 @@ import { ArchetypeRow } from "@/components/archetype-row";
 import { DailyTimetable } from "@/components/daily-timetable";
 import { ProfileCompletionCard } from "@/components/profile-completion-card";
 import { NadirNudgeBanner } from "@/components/nadir-nudge-banner";
+import { AIInsightCard } from "@/components/ai-insight-card";
 import { Panel, PanelHeader, PanelValue } from "@/components/panel";
 import { ErrorBoundary } from "@/components/error-boundary";
 import { CountUpNumber } from "@/components/count-up-number";
@@ -296,6 +297,13 @@ function Dashboard() {
         </Panel>
       </div>
 
+      {/* Nadir mikro-kuzatuv */}
+      <div className="mt-4">
+        <AIInsightCard
+          context={`Foydalanuvchi: ${profile?.display_name ?? "do'st"}. Bugun ${doneCount}/${habits.length} odat (${percent}%). Streak: ${streak?.current_days ?? 0} kun. Daraja ${stats?.level ?? 1}, XP ${stats?.total_xp ?? 0}. Arxetip: ${archetype?.name ?? "-"}. Vaqt: ${c.label}.`}
+        />
+      </div>
+
       {/* Asosiy grid */}
       <div className="mt-4 grid gap-3 sm:gap-4 lg:grid-cols-12">
         {/* Habits */}
@@ -391,7 +399,11 @@ function Dashboard() {
         </Panel>
 
         {/* Progress ring + XP */}
-        <Panel className="lg:col-span-5">
+        <Panel className="relative overflow-hidden lg:col-span-5">
+          <div
+            aria-hidden
+            className="pointer-events-none absolute -bottom-16 -left-16 h-40 w-40 rounded-full bg-primary/15 blur-3xl"
+          />
           <PanelHeader eyebrow="Kun progressi" />
           <div className="mt-3 grid grid-cols-[auto_1fr] items-center gap-4">
             <ProgressRing value={doneCount} total={Math.max(1, habits.length)} />
