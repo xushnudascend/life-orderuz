@@ -217,14 +217,18 @@ function Features() {
       <div className="mx-auto max-w-6xl px-5 py-14 md:py-20">
         <SectionHeader eyebrow="Nima bor" title="Asosiy modullar" />
         <div className="mt-10 grid gap-px overflow-hidden rounded-[var(--radius)] border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
-          {items.map((f) => (
-            <div key={f.title} className="bg-background p-5">
+          {items.map((f, i) => (
+            <Reveal
+              key={f.title}
+              delay={i * 70}
+              className="cell-hover bg-background p-5"
+            >
               <f.icon className="h-4 w-4 text-primary" />
               <h3 className="mt-3 font-serif text-base">{f.title}</h3>
               <p className="mt-2 font-ui text-[13px] leading-relaxed text-muted-foreground">
                 {f.body}
               </p>
-            </div>
+            </Reveal>
           ))}
         </div>
       </div>
