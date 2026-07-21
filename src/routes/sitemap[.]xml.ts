@@ -23,6 +23,9 @@ export const Route = createFileRoute("/sitemap.xml")({
           { path: "/blog/tungi-ritual", changefreq: "monthly", priority: "0.7" },
           { path: "/blog/motivatsiya-tuzogi", changefreq: "monthly", priority: "0.7" },
 
+          { path: "/install", changefreq: "monthly", priority: "0.6" },
+          { path: "/mcp", changefreq: "monthly", priority: "0.5" },
+          { path: "/reset-password", changefreq: "yearly", priority: "0.2" },
           { path: "/terms", changefreq: "yearly", priority: "0.3" },
           { path: "/privacy", changefreq: "yearly", priority: "0.3" },
           { path: "/refund", changefreq: "yearly", priority: "0.3" },

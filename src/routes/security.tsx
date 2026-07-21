@@ -3,7 +3,7 @@ import { LegalShell } from "@/components/legal-shell";
 import { uz } from "@/i18n";
 
 const DESC =
-  "Life Order xavfsizlik arxitekturasi: bcrypt parol xeshlash, Row-Level Security izolyatsiya, TLS 1.3 shifrlash, HIBP tekshiruv, Sentry monitoring va zaifliklarni xabar berish tartibi.";
+  "Life Order xavfsizligi: bcrypt parollar, Row-Level Security, TLS 1.3, HIBP tekshiruvi va Sentry monitoring.";
 
 export const Route = createFileRoute("/security")({
   head: () => ({

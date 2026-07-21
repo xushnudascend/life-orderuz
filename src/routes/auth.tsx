@@ -82,7 +82,7 @@ function AuthPage() {
 
         <div className="mt-10 text-center">
           <h1 className="font-serif text-3xl leading-tight tracking-tight">
-            {uz.brand.name}
+            {uz.brand.name} — Kirish yoki ro'yxatdan o'tish
           </h1>
           <p className="mt-2 font-ui text-sm text-muted-foreground">
             {uz.brand.tagline}
