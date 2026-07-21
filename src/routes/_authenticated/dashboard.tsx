@@ -399,7 +399,11 @@ function Dashboard() {
         </Panel>
 
         {/* Progress ring + XP */}
-        <Panel className="lg:col-span-5">
+        <Panel className="relative overflow-hidden lg:col-span-5">
+          <div
+            aria-hidden
+            className="pointer-events-none absolute -bottom-16 -left-16 h-40 w-40 rounded-full bg-primary/15 blur-3xl"
+          />
           <PanelHeader eyebrow="Kun progressi" />
           <div className="mt-3 grid grid-cols-[auto_1fr] items-center gap-4">
             <ProgressRing value={doneCount} total={Math.max(1, habits.length)} />
