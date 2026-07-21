@@ -360,8 +360,11 @@ function SectionHeader({
   title: string;
 }) {
   return (
-    <div>
-      <p className="font-ui text-xs uppercase tracking-[0.24em] text-primary">{eyebrow}</p>
+    <Reveal>
+      <div className="flex items-center gap-3">
+        <span aria-hidden className="line-sweep" />
+        <p className="font-ui text-xs uppercase tracking-[0.24em] text-primary">{eyebrow}</p>
+      </div>
       <h2 className="mt-3 font-serif text-2xl leading-tight tracking-tight md:text-3xl">
         {title}
       </h2>
