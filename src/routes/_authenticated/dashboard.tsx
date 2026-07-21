@@ -23,6 +23,7 @@ import { ArchetypeRow } from "@/components/archetype-row";
 import { DailyTimetable } from "@/components/daily-timetable";
 import { ProfileCompletionCard } from "@/components/profile-completion-card";
 import { NadirNudgeBanner } from "@/components/nadir-nudge-banner";
+import { AIInsightCard } from "@/components/ai-insight-card";
 import { Panel, PanelHeader, PanelValue } from "@/components/panel";
 import { ErrorBoundary } from "@/components/error-boundary";
 import { CountUpNumber } from "@/components/count-up-number";
