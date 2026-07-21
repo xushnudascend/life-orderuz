@@ -1,0 +1,1 @@
+CREATE POLICY "own scores insert" ON public.assessment_scores FOR INSERT TO authenticated WITH CHECK (user_id = auth.uid());
