@@ -264,23 +264,21 @@ function HowItWorks() {
 function Features() {
   const items = [
     { icon: Sparkles, title: "Nadir AI mentor", body: "Sening ma'lumotlaring bilan gaplashadi. Umumiy maslahat emas — shaxsiy javob." },
-    { icon: Flame, title: "Streak va XP", body: "Har bajarilgan mikro-qadam ballanadi. Yopilmagan kun — Shield sarflaydi, streak saqlanadi." },
-    { icon: Shield, title: "Shield tizimi", body: "Haftada 1 kun \"kechirim\" — bitta xato butun mehnatni yo'q qilmaydi. 7 kunlik earn-back oynasi." },
-    { icon: BookText, title: "Kundalik + kayfiyat", body: "3 satrlik kunlik yozuv. Nadir kayfiyat pastligini sezsa — muloyim nudge yuboradi." },
-    { icon: Clock, title: "Sirkadian jadval", body: "Ertalab, kunduz, kech — har blokka moslashgan qadam. Biologik ritmga qarshi bormaymiz." },
-    { icon: BarChart3, title: "Haftalik hisobot", body: "AI tuzgan tahlil: qaysi odat mustahkam, qaysi qulayapti, keyingi hafta uchun 1 ta tuzatish." },
-    { icon: Target, title: "Quest tizimi", body: "Haftalik maqsad → kunlik mikro-qadam. Katta niyat kichkina harakatga aylanadi." },
-    { icon: Lock, title: "Xavfsiz va shaxsiy", body: "RLS izolyatsiya, TLS shifrlash. Ma'lumotlar sotilmaydi, reklama uchun ishlatilmaydi." },
+    { icon: Flame, title: "Streak va XP", body: "Har bajarilgan mikro-qadam ballanadi. Ketma-ket kunlar zanjiri o'sib boradi." },
+    { icon: Shield, title: "Shield tizimi", body: "Haftada 1 kun kechirim — bitta xato butun mehnatni yo'q qilmaydi." },
+    { icon: BookText, title: "Kundalik + kayfiyat", body: "3 satrlik yozuv. Nadir kayfiyat pastligini sezsa — muloyim nudge yuboradi." },
+    { icon: Clock, title: "Sirkadian jadval", body: "Ertalab, kunduz, kech — har blokka moslashgan qadam. Biologik ritmga hamnafas." },
+    { icon: BarChart3, title: "Haftalik hisobot", body: "AI tahlili: qaysi odat mustahkam, qayerda susayapsan, keyingi hafta uchun 1 tuzatish." },
   ];
   return (
     <section id="features" className="border-b border-border bg-card/30">
-      <div className="mx-auto max-w-6xl px-5 py-20">
+      <div className="mx-auto max-w-6xl px-5 py-14 md:py-20">
         <SectionHeader
           eyebrow="Nima bor"
-          title="8 ta asosiy modul"
+          title="Asosiy modullar"
           sub="Har biri bir maqsad uchun. Bezak emas — mexanizm."
         />
-        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-8 grid gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3">
           {items.map((f) => (
             <div key={f.title} className="rounded-[var(--radius)] border border-border bg-background p-5">
               <f.icon className="h-4 w-4 text-primary" />
