@@ -8,6 +8,8 @@ import { AppShell } from "@/components/app-shell";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Loader2, Send, Sparkles } from "lucide-react";
+import { PageHero } from "@/components/page-hero";
+import { EmptyState } from "@/components/empty-state";
 import { uz } from "@/i18n";
 
 export const Route = createFileRoute("/_authenticated/mentor")({
@@ -232,31 +234,29 @@ function MentorChat({
 
   return (
     <AppShell title="Nadir">
-      <div className="flex items-center gap-3">
-        <span className="flex h-10 w-10 items-center justify-center rounded-full border border-border">
-          <Sparkles className="h-4 w-4 text-primary" />
-        </span>
-        <div>
-          <p className="font-ui text-xs uppercase tracking-[0.28em] text-primary">
-            AI Mentor
-          </p>
-          <h1 className="font-serif text-3xl leading-tight tracking-tight">Nadir</h1>
-        </div>
-      </div>
+      <PageHero
+        eyebrow={
+          <span className="inline-flex items-center gap-2">
+            <Sparkles className="h-3.5 w-3.5" /> AI Mentor
+          </span>
+        }
+        title="Nadir"
+        subtitle="Halol savol ber. Halol javob olasan. Bo'sh maqtov yo'q."
+        actions={
+          <span className="font-ui text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
+            Daraja {stats.level} · Streak {stats.currentStreak} · Discipline {stats.disciplineScore}/100
+          </span>
+        }
+      />
 
-      <p className="mt-3 max-w-xl text-muted-foreground">
-        Halol savol ber. Halol javob olasan. Bo'sh maqtov yo'q.
-      </p>
-
-      <p className="mt-4 font-ui text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
-        Nadir hozir seni ko'ryapti — Daraja {stats.level} · Streak {stats.currentStreak} · Discipline {stats.disciplineScore}/100
-      </p>
 
       <div className="mt-8 space-y-4 pb-4">
         {messages.length === 0 && (
-          <div className="rounded-[var(--radius)] border border-dashed border-border p-6 text-muted-foreground">
-            Bugun nima seni to'xtatyapti? Bir jumla bilan yoz.
-          </div>
+          <EmptyState
+            icon={<Sparkles className="h-5 w-5" />}
+            title="Bugun nima seni to'xtatyapti?"
+            description="Bir jumla bilan yoz — Nadir eshitadi."
+          />
         )}
         {(messages as UIMessage[]).map((m) => {
           const text = extractText(m);

@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { AppShell } from "@/components/app-shell";
+import { PageHero } from "@/components/page-hero";
 import {
   HeartPulse,
   Dumbbell,
@@ -25,19 +26,12 @@ export const Route = createFileRoute("/_authenticated/c/body")({
 function BodyCategory() {
   return (
     <AppShell title="Tana">
-      {/* Sarlavha */}
-      <div className="mb-6">
-        <p className="font-ui text-[11px] font-semibold uppercase tracking-[0.24em] text-primary">
-          Kategoriya
-        </p>
-        <h1 className="mt-1.5 font-serif text-3xl font-semibold tracking-tight sm:text-4xl">
-          Tana
-        </h1>
-        <p className="mt-2 max-w-2xl font-ui text-sm text-muted-foreground leading-relaxed">
-          Miyaga o'ynash uchun tana platforma bo'lishi kerak. Uyqu, harakat va
-          ovqat — uchtasi birga ishlaydi.
-        </p>
-      </div>
+      <PageHero
+        eyebrow="Kategoriya"
+        title="Tana"
+        subtitle="Miyaga o'ynash uchun tana platforma bo'lishi kerak. Uyqu, harakat va ovqat — uchtasi birga ishlaydi."
+      />
+
 
       {/* Asosiy bo'limlar */}
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">

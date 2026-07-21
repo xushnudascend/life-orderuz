@@ -8,6 +8,8 @@ import { Loader2, ArrowLeft, Send, Trash2, MessageSquare } from "lucide-react";
 import { toast } from "sonner";
 import { uz } from "@/i18n";
 import { PostComments } from "@/components/post-comments";
+import { PageHero } from "@/components/page-hero";
+import { EmptyState } from "@/components/empty-state";
 
 export const Route = createFileRoute("/_authenticated/community/$channel")({
   head: () => ({
@@ -103,15 +105,12 @@ function ChannelView() {
           <ArrowLeft className="mr-1 h-4 w-4" /> Kanallar
         </Link>
       </Button>
-      <p className="font-ui text-xs uppercase tracking-[0.28em] text-primary">
-        # {slug}
-      </p>
-      <h1 className="mt-3 font-serif text-4xl leading-tight tracking-tight">
-        {channel?.title ?? "..."}
-      </h1>
-      {channel?.description && (
-        <p className="mt-3 max-w-xl text-muted-foreground">{channel.description}</p>
-      )}
+      <PageHero
+        eyebrow={`# ${slug}`}
+        title={channel?.title ?? "..."}
+        subtitle={channel?.description ?? undefined}
+      />
+
 
       <div className="mt-8 rounded-[var(--radius)] border border-border p-4">
         <p className="mb-3 font-ui text-[11px] uppercase tracking-[0.22em] text-muted-foreground">
@@ -153,9 +152,12 @@ function ChannelView() {
           <Loader2 className="h-5 w-5 animate-spin text-muted-foreground" />
         </div>
       ) : posts.length === 0 ? (
-        <p className="mt-8 text-sm text-muted-foreground">
-          Hali yozuv yo'q. Birinchi bo'l — savolga javob ber.
-        </p>
+        <EmptyState
+          icon={<MessageSquare className="h-5 w-5" />}
+          title="Hali yozuv yo'q"
+          description="Birinchi bo'l — savolga javob ber."
+          className="mt-8"
+        />
       ) : (
         <div className="mt-8 space-y-3">
           {posts.map((p) => (
