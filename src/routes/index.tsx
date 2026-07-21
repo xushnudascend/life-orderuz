@@ -314,14 +314,17 @@ function HowItWorks() {
           sub="Har bosqich keyingisini oziqlantiradi. Kartochkani bos — batafsil."
         />
         <div className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-          {steps.map((s) => (
-            <ExpandableCard
-              key={s.n}
-              eyebrow={s.n}
-              title={s.title}
-              short={s.short}
-              more={s.more}
-            />
+          {steps.map((s, i) => (
+            <Reveal key={s.n} delay={i * 80}>
+              <TiltCard className="h-full">
+                <ExpandableCard
+                  eyebrow={s.n}
+                  title={s.title}
+                  short={s.short}
+                  more={s.more}
+                />
+              </TiltCard>
+            </Reveal>
           ))}
         </div>
       </div>
