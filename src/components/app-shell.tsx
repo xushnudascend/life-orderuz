@@ -106,16 +106,6 @@ export function AppShell({
               >
                 {initial}
               </Link>
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={signOut}
-                className="font-ui text-muted-foreground hover:text-foreground"
-                aria-label="Hisobdan chiqish"
-              >
-                <LogOut className="h-4 w-4 sm:mr-1.5" aria-hidden />
-                <span className="hidden sm:inline">Chiqish</span>
-              </Button>
             </div>
           </div>
         </header>
