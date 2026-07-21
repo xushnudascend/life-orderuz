@@ -71,6 +71,65 @@ export type Database = {
         }
         Relationships: []
       }
+      cohort_members: {
+        Row: {
+          cohort_id: string
+          id: string
+          joined_at: string
+          tier: Database["public"]["Enums"]["cohort_tier"]
+          user_id: string
+        }
+        Insert: {
+          cohort_id: string
+          id?: string
+          joined_at?: string
+          tier: Database["public"]["Enums"]["cohort_tier"]
+          user_id: string
+        }
+        Update: {
+          cohort_id?: string
+          id?: string
+          joined_at?: string
+          tier?: Database["public"]["Enums"]["cohort_tier"]
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "cohort_members_cohort_id_fkey"
+            columns: ["cohort_id"]
+            isOneToOne: false
+            referencedRelation: "cohorts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      cohorts: {
+        Row: {
+          capacity: number
+          created_at: string
+          id: string
+          member_count: number
+          tier: Database["public"]["Enums"]["cohort_tier"]
+          title: string | null
+        }
+        Insert: {
+          capacity: number
+          created_at?: string
+          id?: string
+          member_count?: number
+          tier: Database["public"]["Enums"]["cohort_tier"]
+          title?: string | null
+        }
+        Update: {
+          capacity?: number
+          created_at?: string
+          id?: string
+          member_count?: number
+          tier?: Database["public"]["Enums"]["cohort_tier"]
+          title?: string | null
+        }
+        Relationships: []
+      }
       community_channels: {
         Row: {
           created_at: string
@@ -811,6 +870,23 @@ export type Database = {
           isSetofReturn: true
         }
       }
+      join_cohort: {
+        Args: { _tier: Database["public"]["Enums"]["cohort_tier"] }
+        Returns: {
+          capacity: number
+          created_at: string
+          id: string
+          member_count: number
+          tier: Database["public"]["Enums"]["cohort_tier"]
+          title: string | null
+        }
+        SetofOptions: {
+          from: "*"
+          to: "cohorts"
+          isOneToOne: true
+          isSetofReturn: false
+        }
+      }
       rate_limit_hit: {
         Args: { _key: string; _limit: number; _window_seconds: number }
         Returns: {
@@ -846,6 +922,7 @@ export type Database = {
         | "moderate"
         | "active"
         | "very_active"
+      cohort_tier: "inner5" | "trust15" | "circle50"
       quest_status: "pending" | "completed" | "skipped" | "failed"
       sex: "male" | "female" | "other" | "prefer_not_say"
       shield_reason: "missed_day" | "manual_freeze" | "sick" | "travel"
@@ -994,6 +1071,7 @@ export const Constants = {
         "active",
         "very_active",
       ],
+      cohort_tier: ["inner5", "trust15", "circle50"],
       quest_status: ["pending", "completed", "skipped", "failed"],
       sex: ["male", "female", "other", "prefer_not_say"],
       shield_reason: ["missed_day", "manual_freeze", "sick", "travel"],
