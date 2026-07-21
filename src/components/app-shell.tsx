@@ -48,11 +48,6 @@ export function AppShell({
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  async function signOut() {
-    await supabase.auth.signOut();
-    window.location.href = "/auth";
-  }
-
   const initial = (name?.trim()?.[0] ?? "L").toUpperCase();
 
   return (
