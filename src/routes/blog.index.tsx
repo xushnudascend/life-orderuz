@@ -17,6 +17,14 @@ type Post = {
 
 const POSTS: Post[] = [
   {
+    slug: "habit-tracker-guide",
+    title: "Habit Tracker Guide — odat kuzatuvining ilmiy asosi",
+    excerpt:
+      "Habit tracker nima uchun ishlaydi: BJ Fogg B=MAP, Atomic Habits va 66 kun qoidasi. Amaliy protokol.",
+    minutes: 9,
+    tag: "Qo'llanma",
+  },
+  {
     slug: "66-kun-qoidasi",
     title: "66 kun qoidasi — odat qachon avtomatlashadi",
     excerpt:
