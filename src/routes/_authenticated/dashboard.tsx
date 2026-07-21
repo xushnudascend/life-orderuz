@@ -230,7 +230,7 @@ function Dashboard() {
           <p className="font-ui text-[11px] font-semibold uppercase tracking-[0.24em] text-primary">
             {c.greeting} · {c.label}
           </p>
-          <h1 className="mt-1.5 font-serif text-2xl font-semibold tracking-tight sm:text-3xl">
+          <h1 className="mt-1.5 truncate font-serif text-2xl font-semibold tracking-tight sm:text-3xl">
             {profile?.display_name?.trim()
               ? `${profile.display_name}, `
               : "Bugungi "}
