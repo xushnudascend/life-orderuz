@@ -127,11 +127,43 @@ async function fetchNadirStats(userId: string): Promise<UserStats> {
   };
 }
 
+type Persona = "therapist" | "goggins" | "huberman";
+
+const PERSONAS: Array<{ id: Persona; label: string; desc: string }> = [
+  { id: "therapist", label: "Terapevt", desc: "Yumshoq, aks-ettiruvchi. Rogers + Beck." },
+  { id: "goggins", label: "Goggins", desc: "Halol, bahonasiz. Bugun, hozir." },
+  { id: "huberman", label: "Huberman", desc: "Neyroolim. Protokol shaklida." },
+];
+
+function usePersona(): [Persona, (p: Persona) => void] {
+  const [persona, setPersona] = useState<Persona>("therapist");
+  useEffect(() => {
+    try {
+      const saved = window.localStorage.getItem("lo:mentor:persona");
+      if (saved === "goggins" || saved === "huberman" || saved === "therapist") {
+        setPersona(saved);
+      }
+    } catch {
+      /* ignore */
+    }
+  }, []);
+  const update = (p: Persona) => {
+    setPersona(p);
+    try {
+      window.localStorage.setItem("lo:mentor:persona", p);
+    } catch {
+      /* ignore */
+    }
+  };
+  return [persona, update];
+}
+
 function MentorPage() {
   const { userId } = Route.useRouteContext();
   const [initial, setInitial] = useState<UIMessage[] | null>(null);
   const [stats, setStats] = useState<UserStats | null>(null);
   const [input, setInput] = useState("");
+  const [persona, setPersona] = usePersona();
   const savedIdsRef = useRef<Set<string>>(new Set());
   const bottomRef = useRef<HTMLDivElement>(null);
 
@@ -163,6 +195,8 @@ function MentorPage() {
       userId={userId}
       initialMessages={initial}
       stats={stats}
+      persona={persona}
+      setPersona={setPersona}
       input={input}
       setInput={setInput}
       savedIdsRef={savedIdsRef}
@@ -176,6 +210,7 @@ function MentorPage() {
     </AppShell>
   );
 }
+
 
 function MentorChat({
   userId,
