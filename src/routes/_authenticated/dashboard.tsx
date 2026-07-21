@@ -23,6 +23,7 @@ import { ArchetypeRow } from "@/components/archetype-row";
 import { DailyTimetable } from "@/components/daily-timetable";
 import { ProfileCompletionCard } from "@/components/profile-completion-card";
 import { NadirNudgeBanner } from "@/components/nadir-nudge-banner";
+import { StreakAtRisk } from "@/components/streak-at-risk";
 import { AIInsightCard } from "@/components/ai-insight-card";
 import { Panel, PanelHeader, PanelValue } from "@/components/panel";
 import { ErrorBoundary } from "@/components/error-boundary";
@@ -223,6 +224,8 @@ function Dashboard() {
     <AppShell title="Bosh sahifa">
       <ProfileCompletionCard missing={missing} />
       <NadirNudgeBanner userId={userId} />
+      <StreakAtRisk streakDays={streak?.current_days ?? 0} percent={percent} />
+
 
       {/* Salom + kontekst */}
       <div className="mb-5 flex flex-col gap-2 sm:mb-6 sm:flex-row sm:items-end sm:justify-between">

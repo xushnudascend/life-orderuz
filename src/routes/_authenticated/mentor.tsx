@@ -7,7 +7,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { AppShell } from "@/components/app-shell";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { Loader2, Send, Sparkles } from "lucide-react";
+import { Copy, Check, Loader2, Send, Sparkles } from "lucide-react";
 import { PageHero } from "@/components/page-hero";
 import { EmptyState } from "@/components/empty-state";
 import { uz } from "@/i18n";
@@ -285,7 +285,7 @@ function MentorChat({
             <div key={m.id} className={"flex " + (isUser ? "justify-end" : "justify-start")}>
               <div
                 className={
-                  "max-w-[85%] rounded-[var(--radius)] border p-4 leading-relaxed " +
+                  "group relative max-w-[85%] rounded-[var(--radius)] border p-4 leading-relaxed " +
                   (isUser ? "border-primary/30 bg-primary/5" : "border-border bg-card")
                 }
               >
@@ -295,9 +295,12 @@ function MentorChat({
                 {isUser ? (
                   <p className="whitespace-pre-wrap">{text}</p>
                 ) : (
-                  <div className="prose prose-sm dark:prose-invert max-w-none prose-p:my-2 prose-headings:font-serif">
-                    <ReactMarkdown>{text}</ReactMarkdown>
-                  </div>
+                  <>
+                    <div className="prose prose-sm dark:prose-invert max-w-none prose-p:my-2 prose-headings:font-serif">
+                      <ReactMarkdown>{text}</ReactMarkdown>
+                    </div>
+                    <CopyButton text={text} />
+                  </>
                 )}
               </div>
             </div>
@@ -339,5 +342,27 @@ function MentorChat({
         </Button>
       </form>
     </AppShell>
+  );
+}
+
+function CopyButton({ text }: { text: string }) {
+  const [copied, setCopied] = useState(false);
+  return (
+    <button
+      type="button"
+      onClick={async () => {
+        try {
+          await navigator.clipboard.writeText(text);
+          setCopied(true);
+          setTimeout(() => setCopied(false), 1600);
+        } catch {
+          /* ignore */
+        }
+      }}
+      className="absolute right-2 top-2 inline-flex h-7 w-7 items-center justify-center rounded-md border border-border bg-background/60 text-muted-foreground opacity-0 transition hover:border-primary/40 hover:text-primary group-hover:opacity-100"
+      aria-label={copied ? "Nusxa olindi" : "Nusxa ko'chirish"}
+    >
+      {copied ? <Check className="h-3.5 w-3.5 text-primary" /> : <Copy className="h-3.5 w-3.5" />}
+    </button>
   );
 }
