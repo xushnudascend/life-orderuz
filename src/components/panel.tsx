@@ -20,17 +20,23 @@ export function Panel({
   return (
     <Tag
       className={cn(
-        // Base surface — subtle inner top-highlight + soft outer shadow, brand focus-ring
-        "relative rounded-[var(--radius)] border border-border/80 bg-card p-4",
-        "shadow-[inset_0_1px_0_hsl(var(--foreground)/0.03),0_1px_2px_hsl(240_30%_0%/0.35)]",
-        "transition-[border-color,transform,box-shadow] duration-200",
-        "focus-within:border-primary/50 focus-within:shadow-[inset_0_1px_0_hsl(var(--foreground)/0.03),0_0_0_1px_hsl(var(--primary)/0.35),0_6px_20px_-10px_hsl(var(--primary)/0.4)]",
-        interactive && "lift-3d cursor-pointer",
+        // Base surface: subtle inner top-highlight, soft outer shadow, amber focus ring
+        "group/panel relative rounded-[var(--radius)] border border-border/70 bg-card p-4",
+        "shadow-[inset_0_1px_0_hsl(var(--foreground)/0.04),0_1px_2px_hsl(240_30%_0%/0.35)]",
+        "transition-[border-color,transform,box-shadow] duration-300 ease-out",
+        "hover:border-border focus-within:border-primary/60",
+        "focus-within:shadow-[inset_0_1px_0_hsl(var(--foreground)/0.04),0_0_0_1px_hsl(var(--primary)/0.4),0_8px_24px_-12px_hsl(var(--primary)/0.45)]",
+        // ambient corner highlight — reveals on hover (visual reward without gamification)
+        "before:pointer-events-none before:absolute before:inset-0 before:rounded-[inherit] before:opacity-0 before:transition-opacity before:duration-500",
+        "before:bg-[radial-gradient(circle_at_top_right,hsl(var(--primary)/0.08),transparent_60%)]",
+        "hover:before:opacity-100",
+        interactive && "cursor-pointer hover:-translate-y-[1px]",
         className,
       )}
     >
       {children}
     </Tag>
+
   );
 }
 
