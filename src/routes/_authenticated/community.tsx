@@ -96,3 +96,83 @@ function CommunityLayout() {
     </AppShell>
   );
 }
+
+const TIERS = [
+  { tier: "inner5" as const, cap: 5, icon: Shield, label: "Yaqin halqa", hint: "Kundalik mas'uliyat · 5 kishi" },
+  { tier: "trust15" as const, cap: 15, icon: Users, label: "Ishonch davrasi", hint: "Streak sheriklari · 15 kishi" },
+  { tier: "circle50" as const, cap: 50, icon: Globe2, label: "Kengroq doira", hint: "Mavzuli · 50 kishi" },
+];
+
+function CohortJoiner() {
+  const join = useServerFn(joinCohort);
+  const [state, setState] = useState<Record<string, { members: number; loading?: boolean; error?: string }>>({});
+
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) return;
+      const { data } = await supabase
+        .from("cohort_members")
+        .select("tier, cohort_id, cohorts(member_count)")
+        .eq("user_id", user.id);
+      if (cancelled || !data) return;
+      const next: typeof state = {};
+      for (const row of data as Array<{ tier: string; cohorts: { member_count: number } | null }>) {
+        if (row.cohorts) next[row.tier] = { members: row.cohorts.member_count };
+      }
+      setState(next);
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  const handleJoin = async (tier: "inner5" | "trust15" | "circle50") => {
+    setState((s) => ({ ...s, [tier]: { ...s[tier], loading: true } }));
+    try {
+      const res = await join({ data: { tier } });
+      setState((s) => ({ ...s, [tier]: { members: res.memberCount } }));
+    } catch (e) {
+      setState((s) => ({ ...s, [tier]: { ...s[tier], loading: false, error: (e as Error).message } }));
+    }
+  };
+
+  return (
+    <div className="mt-6 grid gap-3 sm:grid-cols-3">
+      {TIERS.map(({ tier, cap, icon: Icon, label, hint }) => {
+        const joined = state[tier];
+        return (
+          <Panel key={tier} className="flex flex-col gap-3 p-4">
+            <div className="flex items-center gap-2">
+              <Icon className="h-4 w-4 text-primary" />
+              <span className="font-ui text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
+                {label}
+              </span>
+            </div>
+            <div>
+              <p className="font-serif text-2xl tabular-nums">
+                {joined ? `${joined.members}` : "0"}<span className="text-muted-foreground/60"> / {cap}</span>
+              </p>
+              <p className="mt-1 font-ui text-xs text-muted-foreground">{hint}</p>
+            </div>
+            {joined ? (
+              <span className="font-ui text-[11px] uppercase tracking-[0.18em] text-primary">
+                Tegishlisiz
+              </span>
+            ) : (
+              <Button
+                size="sm"
+                variant="outline"
+                disabled={joined?.loading}
+                onClick={() => handleJoin(tier)}
+              >
+                {joined?.loading ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : "Qo'shilish"}
+              </Button>
+            )}
+          </Panel>
+        );
+      })}
+    </div>
+  );
+}
