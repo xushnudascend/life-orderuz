@@ -285,7 +285,7 @@ function MentorChat({
             <div key={m.id} className={"flex " + (isUser ? "justify-end" : "justify-start")}>
               <div
                 className={
-                  "max-w-[85%] rounded-[var(--radius)] border p-4 leading-relaxed " +
+                  "group relative max-w-[85%] rounded-[var(--radius)] border p-4 leading-relaxed " +
                   (isUser ? "border-primary/30 bg-primary/5" : "border-border bg-card")
                 }
               >
@@ -295,9 +295,12 @@ function MentorChat({
                 {isUser ? (
                   <p className="whitespace-pre-wrap">{text}</p>
                 ) : (
-                  <div className="prose prose-sm dark:prose-invert max-w-none prose-p:my-2 prose-headings:font-serif">
-                    <ReactMarkdown>{text}</ReactMarkdown>
-                  </div>
+                  <>
+                    <div className="prose prose-sm dark:prose-invert max-w-none prose-p:my-2 prose-headings:font-serif">
+                      <ReactMarkdown>{text}</ReactMarkdown>
+                    </div>
+                    <CopyButton text={text} />
+                  </>
                 )}
               </div>
             </div>
