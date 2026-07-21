@@ -1032,6 +1032,14 @@ export type Database = {
           isSetofReturn: true
         }
       }
+      get_peer_mirror: {
+        Args: never
+        Returns: {
+          members: number
+          streak_leader: number
+          today_active: number
+        }[]
+      }
       join_cohort: {
         Args: { _tier: Database["public"]["Enums"]["cohort_tier"] }
         Returns: {
