@@ -106,14 +106,18 @@ function HabitsPage() {
     e.preventDefault();
     if (!newTitle.trim()) return;
     setSaving(true);
+    const composed = cue.trim()
+      ? `${cue.trim()} → ${newTitle.trim()}`
+      : newTitle.trim();
     await supabase.from("habits").insert({
       user_id: userId,
-      title: newTitle.trim(),
+      title: composed,
       xp_reward: xpFromDifficulty(difficulty),
       sort_order: habits.length,
       category,
     });
     setNewTitle("");
+    setCue("");
     setDifficulty(2);
     setSaving(false);
     refresh();
