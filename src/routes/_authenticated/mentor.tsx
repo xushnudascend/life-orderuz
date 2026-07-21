@@ -252,12 +252,32 @@ function MentorChat({
 
       <div className="mt-8 space-y-4 pb-4">
         {messages.length === 0 && (
-          <EmptyState
-            icon={<Sparkles className="h-5 w-5" />}
-            title="Bugun nima seni to'xtatyapti?"
-            description="Bir jumla bilan yoz — Nadir eshitadi."
-          />
+          <div className="space-y-4">
+            <EmptyState
+              icon={<Sparkles className="h-5 w-5" />}
+              title="Bugun nima seni to'xtatyapti?"
+              description="Bir jumla bilan yoz — Nadir avval eshitadi, keyin bitta aniq mikro-qadam beradi."
+            />
+            <div className="flex flex-wrap justify-center gap-2">
+              {[
+                "Ertalab tura olmayapman",
+                "Kecha odatimni o'tkazib yubordim",
+                "Fokusim tarqoq, nima qilay?",
+                "Streak uzildi, qaytadan boshlashga qo'rqaman",
+              ].map((p) => (
+                <button
+                  key={p}
+                  type="button"
+                  onClick={() => setInput(p)}
+                  className="rounded-full border border-border bg-card px-3 py-1.5 font-ui text-xs text-muted-foreground transition hover:border-primary/40 hover:text-foreground"
+                >
+                  {p}
+                </button>
+              ))}
+            </div>
+          </div>
         )}
+
         {(messages as UIMessage[]).map((m) => {
           const text = extractText(m);
           const isUser = m.role === "user";
