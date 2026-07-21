@@ -298,7 +298,7 @@ function Diet() {
                 <div className="flex items-center gap-3">
                   {r.image_url ? (
                     <img
-                      src={r.image_url}
+                      src={r.image_url.startsWith("http") ? r.image_url : signedUrls[r.image_url] ?? ""}
                       alt=""
                       className="h-12 w-12 rounded-md object-cover"
                     />
