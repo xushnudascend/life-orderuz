@@ -26,32 +26,32 @@ import { getPeerMirror } from "@/lib/peer-mirror.functions";
 const BRAND = "Life Order";
 const SITE_URL = "https://life-orderuz.lovable.app";
 const ONE_LINER =
-  "Motivatsiya tugaydi — tizim qoladi. Kuniga 3 ta 2-daqiqalik qadam, 9 shkalali psixologik xarita va Nadir AI mentor. Kartasiz, o'zbek tilida.";
+  "Motivatsiya tugaydi — tizim qoladi. Kuniga 3 ta 2-daqiqalik qadam, Nadir AI mentor. Kartasiz, o'zbek tilida.";
 
 const FAQ_ITEMS: { q: string; a: string }[] = [
   {
-    q: "Life Order boshqa ilovalardan qanday farq qiladi?",
-    a: "Motivatsion ilova emas — xulq-atvor tizimi. BJ Fogg va James Clear tadqiqotlariga asoslangan: mikro-harakat (2 daqiqadan kam), aniq trigger va darhol tasdiq.",
+    q: "Nima farqi bor?",
+    a: "Motivatsion ilova emas — xulq-atvor tizimi. Fogg B=MAP va James Clear'ning mikro-odat prinsipi.",
   },
   {
-    q: "Odat qancha vaqtda mustahkamlanadi?",
-    a: "Phillippa Lally (UCL, 2010): o'rtacha 66 kun (18–254). Streak, XP va Shield tizimi shu jarayonni boshqaradi.",
+    q: "Qancha vaqtda mustahkamlanadi?",
+    a: "Lally, UCL 2010: o'rtacha 66 kun. Streak, XP va Shield shu jarayonni ushlab turadi.",
   },
   {
-    q: "Nadir AI mentor nima qiladi?",
-    a: "Sening ma'lumotlaring (odatlar, kayfiyat, streak, kundalik) asosida shaxsiy javob beradi va \"agar X — men Y\" formatida reja tuzadi.",
+    q: "Nadir AI nima qiladi?",
+    a: "Odat, kayfiyat va kundaliging asosida \"agar X — men Y\" formatida shaxsiy protokol beradi.",
   },
   {
-    q: "Bepulmi? Karta so'raladimi?",
-    a: "Free reja doimiy, karta so'ralmaydi. Pro (49 000 so'm/oy) — kengroq AI konteksti va haftalik hisobot.",
+    q: "Karta so'raladimi?",
+    a: "Yo'q. Free doimiy. Pro — 49 000 so'm/oy, istalgan payt bekor qilinadi.",
   },
   {
-    q: "Ma'lumotlarim xavfsizmi?",
-    a: "TLS + RLS izolyatsiya. Sotilmaydi, reklama uchun ishlatilmaydi. Bir bosishda o'chirasan.",
+    q: "Ma'lumotim xavfsizmi?",
+    a: "TLS + RLS. Sotilmaydi, reklamada ishlatilmaydi, bir bosishda o'chirasan.",
   },
   {
     q: "Offline ishlaydimi?",
-    a: "Ha — PWA sifatida telefonga o'rnatiladi. Odat va kundalik offline yoziladi, ulanish tiklanganda sinxron.",
+    a: "Ha — PWA. Odat va kundalik offline yoziladi, ulanish tiklanganda sinxron.",
   },
 ];
 
@@ -90,8 +90,6 @@ function Landing() {
       <main>
         <Hero />
         <PeerMirror />
-        <ProofStrip />
-        <Mechanism />
         <HowItWorks />
         <Features />
         <Science />
@@ -106,7 +104,6 @@ function Landing() {
 function Hero() {
   return (
     <section className="relative overflow-hidden border-b border-border">
-      {/* Ambient halo — extremely subtle */}
       <div
         aria-hidden
         className="pointer-events-none absolute left-1/2 top-1/2 -z-0 h-[520px] w-[520px] -translate-x-1/2 -translate-y-1/2 rounded-full halo-drift"
@@ -116,22 +113,14 @@ function Hero() {
         }}
       />
       <div className="relative mx-auto max-w-3xl px-5 pb-16 pt-16 text-center md:pb-24 md:pt-28">
-        {/* Identity trigger — kimga */}
-        <p className="rise-1 font-ui text-[11px] uppercase tracking-[0.24em] text-muted-foreground">
-          Boshlaganini oxiriga yetkazadigan odamlar uchun
-        </p>
-
-        {/* 5-sekundli xabar: muammo → yechim */}
-        <h1 className="mt-5 font-serif text-[36px] leading-[1.03] tracking-tight text-balance sm:text-5xl md:text-[64px]">
+        <h1 className="font-serif text-[36px] leading-[1.03] tracking-tight text-balance sm:text-5xl md:text-[64px]">
           <span className="rise-2 inline-block">Motivatsiya tugaydi.</span>
           <br />
           <span className="rise-3 inline-block text-muted-foreground">Tizim qoladi.</span>
         </h1>
 
-        {/* Aniq va'da — cheklangan, o'lchanadigan */}
         <p className="rise-4 mx-auto mt-6 max-w-lg text-[16px] leading-relaxed text-foreground/85 text-pretty">
-          Kuniga 3 ta 2-daqiqalik qadam. 9 shkala bo'yicha psixologik xarita.
-          Nadir AI — <span className="text-foreground">motivatsion so'zlar emas</span>,
+          Kuniga 3 ta 2-daqiqalik qadam. Nadir AI — motivatsion so'zlar emas,
           shaxsiy protokol.
         </p>
 
@@ -143,20 +132,13 @@ function Hero() {
             </Link>
           </Button>
           <Button asChild size="lg" variant="ghost" className="h-12 rounded-full px-5 font-ui">
-            <a href="#mechanism">Nima uchun ishlaydi</a>
+            <a href="#how">Qanday ishlaydi</a>
           </Button>
         </div>
 
-        {/* Xavfsizlik — friksiyani nolga tushirish */}
         <p className="rise-4 mt-5 font-ui text-xs text-muted-foreground">
-          Kartasiz · Reklamasiz · Bir bosishda o'chirasan · O'zbek tilida
+          Kartasiz · Reklamasiz · O'zbek tilida
         </p>
-
-        <div className="rise-4 mx-auto mt-8 flex max-w-xl flex-wrap items-center justify-center gap-x-5 gap-y-2 font-ui text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
-          <span className="inline-flex items-center gap-1.5"><span className="h-1 w-1 rounded-full bg-primary/70" /> Ma'lumot sotilmaydi</span>
-          <span className="inline-flex items-center gap-1.5"><span className="h-1 w-1 rounded-full bg-primary/70" /> Notifikatsiya bosimi yo'q</span>
-          <span className="inline-flex items-center gap-1.5"><span className="h-1 w-1 rounded-full bg-primary/70" /> Toshkentda qurilgan</span>
-        </div>
       </div>
     </section>
   );
@@ -174,83 +156,40 @@ function PeerMirror() {
   const members = data?.members ?? null;
   const todayActive = data?.today_active ?? null;
   const streakLeader = data?.streak_leader ?? null;
-
-  // If DB is unreachable or completely empty, show honest early-stage framing.
   const hasReal = (members ?? 0) > 0;
 
   return (
     <section className="border-b border-border bg-background/60">
-      <div className="mx-auto max-w-5xl px-5 py-8 md:py-10">
+      <div className="mx-auto max-w-5xl px-5 py-8">
         <div className="flex flex-col items-center gap-3 text-center sm:flex-row sm:justify-between sm:text-left">
           <div className="flex items-center gap-2 font-ui text-[11px] uppercase tracking-[0.22em] text-muted-foreground">
             <span className="relative flex h-1.5 w-1.5">
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary/60" />
               <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-primary" />
             </span>
-            Live · Hozirgi holat
+            Live
           </div>
           <dl className="grid w-full grid-cols-3 gap-4 sm:w-auto sm:gap-8">
             <div>
-              <dt className="font-ui text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
-                Sizga o'xshash
-              </dt>
+              <dt className="font-ui text-[10px] uppercase tracking-[0.2em] text-muted-foreground">A'zolar</dt>
               <dd className="mt-1 font-serif text-xl tracking-tight tabular-nums">
                 {hasReal ? members : "Beta"}
               </dd>
             </div>
             <div>
-              <dt className="font-ui text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
-                Bugun tizimda
-              </dt>
+              <dt className="font-ui text-[10px] uppercase tracking-[0.2em] text-muted-foreground">Bugun</dt>
               <dd className="mt-1 font-serif text-xl tracking-tight tabular-nums">
                 {hasReal ? (todayActive ?? 0) : "—"}
               </dd>
             </div>
             <div>
-              <dt className="font-ui text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
-                Eng uzun streak
-              </dt>
+              <dt className="font-ui text-[10px] uppercase tracking-[0.2em] text-muted-foreground">Streak</dt>
               <dd className="mt-1 font-serif text-xl tracking-tight tabular-nums">
                 {hasReal ? `${streakLeader ?? 0} kun` : "—"}
               </dd>
             </div>
           </dl>
         </div>
-        {!hasReal && (
-          <p className="mt-4 text-center font-ui text-[11px] leading-relaxed text-muted-foreground sm:text-left">
-            Erta bosqich · pilot foydalanuvchilar davri. Sonlar ochiq va real — soxta metrika yo'q.
-          </p>
-        )}
-      </div>
-    </section>
-  );
-}
-
-function ProofStrip() {
-  const items = [
-    { k: "43%", v: "kunlik xulq — odat", src: "Wood, USC 2019" },
-    { k: "66 kun", v: "o'rtacha avtomatlashuv", src: "Lally, UCL 2010" },
-    { k: "1%", v: "kunlik yaxshilanish", src: "J. Clear, 2018" },
-    { k: "B=MAP", v: "xulq formulasi", src: "BJ Fogg, Stanford" },
-  ];
-  return (
-    <section className="border-b border-border">
-      <div className="mx-auto max-w-6xl px-5 py-12 md:py-16">
-        <dl className="grid grid-cols-2 gap-x-6 gap-y-8 md:grid-cols-4">
-          {items.map((s, i) => (
-            <Reveal key={s.k} delay={i * 90}>
-              <dt className="tick-in font-serif text-2xl tracking-tight tabular-nums md:text-3xl">
-                {s.k}
-              </dt>
-              <dd className="mt-1 font-ui text-[13px] leading-tight text-foreground/80">
-                {s.v}
-              </dd>
-              <p className="mt-1.5 font-ui text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
-                {s.src}
-              </p>
-            </Reveal>
-          ))}
-        </dl>
       </div>
     </section>
   );
@@ -258,10 +197,10 @@ function ProofStrip() {
 
 function HowItWorks() {
   const steps = [
-    { n: "01", title: "Tashxis", body: "5 daqiqalik onboarding: arxetip, uyqu, energiya, zaif nuqta." },
-    { n: "02", title: "Protokol", body: "Har kun 3 ta \"agar X — men Y\" formatidagi mikro-qadam." },
-    { n: "03", title: "Takror", body: "Har bajarilgan qadam → XP + streak. Shield xatoni kechiradi." },
-    { n: "04", title: "Tahlil", body: "Haftalik AI hisobot: nima ishladi, qayerda susaydik." },
+    { n: "01", title: "Tashxis", body: "5 daqiqalik onboarding — arxetip va zaif nuqta." },
+    { n: "02", title: "Protokol", body: "Har kun 3 ta \"agar X — men Y\" mikro-qadam." },
+    { n: "03", title: "Takror", body: "Bajarilgan qadam → XP + streak. Shield xatoni kechiradi." },
+    { n: "04", title: "Tahlil", body: "Haftalik AI hisobot — bitta aniq tuzatish." },
   ];
   return (
     <section id="how" className="border-b border-border">
@@ -269,18 +208,10 @@ function HowItWorks() {
         <SectionHeader eyebrow="Jarayon" title="4 bosqichli halqa" />
         <div className="mt-10 grid gap-px overflow-hidden rounded-[var(--radius)] border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
           {steps.map((s, i) => (
-            <Reveal
-              key={s.n}
-              delay={i * 90}
-              className="cell-hover bg-background p-5"
-            >
-              <p className="font-ui text-xs uppercase tracking-[0.22em] text-primary">
-                {s.n}
-              </p>
+            <Reveal key={s.n} delay={i * 90} className="cell-hover bg-background p-5">
+              <p className="font-ui text-xs uppercase tracking-[0.22em] text-primary">{s.n}</p>
               <h3 className="mt-3 font-serif text-lg">{s.title}</h3>
-              <p className="mt-2 font-ui text-[13px] leading-relaxed text-muted-foreground">
-                {s.body}
-              </p>
+              <p className="mt-2 font-ui text-[13px] leading-relaxed text-muted-foreground">{s.body}</p>
             </Reveal>
           ))}
         </div>
@@ -291,29 +222,23 @@ function HowItWorks() {
 
 function Features() {
   const items = [
-    { icon: Sparkles, title: "Nadir AI mentor", body: "Kundalik, kayfiyat va odatlaring kontekstida shaxsiy javob." },
-    { icon: Flame, title: "Streak va XP", body: "Ketma-ket kunlar zanjiri — har mikro-qadam ballanadi." },
-    { icon: Shield, title: "Shield tizimi", body: "Haftada 1 kun kechirim. Bitta xato tizimni buzmaydi." },
-    { icon: BookText, title: "Kundalik + kayfiyat", body: "3 satrlik yozuv. Nadir pastlikni sezsa nudge yuboradi." },
-    { icon: Clock, title: "Sirkadian jadval", body: "Ertalab, kunduz, kech — o'z blogiga qadam." },
-    { icon: BarChart3, title: "Haftalik hisobot", body: "AI tahlili + keyingi hafta uchun bitta aniq tuzatish." },
+    { icon: Sparkles, title: "Nadir AI", body: "Kundalik va odat kontekstida shaxsiy javob." },
+    { icon: Flame, title: "Streak + XP", body: "Har mikro-qadam ballanadi." },
+    { icon: Shield, title: "Shield", body: "Haftada 1 kechirim — xato tizimni buzmaydi." },
+    { icon: BookText, title: "Kundalik", body: "3 satr. Pastlik sezilsa nudge." },
+    { icon: Clock, title: "Sirkadian", body: "Ertalab, kunduz, kech — o'z bloki." },
+    { icon: BarChart3, title: "Hisobot", body: "Haftalik AI tahlil + tuzatish." },
   ];
   return (
     <section id="features" className="border-b border-border">
       <div className="mx-auto max-w-6xl px-5 py-14 md:py-20">
-        <SectionHeader eyebrow="Nima bor" title="Asosiy modullar" />
+        <SectionHeader eyebrow="Modullar" title="Nima bor" />
         <div className="mt-10 grid gap-px overflow-hidden rounded-[var(--radius)] border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
           {items.map((f, i) => (
-            <Reveal
-              key={f.title}
-              delay={i * 70}
-              className="cell-hover bg-background p-5"
-            >
+            <Reveal key={f.title} delay={i * 70} className="cell-hover bg-background p-5">
               <f.icon className="h-4 w-4 text-primary" />
               <h3 className="mt-3 font-serif text-base">{f.title}</h3>
-              <p className="mt-2 font-ui text-[13px] leading-relaxed text-muted-foreground">
-                {f.body}
-              </p>
+              <p className="mt-2 font-ui text-[13px] leading-relaxed text-muted-foreground">{f.body}</p>
             </Reveal>
           ))}
         </div>
@@ -326,17 +251,16 @@ function Pricing() {
   return (
     <section id="pricing" className="border-b border-border">
       <div className="mx-auto max-w-6xl px-5 py-14 md:py-20">
-        <SectionHeader eyebrow="Narx" title="Bepul boshla — Pro'ga o'sib boradi" />
+        <SectionHeader eyebrow="Narx" title="Bepul boshla" />
 
-        {/* Risk reversal badge — Cialdini + loss aversion neutralizer */}
         <div className="mt-6 flex flex-wrap items-center gap-3 font-ui text-[12px] text-muted-foreground">
           <span className="inline-flex items-center gap-1.5 rounded-full border border-border/70 px-2.5 py-1">
             <span className="h-1.5 w-1.5 rounded-full bg-primary" />
-            14 kun — so'roqsiz pul qaytadi
+            14 kun pul qaytadi
           </span>
           <span className="inline-flex items-center gap-1.5 rounded-full border border-border/70 px-2.5 py-1">
             <span className="h-1.5 w-1.5 rounded-full bg-primary" />
-            Bir bosishda bekor qilish
+            Bir bosishda bekor
           </span>
           <span className="inline-flex items-center gap-1.5 rounded-full border border-border/70 px-2.5 py-1">
             <span className="h-1.5 w-1.5 rounded-full bg-primary" />
@@ -344,58 +268,51 @@ function Pricing() {
           </span>
         </div>
 
-        {/* 3 tarif: Free anchor low → Pro monthly target → Pro yearly value */}
         <div className="mt-10 grid gap-5 md:grid-cols-3">
           <PricingCard
             title="Free"
             price="0 so'm"
             period="doimiy"
-            equivalent="Kartasiz"
             features={[
-              "Kunlik 3 ta mikro-missiya",
-              "Streak, XP, intizom balli",
-              "Nadir bilan asosiy suhbat",
-              "Kundalik va kayfiyat",
-              "PWA — telefonga o'rnatiladi",
+              "3 ta kunlik mikro-missiya",
+              "Streak, XP, intizom",
+              "Nadir asosiy suhbat",
+              "Kundalik + kayfiyat",
+              "PWA",
             ]}
-            cta="Bepul boshlash"
+            cta="Boshlash"
             variant="outline"
           />
           <PricingCard
             title="Pro"
             price="49 000 so'm"
             period="oyiga"
-            equivalent="~$3.9 / oy"
             badge="Eng mashhur"
             features={[
-              "Free rejadagi hammasi",
+              "Free'dagi hammasi",
               "Nadir Pro — kengroq kontekst",
               "Cheksiz odat va quest",
               "Haftalik AI hisobot",
-              "Burnout signal + nudge",
+              "Burnout signal",
             ]}
             cta="Pro'ga o'tish"
             variant="primary"
           />
           <PricingCard
-            title="Pro Yillik"
+            title="Yillik"
             price="490 000 so'm"
             period="yiliga"
-            equivalent="~40 800 so'm / oy · 2 oy tekin"
+            equivalent="2 oy tekin"
             features={[
               "Pro'dagi hammasi",
-              "12 oy narxida 10 oy",
-              "Yillik retrospektiv hisobot",
-              "Muddatidan avval kirish — yangi modullar",
-              "Bir yil davomida narx qotiriladi",
+              "12 oy narxida 10",
+              "Yillik retrospektiv",
+              "Narx qotiriladi",
             ]}
             cta="Yillik olish"
             variant="outline"
           />
         </div>
-        <p className="mt-6 font-ui text-[11px] leading-relaxed text-muted-foreground">
-          Yillik narx = oylikning 10 barobari (12 oy o'rniga). Har oyni alohida to'lasang ~588 000 so'm — yillikda 98 000 so'mni saqlaysan.
-        </p>
       </div>
     </section>
   );
@@ -469,12 +386,11 @@ function PricingCard({
   );
 }
 
-
 function Faq() {
   return (
     <section id="faq" className="border-b border-border">
       <div className="mx-auto max-w-2xl px-5 py-14 md:py-20">
-        <SectionHeader eyebrow="Savollar" title="Ko'p so'raladi" />
+        <SectionHeader eyebrow="FAQ" title="Ko'p so'raladi" />
         <Accordion type="single" collapsible className="mt-8">
           {FAQ_ITEMS.map((it, i) => (
             <AccordionItem key={i} value={`q-${i}`} className="border-border/60">
@@ -492,73 +408,26 @@ function Faq() {
   );
 }
 
-function Mechanism() {
-  const nodes = [
-    { k: "Ilgak", d: "Vaqt / joy / oldingi harakat" },
-    { k: "Xohish", d: "Bosh miya dopamin bilan javob beradi" },
-    { k: "Harakat", d: "2 daqiqadan kam — mikro-qadam" },
-    { k: "Mukofot", d: "Streak + XP → halqa yopiladi" },
-  ];
-  return (
-    <section id="mechanism" className="border-b border-border">
-      <div className="mx-auto max-w-5xl px-5 py-14 md:py-20">
-        <SectionHeader eyebrow="Mexanizm" title="Odat halqasi — 4 tugun" />
-        <div className="mt-10 grid gap-3 md:grid-cols-4">
-          {nodes.map((n, i) => (
-            <Reveal key={n.k} delay={i * 80}>
-              <div className="relative rounded-[var(--radius)] border border-border bg-background p-5">
-                <p className="font-ui text-[10px] uppercase tracking-[0.22em] text-primary">
-                  0{i + 1}
-                </p>
-                <h3 className="mt-2 font-serif text-lg">{n.k}</h3>
-                <p className="mt-2 font-ui text-[13px] leading-relaxed text-muted-foreground">
-                  {n.d}
-                </p>
-                {i < nodes.length - 1 && (
-                  <span
-                    aria-hidden
-                    className="pointer-events-none absolute right-3 top-1/2 hidden -translate-y-1/2 font-ui text-lg text-border md:block"
-                  >
-                    →
-                  </span>
-                )}
-              </div>
-            </Reveal>
-          ))}
-        </div>
-        <p className="mt-6 font-ui text-xs text-muted-foreground">
-          Halqa yopiq — mukofot keyingi ilgakni kuchaytiradi. Manba: Duhigg, <em>The Power of Habit</em> (2012); Wood &amp; Rünger, <em>Annual Review of Psychology</em> (2016); Graybiel, <em>Annual Review of Neuroscience</em> (2008).
-        </p>
-      </div>
-    </section>
-  );
-}
-
 function Science() {
   const refs = [
     {
-      claim: "Kunlik xulqning ~43% — ongsiz odat, qaror emas",
-      src: "Wood, Quinn &amp; Kashy — J. Personality &amp; Social Psychology, 2002",
+      claim: "Kunlik xulqning ~43% — ongsiz odat",
+      src: "Wood et al., 2002",
       href: "https://doi.org/10.1037/0022-3514.83.6.1281",
     },
     {
-      claim: "Odat avtomatlashuvi o'rtacha 66 kun (18–254)",
-      src: "Lally et al. — European J. Social Psychology, 2010",
+      claim: "Odat avtomatlashuvi o'rtacha 66 kun",
+      src: "Lally et al., 2010",
       href: "https://doi.org/10.1002/ejsp.674",
     },
     {
       claim: "\"Agar X — men Y\" niyati bajarilishni 2–3× oshiradi",
-      src: "Gollwitzer — American Psychologist, 1999",
+      src: "Gollwitzer, 1999",
       href: "https://doi.org/10.1037/0003-066X.54.7.493",
     },
     {
-      claim: "Dopamin — mukofot bashorati xatosi, ilgak-mukofot bog'lanishi",
-      src: "Schultz, Dayan &amp; Montague — Science, 1997",
-      href: "https://doi.org/10.1126/science.275.5306.1593",
-    },
-    {
-      claim: "Xulq = Motivatsiya × Qobiliyat × Ilgak (B=MAP)",
-      src: "Fogg — Stanford Behavior Design Lab, 2009",
+      claim: "Xulq = Motivatsiya × Qobiliyat × Ilgak",
+      src: "Fogg, Stanford",
       href: "https://behaviormodel.org/",
     },
   ];
@@ -576,27 +445,19 @@ function Science() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="font-ui text-[11px] uppercase tracking-[0.16em] text-muted-foreground underline-offset-4 hover:text-primary hover:underline"
-                  dangerouslySetInnerHTML={{ __html: r.src }}
-                />
+                >
+                  {r.src}
+                </a>
               </li>
             </Reveal>
           ))}
         </ul>
-        <p className="mt-4 font-ui text-[11px] text-muted-foreground">
-          Har havola — asl akademik manba. Marketing emas, mexanizm.
-        </p>
       </div>
     </section>
   );
 }
 
-function SectionHeader({
-  eyebrow,
-  title,
-}: {
-  eyebrow: string;
-  title: string;
-}) {
+function SectionHeader({ eyebrow, title }: { eyebrow: string; title: string }) {
   return (
     <Reveal>
       <div className="flex items-center gap-3">
