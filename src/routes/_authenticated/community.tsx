@@ -1,12 +1,15 @@
 import { createFileRoute, Link, Outlet, useLocation } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
+import { useServerFn } from "@tanstack/react-start";
 import { supabase } from "@/integrations/supabase/client";
 import { AppShell } from "@/components/app-shell";
 import { PageHero } from "@/components/page-hero";
 import { EmptyState } from "@/components/empty-state";
 import { Panel } from "@/components/panel";
-import { Loader2, Hash } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Loader2, Hash, Users, Shield, Globe2 } from "lucide-react";
 import { uz } from "@/i18n";
+import { joinCohort } from "@/lib/cohort.functions";
 
 export const Route = createFileRoute("/_authenticated/community")({
   head: () => ({
