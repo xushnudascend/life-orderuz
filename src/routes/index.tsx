@@ -241,7 +241,7 @@ function HowItWorks() {
   ];
   return (
     <section id="how" className="border-b border-border">
-      <div className="mx-auto max-w-5xl px-5 py-20">
+      <div className="mx-auto max-w-5xl px-5 py-14 md:py-20">
         <SectionHeader
           eyebrow="Jarayon"
           title="4 bosqichli halqa"
@@ -319,7 +319,7 @@ function Science() {
   ];
   return (
     <section id="science" className="border-b border-border">
-      <div className="mx-auto max-w-5xl px-5 py-20">
+      <div className="mx-auto max-w-5xl px-5 py-14 md:py-20">
         <SectionHeader
           eyebrow="Ilmiy asos"
           title="Sinalgan tadqiqotga tayanadi"
@@ -344,7 +344,7 @@ function Science() {
 function Pricing() {
   return (
     <section id="pricing" className="border-b border-border">
-      <div className="mx-auto max-w-4xl px-5 py-20">
+      <div className="mx-auto max-w-4xl px-5 py-14 md:py-20">
         <SectionHeader
           eyebrow="Narx"
           title="Bepul boshla, xohlasang chuqurlash"
@@ -438,7 +438,7 @@ function PricingCard({
 function Faq() {
   return (
     <section id="faq" className="border-b border-border">
-      <div className="mx-auto max-w-2xl px-5 py-20">
+      <div className="mx-auto max-w-2xl px-5 py-14 md:py-20">
         <SectionHeader eyebrow="Savollar" title="Ko'p so'raladi" />
         <Accordion type="single" collapsible defaultValue="q-0" className="mt-8">
           {FAQ_ITEMS.map((it, i) => (
@@ -460,7 +460,7 @@ function Faq() {
 function FinalCta() {
   return (
     <section className="border-b border-border">
-      <div className="mx-auto max-w-3xl px-5 py-20 text-center">
+      <div className="mx-auto max-w-3xl px-5 py-14 md:py-20 text-center">
         <h2 className="font-serif text-3xl leading-tight tracking-tight md:text-4xl">
           Ertaga emas, bugun bitta kichkina qadam.
         </h2>
@@ -618,7 +618,7 @@ function Testimonials() {
   ];
   return (
     <section aria-labelledby="voices-title" className="border-b border-border">
-      <div className="mx-auto max-w-6xl px-5 py-20">
+      <div className="mx-auto max-w-6xl px-5 py-14 md:py-20">
         <div className="max-w-2xl">
           <p className="font-ui text-xs uppercase tracking-[0.24em] text-primary">Pilot fikrlar</p>
           <h2 id="voices-title" className="mt-3 font-serif text-2xl leading-tight tracking-tight md:text-3xl">
@@ -750,7 +750,7 @@ function CostOfDrift() {
   ];
   return (
     <section className="border-b border-border bg-background">
-      <div className="mx-auto max-w-5xl px-5 py-20">
+      <div className="mx-auto max-w-5xl px-5 py-14 md:py-20">
         <div className="max-w-2xl">
           <p className="font-ui text-xs uppercase tracking-[0.24em] text-primary">
             Harakatsizlik narxi
@@ -809,7 +809,7 @@ function ForWhom() {
   ];
   return (
     <section className="border-b border-border bg-card/30">
-      <div className="mx-auto max-w-6xl px-5 py-20">
+      <div className="mx-auto max-w-6xl px-5 py-14 md:py-20">
         <div className="max-w-2xl">
           <p className="font-ui text-xs uppercase tracking-[0.24em] text-primary">
             Kim uchun
@@ -847,7 +847,7 @@ function ForWhom() {
 function FounderNote() {
   return (
     <section className="border-b border-border">
-      <div className="mx-auto max-w-3xl px-5 py-20">
+      <div className="mx-auto max-w-3xl px-5 py-14 md:py-20">
         <Quote className="h-6 w-6 text-primary" aria-hidden />
         <blockquote className="mt-4 font-serif text-2xl leading-snug tracking-tight md:text-3xl text-balance">
           "Men motivatsion kitoblarni yig'ib katta bo'ldim. Hech biri ishlamadi —
