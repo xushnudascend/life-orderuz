@@ -204,12 +204,46 @@ function HabitsPage() {
           }
         />
         <form onSubmit={addHabit} className="mt-4 space-y-3">
-          <Input
-            placeholder="Masalan, 20 daqiqa o'qish"
-            value={newTitle}
-            onChange={(e) => setNewTitle(e.target.value)}
-            className="font-ui"
-          />
+          <div className="rounded-[var(--radius)] border border-dashed border-border/70 bg-background/40 p-3">
+            <p className="font-ui text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
+              Niyat formulasi · Agar X — men Y
+            </p>
+            <div className="mt-2 grid gap-2 sm:grid-cols-[1fr_auto_1fr] sm:items-center">
+              <Input
+                placeholder="Qachon / qayerda (masalan, ertalab nonushtadan keyin)"
+                value={cue}
+                onChange={(e) => setCue(e.target.value)}
+                className="font-ui text-sm"
+              />
+              <span className="hidden text-center font-ui text-sm text-muted-foreground sm:block">→</span>
+              <Input
+                placeholder="Nima qilaman (2 daqiqadan kam)"
+                value={newTitle}
+                onChange={(e) => setNewTitle(e.target.value)}
+                className="font-ui text-sm"
+              />
+            </div>
+            <div className="mt-3 flex flex-wrap items-center gap-1.5">
+              <span className="font-ui text-[10px] uppercase tracking-[0.2em] text-muted-foreground">Ilgak</span>
+              {CUE_PICKS.map((c) => (
+                <button
+                  key={c}
+                  type="button"
+                  onClick={() => setCue(c)}
+                  className="rounded-full border border-border/70 px-2.5 py-0.5 font-ui text-[11px] text-muted-foreground hover:text-foreground"
+                >
+                  {c}
+                </button>
+              ))}
+            </div>
+            {(cue.trim() || newTitle.trim()) && (
+              <p className="mt-3 border-t border-border/60 pt-3 font-serif text-sm text-foreground">
+                <span className="text-muted-foreground">Ko'rinish:</span>{" "}
+                {cue.trim() ? `${cue.trim()} → ` : ""}
+                {newTitle.trim() || "..."}
+              </p>
+            )}
+          </div>
           <div className="flex flex-wrap items-center gap-2">
             <span className="font-ui text-xs uppercase tracking-[0.2em] text-muted-foreground">
               Qiyinlik
