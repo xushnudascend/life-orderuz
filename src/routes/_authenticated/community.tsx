@@ -55,9 +55,15 @@ function CommunityLayout() {
       ) : channels.length === 0 ? (
         <EmptyState
           icon={<Hash className="h-5 w-5" />}
-          title="Kanallar hali ochilmagan"
-          description="Tez orada — kitobxonlik, streak partnyorlik va tematik davralar shu yerda paydo bo'ladi."
+          title="Davra tez orada ochiladi"
+          description="Kitobxonlik, streak partnyorlik va tematik davralar shu yerda paydo bo'ladi. Ayni paytda o'z tizimingga fokus qil — jamoa tayyor bo'lganda seni topamiz."
+          action={
+            <Link to="/dashboard" className="font-ui text-sm text-primary hover:underline">
+              Bugungi kunga qaytish →
+            </Link>
+          }
         />
+
 
       ) : (
         <div className="mt-8 space-y-2">
