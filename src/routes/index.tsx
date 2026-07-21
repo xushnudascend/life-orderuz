@@ -368,6 +368,6 @@ function SectionHeader({
       <h2 className="mt-3 font-serif text-2xl leading-tight tracking-tight md:text-3xl">
         {title}
       </h2>
-    </div>
+    </Reveal>
   );
 }
