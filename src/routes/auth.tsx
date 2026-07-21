@@ -62,21 +62,14 @@ function AuthPage() {
 
   return (
     <div className="relative min-h-dvh overflow-hidden bg-background text-foreground">
-      {/* Animated ambient background */}
+      {/* Calm ambient — single soft halo (amygdala down-regulation) */}
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
-        <div className="absolute -top-24 -left-24 h-[380px] w-[380px] rounded-full bg-primary/50 opacity-70 blur-[90px] lo-float-a" />
-        <div className="absolute top-1/4 -right-24 h-[340px] w-[340px] rounded-full bg-primary/40 opacity-70 blur-[90px] lo-float-b" />
-        <div className="absolute -bottom-24 left-1/4 h-[360px] w-[360px] rounded-full bg-primary/45 opacity-70 blur-[90px] lo-float-c" />
-        <div className="absolute inset-0 opacity-[0.05] [background-image:radial-gradient(hsl(var(--foreground))_1px,transparent_1px)] [background-size:22px_22px]" />
+        <div
+          className="absolute left-1/2 top-[18%] h-[520px] w-[520px] -translate-x-1/2 rounded-full opacity-60 blur-[110px] halo-drift"
+          style={{ background: "radial-gradient(closest-side, hsl(var(--primary) / 0.22), transparent 70%)" }}
+        />
+        <div className="absolute inset-0 opacity-[0.035] [background-image:radial-gradient(hsl(var(--foreground))_1px,transparent_1px)] [background-size:24px_24px]" />
       </div>
-      <style>{`
-        @keyframes lo-float-a { 0%,100% { transform: translate(0,0) scale(1);} 50% { transform: translate(80px,60px) scale(1.15);} }
-        @keyframes lo-float-b { 0%,100% { transform: translate(0,0) scale(1);} 50% { transform: translate(-70px,50px) scale(1.12);} }
-        @keyframes lo-float-c { 0%,100% { transform: translate(0,0) scale(1);} 50% { transform: translate(60px,-70px) scale(1.18);} }
-        .lo-float-a { animation: lo-float-a 10s ease-in-out infinite; }
-        .lo-float-b { animation: lo-float-b 13s ease-in-out infinite; }
-        .lo-float-c { animation: lo-float-c 16s ease-in-out infinite; }
-      `}</style>
 
       <div className="mx-auto max-w-md px-5 py-10">
         <Link
