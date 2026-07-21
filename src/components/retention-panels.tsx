@@ -101,18 +101,18 @@ export function RetentionPanels() {
       {/* Season */}
       <Panel>
         <PanelHeader
-          icon={<Trophy className="h-3.5 w-3.5" />}
-          title={season?.season?.name ?? "Mavsum"}
-          subtitle={season?.season?.theme ?? undefined}
+          eyebrow={season?.season?.theme ?? "Mavsum"}
+          title={
+            <p className="font-ui text-[14px] font-semibold flex items-center gap-1.5">
+              <Trophy className="h-3.5 w-3.5 text-primary" />
+              {season?.season?.name ?? "Mavsum"}
+            </p>
+          }
         />
         {season?.season ? (
           <div className="mt-3 space-y-3">
-            <div className="flex items-baseline gap-2">
-              <PanelValue>{season.myXp}</PanelValue>
-              <span className="font-ui text-[11px] uppercase tracking-widest text-muted-foreground">
-                mavsum XP
-              </span>
-            </div>
+            <PanelValue value={season.myXp} caption="mavsum XP" />
+
             <div className="grid grid-cols-2 gap-2 text-[12px]">
               <div className="rounded-md border border-border/50 bg-background/40 px-3 py-2">
                 <p className="text-muted-foreground">Reyting</p>
