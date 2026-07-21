@@ -73,6 +73,7 @@ function HabitsPage() {
   const [todayLogs, setTodayLogs] = useState<Set<string>>(new Set());
   const [newTitle, setNewTitle] = useState("");
   const [cue, setCue] = useState("");
+  const [stackAnchor, setStackAnchor] = useState<string>("");
   const [difficulty, setDifficulty] = useState<1 | 2 | 3 | 4 | 5>(2);
   const [category, setCategory] = useState<string>("habit");
   const [saving, setSaving] = useState(false);
@@ -106,8 +107,18 @@ function HabitsPage() {
     e.preventDefault();
     if (!newTitle.trim()) return;
     setSaving(true);
-    const composed = cue.trim()
-      ? `${cue.trim()} → ${newTitle.trim()}`
+    // Habit stacking (James Clear) — bog'lansa, avtomatik cue quriladi
+    let composedCue = cue.trim();
+    if (stackAnchor) {
+      const anchor = habits.find((h) => h.id === stackAnchor);
+      if (anchor) {
+        // trigger'ni "<anchor title>dan keyin" ga aylantirdik
+        const base = anchor.title.split("→").pop()?.trim() || anchor.title;
+        composedCue = `${base}dan keyin`;
+      }
+    }
+    const composed = composedCue
+      ? `${composedCue} → ${newTitle.trim()}`
       : newTitle.trim();
     await supabase.from("habits").insert({
       user_id: userId,
@@ -118,10 +129,12 @@ function HabitsPage() {
     });
     setNewTitle("");
     setCue("");
+    setStackAnchor("");
     setDifficulty(2);
     setSaving(false);
     refresh();
   }
+
 
   async function toggleToday(h: Habit) {
     // Faqat bugunga rejalashtirilgan bo'lsa ish beradi (scheduled_for null => today)
