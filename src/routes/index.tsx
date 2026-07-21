@@ -151,9 +151,9 @@ function ProofStrip() {
     <section className="border-b border-border">
       <div className="mx-auto max-w-6xl px-5 py-12 md:py-16">
         <dl className="grid grid-cols-2 gap-x-6 gap-y-8 md:grid-cols-4">
-          {items.map((s) => (
-            <div key={s.k}>
-              <dt className="font-serif text-2xl tracking-tight tabular-nums md:text-3xl">
+          {items.map((s, i) => (
+            <Reveal key={s.k} delay={i * 90}>
+              <dt className="tick-in font-serif text-2xl tracking-tight tabular-nums md:text-3xl">
                 {s.k}
               </dt>
               <dd className="mt-1 font-ui text-[13px] leading-tight text-foreground/80">
@@ -162,7 +162,7 @@ function ProofStrip() {
               <p className="mt-1.5 font-ui text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
                 {s.src}
               </p>
-            </div>
+            </Reveal>
           ))}
         </dl>
       </div>
