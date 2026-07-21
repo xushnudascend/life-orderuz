@@ -22,33 +22,37 @@ export function PageHero({
   return (
     <header
       className={cn(
-        "mb-6 flex flex-col gap-4 border-b border-border/60 pb-6 sm:mb-8 sm:flex-row sm:items-end sm:justify-between sm:pb-8",
+        "relative mb-6 flex flex-col gap-4 border-b border-border/60 pb-6 sm:mb-8 sm:flex-row sm:items-end sm:justify-between sm:pb-8",
+        // subtle amber hairline that decays — anchors the eye (Gestalt: continuity)
+        "before:absolute before:-bottom-px before:left-0 before:h-px before:w-24 before:bg-gradient-to-r before:from-primary before:to-transparent",
         className,
       )}
     >
       <div className="min-w-0">
         {eyebrow && (
-          <p className="font-ui text-[11px] font-semibold uppercase tracking-[0.28em] text-primary">
+          <p className="rise-1 flex items-center gap-2 font-ui text-[11px] font-semibold uppercase tracking-[0.28em] text-primary">
+            <span className="line-sweep" aria-hidden />
             {eyebrow}
           </p>
         )}
-        <h1 className="mt-2 font-serif text-3xl font-semibold leading-tight tracking-tight sm:text-4xl">
+        <h1 className="rise-2 mt-3 font-serif text-3xl font-semibold leading-[1.05] tracking-tight sm:text-4xl md:text-[2.6rem]">
           {title}
         </h1>
         {subtitle && (
-          <p className="mt-2 max-w-2xl font-ui text-sm text-muted-foreground sm:text-base">
+          <p className="rise-3 mt-3 max-w-2xl font-ui text-sm leading-relaxed text-muted-foreground sm:text-base">
             {subtitle}
           </p>
         )}
       </div>
       {actions && (
-        <div className="flex shrink-0 flex-wrap items-center gap-2">
+        <div className="rise-4 flex shrink-0 flex-wrap items-center gap-2">
           {actions}
         </div>
       )}
     </header>
   );
 }
+
 
 /**
  * SectionHeader — inline section divider used between panels/lists.
