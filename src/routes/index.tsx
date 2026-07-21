@@ -359,6 +359,89 @@ function Faq() {
   );
 }
 
+function Mechanism() {
+  const nodes = [
+    { k: "Ilgak", d: "Vaqt / joy / oldingi harakat" },
+    { k: "Xohish", d: "Bosh miya dopamin bilan javob beradi" },
+    { k: "Harakat", d: "2 daqiqadan kam — mikro-qadam" },
+    { k: "Mukofot", d: "Streak + XP → halqa yopiladi" },
+  ];
+  return (
+    <section id="mechanism" className="border-b border-border">
+      <div className="mx-auto max-w-5xl px-5 py-14 md:py-20">
+        <SectionHeader eyebrow="Mexanizm" title="Odat halqasi — 4 tugun" />
+        <div className="mt-10 grid gap-3 md:grid-cols-4">
+          {nodes.map((n, i) => (
+            <Reveal key={n.k} delay={i * 80}>
+              <div className="relative rounded-[var(--radius)] border border-border bg-background p-5">
+                <p className="font-ui text-[10px] uppercase tracking-[0.22em] text-primary">
+                  0{i + 1}
+                </p>
+                <h3 className="mt-2 font-serif text-lg">{n.k}</h3>
+                <p className="mt-2 font-ui text-[13px] leading-relaxed text-muted-foreground">
+                  {n.d}
+                </p>
+                {i < nodes.length - 1 && (
+                  <span
+                    aria-hidden
+                    className="pointer-events-none absolute right-3 top-1/2 hidden -translate-y-1/2 font-ui text-lg text-border md:block"
+                  >
+                    →
+                  </span>
+                )}
+              </div>
+            </Reveal>
+          ))}
+        </div>
+        <p className="mt-6 font-ui text-xs text-muted-foreground">
+          Manba: Duhigg (2012), <em>The Power of Habit</em>; Wood &amp; Rünger, <em>Annual Review of Psychology</em>, 2016.
+        </p>
+      </div>
+    </section>
+  );
+}
+
+function Science() {
+  const refs = [
+    {
+      claim: "Kunlik xulqning 43% — ongsiz odat",
+      src: "Wood, Quinn &amp; Kashy — J. Personality & Social Psych., 2002",
+    },
+    {
+      claim: "Odat avtomatlashuvi o'rtacha 66 kun",
+      src: "Lally et al. — Eur. J. Social Psych., 2010",
+    },
+    {
+      claim: "Niyat formulasi bajarilishni 2–3 barobar oshiradi",
+      src: "Gollwitzer — American Psychologist, 1999",
+    },
+    {
+      claim: "Xulq = Motivatsiya × Qobiliyat × Ilgak (B=MAP)",
+      src: "Fogg — Stanford Behavior Design Lab",
+    },
+  ];
+  return (
+    <section id="science" className="border-b border-border">
+      <div className="mx-auto max-w-4xl px-5 py-14 md:py-20">
+        <SectionHeader eyebrow="Ilm" title="Nima uchun ishlaydi" />
+        <ul className="mt-10 divide-y divide-border overflow-hidden rounded-[var(--radius)] border border-border">
+          {refs.map((r, i) => (
+            <Reveal key={i} delay={i * 60}>
+              <li className="flex flex-col gap-1 bg-background p-5 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6">
+                <p className="font-serif text-base leading-snug">{r.claim}</p>
+                <p
+                  className="font-ui text-[11px] uppercase tracking-[0.16em] text-muted-foreground"
+                  dangerouslySetInnerHTML={{ __html: r.src }}
+                />
+              </li>
+            </Reveal>
+          ))}
+        </ul>
+      </div>
+    </section>
+  );
+}
+
 function SectionHeader({
   eyebrow,
   title,
