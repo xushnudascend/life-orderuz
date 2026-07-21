@@ -355,11 +355,34 @@ function MentorChat({
                 <Shimmer className="font-ui text-sm">Nadir o'ylayapti…</Shimmer>
               </div>
             )}
-            {error && (
-              <div className="rounded-[var(--radius)] border border-destructive/40 bg-destructive/10 p-3 text-sm text-destructive">
-                Xato: {error.message}
-              </div>
-            )}
+            {error && (() => {
+              const msg = error.message || "";
+              const isQuota = /daily_ai_budget_exceeded|429/i.test(msg);
+              if (isQuota) {
+                return (
+                  <div className="rounded-[var(--radius)] border border-primary/40 bg-primary/5 p-4 text-sm">
+                    <p className="mb-2 font-serif text-base text-foreground">
+                      Bugungi bepul limit tugadi.
+                    </p>
+                    <p className="mb-3 text-muted-foreground">
+                      Free rejimida kuniga 10 ta xabar. Pro'da 300 ta va boshqa AI xizmatlari cheklovsiz.
+                    </p>
+                    <a
+                      href="/pricing"
+                      className="inline-flex items-center rounded-full border border-primary bg-primary px-3 py-1.5 font-ui text-xs uppercase tracking-[0.2em] text-primary-foreground transition hover:opacity-90"
+                    >
+                      Pro'ga o'tish
+                    </a>
+                  </div>
+                );
+              }
+              return (
+                <div className="rounded-[var(--radius)] border border-destructive/40 bg-destructive/10 p-3 text-sm text-destructive">
+                  Xato: {msg}
+                </div>
+              );
+            })()}
+
             <div ref={bottomRef} />
           </ConversationContent>
           <ConversationScrollButton />
