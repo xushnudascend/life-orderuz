@@ -154,12 +154,13 @@ function EmailForm({ mode, next }: { mode: "signin" | "signup"; next: string }) 
         if (error) throw error;
         // If auto-confirm is on, session exists. Otherwise try password login
         // (works when email confirmation is disabled server-side).
-        let { data } = await supabase.auth.getSession();
-        if (!data.session) {
+        const { data: sess } = await supabase.auth.getSession();
+        let hasSession = !!sess.session;
+        if (!hasSession) {
           const pw = await supabase.auth.signInWithPassword({ email, password });
-          if (!pw.error) data = { session: pw.data.session } as typeof data;
+          hasSession = !!pw.data.session && !pw.error;
         }
-        if (data.session) {
+        if (hasSession) {
           window.location.replace("/onboarding");
         } else {
           toast.success("Emailingizga tasdiq havolasi yuborildi.");
