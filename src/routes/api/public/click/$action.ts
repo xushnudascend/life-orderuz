@@ -3,7 +3,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { createHash } from "crypto";
 
-const ERROR = {
+const ERROR: Record<string, number> = {
   OK: 0,
   SIGN: -1,
   INVALID_AMOUNT: -2,
@@ -13,7 +13,7 @@ const ERROR = {
   TX_NOT_FOUND: -6,
   BAD_REQUEST: -8,
   CANCELED: -9,
-} as const;
+};
 
 function md5(s: string) {
   return createHash("md5").update(s).digest("hex");
