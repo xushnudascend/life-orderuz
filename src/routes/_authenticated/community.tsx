@@ -43,10 +43,36 @@ function CommunityLayout() {
   return (
     <AppShell title="Davra">
       <PageHero
-        eyebrow="Jamoa"
+        eyebrow="Jamoa · Dunbar qatlamlari"
         title="Davra."
-        subtitle="Kanallar, chaqiriqlar, kitobxonlar. Bir yo'lda emassan."
+        subtitle="Bir yo'lda emassan. Kichik davralar — chuqurroq mas'uliyat."
       />
+
+      {/* Dunbar science strip — nega kichik davra kuchli */}
+      <div className="mt-6 grid gap-2 sm:grid-cols-3">
+        {[
+          { n: "5", label: "Yaqin halqa", hint: "Kundalik mas'uliyat" },
+          { n: "15", label: "Ishonch davrasi", hint: "Streak sherigi" },
+          { n: "150", label: "Dunbar chegarasi", hint: "Tanish yuzlar" },
+        ].map((d) => (
+          <div
+            key={d.n}
+            className="rounded-lg border border-border/50 bg-card/40 px-3 py-2.5"
+          >
+            <div className="flex items-baseline gap-2">
+              <span className="font-serif text-xl tabular-nums text-primary">{d.n}</span>
+              <span className="font-ui text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
+                {d.label}
+              </span>
+            </div>
+            <p className="mt-0.5 font-ui text-xs text-muted-foreground">{d.hint}</p>
+          </div>
+        ))}
+      </div>
+      <p className="mt-2 font-ui text-[11px] leading-relaxed text-muted-foreground/70">
+        Dunbar (1992): neokorteks hajmi ijtimoiy davra chegarasini belgilaydi. Katta guruh —
+        yuzsiz; kichik davra — javobgar.
+      </p>
 
       {loading ? (
         <div className="flex justify-center py-16">
@@ -63,8 +89,6 @@ function CommunityLayout() {
             </Link>
           }
         />
-
-
       ) : (
         <div className="mt-8 space-y-2">
           {channels.map((c) => (
