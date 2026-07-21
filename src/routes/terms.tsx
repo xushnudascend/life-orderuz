@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { LegalShell } from "@/components/legal-shell";
+import { FounderPledge } from "@/components/legal-pledge";
 import { uz } from "@/i18n";
 
 const DESC =
