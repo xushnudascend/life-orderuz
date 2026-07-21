@@ -583,3 +583,115 @@ html[data-perf="low"] .lift-3d:hover { transform: none; box-shadow: none; }
 }
 html[data-perf="low"] .sheen::after { animation: none; display: none; }
 
+
+/* ---------- Guruh 5 — kinetic polish ---------- */
+
+/* 3D tilt card */
+.tilt-card {
+  perspective: 1000px;
+  --tx: 0deg;
+  --ty: 0deg;
+  --mx: 50%;
+  --my: 50%;
+}
+.tilt-card__inner {
+  position: relative;
+  height: 100%;
+  transform: rotateX(var(--tx)) rotateY(var(--ty));
+  transform-style: preserve-3d;
+  transition: transform 220ms cubic-bezier(0.2, 0.7, 0.2, 1);
+  will-change: transform;
+}
+.tilt-card__inner::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    280px circle at var(--mx) var(--my),
+    hsl(var(--primary) / 0.16),
+    transparent 55%
+  );
+  opacity: 0;
+  transition: opacity 260ms ease;
+  pointer-events: none;
+  z-index: 1;
+}
+.tilt-card:hover .tilt-card__inner::before { opacity: 1; }
+html[data-perf="low"] .tilt-card__inner,
+@media (prefers-reduced-motion: reduce) {
+  .tilt-card__inner { transform: none !important; transition: none !important; }
+}
+@media (hover: none) {
+  .tilt-card__inner { transform: none !important; }
+  .tilt-card__inner::before { display: none; }
+}
+
+/* Aurora backdrop — slow gradient drift */
+@keyframes lo-aurora {
+  0%   { transform: translate3d(-8%, -6%, 0) scale(1); }
+  50%  { transform: translate3d(6%, 4%, 0) scale(1.08); }
+  100% { transform: translate3d(-8%, -6%, 0) scale(1); }
+}
+.aurora {
+  position: absolute;
+  inset: -20%;
+  pointer-events: none;
+  background:
+    radial-gradient(40% 30% at 30% 40%, hsl(var(--primary) / 0.28), transparent 60%),
+    radial-gradient(30% 25% at 70% 30%, hsl(var(--primary-glow) / 0.18), transparent 60%),
+    radial-gradient(35% 30% at 50% 80%, hsl(var(--primary) / 0.14), transparent 60%);
+  filter: blur(40px);
+  animation: lo-aurora 18s ease-in-out infinite;
+  will-change: transform;
+}
+html[data-perf="low"] .aurora { animation: none; filter: blur(20px); opacity: 0.6; }
+
+/* Subtle grid pattern overlay */
+.bg-grid {
+  background-image:
+    linear-gradient(hsl(var(--border) / 0.35) 1px, transparent 1px),
+    linear-gradient(90deg, hsl(var(--border) / 0.35) 1px, transparent 1px);
+  background-size: 44px 44px;
+  mask-image: radial-gradient(ellipse at center, black 40%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse at center, black 40%, transparent 75%);
+}
+
+/* Animated gradient sweep on headlines */
+@keyframes lo-title-sweep {
+  0%   { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+.title-sweep {
+  background: linear-gradient(
+    90deg,
+    hsl(var(--foreground)) 0%,
+    hsl(var(--primary)) 45%,
+    hsl(var(--primary-glow)) 55%,
+    hsl(var(--foreground)) 100%
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: lo-title-sweep 6s linear infinite;
+}
+html[data-perf="low"] .title-sweep { animation: none; color: hsl(var(--foreground)); background: none; -webkit-text-fill-color: currentColor; }
+
+/* Floating orbs */
+@keyframes lo-float-a {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50%      { transform: translate3d(30px, -20px, 0) scale(1.1); }
+}
+@keyframes lo-float-b {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50%      { transform: translate3d(-24px, 24px, 0) scale(1.08); }
+}
+.orb-a { animation: lo-float-a 12s ease-in-out infinite; }
+.orb-b { animation: lo-float-b 15s ease-in-out infinite; }
+html[data-perf="low"] .orb-a, html[data-perf="low"] .orb-b { animation: none; }
+
+/* Marquee (for optional strip) */
+@keyframes lo-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+.marquee-track { animation: lo-marquee 30s linear infinite; }
+html[data-perf="low"] .marquee-track { animation: none; }

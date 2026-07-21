@@ -1,8 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
+import { Reveal, TiltCard } from "@/components/reveal";
 import {
   Accordion,
   AccordionContent,
@@ -102,37 +103,81 @@ function Landing() {
 }
 
 function Hero() {
+  const ref = useRef<HTMLDivElement | null>(null);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const onMove = (e: PointerEvent) => {
+      if (e.pointerType === "touch") return;
+      const r = el.getBoundingClientRect();
+      el.style.setProperty("--px", `${((e.clientX - r.left) / r.width) * 100}%`);
+      el.style.setProperty("--py", `${((e.clientY - r.top) / r.height) * 100}%`);
+    };
+    el.addEventListener("pointermove", onMove);
+    return () => el.removeEventListener("pointermove", onMove);
+  }, []);
   return (
-    <section className="relative overflow-hidden border-b border-border">
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,hsl(var(--primary)/0.10),transparent_60%)]"
-      />
-      <div className="relative mx-auto max-w-3xl px-5 pb-12 pt-14 text-center md:pb-16 md:pt-24">
-        <p className="font-ui text-[11px] uppercase tracking-[0.24em] text-muted-foreground">
-          Beta · Xulq-atvor tizimi
-        </p>
-        <h1 className="mt-5 font-serif text-[34px] leading-[1.05] tracking-tight text-balance sm:text-5xl md:text-6xl">
-          Motivatsiya tugaydi.<br />
-          <span className="text-muted-foreground">Tizim qoladi.</span>
-        </h1>
-        <p className="mx-auto mt-5 max-w-md text-[15px] leading-relaxed text-muted-foreground text-pretty">
-          Kuniga uchta 2-daqiqalik qadam. Nadir AI mentor sen uchun shaxsiy protokol tuzadi.
-        </p>
-        <div className="mt-7 flex flex-col items-stretch gap-2.5 sm:flex-row sm:items-center sm:justify-center sm:gap-3">
-          <Button asChild size="lg" className="h-12 rounded-full px-6 font-ui font-semibold">
-            <Link to="/auth">
-              Bepul boshlash
-              <ArrowRight className="ml-1.5 h-4 w-4" />
-            </Link>
-          </Button>
-          <Button asChild size="lg" variant="ghost" className="h-12 rounded-full px-5 font-ui">
-            <a href="#how">Qanday ishlaydi ↓</a>
-          </Button>
-        </div>
-        <p className="mt-4 font-ui text-xs text-muted-foreground">
-          60 soniyada · Kartasiz · O'zbek tilida
-        </p>
+    <section
+      ref={ref}
+      className="relative isolate overflow-hidden border-b border-border"
+      style={{ ["--px" as never]: "50%", ["--py" as never]: "30%" }}
+    >
+      {/* Animated aurora + grid + spotlight */}
+      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
+        <div className="aurora" />
+        <div className="absolute inset-0 bg-grid opacity-40" />
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "radial-gradient(600px circle at var(--px) var(--py), hsl(var(--primary) / 0.14), transparent 55%)",
+          }}
+        />
+        {/* floating orbs */}
+        <div className="orb-a absolute left-[8%] top-[15%] h-40 w-40 rounded-full bg-primary/25 blur-3xl" />
+        <div className="orb-b absolute right-[10%] top-[45%] h-52 w-52 rounded-full bg-primary-glow/20 blur-3xl" />
+      </div>
+
+      <div className="relative mx-auto max-w-3xl px-5 pb-14 pt-16 text-center md:pb-20 md:pt-28">
+        <Reveal>
+          <p className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/5 px-3 py-1 font-ui text-[11px] uppercase tracking-[0.24em] text-primary/90">
+            <span className="relative flex h-1.5 w-1.5">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-70" />
+              <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-primary" />
+            </span>
+            Beta · Xulq-atvor tizimi
+          </p>
+        </Reveal>
+        <Reveal delay={80}>
+          <h1 className="mt-5 font-serif text-[36px] leading-[1.02] tracking-tight text-balance sm:text-5xl md:text-6xl">
+            <span className="title-sweep">Motivatsiya tugaydi.</span>
+            <br />
+            <span className="text-muted-foreground">Tizim qoladi.</span>
+          </h1>
+        </Reveal>
+        <Reveal delay={160}>
+          <p className="mx-auto mt-5 max-w-md text-[15px] leading-relaxed text-muted-foreground text-pretty">
+            Kuniga uchta 2-daqiqalik qadam. Nadir AI mentor sen uchun shaxsiy protokol tuzadi.
+          </p>
+        </Reveal>
+        <Reveal delay={220}>
+          <div className="mt-8 flex flex-col items-stretch gap-2.5 sm:flex-row sm:items-center sm:justify-center sm:gap-3">
+            <Button asChild size="lg" className="h-12 rounded-full px-6 font-ui font-semibold btn-shine glow-amber">
+              <Link to="/auth">
+                Bepul boshlash
+                <ArrowRight className="ml-1.5 h-4 w-4" />
+              </Link>
+            </Button>
+            <Button asChild size="lg" variant="ghost" className="h-12 rounded-full px-5 font-ui">
+              <a href="#how">Qanday ishlaydi ↓</a>
+            </Button>
+          </div>
+        </Reveal>
+        <Reveal delay={280}>
+          <p className="mt-5 font-ui text-xs text-muted-foreground">
+            60 soniyada · Kartasiz · O'zbek tilida
+          </p>
+        </Reveal>
       </div>
     </section>
   );
@@ -172,8 +217,12 @@ function ProofStrip() {
           Ilmiy asos · peer-reviewed manba
         </p>
         <dl className="mt-6 grid grid-cols-2 gap-3 md:grid-cols-4">
-          {items.map((s) => (
-            <ExpandableStat key={s.k} {...s} />
+          {items.map((s, i) => (
+            <Reveal key={s.k} delay={i * 60}>
+              <TiltCard className="h-full">
+                <ExpandableStat {...s} />
+              </TiltCard>
+            </Reveal>
           ))}
         </dl>
         <p className="mt-4 text-center font-ui text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
@@ -201,7 +250,7 @@ function ExpandableStat({
       type="button"
       onClick={() => setOpen((o) => !o)}
       aria-expanded={open}
-      className="group text-left rounded-[var(--radius)] border border-border bg-background/60 p-4 transition hover:border-primary/40 hover:bg-background focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
+      className="group text-left h-full w-full rounded-[var(--radius)] border border-border bg-background/60 p-4 transition hover:border-primary/40 hover:bg-background focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
     >
       <div className="flex items-baseline justify-between gap-2">
         <dt className="font-serif text-2xl tracking-tight tabular-nums md:text-3xl">
@@ -265,14 +314,17 @@ function HowItWorks() {
           sub="Har bosqich keyingisini oziqlantiradi. Kartochkani bos — batafsil."
         />
         <div className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-          {steps.map((s) => (
-            <ExpandableCard
-              key={s.n}
-              eyebrow={s.n}
-              title={s.title}
-              short={s.short}
-              more={s.more}
-            />
+          {steps.map((s, i) => (
+            <Reveal key={s.n} delay={i * 80}>
+              <TiltCard className="h-full">
+                <ExpandableCard
+                  eyebrow={s.n}
+                  title={s.title}
+                  short={s.short}
+                  more={s.more}
+                />
+              </TiltCard>
+            </Reveal>
           ))}
         </div>
       </div>
@@ -328,8 +380,12 @@ function Features() {
           sub="Har biri bir maqsad uchun. Bezak emas — mexanizm."
         />
         <div className="mt-8 grid gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3">
-          {items.map((f) => (
-            <ExpandableFeature key={f.title} {...f} />
+          {items.map((f, i) => (
+            <Reveal key={f.title} delay={i * 60}>
+              <TiltCard className="h-full">
+                <ExpandableFeature {...f} />
+              </TiltCard>
+            </Reveal>
           ))}
         </div>
       </div>
@@ -354,7 +410,7 @@ function ExpandableFeature({
       type="button"
       onClick={() => setOpen((o) => !o)}
       aria-expanded={open}
-      className="group text-left rounded-[var(--radius)] border border-border bg-background p-5 transition hover:border-primary/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
+      className="group text-left h-full w-full rounded-[var(--radius)] border border-border bg-background p-5 transition hover:border-primary/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
     >
       <div className="flex items-start justify-between gap-2">
         <Icon className="h-4 w-4 text-primary" />
@@ -397,7 +453,7 @@ function ExpandableCard({
       type="button"
       onClick={() => setOpen((o) => !o)}
       aria-expanded={open}
-      className="relative text-left rounded-[var(--radius)] border border-border p-5 transition hover:border-primary/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
+      className="relative text-left h-full w-full rounded-[var(--radius)] border border-border p-5 transition hover:border-primary/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
     >
       <div className="flex items-start justify-between gap-2">
         <p className="font-ui text-xs uppercase tracking-[0.22em] text-primary">
@@ -435,35 +491,43 @@ function Pricing() {
           sub="Free doimiy. Pro — kengroq AI konteksti va cheksiz odat."
         />
         <div className="mt-10 grid gap-5 md:grid-cols-2">
-          <PricingCard
-            title="Free"
-            price="0 so'm"
-            period="doimiy"
-            features={[
-              "Kunlik 3 ta mikro-missiya",
-              "Streak, XP, intizom balli",
-              "Nadir bilan asosiy suhbat",
-              "Kundalik va kayfiyat",
-              "PWA — telefonga o'rnatiladi",
-            ]}
-            cta="Bepul boshlash"
-            variant="outline"
-          />
-          <PricingCard
-            title="Pro"
-            price="49 000 so'm"
-            period="oyiga"
-            features={[
-              "Free rejadagi hammasi",
-              "Nadir Pro — kengroq kontekst",
-              "Cheksiz odat va quest",
-              "Haftalik AI hisobot",
-              "Burnout signal + nudge",
-              "Davra kanallariga to'liq kirish",
-            ]}
-            cta="Pro rejaga o'tish"
-            variant="primary"
-          />
+          <Reveal>
+            <TiltCard className="h-full">
+              <PricingCard
+                title="Free"
+                price="0 so'm"
+                period="doimiy"
+                features={[
+                  "Kunlik 3 ta mikro-missiya",
+                  "Streak, XP, intizom balli",
+                  "Nadir bilan asosiy suhbat",
+                  "Kundalik va kayfiyat",
+                  "PWA — telefonga o'rnatiladi",
+                ]}
+                cta="Bepul boshlash"
+                variant="outline"
+              />
+            </TiltCard>
+          </Reveal>
+          <Reveal delay={120}>
+            <TiltCard className="h-full">
+              <PricingCard
+                title="Pro"
+                price="49 000 so'm"
+                period="oyiga"
+                features={[
+                  "Free rejadagi hammasi",
+                  "Nadir Pro — kengroq kontekst",
+                  "Cheksiz odat va quest",
+                  "Haftalik AI hisobot",
+                  "Burnout signal + nudge",
+                  "Davra kanallariga to'liq kirish",
+                ]}
+                cta="Pro rejaga o'tish"
+                variant="primary"
+              />
+            </TiltCard>
+          </Reveal>
         </div>
       </div>
     </section>
@@ -488,9 +552,9 @@ function PricingCard({
   return (
     <div
       className={
-        "rounded-[var(--radius)] p-7 " +
+        "relative h-full rounded-[var(--radius)] p-7 " +
         (variant === "primary"
-          ? "border-2 border-primary bg-background"
+          ? "border-2 border-primary bg-background glow-amber"
           : "border border-border bg-background")
       }
     >
