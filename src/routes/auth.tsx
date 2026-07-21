@@ -341,11 +341,16 @@ function GoogleIcon() {
 
 function translateAuthError(msg: string): string {
   const s = msg.toLowerCase();
-  if (s.includes("invalid login")) return "Email yoki parol noto'g'ri.";
+  if (s.includes("invalid login") || s.includes("invalid credentials"))
+    return "Email yoki parol mos kelmadi. Qayta tekshirib ko'ring — hech narsa yo'qolmadi.";
   if (s.includes("already registered") || s.includes("user already"))
-    return "Bu email allaqachon ro'yxatdan o'tgan. Kirish tabini tanlang.";
-  if (s.includes("password")) return "Parol yetarli darajada kuchli emas.";
+    return "Bu email allaqachon ro'yxatdan o'tgan. Kirish tabini tanlang yoki parolni tiklang.";
+  if (s.includes("email not confirmed"))
+    return "Email hali tasdiqlanmagan. Pochtangizni tekshiring — havola yuborilgan.";
+  if (s.includes("rate limit") || s.includes("too many"))
+    return "Ko'p urinish bo'ldi. Bir daqiqadan keyin qayta urinib ko'ring.";
+  if (s.includes("password")) return "Parol kuchsizroq — kamida 8 belgi va turli-tuman kombinatsiya bering.";
   if (s.includes("network") || s.includes("fetch"))
-    return "Internet aloqasi uzildi. Qayta urinib ko'ring.";
-  return msg;
+    return "Internet aloqasi uzildi. Ulanish tiklanganda qayta urinib ko'ring.";
+  return "Xato yuz berdi. Qayta urinib ko'ring — hech narsa buzilmadi.";
 }
