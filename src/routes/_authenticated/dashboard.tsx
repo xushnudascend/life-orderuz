@@ -224,17 +224,11 @@ function Dashboard() {
 
   return (
     <AppShell title="Bosh sahifa">
+      {/* Yuqori qism — salom, kontekst, ogohlantirishlar */}
       <ProfileCompletionCard missing={missing} />
       <NadirNudgeBanner userId={userId} />
       <StreakAtRisk streakDays={streak?.current_days ?? 0} percent={percent} />
 
-      <div className="mb-5">
-        <HumanPotentialPanel />
-      </div>
-
-      <div className="mb-5">
-        <RetentionPanels />
-      </div>
 
 
 
@@ -490,6 +484,13 @@ function Dashboard() {
           </div>
         </Panel>
       </div>
+
+      {/* Pastki qism — chuqurroq psixologik ma'lumot va retentsiya */}
+      <div className="mt-5 grid gap-4 lg:grid-cols-2">
+        <HumanPotentialPanel />
+        <RetentionPanels />
+      </div>
+
       {milestone !== null && (
         <StreakMilestone days={milestone} onDismiss={() => setMilestone(null)} />
       )}
