@@ -380,8 +380,12 @@ function Features() {
           sub="Har biri bir maqsad uchun. Bezak emas — mexanizm."
         />
         <div className="mt-8 grid gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3">
-          {items.map((f) => (
-            <ExpandableFeature key={f.title} {...f} />
+          {items.map((f, i) => (
+            <Reveal key={f.title} delay={i * 60}>
+              <TiltCard className="h-full">
+                <ExpandableFeature {...f} />
+              </TiltCard>
+            </Reveal>
           ))}
         </div>
       </div>
