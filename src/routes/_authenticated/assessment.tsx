@@ -44,14 +44,17 @@ function AssessmentPage() {
   const finalizingRef = useRef(false);
 
   function setAnswer(key: string, val: number) {
-    const next = { ...answers, [key]: val };
-    setAnswers(next);
+    let latest: Record<string, number> = {};
+    setAnswers((prev) => {
+      latest = { ...prev, [key]: val };
+      return latest;
+    });
     // auto-advance 300ms after tap (dopamine RPE — anticipation)
     setTimeout(() => {
-      if (step + 1 >= total) {
+      if (Object.keys(latest).length >= total) {
         if (finalizingRef.current) return;
         finalizingRef.current = true;
-        void finalize(next);
+        void finalize(latest);
       } else {
         setStep((s) => (s + 1 >= total ? s : s + 1));
       }
