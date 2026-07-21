@@ -217,8 +217,12 @@ function ProofStrip() {
           Ilmiy asos · peer-reviewed manba
         </p>
         <dl className="mt-6 grid grid-cols-2 gap-3 md:grid-cols-4">
-          {items.map((s) => (
-            <ExpandableStat key={s.k} {...s} />
+          {items.map((s, i) => (
+            <Reveal key={s.k} delay={i * 60}>
+              <TiltCard className="h-full">
+                <ExpandableStat {...s} />
+              </TiltCard>
+            </Reveal>
           ))}
         </dl>
         <p className="mt-4 text-center font-ui text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
