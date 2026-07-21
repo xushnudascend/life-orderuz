@@ -159,9 +159,6 @@ function ChannelView() {
           className="mt-8"
         />
       ) : (
-        <div className="mt-8 space-y-3">{null}</div>
-      )}
-      ) : (
         <div className="mt-8 space-y-3">
           {posts.map((p) => (
             <div key={p.id} className="rounded-[var(--radius)] border border-border bg-card p-4">
