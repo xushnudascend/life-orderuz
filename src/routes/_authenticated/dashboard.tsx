@@ -244,58 +244,71 @@ function Dashboard() {
       </div>
 
       {/* KPI qatori */}
-      <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-4">
-        <Panel>
-          <PanelHeader eyebrow="Bugun" />
-          <PanelValue
-            value={`${doneCount}/${habits.length || 0}`}
-            caption={`${percent}% bajarildi`}
-            trend={percent >= 70 ? "up" : "flat"}
-          />
-        </Panel>
-        <Panel>
-          <PanelHeader eyebrow="Streak" />
-          <PanelValue
-            value={
-              <span className="inline-flex items-center gap-1.5">
-                <Flame className="h-5 w-5 text-primary" />
-                {streak?.current_days ?? 0}
-              </span>
-            }
-            caption="ketma-ket kun"
-          />
-        </Panel>
-        <Panel>
-          <PanelHeader eyebrow={`Daraja ${stats?.level ?? 1}`} />
-          <PanelValue
-            value={<><CountUpNumber value={stats?.total_xp ?? 0} once="dash-xp" /> XP</>}
-            caption={`${xpProgress}% keyingi darajaga`}
-          />
-          <div className="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-border">
-            <div
-              className="h-full bg-primary transition-all"
-              style={{ width: `${xpProgress}%` }}
+      {!loaded ? (
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-4" aria-busy="true" aria-live="polite">
+          <span className="sr-only">Bugungi ma'lumotlar yuklanmoqda…</span>
+          {[0, 1, 2, 3].map((i) => (
+            <div key={i} className="rounded-[var(--radius)] border border-border/70 bg-card p-4">
+              <div className="skeleton h-3 w-16" />
+              <div className="skeleton mt-3 h-7 w-24" />
+              <div className="skeleton mt-2 h-3 w-20" />
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-4">
+          <Panel>
+            <PanelHeader eyebrow="Bugun" />
+            <PanelValue
+              value={`${doneCount}/${habits.length || 0}`}
+              caption={`${percent}% bajarildi`}
+              trend={percent >= 70 ? "up" : "flat"}
             />
-          </div>
-        </Panel>
-        <Panel>
-          <PanelHeader
-            eyebrow="Himoya"
-            action={
-              <Link
-                to="/profile"
-                className="font-ui text-[10px] uppercase tracking-[0.2em] text-muted-foreground hover:text-primary"
-              >
-                Rank
-              </Link>
-            }
-          />
-          <div className="mt-2 flex items-center justify-between gap-2">
-            <ShieldIndicator usedThisWeek={shieldsUsed} max={3} />
-            <RankBadge score={score} />
-          </div>
-        </Panel>
-      </div>
+          </Panel>
+          <Panel>
+            <PanelHeader eyebrow="Streak" />
+            <PanelValue
+              value={
+                <span className="inline-flex items-center gap-1.5">
+                  <Flame className="h-5 w-5 text-primary" />
+                  {streak?.current_days ?? 0}
+                </span>
+              }
+              caption="ketma-ket kun"
+            />
+          </Panel>
+          <Panel>
+            <PanelHeader eyebrow={`Daraja ${stats?.level ?? 1}`} />
+            <PanelValue
+              value={<><CountUpNumber value={stats?.total_xp ?? 0} once="dash-xp" /> XP</>}
+              caption={`${xpProgress}% keyingi darajaga`}
+            />
+            <div className="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-border">
+              <div
+                className="h-full bg-primary transition-all"
+                style={{ width: `${xpProgress}%` }}
+              />
+            </div>
+          </Panel>
+          <Panel>
+            <PanelHeader
+              eyebrow="Himoya"
+              action={
+                <Link
+                  to="/profile"
+                  className="font-ui text-[10px] uppercase tracking-[0.2em] text-muted-foreground hover:text-primary"
+                >
+                  Rank
+                </Link>
+              }
+            />
+            <div className="mt-2 flex items-center justify-between gap-2">
+              <ShieldIndicator usedThisWeek={shieldsUsed} max={3} />
+              <RankBadge score={score} />
+            </div>
+          </Panel>
+        </div>
+      )}
 
       {/* Nadir mikro-kuzatuv */}
       <div className="mt-4">
