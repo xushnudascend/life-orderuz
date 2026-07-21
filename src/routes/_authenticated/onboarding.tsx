@@ -279,9 +279,18 @@ function Onboarding() {
             <QuestionCard
               q={currentB}
               value={answers[currentB.key]}
-              onChange={(v) => setAnswer(currentB.key, v)}
+              onChange={(v) => {
+                setAnswer(currentB.key, v);
+                // Single-choice — avtomatik keyingi savolga o'tish
+                if (currentB.type === "single") {
+                  setTimeout(() => {
+                    setStep((s) => (s < total - 1 ? s + 1 : s));
+                  }, 220);
+                }
+              }}
               onToggleMulti={(v) => toggleMulti(currentB.key, v)}
             />
+
           ) : (
             <FinalPage
               questions={aQuestions}
