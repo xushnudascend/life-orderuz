@@ -46,7 +46,11 @@ export function BottomNav({
         <Sparkles className="h-6 w-6" strokeWidth={2.2} aria-hidden />
         <span
           aria-hidden
-          className="absolute inset-0 -z-10 rounded-full bg-primary/50 blur-xl opacity-70"
+          className="halo-spin absolute inset-[-6px] -z-10 rounded-full bg-[conic-gradient(from_0deg,hsl(var(--primary)/0.55),transparent_40%,hsl(var(--primary)/0.55)_80%,transparent)] blur-md opacity-70"
+        />
+        <span
+          aria-hidden
+          className="orb-breathe absolute inset-0 -z-10 rounded-full bg-primary/50 blur-xl"
         />
         <span className="sr-only">Nadir</span>
       </Link>

@@ -25,8 +25,7 @@ export function Panel({
         "shadow-[inset_0_1px_0_hsl(var(--foreground)/0.03),0_1px_2px_hsl(240_30%_0%/0.35)]",
         "transition-[border-color,transform,box-shadow] duration-200",
         "focus-within:border-primary/50 focus-within:shadow-[inset_0_1px_0_hsl(var(--foreground)/0.03),0_0_0_1px_hsl(var(--primary)/0.35),0_6px_20px_-10px_hsl(var(--primary)/0.4)]",
-        interactive &&
-          "cursor-pointer hover:-translate-y-0.5 hover:border-primary/50 hover:shadow-[inset_0_1px_0_hsl(var(--foreground)/0.04),0_10px_28px_-14px_hsl(var(--primary)/0.35)]",
+        interactive && "lift-3d cursor-pointer",
         className,
       )}
     >
