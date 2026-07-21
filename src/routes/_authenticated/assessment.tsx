@@ -171,7 +171,7 @@ function AssessmentPage() {
         <div className="animate-in fade-in duration-500">
           <PageHero
             eyebrow="Human Potential Assessment"
-            title="Sizning hozirgi \"men\" — yakuniy \"men\" emas."
+            title={'Sizning hozirgi "men" — yakuniy "men" emas.'}
             subtitle="Bu 9 shkala bo'yicha bugungi holatingiz. Har biri o'zgarishi mumkin."
           />
 
