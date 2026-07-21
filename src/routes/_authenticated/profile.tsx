@@ -312,3 +312,13 @@ function Row({ label, value }: { label: string; value: string }) {
     </div>
   );
 }
+
+function identityFrom(level: number, streak: number): string {
+  if (streak >= 66) return "izchillik ustasi";
+  if (streak >= 21) return "tizim quruvchi";
+  if (streak >= 7) return "kundalik amaliyotchi";
+  if (level >= 5) return "o'zini boshqaruvchi";
+  if (streak >= 3) return "boshlagan odam";
+  return "yangi boshlanuvchi tizim quruvchi";
+}
+
