@@ -8,6 +8,7 @@ import {
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { DailyQuoteModal } from "@/components/daily-quote-modal";
+import { RestNudge } from "@/components/rest-nudge";
 
 
 /**
@@ -80,7 +81,9 @@ function AuthenticatedShell() {
     <>
       <Outlet />
       <DailyQuoteModal />
+      <RestNudge />
     </>
+
   );
 }
 
