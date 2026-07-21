@@ -50,6 +50,7 @@ function Diet() {
   const [cal, setCal] = useState<string>("");
   const [uploading, setUploading] = useState(false);
   const [pendingImage, setPendingImage] = useState<string | null>(null);
+  const [signedUrls, setSignedUrls] = useState<Record<string, string>>({});
   const fileRef = useRef<HTMLInputElement>(null);
 
   // Kaloriya kalkulyator
@@ -84,6 +85,32 @@ function Diet() {
     refresh();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userId]);
+
+  // Sign short-lived URLs (1h) for visible meal images at render time.
+  useEffect(() => {
+    let cancelled = false;
+    const paths = rows
+      .map((r) => r.image_url)
+      .filter((v): v is string => !!v && !v.startsWith("http") && !v.startsWith("blob:"));
+    if (paths.length === 0) {
+      setSignedUrls({});
+      return;
+    }
+    (async () => {
+      const { data } = await supabase.storage
+        .from("meals")
+        .createSignedUrls(paths, 60 * 60);
+      if (cancelled || !data) return;
+      const map: Record<string, string> = {};
+      data.forEach((d) => {
+        if (d.path && d.signedUrl) map[d.path] = d.signedUrl;
+      });
+      setSignedUrls(map);
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [rows]);
 
   const dailyTarget = useMemo(() => {
     if (!profile?.sex || !profile.height_cm || !profile.weight_kg || !profile.age) return null;
