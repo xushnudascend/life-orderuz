@@ -48,9 +48,12 @@ export function RetentionPanels() {
       {/* Weekly challenge */}
       <Panel>
         <PanelHeader
-          icon={<Target className="h-3.5 w-3.5" />}
-          title="Bu hafta"
-          subtitle="Bitta aniq maqsad — kognitiv yuk minimal"
+          eyebrow="Bu hafta"
+          title={
+            <p className="font-ui text-[14px] font-semibold flex items-center gap-1.5">
+              <Target className="h-3.5 w-3.5 text-primary" /> Haftalik maqsad
+            </p>
+          }
         />
         {challenge ? (
           <div className="mt-3 space-y-3">
