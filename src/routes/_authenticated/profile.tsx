@@ -169,6 +169,12 @@ function ProfilePage() {
         </Panel>
       )}
 
+      {!loading && (
+        <ProgressTimeline current={streak?.current_days ?? 0} />
+      )}
+
+
+
 
 
       {loading ? (
