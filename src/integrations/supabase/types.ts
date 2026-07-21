@@ -511,6 +511,57 @@ export type Database = {
           },
         ]
       }
+      payment_orders: {
+        Row: {
+          amount_uzs: number
+          cancel_reason: number | null
+          cancel_time: string | null
+          created_at: string
+          currency: string
+          id: string
+          perform_time: string | null
+          plan: string
+          provider: string
+          provider_txn_id: string | null
+          raw_payload: Json | null
+          state: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          amount_uzs: number
+          cancel_reason?: number | null
+          cancel_time?: string | null
+          created_at?: string
+          currency?: string
+          id?: string
+          perform_time?: string | null
+          plan: string
+          provider: string
+          provider_txn_id?: string | null
+          raw_payload?: Json | null
+          state?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          amount_uzs?: number
+          cancel_reason?: number | null
+          cancel_time?: string | null
+          created_at?: string
+          currency?: string
+          id?: string
+          perform_time?: string | null
+          plan?: string
+          provider?: string
+          provider_txn_id?: string | null
+          raw_payload?: Json | null
+          state?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       post_comments: {
         Row: {
           content: string
