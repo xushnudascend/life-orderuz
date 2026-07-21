@@ -695,3 +695,70 @@ html[data-perf="low"] .orb-a, html[data-perf="low"] .orb-b { animation: none; }
 @keyframes lo-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 .marquee-track { animation: lo-marquee 30s linear infinite; }
 html[data-perf="low"] .marquee-track { animation: none; }
+
+/* ============================================================
+ * Subtle editorial motion — no gamification.
+ * ============================================================ */
+
+/* Slow ambient drift for the hero backdrop halo */
+@keyframes lo-halo-drift {
+  0%, 100% { transform: translate3d(-50%, -50%, 0) scale(1); opacity: 0.55; }
+  50%      { transform: translate3d(-48%, -52%, 0) scale(1.08); opacity: 0.75; }
+}
+.halo-drift {
+  animation: lo-halo-drift 14s ease-in-out infinite;
+}
+
+/* Hero title character rise — applied once on mount */
+@keyframes lo-rise {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.rise-1 { animation: lo-rise 700ms ease-out both; }
+.rise-2 { animation: lo-rise 700ms ease-out 120ms both; }
+.rise-3 { animation: lo-rise 700ms ease-out 240ms both; }
+.rise-4 { animation: lo-rise 700ms ease-out 360ms both; }
+
+/* Hairline sweep beneath eyebrow labels */
+@keyframes lo-line-in {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+.line-sweep {
+  display: inline-block;
+  height: 1px;
+  width: 28px;
+  background: hsl(var(--primary));
+  transform-origin: left center;
+  animation: lo-line-in 900ms ease-out 200ms both;
+}
+
+/* Grid-cell hover: gentle tint + tiny lift, no scale/bounce */
+.cell-hover {
+  transition: background-color 300ms ease, transform 400ms ease, border-color 300ms ease;
+}
+.cell-hover:hover {
+  background-color: hsl(var(--muted) / 0.35);
+  transform: translateY(-1px);
+}
+
+/* Number tick — for ProofStrip stats */
+@keyframes lo-tick {
+  from { opacity: 0; transform: translateY(6px); letter-spacing: 0.02em; }
+  to   { opacity: 1; transform: translateY(0); letter-spacing: 0; }
+}
+.tick-in { animation: lo-tick 800ms ease-out both; }
+
+/* Arrow nudge on CTA hover */
+.cta-arrow { transition: transform 300ms ease; }
+.group:hover .cta-arrow, a:hover .cta-arrow, button:hover .cta-arrow {
+  transform: translateX(3px);
+}
+
+/* Reduced motion respect */
+@media (prefers-reduced-motion: reduce) {
+  .halo-drift, .rise-1, .rise-2, .rise-3, .rise-4,
+  .line-sweep, .tick-in { animation: none !important; }
+  .cell-hover:hover { transform: none; }
+}
+html[data-perf="low"] .halo-drift { animation: none; }
