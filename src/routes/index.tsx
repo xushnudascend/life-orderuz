@@ -103,37 +103,81 @@ function Landing() {
 }
 
 function Hero() {
+  const ref = useRef<HTMLDivElement | null>(null);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const onMove = (e: PointerEvent) => {
+      if (e.pointerType === "touch") return;
+      const r = el.getBoundingClientRect();
+      el.style.setProperty("--px", `${((e.clientX - r.left) / r.width) * 100}%`);
+      el.style.setProperty("--py", `${((e.clientY - r.top) / r.height) * 100}%`);
+    };
+    el.addEventListener("pointermove", onMove);
+    return () => el.removeEventListener("pointermove", onMove);
+  }, []);
   return (
-    <section className="relative overflow-hidden border-b border-border">
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,hsl(var(--primary)/0.10),transparent_60%)]"
-      />
-      <div className="relative mx-auto max-w-3xl px-5 pb-12 pt-14 text-center md:pb-16 md:pt-24">
-        <p className="font-ui text-[11px] uppercase tracking-[0.24em] text-muted-foreground">
-          Beta · Xulq-atvor tizimi
-        </p>
-        <h1 className="mt-5 font-serif text-[34px] leading-[1.05] tracking-tight text-balance sm:text-5xl md:text-6xl">
-          Motivatsiya tugaydi.<br />
-          <span className="text-muted-foreground">Tizim qoladi.</span>
-        </h1>
-        <p className="mx-auto mt-5 max-w-md text-[15px] leading-relaxed text-muted-foreground text-pretty">
-          Kuniga uchta 2-daqiqalik qadam. Nadir AI mentor sen uchun shaxsiy protokol tuzadi.
-        </p>
-        <div className="mt-7 flex flex-col items-stretch gap-2.5 sm:flex-row sm:items-center sm:justify-center sm:gap-3">
-          <Button asChild size="lg" className="h-12 rounded-full px-6 font-ui font-semibold">
-            <Link to="/auth">
-              Bepul boshlash
-              <ArrowRight className="ml-1.5 h-4 w-4" />
-            </Link>
-          </Button>
-          <Button asChild size="lg" variant="ghost" className="h-12 rounded-full px-5 font-ui">
-            <a href="#how">Qanday ishlaydi ↓</a>
-          </Button>
-        </div>
-        <p className="mt-4 font-ui text-xs text-muted-foreground">
-          60 soniyada · Kartasiz · O'zbek tilida
-        </p>
+    <section
+      ref={ref}
+      className="relative isolate overflow-hidden border-b border-border"
+      style={{ ["--px" as never]: "50%", ["--py" as never]: "30%" }}
+    >
+      {/* Animated aurora + grid + spotlight */}
+      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
+        <div className="aurora" />
+        <div className="absolute inset-0 bg-grid opacity-40" />
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "radial-gradient(600px circle at var(--px) var(--py), hsl(var(--primary) / 0.14), transparent 55%)",
+          }}
+        />
+        {/* floating orbs */}
+        <div className="orb-a absolute left-[8%] top-[15%] h-40 w-40 rounded-full bg-primary/25 blur-3xl" />
+        <div className="orb-b absolute right-[10%] top-[45%] h-52 w-52 rounded-full bg-primary-glow/20 blur-3xl" />
+      </div>
+
+      <div className="relative mx-auto max-w-3xl px-5 pb-14 pt-16 text-center md:pb-20 md:pt-28">
+        <Reveal>
+          <p className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/5 px-3 py-1 font-ui text-[11px] uppercase tracking-[0.24em] text-primary/90">
+            <span className="relative flex h-1.5 w-1.5">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-70" />
+              <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-primary" />
+            </span>
+            Beta · Xulq-atvor tizimi
+          </p>
+        </Reveal>
+        <Reveal delay={80}>
+          <h1 className="mt-5 font-serif text-[36px] leading-[1.02] tracking-tight text-balance sm:text-5xl md:text-6xl">
+            <span className="title-sweep">Motivatsiya tugaydi.</span>
+            <br />
+            <span className="text-muted-foreground">Tizim qoladi.</span>
+          </h1>
+        </Reveal>
+        <Reveal delay={160}>
+          <p className="mx-auto mt-5 max-w-md text-[15px] leading-relaxed text-muted-foreground text-pretty">
+            Kuniga uchta 2-daqiqalik qadam. Nadir AI mentor sen uchun shaxsiy protokol tuzadi.
+          </p>
+        </Reveal>
+        <Reveal delay={220}>
+          <div className="mt-8 flex flex-col items-stretch gap-2.5 sm:flex-row sm:items-center sm:justify-center sm:gap-3">
+            <Button asChild size="lg" className="h-12 rounded-full px-6 font-ui font-semibold btn-shine glow-amber">
+              <Link to="/auth">
+                Bepul boshlash
+                <ArrowRight className="ml-1.5 h-4 w-4" />
+              </Link>
+            </Button>
+            <Button asChild size="lg" variant="ghost" className="h-12 rounded-full px-5 font-ui">
+              <a href="#how">Qanday ishlaydi ↓</a>
+            </Button>
+          </div>
+        </Reveal>
+        <Reveal delay={280}>
+          <p className="mt-5 font-ui text-xs text-muted-foreground">
+            60 soniyada · Kartasiz · O'zbek tilida
+          </p>
+        </Reveal>
       </div>
     </section>
   );
