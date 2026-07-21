@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode, type ElementType } from "react";
 
 /**
  * Subtle scroll-triggered reveal. No gamification, no bounce.
@@ -12,7 +12,7 @@ export function Reveal({
 }: {
   children: ReactNode;
   delay?: number;
-  as?: keyof JSX.IntrinsicElements;
+  as?: ElementType;
   className?: string;
 }) {
   const ref = useRef<HTMLElement | null>(null);
