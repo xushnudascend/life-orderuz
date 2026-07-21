@@ -29,6 +29,7 @@ import { Route as CheckoutSuccessRouteImport } from './routes/checkout.success'
 import { Route as BlogTungiRitualRouteImport } from './routes/blog.tungi-ritual'
 import { Route as BlogMotivatsiyaTuzogiRouteImport } from './routes/blog.motivatsiya-tuzogi'
 import { Route as BlogHayotSohalariRouteImport } from './routes/blog.hayot-sohalari'
+import { Route as BlogHabitTrackerGuideRouteImport } from './routes/blog.habit-tracker-guide'
 import { Route as Blog66KunQoidasiRouteImport } from './routes/blog.66-kun-qoidasi'
 import { Route as ApiChatRouteImport } from './routes/api/chat'
 import { Route as AuthenticatedWorkoutRouteImport } from './routes/_authenticated/workout'
@@ -163,6 +164,11 @@ const BlogMotivatsiyaTuzogiRoute = BlogMotivatsiyaTuzogiRouteImport.update({
 const BlogHayotSohalariRoute = BlogHayotSohalariRouteImport.update({
   id: '/blog/hayot-sohalari',
   path: '/blog/hayot-sohalari',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BlogHabitTrackerGuideRoute = BlogHabitTrackerGuideRouteImport.update({
+  id: '/blog/habit-tracker-guide',
+  path: '/blog/habit-tracker-guide',
   getParentRoute: () => rootRouteImport,
 } as any)
 const Blog66KunQoidasiRoute = Blog66KunQoidasiRouteImport.update({
@@ -389,6 +395,7 @@ export interface FileRoutesByFullPath {
   '/workout': typeof AuthenticatedWorkoutRoute
   '/api/chat': typeof ApiChatRoute
   '/blog/66-kun-qoidasi': typeof Blog66KunQoidasiRoute
+  '/blog/habit-tracker-guide': typeof BlogHabitTrackerGuideRoute
   '/blog/hayot-sohalari': typeof BlogHayotSohalariRoute
   '/blog/motivatsiya-tuzogi': typeof BlogMotivatsiyaTuzogiRoute
   '/blog/tungi-ritual': typeof BlogTungiRitualRoute
@@ -446,6 +453,7 @@ export interface FileRoutesByTo {
   '/workout': typeof AuthenticatedWorkoutRoute
   '/api/chat': typeof ApiChatRoute
   '/blog/66-kun-qoidasi': typeof Blog66KunQoidasiRoute
+  '/blog/habit-tracker-guide': typeof BlogHabitTrackerGuideRoute
   '/blog/hayot-sohalari': typeof BlogHayotSohalariRoute
   '/blog/motivatsiya-tuzogi': typeof BlogMotivatsiyaTuzogiRoute
   '/blog/tungi-ritual': typeof BlogTungiRitualRoute
@@ -505,6 +513,7 @@ export interface FileRoutesById {
   '/_authenticated/workout': typeof AuthenticatedWorkoutRoute
   '/api/chat': typeof ApiChatRoute
   '/blog/66-kun-qoidasi': typeof Blog66KunQoidasiRoute
+  '/blog/habit-tracker-guide': typeof BlogHabitTrackerGuideRoute
   '/blog/hayot-sohalari': typeof BlogHayotSohalariRoute
   '/blog/motivatsiya-tuzogi': typeof BlogMotivatsiyaTuzogiRoute
   '/blog/tungi-ritual': typeof BlogTungiRitualRoute
@@ -564,6 +573,7 @@ export interface FileRouteTypes {
     | '/workout'
     | '/api/chat'
     | '/blog/66-kun-qoidasi'
+    | '/blog/habit-tracker-guide'
     | '/blog/hayot-sohalari'
     | '/blog/motivatsiya-tuzogi'
     | '/blog/tungi-ritual'
@@ -621,6 +631,7 @@ export interface FileRouteTypes {
     | '/workout'
     | '/api/chat'
     | '/blog/66-kun-qoidasi'
+    | '/blog/habit-tracker-guide'
     | '/blog/hayot-sohalari'
     | '/blog/motivatsiya-tuzogi'
     | '/blog/tungi-ritual'
@@ -679,6 +690,7 @@ export interface FileRouteTypes {
     | '/_authenticated/workout'
     | '/api/chat'
     | '/blog/66-kun-qoidasi'
+    | '/blog/habit-tracker-guide'
     | '/blog/hayot-sohalari'
     | '/blog/motivatsiya-tuzogi'
     | '/blog/tungi-ritual'
@@ -720,6 +732,7 @@ export interface RootRouteChildren {
   Char91DotwellKnownChar93OauthProtectedResourceRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   ApiChatRoute: typeof ApiChatRoute
   Blog66KunQoidasiRoute: typeof Blog66KunQoidasiRoute
+  BlogHabitTrackerGuideRoute: typeof BlogHabitTrackerGuideRoute
   BlogHayotSohalariRoute: typeof BlogHayotSohalariRoute
   BlogMotivatsiyaTuzogiRoute: typeof BlogMotivatsiyaTuzogiRoute
   BlogTungiRitualRoute: typeof BlogTungiRitualRoute
@@ -879,6 +892,13 @@ declare module '@tanstack/react-router' {
       path: '/blog/hayot-sohalari'
       fullPath: '/blog/hayot-sohalari'
       preLoaderRoute: typeof BlogHayotSohalariRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog/habit-tracker-guide': {
+      id: '/blog/habit-tracker-guide'
+      path: '/blog/habit-tracker-guide'
+      fullPath: '/blog/habit-tracker-guide'
+      preLoaderRoute: typeof BlogHabitTrackerGuideRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/blog/66-kun-qoidasi': {
@@ -1220,6 +1240,7 @@ const rootRouteChildren: RootRouteChildren = {
     Char91DotwellKnownChar93OauthProtectedResourceRoute,
   ApiChatRoute: ApiChatRoute,
   Blog66KunQoidasiRoute: Blog66KunQoidasiRoute,
+  BlogHabitTrackerGuideRoute: BlogHabitTrackerGuideRoute,
   BlogHayotSohalariRoute: BlogHayotSohalariRoute,
   BlogMotivatsiyaTuzogiRoute: BlogMotivatsiyaTuzogiRoute,
   BlogTungiRitualRoute: BlogTungiRitualRoute,
