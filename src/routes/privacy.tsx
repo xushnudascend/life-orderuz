@@ -66,6 +66,21 @@ export const Route = createFileRoute("/privacy")({
       <p className="mt-6">
         Savol yoki so'rov: <strong>privacy@lifeorder.app</strong>. Odatda 3 ish kunida javob.
       </p>
+
+      <FounderPledge
+        will={[
+          "Ma'lumotni faqat sizning tajribangizni yaxshilash uchun ishlatamiz.",
+          "Barcha yozuvni JSON'da yuklab olish imkoni beramiz.",
+          "Hisobni o'chirsangiz — 30 kun ichida to'liq tozalaymiz (zaxira ham).",
+          "Buzilish bo'lsa — 72 soat ichida ochiq xabar beramiz.",
+        ]}
+        wont={[
+          "Ma'lumotingizni sotmaymiz.",
+          "Reklama tarmoqlariga bermaymiz.",
+          "AI treningiga rozilingizsiz ishlatmaymiz.",
+          "Shubhali ma'lumot broker'lar bilan ishlamaymiz.",
+        ]}
+      />
     </LegalShell>
   ),
 });
