@@ -20,8 +20,9 @@ type Item = { to: string; label: string; icon: LucideIcon; hint?: string };
 
 const PRIMARY: Item[] = [
   { to: "/dashboard", label: "Bosh sahifa", icon: Compass, hint: "Bugungi reja" },
+  { to: "/roadmap", label: "Yo'l xarita", icon: Target, hint: "Reclaim → Rebuild → Rise" },
   { to: "/habits", label: "Odatlar", icon: ListChecks, hint: "Kunlik odatlar" },
-  { to: "/quests", label: "Vazifalar", icon: Target, hint: "Haftalik quest'lar" },
+  { to: "/quests", label: "Vazifalar", icon: Trophy, hint: "Haftalik quest'lar" },
   { to: "/journal", label: "Kundalik", icon: BookText, hint: "Fikrlar" },
   { to: "/mentor", label: "Nadir AI", icon: Sparkles, hint: "AI mentor" },
 ];
