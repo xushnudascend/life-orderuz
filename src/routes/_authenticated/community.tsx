@@ -164,10 +164,10 @@ function CohortJoiner() {
               <Button
                 size="sm"
                 variant="outline"
-                disabled={joined?.loading}
+                disabled={state[tier]?.loading}
                 onClick={() => handleJoin(tier)}
               >
-                {joined?.loading ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : "Qo'shilish"}
+                {state[tier]?.loading ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : "Qo'shilish"}
               </Button>
             )}
           </Panel>
