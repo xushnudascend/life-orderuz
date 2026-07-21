@@ -2,15 +2,31 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useChat } from "@ai-sdk/react";
 import { DefaultChatTransport, type UIMessage } from "ai";
-import ReactMarkdown from "react-markdown";
 import { supabase } from "@/integrations/supabase/client";
 import { AppShell } from "@/components/app-shell";
-import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
-import { Copy, Check, Loader2, Send, Sparkles } from "lucide-react";
+import { Copy, Check, Loader2, Sparkles } from "lucide-react";
 import { PageHero } from "@/components/page-hero";
 import { EmptyState } from "@/components/empty-state";
 import { uz } from "@/i18n";
+import {
+  Conversation,
+  ConversationContent,
+  ConversationScrollButton,
+} from "@/components/ai-elements/conversation";
+import {
+  Message,
+  MessageContent,
+  MessageResponse,
+  MessageActions,
+  MessageAction,
+} from "@/components/ai-elements/message";
+import {
+  PromptInput,
+  PromptInputTextarea,
+  PromptInputFooter,
+  PromptInputSubmit,
+} from "@/components/ai-elements/prompt-input";
+import { Shimmer } from "@/components/ai-elements/shimmer";
 
 export const Route = createFileRoute("/_authenticated/mentor")({
   head: () => ({
@@ -250,129 +266,134 @@ function MentorChat({
       />
 
 
-      <div className="mt-8 space-y-4 pb-4">
-        {messages.length === 0 && (
-          <div className="space-y-4">
-            <EmptyState
-              icon={<Sparkles className="h-5 w-5" />}
-              title="Bugun nima seni to'xtatyapti?"
-              description="Bir jumla bilan yoz — Nadir avval eshitadi, keyin bitta aniq mikro-qadam beradi."
-            />
-            <div className="flex flex-wrap justify-center gap-2">
-              {[
-                "Ertalab tura olmayapman",
-                "Kecha odatimni o'tkazib yubordim",
-                "Fokusim tarqoq, nima qilay?",
-                "Streak uzildi, qaytadan boshlashga qo'rqaman",
-              ].map((p) => (
-                <button
-                  key={p}
-                  type="button"
-                  onClick={() => setInput(p)}
-                  className="rounded-full border border-border bg-card px-3 py-1.5 font-ui text-xs text-muted-foreground transition hover:border-primary/40 hover:text-foreground"
-                >
-                  {p}
-                </button>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {(messages as UIMessage[]).map((m) => {
-          const text = extractText(m);
-          const isUser = m.role === "user";
-          return (
-            <div key={m.id} className={"flex " + (isUser ? "justify-end" : "justify-start")}>
-              <div
-                className={
-                  "group relative max-w-[85%] rounded-[var(--radius)] border p-4 leading-relaxed " +
-                  (isUser ? "border-primary/30 bg-primary/5" : "border-border bg-card")
-                }
-              >
-                <p className="mb-1 font-ui text-[10px] uppercase tracking-[0.24em] text-muted-foreground">
-                  {isUser ? "Sen" : "Nadir"}
-                </p>
-                {isUser ? (
-                  <p className="whitespace-pre-wrap">{text}</p>
-                ) : (
-                  <>
-                    <div className="prose prose-sm dark:prose-invert max-w-none prose-p:my-2 prose-headings:font-serif">
-                      <ReactMarkdown>{text}</ReactMarkdown>
-                    </div>
-                    <CopyButton text={text} />
-                  </>
-                )}
+      <div className="mt-6 flex min-h-[60vh] flex-col">
+        <Conversation className="flex-1">
+          <ConversationContent className="space-y-4">
+            {messages.length === 0 && (
+              <div className="space-y-4">
+                <EmptyState
+                  icon={<Sparkles className="h-5 w-5" />}
+                  title="Bugun nima seni to'xtatyapti?"
+                  description="Bir jumla bilan yoz — Nadir avval eshitadi, keyin bitta aniq mikro-qadam beradi."
+                />
+                <div className="flex flex-wrap justify-center gap-2">
+                  {[
+                    "Ertalab tura olmayapman",
+                    "Kecha odatimni o'tkazib yubordim",
+                    "Fokusim tarqoq, nima qilay?",
+                    "Streak uzildi, qaytadan boshlashga qo'rqaman",
+                  ].map((p) => (
+                    <button
+                      key={p}
+                      type="button"
+                      onClick={() => setInput(p)}
+                      className="rounded-full border border-border bg-card px-3 py-1.5 font-ui text-xs text-muted-foreground transition hover:border-primary/40 hover:text-foreground"
+                    >
+                      {p}
+                    </button>
+                  ))}
+                </div>
               </div>
-            </div>
-          );
-        })}
-        {(() => {
-          const lastAssistant = [...(messages as UIMessage[])].reverse().find((m) => m.role === "assistant");
-          if (!lastAssistant || busy || messages.length === 0) return null;
-          const followUps = [
-            "Bu mikro-qadamni bugun qachon bajaraman?",
-            "Agar to'siq chiqsa — plan B nima?",
-            "Buni odatga aylantirish uchun kimga aytaman?",
-          ];
-          return (
-            <div className="flex flex-wrap gap-2 pl-2">
-              {followUps.map((q) => (
-                <button
-                  key={q}
-                  type="button"
-                  onClick={() => setInput(q)}
-                  className="rounded-full border border-border bg-card/60 px-3 py-1.5 font-ui text-[11px] text-muted-foreground transition hover:border-primary/40 hover:text-foreground"
-                >
-                  {q}
-                </button>
-              ))}
-            </div>
-          );
-        })()}
-        {busy && (
-          <div className="flex items-center gap-2 text-sm text-muted-foreground">
-            <Loader2 className="h-4 w-4 animate-spin" />
-            Nadir o'ylayapti…
-          </div>
-        )}
-        {error && (
-          <div className="rounded-[var(--radius)] border border-destructive/40 bg-destructive/10 p-3 text-sm text-destructive">
-            Xato: {error.message}
-          </div>
-        )}
-        <div ref={bottomRef} />
-      </div>
+            )}
 
-      <form
-        onSubmit={submit}
-        className="sticky bottom-24 mt-6 flex items-end gap-2 rounded-[var(--radius)] border border-border bg-background/95 p-3 backdrop-blur"
-      >
-        <Textarea
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          onKeyDown={(e) => {
-            if (e.key === "Enter" && !e.shiftKey) {
-              e.preventDefault();
-              submit(e as unknown as React.FormEvent);
-            }
+            {(messages as UIMessage[]).map((m) => {
+              const text = extractText(m);
+              const isUser = m.role === "user";
+              return (
+                <Message key={m.id} from={m.role}>
+                  <MessageContent
+                    className={
+                      isUser
+                        ? "bg-primary/5 border border-primary/30"
+                        : "bg-transparent border-0 px-0"
+                    }
+                  >
+                    <p className="mb-1 font-ui text-[10px] uppercase tracking-[0.24em] text-muted-foreground">
+                      {isUser ? "Sen" : "Nadir"}
+                    </p>
+                    {isUser ? (
+                      <p className="whitespace-pre-wrap">{text}</p>
+                    ) : (
+                      <>
+                        <MessageResponse>{text}</MessageResponse>
+                        <MessageActions>
+                          <CopyAction text={text} />
+                        </MessageActions>
+                      </>
+                    )}
+                  </MessageContent>
+                </Message>
+              );
+            })}
+
+            {(() => {
+              const lastAssistant = [...(messages as UIMessage[])].reverse().find((m) => m.role === "assistant");
+              if (!lastAssistant || busy || messages.length === 0) return null;
+              const followUps = [
+                "Bu mikro-qadamni bugun qachon bajaraman?",
+                "Agar to'siq chiqsa — plan B nima?",
+                "Buni odatga aylantirish uchun kimga aytaman?",
+              ];
+              return (
+                <div className="flex flex-wrap gap-2 pl-2">
+                  {followUps.map((q) => (
+                    <button
+                      key={q}
+                      type="button"
+                      onClick={() => setInput(q)}
+                      className="rounded-full border border-border bg-card/60 px-3 py-1.5 font-ui text-[11px] text-muted-foreground transition hover:border-primary/40 hover:text-foreground"
+                    >
+                      {q}
+                    </button>
+                  ))}
+                </div>
+              );
+            })()}
+
+            {busy && (
+              <div className="flex items-center gap-2 pl-2">
+                <Shimmer className="font-ui text-sm">Nadir o'ylayapti…</Shimmer>
+              </div>
+            )}
+            {error && (
+              <div className="rounded-[var(--radius)] border border-destructive/40 bg-destructive/10 p-3 text-sm text-destructive">
+                Xato: {error.message}
+              </div>
+            )}
+            <div ref={bottomRef} />
+          </ConversationContent>
+          <ConversationScrollButton />
+        </Conversation>
+
+        <PromptInput
+          onSubmit={(_msg, e) => {
+            e.preventDefault();
+            const text = input.trim();
+            if (!text || busy) return;
+            setInput("");
+            void sendMessage({ text });
           }}
-          placeholder="Nadirga yoz…"
-          rows={2}
-          className="min-h-[52px] resize-none font-ui"
-        />
-        <Button type="submit" disabled={busy || !input.trim()} size="icon" aria-label="Xabar yuborish">
-          <Send className="h-4 w-4" />
-        </Button>
-      </form>
+          className="mt-4"
+        >
+          <PromptInputTextarea
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            placeholder="Nadirga yoz…"
+          />
+          <PromptInputFooter className="justify-end">
+            <PromptInputSubmit status={busy ? "streaming" : undefined} disabled={!input.trim()} />
+          </PromptInputFooter>
+        </PromptInput>
+      </div>
     </AppShell>
   );
 }
 
-function CopyButton({ text }: { text: string }) {
+function CopyAction({ text }: { text: string }) {
   const [copied, setCopied] = useState(false);
   return (
-    <button
-      type="button"
+    <MessageAction
+      tooltip={copied ? "Nusxa olindi" : "Nusxa ko'chirish"}
       onClick={async () => {
         try {
           await navigator.clipboard.writeText(text);
@@ -382,10 +403,8 @@ function CopyButton({ text }: { text: string }) {
           /* ignore */
         }
       }}
-      className="absolute right-2 top-2 inline-flex h-7 w-7 items-center justify-center rounded-md border border-border bg-background/60 text-muted-foreground opacity-0 transition hover:border-primary/40 hover:text-primary group-hover:opacity-100"
-      aria-label={copied ? "Nusxa olindi" : "Nusxa ko'chirish"}
     >
       {copied ? <Check className="h-3.5 w-3.5 text-primary" /> : <Copy className="h-3.5 w-3.5" />}
-    </button>
+    </MessageAction>
   );
 }
