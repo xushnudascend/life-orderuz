@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { LegalShell } from "@/components/legal-shell";
+import { FounderPledge } from "@/components/legal-pledge";
 import { uz } from "@/i18n";
 
 const DESC =
@@ -75,6 +76,21 @@ export const Route = createFileRoute("/terms")({
       </p>
 
       <p className="mt-6">Aloqa: <strong>support@lifeorder.app</strong></p>
+
+      <FounderPledge
+        will={[
+          "Narx o'zgarsa — 30 kun oldin ochiq xabar beramiz.",
+          "14 kun ichida so'roqsiz pul qaytaramiz.",
+          "Xizmat ishlamasa — pro-rata kredit beramiz.",
+          "Har o'zgarish tarixi ochiq: changelog + email.",
+        ]}
+        wont={[
+          "Bekor qilishni yashirmaymiz — bir bosishda.",
+          "Karta ma'lumotini o'zimizda saqlamaymiz.",
+          "Kichik shrift bilan sirli shart yashirmaymiz.",
+          "AI javobini tibbiy/psixologik maslahat sifatida taqdim etmaymiz.",
+        ]}
+      />
     </LegalShell>
   ),
 });

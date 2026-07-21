@@ -169,6 +169,12 @@ function ProfilePage() {
         </Panel>
       )}
 
+      {!loading && (
+        <ProgressTimeline current={streak?.current_days ?? 0} />
+      )}
+
+
+
 
 
       {loading ? (
@@ -300,6 +306,78 @@ function Stat({ label, value }: { label: string; value: string | number }) {
       <p className="mt-2 font-serif text-3xl tabular-nums">
         {isNumber ? <CountUpNumber value={value} once={`profile-${label}`} /> : value}
       </p>
+    </Panel>
+  );
+}
+
+function ProgressTimeline({ current }: { current: number }) {
+  const marks = [
+    { day: 3, label: "Trigger o'rnadi", note: "Yosin sig'im shakllanmoqda" },
+    { day: 7, label: "Birinchi to'lqin", note: "Prefrontal-striatal bog'lanish" },
+    { day: 21, label: "Avtomatlashuv boshi", note: "Ilgak → harakat qisqaradi" },
+    { day: 66, label: "O'rtacha to'liqlashuv", note: "Lally, UCL 2010" },
+    { day: 100, label: "Identitet qatlami", note: "\"Men — bunday odamman\"" },
+  ];
+  const max = 100;
+  const pct = Math.min(100, (current / max) * 100);
+  return (
+    <Panel className="mt-6 p-5">
+      <PanelHeader
+        eyebrow="Timeline"
+        title={<h2 className="font-serif text-lg">Odat qatlamlari — 100 kun</h2>}
+      />
+      <div className="mt-6">
+        <div className="relative h-1.5 rounded-full bg-border">
+          <div
+            className="absolute inset-y-0 left-0 rounded-full bg-primary transition-[width] duration-500"
+            style={{ width: `${pct}%` }}
+          />
+          {marks.map((m) => {
+            const left = (m.day / max) * 100;
+            const reached = current >= m.day;
+            return (
+              <span
+                key={m.day}
+                aria-hidden
+                className={
+                  "absolute top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 transition-colors " +
+                  (reached
+                    ? "h-3.5 w-3.5 border-primary bg-primary"
+                    : "h-3 w-3 border-border bg-background")
+                }
+                style={{ left: `${left}%` }}
+              />
+            );
+          })}
+        </div>
+        <div className="mt-4 grid gap-3 sm:grid-cols-5">
+          {marks.map((m) => {
+            const reached = current >= m.day;
+            return (
+              <div key={m.day} className="text-center">
+                <p
+                  className={
+                    "font-serif text-lg tabular-nums " +
+                    (reached ? "text-primary" : "text-muted-foreground")
+                  }
+                >
+                  {m.day}
+                  <span className="ml-1 font-ui text-[10px] uppercase tracking-[0.18em]">kun</span>
+                </p>
+                <p className={"mt-1 font-ui text-[11px] " + (reached ? "text-foreground" : "text-muted-foreground")}>
+                  {m.label}
+                </p>
+                <p className="mt-0.5 font-ui text-[10px] leading-tight text-muted-foreground">
+                  {m.note}
+                </p>
+              </div>
+            );
+          })}
+        </div>
+        <p className="mt-4 font-ui text-[11px] text-muted-foreground">
+          Bugungi joyingiz: <strong className="text-foreground tabular-nums">{current} kun</strong>. Har bosqich — miya darajasidagi o'zgarish, marketing emas.
+        </p>
+      </div>
     </Panel>
   );
 }
