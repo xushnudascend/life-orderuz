@@ -78,7 +78,7 @@ export function AIInsightCard({ context, storageKey = "nadir-insight-today" }: P
     <Panel className="relative overflow-hidden">
       <div
         aria-hidden
-        className="pointer-events-none absolute -top-16 -right-16 h-40 w-40 rounded-full bg-primary/20 blur-3xl"
+        className="orb-breathe pointer-events-none absolute -top-16 -right-16 h-40 w-40 rounded-full bg-primary/20 blur-3xl"
       />
       <PanelHeader
         eyebrow="Nadir · mikro-kuzatuv"
