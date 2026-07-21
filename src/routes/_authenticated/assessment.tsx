@@ -124,19 +124,29 @@ function AssessmentPage() {
                   <button
                     key={v}
                     onClick={() => setAnswer(current.key, v)}
-                    className={`group flex items-center justify-between rounded-lg border px-4 py-3 text-left transition-all ${
+                    className={`group relative flex items-center justify-between overflow-hidden rounded-lg border px-4 py-3.5 text-left transition-all duration-200 will-change-transform active:scale-[0.98] ${
                       selected
-                        ? "border-amber-500/60 bg-amber-500/10 text-foreground"
-                        : "border-border/60 bg-card/40 text-muted-foreground hover:border-amber-500/30 hover:bg-amber-500/5 hover:text-foreground"
+                        ? "border-amber-500/70 bg-amber-500/[0.12] text-foreground shadow-[0_0_0_1px_hsl(var(--primary)/0.35),0_10px_30px_-12px_hsl(var(--primary)/0.5)] scale-[1.015]"
+                        : "border-border/60 bg-card/40 text-muted-foreground hover:border-amber-500/40 hover:bg-amber-500/[0.06] hover:text-foreground hover:translate-x-0.5"
                     }`}
                   >
-                    <span className="text-sm">{LIKERT_LABELS[v]}</span>
+                    {selected && (
+                      <span
+                        aria-hidden
+                        className="pointer-events-none absolute inset-0 -z-0 animate-[pulse_1.2s_ease-out_1] bg-gradient-to-r from-transparent via-amber-400/10 to-transparent"
+                      />
+                    )}
+                    <span className="relative z-10 text-sm">{LIKERT_LABELS[v]}</span>
                     <span
-                      className={`h-2 w-2 rounded-full ${
-                        selected ? "bg-amber-400" : "bg-muted-foreground/30 group-hover:bg-amber-400/60"
+                      className={`relative z-10 grid h-5 w-5 shrink-0 place-items-center rounded-full border transition-all duration-200 ${
+                        selected
+                          ? "border-amber-400 bg-amber-400 shadow-[0_0_12px_hsl(var(--primary)/0.6)]"
+                          : "border-muted-foreground/30 group-hover:border-amber-400/60"
                       }`}
                       aria-hidden
-                    />
+                    >
+                      {selected && <span className="h-2 w-2 rounded-full bg-background" />}
+                    </span>
                   </button>
                 );
               })}
@@ -238,22 +248,25 @@ function AssessmentPage() {
               className="mt-3 w-full rounded-md border border-border/60 bg-background px-3 py-2 text-sm outline-none focus:border-amber-500/60"
               maxLength={40}
             />
-            <div className="mt-4 flex gap-2">
+            <div className="mt-4 flex flex-col gap-2 sm:flex-row">
               <Button
-                onClick={commitAndGo}
-                disabled={commitName.trim().length < 2 || saving}
+                onClick={() => navigate({ to: "/dashboard" })}
                 className="flex-1"
+                size="lg"
               >
-                {saving ? (
-                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                ) : (
-                  <Sparkles className="mr-2 h-4 w-4" />
-                )}
-                Yo'l xaritamni ko'raman
+                <Sparkles className="mr-2 h-4 w-4" />
+                Dashboardga o'tish
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
-              <Button variant="ghost" asChild>
-                <Link to="/dashboard">Keyinroq</Link>
+              <Button
+                onClick={commitAndGo}
+                variant="outline"
+                disabled={saving}
+                className="flex-1"
+                size="lg"
+              >
+                {saving ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
+                Yo'l xaritani ko'rish
               </Button>
             </div>
           </Panel>

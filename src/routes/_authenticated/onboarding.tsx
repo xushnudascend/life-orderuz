@@ -194,8 +194,9 @@ function Onboarding() {
 
       // Hard nav — _authenticated layout profilni qaytadan o'qishi shart,
       // aks holda eski state onboarded=false qolib, /onboarding'ga qaytaradi.
-      // Assessment birinchi (psixologik profil), keyin dashboard.
-      window.location.assign("/assessment");
+      // Onboarding tugagach, to'g'ridan-to'g'ri dashboardga. Chuqur test —
+      // dashboarddan ixtiyoriy ravishda yechiladi.
+      window.location.assign("/dashboard");
     } catch (err) {
       const msg = err instanceof Error ? err.message : "Saqlanmadi";
       toast.error(msg);
@@ -228,9 +229,9 @@ function Onboarding() {
             <Button
               className="mt-8 w-full font-ui font-semibold"
               size="lg"
-              onClick={() => window.location.assign("/assessment")}
+              onClick={() => window.location.assign("/dashboard")}
             >
-              Human Potential testiga o'tish
+              Boshlash — dashboardga o'tish
               <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
           </div>
