@@ -47,6 +47,78 @@ export type Database = {
         }
         Relationships: []
       }
+      assessment_responses: {
+        Row: {
+          created_at: string
+          id: string
+          question_key: string
+          scale: string
+          updated_at: string
+          user_id: string
+          value: number
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          question_key: string
+          scale: string
+          updated_at?: string
+          user_id: string
+          value: number
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          question_key?: string
+          scale?: string
+          updated_at?: string
+          user_id?: string
+          value?: number
+        }
+        Relationships: []
+      }
+      assessment_scores: {
+        Row: {
+          addiction_risk: number
+          computed_at: string
+          created_at: string
+          discipline: number
+          focus: number
+          id: string
+          potential: number
+          scales: Json
+          updated_at: string
+          user_id: string
+          weakest_scale: string | null
+        }
+        Insert: {
+          addiction_risk: number
+          computed_at?: string
+          created_at?: string
+          discipline: number
+          focus: number
+          id?: string
+          potential: number
+          scales?: Json
+          updated_at?: string
+          user_id: string
+          weakest_scale?: string | null
+        }
+        Update: {
+          addiction_risk?: number
+          computed_at?: string
+          created_at?: string
+          discipline?: number
+          focus?: number
+          id?: string
+          potential?: number
+          scales?: Json
+          updated_at?: string
+          user_id?: string
+          weakest_scale?: string | null
+        }
+        Relationships: []
+      }
       chat_messages: {
         Row: {
           content: string
@@ -699,6 +771,45 @@ export type Database = {
           count?: number
           key?: string
           window_start?: string
+        }
+        Relationships: []
+      }
+      roadmap_stages: {
+        Row: {
+          created_at: string
+          description: string | null
+          focus_area: string
+          id: string
+          stage_index: number
+          status: string
+          target_date: string | null
+          title: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          focus_area: string
+          id?: string
+          stage_index: number
+          status?: string
+          target_date?: string | null
+          title: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          focus_area?: string
+          id?: string
+          stage_index?: number
+          status?: string
+          target_date?: string | null
+          title?: string
+          updated_at?: string
+          user_id?: string
         }
         Relationships: []
       }

@@ -34,6 +34,7 @@ import { Route as ApiChatRouteImport } from './routes/api/chat'
 import { Route as AuthenticatedWorkoutRouteImport } from './routes/_authenticated/workout'
 import { Route as AuthenticatedTemirIntizomRouteImport } from './routes/_authenticated/temir-intizom'
 import { Route as AuthenticatedSettingsRouteImport } from './routes/_authenticated/settings'
+import { Route as AuthenticatedRoadmapRouteImport } from './routes/_authenticated/roadmap'
 import { Route as AuthenticatedQuestsRouteImport } from './routes/_authenticated/quests'
 import { Route as AuthenticatedProfileRouteImport } from './routes/_authenticated/profile'
 import { Route as AuthenticatedPartyRouteImport } from './routes/_authenticated/party'
@@ -45,6 +46,7 @@ import { Route as AuthenticatedHabitsRouteImport } from './routes/_authenticated
 import { Route as AuthenticatedDietRouteImport } from './routes/_authenticated/diet'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as AuthenticatedCommunityRouteImport } from './routes/_authenticated/community'
+import { Route as AuthenticatedAssessmentRouteImport } from './routes/_authenticated/assessment'
 import { Route as AuthenticatedAnalyticsRouteImport } from './routes/_authenticated/analytics'
 import { Route as AuthenticatedAchievementsRouteImport } from './routes/_authenticated/achievements'
 import { Route as Char91DotwellKnownChar93OauthProtectedResourceRouteImport } from './routes/[.well-known]/oauth-protected-resource'
@@ -189,6 +191,11 @@ const AuthenticatedSettingsRoute = AuthenticatedSettingsRouteImport.update({
   path: '/settings',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedRoadmapRoute = AuthenticatedRoadmapRouteImport.update({
+  id: '/roadmap',
+  path: '/roadmap',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedQuestsRoute = AuthenticatedQuestsRouteImport.update({
   id: '/quests',
   path: '/quests',
@@ -243,6 +250,11 @@ const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
 const AuthenticatedCommunityRoute = AuthenticatedCommunityRouteImport.update({
   id: '/community',
   path: '/community',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedAssessmentRoute = AuthenticatedAssessmentRouteImport.update({
+  id: '/assessment',
+  path: '/assessment',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedAnalyticsRoute = AuthenticatedAnalyticsRouteImport.update({
@@ -359,6 +371,7 @@ export interface FileRoutesByFullPath {
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/achievements': typeof AuthenticatedAchievementsRoute
   '/analytics': typeof AuthenticatedAnalyticsRoute
+  '/assessment': typeof AuthenticatedAssessmentRoute
   '/community': typeof AuthenticatedCommunityRouteWithChildren
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/diet': typeof AuthenticatedDietRoute
@@ -370,6 +383,7 @@ export interface FileRoutesByFullPath {
   '/party': typeof AuthenticatedPartyRoute
   '/profile': typeof AuthenticatedProfileRoute
   '/quests': typeof AuthenticatedQuestsRoute
+  '/roadmap': typeof AuthenticatedRoadmapRoute
   '/settings': typeof AuthenticatedSettingsRoute
   '/temir-intizom': typeof AuthenticatedTemirIntizomRoute
   '/workout': typeof AuthenticatedWorkoutRoute
@@ -414,6 +428,7 @@ export interface FileRoutesByTo {
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/achievements': typeof AuthenticatedAchievementsRoute
   '/analytics': typeof AuthenticatedAnalyticsRoute
+  '/assessment': typeof AuthenticatedAssessmentRoute
   '/community': typeof AuthenticatedCommunityRouteWithChildren
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/diet': typeof AuthenticatedDietRoute
@@ -425,6 +440,7 @@ export interface FileRoutesByTo {
   '/party': typeof AuthenticatedPartyRoute
   '/profile': typeof AuthenticatedProfileRoute
   '/quests': typeof AuthenticatedQuestsRoute
+  '/roadmap': typeof AuthenticatedRoadmapRoute
   '/settings': typeof AuthenticatedSettingsRoute
   '/temir-intizom': typeof AuthenticatedTemirIntizomRoute
   '/workout': typeof AuthenticatedWorkoutRoute
@@ -471,6 +487,7 @@ export interface FileRoutesById {
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/_authenticated/achievements': typeof AuthenticatedAchievementsRoute
   '/_authenticated/analytics': typeof AuthenticatedAnalyticsRoute
+  '/_authenticated/assessment': typeof AuthenticatedAssessmentRoute
   '/_authenticated/community': typeof AuthenticatedCommunityRouteWithChildren
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/_authenticated/diet': typeof AuthenticatedDietRoute
@@ -482,6 +499,7 @@ export interface FileRoutesById {
   '/_authenticated/party': typeof AuthenticatedPartyRoute
   '/_authenticated/profile': typeof AuthenticatedProfileRoute
   '/_authenticated/quests': typeof AuthenticatedQuestsRoute
+  '/_authenticated/roadmap': typeof AuthenticatedRoadmapRoute
   '/_authenticated/settings': typeof AuthenticatedSettingsRoute
   '/_authenticated/temir-intizom': typeof AuthenticatedTemirIntizomRoute
   '/_authenticated/workout': typeof AuthenticatedWorkoutRoute
@@ -528,6 +546,7 @@ export interface FileRouteTypes {
     | '/.well-known/oauth-protected-resource'
     | '/achievements'
     | '/analytics'
+    | '/assessment'
     | '/community'
     | '/dashboard'
     | '/diet'
@@ -539,6 +558,7 @@ export interface FileRouteTypes {
     | '/party'
     | '/profile'
     | '/quests'
+    | '/roadmap'
     | '/settings'
     | '/temir-intizom'
     | '/workout'
@@ -583,6 +603,7 @@ export interface FileRouteTypes {
     | '/.well-known/oauth-protected-resource'
     | '/achievements'
     | '/analytics'
+    | '/assessment'
     | '/community'
     | '/dashboard'
     | '/diet'
@@ -594,6 +615,7 @@ export interface FileRouteTypes {
     | '/party'
     | '/profile'
     | '/quests'
+    | '/roadmap'
     | '/settings'
     | '/temir-intizom'
     | '/workout'
@@ -639,6 +661,7 @@ export interface FileRouteTypes {
     | '/.well-known/oauth-protected-resource'
     | '/_authenticated/achievements'
     | '/_authenticated/analytics'
+    | '/_authenticated/assessment'
     | '/_authenticated/community'
     | '/_authenticated/dashboard'
     | '/_authenticated/diet'
@@ -650,6 +673,7 @@ export interface FileRouteTypes {
     | '/_authenticated/party'
     | '/_authenticated/profile'
     | '/_authenticated/quests'
+    | '/_authenticated/roadmap'
     | '/_authenticated/settings'
     | '/_authenticated/temir-intizom'
     | '/_authenticated/workout'
@@ -892,6 +916,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedSettingsRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/roadmap': {
+      id: '/_authenticated/roadmap'
+      path: '/roadmap'
+      fullPath: '/roadmap'
+      preLoaderRoute: typeof AuthenticatedRoadmapRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/quests': {
       id: '/_authenticated/quests'
       path: '/quests'
@@ -967,6 +998,13 @@ declare module '@tanstack/react-router' {
       path: '/community'
       fullPath: '/community'
       preLoaderRoute: typeof AuthenticatedCommunityRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/assessment': {
+      id: '/_authenticated/assessment'
+      path: '/assessment'
+      fullPath: '/assessment'
+      preLoaderRoute: typeof AuthenticatedAssessmentRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/analytics': {
@@ -1115,6 +1153,7 @@ const AuthenticatedCommunityRouteWithChildren =
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedAchievementsRoute: typeof AuthenticatedAchievementsRoute
   AuthenticatedAnalyticsRoute: typeof AuthenticatedAnalyticsRoute
+  AuthenticatedAssessmentRoute: typeof AuthenticatedAssessmentRoute
   AuthenticatedCommunityRoute: typeof AuthenticatedCommunityRouteWithChildren
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
   AuthenticatedDietRoute: typeof AuthenticatedDietRoute
@@ -1126,6 +1165,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedPartyRoute: typeof AuthenticatedPartyRoute
   AuthenticatedProfileRoute: typeof AuthenticatedProfileRoute
   AuthenticatedQuestsRoute: typeof AuthenticatedQuestsRoute
+  AuthenticatedRoadmapRoute: typeof AuthenticatedRoadmapRoute
   AuthenticatedSettingsRoute: typeof AuthenticatedSettingsRoute
   AuthenticatedTemirIntizomRoute: typeof AuthenticatedTemirIntizomRoute
   AuthenticatedWorkoutRoute: typeof AuthenticatedWorkoutRoute
@@ -1137,6 +1177,7 @@ interface AuthenticatedRouteRouteChildren {
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAchievementsRoute: AuthenticatedAchievementsRoute,
   AuthenticatedAnalyticsRoute: AuthenticatedAnalyticsRoute,
+  AuthenticatedAssessmentRoute: AuthenticatedAssessmentRoute,
   AuthenticatedCommunityRoute: AuthenticatedCommunityRouteWithChildren,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
   AuthenticatedDietRoute: AuthenticatedDietRoute,
@@ -1148,6 +1189,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedPartyRoute: AuthenticatedPartyRoute,
   AuthenticatedProfileRoute: AuthenticatedProfileRoute,
   AuthenticatedQuestsRoute: AuthenticatedQuestsRoute,
+  AuthenticatedRoadmapRoute: AuthenticatedRoadmapRoute,
   AuthenticatedSettingsRoute: AuthenticatedSettingsRoute,
   AuthenticatedTemirIntizomRoute: AuthenticatedTemirIntizomRoute,
   AuthenticatedWorkoutRoute: AuthenticatedWorkoutRoute,
