@@ -305,6 +305,39 @@ function MentorChat({
         }
       />
 
+      <div className="mt-4 flex flex-wrap gap-2" role="radiogroup" aria-label="Mentor rejimi">
+        {PERSONAS.map((p) => {
+          const active = persona === p.id;
+          return (
+            <button
+              key={p.id}
+              type="button"
+              role="radio"
+              aria-checked={active}
+              onClick={() => setPersona(p.id)}
+              className={
+                "group flex flex-col items-start rounded-[var(--radius)] border px-3 py-2 text-left transition " +
+                (active
+                  ? "border-primary bg-primary/10"
+                  : "border-border bg-card hover:border-primary/40")
+              }
+            >
+              <span
+                className={
+                  "font-ui text-[11px] uppercase tracking-[0.2em] " +
+                  (active ? "text-primary" : "text-muted-foreground")
+                }
+              >
+                {p.label}
+              </span>
+              <span className="mt-0.5 text-[11px] text-muted-foreground">{p.desc}</span>
+            </button>
+          );
+        })}
+      </div>
+
+
+
 
       <div className="mt-6 flex min-h-[60vh] flex-col">
         <Conversation className="flex-1">
