@@ -41,17 +41,20 @@ function AssessmentPage() {
     [current],
   );
 
+  const finalizingRef = useRef(false);
+
   function setAnswer(key: string, val: number) {
-    setAnswers((prev) => ({ ...prev, [key]: val }));
+    const next = { ...answers, [key]: val };
+    setAnswers(next);
     // auto-advance 300ms after tap (dopamine RPE — anticipation)
     setTimeout(() => {
-      setStep((s) => {
-        if (s + 1 >= total) {
-          void finalize({ ...answers, [key]: val });
-          return s;
-        }
-        return s + 1;
-      });
+      if (step + 1 >= total) {
+        if (finalizingRef.current) return;
+        finalizingRef.current = true;
+        void finalize(next);
+      } else {
+        setStep((s) => (s + 1 >= total ? s : s + 1));
+      }
     }, 280);
   }
 
