@@ -552,9 +552,9 @@ function PricingCard({
   return (
     <div
       className={
-        "rounded-[var(--radius)] p-7 " +
+        "relative h-full rounded-[var(--radius)] p-7 " +
         (variant === "primary"
-          ? "border-2 border-primary bg-background"
+          ? "border-2 border-primary bg-background glow-amber"
           : "border border-border bg-background")
       }
     >
