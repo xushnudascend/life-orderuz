@@ -228,9 +228,9 @@ function Onboarding() {
             <Button
               className="mt-8 w-full font-ui font-semibold"
               size="lg"
-              onClick={() => window.location.assign("/dashboard")}
+              onClick={() => window.location.assign("/assessment")}
             >
-              Boshlaymiz
+              Human Potential testiga o'tish
               <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
           </div>
