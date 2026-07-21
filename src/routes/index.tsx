@@ -1,4 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useServerFn } from "@tanstack/react-start";
+import { useQuery } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
@@ -11,7 +13,6 @@ import {
 } from "@/components/ui/accordion";
 import {
   ArrowRight,
-  Check,
   Shield,
   Flame,
   BarChart3,
@@ -19,6 +20,7 @@ import {
   BookText,
   Clock,
 } from "lucide-react";
+import { getPeerMirror } from "@/lib/peer-mirror.functions";
 
 const BRAND = "Life Order";
 const SITE_URL = "https://life-orderuz.lovable.app";
