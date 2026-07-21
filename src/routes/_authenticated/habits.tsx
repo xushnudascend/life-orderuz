@@ -72,6 +72,7 @@ function HabitsPage() {
   const [habits, setHabits] = useState<Habit[]>([]);
   const [todayLogs, setTodayLogs] = useState<Set<string>>(new Set());
   const [newTitle, setNewTitle] = useState("");
+  const [cue, setCue] = useState("");
   const [difficulty, setDifficulty] = useState<1 | 2 | 3 | 4 | 5>(2);
   const [category, setCategory] = useState<string>("habit");
   const [saving, setSaving] = useState(false);
