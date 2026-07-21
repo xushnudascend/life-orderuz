@@ -91,22 +91,14 @@ function Landing() {
   return (
     <div className="min-h-dvh bg-background text-foreground animate-fade-in">
       <SiteHeader />
-      <main>
+      <main className="pb-20 md:pb-0">
         <Hero />
-        <TrustStrip />
-        <ProductPreview />
         <ProofStrip />
-        <CostOfDrift />
-        <Pillars />
+        <ProductPreview />
         <HowItWorks />
-        <ForWhom />
         <Features />
         <Testimonials />
-        <Science />
-        <FounderNote />
-        <Traction />
         <Pricing />
-        <Guarantee />
         <Faq />
         <FinalCta />
       </main>
@@ -115,6 +107,7 @@ function Landing() {
     </div>
   );
 }
+
 
 
 function ProofStrip() {
