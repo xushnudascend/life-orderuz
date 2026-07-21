@@ -1,17 +1,17 @@
 import { Link, useLocation } from "@tanstack/react-router";
-import { Compass, HeartPulse, ListChecks, BookText, Users, Sparkles } from "lucide-react";
+import { Compass, HeartPulse, ListChecks, GraduationCap, Users, Sparkles } from "lucide-react";
 
 /**
  * 5 tab bottom nav + markazda Nadir FAB (floating action button).
  * Faqat mobilda ( md:hidden ).
  */
 const TABS = [
-  { to: "/dashboard", label: "Bosh",     icon: Compass,    match: ["/dashboard", "/analytics"] },
-  { to: "/c/body",    label: "Tana",     icon: HeartPulse, match: ["/c/body", "/workout", "/diet"] },
+  { to: "/dashboard", label: "Bosh",   icon: Compass,       match: ["/dashboard", "/analytics"] },
+  { to: "/c/body",    label: "Tana",   icon: HeartPulse,    match: ["/c/body", "/workout", "/diet"] },
   // FAB (Nadir) — markazda, ushbu slotni bo'sh qoldiramiz
-  { to: "/habits",    label: "Odat",     icon: ListChecks, match: ["/habits", "/quests", "/c/habits"] },
-  { to: "/journal",   label: "Kundalik", icon: BookText,   match: ["/journal", "/c/learn"] },
-  { to: "/community", label: "Davra",    icon: Users,      match: ["/community", "/party", "/leaderboard"] },
+  { to: "/habits",    label: "Odat",   icon: ListChecks,    match: ["/habits", "/quests", "/c/habits"] },
+  { to: "/c/learn",   label: "O'rgan", icon: GraduationCap, match: ["/c/learn", "/journal"] },
+  { to: "/community", label: "Davra",  icon: Users,         match: ["/community", "/party", "/leaderboard"] },
 ] as const;
 
 export function BottomNav({

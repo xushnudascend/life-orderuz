@@ -152,17 +152,25 @@ function EmailForm({ mode, next }: { mode: "signin" | "signup"; next: string }) 
           },
         });
         if (error) throw error;
-        const { data } = await supabase.auth.getSession();
-        if (data.session) {
-          // Yangi hisob — to'g'ridan-to'g'ri onboarding'ga
+        // If auto-confirm is on, session exists. Otherwise try password login
+        // (works when email confirmation is disabled server-side).
+        const { data: sess } = await supabase.auth.getSession();
+        let hasSession = !!sess.session;
+        if (!hasSession) {
+          const pw = await supabase.auth.signInWithPassword({ email, password });
+          hasSession = !!pw.data.session && !pw.error;
+        }
+        if (hasSession) {
           window.location.replace("/onboarding");
         } else {
-          toast.success("Ro'yxatdan o'tildi. Endi kirishingiz mumkin.");
+          toast.success("Emailingizga tasdiq havolasi yuborildi.");
         }
       } else {
         const { error } = await supabase.auth.signInWithPassword({ email, password });
         if (error) throw error;
-        window.location.replace(next);
+        // Route through the authenticated gate — it forwards to onboarding
+        // or dashboard depending on profile state, avoiding a visible flash.
+        window.location.replace(next === "/dashboard" ? "/dashboard" : next);
       }
     } catch (err) {
       const msg = err instanceof Error ? err.message : "Xato yuz berdi";
