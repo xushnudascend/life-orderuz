@@ -248,22 +248,25 @@ function AssessmentPage() {
               className="mt-3 w-full rounded-md border border-border/60 bg-background px-3 py-2 text-sm outline-none focus:border-amber-500/60"
               maxLength={40}
             />
-            <div className="mt-4 flex gap-2">
+            <div className="mt-4 flex flex-col gap-2 sm:flex-row">
               <Button
-                onClick={commitAndGo}
-                disabled={commitName.trim().length < 2 || saving}
+                onClick={() => navigate({ to: "/dashboard" })}
                 className="flex-1"
+                size="lg"
               >
-                {saving ? (
-                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                ) : (
-                  <Sparkles className="mr-2 h-4 w-4" />
-                )}
-                Yo'l xaritamni ko'raman
+                <Sparkles className="mr-2 h-4 w-4" />
+                Dashboardga o'tish
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
-              <Button variant="ghost" asChild>
-                <Link to="/dashboard">Keyinroq</Link>
+              <Button
+                onClick={commitAndGo}
+                variant="outline"
+                disabled={saving}
+                className="flex-1"
+                size="lg"
+              >
+                {saving ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
+                Yo'l xaritani ko'rish
               </Button>
             </div>
           </Panel>
