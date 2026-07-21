@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { AppShell } from "@/components/app-shell";
 import { Panel, PanelHeader } from "@/components/panel";
+import { PageHero } from "@/components/page-hero";
 import {
   Flame,
   Target,
@@ -25,18 +26,12 @@ export const Route = createFileRoute("/_authenticated/c/habits")({
 function HabitsCategory() {
   return (
     <AppShell title="Odatlar">
-      <div className="mb-6">
-        <p className="font-ui text-[11px] font-semibold uppercase tracking-[0.24em] text-primary">
-          Kategoriya
-        </p>
-        <h1 className="mt-1.5 font-serif text-3xl font-semibold tracking-tight sm:text-4xl">
-          Odatlar
-        </h1>
-        <p className="mt-2 max-w-2xl font-ui text-sm text-muted-foreground leading-relaxed">
-          Kunlik xulqning ~43% — odat (Wendy Wood, USC). Motivatsiya emas,
-          takror va kontekst hal qiladi.
-        </p>
-      </div>
+      <PageHero
+        eyebrow="Kategoriya"
+        title="Odatlar"
+        subtitle="Kunlik xulqning ~43% — odat (Wendy Wood, USC). Motivatsiya emas, takror va kontekst hal qiladi."
+      />
+
 
       {/* Asosiy bo'limlar */}
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
