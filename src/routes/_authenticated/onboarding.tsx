@@ -194,7 +194,8 @@ function Onboarding() {
 
       // Hard nav — _authenticated layout profilni qaytadan o'qishi shart,
       // aks holda eski state onboarded=false qolib, /onboarding'ga qaytaradi.
-      window.location.assign("/dashboard");
+      // Assessment birinchi (psixologik profil), keyin dashboard.
+      window.location.assign("/assessment");
     } catch (err) {
       const msg = err instanceof Error ? err.message : "Saqlanmadi";
       toast.error(msg);
