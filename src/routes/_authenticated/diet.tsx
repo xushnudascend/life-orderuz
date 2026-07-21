@@ -50,6 +50,7 @@ function Diet() {
   const [cal, setCal] = useState<string>("");
   const [uploading, setUploading] = useState(false);
   const [pendingImage, setPendingImage] = useState<string | null>(null);
+  const [signedUrls, setSignedUrls] = useState<Record<string, string>>({});
   const fileRef = useRef<HTMLInputElement>(null);
 
   // Kaloriya kalkulyator
@@ -85,6 +86,32 @@ function Diet() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userId]);
 
+  // Sign short-lived URLs (1h) for visible meal images at render time.
+  useEffect(() => {
+    let cancelled = false;
+    const paths = rows
+      .map((r) => r.image_url)
+      .filter((v): v is string => !!v && !v.startsWith("http") && !v.startsWith("blob:"));
+    if (paths.length === 0) {
+      setSignedUrls({});
+      return;
+    }
+    (async () => {
+      const { data } = await supabase.storage
+        .from("meals")
+        .createSignedUrls(paths, 60 * 60);
+      if (cancelled || !data) return;
+      const map: Record<string, string> = {};
+      data.forEach((d) => {
+        if (d.path && d.signedUrl) map[d.path] = d.signedUrl;
+      });
+      setSignedUrls(map);
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [rows]);
+
   const dailyTarget = useMemo(() => {
     if (!profile?.sex || !profile.height_cm || !profile.weight_kg || !profile.age) return null;
     const map: Record<string, number> = {
@@ -97,6 +124,8 @@ function Diet() {
     const act = map[profile.activity_level ?? ""] ?? 1.375;
     return mifflin(profile.sex as "male" | "female", Number(profile.weight_kg), Number(profile.height_cm), profile.age, act);
   }, [profile]);
+
+  const [pendingPath, setPendingPath] = useState<string | null>(null);
 
   async function pickImage(f: File | null | undefined) {
     if (!f) return;
@@ -116,12 +145,11 @@ function Diet() {
       toast.error("Rasmni yuklab bo'lmadi.");
       return;
     }
-    // Private bucket → signed URL (1 yil)
-    const { data } = await supabase.storage
-      .from("meals")
-      .createSignedUrl(path, 60 * 60 * 24 * 365);
+    // Store storage path; sign short-lived URLs at render time.
+    setPendingPath(path);
+    // Local preview only — never persisted.
+    setPendingImage(URL.createObjectURL(f));
     setUploading(false);
-    setPendingImage(data?.signedUrl ?? null);
     toast.success("Rasm biriktirildi.");
   }
 
@@ -132,12 +160,13 @@ function Diet() {
       kind,
       description: desc.trim(),
       calories: cal ? Number(cal) : null,
-      image_url: pendingImage,
+      image_url: pendingPath,
     });
     if (error) return toast.error("Saqlab bo'lmadi");
     setDesc("");
     setCal("");
     setPendingImage(null);
+    setPendingPath(null);
     if (fileRef.current) fileRef.current.value = "";
     toast.success("Ovqat jurnalga qo'shildi.");
     refresh();
@@ -269,7 +298,7 @@ function Diet() {
                 <div className="flex items-center gap-3">
                   {r.image_url ? (
                     <img
-                      src={r.image_url}
+                      src={r.image_url.startsWith("http") ? r.image_url : signedUrls[r.image_url] ?? ""}
                       alt=""
                       className="h-12 w-12 rounded-md object-cover"
                     />
