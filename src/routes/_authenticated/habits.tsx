@@ -44,9 +44,17 @@ const CATEGORIES = [
 const QUICK_PICKS = [
   "20 daqiqa o'qish",
   "10 000 qadam",
-  "8 stakan suv",
+  "8 stakan suh",
   "10 daqiqa meditatsiya",
   "Ertalab mashq",
+];
+
+const CUE_PICKS = [
+  "Ertalab tishimni yuvgandan keyin",
+  "Nonushtadan keyin",
+  "Ishga borishdan oldin",
+  "Kechqurun yotishdan oldin",
+  "Tushlik tanaffusida",
 ];
 
 function today(): string {
