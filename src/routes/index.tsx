@@ -135,6 +135,11 @@ function Hero() {
         <p className="rise-4 mt-5 font-ui text-xs text-muted-foreground">
           60 soniyada · Kartasiz · O'zbek tilida
         </p>
+        <div className="rise-4 mx-auto mt-8 flex max-w-xl flex-wrap items-center justify-center gap-x-5 gap-y-2 font-ui text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
+          <span className="inline-flex items-center gap-1.5"><span className="h-1 w-1 rounded-full bg-primary/70" /> Reklama yo'q</span>
+          <span className="inline-flex items-center gap-1.5"><span className="h-1 w-1 rounded-full bg-primary/70" /> Notifikatsiya bosimi yo'q</span>
+          <span className="inline-flex items-center gap-1.5"><span className="h-1 w-1 rounded-full bg-primary/70" /> Ma'lumot sotilmaydi</span>
+        </div>
       </div>
     </section>
   );
