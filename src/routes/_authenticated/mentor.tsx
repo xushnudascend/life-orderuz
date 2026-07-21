@@ -7,7 +7,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { AppShell } from "@/components/app-shell";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { Loader2, Send, Sparkles } from "lucide-react";
+import { Copy, Check, Loader2, Send, Sparkles } from "lucide-react";
 import { PageHero } from "@/components/page-hero";
 import { EmptyState } from "@/components/empty-state";
 import { uz } from "@/i18n";
