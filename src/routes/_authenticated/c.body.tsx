@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { AppShell } from "@/components/app-shell";
+import { PageHero } from "@/components/page-hero";
 import {
   HeartPulse,
   Dumbbell,
