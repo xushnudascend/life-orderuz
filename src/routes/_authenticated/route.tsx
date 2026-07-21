@@ -70,8 +70,9 @@ function AuthenticatedShell() {
     }
   }, [onboarded, isOnOnboarding, navigate]);
 
-  // Never show a full-screen spinner: render children immediately.
-  // Onboarding gate flips silently in the background.
+  // Prevent Dashboard flash: until we know onboarded status,
+  // don't render anything. Only skip the guard when we have a cached=true.
+  if (onboarded === null) return null;
   if (onboarded === false && !isOnOnboarding) return null;
   if (onboarded === true && isOnOnboarding) return null;
 
