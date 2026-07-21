@@ -71,6 +71,7 @@ function AssessmentPage() {
     } catch (e) {
       const msg = e instanceof Error ? e.message : "Xatolik";
       toast.error(msg);
+      finalizingRef.current = false;
       setPhase("questions");
     }
   }
