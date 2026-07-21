@@ -306,6 +306,29 @@ function MentorChat({
             </div>
           );
         })}
+        {(() => {
+          const lastAssistant = [...(messages as UIMessage[])].reverse().find((m) => m.role === "assistant");
+          if (!lastAssistant || busy || messages.length === 0) return null;
+          const followUps = [
+            "Bu mikro-qadamni bugun qachon bajaraman?",
+            "Agar to'siq chiqsa — plan B nima?",
+            "Buni odatga aylantirish uchun kimga aytaman?",
+          ];
+          return (
+            <div className="flex flex-wrap gap-2 pl-2">
+              {followUps.map((q) => (
+                <button
+                  key={q}
+                  type="button"
+                  onClick={() => setInput(q)}
+                  className="rounded-full border border-border bg-card/60 px-3 py-1.5 font-ui text-[11px] text-muted-foreground transition hover:border-primary/40 hover:text-foreground"
+                >
+                  {q}
+                </button>
+              ))}
+            </div>
+          );
+        })()}
         {busy && (
           <div className="flex items-center gap-2 text-sm text-muted-foreground">
             <Loader2 className="h-4 w-4 animate-spin" />
