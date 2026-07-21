@@ -90,6 +90,19 @@ function AuthPage() {
         </div>
 
         <div className="glass mt-8 rounded-[var(--radius)] p-6">
+          <GoogleButton next={next} />
+
+          <div className="relative my-6">
+            <div className="absolute inset-0 flex items-center">
+              <span className="w-full border-t border-border" />
+            </div>
+            <div className="relative flex justify-center">
+              <span className="bg-card px-3 font-ui text-xs uppercase tracking-[0.2em] text-muted-foreground">
+                yoki email
+              </span>
+            </div>
+          </div>
+
           <Tabs value={tab} onValueChange={(v) => setTab(v as "signin" | "signup")}>
             <TabsList className="grid w-full grid-cols-2 font-ui">
               <TabsTrigger value="signup">Ro'yxatdan o'tish</TabsTrigger>
@@ -102,19 +115,6 @@ function AuthPage() {
               <EmailForm mode="signin" next={next} />
             </TabsContent>
           </Tabs>
-
-          <div className="relative my-6">
-            <div className="absolute inset-0 flex items-center">
-              <span className="w-full border-t border-border" />
-            </div>
-            <div className="relative flex justify-center">
-              <span className="bg-card px-3 font-ui text-xs uppercase tracking-[0.2em] text-muted-foreground">
-                yoki
-              </span>
-            </div>
-          </div>
-
-          <GoogleButton next={next} />
         </div>
 
         <div className="mt-6 grid grid-cols-3 gap-2 text-center font-ui text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
