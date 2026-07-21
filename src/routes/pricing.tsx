@@ -63,7 +63,9 @@ function Pricing() {
       />
       <main>
         <Hero />
+        <Anchor />
         <Plans />
+        <Guarantee />
         <Compare />
         <LocalPayments />
         <Faq />
@@ -71,6 +73,61 @@ function Pricing() {
       </main>
       <SiteFooter />
     </div>
+  );
+}
+
+function Anchor() {
+  const items = [
+    { label: "Shaxsiy koʻch (coach)", price: "500 000+", note: "so'm / oy" },
+    { label: "Terapevt seansi", price: "300 000", note: "1 uchrashuv" },
+    { label: "Kitob + kurs to'plami", price: "150 000", note: "bir martalik" },
+    { label: "Life Order Pro", price: pricing.monthly.label, note: "oyiga · bekor qilinadi", accent: true },
+  ];
+  return (
+    <section className="border-b border-border bg-card/30">
+      <div className="mx-auto max-w-5xl px-5 py-14">
+        <div className="max-w-xl">
+          <p className="font-ui text-[11px] uppercase tracking-[0.24em] text-primary">Solishtir</p>
+          <h2 className="mt-3 font-serif text-2xl leading-tight tracking-tight md:text-3xl">
+            Xulq-atvor tizimi — bozordagi eng arzon yoʻl
+          </h2>
+          <p className="mt-3 font-ui text-sm text-muted-foreground leading-relaxed">
+            AI mentor, kundalik tahlil va 66 kunlik protokol — bir kishilik koʻch narxining oʻndan bir qismida.
+          </p>
+        </div>
+        <div className="mt-8 grid gap-px overflow-hidden rounded-[var(--radius)] border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
+          {items.map((it) => (
+            <div key={it.label} className={"bg-background p-5 " + (it.accent ? "ring-1 ring-inset ring-primary/40" : "")}>
+              <p className="font-ui text-[11px] uppercase tracking-[0.2em] text-muted-foreground">{it.label}</p>
+              <p className={"mt-2 font-serif text-2xl tracking-tight tabular-nums " + (it.accent ? "text-primary" : "")}>{it.price}</p>
+              <p className="mt-1 font-ui text-xs text-muted-foreground">{it.note}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Guarantee() {
+  const items = [
+    { t: "14 kun — pulni qaytarish", d: "Yoqmasa savolsiz qaytarib beramiz." },
+    { t: "Kartasiz start", d: "Free rejim uchun karta so'ralmaydi." },
+    { t: "Bir bosishda bekor", d: "Yashirin obuna yo'q, avto-uzaytirish shaffof." },
+  ];
+  return (
+    <section className="border-b border-border">
+      <div className="mx-auto max-w-4xl px-5 py-12">
+        <div className="grid gap-px overflow-hidden rounded-[var(--radius)] border border-border bg-border sm:grid-cols-3">
+          {items.map((g) => (
+            <div key={g.t} className="bg-background p-5">
+              <p className="font-serif text-base font-semibold">{g.t}</p>
+              <p className="mt-1 font-ui text-xs text-muted-foreground leading-relaxed">{g.d}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }
 
