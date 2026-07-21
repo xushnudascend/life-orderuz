@@ -246,13 +246,32 @@ function Features() {
 function Pricing() {
   return (
     <section id="pricing" className="border-b border-border">
-      <div className="mx-auto max-w-4xl px-5 py-14 md:py-20">
-        <SectionHeader eyebrow="Narx" title="Bepul boshla" />
-        <div className="mt-10 grid gap-5 md:grid-cols-2">
+      <div className="mx-auto max-w-6xl px-5 py-14 md:py-20">
+        <SectionHeader eyebrow="Narx" title="Bepul boshla — Pro'ga o'sib boradi" />
+
+        {/* Risk reversal badge — Cialdini + loss aversion neutralizer */}
+        <div className="mt-6 flex flex-wrap items-center gap-3 font-ui text-[12px] text-muted-foreground">
+          <span className="inline-flex items-center gap-1.5 rounded-full border border-border/70 px-2.5 py-1">
+            <span className="h-1.5 w-1.5 rounded-full bg-primary" />
+            14 kun — so'roqsiz pul qaytadi
+          </span>
+          <span className="inline-flex items-center gap-1.5 rounded-full border border-border/70 px-2.5 py-1">
+            <span className="h-1.5 w-1.5 rounded-full bg-primary" />
+            Bir bosishda bekor qilish
+          </span>
+          <span className="inline-flex items-center gap-1.5 rounded-full border border-border/70 px-2.5 py-1">
+            <span className="h-1.5 w-1.5 rounded-full bg-primary" />
+            Kartasiz sinov
+          </span>
+        </div>
+
+        {/* 3 tarif: Free anchor low → Pro monthly target → Pro yearly value */}
+        <div className="mt-10 grid gap-5 md:grid-cols-3">
           <PricingCard
             title="Free"
             price="0 so'm"
             period="doimiy"
+            equivalent="Kartasiz"
             features={[
               "Kunlik 3 ta mikro-missiya",
               "Streak, XP, intizom balli",
@@ -267,6 +286,8 @@ function Pricing() {
             title="Pro"
             price="49 000 so'm"
             period="oyiga"
+            equivalent="~$3.9 / oy"
+            badge="Eng mashhur"
             features={[
               "Free rejadagi hammasi",
               "Nadir Pro — kengroq kontekst",
@@ -274,10 +295,28 @@ function Pricing() {
               "Haftalik AI hisobot",
               "Burnout signal + nudge",
             ]}
-            cta="Pro rejaga o'tish"
+            cta="Pro'ga o'tish"
             variant="primary"
           />
+          <PricingCard
+            title="Pro Yillik"
+            price="490 000 so'm"
+            period="yiliga"
+            equivalent="~40 800 so'm / oy · 2 oy tekin"
+            features={[
+              "Pro'dagi hammasi",
+              "12 oy narxida 10 oy",
+              "Yillik retrospektiv hisobot",
+              "Muddatidan avval kirish — yangi modullar",
+              "Bir yil davomida narx qotiriladi",
+            ]}
+            cta="Yillik olish"
+            variant="outline"
+          />
         </div>
+        <p className="mt-6 font-ui text-[11px] leading-relaxed text-muted-foreground">
+          Yillik narx = oylikning 10 barobari (12 oy o'rniga). Har oyni alohida to'lasang ~588 000 so'm — yillikda 98 000 so'mni saqlaysan.
+        </p>
       </div>
     </section>
   );
@@ -287,31 +326,45 @@ function PricingCard({
   title,
   price,
   period,
+  equivalent,
   features,
   cta,
   variant,
+  badge,
 }: {
   title: string;
   price: string;
   period: string;
+  equivalent?: string;
   features: string[];
   cta: string;
   variant: "primary" | "outline";
+  badge?: string;
 }) {
   return (
     <div
       className={
         "relative h-full rounded-[var(--radius)] p-7 " +
         (variant === "primary"
-          ? "border-2 border-primary bg-background"
+          ? "border-2 border-primary bg-background shadow-[0_20px_60px_-30px_hsl(var(--primary)/0.55)]"
           : "border border-border bg-background")
       }
     >
+      {badge && (
+        <span className="absolute -top-3 left-6 rounded-full border border-primary bg-background px-2.5 py-0.5 font-ui text-[10px] font-semibold uppercase tracking-[0.18em] text-primary">
+          {badge}
+        </span>
+      )}
       <h3 className="font-serif text-2xl">{title}</h3>
       <div className="mt-4 flex items-baseline gap-2">
         <span className="font-serif text-3xl tracking-tight tabular-nums">{price}</span>
         <span className="font-ui text-sm text-muted-foreground">/ {period}</span>
       </div>
+      {equivalent && (
+        <p className="mt-1 font-ui text-[11px] uppercase tracking-[0.16em] text-muted-foreground">
+          {equivalent}
+        </p>
+      )}
       <ul className="mt-6 space-y-3 font-ui text-sm">
         {features.map((f) => (
           <li key={f} className="flex items-start gap-3">
@@ -336,6 +389,7 @@ function PricingCard({
     </div>
   );
 }
+
 
 function Faq() {
   return (
