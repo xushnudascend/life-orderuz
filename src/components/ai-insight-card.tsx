@@ -81,11 +81,7 @@ export function AIInsightCard({ context, storageKey = "nadir-insight-today" }: P
         className="pointer-events-none absolute -top-16 -right-16 h-40 w-40 rounded-full bg-primary/20 blur-3xl"
       />
       <PanelHeader
-        eyebrow={
-          <span className="inline-flex items-center gap-1.5">
-            <Sparkles className="h-3 w-3 text-primary" /> Nadir · mikro-kuzatuv
-          </span>
-        }
+        eyebrow="Nadir · mikro-kuzatuv"
         action={
           <button
             type="button"
