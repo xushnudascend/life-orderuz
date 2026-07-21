@@ -37,6 +37,23 @@ FORMAT (kognitiv yuk):
 - 3-6 jumla. Ro'yxat — max 3 punkt.
 - Har javob oxirida BITTA narsa: aniq savol YOKI "agar X — men Y" qadami (ikkalasi emas).`;
 
+type Persona = "therapist" | "goggins" | "huberman";
+
+const PERSONA_OVERLAYS: Record<Persona, string> = {
+  therapist: "",
+  goggins: `\n\nPERSONA-QATLAM (Goggins rejimi — foydalanuvchi tanladi):
+- Ovoz: qat'iy, halol, ayblovsiz, lekin **bahonasiz**. Askar-og'a. "Sen" — buyruq ohangida emas, hurmatli lekin ushlab qo'ymaydigan.
+- Bahonalarni yumshoq empatiya bilan qabul qilma — nomlab ko'rsat: "Bu bahona. Sen o'zing ham buni bilasan."
+- "Ertaga" so'zi — TAQIQ. Faqat "bugun soat X:XX da" mikro-qadam beriladi.
+- Har javobda: 1 satr reflektiv eshitish → 1 satr bahonani nomlash → 1 satr aniq mikro-qadam (bugun, 2 daqiqagacha).
+- HALI HAM TAQIQ: haqorat, kamsitish, "you're weak", jismoniy jazo tavsiyasi, xavfli mashqlar. Halol qattiqlik ≠ zo'ravonlik.`,
+  huberman: `\n\nPERSONA-QATLAM (Huberman rejimi — foydalanuvchi tanladi):
+- Ovoz: neyroolim + amaliyotchi. "Sen" — hurmatli, protokol-yo'naltirilgan.
+- Har javobda mumkin bo'lganda 1 ta konkret neyrobiologik mexanizm nomla (dopamin baseline, cortisol awakening response, prefrontal-limbic, ultradian cycle, sleep pressure, va h.k.) — 1 jumlada, jargonsiz.
+- Mikro-qadamni **protokol** shaklida ber: vaqt + davomiyligi + o'lchanadigan natija. Masalan: "Ertaga 07:00-07:10 — quyoshga qarash (10 daq). O'lchov: shu kuni uyquga ketish vaqti."
+- TAQIQ: aniq bo'lmagan tadqiqot da'volari, tibbiy tavsiya, dozalar, dorilar.`,
+};
+
 type UserStats = {
   displayName?: string | null;
   level?: number | null;
@@ -116,6 +133,7 @@ export const Route = createFileRoute("/api/chat")({
         const body = (await request.json()) as {
           messages?: unknown;
           userStats?: UserStats;
+          persona?: string;
         };
         if (!Array.isArray(body.messages)) {
           return new Response("Messages are required", { status: 400 });
@@ -124,11 +142,17 @@ export const Route = createFileRoute("/api/chat")({
         if (!key) return new Response("Missing LOVABLE_API_KEY", { status: 500 });
 
         const uiMessages = body.messages as UIMessage[];
+        const persona: Persona =
+          body.persona === "goggins" || body.persona === "huberman" ? body.persona : "therapist";
 
         // Fetch RAG-lite memories
         const memories = await fetchNadirMemories(auth.userId, 8);
         const system =
-          NADIR_BASE + buildContext(body.userStats) + formatMemoriesForPrompt(memories);
+          NADIR_BASE +
+          PERSONA_OVERLAYS[persona] +
+          buildContext(body.userStats) +
+          formatMemoriesForPrompt(memories);
+
 
         const gateway = createLovableAiGatewayProvider(key);
         const model = gateway("google/gemini-3-flash-preview");

@@ -26,6 +26,7 @@ import { NadirNudgeBanner } from "@/components/nadir-nudge-banner";
 import { StreakAtRisk } from "@/components/streak-at-risk";
 import { AIInsightCard } from "@/components/ai-insight-card";
 import { RetentionPanels } from "@/components/retention-panels";
+import { HumanPotentialPanel } from "@/components/human-potential-panel";
 import { Panel, PanelHeader, PanelValue } from "@/components/panel";
 import { ErrorBoundary } from "@/components/error-boundary";
 import { CountUpNumber } from "@/components/count-up-number";
@@ -228,8 +229,13 @@ function Dashboard() {
       <StreakAtRisk streakDays={streak?.current_days ?? 0} percent={percent} />
 
       <div className="mb-5">
+        <HumanPotentialPanel />
+      </div>
+
+      <div className="mb-5">
         <RetentionPanels />
       </div>
+
 
 
 

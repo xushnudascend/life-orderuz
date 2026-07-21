@@ -127,11 +127,43 @@ async function fetchNadirStats(userId: string): Promise<UserStats> {
   };
 }
 
+type Persona = "therapist" | "goggins" | "huberman";
+
+const PERSONAS: Array<{ id: Persona; label: string; desc: string }> = [
+  { id: "therapist", label: "Terapevt", desc: "Yumshoq, aks-ettiruvchi. Rogers + Beck." },
+  { id: "goggins", label: "Goggins", desc: "Halol, bahonasiz. Bugun, hozir." },
+  { id: "huberman", label: "Huberman", desc: "Neyroolim. Protokol shaklida." },
+];
+
+function usePersona(): [Persona, (p: Persona) => void] {
+  const [persona, setPersona] = useState<Persona>("therapist");
+  useEffect(() => {
+    try {
+      const saved = window.localStorage.getItem("lo:mentor:persona");
+      if (saved === "goggins" || saved === "huberman" || saved === "therapist") {
+        setPersona(saved);
+      }
+    } catch {
+      /* ignore */
+    }
+  }, []);
+  const update = (p: Persona) => {
+    setPersona(p);
+    try {
+      window.localStorage.setItem("lo:mentor:persona", p);
+    } catch {
+      /* ignore */
+    }
+  };
+  return [persona, update];
+}
+
 function MentorPage() {
   const { userId } = Route.useRouteContext();
   const [initial, setInitial] = useState<UIMessage[] | null>(null);
   const [stats, setStats] = useState<UserStats | null>(null);
   const [input, setInput] = useState("");
+  const [persona, setPersona] = usePersona();
   const savedIdsRef = useRef<Set<string>>(new Set());
   const bottomRef = useRef<HTMLDivElement>(null);
 
@@ -163,6 +195,8 @@ function MentorPage() {
       userId={userId}
       initialMessages={initial}
       stats={stats}
+      persona={persona}
+      setPersona={setPersona}
       input={input}
       setInput={setInput}
       savedIdsRef={savedIdsRef}
@@ -177,10 +211,13 @@ function MentorPage() {
   );
 }
 
+
 function MentorChat({
   userId,
   initialMessages,
   stats,
+  persona,
+  setPersona,
   input,
   setInput,
   savedIdsRef,
@@ -189,6 +226,8 @@ function MentorChat({
   userId: string;
   initialMessages: UIMessage[];
   stats: UserStats;
+  persona: Persona;
+  setPersona: (p: Persona) => void;
   input: string;
   setInput: (v: string) => void;
   savedIdsRef: React.MutableRefObject<Set<string>>;
@@ -198,10 +237,11 @@ function MentorChat({
     () =>
       new DefaultChatTransport({
         api: "/api/chat",
-        body: { userStats: stats },
+        body: { userStats: stats, persona },
       }),
-    [stats],
+    [stats, persona],
   );
+
 
   const { messages, sendMessage, status, error } = useChat({
     id: userId,
@@ -264,6 +304,39 @@ function MentorChat({
           </span>
         }
       />
+
+      <div className="mt-4 flex flex-wrap gap-2" role="radiogroup" aria-label="Mentor rejimi">
+        {PERSONAS.map((p) => {
+          const active = persona === p.id;
+          return (
+            <button
+              key={p.id}
+              type="button"
+              role="radio"
+              aria-checked={active}
+              onClick={() => setPersona(p.id)}
+              className={
+                "group flex flex-col items-start rounded-[var(--radius)] border px-3 py-2 text-left transition " +
+                (active
+                  ? "border-primary bg-primary/10"
+                  : "border-border bg-card hover:border-primary/40")
+              }
+            >
+              <span
+                className={
+                  "font-ui text-[11px] uppercase tracking-[0.2em] " +
+                  (active ? "text-primary" : "text-muted-foreground")
+                }
+              >
+                {p.label}
+              </span>
+              <span className="mt-0.5 text-[11px] text-muted-foreground">{p.desc}</span>
+            </button>
+          );
+        })}
+      </div>
+
+
 
 
       <div className="mt-6 flex min-h-[60vh] flex-col">
@@ -355,11 +428,34 @@ function MentorChat({
                 <Shimmer className="font-ui text-sm">Nadir o'ylayapti…</Shimmer>
               </div>
             )}
-            {error && (
-              <div className="rounded-[var(--radius)] border border-destructive/40 bg-destructive/10 p-3 text-sm text-destructive">
-                Xato: {error.message}
-              </div>
-            )}
+            {error && (() => {
+              const msg = error.message || "";
+              const isQuota = /daily_ai_budget_exceeded|429/i.test(msg);
+              if (isQuota) {
+                return (
+                  <div className="rounded-[var(--radius)] border border-primary/40 bg-primary/5 p-4 text-sm">
+                    <p className="mb-2 font-serif text-base text-foreground">
+                      Bugungi bepul limit tugadi.
+                    </p>
+                    <p className="mb-3 text-muted-foreground">
+                      Free rejimida kuniga 10 ta xabar. Pro'da 300 ta va boshqa AI xizmatlari cheklovsiz.
+                    </p>
+                    <a
+                      href="/pricing"
+                      className="inline-flex items-center rounded-full border border-primary bg-primary px-3 py-1.5 font-ui text-xs uppercase tracking-[0.2em] text-primary-foreground transition hover:opacity-90"
+                    >
+                      Pro'ga o'tish
+                    </a>
+                  </div>
+                );
+              }
+              return (
+                <div className="rounded-[var(--radius)] border border-destructive/40 bg-destructive/10 p-3 text-sm text-destructive">
+                  Xato: {msg}
+                </div>
+              );
+            })()}
+
             <div ref={bottomRef} />
           </ConversationContent>
           <ConversationScrollButton />
