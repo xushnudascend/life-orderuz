@@ -491,35 +491,43 @@ function Pricing() {
           sub="Free doimiy. Pro — kengroq AI konteksti va cheksiz odat."
         />
         <div className="mt-10 grid gap-5 md:grid-cols-2">
-          <PricingCard
-            title="Free"
-            price="0 so'm"
-            period="doimiy"
-            features={[
-              "Kunlik 3 ta mikro-missiya",
-              "Streak, XP, intizom balli",
-              "Nadir bilan asosiy suhbat",
-              "Kundalik va kayfiyat",
-              "PWA — telefonga o'rnatiladi",
-            ]}
-            cta="Bepul boshlash"
-            variant="outline"
-          />
-          <PricingCard
-            title="Pro"
-            price="49 000 so'm"
-            period="oyiga"
-            features={[
-              "Free rejadagi hammasi",
-              "Nadir Pro — kengroq kontekst",
-              "Cheksiz odat va quest",
-              "Haftalik AI hisobot",
-              "Burnout signal + nudge",
-              "Davra kanallariga to'liq kirish",
-            ]}
-            cta="Pro rejaga o'tish"
-            variant="primary"
-          />
+          <Reveal>
+            <TiltCard className="h-full">
+              <PricingCard
+                title="Free"
+                price="0 so'm"
+                period="doimiy"
+                features={[
+                  "Kunlik 3 ta mikro-missiya",
+                  "Streak, XP, intizom balli",
+                  "Nadir bilan asosiy suhbat",
+                  "Kundalik va kayfiyat",
+                  "PWA — telefonga o'rnatiladi",
+                ]}
+                cta="Bepul boshlash"
+                variant="outline"
+              />
+            </TiltCard>
+          </Reveal>
+          <Reveal delay={120}>
+            <TiltCard className="h-full">
+              <PricingCard
+                title="Pro"
+                price="49 000 so'm"
+                period="oyiga"
+                features={[
+                  "Free rejadagi hammasi",
+                  "Nadir Pro — kengroq kontekst",
+                  "Cheksiz odat va quest",
+                  "Haftalik AI hisobot",
+                  "Burnout signal + nudge",
+                  "Davra kanallariga to'liq kirish",
+                ]}
+                cta="Pro rejaga o'tish"
+                variant="primary"
+              />
+            </TiltCard>
+          </Reveal>
         </div>
       </div>
     </section>
