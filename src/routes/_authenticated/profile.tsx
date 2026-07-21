@@ -154,6 +154,23 @@ function ProfilePage() {
         </p>
       )}
 
+      {!loading && (
+        <Panel className="mt-6 border-primary/30 bg-primary/5 p-5">
+          <p className="font-ui text-[10px] font-semibold uppercase tracking-[0.22em] text-primary">
+            Identitet
+          </p>
+          <p className="mt-2 font-serif text-xl leading-snug text-balance">
+            Men — {identityFrom(stats?.level ?? 1, streak?.current_days ?? 0)}.
+          </p>
+          <p className="mt-2 font-ui text-xs text-muted-foreground">
+            Har bajarilgan mikro-qadam — shu jumlaning isboti. Odat ovoz berishdir:
+            har kuni sen qanday odam ekanligingga.
+          </p>
+        </Panel>
+      )}
+
+
+
       {loading ? (
         <div className="flex justify-center py-16">
           <Loader2 className="h-5 w-5 animate-spin text-muted-foreground" />
