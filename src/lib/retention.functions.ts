@@ -48,10 +48,10 @@ export const bumpWeeklyChallenge = createServerFn({ method: "POST" })
     if (done) {
       await context.supabase.from("xp_events").insert({
         user_id: context.userId,
-        amount: current.xp_reward,
-        reason: "weekly_challenge_completed",
-        ref_type: "weekly_challenge",
-        ref_id: current.id,
+        amount: Math.min(50, current.xp_reward),
+        source: "achievement",
+        reference_id: current.id,
+        note: "weekly_challenge_completed",
       });
     }
     return updated as WeeklyChallenge;
