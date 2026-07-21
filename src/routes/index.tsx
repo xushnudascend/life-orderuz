@@ -26,7 +26,7 @@ import { getPeerMirror } from "@/lib/peer-mirror.functions";
 const BRAND = "Life Order";
 const SITE_URL = "https://life-orderuz.lovable.app";
 const ONE_LINER =
-  "Life Order — xulq-atvor tizimi. Trigger → mikro-harakat → tasdiq halqasi. Nadir AI mentor bilan. Bepul, kartasiz.";
+  "Motivatsiya tugaydi — tizim qoladi. Kuniga 3 ta 2-daqiqalik qadam, 9 shkalali psixologik xarita va Nadir AI mentor. Kartasiz, o'zbek tilida.";
 
 const FAQ_ITEMS: { q: string; a: string }[] = [
   {
