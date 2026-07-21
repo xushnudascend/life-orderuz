@@ -89,6 +89,7 @@ function Landing() {
       <SiteHeader />
       <main>
         <Hero />
+        <PeerMirror />
         <ProofStrip />
         <Mechanism />
         <HowItWorks />
@@ -115,37 +116,111 @@ function Hero() {
         }}
       />
       <div className="relative mx-auto max-w-3xl px-5 pb-16 pt-16 text-center md:pb-24 md:pt-28">
+        {/* Identity trigger — kimga */}
         <p className="rise-1 font-ui text-[11px] uppercase tracking-[0.24em] text-muted-foreground">
-          Xulq-atvor tizimi · Beta
+          Boshlaganini oxiriga yetkazadigan odamlar uchun
         </p>
-        <h1 className="mt-5 font-serif text-[36px] leading-[1.05] tracking-tight text-balance sm:text-5xl md:text-6xl">
+
+        {/* 5-sekundli xabar: muammo → yechim */}
+        <h1 className="mt-5 font-serif text-[36px] leading-[1.03] tracking-tight text-balance sm:text-5xl md:text-[64px]">
           <span className="rise-2 inline-block">Motivatsiya tugaydi.</span>
           <br />
           <span className="rise-3 inline-block text-muted-foreground">Tizim qoladi.</span>
         </h1>
-        <p className="rise-4 mx-auto mt-5 max-w-md text-[15px] leading-relaxed text-muted-foreground text-pretty">
-          Kuniga uchta 2-daqiqalik qadam. Nadir AI mentor sen uchun shaxsiy protokol tuzadi.
+
+        {/* Aniq va'da — cheklangan, o'lchanadigan */}
+        <p className="rise-4 mx-auto mt-6 max-w-lg text-[16px] leading-relaxed text-foreground/85 text-pretty">
+          Kuniga 3 ta 2-daqiqalik qadam. 9 shkala bo'yicha psixologik xarita.
+          Nadir AI — <span className="text-foreground">motivatsion so'zlar emas</span>,
+          shaxsiy protokol.
         </p>
+
         <div className="rise-4 mt-8 flex flex-col items-stretch gap-2.5 sm:flex-row sm:items-center sm:justify-center sm:gap-3">
           <Button asChild size="lg" className="group h-12 rounded-full px-6 font-ui font-semibold">
             <Link to="/auth">
-              Bepul boshlash
+              3 daqiqada boshlash
               <ArrowRight className="cta-arrow ml-1.5 h-4 w-4" />
             </Link>
           </Button>
           <Button asChild size="lg" variant="ghost" className="h-12 rounded-full px-5 font-ui">
-            <a href="#how">Qanday ishlaydi</a>
+            <a href="#mechanism">Nima uchun ishlaydi</a>
           </Button>
         </div>
-        <p className="rise-4 mt-5 font-ui text-xs text-muted-foreground">
-          60 soniyada · Kartasiz · O'zbek tilida · Toshkentda qurilgan
-        </p>
-        <div className="rise-4 mx-auto mt-8 flex max-w-xl flex-wrap items-center justify-center gap-x-5 gap-y-2 font-ui text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
-          <span className="inline-flex items-center gap-1.5"><span className="h-1 w-1 rounded-full bg-primary/70" /> Reklama yo'q</span>
-          <span className="inline-flex items-center gap-1.5"><span className="h-1 w-1 rounded-full bg-primary/70" /> Notifikatsiya bosimi yo'q</span>
-          <span className="inline-flex items-center gap-1.5"><span className="h-1 w-1 rounded-full bg-primary/70" /> Ma'lumot sotilmaydi</span>
-        </div>
 
+        {/* Xavfsizlik — friksiyani nolga tushirish */}
+        <p className="rise-4 mt-5 font-ui text-xs text-muted-foreground">
+          Kartasiz · Reklamasiz · Bir bosishda o'chirasan · O'zbek tilida
+        </p>
+
+        <div className="rise-4 mx-auto mt-8 flex max-w-xl flex-wrap items-center justify-center gap-x-5 gap-y-2 font-ui text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
+          <span className="inline-flex items-center gap-1.5"><span className="h-1 w-1 rounded-full bg-primary/70" /> Ma'lumot sotilmaydi</span>
+          <span className="inline-flex items-center gap-1.5"><span className="h-1 w-1 rounded-full bg-primary/70" /> Notifikatsiya bosimi yo'q</span>
+          <span className="inline-flex items-center gap-1.5"><span className="h-1 w-1 rounded-full bg-primary/70" /> Toshkentda qurilgan</span>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function PeerMirror() {
+  const load = useServerFn(getPeerMirror);
+  const { data } = useQuery({
+    queryKey: ["peer-mirror"],
+    queryFn: () => load(),
+    staleTime: 5 * 60 * 1000,
+    gcTime: 30 * 60 * 1000,
+  });
+
+  const members = data?.members ?? null;
+  const todayActive = data?.today_active ?? null;
+  const streakLeader = data?.streak_leader ?? null;
+
+  // If DB is unreachable or completely empty, show honest early-stage framing.
+  const hasReal = (members ?? 0) > 0;
+
+  return (
+    <section className="border-b border-border bg-background/60">
+      <div className="mx-auto max-w-5xl px-5 py-8 md:py-10">
+        <div className="flex flex-col items-center gap-3 text-center sm:flex-row sm:justify-between sm:text-left">
+          <div className="flex items-center gap-2 font-ui text-[11px] uppercase tracking-[0.22em] text-muted-foreground">
+            <span className="relative flex h-1.5 w-1.5">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary/60" />
+              <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-primary" />
+            </span>
+            Live · Hozirgi holat
+          </div>
+          <dl className="grid w-full grid-cols-3 gap-4 sm:w-auto sm:gap-8">
+            <div>
+              <dt className="font-ui text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
+                Sizga o'xshash
+              </dt>
+              <dd className="mt-1 font-serif text-xl tracking-tight tabular-nums">
+                {hasReal ? members : "Beta"}
+              </dd>
+            </div>
+            <div>
+              <dt className="font-ui text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
+                Bugun tizimda
+              </dt>
+              <dd className="mt-1 font-serif text-xl tracking-tight tabular-nums">
+                {hasReal ? (todayActive ?? 0) : "—"}
+              </dd>
+            </div>
+            <div>
+              <dt className="font-ui text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
+                Eng uzun streak
+              </dt>
+              <dd className="mt-1 font-serif text-xl tracking-tight tabular-nums">
+                {hasReal ? `${streakLeader ?? 0} kun` : "—"}
+              </dd>
+            </div>
+          </dl>
+        </div>
+        {!hasReal && (
+          <p className="mt-4 text-center font-ui text-[11px] leading-relaxed text-muted-foreground sm:text-left">
+            Erta bosqich · pilot foydalanuvchilar davri. Sonlar ochiq va real — soxta metrika yo'q.
+          </p>
+        )}
       </div>
     </section>
   );
