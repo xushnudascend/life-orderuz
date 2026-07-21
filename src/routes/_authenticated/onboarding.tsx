@@ -222,6 +222,8 @@ function Onboarding() {
             <div className="whitespace-pre-line rounded-xl border border-border/60 bg-background/60 p-5 font-body text-[15px] leading-relaxed text-foreground">
               {ahaNudge}
             </div>
+            <SocialMirror />
+
             <Button
               className="mt-8 w-full font-ui font-semibold"
               size="lg"
