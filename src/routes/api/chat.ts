@@ -133,6 +133,7 @@ export const Route = createFileRoute("/api/chat")({
         const body = (await request.json()) as {
           messages?: unknown;
           userStats?: UserStats;
+          persona?: string;
         };
         if (!Array.isArray(body.messages)) {
           return new Response("Messages are required", { status: 400 });
@@ -141,11 +142,17 @@ export const Route = createFileRoute("/api/chat")({
         if (!key) return new Response("Missing LOVABLE_API_KEY", { status: 500 });
 
         const uiMessages = body.messages as UIMessage[];
+        const persona: Persona =
+          body.persona === "goggins" || body.persona === "huberman" ? body.persona : "therapist";
 
         // Fetch RAG-lite memories
         const memories = await fetchNadirMemories(auth.userId, 8);
         const system =
-          NADIR_BASE + buildContext(body.userStats) + formatMemoriesForPrompt(memories);
+          NADIR_BASE +
+          PERSONA_OVERLAYS[persona] +
+          buildContext(body.userStats) +
+          formatMemoriesForPrompt(memories);
+
 
         const gateway = createLovableAiGatewayProvider(key);
         const model = gateway("google/gemini-3-flash-preview");
