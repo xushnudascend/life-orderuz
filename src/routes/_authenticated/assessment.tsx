@@ -124,19 +124,29 @@ function AssessmentPage() {
                   <button
                     key={v}
                     onClick={() => setAnswer(current.key, v)}
-                    className={`group flex items-center justify-between rounded-lg border px-4 py-3 text-left transition-all ${
+                    className={`group relative flex items-center justify-between overflow-hidden rounded-lg border px-4 py-3.5 text-left transition-all duration-200 will-change-transform active:scale-[0.98] ${
                       selected
-                        ? "border-amber-500/60 bg-amber-500/10 text-foreground"
-                        : "border-border/60 bg-card/40 text-muted-foreground hover:border-amber-500/30 hover:bg-amber-500/5 hover:text-foreground"
+                        ? "border-amber-500/70 bg-amber-500/[0.12] text-foreground shadow-[0_0_0_1px_hsl(var(--primary)/0.35),0_10px_30px_-12px_hsl(var(--primary)/0.5)] scale-[1.015]"
+                        : "border-border/60 bg-card/40 text-muted-foreground hover:border-amber-500/40 hover:bg-amber-500/[0.06] hover:text-foreground hover:translate-x-0.5"
                     }`}
                   >
-                    <span className="text-sm">{LIKERT_LABELS[v]}</span>
+                    {selected && (
+                      <span
+                        aria-hidden
+                        className="pointer-events-none absolute inset-0 -z-0 animate-[pulse_1.2s_ease-out_1] bg-gradient-to-r from-transparent via-amber-400/10 to-transparent"
+                      />
+                    )}
+                    <span className="relative z-10 text-sm">{LIKERT_LABELS[v]}</span>
                     <span
-                      className={`h-2 w-2 rounded-full ${
-                        selected ? "bg-amber-400" : "bg-muted-foreground/30 group-hover:bg-amber-400/60"
+                      className={`relative z-10 grid h-5 w-5 shrink-0 place-items-center rounded-full border transition-all duration-200 ${
+                        selected
+                          ? "border-amber-400 bg-amber-400 shadow-[0_0_12px_hsl(var(--primary)/0.6)]"
+                          : "border-muted-foreground/30 group-hover:border-amber-400/60"
                       }`}
                       aria-hidden
-                    />
+                    >
+                      {selected && <span className="h-2 w-2 rounded-full bg-background" />}
+                    </span>
                   </button>
                 );
               })}
