@@ -34,6 +34,7 @@ import { Route as ApiChatRouteImport } from './routes/api/chat'
 import { Route as AuthenticatedWorkoutRouteImport } from './routes/_authenticated/workout'
 import { Route as AuthenticatedTemirIntizomRouteImport } from './routes/_authenticated/temir-intizom'
 import { Route as AuthenticatedSettingsRouteImport } from './routes/_authenticated/settings'
+import { Route as AuthenticatedRoadmapRouteImport } from './routes/_authenticated/roadmap'
 import { Route as AuthenticatedQuestsRouteImport } from './routes/_authenticated/quests'
 import { Route as AuthenticatedProfileRouteImport } from './routes/_authenticated/profile'
 import { Route as AuthenticatedPartyRouteImport } from './routes/_authenticated/party'
@@ -188,6 +189,11 @@ const AuthenticatedTemirIntizomRoute =
 const AuthenticatedSettingsRoute = AuthenticatedSettingsRouteImport.update({
   id: '/settings',
   path: '/settings',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedRoadmapRoute = AuthenticatedRoadmapRouteImport.update({
+  id: '/roadmap',
+  path: '/roadmap',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedQuestsRoute = AuthenticatedQuestsRouteImport.update({
@@ -377,6 +383,7 @@ export interface FileRoutesByFullPath {
   '/party': typeof AuthenticatedPartyRoute
   '/profile': typeof AuthenticatedProfileRoute
   '/quests': typeof AuthenticatedQuestsRoute
+  '/roadmap': typeof AuthenticatedRoadmapRoute
   '/settings': typeof AuthenticatedSettingsRoute
   '/temir-intizom': typeof AuthenticatedTemirIntizomRoute
   '/workout': typeof AuthenticatedWorkoutRoute
@@ -433,6 +440,7 @@ export interface FileRoutesByTo {
   '/party': typeof AuthenticatedPartyRoute
   '/profile': typeof AuthenticatedProfileRoute
   '/quests': typeof AuthenticatedQuestsRoute
+  '/roadmap': typeof AuthenticatedRoadmapRoute
   '/settings': typeof AuthenticatedSettingsRoute
   '/temir-intizom': typeof AuthenticatedTemirIntizomRoute
   '/workout': typeof AuthenticatedWorkoutRoute
@@ -491,6 +499,7 @@ export interface FileRoutesById {
   '/_authenticated/party': typeof AuthenticatedPartyRoute
   '/_authenticated/profile': typeof AuthenticatedProfileRoute
   '/_authenticated/quests': typeof AuthenticatedQuestsRoute
+  '/_authenticated/roadmap': typeof AuthenticatedRoadmapRoute
   '/_authenticated/settings': typeof AuthenticatedSettingsRoute
   '/_authenticated/temir-intizom': typeof AuthenticatedTemirIntizomRoute
   '/_authenticated/workout': typeof AuthenticatedWorkoutRoute
@@ -549,6 +558,7 @@ export interface FileRouteTypes {
     | '/party'
     | '/profile'
     | '/quests'
+    | '/roadmap'
     | '/settings'
     | '/temir-intizom'
     | '/workout'
@@ -605,6 +615,7 @@ export interface FileRouteTypes {
     | '/party'
     | '/profile'
     | '/quests'
+    | '/roadmap'
     | '/settings'
     | '/temir-intizom'
     | '/workout'
@@ -662,6 +673,7 @@ export interface FileRouteTypes {
     | '/_authenticated/party'
     | '/_authenticated/profile'
     | '/_authenticated/quests'
+    | '/_authenticated/roadmap'
     | '/_authenticated/settings'
     | '/_authenticated/temir-intizom'
     | '/_authenticated/workout'
@@ -902,6 +914,13 @@ declare module '@tanstack/react-router' {
       path: '/settings'
       fullPath: '/settings'
       preLoaderRoute: typeof AuthenticatedSettingsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/roadmap': {
+      id: '/_authenticated/roadmap'
+      path: '/roadmap'
+      fullPath: '/roadmap'
+      preLoaderRoute: typeof AuthenticatedRoadmapRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/quests': {
@@ -1146,6 +1165,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedPartyRoute: typeof AuthenticatedPartyRoute
   AuthenticatedProfileRoute: typeof AuthenticatedProfileRoute
   AuthenticatedQuestsRoute: typeof AuthenticatedQuestsRoute
+  AuthenticatedRoadmapRoute: typeof AuthenticatedRoadmapRoute
   AuthenticatedSettingsRoute: typeof AuthenticatedSettingsRoute
   AuthenticatedTemirIntizomRoute: typeof AuthenticatedTemirIntizomRoute
   AuthenticatedWorkoutRoute: typeof AuthenticatedWorkoutRoute
@@ -1169,6 +1189,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedPartyRoute: AuthenticatedPartyRoute,
   AuthenticatedProfileRoute: AuthenticatedProfileRoute,
   AuthenticatedQuestsRoute: AuthenticatedQuestsRoute,
+  AuthenticatedRoadmapRoute: AuthenticatedRoadmapRoute,
   AuthenticatedSettingsRoute: AuthenticatedSettingsRoute,
   AuthenticatedTemirIntizomRoute: AuthenticatedTemirIntizomRoute,
   AuthenticatedWorkoutRoute: AuthenticatedWorkoutRoute,
