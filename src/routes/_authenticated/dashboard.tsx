@@ -297,6 +297,13 @@ function Dashboard() {
         </Panel>
       </div>
 
+      {/* Nadir mikro-kuzatuv */}
+      <div className="mt-4">
+        <AIInsightCard
+          context={`Foydalanuvchi: ${profile?.display_name ?? "do'st"}. Bugun ${doneCount}/${habits.length} odat (${percent}%). Streak: ${streak?.current_days ?? 0} kun. Daraja ${stats?.level ?? 1}, XP ${stats?.total_xp ?? 0}. Arxetip: ${archetype?.name ?? "-"}. Vaqt: ${c.label}.`}
+        />
+      </div>
+
       {/* Asosiy grid */}
       <div className="mt-4 grid gap-3 sm:gap-4 lg:grid-cols-12">
         {/* Habits */}
