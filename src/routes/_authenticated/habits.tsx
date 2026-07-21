@@ -44,7 +44,7 @@ const CATEGORIES = [
 const QUICK_PICKS = [
   "20 daqiqa o'qish",
   "10 000 qadam",
-  "8 stakan suh",
+  "8 stakan suv",
   "10 daqiqa meditatsiya",
   "Ertalab mashq",
 ];
