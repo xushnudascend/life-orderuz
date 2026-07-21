@@ -124,7 +124,22 @@ function AuthPage() {
           <GoogleButton next={next} />
         </div>
 
-        <p className="mt-6 text-center font-ui text-xs text-muted-foreground">
+        <div className="mt-6 grid grid-cols-3 gap-2 text-center font-ui text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
+          <div className="rounded-md border border-border/60 bg-background/30 px-2 py-2">
+            <p className="text-foreground/80">Shifrlangan</p>
+            <p className="mt-0.5 text-muted-foreground/70 normal-case tracking-normal text-[10px]">TLS + RLS</p>
+          </div>
+          <div className="rounded-md border border-border/60 bg-background/30 px-2 py-2">
+            <p className="text-foreground/80">Reklama yo'q</p>
+            <p className="mt-0.5 text-muted-foreground/70 normal-case tracking-normal text-[10px]">sotilmaydi</p>
+          </div>
+          <div className="rounded-md border border-border/60 bg-background/30 px-2 py-2">
+            <p className="text-foreground/80">Bir bosishda</p>
+            <p className="mt-0.5 text-muted-foreground/70 normal-case tracking-normal text-[10px]">o'chirasan</p>
+          </div>
+        </div>
+
+        <p className="mt-4 text-center font-ui text-xs text-muted-foreground">
           Davom etib, Shartlar va Maxfiylik siyosatiga rozilik bildirasiz.
         </p>
       </div>
