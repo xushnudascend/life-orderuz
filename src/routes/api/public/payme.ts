@@ -84,7 +84,7 @@ export const Route = createFileRoute("/api/public/payme")({
               provider: "payme",
               provider_txn_id: id,
               state: "prepared",
-              raw_payload: p as object,
+              raw_payload: p as unknown as Record<string, unknown>,
             }).eq("id", orderId);
             return rpcResult(body.id, { create_time: time, transaction: orderId, state: 1 });
           }
