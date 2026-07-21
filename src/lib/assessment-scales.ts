@@ -102,46 +102,35 @@ export const QUESTIONS: AssessmentQuestion[] = [
   // Self-Control (Tangney SCS qisqartma)
   { key: "sc_1", scale: "self_control", prompt: "Vasvasaga qarshi turishim men uchun oson.", direction: "forward" },
   { key: "sc_2", scale: "self_control", prompt: "Yomon odatlarni to'xtata olmayman.", direction: "reverse" },
-  { key: "sc_3", scale: "self_control", prompt: "Uzoq maqsad uchun bugungi lazzatdan voz kecha olaman.", direction: "forward" },
 
   // Dopamine Dependence
   { key: "dd_1", scale: "dopamine_dependence", prompt: "Qisqa videolar (TikTok, Reels, Shorts) meni soatlab tutib qoladi.", direction: "forward" },
   { key: "dd_2", scale: "dopamine_dependence", prompt: "5 daqiqa telefonsiz o'tirish — men uchun qiyin.", direction: "forward" },
-  { key: "dd_3", scale: "dopamine_dependence", prompt: "Xabarnoma kelmasa ham, telefon ekranini ochib yopaman.", direction: "forward" },
 
   // Goal Clarity
   { key: "gc_1", scale: "goal_clarity", prompt: "Keyingi 90 kunda erishmoqchi bo'lgan aniq maqsadim bor.", direction: "forward" },
-  { key: "gc_2", scale: "goal_clarity", prompt: "Har haftaga aniq rejam bor.", direction: "forward" },
   { key: "gc_3", scale: "goal_clarity", prompt: "Ko'p vaqt nima qilishim kerakligini bilmayman.", direction: "reverse" },
 
-  // Confidence (Bandura general self-efficacy qisqartma)
+  // Confidence
   { key: "cf_1", scale: "confidence", prompt: "Qiyin vazifa bo'lsa ham, yechim topa olaman.", direction: "forward" },
   { key: "cf_2", scale: "confidence", prompt: "Xatoga yo'l qo'ysam ham, yana urina olaman.", direction: "forward" },
-  { key: "cf_3", scale: "confidence", prompt: "O'zimni tengdoshlarimdan orqada his qilaman.", direction: "reverse" },
 
   // Discipline
   { key: "di_1", scale: "discipline", prompt: "Rejalashtirgan ishimni oxirigacha bajaraman.", direction: "forward" },
-  { key: "di_2", scale: "discipline", prompt: "Kayfiyatim yomon bo'lsa, ishni tashlab qo'yaman.", direction: "reverse" },
   { key: "di_3", scale: "discipline", prompt: "So'nggi 30 kunda kamida bitta odatimni izchil bajardim.", direction: "forward" },
 
-  // Sleep Quality (PSQI-lite)
-  { key: "sq_1", scale: "sleep_quality", prompt: "Uyquga ketishim 20 daqiqadan kam.", direction: "forward" },
+  // Sleep Quality
   { key: "sq_2", scale: "sleep_quality", prompt: "Ertalab tetik uyg'onaman.", direction: "forward" },
-  { key: "sq_3", scale: "sleep_quality", prompt: "Kechqurun telefondan ajrala olmayman.", direction: "reverse" },
 
-  // Social Media Addiction (Bergen SMAS qisqartma)
+  // Social Media Addiction
   { key: "sm_1", scale: "social_media_addiction", prompt: "Ijtimoiy tarmoqlar haqida rejalashtirilganidan ko'proq o'ylayman.", direction: "forward" },
-  { key: "sm_2", scale: "social_media_addiction", prompt: "Kayfiyatimni yaxshilash uchun tarmoqqa kiraman.", direction: "forward" },
-  { key: "sm_3", scale: "social_media_addiction", prompt: "Tarmoqni kamaytirmoqchi bo'ldim, lekin uddasidan chiqmadim.", direction: "forward" },
 
-  // Purpose (Meaning in Life Q qisqartma)
+  // Purpose
   { key: "pu_1", scale: "purpose", prompt: "Hayotimning aniq ma'nosi bor.", direction: "forward" },
   { key: "pu_2", scale: "purpose", prompt: "Nima uchun uyg'onishimni bilaman.", direction: "forward" },
 
   // Environment
   { key: "en_1", scale: "environment", prompt: "Uyimdagi joyim — diqqatimni jamlashga yordam beradi.", direction: "forward" },
-  { key: "en_2", scale: "environment", prompt: "Telefonimdagi ilovalar diqqatimni chalg'itadi.", direction: "reverse" },
-  { key: "en_3", scale: "environment", prompt: "Atrofimda meni yaxshilikka undaydigan odamlar bor.", direction: "forward" },
 ];
 
 export const LIKERT_LABELS: Record<number, string> = {

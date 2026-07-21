@@ -23,7 +23,10 @@ export const submitAssessment = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((input: unknown) => SubmitInput.parse(input))
   .handler(async ({ data, context }) => {
-    const { supabase, userId } = context;
+    const { userId } = context;
+    // Use admin client for writes — userId is trusted from validated JWT.
+    // This avoids intermittent RLS failures with JWT header forwarding.
+    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
 
     // 1. Sanitize & validate keys
     const clean: Record<string, number> = {};
@@ -32,7 +35,9 @@ export const submitAssessment = createServerFn({ method: "POST" })
       clean[k] = v;
     }
     if (Object.keys(clean).length !== QUESTIONS.length) {
-      throw new Error("Barcha savollarga javob bering.");
+      throw new Error(
+        `Iltimos, barcha savollarga javob bering (${Object.keys(clean).length}/${QUESTIONS.length}).`,
+      );
     }
 
     // 2. Compute
@@ -49,13 +54,13 @@ export const submitAssessment = createServerFn({ method: "POST" })
         value: clean[q.key],
       };
     });
-    const { error: respErr } = await supabase
+    const { error: respErr } = await supabaseAdmin
       .from("assessment_responses")
       .upsert(rows, { onConflict: "user_id,question_key" });
     if (respErr) throw new Error(respErr.message);
 
-    // 4. Insert score snapshot (a new row each recompute — history)
-    const { error: scoreErr } = await supabase.from("assessment_scores").insert({
+    // 4. Insert score snapshot
+    const { error: scoreErr } = await supabaseAdmin.from("assessment_scores").insert({
       user_id: userId,
       potential: scores.potential,
       discipline: scores.discipline,
@@ -77,10 +82,29 @@ export const submitAssessment = createServerFn({ method: "POST" })
       target_date: stageTargetDate(i).toISOString().slice(0, 10),
       status: i === 0 ? "active" : "pending",
     }));
-    const { error: roadmapErr } = await supabase
+    const { error: roadmapErr } = await supabaseAdmin
       .from("roadmap_stages")
       .upsert(stageRows, { onConflict: "user_id,stage_index" });
     if (roadmapErr) throw new Error(roadmapErr.message);
+
+    // 6. Save a rich Nadir memory so the AI mentor remembers this profile.
+    try {
+      const weakestMeta = SCALES.find((s) => s.key === scores.weakest_scale);
+      const summary = [
+        `Human Potential: ${scores.potential}/100`,
+        `Discipline: ${scores.discipline}, Focus: ${scores.focus}, Addiction risk: ${scores.addiction_risk}`,
+        `Eng zaif joy: ${weakestMeta?.title ?? scores.weakest_scale}`,
+        `Shkalalar: ${SCALES.map((s) => `${s.short}=${scores.scales[s.key]}`).join(", ")}`,
+      ].join(" · ");
+      await supabaseAdmin.from("nadir_memories").insert({
+        user_id: userId,
+        kind: "assessment",
+        content: summary,
+        importance: 5,
+      });
+    } catch {
+      // best-effort — do not block user progress
+    }
 
     return { scores, roadmap: seeds };
   });
