@@ -48,6 +48,7 @@ import { Route as AuthenticatedAnalyticsRouteImport } from './routes/_authentica
 import { Route as AuthenticatedAchievementsRouteImport } from './routes/_authenticated/achievements'
 import { Route as Char91DotwellKnownChar93OauthProtectedResourceRouteImport } from './routes/[.well-known]/oauth-protected-resource'
 import { Route as Char91DotmcpChar93ListToolsRouteImport } from './routes/[.mcp]/list-tools'
+import { Route as ApiPublicPaymeRouteImport } from './routes/api/public/payme'
 import { Route as ApiPublicConfigRouteImport } from './routes/api/public/config'
 import { Route as ApiAiWeeklyReportRouteImport } from './routes/api/ai.weekly-report'
 import { Route as ApiAiOnboardingNudgeRouteImport } from './routes/api/ai.onboarding-nudge'
@@ -60,6 +61,7 @@ import { Route as AuthenticatedCBodyRouteImport } from './routes/_authenticated/
 import { Route as Char91DotmcpChar93InvokeToolToolRouteImport } from './routes/[.mcp]/invoke-tool/$tool'
 import { Route as DotlovableOauthConsentRouteImport } from './routes/[.]lovable.oauth.consent'
 import { Route as ApiPublicHooksBurnoutCheckRouteImport } from './routes/api/public/hooks/burnout-check'
+import { Route as ApiPublicClickActionRouteImport } from './routes/api/public/click/$action'
 
 const TermsRoute = TermsRouteImport.update({
   id: '/terms',
@@ -260,6 +262,11 @@ const Char91DotmcpChar93ListToolsRoute =
     path: '/.mcp/list-tools',
     getParentRoute: () => rootRouteImport,
   } as any)
+const ApiPublicPaymeRoute = ApiPublicPaymeRouteImport.update({
+  id: '/api/public/payme',
+  path: '/api/public/payme',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiPublicConfigRoute = ApiPublicConfigRouteImport.update({
   id: '/api/public/config',
   path: '/api/public/config',
@@ -323,6 +330,11 @@ const ApiPublicHooksBurnoutCheckRoute =
     path: '/api/public/hooks/burnout-check',
     getParentRoute: () => rootRouteImport,
   } as any)
+const ApiPublicClickActionRoute = ApiPublicClickActionRouteImport.update({
+  id: '/api/public/click/$action',
+  path: '/api/public/click/$action',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -374,6 +386,8 @@ export interface FileRoutesByFullPath {
   '/api/ai/onboarding-nudge': typeof ApiAiOnboardingNudgeRoute
   '/api/ai/weekly-report': typeof ApiAiWeeklyReportRoute
   '/api/public/config': typeof ApiPublicConfigRoute
+  '/api/public/payme': typeof ApiPublicPaymeRoute
+  '/api/public/click/$action': typeof ApiPublicClickActionRoute
   '/api/public/hooks/burnout-check': typeof ApiPublicHooksBurnoutCheckRoute
 }
 export interface FileRoutesByTo {
@@ -426,6 +440,8 @@ export interface FileRoutesByTo {
   '/api/ai/onboarding-nudge': typeof ApiAiOnboardingNudgeRoute
   '/api/ai/weekly-report': typeof ApiAiWeeklyReportRoute
   '/api/public/config': typeof ApiPublicConfigRoute
+  '/api/public/payme': typeof ApiPublicPaymeRoute
+  '/api/public/click/$action': typeof ApiPublicClickActionRoute
   '/api/public/hooks/burnout-check': typeof ApiPublicHooksBurnoutCheckRoute
 }
 export interface FileRoutesById {
@@ -480,6 +496,8 @@ export interface FileRoutesById {
   '/api/ai/onboarding-nudge': typeof ApiAiOnboardingNudgeRoute
   '/api/ai/weekly-report': typeof ApiAiWeeklyReportRoute
   '/api/public/config': typeof ApiPublicConfigRoute
+  '/api/public/payme': typeof ApiPublicPaymeRoute
+  '/api/public/click/$action': typeof ApiPublicClickActionRoute
   '/api/public/hooks/burnout-check': typeof ApiPublicHooksBurnoutCheckRoute
 }
 export interface FileRouteTypes {
@@ -534,6 +552,8 @@ export interface FileRouteTypes {
     | '/api/ai/onboarding-nudge'
     | '/api/ai/weekly-report'
     | '/api/public/config'
+    | '/api/public/payme'
+    | '/api/public/click/$action'
     | '/api/public/hooks/burnout-check'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -586,6 +606,8 @@ export interface FileRouteTypes {
     | '/api/ai/onboarding-nudge'
     | '/api/ai/weekly-report'
     | '/api/public/config'
+    | '/api/public/payme'
+    | '/api/public/click/$action'
     | '/api/public/hooks/burnout-check'
   id:
     | '__root__'
@@ -639,6 +661,8 @@ export interface FileRouteTypes {
     | '/api/ai/onboarding-nudge'
     | '/api/ai/weekly-report'
     | '/api/public/config'
+    | '/api/public/payme'
+    | '/api/public/click/$action'
     | '/api/public/hooks/burnout-check'
   fileRoutesById: FileRoutesById
 }
@@ -673,6 +697,8 @@ export interface RootRouteChildren {
   ApiAiOnboardingNudgeRoute: typeof ApiAiOnboardingNudgeRoute
   ApiAiWeeklyReportRoute: typeof ApiAiWeeklyReportRoute
   ApiPublicConfigRoute: typeof ApiPublicConfigRoute
+  ApiPublicPaymeRoute: typeof ApiPublicPaymeRoute
+  ApiPublicClickActionRoute: typeof ApiPublicClickActionRoute
   ApiPublicHooksBurnoutCheckRoute: typeof ApiPublicHooksBurnoutCheckRoute
 }
 
@@ -951,6 +977,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof Char91DotmcpChar93ListToolsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/payme': {
+      id: '/api/public/payme'
+      path: '/api/public/payme'
+      fullPath: '/api/public/payme'
+      preLoaderRoute: typeof ApiPublicPaymeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/config': {
       id: '/api/public/config'
       path: '/api/public/config'
@@ -1033,6 +1066,13 @@ declare module '@tanstack/react-router' {
       path: '/api/public/hooks/burnout-check'
       fullPath: '/api/public/hooks/burnout-check'
       preLoaderRoute: typeof ApiPublicHooksBurnoutCheckRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/click/$action': {
+      id: '/api/public/click/$action'
+      path: '/api/public/click/$action'
+      fullPath: '/api/public/click/$action'
+      preLoaderRoute: typeof ApiPublicClickActionRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -1131,6 +1171,8 @@ const rootRouteChildren: RootRouteChildren = {
   ApiAiOnboardingNudgeRoute: ApiAiOnboardingNudgeRoute,
   ApiAiWeeklyReportRoute: ApiAiWeeklyReportRoute,
   ApiPublicConfigRoute: ApiPublicConfigRoute,
+  ApiPublicPaymeRoute: ApiPublicPaymeRoute,
+  ApiPublicClickActionRoute: ApiPublicClickActionRoute,
   ApiPublicHooksBurnoutCheckRoute: ApiPublicHooksBurnoutCheckRoute,
 }
 export const routeTree = rootRouteImport
