@@ -4,20 +4,15 @@ import type { Database } from "@/integrations/supabase/types";
 
 /**
  * Public peer mirror — anonymous aggregate counts for landing social proof.
- * Uses SUPABASE_PUBLISHABLE_KEY (server publishable client), so it can be
- * called from public loaders during SSR without a bearer token.
- *
- * Returns real counts from the database. When counts are very small we still
- * return the honest number — "Erta bosqich" narrative on the landing owns
- * the framing.
+ * Reads via SECURITY DEFINER RPC `public.get_peer_mirror` (aggregates only,
+ * no PII). Safe to call from public loaders during SSR.
  */
 export const getPeerMirror = createServerFn({ method: "GET" }).handler(async () => {
+  const fallback = { members: null, today_active: null, streak_leader: null };
   try {
     const url = process.env.SUPABASE_URL;
     const key = process.env.SUPABASE_PUBLISHABLE_KEY;
-    if (!url || !key) {
-      return { members: null, today_active: null, streak_leader: null };
-    }
+    if (!url || !key) return fallback;
 
     const supabase = createClient<Database>(url, key, {
       auth: { persistSession: false, autoRefreshToken: false },
@@ -33,28 +28,20 @@ export const getPeerMirror = createServerFn({ method: "GET" }).handler(async () 
       },
     });
 
-    const todayISO = new Date().toISOString().slice(0, 10);
+    const { data, error } = await supabase.rpc("get_peer_mirror");
+    if (error || !data || (Array.isArray(data) && data.length === 0)) return fallback;
 
-    const [membersRes, todayRes, leaderRes] = await Promise.all([
-      supabase.from("profiles").select("id", { count: "exact", head: true }),
-      supabase
-        .from("habit_logs")
-        .select("user_id", { count: "exact", head: true })
-        .gte("logged_date", todayISO),
-      supabase
-        .from("streaks")
-        .select("current_days")
-        .order("current_days", { ascending: false })
-        .limit(1)
-        .maybeSingle(),
-    ]);
-
+    const row = Array.isArray(data) ? data[0] : data;
     return {
-      members: membersRes.count ?? null,
-      today_active: todayRes.count ?? null,
-      streak_leader: leaderRes.data?.current_days ?? null,
+      members: typeof row.members === "number" ? row.members : Number(row.members ?? 0),
+      today_active:
+        typeof row.today_active === "number" ? row.today_active : Number(row.today_active ?? 0),
+      streak_leader:
+        typeof row.streak_leader === "number"
+          ? row.streak_leader
+          : Number(row.streak_leader ?? 0),
     };
   } catch {
-    return { members: null, today_active: null, streak_leader: null };
+    return fallback;
   }
 });
