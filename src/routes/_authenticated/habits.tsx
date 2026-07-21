@@ -73,6 +73,7 @@ function HabitsPage() {
   const [todayLogs, setTodayLogs] = useState<Set<string>>(new Set());
   const [newTitle, setNewTitle] = useState("");
   const [cue, setCue] = useState("");
+  const [stackAnchor, setStackAnchor] = useState<string>("");
   const [difficulty, setDifficulty] = useState<1 | 2 | 3 | 4 | 5>(2);
   const [category, setCategory] = useState<string>("habit");
   const [saving, setSaving] = useState(false);
@@ -106,8 +107,18 @@ function HabitsPage() {
     e.preventDefault();
     if (!newTitle.trim()) return;
     setSaving(true);
-    const composed = cue.trim()
-      ? `${cue.trim()} → ${newTitle.trim()}`
+    // Habit stacking (James Clear) — bog'lansa, avtomatik cue quriladi
+    let composedCue = cue.trim();
+    if (stackAnchor) {
+      const anchor = habits.find((h) => h.id === stackAnchor);
+      if (anchor) {
+        // trigger'ni "<anchor title>dan keyin" ga aylantirdik
+        const base = anchor.title.split("→").pop()?.trim() || anchor.title;
+        composedCue = `${base}dan keyin`;
+      }
+    }
+    const composed = composedCue
+      ? `${composedCue} → ${newTitle.trim()}`
       : newTitle.trim();
     await supabase.from("habits").insert({
       user_id: userId,
@@ -118,10 +129,12 @@ function HabitsPage() {
     });
     setNewTitle("");
     setCue("");
+    setStackAnchor("");
     setDifficulty(2);
     setSaving(false);
     refresh();
   }
+
 
   async function toggleToday(h: Habit) {
     // Faqat bugunga rejalashtirilgan bo'lsa ish beradi (scheduled_for null => today)
@@ -236,14 +249,52 @@ function HabitsPage() {
                 </button>
               ))}
             </div>
-            {(cue.trim() || newTitle.trim()) && (
+
+            {habits.length > 0 && (
+              <div className="mt-3 border-t border-border/60 pt-3">
+                <label className="flex items-center gap-2 font-ui text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
+                  <span>Habit stacking · mavjud odatga bog'lash</span>
+                </label>
+                <select
+                  value={stackAnchor}
+                  onChange={(e) => {
+                    setStackAnchor(e.target.value);
+                    if (e.target.value) setCue("");
+                  }}
+                  className="mt-2 w-full rounded-[var(--radius)] border border-border bg-background px-3 py-2 font-ui text-sm text-foreground focus:border-primary focus:outline-none"
+                >
+                  <option value="">— Bog'lamayman (yangi cue yozaman) —</option>
+                  {habits.map((h) => (
+                    <option key={h.id} value={h.id}>
+                      {h.title.length > 60 ? h.title.slice(0, 60) + "…" : h.title}
+                    </option>
+                  ))}
+                </select>
+                <p className="mt-1.5 font-ui text-[10px] text-muted-foreground">
+                  James Clear: yangi odat mavjud odatga bog'lansa — 2-3x mustahkam qoladi.
+                </p>
+              </div>
+            )}
+
+            {(cue.trim() || newTitle.trim() || stackAnchor) && (
               <p className="mt-3 border-t border-border/60 pt-3 font-serif text-sm text-foreground">
                 <span className="text-muted-foreground">Ko'rinish:</span>{" "}
-                {cue.trim() ? `${cue.trim()} → ` : ""}
+                {stackAnchor
+                  ? (() => {
+                      const a = habits.find((h) => h.id === stackAnchor);
+                      const base = a
+                        ? a.title.split("→").pop()?.trim() || a.title
+                        : "";
+                      return `${base}dan keyin → `;
+                    })()
+                  : cue.trim()
+                  ? `${cue.trim()} → `
+                  : ""}
                 {newTitle.trim() || "..."}
               </p>
             )}
           </div>
+
           <div className="flex flex-wrap items-center gap-2">
             <span className="font-ui text-xs uppercase tracking-[0.2em] text-muted-foreground">
               Qiyinlik
