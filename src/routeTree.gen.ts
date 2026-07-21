@@ -18,6 +18,7 @@ import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as McpRouteImport } from './routes/mcp'
 import { Route as InvestorsRouteImport } from './routes/investors'
+import { Route as InstallRouteImport } from './routes/install'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
@@ -106,6 +107,11 @@ const McpRoute = McpRouteImport.update({
 const InvestorsRoute = InvestorsRouteImport.update({
   id: '/investors',
   path: '/investors',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InstallRoute = InstallRouteImport.update({
+  id: '/install',
+  path: '/install',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthRoute = AuthRouteImport.update({
@@ -339,6 +345,7 @@ const ApiPublicClickActionRoute = ApiPublicClickActionRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/install': typeof InstallRoute
   '/investors': typeof InvestorsRoute
   '/mcp': typeof McpRoute
   '/pricing': typeof PricingRoute
@@ -393,6 +400,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/install': typeof InstallRoute
   '/investors': typeof InvestorsRoute
   '/mcp': typeof McpRoute
   '/pricing': typeof PricingRoute
@@ -449,6 +457,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
+  '/install': typeof InstallRoute
   '/investors': typeof InvestorsRoute
   '/mcp': typeof McpRoute
   '/pricing': typeof PricingRoute
@@ -505,6 +514,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/auth'
+    | '/install'
     | '/investors'
     | '/mcp'
     | '/pricing'
@@ -559,6 +569,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/auth'
+    | '/install'
     | '/investors'
     | '/mcp'
     | '/pricing'
@@ -614,6 +625,7 @@ export interface FileRouteTypes {
     | '/'
     | '/_authenticated'
     | '/auth'
+    | '/install'
     | '/investors'
     | '/mcp'
     | '/pricing'
@@ -670,6 +682,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AuthRoute: typeof AuthRoute
+  InstallRoute: typeof InstallRoute
   InvestorsRoute: typeof InvestorsRoute
   McpRoute: typeof McpRoute
   PricingRoute: typeof PricingRoute
@@ -765,6 +778,13 @@ declare module '@tanstack/react-router' {
       path: '/investors'
       fullPath: '/investors'
       preLoaderRoute: typeof InvestorsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/install': {
+      id: '/install'
+      path: '/install'
+      fullPath: '/install'
+      preLoaderRoute: typeof InstallRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/auth': {
@@ -1143,6 +1163,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AuthRoute: AuthRoute,
+  InstallRoute: InstallRoute,
   InvestorsRoute: InvestorsRoute,
   McpRoute: McpRoute,
   PricingRoute: PricingRoute,
