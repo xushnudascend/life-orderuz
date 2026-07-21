@@ -59,56 +59,57 @@
   --font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
 }
 
-/* ---------- "Obsidian" — default dark theme (amber accent) ---------- */
+/* ---------- "Obsidian" — deep black + neon chartreuse (Life Order signature) ---------- */
 :root {
   --radius: 0.5rem;
 
-  --background: 240 6% 5%;
-  --foreground: 40 15% 94%;
-  --card: 240 6% 7%;
-  --card-foreground: 40 15% 95%;
-  --popover: 240 6% 8%;
-  --popover-foreground: 40 15% 95%;
+  --background: 0 0% 4%;
+  --foreground: 0 0% 92%;
+  --card: 0 0% 6%;
+  --card-foreground: 0 0% 94%;
+  --popover: 0 0% 7%;
+  --popover-foreground: 0 0% 94%;
 
-  --primary: 38 92% 58%;
-  --primary-foreground: 240 10% 6%;
-  --primary-glow: 42 96% 65%;
+  /* Neon chartreuse — max cone sensitivity (~575nm), Life Order signature */
+  --primary: 72 100% 50%;
+  --primary-foreground: 0 0% 5%;
+  --primary-glow: 68 100% 60%;
 
-  --secondary: 240 5% 11%;
-  --secondary-foreground: 40 15% 94%;
-  --muted: 240 5% 10%;
-  --muted-foreground: 240 5% 62%;
-  --accent: 240 6% 14%;
-  --accent-foreground: 40 15% 95%;
+  --secondary: 0 0% 10%;
+  --secondary-foreground: 0 0% 90%;
+  --muted: 0 0% 9%;
+  --muted-foreground: 0 0% 62%;
+  --accent: 0 0% 14%;
+  --accent-foreground: 0 0% 92%;
 
-  --destructive: 0 72% 55%;
-  --destructive-foreground: 0 0% 98%;
-  --success: 142 70% 45%;
-  --success-foreground: 150 20% 4%;
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 0% 100%;
+  --success: 142 71% 45%;
+  --success-foreground: 0 0% 5%;
 
-  --border: 240 5% 15%;
-  --input: 240 5% 13%;
-  --ring: 38 92% 58%;
+  --border: 0 0% 14%;
+  --input: 0 0% 12%;
+  --ring: 72 100% 50%;
 
   /* Sidebar */
   --sidebar-width: 15rem;
   --sidebar-width-icon: 4rem;
 
-  /* Legacy accent scale */
-  --abyss: 240 10% 5%;
-  --deep: 240 8% 10%;
-  --tide: 30 25% 22%;
-  --surf: 38 80% 55%;
-  --foam: 40 30% 82%;
-  --pearl: 40 15% 94%;
+  /* Legacy accent scale — remapped to obsidian neutrals + chartreuse */
+  --abyss: 0 0% 2%;
+  --deep: 0 0% 5%;
+  --tide: 0 0% 18%;
+  --surf: 72 100% 55%;
+  --foam: 0 0% 82%;
+  --pearl: 0 0% 94%;
   --coral: 12 88% 62%;
-  --sun: 42 95% 58%;
-  --kelp: 30 40% 30%;
+  --sun: 72 100% 55%;
+  --kelp: 150 35% 55%;
 
-  --shadow-glow: 0 0 40px hsl(38 92% 58% / 0.18);
-  --shadow-soft: 0 8px 32px -12px hsl(240 30% 0% / 0.75);
-  --shadow-card: 0 1px 0 hsl(40 20% 100% / 0.04) inset,
-    0 8px 24px -12px hsl(240 30% 0% / 0.65);
+  --shadow-glow: 0 0 40px hsl(72 100% 55% / 0.18);
+  --shadow-soft: 0 8px 32px -12px hsl(0 0% 0% / 0.75);
+  --shadow-card: 0 1px 0 hsl(0 0% 100% / 0.04) inset,
+    0 8px 24px -12px hsl(0 0% 0% / 0.65);
 }
 
 /* ---------- "Aurora" — light monochrome theme ---------- */
