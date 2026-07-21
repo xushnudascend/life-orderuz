@@ -449,7 +449,7 @@ function Mechanism() {
           ))}
         </div>
         <p className="mt-6 font-ui text-xs text-muted-foreground">
-          Manba: Duhigg (2012), <em>The Power of Habit</em>; Wood &amp; Rünger, <em>Annual Review of Psychology</em>, 2016.
+          Halqa yopiq — mukofot keyingi ilgakni kuchaytiradi. Manba: Duhigg, <em>The Power of Habit</em> (2012); Wood &amp; Rünger, <em>Annual Review of Psychology</em> (2016); Graybiel, <em>Annual Review of Neuroscience</em> (2008).
         </p>
       </div>
     </section>
