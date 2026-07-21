@@ -261,7 +261,7 @@ function Intro({ onStart }: { onStart: () => void }) {
     <div className="min-h-[60vh] py-8">
       <PageHero
         eyebrow="Human Potential Assessment"
-        title="Sizning hozirgi \"men\" — yakuniy \"men\" emas."
+        title={'Sizning hozirgi "men" — yakuniy "men" emas.'}
         subtitle="3 daqiqa. 9 shkala. Halol javoblar. So'ngida — sizga xos yo'l xarita."
       />
       <Panel className="mt-6">
