@@ -470,6 +470,36 @@ export type Database = {
         }
         Relationships: []
       }
+      nadir_memories: {
+        Row: {
+          content: string
+          created_at: string
+          id: string
+          importance: number
+          kind: string
+          last_used_at: string
+          user_id: string
+        }
+        Insert: {
+          content: string
+          created_at?: string
+          id?: string
+          importance?: number
+          kind?: string
+          last_used_at?: string
+          user_id: string
+        }
+        Update: {
+          content?: string
+          created_at?: string
+          id?: string
+          importance?: number
+          kind?: string
+          last_used_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       nadir_nudges: {
         Row: {
           created_at: string

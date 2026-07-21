@@ -1,43 +1,41 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { convertToModelMessages, streamText, type UIMessage } from "ai";
+import { convertToModelMessages, generateText, streamText, type UIMessage } from "ai";
 import { createLovableAiGatewayProvider } from "@/lib/ai-gateway.server";
 import { rateLimit } from "@/lib/rate-limit";
 import { enforceAiDailyBudget } from "@/lib/ai-budget";
 import { verifySupabaseBearer } from "@/lib/verify-bearer.server";
+import {
+  fetchNadirMemories,
+  formatMemoriesForPrompt,
+  insertNadirMemories,
+} from "@/lib/nadir-memory.server";
 
-/**
- * Nadir tone-guard + real Supabase stats injection.
- * Client mentor.tsx faylida `transport.body` orqali `userStats` yuboriladi;
- * bu yerda system prompt'ga qo'shiladi.
- */
-const NADIR_BASE = `Sen — Nadir. Life Order ilovasidagi halol AI mentorsan.
+const NADIR_BASE = `Sen — Nadir. Life Order ilovasidagi halol AI mentor.
 
-Sening ovozing:
-- O'zbek tilida gaplashasan (foydalanuvchi so'rasa — rus/ingliz).
-- Emojisiz, ustozliksiz, motivatsion shior yo'q.
-- Qisqa, aniq, halol. Foydalanuvchini "sen" deb chaqirasan.
-- Yumshoq, lekin haqiqatni gapiradigan tovush.
+OVOZ (persona qat'iy):
+- O'zbek tilida (foydalanuvchi rus/ingliz so'rasa — o'sha tilda).
+- Emojisiz, shiorsiz, ustozlik yo'q. "Sen" deb chaqirasan.
+- Yumshoq, lekin haqiqatni ko'zga qarab aytadigan tovush. Ovozing — psixoterapevt + do'st.
 
-Metod (har javobda amal qil):
-1) Reflective listening — avval foydalanuvchining aytganini 1 jumlada o'z so'zlaring bilan takrorla ("Sen aytding: …"). Bu isbotlangan (Rogers, 1957) — odam eshitilganini his qiladi.
-2) Cognitive reframing (CBT — Beck, 1979) — agar u fikri "men doim/hech qachon/hamma vaqt" turidagi mutlaq bo'lsa, sekin qayta shakllantir: "hozircha", "shu holatda", "bu safar".
-3) Implementation intention (Gollwitzer, 1999) — javob oxirida "agar X — men Y" formatida bitta aniq mikro-qadam ber (2 daqiqadan kam).
-4) Barnum'dan qoch — umumiy maslahat berma. Foydalanuvchining kontekstidan (streak, arxetip, kecha o'tkazib yuborilgan kun) aniq foydalan.
+METOD (har javobda ketma-ket):
+1) Reflektiv eshitish (Rogers, 1957) — 1 jumlada uning aytganini o'z so'zing bilan takrorla: "Sen aytding: …" yoki "Demak, hozir …".
+2) Kognitiv qayta shakllantirish (Beck, 1979) — "doim / hech qachon / hamma" mutlaq fikrlarni yumshat: "hozircha", "shu holatda", "bu hafta".
+3) Implementation intention (Gollwitzer, 1999) — javob oxirida bitta "agar X — men Y" mikro-qadam (2 daqiqadan kam).
+4) Kontekstdan foydalan (Barnum'dan qoch) — foydalanuvchining real statistikasi va xotiralaridan aniq foydalan, umumiy maslahat berma.
 
-Tone-guard (qat'iy taqiqlar):
-- "Ajoyibsan!", "Zo'r!", "Sen qahramonsan" kabi bo'sh maqtov TAQIQLANADI.
-- Emoji, exclamation-motivation, "You got this!" shiorlar YO'Q.
-- Aduляция, xushomad, quruq empatiya yo'q — aniq savol yoki aniq qadam.
-- Haqiqatni yumshatib buzma, lekin ayblovsiz ayt.
+TAQIQ (tone-guard):
+- "Ajoyibsan / Zo'r / Sen qahramonsan / You got this" — TAQIQ.
+- Emoji, exclamation-motivation, xushomad — TAQIQ.
+- Aduляция va quruq empatiya — TAQIQ. O'rniga: aniq savol yoki aniq qadam.
+- Haqiqatni buzma, lekin ayblovsiz ayt.
 
-Chegaralar:
-- Tibbiy, huquqiy, moliyaviy maslahat bermaysan.
-- Ruhiy shoshilinch holatda (o'z-o'ziga zarar, umidsizlik) — darhol professional yordamga yo'naltir: Ishonch telefoni 1051 (O'zbekiston).
+CHEGARA:
+- Tibbiy/huquqiy/moliyaviy maslahat yo'q.
+- Ruhiy shoshilinch (o'z-o'ziga zarar, umidsizlik) belgilari — darhol: "Ishonch telefoni 1051 (O'zbekiston)".
 
-Bounded response (cognitive load):
-- Javob 3-6 jumladan oshmasin. Ro'yxat kerak bo'lsa — maksimum 3 punkt.
-- Har javob oxirida bitta aniq savol YOKI bitta "agar X — men Y" qadami — ikkalasi emas.`;
-
+FORMAT (kognitiv yuk):
+- 3-6 jumla. Ro'yxat — max 3 punkt.
+- Har javob oxirida BITTA narsa: aniq savol YOKI "agar X — men Y" qadami (ikkalasi emas).`;
 
 type UserStats = {
   displayName?: string | null;
@@ -67,18 +65,44 @@ function buildContext(s: UserStats | undefined): string {
   if (s.archetype) parts.push(`Arxetip: ${s.archetype}`);
   if (typeof s.planLength === "number") parts.push(`Reja: ${s.planLength} kun`);
   if (parts.length === 0) return "";
-  return `\n\nFoydalanuvchining hozirgi holati (real ma'lumot — javobingda tegishli joyda foydalan, quruq takrorlama):\n- ${parts.join("\n- ")}`;
+  return `\n\nFoydalanuvchining hozirgi real holati (statistika — quruq takrorlama, tabiiy foydalan):\n- ${parts.join("\n- ")}`;
+}
+
+async function extractMemoriesInBackground(
+  userId: string,
+  lastUserText: string,
+  assistantText: string,
+  apiKey: string,
+) {
+  try {
+    const gateway = createLovableAiGatewayProvider(apiKey);
+    const model = gateway("google/gemini-3-flash-preview");
+    const { text } = await generateText({
+      model,
+      system:
+        "Sen fakt-ajratuvchisan. Suhbatdan foydalanuvchi haqida DURABLE (uzoq muddat foydali) faktlarni ajratasan: maqsad, naqsh, afzallik, trigger, muhim fakt. Vaqtinchalik his-tuyg'u yoki bir martalik gap — YO'Q. Har bir fakt qisqa (max 140 belgi), 1-shaxsda emas ('foydalanuvchi ...'). Agar durable fakt yo'q bo'lsa — bo'sh massiv qaytar. JSON qaytar, boshqa hech narsa.",
+      prompt: `Foydalanuvchi: ${lastUserText}\n\nNadir: ${assistantText}\n\nJSON formatda qaytar:\n{"memories":[{"content":"...","importance":1-5,"kind":"fact|goal|pattern|preference|trigger"}]}`,
+    });
+    const jsonMatch = text.match(/\{[\s\S]*\}/);
+    if (!jsonMatch) return;
+    const parsed = JSON.parse(jsonMatch[0]) as {
+      memories?: Array<{ content: string; importance: number; kind: string }>;
+    };
+    if (Array.isArray(parsed.memories) && parsed.memories.length) {
+      await insertNadirMemories(userId, parsed.memories);
+    }
+  } catch {
+    // silent — memory extraction is best-effort
+  }
 }
 
 export const Route = createFileRoute("/api/chat")({
   server: {
     handlers: {
       POST: async ({ request }) => {
-        // Require authenticated Supabase user before touching the paid AI gateway.
         const auth = await verifySupabaseBearer(request);
         if (!auth.ok) return auth.response;
 
-        // Ad-hoc rate limit: 20 chat req / user / minute.
         const rl = await rateLimit({ key: `chat:${auth.userId}`, limit: 20, windowSeconds: 60 });
         if (!rl.allowed) {
           return new Response("Too many requests", {
@@ -86,9 +110,9 @@ export const Route = createFileRoute("/api/chat")({
             headers: { "Retry-After": String(rl.retryAfter) },
           });
         }
-        // Per-user daily AI cost cap.
         const budget = await enforceAiDailyBudget(auth.userId, "chat");
         if (!budget.ok) return budget.response;
+
         const body = (await request.json()) as {
           messages?: unknown;
           userStats?: UserStats;
@@ -97,21 +121,36 @@ export const Route = createFileRoute("/api/chat")({
           return new Response("Messages are required", { status: 400 });
         }
         const key = process.env.LOVABLE_API_KEY;
-        if (!key) {
-          return new Response("Missing LOVABLE_API_KEY", { status: 500 });
-        }
+        if (!key) return new Response("Missing LOVABLE_API_KEY", { status: 500 });
+
+        const uiMessages = body.messages as UIMessage[];
+
+        // Fetch RAG-lite memories
+        const memories = await fetchNadirMemories(auth.userId, 8);
+        const system =
+          NADIR_BASE + buildContext(body.userStats) + formatMemoriesForPrompt(memories);
+
         const gateway = createLovableAiGatewayProvider(key);
         const model = gateway("google/gemini-3-flash-preview");
-        const uiMessages = body.messages as UIMessage[];
-        const system = NADIR_BASE + buildContext(body.userStats);
+
         const result = streamText({
           model,
           system,
           messages: await convertToModelMessages(uiMessages),
+          onFinish: async ({ text }) => {
+            const lastUser = [...uiMessages].reverse().find((m) => m.role === "user");
+            const lastUserText =
+              lastUser?.parts
+                ?.map((p) => (p.type === "text" ? p.text : ""))
+                .join(" ")
+                .trim() ?? "";
+            if (lastUserText && text) {
+              // fire-and-forget
+              void extractMemoriesInBackground(auth.userId, lastUserText, text, key);
+            }
+          },
         });
-        return result.toUIMessageStreamResponse({
-          originalMessages: uiMessages,
-        });
+        return result.toUIMessageStreamResponse({ originalMessages: uiMessages });
       },
     },
   },
