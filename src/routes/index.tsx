@@ -87,8 +87,10 @@ function Landing() {
       <main>
         <Hero />
         <ProofStrip />
+        <Mechanism />
         <HowItWorks />
         <Features />
+        <Science />
         <Pricing />
         <Faq />
       </main>
