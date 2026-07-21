@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/accordion";
 import {
   ArrowRight,
+  Check,
   Shield,
   Flame,
   BarChart3,
