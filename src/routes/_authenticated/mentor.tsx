@@ -216,6 +216,8 @@ function MentorChat({
   userId,
   initialMessages,
   stats,
+  persona,
+  setPersona,
   input,
   setInput,
   savedIdsRef,
@@ -224,6 +226,8 @@ function MentorChat({
   userId: string;
   initialMessages: UIMessage[];
   stats: UserStats;
+  persona: Persona;
+  setPersona: (p: Persona) => void;
   input: string;
   setInput: (v: string) => void;
   savedIdsRef: React.MutableRefObject<Set<string>>;
@@ -233,10 +237,11 @@ function MentorChat({
     () =>
       new DefaultChatTransport({
         api: "/api/chat",
-        body: { userStats: stats },
+        body: { userStats: stats, persona },
       }),
-    [stats],
+    [stats, persona],
   );
+
 
   const { messages, sendMessage, status, error } = useChat({
     id: userId,
