@@ -98,6 +98,8 @@ function Diet() {
     return mifflin(profile.sex as "male" | "female", Number(profile.weight_kg), Number(profile.height_cm), profile.age, act);
   }, [profile]);
 
+  const [pendingPath, setPendingPath] = useState<string | null>(null);
+
   async function pickImage(f: File | null | undefined) {
     if (!f) return;
     if (f.size > 5 * 1024 * 1024) {
@@ -116,12 +118,11 @@ function Diet() {
       toast.error("Rasmni yuklab bo'lmadi.");
       return;
     }
-    // Private bucket → signed URL (1 yil)
-    const { data } = await supabase.storage
-      .from("meals")
-      .createSignedUrl(path, 60 * 60 * 24 * 365);
+    // Store storage path; sign short-lived URLs at render time.
+    setPendingPath(path);
+    // Local preview only — never persisted.
+    setPendingImage(URL.createObjectURL(f));
     setUploading(false);
-    setPendingImage(data?.signedUrl ?? null);
     toast.success("Rasm biriktirildi.");
   }
 
@@ -132,12 +133,13 @@ function Diet() {
       kind,
       description: desc.trim(),
       calories: cal ? Number(cal) : null,
-      image_url: pendingImage,
+      image_url: pendingPath,
     });
     if (error) return toast.error("Saqlab bo'lmadi");
     setDesc("");
     setCal("");
     setPendingImage(null);
+    setPendingPath(null);
     if (fileRef.current) fileRef.current.value = "";
     toast.success("Ovqat jurnalga qo'shildi.");
     refresh();
