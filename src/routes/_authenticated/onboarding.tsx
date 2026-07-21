@@ -673,3 +673,43 @@ function FinalPage({
   );
 }
 
+function SocialMirror() {
+  const [data, setData] = useState<{ sameArchetype: number; samePlan: number } | null>(null);
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      try {
+        const { archetypePeers } = await import("@/lib/cohort.functions");
+        const res = await archetypePeers();
+        if (!cancelled) setData({ sameArchetype: res.sameArchetype, samePlan: res.samePlan });
+      } catch {
+        /* ignore */
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+  if (!data || (data.sameArchetype === 0 && data.samePlan === 0)) return null;
+  return (
+    <div className="mt-5 rounded-xl border border-border/50 bg-background/40 p-4">
+      <p className="font-ui text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
+        Senga o'xshaganlar
+      </p>
+      <p className="mt-2 font-body text-sm leading-relaxed text-foreground/90">
+        Aynan shu arxetipda <span className="font-serif text-primary">{data.sameArchetype}</span>{" "}
+        odam yo'lda.{" "}
+        {data.samePlan > 0 && (
+          <>
+            Ulardan <span className="font-serif text-primary">{data.samePlan}</span> tasi seni bilan
+            bir xil davomlik rejasini tanladi.
+          </>
+        )}
+      </p>
+      <p className="mt-2 font-ui text-[11px] text-muted-foreground/70">
+        Yolg'iz emassan — lekin bu senga tayyor javob emas, faqat tasdiq.
+      </p>
+    </div>
+  );
+}
+
