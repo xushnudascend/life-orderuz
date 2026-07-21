@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
@@ -11,8 +12,6 @@ import {
 import {
   ArrowRight,
   Check,
-  Brain,
-  Target,
   Repeat,
   Shield,
   Flame,
@@ -20,12 +19,8 @@ import {
   Sparkles,
   BookText,
   Clock,
-  Lock,
-  TrendingDown,
-  Users,
-  Quote,
+  Plus,
 } from "lucide-react";
-
 
 const BRAND = "Life Order";
 const SITE_URL = "https://life-orderuz.lovable.app";
@@ -34,28 +29,28 @@ const ONE_LINER =
 
 const FAQ_ITEMS: { q: string; a: string }[] = [
   {
-    q: "Life Order nima va boshqa ilovalardan qanday farq qiladi?",
-    a: "Motivatsion ilova emas — xulq-atvor tizimi. BJ Fogg va James Clear tadqiqotlariga asoslangan: mikro-harakat (2 daqiqadan kam), aniq trigger va darhol tasdiq. Motivatsiyaga tayanmaydi — takror va kontekstga tayanadi.",
+    q: "Life Order boshqa ilovalardan qanday farq qiladi?",
+    a: "Motivatsion ilova emas — xulq-atvor tizimi. BJ Fogg va James Clear tadqiqotlariga asoslangan: mikro-harakat (2 daqiqadan kam), aniq trigger va darhol tasdiq.",
   },
   {
     q: "Odat qancha vaqtda mustahkamlanadi?",
-    a: "Phillippa Lally (UCL, 2010) tadqiqotiga ko'ra o'rtacha 66 kun — lekin murakkabligiga qarab 18-254 kun oralig'ida. Life Order streak, XP va Shield tizimi orqali shu jarayonni boshqaradi.",
+    a: "Phillippa Lally (UCL, 2010): o'rtacha 66 kun (18–254). Streak, XP va Shield tizimi shu jarayonni boshqaradi.",
   },
   {
     q: "Nadir AI mentor nima qiladi?",
-    a: "Sening ma'lumotlaring (odatlar, kayfiyat, streak, kundalik) asosida shaxsiy javob beradi. Burnout signallarini oldindan sezadi va \"agar X — men Y\" formatida aniq reja tuzadi.",
+    a: "Sening ma'lumotlaring (odatlar, kayfiyat, streak, kundalik) asosida shaxsiy javob beradi va \"agar X — men Y\" formatida reja tuzadi.",
   },
   {
     q: "Bepulmi? Karta so'raladimi?",
-    a: "Free reja doimiy va karta so'ralmaydi. Pro (49 000 so'm/oy) — kengroq AI konteksti, cheksiz odat, haftalik AI hisobot. Istalgan paytda bekor qilinadi.",
+    a: "Free reja doimiy, karta so'ralmaydi. Pro (49 000 so'm/oy) — kengroq AI konteksti va haftalik hisobot. Istalgan paytda bekor qilinadi.",
   },
   {
     q: "Ma'lumotlarim xavfsizmi?",
-    a: "TLS shifrlash, RLS bilan izolyatsiya, sotilmaydi va reklama uchun ishlatilmaydi. Hisobingni bir bosishda o'chirasan — barcha ma'lumot 30 kun ichida yo'q qilinadi.",
+    a: "TLS + RLS izolyatsiya. Sotilmaydi, reklama uchun ishlatilmaydi. Bir bosishda o'chirasan.",
   },
   {
     q: "Offline ishlaydimi?",
-    a: "Ha — PWA sifatida telefonga o'rnatiladi. Odat belgilash va kundalik yozish offline ishlaydi, ulanish tiklanganda avtomatik sinxron.",
+    a: "Ha — PWA sifatida telefonga o'rnatiladi. Odat va kundalik offline yoziladi, ulanish tiklanganda sinxron.",
   },
 ];
 
@@ -91,13 +86,11 @@ function Landing() {
   return (
     <div className="min-h-dvh bg-background text-foreground animate-fade-in">
       <SiteHeader />
-      <main className="pb-20 md:pb-0">
+      <main className="pb-24 md:pb-0">
         <Hero />
         <ProofStrip />
-        <ProductPreview />
         <HowItWorks />
         <Features />
-        <Testimonials />
         <Pricing />
         <Faq />
         <FinalCta />
@@ -108,47 +101,14 @@ function Landing() {
   );
 }
 
-
-
-function ProofStrip() {
-  const items = [
-    { k: "43%", v: "kunlik xulq — odat", src: "Wood, USC 2019" },
-    { k: "66 kun", v: "o'rtacha avtomatlashuv", src: "Lally, UCL 2010" },
-    { k: "1%", v: "kunlik yaxshilanish", src: "J. Clear, 2018" },
-    { k: "B=MAP", v: "xulq formulasi", src: "BJ Fogg, Stanford" },
-  ];
-  return (
-    <section className="border-b border-border bg-card/40">
-      <div className="mx-auto max-w-6xl px-5 py-10">
-        <p className="text-center font-ui text-[11px] uppercase tracking-[0.28em] text-muted-foreground">
-          Ilmiy asos · peer-reviewed manba
-        </p>
-        <dl className="mt-6 grid grid-cols-2 gap-6 md:grid-cols-4">
-          {items.map((s) => (
-            <div key={s.k} className="text-center">
-              <dt className="font-serif text-2xl tracking-tight tabular-nums md:text-3xl">
-                {s.k}
-              </dt>
-              <dd className="mt-1 font-ui text-[13px] leading-tight text-foreground/80">
-                {s.v}
-              </dd>
-              <p className="mt-1.5 font-ui text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
-                {s.src}
-              </p>
-            </div>
-          ))}
-        </dl>
-      </div>
-    </section>
-  );
-}
-
-
-
 function Hero() {
   return (
     <section className="relative overflow-hidden border-b border-border">
-      <div className="mx-auto max-w-4xl px-5 pb-12 pt-14 text-center md:pb-16 md:pt-24">
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,hsl(var(--primary)/0.10),transparent_60%)]"
+      />
+      <div className="relative mx-auto max-w-3xl px-5 pb-12 pt-14 text-center md:pb-16 md:pt-24">
         <p className="font-ui text-[11px] uppercase tracking-[0.24em] text-muted-foreground">
           Beta · Xulq-atvor tizimi
         </p>
@@ -156,7 +116,7 @@ function Hero() {
           Motivatsiya tugaydi.<br />
           <span className="text-muted-foreground">Tizim qoladi.</span>
         </h1>
-        <p className="mx-auto mt-5 max-w-lg text-[15px] leading-relaxed text-muted-foreground text-pretty sm:text-base">
+        <p className="mx-auto mt-5 max-w-md text-[15px] leading-relaxed text-muted-foreground text-pretty">
           Kuniga uchta 2-daqiqalik qadam. Nadir AI mentor sen uchun shaxsiy protokol tuzadi.
         </p>
         <div className="mt-7 flex flex-col items-stretch gap-2.5 sm:flex-row sm:items-center sm:justify-center sm:gap-3">
@@ -178,41 +138,94 @@ function Hero() {
   );
 }
 
-
-function Pillars() {
+function ProofStrip() {
   const items = [
     {
-      icon: Brain,
-      title: "Ong",
-      body: "Kundalik, kayfiyat, refleksiya. Miya nima kechayotganini ko'radi.",
+      k: "43%",
+      v: "kunlik xulq — odat",
+      src: "Wood, USC 2019",
+      more: "Wendy Wood tadqiqoti: kundalik xatti-harakatlarimizning ~43% ongsiz takror — irodaga emas, kontekstga bog'liq.",
     },
     {
-      icon: Repeat,
-      title: "Odat",
-      body: "Trigger'ga bog'langan mikro-harakat. Motivatsiyaga tayanmaydi.",
+      k: "66 kun",
+      v: "o'rtacha avtomatlashuv",
+      src: "Lally, UCL 2010",
+      more: "Yangi odat o'rtacha 66 kunda avtomatik holatga o'tadi. Diapazon: 18–254 kun. Life Order streak/Shield tizimi shu oynani boshqaradi.",
     },
     {
-      icon: Target,
-      title: "Maqsad",
-      body: "Katta niyat → haftalik quest → kunlik qadam. Zanjir uzilmaydi.",
+      k: "1%",
+      v: "kunlik yaxshilanish",
+      src: "J. Clear, 2018",
+      more: "Har kuni 1% yaxshilansang — bir yilda 37×. Kichik takrorlar birlashib identifikatsiyani o'zgartiradi.",
+    },
+    {
+      k: "B=MAP",
+      v: "xulq formulasi",
+      src: "BJ Fogg, Stanford",
+      more: "Xulq = Motivatsiya × Ability × Prompt. Motivatsiya tushganda ham xulq saqlanishi uchun Ability yuqori, Prompt aniq bo'lishi kerak.",
     },
   ];
   return (
-    <section className="border-b border-border">
-      <div className="mx-auto max-w-5xl px-5 py-16">
-        <div className="grid gap-6 md:grid-cols-3">
-          {items.map((it) => (
-            <div key={it.title} className="rounded-[var(--radius)] border border-border p-6">
-              <it.icon className="h-5 w-5 text-primary" />
-              <h2 className="mt-4 font-serif text-xl">{it.title}</h2>
-              <p className="mt-2 font-ui text-sm leading-relaxed text-muted-foreground">
-                {it.body}
-              </p>
-            </div>
+    <section className="border-b border-border bg-card/40">
+      <div className="mx-auto max-w-6xl px-5 py-10">
+        <p className="text-center font-ui text-[11px] uppercase tracking-[0.28em] text-muted-foreground">
+          Ilmiy asos · peer-reviewed manba
+        </p>
+        <dl className="mt-6 grid grid-cols-2 gap-3 md:grid-cols-4">
+          {items.map((s) => (
+            <ExpandableStat key={s.k} {...s} />
           ))}
-        </div>
+        </dl>
+        <p className="mt-4 text-center font-ui text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
+          Kartochkani bos — batafsil
+        </p>
       </div>
     </section>
+  );
+}
+
+function ExpandableStat({
+  k,
+  v,
+  src,
+  more,
+}: {
+  k: string;
+  v: string;
+  src: string;
+  more: string;
+}) {
+  const [open, setOpen] = useState(false);
+  return (
+    <button
+      type="button"
+      onClick={() => setOpen((o) => !o)}
+      aria-expanded={open}
+      className="group text-left rounded-[var(--radius)] border border-border bg-background/60 p-4 transition hover:border-primary/40 hover:bg-background focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
+    >
+      <div className="flex items-baseline justify-between gap-2">
+        <dt className="font-serif text-2xl tracking-tight tabular-nums md:text-3xl">
+          {k}
+        </dt>
+        <Plus
+          className={`h-3.5 w-3.5 text-muted-foreground transition-transform ${open ? "rotate-45" : ""}`}
+          aria-hidden
+        />
+      </div>
+      <dd className="mt-1 font-ui text-[13px] leading-tight text-foreground/80">{v}</dd>
+      <p className="mt-1.5 font-ui text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
+        {src}
+      </p>
+      <div
+        className={`grid transition-all duration-300 ease-out ${open ? "mt-3 grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}`}
+      >
+        <div className="overflow-hidden">
+          <p className="font-ui text-[12px] leading-relaxed text-muted-foreground">
+            {more}
+          </p>
+        </div>
+      </div>
+    </button>
   );
 }
 
@@ -221,22 +234,26 @@ function HowItWorks() {
     {
       n: "01",
       title: "Tashxis",
-      body: "5 daqiqalik onboarding: arxetip, uyqu, energiya, zaif nuqta. Nadir profilni tuzadi.",
+      short: "5 daqiqalik onboarding: arxetip, uyqu, energiya, zaif nuqta.",
+      more: "Nadir javoblardan profil quradi: sirkadian ritm, motivatsion arxetip (SDT), asosiy trigger nuqtalari. Bu keyingi barcha protokollarga asos.",
     },
     {
       n: "02",
       title: "Protokol",
-      body: "Har kun 3 ta \"agar X — men Y\" formatidagi mikro-qadam. Sirkadian ritmga moslashgan.",
+      short: "Har kun 3 ta \"agar X — men Y\" formatidagi mikro-qadam.",
+      more: "Gollwitzer (1999) implementation intentions: aniq trigger'ga bog'langan niyat oddiy niyatdan 2–3× ko'proq bajariladi. Har qadam <2 daqiqa.",
     },
     {
       n: "03",
       title: "Takror",
-      body: "Har bajarilgan qadam → XP + streak. Shield tizimi bir kunlik xatoni kechiradi.",
+      short: "Har bajarilgan qadam → XP + streak. Shield xatoni kechiradi.",
+      more: "Ferster & Skinner: darhol tasdiq (reinforcement) xulqni mustahkamlaydi. Shield tizimi \"all-or-nothing\" psixologik tuzoqni sindiradi.",
     },
     {
       n: "04",
       title: "Tahlil",
-      body: "Haftalik AI hisobot: nima ishladi, qayerda susaydik, keyingi hafta uchun tuzatish.",
+      short: "Haftalik AI hisobot: nima ishladi, qayerda susaydik.",
+      more: "Nadir haftalik ma'lumotni tahlil qiladi: qaysi odat mustahkam, kayfiyat trendi, keyingi hafta uchun 1 aniq tuzatish.",
     },
   ];
   return (
@@ -245,15 +262,17 @@ function HowItWorks() {
         <SectionHeader
           eyebrow="Jarayon"
           title="4 bosqichli halqa"
-          sub="Har bosqich keyingisini oziqlantiradi. Uzilish emas, davomiylik."
+          sub="Har bosqich keyingisini oziqlantiradi. Kartochkani bos — batafsil."
         />
-        <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {steps.map((s) => (
-            <div key={s.n} className="relative rounded-[var(--radius)] border border-border p-6">
-              <p className="font-ui text-xs uppercase tracking-[0.22em] text-primary">{s.n}</p>
-              <h3 className="mt-3 font-serif text-lg">{s.title}</h3>
-              <p className="mt-2 font-ui text-sm leading-relaxed text-muted-foreground">{s.body}</p>
-            </div>
+            <ExpandableCard
+              key={s.n}
+              eyebrow={s.n}
+              title={s.title}
+              short={s.short}
+              more={s.more}
+            />
           ))}
         </div>
       </div>
@@ -263,12 +282,42 @@ function HowItWorks() {
 
 function Features() {
   const items = [
-    { icon: Sparkles, title: "Nadir AI mentor", body: "Sening ma'lumotlaring bilan gaplashadi. Umumiy maslahat emas — shaxsiy javob." },
-    { icon: Flame, title: "Streak va XP", body: "Har bajarilgan mikro-qadam ballanadi. Ketma-ket kunlar zanjiri o'sib boradi." },
-    { icon: Shield, title: "Shield tizimi", body: "Haftada 1 kun kechirim — bitta xato butun mehnatni yo'q qilmaydi." },
-    { icon: BookText, title: "Kundalik + kayfiyat", body: "3 satrlik yozuv. Nadir kayfiyat pastligini sezsa — muloyim nudge yuboradi." },
-    { icon: Clock, title: "Sirkadian jadval", body: "Ertalab, kunduz, kech — har blokka moslashgan qadam. Biologik ritmga hamnafas." },
-    { icon: BarChart3, title: "Haftalik hisobot", body: "AI tahlili: qaysi odat mustahkam, qayerda susayapsan, keyingi hafta uchun 1 tuzatish." },
+    {
+      icon: Sparkles,
+      title: "Nadir AI mentor",
+      short: "Sening ma'lumotlaring bilan gaplashadi.",
+      more: "Umumiy maslahat emas — kundalik, kayfiyat, streak va odatlaring kontekstida shaxsiy javob. Burnout signalini oldindan sezadi.",
+    },
+    {
+      icon: Flame,
+      title: "Streak va XP",
+      short: "Har mikro-qadam ballanadi.",
+      more: "Ketma-ket kunlar zanjiri — variable reward tizimi (Skinner). XP progressbari sifatida vizual tasdiq beradi.",
+    },
+    {
+      icon: Shield,
+      title: "Shield tizimi",
+      short: "Haftada 1 kun kechirim.",
+      more: "Bitta xato butun mehnatni yo'q qilmaydi. Bu \"nima bo'lsa ham davom etaman\" ustanovkasini o'rgatadi va tark etish darajasini kamaytiradi.",
+    },
+    {
+      icon: BookText,
+      title: "Kundalik + kayfiyat",
+      short: "3 satrlik yozuv.",
+      more: "Pennebaker (1997) expressive writing: qisqa reflektsiya stress markerlarini pasaytiradi. Nadir kayfiyat pastligini sezsa nudge yuboradi.",
+    },
+    {
+      icon: Clock,
+      title: "Sirkadian jadval",
+      short: "Ertalab, kunduz, kech — o'z blogiga qadam.",
+      more: "Circadian rhythm tadqiqotlariga muvofiq har blokka moslashgan qadam. Kognitiv unumdorlik pigida bajariladi.",
+    },
+    {
+      icon: BarChart3,
+      title: "Haftalik hisobot",
+      short: "AI tahlili + 1 aniq tuzatish.",
+      more: "Qaysi odat mustahkam, qayerda susayapsan, keyingi hafta uchun bitta konkret o'zgarish — ortiqcha ma'lumot yuklamaydi.",
+    },
   ];
   return (
     <section id="features" className="border-b border-border bg-card/30">
@@ -280,13 +329,7 @@ function Features() {
         />
         <div className="mt-8 grid gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3">
           {items.map((f) => (
-            <div key={f.title} className="rounded-[var(--radius)] border border-border bg-background p-5">
-              <f.icon className="h-4 w-4 text-primary" />
-              <h3 className="mt-3 font-serif text-base">{f.title}</h3>
-              <p className="mt-1.5 font-ui text-[13px] leading-relaxed text-muted-foreground">
-                {f.body}
-              </p>
-            </div>
+            <ExpandableFeature key={f.title} {...f} />
           ))}
         </div>
       </div>
@@ -294,50 +337,91 @@ function Features() {
   );
 }
 
-function Science() {
-  const refs = [
-    {
-      k: "BJ Fogg",
-      v: "Tiny Habits (Stanford)",
-      d: "Mikro-harakat + trigger + tasdiq — motivatsiyadan qat'iy nazar takrorlanadi.",
-    },
-    {
-      k: "James Clear",
-      v: "Atomic Habits",
-      d: "1% qoidasi: kichik takrorlar birlashib, identifikatsiyani o'zgartiradi.",
-    },
-    {
-      k: "P. Lally",
-      v: "UCL, 2010",
-      d: "Yangi odat o'rtacha 66 kun (18-254) da avtomatik holatga o'tadi.",
-    },
-    {
-      k: "W. Wood",
-      v: "USC, 2019",
-      d: "Kunlik xulqning ~43% odat — irodaga emas, kontekstga bog'liq.",
-    },
-  ];
+function ExpandableFeature({
+  icon: Icon,
+  title,
+  short,
+  more,
+}: {
+  icon: typeof Repeat;
+  title: string;
+  short: string;
+  more: string;
+}) {
+  const [open, setOpen] = useState(false);
   return (
-    <section id="science" className="border-b border-border">
-      <div className="mx-auto max-w-5xl px-5 py-14 md:py-20">
-        <SectionHeader
-          eyebrow="Ilmiy asos"
-          title="Sinalgan tadqiqotga tayanadi"
-          sub="Har mexanizm ortida peer-reviewed ish. Sehr emas — takrorlanadigan naqsh."
+    <button
+      type="button"
+      onClick={() => setOpen((o) => !o)}
+      aria-expanded={open}
+      className="group text-left rounded-[var(--radius)] border border-border bg-background p-5 transition hover:border-primary/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
+    >
+      <div className="flex items-start justify-between gap-2">
+        <Icon className="h-4 w-4 text-primary" />
+        <Plus
+          className={`h-3.5 w-3.5 text-muted-foreground transition-transform ${open ? "rotate-45" : ""}`}
+          aria-hidden
         />
-        <div className="mt-10 grid gap-4 md:grid-cols-2">
-          {refs.map((r) => (
-            <div key={r.k} className="rounded-[var(--radius)] border border-border p-5">
-              <p className="font-ui text-xs uppercase tracking-[0.22em] text-primary">{r.k}</p>
-              <p className="mt-1 font-serif text-base">{r.v}</p>
-              <p className="mt-2 font-ui text-[13px] leading-relaxed text-muted-foreground">
-                {r.d}
-              </p>
-            </div>
-          ))}
+      </div>
+      <h3 className="mt-3 font-serif text-base">{title}</h3>
+      <p className="mt-1.5 font-ui text-[13px] leading-relaxed text-muted-foreground">
+        {short}
+      </p>
+      <div
+        className={`grid transition-all duration-300 ease-out ${open ? "mt-3 grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}`}
+      >
+        <div className="overflow-hidden">
+          <p className="border-t border-border/60 pt-3 font-ui text-[12px] leading-relaxed text-foreground/70">
+            {more}
+          </p>
         </div>
       </div>
-    </section>
+    </button>
+  );
+}
+
+function ExpandableCard({
+  eyebrow,
+  title,
+  short,
+  more,
+}: {
+  eyebrow: string;
+  title: string;
+  short: string;
+  more: string;
+}) {
+  const [open, setOpen] = useState(false);
+  return (
+    <button
+      type="button"
+      onClick={() => setOpen((o) => !o)}
+      aria-expanded={open}
+      className="relative text-left rounded-[var(--radius)] border border-border p-5 transition hover:border-primary/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
+    >
+      <div className="flex items-start justify-between gap-2">
+        <p className="font-ui text-xs uppercase tracking-[0.22em] text-primary">
+          {eyebrow}
+        </p>
+        <Plus
+          className={`h-3.5 w-3.5 text-muted-foreground transition-transform ${open ? "rotate-45" : ""}`}
+          aria-hidden
+        />
+      </div>
+      <h3 className="mt-3 font-serif text-lg">{title}</h3>
+      <p className="mt-2 font-ui text-[13px] leading-relaxed text-muted-foreground">
+        {short}
+      </p>
+      <div
+        className={`grid transition-all duration-300 ease-out ${open ? "mt-3 grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}`}
+      >
+        <div className="overflow-hidden">
+          <p className="border-t border-border/60 pt-3 font-ui text-[12px] leading-relaxed text-foreground/70">
+            {more}
+          </p>
+        </div>
+      </div>
+    </button>
   );
 }
 
@@ -359,7 +443,7 @@ function Pricing() {
               "Kunlik 3 ta mikro-missiya",
               "Streak, XP, intizom balli",
               "Nadir bilan asosiy suhbat",
-              "Kundalik va kayfiyat kuzatuvi",
+              "Kundalik va kayfiyat",
               "PWA — telefonga o'rnatiladi",
             ]}
             cta="Bepul boshlash"
@@ -371,11 +455,11 @@ function Pricing() {
             period="oyiga"
             features={[
               "Free rejadagi hammasi",
-              "Nadir Pro — kengroq kontekst va tarix",
+              "Nadir Pro — kengroq kontekst",
               "Cheksiz odat va quest",
-              "Haftalik AI hisobot va tuzatish",
-              "Burnout signal va oldindan nudge",
-              "Reyting va davra kanallariga to'liq kirish",
+              "Haftalik AI hisobot",
+              "Burnout signal + nudge",
+              "Davra kanallariga to'liq kirish",
             ]}
             cta="Pro rejaga o'tish"
             variant="primary"
@@ -418,7 +502,12 @@ function PricingCard({
       <ul className="mt-6 space-y-3 font-ui text-sm">
         {features.map((f) => (
           <li key={f} className="flex items-start gap-3">
-            <Check className={"mt-0.5 h-4 w-4 shrink-0 " + (variant === "primary" ? "text-primary" : "text-muted-foreground")} />
+            <Check
+              className={
+                "mt-0.5 h-4 w-4 shrink-0 " +
+                (variant === "primary" ? "text-primary" : "text-muted-foreground")
+              }
+            />
             <span>{f}</span>
           </li>
         ))}
@@ -440,7 +529,7 @@ function Faq() {
     <section id="faq" className="border-b border-border">
       <div className="mx-auto max-w-2xl px-5 py-14 md:py-20">
         <SectionHeader eyebrow="Savollar" title="Ko'p so'raladi" />
-        <Accordion type="single" collapsible defaultValue="q-0" className="mt-8">
+        <Accordion type="single" collapsible className="mt-8">
           {FAQ_ITEMS.map((it, i) => (
             <AccordionItem key={i} value={`q-${i}`} className="border-border/60">
               <AccordionTrigger className="text-left font-serif text-base">
@@ -499,432 +588,6 @@ function SectionHeader({
   );
 }
 
-function ProductPreview() {
-  return (
-    <section aria-labelledby="preview-title" className="border-b border-border bg-card/20">
-      <div className="mx-auto max-w-6xl px-5 py-16 md:py-20">
-        <div className="mx-auto max-w-2xl text-center">
-          <p className="font-ui text-[11px] uppercase tracking-[0.24em] text-muted-foreground">
-            Mahsulot
-          </p>
-          <h2 id="preview-title" className="mt-4 font-serif text-3xl leading-tight tracking-tight md:text-4xl">
-            Ertalab ochasan — bugungi protokol tayyor.
-          </h2>
-          <p className="mt-4 font-ui text-sm leading-relaxed text-muted-foreground">
-            Ortiqcha bezak yo'q. Faqat bugun kerak bo'lgan uch qadam va Nadir'ning bir jumlasi.
-          </p>
-        </div>
-
-        <div className="relative mx-auto mt-12 max-w-4xl">
-          <div className="absolute -inset-x-8 -inset-y-6 rounded-[calc(var(--radius)+18px)] bg-[radial-gradient(ellipse_at_top,hsl(var(--primary)/0.14),transparent_70%)] blur-2xl" aria-hidden />
-          <div className="relative overflow-hidden rounded-[var(--radius)] border border-border bg-background shadow-[0_20px_60px_-30px_hsl(var(--primary)/0.35)]">
-            {/* Mock browser chrome */}
-            <div className="flex items-center gap-1.5 border-b border-border bg-card/60 px-4 py-2.5">
-              <span className="h-2.5 w-2.5 rounded-full bg-muted" />
-              <span className="h-2.5 w-2.5 rounded-full bg-muted" />
-              <span className="h-2.5 w-2.5 rounded-full bg-muted" />
-              <span className="ml-3 font-ui text-[11px] text-muted-foreground">life-order · dashboard</span>
-            </div>
-
-            {/* Mock dashboard */}
-            <div className="grid gap-4 p-5 sm:grid-cols-3 md:p-7">
-              {/* KPIs */}
-              {[
-                { k: "12", v: "Streak · kun", accent: true },
-                { k: "3/3", v: "Bugungi protokol" },
-                { k: "84%", v: "Haftalik ijro" },
-              ].map((s) => (
-                <div key={s.v} className={`rounded-[calc(var(--radius)-4px)] border border-border p-4 ${s.accent ? "bg-primary/5" : "bg-card/40"}`}>
-                  <p className="font-serif text-3xl tabular-nums leading-none">{s.k}</p>
-                  <p className="mt-2 font-ui text-[11px] uppercase tracking-[0.18em] text-muted-foreground">{s.v}</p>
-                </div>
-              ))}
-
-              {/* Today's protocol */}
-              <div className="sm:col-span-2 rounded-[calc(var(--radius)-4px)] border border-border p-5">
-                <div className="flex items-center justify-between">
-                  <p className="font-serif text-base">Bugungi protokol</p>
-                  <p className="font-ui text-[11px] uppercase tracking-[0.18em] text-primary">Ertalab</p>
-                </div>
-                <ul className="mt-4 space-y-3 font-ui text-[13px]">
-                  {[
-                    { d: "Agar ko'zim ochilsa — 2 daqiqa nafas", on: true },
-                    { d: "Agar choyni damlasam — 3 satr kundalik", on: true },
-                    { d: "Agar ish stoliga o'tirsam — 1 muhim vazifa", on: false },
-                  ].map((t) => (
-                    <li key={t.d} className="flex items-start gap-3">
-                      <span className={`mt-0.5 grid h-4 w-4 shrink-0 place-items-center rounded-[4px] border ${t.on ? "border-primary bg-primary text-primary-foreground" : "border-border"}`}>
-                        {t.on && <Check className="h-3 w-3" strokeWidth={3} />}
-                      </span>
-                      <span className={t.on ? "text-foreground/70 line-through decoration-muted-foreground/40" : "text-foreground"}>{t.d}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              {/* Nadir card */}
-              <div className="rounded-[calc(var(--radius)-4px)] border border-border bg-card/40 p-5">
-                <div className="flex items-center gap-2">
-                  <Sparkles className="h-3.5 w-3.5 text-primary" />
-                  <p className="font-ui text-[11px] uppercase tracking-[0.18em] text-primary">Nadir</p>
-                </div>
-                <p className="mt-3 font-serif text-[15px] leading-snug">
-                  "Ikki kun ketma-ket kayfiyat pastladi. Bugun faqat bitta qadamga tayan."
-                </p>
-                <p className="mt-3 font-ui text-[11px] text-muted-foreground">02:14 · avtomatik nudge</p>
-              </div>
-
-              {/* Weekly bar */}
-              <div className="sm:col-span-3 rounded-[calc(var(--radius)-4px)] border border-border p-5">
-                <div className="flex items-center justify-between">
-                  <p className="font-serif text-base">Hafta</p>
-                  <p className="font-ui text-[11px] uppercase tracking-[0.18em] text-muted-foreground">Shield: 1/1</p>
-                </div>
-                <div className="mt-4 flex items-end gap-2 h-16">
-                  {[60, 80, 100, 70, 90, 100, 45].map((h, i) => (
-                    <div key={i} className="flex flex-1 flex-col items-center gap-1.5">
-                      <div className="w-full rounded-t-[3px] bg-primary/70" style={{ height: `${h}%` }} />
-                      <span className="font-ui text-[10px] uppercase tracking-wider text-muted-foreground">{["D","S","Ch","P","J","Sh","Y"][i]}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function Testimonials() {
-  // Erta pilot foydalanuvchilar fikrlari. Ismlar bosh harflarga qisqartirilgan.
-  const items = [
-    {
-      q: "2-daqiqalik qadam formati ishladi. Ilgari «ertaga boshlayman» degan narsa endi bugun bajariladi.",
-      a: "A. R.",
-      r: "pilot foydalanuvchi",
-    },
-    {
-      q: "Nadir ertalabki jumlasi kunimni yo'naltiradi. Motivatsion iqtiboslardan farqi — u meni biladi.",
-      a: "D. T.",
-      r: "pilot foydalanuvchi",
-    },
-    {
-      q: "Bir kun o'tkazib yubordim, Shield saqladi. Streak yo'qolganda hammasi barbod bo'ladigan tuyg'u yo'q.",
-      a: "S. M.",
-      r: "pilot foydalanuvchi",
-    },
-  ];
-  return (
-    <section aria-labelledby="voices-title" className="border-b border-border">
-      <div className="mx-auto max-w-6xl px-5 py-14 md:py-20">
-        <div className="max-w-2xl">
-          <p className="font-ui text-xs uppercase tracking-[0.24em] text-primary">Pilot fikrlar</p>
-          <h2 id="voices-title" className="mt-3 font-serif text-2xl leading-tight tracking-tight md:text-3xl">
-            Erta foydalanuvchilar nima deydi
-          </h2>
-          <p className="mt-3 font-ui text-[13px] text-muted-foreground">
-            Yopiq pilot ishtirokchilarining yozma fikrlari. Ismlar maxfiylik uchun qisqartirilgan.
-          </p>
-        </div>
-        <div className="mt-10 grid gap-5 md:grid-cols-3">
-          {items.map((t) => (
-            <figure key={t.a} className="flex h-full flex-col rounded-[var(--radius)] border border-border bg-card/30 p-6">
-              <blockquote className="font-serif text-[17px] leading-snug text-balance">
-                "{t.q}"
-              </blockquote>
-              <figcaption className="mt-6 border-t border-border/60 pt-4 font-ui text-[13px]">
-                <span className="font-semibold">{t.a}</span>
-                <span className="text-muted-foreground"> · {t.r}</span>
-              </figcaption>
-            </figure>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function Traction() {
-  // Halol bosqich: mahsulot tayyor, foydalanuvchi bazasi hali kichik.
-  // Soxta raqamlar o'rniga — mahsulot holati va yo'l xaritasi.
-  const items = [
-    { k: "Beta", v: "Hozirgi bosqich" },
-    { k: "10+", v: "Yadro modullari jonli" },
-    { k: "3 til", v: "Uz · Ru · En" },
-    { k: "Q1 2026", v: "Ochiq launch maqsadi" },
-  ];
-  return (
-    <section aria-labelledby="traction-title" className="border-b border-border bg-card/30">
-      <div className="mx-auto max-w-6xl px-5 py-16">
-        <div className="flex flex-wrap items-end justify-between gap-4">
-          <div>
-            <p className="font-ui text-xs uppercase tracking-[0.24em] text-primary">Bosqich</p>
-            <h2 id="traction-title" className="mt-3 font-serif text-2xl leading-tight tracking-tight md:text-3xl">
-              Erta bosqich — halol
-            </h2>
-            <p className="mt-3 max-w-xl font-ui text-[13px] text-muted-foreground">
-              Biz endigina yo'lda ekanimizni yashirmaymiz. Mahsulot jonli, tizim ishlaydi — foydalanuvchilar sonini bo'yab ko'rsatmaymiz.
-            </p>
-          </div>
-        </div>
-        <dl className="mt-10 grid grid-cols-2 gap-6 md:grid-cols-4">
-          {items.map((s) => (
-            <div key={s.v} className="rounded-[var(--radius)] border border-border bg-background p-5">
-              <dt className="font-serif text-3xl tracking-tight tabular-nums md:text-4xl">
-                {s.k}
-              </dt>
-              <dd className="mt-2 font-ui text-[12px] uppercase tracking-[0.18em] text-muted-foreground">
-                {s.v}
-              </dd>
-            </div>
-          ))}
-        </dl>
-        <p className="mt-6 font-ui text-[11px] text-muted-foreground">
-          Traksiya raqamlari (foydalanuvchilar, retention, MRR) real to'planganda shu yerda ochiq nashr qilinadi.
-        </p>
-      </div>
-    </section>
-  );
-}
-
-/* ============================================================
-   Psixologik qatlamlar — real tadqiqotlarga asoslangan bloklar
-   ============================================================ */
-
-// Trust markers — Cialdini (authority + social proof), qisqa vaqtda ishonch beradi
-function TrustStrip() {
-  const items = [
-    "Stanford Behavior Design",
-    "UCL Habit Research",
-    "APA Clinical Psychology",
-    "Nature Human Behaviour",
-    "Harvard T.H. Chan",
-  ];
-  return (
-    <section aria-label="Ilmiy asos manbalar" className="border-b border-border">
-      <div className="mx-auto max-w-6xl px-5 py-6">
-        <p className="text-center font-ui text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
-          Metodika manbalari
-        </p>
-        <ul className="mt-4 flex flex-wrap items-center justify-center gap-x-8 gap-y-3">
-          {items.map((it) => (
-            <li
-              key={it}
-              className="font-serif text-[13px] tracking-tight text-foreground/60"
-            >
-              {it}
-            </li>
-          ))}
-        </ul>
-      </div>
-    </section>
-  );
-}
-
-// Loss aversion — Kahneman & Tversky (Prospect Theory, 1979).
-// Yo'qotish qo'rquvi foyda umididan 2× kuchli motivator.
-function CostOfDrift() {
-  const rows = [
-    {
-      k: "−3.5 yil",
-      v: "Sog'liq bo'yicha yo'qotilgan umr — sedentar hayot",
-      s: "The Lancet, 2012 (Lee et al.)",
-    },
-    {
-      k: "40%",
-      v: "Kognitiv unumdorlik tushishi — surunkali uyqusizlik",
-      s: "Sleep Foundation meta-analysis, 2017",
-    },
-    {
-      k: "2.1×",
-      v: "Depressiya xavfi — kundalik reflektsiyasiz",
-      s: "JAMA Psychiatry, 2020",
-    },
-    {
-      k: "9 yil",
-      v: "Maqsadga erishishning kechikish o'rtachasi — tizimsiz",
-      s: "Locke & Latham, Goal Setting, 2019",
-    },
-  ];
-  return (
-    <section className="border-b border-border bg-background">
-      <div className="mx-auto max-w-5xl px-5 py-14 md:py-20">
-        <div className="max-w-2xl">
-          <p className="font-ui text-xs uppercase tracking-[0.24em] text-primary">
-            Harakatsizlik narxi
-          </p>
-          <h2 className="mt-3 font-serif text-3xl leading-tight tracking-tight md:text-4xl">
-            Hech narsa qilmaslik ham qaror.
-          </h2>
-          <p className="mt-4 font-ui text-sm leading-relaxed text-muted-foreground">
-            Kahneman & Tversky (1979) ko'rsatishicha, yo'qotish qo'rquvi foyda umididan
-            ikki barobar kuchli. Quyidagilar — «keyinroq boshlayman» qarorining real bahosi.
-          </p>
-        </div>
-
-        <div className="mt-10 grid gap-3 md:grid-cols-2">
-          {rows.map((r) => (
-            <div
-              key={r.k}
-              className="flex items-start gap-5 rounded-[var(--radius)] border border-border bg-card/30 p-5"
-            >
-              <TrendingDown className="mt-1 h-5 w-5 shrink-0 text-primary" />
-              <div>
-                <p className="font-serif text-2xl tabular-nums tracking-tight">{r.k}</p>
-                <p className="mt-1 font-ui text-[14px] leading-snug">{r.v}</p>
-                <p className="mt-2 font-ui text-[11px] uppercase tracking-[0.16em] text-muted-foreground">
-                  {r.s}
-                </p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-// Identity-based habits — James Clear + Self-Determination Theory (Deci & Ryan).
-// Foydalanuvchi o'zini "kim uchun" ekanligida ko'rsa — o'zlashtirish tezlashadi.
-function ForWhom() {
-  const groups = [
-    {
-      t: "Talaba",
-      d: "Diqqat, uyqu, imtihon rejimi. Kunlik 3 qadam bilan semestrni yo'qotmaslik.",
-    },
-    {
-      t: "Kreativ mutaxassis",
-      d: "Deep work bloklari, ijodiy tiklanish, burnout signalini erta ushlash.",
-    },
-    {
-      t: "Ota-ona",
-      d: "Kichkina vaqt, katta ta'sir. Uyqu, sabr va oilaviy ritual mikro-tizimi.",
-    },
-    {
-      t: "Tadbirkor",
-      d: "Qaror charchog'ini kamaytirish. Kognitiv yuk-menejment va energiya boshqaruvi.",
-    },
-  ];
-  return (
-    <section className="border-b border-border bg-card/30">
-      <div className="mx-auto max-w-6xl px-5 py-14 md:py-20">
-        <div className="max-w-2xl">
-          <p className="font-ui text-xs uppercase tracking-[0.24em] text-primary">
-            Kim uchun
-          </p>
-          <h2 className="mt-3 font-serif text-2xl leading-tight tracking-tight md:text-3xl">
-            Har arxetip — o'z protokoli
-          </h2>
-          <p className="mt-4 font-ui text-sm leading-relaxed text-muted-foreground">
-            Deci & Ryan (Self-Determination Theory) — ichki motivatsiya avtonomiya,
-            kompetentlik va bog'liqlikdan tug'iladi. Nadir har arxetipga shu uch o'q
-            bo'yicha moslashadi.
-          </p>
-        </div>
-        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {groups.map((g) => (
-            <div
-              key={g.t}
-              className="rounded-[var(--radius)] border border-border bg-background p-5"
-            >
-              <Users className="h-4 w-4 text-primary" />
-              <h3 className="mt-3 font-serif text-lg">{g.t}</h3>
-              <p className="mt-2 font-ui text-[13px] leading-relaxed text-muted-foreground">
-                {g.d}
-              </p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-// Founder note — humanization heuristic (Kahneman, System 1).
-// Yuz + shaxsiy iqtibos ishonch koeffitsiyentini oshiradi.
-function FounderNote() {
-  return (
-    <section className="border-b border-border">
-      <div className="mx-auto max-w-3xl px-5 py-14 md:py-20">
-        <Quote className="h-6 w-6 text-primary" aria-hidden />
-        <blockquote className="mt-4 font-serif text-2xl leading-snug tracking-tight md:text-3xl text-balance">
-          "Men motivatsion kitoblarni yig'ib katta bo'ldim. Hech biri ishlamadi —
-          chunki motivatsiya kuni-kunidan tugaydi. Ishlagan bitta narsa: kichik,
-          takrorlanadigan halqa. Life Order — shu halqani tizimga aylantirish."
-        </blockquote>
-        <div className="mt-8 flex items-center gap-4 border-t border-border pt-6">
-          <div
-            aria-hidden
-            className="grid h-11 w-11 place-items-center rounded-full bg-primary/15 font-serif text-lg text-primary"
-          >
-            N
-          </div>
-          <div>
-            <p className="font-ui text-sm font-semibold">Asoschi</p>
-            <p className="font-ui text-[12px] text-muted-foreground">
-              Life Order jamoasi · Toshkent
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-// Risk reversal — Ariely (Predictably Irrational).
-// Kafolat qaror sur'atini keskin oshiradi (perceived risk ↓).
-function Guarantee() {
-  const items = [
-    {
-      icon: Shield,
-      t: "30 kun kafolat",
-      d: "Pro'ga o'tsang va foyda ko'rmasang — bir bosishda pul qaytadi. Savol berilmaydi.",
-    },
-    {
-      icon: Lock,
-      t: "Karta talab qilinmaydi",
-      d: "Free reja doimiy. Sinov davri ham, kartani kiritish ham yo'q.",
-    },
-    {
-      icon: Check,
-      t: "Ma'lumot sotilmaydi",
-      d: "GDPR-hamda mos. Reklama tarmoqlariga uzatilmaydi. Bir bosishda o'chirasan.",
-    },
-  ];
-  return (
-    <section className="border-b border-border bg-card/30">
-      <div className="mx-auto max-w-5xl px-5 py-16">
-        <div className="max-w-2xl">
-          <p className="font-ui text-xs uppercase tracking-[0.24em] text-primary">
-            Xavfsiz sinov
-          </p>
-          <h2 className="mt-3 font-serif text-2xl leading-tight tracking-tight md:text-3xl">
-            Yo'qotadigan narsang yo'q
-          </h2>
-        </div>
-        <div className="mt-8 grid gap-4 md:grid-cols-3">
-          {items.map((it) => (
-            <div
-              key={it.t}
-              className="rounded-[var(--radius)] border border-border bg-background p-5"
-            >
-              <it.icon className="h-4 w-4 text-primary" />
-              <h3 className="mt-3 font-serif text-base">{it.t}</h3>
-              <p className="mt-2 font-ui text-[13px] leading-relaxed text-muted-foreground">
-                {it.d}
-              </p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-// Sticky mobile CTA — Fogg B=MAP: harakatni oson qilish (Ability↑).
-// Doimo ko'rinadigan CTA konversiya ehtimolini oshiradi.
 function StickyMobileCta() {
   return (
     <div className="fixed inset-x-0 bottom-0 z-30 border-t border-border bg-background/95 px-4 py-3 backdrop-blur-md md:hidden">
@@ -935,11 +598,7 @@ function StickyMobileCta() {
             60 soniya · Kartasiz
           </p>
         </div>
-        <Button
-          asChild
-          size="sm"
-          className="rounded-full px-5 font-ui font-semibold"
-        >
+        <Button asChild size="sm" className="rounded-full px-5 font-ui font-semibold">
           <Link to="/auth">
             Bepul <ArrowRight className="ml-1 h-3.5 w-3.5" />
           </Link>
@@ -948,6 +607,3 @@ function StickyMobileCta() {
     </div>
   );
 }
-
-
-
