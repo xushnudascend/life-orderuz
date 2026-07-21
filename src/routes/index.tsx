@@ -148,19 +148,18 @@ function ProofStrip() {
 function Hero() {
   return (
     <section className="relative overflow-hidden border-b border-border">
-      <div className="mx-auto max-w-4xl px-5 pb-16 pt-20 text-center md:pt-28">
+      <div className="mx-auto max-w-4xl px-5 pb-12 pt-14 text-center md:pb-16 md:pt-24">
         <p className="font-ui text-[11px] uppercase tracking-[0.24em] text-muted-foreground">
           Beta · Xulq-atvor tizimi
         </p>
-        <h1 className="mt-6 font-serif text-4xl leading-[1.05] tracking-tight text-balance sm:text-5xl md:text-6xl">
+        <h1 className="mt-5 font-serif text-[34px] leading-[1.05] tracking-tight text-balance sm:text-5xl md:text-6xl">
           Motivatsiya tugaydi.<br />
           <span className="text-muted-foreground">Tizim qoladi.</span>
         </h1>
-        <p className="mx-auto mt-6 max-w-xl leading-relaxed text-muted-foreground text-pretty">
-          Kuniga uchta 2-daqiqalik qadam. Nadir AI mentor — sening ma'lumotlaringga qarab
-          shaxsiy protokol tuzadi. Streak, XP, Shield — naqsh mustahkamlanguncha.
+        <p className="mx-auto mt-5 max-w-lg text-[15px] leading-relaxed text-muted-foreground text-pretty sm:text-base">
+          Kuniga uchta 2-daqiqalik qadam. Nadir AI mentor sen uchun shaxsiy protokol tuzadi.
         </p>
-        <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+        <div className="mt-7 flex flex-col items-stretch gap-2.5 sm:flex-row sm:items-center sm:justify-center sm:gap-3">
           <Button asChild size="lg" className="h-12 rounded-full px-6 font-ui font-semibold">
             <Link to="/auth">
               Bepul boshlash
@@ -174,26 +173,11 @@ function Hero() {
         <p className="mt-4 font-ui text-xs text-muted-foreground">
           60 soniyada · Kartasiz · O'zbek tilida
         </p>
-
-        {/* Micro stats */}
-        <dl className="mx-auto mt-14 grid max-w-2xl grid-cols-3 gap-6 border-t border-border pt-8 text-center">
-          {[
-            { k: "2 daq", v: "Mikro-harakat" },
-            { k: "66 kun", v: "O'rtacha odat" },
-            { k: "3×/kun", v: "Tasdiq halqasi" },
-          ].map((s) => (
-            <div key={s.k}>
-              <dt className="font-serif text-2xl tabular-nums">{s.k}</dt>
-              <dd className="mt-1 font-ui text-xs uppercase tracking-[0.18em] text-muted-foreground">
-                {s.v}
-              </dd>
-            </div>
-          ))}
-        </dl>
       </div>
     </section>
   );
 }
+
 
 function Pillars() {
   const items = [
