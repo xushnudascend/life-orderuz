@@ -449,7 +449,7 @@ function Mechanism() {
           ))}
         </div>
         <p className="mt-6 font-ui text-xs text-muted-foreground">
-          Manba: Duhigg (2012), <em>The Power of Habit</em>; Wood &amp; Rünger, <em>Annual Review of Psychology</em>, 2016.
+          Halqa yopiq — mukofot keyingi ilgakni kuchaytiradi. Manba: Duhigg, <em>The Power of Habit</em> (2012); Wood &amp; Rünger, <em>Annual Review of Psychology</em> (2016); Graybiel, <em>Annual Review of Neuroscience</em> (2008).
         </p>
       </div>
     </section>
@@ -459,20 +459,29 @@ function Mechanism() {
 function Science() {
   const refs = [
     {
-      claim: "Kunlik xulqning 43% — ongsiz odat",
-      src: "Wood, Quinn &amp; Kashy — J. Personality & Social Psych., 2002",
+      claim: "Kunlik xulqning ~43% — ongsiz odat, qaror emas",
+      src: "Wood, Quinn &amp; Kashy — J. Personality &amp; Social Psychology, 2002",
+      href: "https://doi.org/10.1037/0022-3514.83.6.1281",
     },
     {
-      claim: "Odat avtomatlashuvi o'rtacha 66 kun",
-      src: "Lally et al. — Eur. J. Social Psych., 2010",
+      claim: "Odat avtomatlashuvi o'rtacha 66 kun (18–254)",
+      src: "Lally et al. — European J. Social Psychology, 2010",
+      href: "https://doi.org/10.1002/ejsp.674",
     },
     {
-      claim: "Niyat formulasi bajarilishni 2–3 barobar oshiradi",
+      claim: "\"Agar X — men Y\" niyati bajarilishni 2–3× oshiradi",
       src: "Gollwitzer — American Psychologist, 1999",
+      href: "https://doi.org/10.1037/0003-066X.54.7.493",
+    },
+    {
+      claim: "Dopamin — mukofot bashorati xatosi, ilgak-mukofot bog'lanishi",
+      src: "Schultz, Dayan &amp; Montague — Science, 1997",
+      href: "https://doi.org/10.1126/science.275.5306.1593",
     },
     {
       claim: "Xulq = Motivatsiya × Qobiliyat × Ilgak (B=MAP)",
-      src: "Fogg — Stanford Behavior Design Lab",
+      src: "Fogg — Stanford Behavior Design Lab, 2009",
+      href: "https://behaviormodel.org/",
     },
   ];
   return (
@@ -484,14 +493,20 @@ function Science() {
             <Reveal key={i} delay={i * 60}>
               <li className="flex flex-col gap-1 bg-background p-5 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6">
                 <p className="font-serif text-base leading-snug">{r.claim}</p>
-                <p
-                  className="font-ui text-[11px] uppercase tracking-[0.16em] text-muted-foreground"
+                <a
+                  href={r.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-ui text-[11px] uppercase tracking-[0.16em] text-muted-foreground underline-offset-4 hover:text-primary hover:underline"
                   dangerouslySetInnerHTML={{ __html: r.src }}
                 />
               </li>
             </Reveal>
           ))}
         </ul>
+        <p className="mt-4 font-ui text-[11px] text-muted-foreground">
+          Har havola — asl akademik manba. Marketing emas, mexanizm.
+        </p>
       </div>
     </section>
   );
