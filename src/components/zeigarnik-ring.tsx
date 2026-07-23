@@ -20,7 +20,7 @@ export function ZeigarnikRing({
 
   return (
     <div className="flex items-center gap-4">
-      <ProgressRing value={pct} />
+      <ProgressRing value={done} total={total} />
       <div className="min-w-0">
         <p className="font-ui text-[11px] font-semibold uppercase tracking-[0.22em] text-primary">
           {closed ? "Halqa yopildi" : "Ochiq halqa"}
