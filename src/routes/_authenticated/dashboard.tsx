@@ -230,7 +230,20 @@ function Dashboard() {
       {/* Yuqori qism — salom, kontekst, ogohlantirishlar */}
       <ProfileCompletionCard missing={missing} />
       <NadirNudgeBanner userId={userId} />
+      <EasyModeRibbon streakDays={streak?.current_days ?? 0} />
       <StreakAtRisk streakDays={streak?.current_days ?? 0} percent={percent} />
+      <PeakEndReflect />
+
+      {loaded && habits.length > 0 && (
+        <div className="mb-5 rounded-[var(--radius)] border border-border/70 bg-card p-4 sm:p-5">
+          <ZeigarnikRing
+            done={doneCount}
+            total={habits.length}
+            nextTitle={habits.find((h) => !done.has(h.id))?.title ?? null}
+          />
+        </div>
+      )}
+
 
 
 
