@@ -116,9 +116,9 @@ function Leaderboard() {
   return (
     <AppShell title="Reyting">
       <PageHero
-        eyebrow="Reyting"
+        eyebrow="Reyting · Izchillik + XP"
         title="Eng qat'iyatlilar."
-        subtitle="Avval o'z viloyating bilan raqobatlash — keyin butun O'zbekiston."
+        subtitle="50/50 tarozi: yarmi XP, yarmi izchillik (streak). Faqat ko'p ishlagan emas — davomiy ishlagan yuqorida."
       />
 
       <div className="mt-6 flex flex-wrap items-center gap-3">
@@ -189,11 +189,13 @@ function Leaderboard() {
                       )}
                     </p>
                     <p className="font-ui text-xs uppercase tracking-[0.18em] text-muted-foreground/80">
-                      Daraja {r.level}
+                      Daraja {r.level} · {r.streak_days} kun izchil · {r.total_xp} XP
                     </p>
                   </div>
                 </div>
-                <p className="font-serif text-xl tabular-nums">{r.total_xp} XP</p>
+                <p className="font-serif text-xl tabular-nums" title="Blended score: 50% XP + 50% izchillik">
+                  {r.blended}
+                </p>
               </Panel>
             );
           })}
