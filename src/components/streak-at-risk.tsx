@@ -1,9 +1,11 @@
-import { AlertTriangle } from "lucide-react";
+import { Sparkles } from "lucide-react";
 
 /**
- * Loss aversion visualization (Kahneman & Tversky, 1979).
- * Streak endangered — surfaces at end-of-day if today is incomplete.
+ * Loss aversion — xotirjam ohang (Kahneman & Tversky, 1979).
+ * Streak endangered — but we frame it as an INVITATION, not an ALARM.
  * Threshold: after 18:00 local time AND streak >= 3 AND completion < 100%.
+ * Wording rule (A3): never "streak xavf ostida" — that's fear-mongering.
+ * Say what's true and offer the smallest next step.
  */
 export function StreakAtRisk({
   streakDays,
@@ -16,19 +18,19 @@ export function StreakAtRisk({
   const show = streakDays >= 3 && percent < 100 && hour >= 18;
   if (!show) return null;
 
-  const remaining = 100 - percent;
+  const remaining = Math.max(0, 100 - percent);
   return (
     <div
-      role="alert"
-      className="mb-4 flex items-start gap-3 rounded-[var(--radius)] border border-amber-500/40 bg-amber-500/5 p-3.5"
+      role="status"
+      className="mb-4 flex items-start gap-3 rounded-[var(--radius)] border border-primary/30 bg-primary/5 p-3.5"
     >
-      <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0 text-amber-400" />
+      <Sparkles className="mt-0.5 h-4 w-4 shrink-0 text-primary" aria-hidden />
       <div className="min-w-0 flex-1">
-        <p className="font-ui text-[13px] font-semibold text-amber-100">
-          {streakDays} kunlik streak xavf ostida
+        <p className="font-ui text-[13px] font-semibold text-foreground">
+          {streakDays} kunlik naqsh davom etyapti
         </p>
-        <p className="mt-0.5 font-ui text-xs text-amber-100/70">
-          Bugungi rejadan {remaining}% qoldi. Bitta kichik odatni yakunlash — streak'ni saqlab qoladi.
+        <p className="mt-0.5 font-ui text-xs text-muted-foreground">
+          Bugundan {remaining}% qoldi. Eng kichigidan boshla — 2 daqiqalik odat kifoya.
         </p>
       </div>
     </div>

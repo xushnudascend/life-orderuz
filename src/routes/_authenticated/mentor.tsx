@@ -2,12 +2,14 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useChat } from "@ai-sdk/react";
 import { DefaultChatTransport, type UIMessage } from "ai";
+import { useServerFn } from "@tanstack/react-start";
 import { supabase } from "@/integrations/supabase/client";
 import { AppShell } from "@/components/app-shell";
 import { Copy, Check, Loader2, Sparkles } from "lucide-react";
 import { PageHero } from "@/components/page-hero";
 import { EmptyState } from "@/components/empty-state";
 import { uz } from "@/i18n";
+import { ensurePrimaryThread, loadThreadMessages } from "@/lib/nadir-threads.functions";
 import {
   Conversation,
   ConversationContent,
@@ -160,46 +162,46 @@ function usePersona(): [Persona, (p: Persona) => void] {
 
 function MentorPage() {
   const { userId } = Route.useRouteContext();
+  const ensureFn = useServerFn(ensurePrimaryThread);
+  const loadFn = useServerFn(loadThreadMessages);
   const [initial, setInitial] = useState<UIMessage[] | null>(null);
+  const [threadId, setThreadId] = useState<string | null>(null);
   const [stats, setStats] = useState<UserStats | null>(null);
   const [input, setInput] = useState("");
   const [persona, setPersona] = usePersona();
-  const savedIdsRef = useRef<Set<string>>(new Set());
   const bottomRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     let alive = true;
     (async () => {
-      const [chat, s] = await Promise.all([
-        supabase
-          .from("chat_messages")
-          .select("id, role, content")
-          .eq("user_id", userId)
-          .order("created_at", { ascending: true }),
+      const [{ threadId: tid }, s] = await Promise.all([
+        ensureFn({ data: undefined as never }),
         fetchNadirStats(userId),
       ]);
       if (!alive) return;
-      const rows = ((chat.data as Row[] | null) ?? []).filter((r) => r.role !== "system");
-      rows.forEach((r) => savedIdsRef.current.add(r.id));
+      setThreadId(tid);
+      const { messages } = await loadFn({ data: { threadId: tid } });
+      if (!alive) return;
+      const rows = messages.filter((r) => r.role !== "system") as Row[];
       setInitial(rows.map(rowToUIMessage));
       setStats(s);
     })();
     return () => {
       alive = false;
     };
-  }, [userId]);
+  }, [userId, ensureFn, loadFn]);
 
-  return initial && stats ? (
+  return initial && stats && threadId ? (
     <MentorChat
-      key={userId}
+      key={threadId}
       userId={userId}
+      threadId={threadId}
       initialMessages={initial}
       stats={stats}
       persona={persona}
       setPersona={setPersona}
       input={input}
       setInput={setInput}
-      savedIdsRef={savedIdsRef}
       bottomRef={bottomRef}
     />
   ) : (
@@ -214,65 +216,41 @@ function MentorPage() {
 
 function MentorChat({
   userId,
+  threadId,
   initialMessages,
   stats,
   persona,
   setPersona,
   input,
   setInput,
-  savedIdsRef,
   bottomRef,
 }: {
   userId: string;
+  threadId: string;
   initialMessages: UIMessage[];
   stats: UserStats;
   persona: Persona;
   setPersona: (p: Persona) => void;
   input: string;
   setInput: (v: string) => void;
-  savedIdsRef: React.MutableRefObject<Set<string>>;
   bottomRef: React.RefObject<HTMLDivElement | null>;
 }) {
   const transport = useMemo(
     () =>
       new DefaultChatTransport({
         api: "/api/chat",
-        body: { userStats: stats, persona },
+        body: { userStats: stats, persona, threadId, contextHint: "mentor" },
       }),
-    [stats, persona],
+    [stats, persona, threadId],
   );
 
-
   const { messages, sendMessage, status, error } = useChat({
-    id: userId,
+    id: `nadir:${threadId}`,
     messages: initialMessages,
     transport,
   });
+  void userId;
 
-  useEffect(() => {
-    if (status === "streaming" || status === "submitted") return;
-    const toSave = (messages as UIMessage[]).filter((m) => !savedIdsRef.current.has(m.id));
-    if (toSave.length === 0) return;
-    (async () => {
-      for (const m of toSave) {
-        const text = extractText(m);
-        if (!text.trim()) continue;
-        savedIdsRef.current.add(m.id);
-        await supabase.from("chat_messages").insert({
-          user_id: userId,
-          role: m.role,
-          content: text,
-        });
-        if (m.role === "assistant") {
-          await supabase.from("xp_events").insert({
-            user_id: userId,
-            source: "journal",
-            amount: 1,
-          });
-        }
-      }
-    })();
-  }, [messages, status, userId, savedIdsRef]);
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
