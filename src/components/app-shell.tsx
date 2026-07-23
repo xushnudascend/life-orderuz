@@ -8,6 +8,9 @@ import { CommandBar } from "@/components/command-bar";
 import { QuickLogFab } from "@/components/quick-log-fab";
 import { SkipLink } from "@/components/skip-link";
 import { ErrorBoundary } from "@/components/error-boundary";
+import { NadirProvider } from "@/lib/nadir-context";
+import { NadirFab } from "@/components/nadir-fab";
+import { NadirDrawer } from "@/components/nadir-drawer";
 import { ARCHETYPES, type Archetype } from "@/lib/nervous";
 
 export function AppShell({
@@ -52,6 +55,7 @@ export function AppShell({
   const initial = (name?.trim()?.[0] ?? "L").toUpperCase();
 
   return (
+    <NadirProvider>
     <div className="min-h-dvh bg-background text-foreground">
       <SkipLink />
       <SidebarNav />
@@ -122,6 +126,9 @@ export function AppShell({
 
       <BottomNav recommendedTab={archetype?.preferredTab} />
       <QuickLogFab />
+      <NadirFab />
+      <NadirDrawer />
     </div>
+    </NadirProvider>
   );
 }
