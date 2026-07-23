@@ -1,8 +1,9 @@
 import { Shield } from "lucide-react";
 
 /**
- * Himoya: N/3 · Streak buzilsa avto ishlaydi
- * Backend: haftada 1 dona ishlatilgani hisoblanadi.
+ * Himoya (Shield) — Kahneman loss aversion, xotirjam ohang.
+ * Copy rule (A3): never "himoyang tugayapti!!" — that's alarm.
+ * Say the truth calmly: X ta himoyang bor, xavfsizsan.
  */
 export function ShieldIndicator({
   usedThisWeek,
@@ -15,9 +16,9 @@ export function ShieldIndicator({
   return (
     <span
       className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1.5 font-ui text-[11px] uppercase tracking-[0.18em] text-muted-foreground"
-      title="Himoya (Shield) — Streak buzilsa avto ishlaydi"
+      title={`${remaining} ta himoyang bor — streak buzilsa avto ishlaydi`}
     >
-      <Shield className="h-3.5 w-3.5 text-primary" />
+      <Shield className="h-3.5 w-3.5 text-primary" aria-hidden />
       Himoya: <span className="text-foreground">{remaining}</span>/{max}
     </span>
   );
