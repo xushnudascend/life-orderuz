@@ -82,7 +82,7 @@ function buildBlocks(p: TimetableProfile): Block[] {
       to: 8 + shift,
       label: `Uyg'onish — ${morningLabel}`,
       hint: "Cortizol tabiiy peak. Yorug'lik va suv.",
-      tone: "peak",
+      tone: "peak" as Tone,
     },
     {
       from: 9 + shift,
@@ -124,7 +124,7 @@ function buildBlocks(p: TimetableProfile): Block[] {
       to: 24,
       label: nightLabel,
       hint: "Melatonin uchun qorong'ilik.",
-      tone: "rest",
+      tone: "rest" as Tone,
     },
   ].map((x) => ({ ...x, from: Math.max(0, Math.min(23, x.from)), to: Math.max(1, Math.min(24, x.to)) }));
 }
