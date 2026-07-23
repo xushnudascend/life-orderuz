@@ -137,23 +137,19 @@ function EmailForm({ mode, next }: { mode: "signin" | "signup"; next: string }) 
     setLoading(true);
     try {
       if (mode === "signup") {
-        const { error } = await supabase.auth.signUp({
+        const { data: up, error } = await supabase.auth.signUp({
           email,
           password,
-          options: {
-            emailRedirectTo: `${window.location.origin}/onboarding`,
-          },
+          options: { emailRedirectTo: `${window.location.origin}/onboarding` },
         });
         if (error) throw error;
-        // If auto-confirm is on, session exists. Otherwise try password login
-        // (works when email confirmation is disabled server-side).
-        const { data: sess } = await supabase.auth.getSession();
-        let hasSession = !!sess.session;
-        if (!hasSession) {
-          const pw = await supabase.auth.signInWithPassword({ email, password });
-          hasSession = !!pw.data.session && !pw.error;
+        // Auto-confirm on → signUp already returns session. Skip extra roundtrips.
+        if (up.session) {
+          window.location.replace("/onboarding");
+          return;
         }
-        if (hasSession) {
+        const pw = await supabase.auth.signInWithPassword({ email, password });
+        if (pw.data.session && !pw.error) {
           window.location.replace("/onboarding");
         } else {
           toast.success("Emailingizga tasdiq havolasi yuborildi.");
@@ -161,8 +157,6 @@ function EmailForm({ mode, next }: { mode: "signin" | "signup"; next: string }) 
       } else {
         const { error } = await supabase.auth.signInWithPassword({ email, password });
         if (error) throw error;
-        // Route through the authenticated gate — it forwards to onboarding
-        // or dashboard depending on profile state, avoiding a visible flash.
         window.location.replace(next === "/dashboard" ? "/dashboard" : next);
       }
     } catch (err) {

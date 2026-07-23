@@ -456,7 +456,15 @@ function Dashboard() {
         {/* Timetable */}
         <div className="lg:col-span-7">
           <ErrorBoundary boundary="dashboard_daily_timetable">
-            <DailyTimetable />
+            <DailyTimetable
+              profile={{
+                age: profile?.age,
+                sex: profile?.sex,
+                height_cm: profile?.height_cm,
+                weight_kg: profile?.weight_kg,
+                archetype: profile?.archetype,
+              }}
+            />
           </ErrorBoundary>
         </div>
 
