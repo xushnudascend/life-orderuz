@@ -12,6 +12,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Loader2, Users, Copy, LogOut, Plus } from "lucide-react";
 import { toast } from "sonner";
 import { uz } from "@/i18n";
+import { PartyCommitment } from "@/components/party-commitment";
 
 export const Route = createFileRoute("/_authenticated/party")({
   head: () => ({
@@ -250,7 +251,8 @@ function PartyPage() {
                     <p className="mb-2 font-ui text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
                       A'zolar ({list.length})
                     </p>
-                    <ul className="space-y-1.5">
+                    <PartyCommitment memberIds={list.map((m) => m.user_id)} />
+                    <ul className="mt-3 space-y-1.5">
                       {list.map((m) => (
                         <li
                           key={m.id}

@@ -20,8 +20,24 @@ export const Route = createFileRoute("/_authenticated/leaderboard")({
   component: Leaderboard,
 });
 
-type Row = { user_id: string; display_name: string; level: number; total_xp: number };
+type Row = {
+  user_id: string;
+  display_name: string;
+  level: number;
+  total_xp: number;
+  streak_days: number;
+  blended: number;
+};
 type Filter = "all" | "week";
+
+/**
+ * 50/50 blend — Cialdini social proof + consistency > raw output.
+ * blended = 0.5 * (xp normalized) + 0.5 * (streak_days * 20)
+ * Bu jazo yo'q — faqat izchillik ko'rinsin uchun tenglashtiradi.
+ */
+function blend(xp: number, streak: number) {
+  return Math.round(xp * 0.5 + streak * 100 * 0.5);
+}
 
 function Leaderboard() {
   const { userId } = Route.useRouteContext();
@@ -39,7 +55,24 @@ function Leaderboard() {
         .select("user_id, display_name, level, total_xp")
         .order("total_xp", { ascending: false })
         .limit(200);
-      setRows((data as Row[] | null) ?? []);
+      const base = (data as Omit<Row, "streak_days" | "blended">[] | null) ?? [];
+      const ids = base.map((b) => b.user_id);
+      let streakMap: Record<string, number> = {};
+      if (ids.length > 0) {
+        const { data: sts } = await supabase
+          .from("streaks")
+          .select("user_id, current_days")
+          .in("user_id", ids);
+        for (const s of (sts as { user_id: string; current_days: number }[] | null) ?? []) {
+          streakMap[s.user_id] = s.current_days;
+        }
+      }
+      const merged: Row[] = base.map((b) => {
+        const streak_days = streakMap[b.user_id] ?? 0;
+        return { ...b, streak_days, blended: blend(b.total_xp, streak_days) };
+      });
+      merged.sort((a, b) => b.blended - a.blended);
+      setRows(merged);
       const { data: prof } = await supabase
         .from("profiles")
         .select("viloyat")
@@ -83,9 +116,9 @@ function Leaderboard() {
   return (
     <AppShell title="Reyting">
       <PageHero
-        eyebrow="Reyting"
+        eyebrow="Reyting · Izchillik + XP"
         title="Eng qat'iyatlilar."
-        subtitle="Avval o'z viloyating bilan raqobatlash — keyin butun O'zbekiston."
+        subtitle="50/50 tarozi: yarmi XP, yarmi izchillik (streak). Faqat ko'p ishlagan emas — davomiy ishlagan yuqorida."
       />
 
       <div className="mt-6 flex flex-wrap items-center gap-3">
@@ -156,11 +189,13 @@ function Leaderboard() {
                       )}
                     </p>
                     <p className="font-ui text-xs uppercase tracking-[0.18em] text-muted-foreground/80">
-                      Daraja {r.level}
+                      Daraja {r.level} · {r.streak_days} kun izchil · {r.total_xp} XP
                     </p>
                   </div>
                 </div>
-                <p className="font-serif text-xl tabular-nums">{r.total_xp} XP</p>
+                <p className="font-serif text-xl tabular-nums" title="Blended score: 50% XP + 50% izchillik">
+                  {r.blended}
+                </p>
               </Panel>
             );
           })}

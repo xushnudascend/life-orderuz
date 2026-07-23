@@ -15,6 +15,7 @@ import { ThemeSwitcher } from "@/components/theme-switcher";
 import { PageHero } from "@/components/page-hero";
 import { Panel, PanelHeader } from "@/components/panel";
 import { getMotionPref, setMotionPref, type MotionPref } from "@/lib/motion-pref";
+import { NotificationBudgetCard } from "@/components/notification-budget-card";
 
 export const Route = createFileRoute("/_authenticated/settings")({
   head: () => ({
@@ -158,6 +159,7 @@ function Settings() {
       />
 
       <section className="mt-2 space-y-6">
+        <NotificationBudgetCard userId={userId} />
         <Card icon={<UserIcon className="h-4 w-4 text-primary" />} title="Profil">
           <div className="space-y-4">
             <div className="space-y-2">
