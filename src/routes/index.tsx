@@ -26,7 +26,7 @@ import { getPeerMirror } from "@/lib/peer-mirror.functions";
 const BRAND = "Life Order";
 const SITE_URL = "https://life-orderuz.lovable.app";
 const ONE_LINER =
-  "Motivatsiya tugaydi — tizim qoladi. Kuniga 3 ta 2-daqiqalik qadam, Nadir AI mentor. Kartasiz, o'zbek tilida.";
+  "Sen uchun tuzilgan tizim: 3 daqiqada tashxis, kuniga 3 ta 2-daqiqalik qadam, Nadir AI mentor. Motivatsiyani kutma — tizim seni tortadi.";
 
 const FAQ_ITEMS: { q: string; a: string }[] = [
   {
@@ -113,21 +113,25 @@ function Hero() {
         }}
       />
       <div className="relative mx-auto max-w-3xl px-5 pb-16 pt-16 text-center md:pb-24 md:pt-28">
+        <p className="rise-1 mb-5 inline-flex items-center gap-2 rounded-full border border-border/70 px-3 py-1 font-ui text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
+          <span className="h-1.5 w-1.5 rounded-full bg-primary" />
+          O'zbekcha · Kartasiz · 3 daqiqada
+        </p>
         <h1 className="font-serif text-[36px] leading-[1.03] tracking-tight text-balance sm:text-5xl md:text-[64px]">
           <span className="rise-2 inline-block">Motivatsiya tugaydi.</span>
           <br />
           <span className="rise-3 inline-block text-muted-foreground">Tizim qoladi.</span>
         </h1>
 
-        <p className="rise-4 mx-auto mt-6 max-w-lg text-[16px] leading-relaxed text-foreground/85 text-pretty">
-          Kuniga 3 ta 2-daqiqalik qadam. Nadir AI — motivatsion so'zlar emas,
-          shaxsiy protokol.
+        <p className="rise-4 mx-auto mt-6 max-w-xl text-[16px] leading-relaxed text-foreground/85 text-pretty">
+          Sen javob berasan — biz sen uchun kunlik reja tuzamiz. Yoshing, jinsing,
+          uyqu vaqting va xarakteringga moslashgan 3 ta mikro-qadam. Har kun. Faqat 2 daqiqa.
         </p>
 
         <div className="rise-4 mt-8 flex flex-col items-stretch gap-2.5 sm:flex-row sm:items-center sm:justify-center sm:gap-3">
           <Button asChild size="lg" className="group h-12 rounded-full px-6 font-ui font-semibold">
             <Link to="/auth">
-              3 daqiqada boshlash
+              Mening rejamni ko'rish
               <ArrowRight className="cta-arrow ml-1.5 h-4 w-4" />
             </Link>
           </Button>
@@ -137,7 +141,7 @@ function Hero() {
         </div>
 
         <p className="rise-4 mt-5 font-ui text-xs text-muted-foreground">
-          Kartasiz · Reklamasiz · O'zbek tilida
+          14 kun pul qaytadi · Bir bosishda bekor · Reklamasiz
         </p>
       </div>
     </section>
