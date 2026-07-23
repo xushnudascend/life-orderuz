@@ -76,13 +76,13 @@ function buildBlocks(p: TimetableProfile): Block[] {
 
   const nightLabel = "Ekran off · nafas · uyquga tayyorlik";
 
-  return [
+  const raw: Block[] = [
     {
       from: 6 + shift,
       to: 8 + shift,
       label: `Uyg'onish — ${morningLabel}`,
       hint: "Cortizol tabiiy peak. Yorug'lik va suv.",
-      tone: "peak" as Tone,
+      tone: "peak",
     },
     {
       from: 9 + shift,
@@ -124,9 +124,10 @@ function buildBlocks(p: TimetableProfile): Block[] {
       to: 24,
       label: nightLabel,
       hint: "Melatonin uchun qorong'ilik.",
-      tone: "rest" as Tone,
+      tone: "rest",
     },
-  ].map((x) => ({ ...x, from: Math.max(0, Math.min(23, x.from)), to: Math.max(1, Math.min(24, x.to)) }));
+  ];
+  return raw.map((x) => ({ ...x, from: Math.max(0, Math.min(23, x.from)), to: Math.max(1, Math.min(24, x.to)) }));
 }
 
 export function DailyTimetable({ profile }: { profile?: TimetableProfile }) {
