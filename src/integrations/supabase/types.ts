@@ -500,6 +500,50 @@ export type Database = {
         }
         Relationships: []
       }
+      nadir_messages: {
+        Row: {
+          content: string
+          context_hint: string | null
+          created_at: string
+          external_id: string | null
+          id: string
+          parts: Json | null
+          role: string
+          thread_id: string
+          user_id: string
+        }
+        Insert: {
+          content?: string
+          context_hint?: string | null
+          created_at?: string
+          external_id?: string | null
+          id?: string
+          parts?: Json | null
+          role: string
+          thread_id: string
+          user_id: string
+        }
+        Update: {
+          content?: string
+          context_hint?: string | null
+          created_at?: string
+          external_id?: string | null
+          id?: string
+          parts?: Json | null
+          role?: string
+          thread_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "nadir_messages_thread_id_fkey"
+            columns: ["thread_id"]
+            isOneToOne: false
+            referencedRelation: "nadir_threads"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       nadir_nudges: {
         Row: {
           created_at: string
@@ -524,6 +568,69 @@ export type Database = {
           message?: string
           read_at?: string | null
           user_id?: string
+        }
+        Relationships: []
+      }
+      nadir_threads: {
+        Row: {
+          archived_at: string | null
+          created_at: string
+          id: string
+          is_primary: boolean
+          last_message_at: string
+          title: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          archived_at?: string | null
+          created_at?: string
+          id?: string
+          is_primary?: boolean
+          last_message_at?: string
+          title?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          archived_at?: string | null
+          created_at?: string
+          id?: string
+          is_primary?: boolean
+          last_message_at?: string
+          title?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      notification_budget: {
+        Row: {
+          created_at: string
+          paused_until: string | null
+          sent_this_week: number
+          updated_at: string
+          user_id: string
+          week_start: string
+          weekly_max: number
+        }
+        Insert: {
+          created_at?: string
+          paused_until?: string | null
+          sent_this_week?: number
+          updated_at?: string
+          user_id: string
+          week_start?: string
+          weekly_max?: number
+        }
+        Update: {
+          created_at?: string
+          paused_until?: string | null
+          sent_this_week?: number
+          updated_at?: string
+          user_id?: string
+          week_start?: string
+          weekly_max?: number
         }
         Relationships: []
       }
@@ -1225,6 +1332,7 @@ export type Database = {
           retry_after_seconds: number
         }[]
       }
+      try_consume_notification: { Args: { _user_id: string }; Returns: boolean }
       use_shield: {
         Args: { _note?: string }
         Returns: {
