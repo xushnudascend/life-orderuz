@@ -138,15 +138,32 @@ function AssessmentPage() {
                     )}
                     <span className="relative z-10 text-sm">{LIKERT_LABELS[v]}</span>
                     <span
-                      className={`relative z-10 grid h-5 w-5 shrink-0 place-items-center rounded-full border transition-all duration-200 ${
+                      className={`relative z-10 grid h-6 w-6 shrink-0 place-items-center rounded-full border transition-all duration-300 ${
                         selected
-                          ? "border-amber-400 bg-amber-400 shadow-[0_0_12px_hsl(var(--primary)/0.6)]"
+                          ? "border-amber-400 bg-amber-400 shadow-[0_0_18px_hsl(var(--primary)/0.75)] scale-110"
                           : "border-muted-foreground/30 group-hover:border-amber-400/60"
                       }`}
                       aria-hidden
                     >
-                      {selected && <span className="h-2 w-2 rounded-full bg-background" />}
+                      {selected ? (
+                        <svg viewBox="0 0 20 20" className="h-3.5 w-3.5 text-background animate-in zoom-in-50 duration-300">
+                          <path
+                            d="M4 10.5l3.5 3.5L16 6"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="3"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
+                        </svg>
+                      ) : null}
                     </span>
+                    {selected && (
+                      <span
+                        aria-hidden
+                        className="pointer-events-none absolute right-2 top-1/2 -translate-y-1/2 h-8 w-8 rounded-full bg-amber-400/30 animate-ping"
+                      />
+                    )}
                   </button>
                 );
               })}
