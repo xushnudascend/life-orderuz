@@ -24,6 +24,7 @@ export const Route = createFileRoute("/sitemap.xml")({
           { path: "/blog/motivatsiya-tuzogi", changefreq: "monthly", priority: "0.7" },
           { path: "/blog/habit-tracker-guide", changefreq: "monthly", priority: "0.8" },
           { path: "/blog/best-habit-tracker-apps", changefreq: "monthly", priority: "0.8" },
+          { path: "/blog/printable-habit-tracker-template", changefreq: "monthly", priority: "0.8" },
 
           { path: "/install", changefreq: "monthly", priority: "0.6" },
           { path: "/mcp", changefreq: "monthly", priority: "0.5" },
