@@ -153,11 +153,13 @@ function EmailForm({ mode, next }: { mode: "signin" | "signup"; next: string }) 
         if (error) throw error;
         // Auto-confirm on → signUp already returns session. Skip extra roundtrips.
         if (up.session) {
+          track("signup", { method: "email" });
           window.location.replace("/onboarding");
           return;
         }
         const pw = await supabase.auth.signInWithPassword({ email, password });
         if (pw.data.session && !pw.error) {
+          track("signup", { method: "email" });
           window.location.replace("/onboarding");
         } else {
           toast.success("Emailingizga tasdiq havolasi yuborildi.");
@@ -165,6 +167,7 @@ function EmailForm({ mode, next }: { mode: "signin" | "signup"; next: string }) 
       } else {
         const { error } = await supabase.auth.signInWithPassword({ email, password });
         if (error) throw error;
+        track("login", { method: "email" });
         window.location.replace(next === "/dashboard" ? "/dashboard" : next);
       }
     } catch (err) {
