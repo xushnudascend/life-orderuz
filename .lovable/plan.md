@@ -100,3 +100,36 @@ Hozir Nadir 4 joyda alohida-alohida yashaydi (Dashboard, Body, Habits, HubAdviso
 4. Har bosqich oxirida QISM A tamoyillari checklisti.
 
 Tasdiqlasangiz, Bosqich 1'dan boshlayman (avval migration).
+
+---
+
+## Bajarilish holati (halol audit)
+
+- 🟢 **Bosqich 1** — Yagona Nadir: FAB, drawer, `nadir_threads`/`nadir_messages`, memory, MI-savollar.
+- 🟢 **Bosqich 2** — Zeigarnik ring, Peak-End reflect, Easy-mode ribbon, if-then quests, xotirjam streak/shield tili.
+- 🟢 **Bosqich 3** — Party commitment, Notification budget kartochkasi, Leaderboard 50/50 XP+izchillik.
+- 🟢 **Bosqich 4** — Pricing auditi (soxta shoshiltirish yo'q — tasdiqlandi), Profile raqamlari kontekstga bog'landi (`+X% oldingi haftaga nisbatan`, "eng uzun: N kun"), Analytics'da peak/weak day + this-week vs last-week (avvaldan bor edi), Workout/Diet/Learn'ga `IfThenHint` chip'lari.
+
+## A-tamoyillari xaritasi (qayerda qo'llangan)
+
+| Tamoyil | Fayl(lar) |
+|---|---|
+| A1 Fogg B=MAP + if-then | `src/components/if-then-hint.tsx`, `easy-mode-ribbon.tsx`, `ai.generate-plan.ts` |
+| A1 Duhigg Signal→Rutina→Mukofot | `habits.tsx` forma, kartochka |
+| A2 SDT (Kompetentsiya) | Profile Stat + kontekst, XP formulasi |
+| A2 SDT (Bog'lanish) | `party.tsx`, `party-commitment.tsx`, `cohorts` |
+| A2 Growth mindset | `streak-at-risk.tsx`, `shield-indicator.tsx` matn |
+| A3 Yo'qotishdan qochish (xotirjam) | `shield-indicator.tsx`, streak matnlari |
+| A3 Zeigarnik | `zeigarnik-ring.tsx`, dashboard progress |
+| A3 Peak-End | `peak-end-reflect.tsx`, `analytics.tsx` (strongestDay) |
+| A3 Hick qonuni | dashboard 3 asosiy CTA |
+| A4 Etik mukofot (fixed-ratio) | `pricing.tsx` (tekshirildi), `xp_events` triggeri (0..50 bound) |
+| A4 Anti-qaramlik | `notification_budget`, `try_consume_notification()`, `rest-nudge.tsx` |
+| A5 Cialdini izchillik | `party-commitment.tsx` (kunlik va'da) |
+| A5 O'ziga-nisbatan progress | `leaderboard.tsx` (50/50), Profile delta |
+| A6 MI/OARS | `api/chat.ts` system-prompt, `nadir-drawer.tsx` |
+| A6 Working Alliance | `nadir_threads` (yagona uzluksiz thread) |
+| A7 Sirkadian/peak_failure_time | `ai.weekly-report.ts`, `daily-timetable.tsx` |
+| A8 Pennebaker refleksiya | `journal.tsx`, `peak-end-reflect.tsx` |
+| A8 Kontekstli raqamlar | `profile.tsx` Stat `context` prop |
+

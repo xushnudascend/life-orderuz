@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { AppShell } from "@/components/app-shell";
 import { PageHero } from "@/components/page-hero";
+import { IfThenHint } from "@/components/if-then-hint";
 import { Panel, PanelHeader } from "@/components/panel";
 import { EmptyState } from "@/components/empty-state";
 import { Button } from "@/components/ui/button";
@@ -79,6 +80,9 @@ function Workout() {
         title="Bugungi mashg'ulot."
         subtitle="Kichik jismoniy harakat — ruhiy holatingni ham tiklaydi."
       />
+      <IfThenHint trigger="ertalab tishimni yuvsam" action="10 ta sakrash qilaman" />
+
+
 
       <Panel className="mt-8 p-5">
 

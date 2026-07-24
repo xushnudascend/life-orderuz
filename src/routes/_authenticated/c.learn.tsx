@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { AppShell } from "@/components/app-shell";
 import { Panel, PanelHeader } from "@/components/panel";
 import { PageHero } from "@/components/page-hero";
+import { IfThenHint } from "@/components/if-then-hint";
 import {
   BookText,
   GraduationCap,
@@ -32,6 +33,9 @@ function LearnCategory() {
         title="O'rganish"
         subtitle="O'zingni tomosha qilib turmasang — o'zgarish ko'rinmaydi. Kundalik, suhbat va tahlil — refleksiya halqasi."
       />
+      <IfThenHint trigger="kechqurun yotoqqa yotsam" action="3 jumla kundalik yozaman" />
+
+
 
 
       {/* Asosiy bo'limlar */}
