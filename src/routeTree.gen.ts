@@ -27,6 +27,7 @@ import { Route as UUsernameRouteImport } from './routes/u.$username'
 import { Route as ShareMilestoneRouteImport } from './routes/share.milestone'
 import { Route as CheckoutSuccessRouteImport } from './routes/checkout.success'
 import { Route as BlogTungiRitualRouteImport } from './routes/blog.tungi-ritual'
+import { Route as BlogPrintableHabitTrackerTemplateRouteImport } from './routes/blog.printable-habit-tracker-template'
 import { Route as BlogMotivatsiyaTuzogiRouteImport } from './routes/blog.motivatsiya-tuzogi'
 import { Route as BlogHayotSohalariRouteImport } from './routes/blog.hayot-sohalari'
 import { Route as BlogHabitTrackerGuideRouteImport } from './routes/blog.habit-tracker-guide'
@@ -157,6 +158,12 @@ const BlogTungiRitualRoute = BlogTungiRitualRouteImport.update({
   path: '/blog/tungi-ritual',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BlogPrintableHabitTrackerTemplateRoute =
+  BlogPrintableHabitTrackerTemplateRouteImport.update({
+    id: '/blog/printable-habit-tracker-template',
+    path: '/blog/printable-habit-tracker-template',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const BlogMotivatsiyaTuzogiRoute = BlogMotivatsiyaTuzogiRouteImport.update({
   id: '/blog/motivatsiya-tuzogi',
   path: '/blog/motivatsiya-tuzogi',
@@ -406,6 +413,7 @@ export interface FileRoutesByFullPath {
   '/blog/habit-tracker-guide': typeof BlogHabitTrackerGuideRoute
   '/blog/hayot-sohalari': typeof BlogHayotSohalariRoute
   '/blog/motivatsiya-tuzogi': typeof BlogMotivatsiyaTuzogiRoute
+  '/blog/printable-habit-tracker-template': typeof BlogPrintableHabitTrackerTemplateRoute
   '/blog/tungi-ritual': typeof BlogTungiRitualRoute
   '/checkout/success': typeof CheckoutSuccessRoute
   '/share/milestone': typeof ShareMilestoneRoute
@@ -465,6 +473,7 @@ export interface FileRoutesByTo {
   '/blog/habit-tracker-guide': typeof BlogHabitTrackerGuideRoute
   '/blog/hayot-sohalari': typeof BlogHayotSohalariRoute
   '/blog/motivatsiya-tuzogi': typeof BlogMotivatsiyaTuzogiRoute
+  '/blog/printable-habit-tracker-template': typeof BlogPrintableHabitTrackerTemplateRoute
   '/blog/tungi-ritual': typeof BlogTungiRitualRoute
   '/checkout/success': typeof CheckoutSuccessRoute
   '/share/milestone': typeof ShareMilestoneRoute
@@ -526,6 +535,7 @@ export interface FileRoutesById {
   '/blog/habit-tracker-guide': typeof BlogHabitTrackerGuideRoute
   '/blog/hayot-sohalari': typeof BlogHayotSohalariRoute
   '/blog/motivatsiya-tuzogi': typeof BlogMotivatsiyaTuzogiRoute
+  '/blog/printable-habit-tracker-template': typeof BlogPrintableHabitTrackerTemplateRoute
   '/blog/tungi-ritual': typeof BlogTungiRitualRoute
   '/checkout/success': typeof CheckoutSuccessRoute
   '/share/milestone': typeof ShareMilestoneRoute
@@ -587,6 +597,7 @@ export interface FileRouteTypes {
     | '/blog/habit-tracker-guide'
     | '/blog/hayot-sohalari'
     | '/blog/motivatsiya-tuzogi'
+    | '/blog/printable-habit-tracker-template'
     | '/blog/tungi-ritual'
     | '/checkout/success'
     | '/share/milestone'
@@ -646,6 +657,7 @@ export interface FileRouteTypes {
     | '/blog/habit-tracker-guide'
     | '/blog/hayot-sohalari'
     | '/blog/motivatsiya-tuzogi'
+    | '/blog/printable-habit-tracker-template'
     | '/blog/tungi-ritual'
     | '/checkout/success'
     | '/share/milestone'
@@ -706,6 +718,7 @@ export interface FileRouteTypes {
     | '/blog/habit-tracker-guide'
     | '/blog/hayot-sohalari'
     | '/blog/motivatsiya-tuzogi'
+    | '/blog/printable-habit-tracker-template'
     | '/blog/tungi-ritual'
     | '/checkout/success'
     | '/share/milestone'
@@ -749,6 +762,7 @@ export interface RootRouteChildren {
   BlogHabitTrackerGuideRoute: typeof BlogHabitTrackerGuideRoute
   BlogHayotSohalariRoute: typeof BlogHayotSohalariRoute
   BlogMotivatsiyaTuzogiRoute: typeof BlogMotivatsiyaTuzogiRoute
+  BlogPrintableHabitTrackerTemplateRoute: typeof BlogPrintableHabitTrackerTemplateRoute
   BlogTungiRitualRoute: typeof BlogTungiRitualRoute
   CheckoutSuccessRoute: typeof CheckoutSuccessRoute
   ShareMilestoneRoute: typeof ShareMilestoneRoute
@@ -892,6 +906,13 @@ declare module '@tanstack/react-router' {
       path: '/blog/tungi-ritual'
       fullPath: '/blog/tungi-ritual'
       preLoaderRoute: typeof BlogTungiRitualRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog/printable-habit-tracker-template': {
+      id: '/blog/printable-habit-tracker-template'
+      path: '/blog/printable-habit-tracker-template'
+      fullPath: '/blog/printable-habit-tracker-template'
+      preLoaderRoute: typeof BlogPrintableHabitTrackerTemplateRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/blog/motivatsiya-tuzogi': {
@@ -1265,6 +1286,8 @@ const rootRouteChildren: RootRouteChildren = {
   BlogHabitTrackerGuideRoute: BlogHabitTrackerGuideRoute,
   BlogHayotSohalariRoute: BlogHayotSohalariRoute,
   BlogMotivatsiyaTuzogiRoute: BlogMotivatsiyaTuzogiRoute,
+  BlogPrintableHabitTrackerTemplateRoute:
+    BlogPrintableHabitTrackerTemplateRoute,
   BlogTungiRitualRoute: BlogTungiRitualRoute,
   CheckoutSuccessRoute: CheckoutSuccessRoute,
   ShareMilestoneRoute: ShareMilestoneRoute,
