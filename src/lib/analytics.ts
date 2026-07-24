@@ -63,7 +63,7 @@ async function flush(): Promise<void> {
       batch.map((e) => ({
         user_id: user.id,
         event: e.event,
-        props: e.props,
+        props: e.props as never,
         session_id: sid,
         path: e.path,
       })),
