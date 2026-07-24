@@ -208,7 +208,7 @@ function Onboarding() {
     return (
       <div className="min-h-dvh bg-background text-foreground">
         <div className="mx-auto max-w-xl px-5 py-16">
-          <div className="animate-fade-in-up rounded-2xl border border-primary/30 bg-card/60 p-8 shadow-[0_0_60px_-20px_hsl(var(--primary)/0.35)] backdrop-blur">
+          <div className="animate-fade-in-up rounded-[var(--radius)] border border-primary/30 bg-card/60 p-8 shadow-[0_0_60px_-20px_hsl(var(--primary)/0.35)] backdrop-blur">
             <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-primary/40 bg-primary/10 px-3 py-1 font-ui text-[11px] uppercase tracking-[0.24em] text-primary">
               <Sparkles className="h-3.5 w-3.5" />
               Nadir sen uchun
@@ -221,7 +221,7 @@ function Onboarding() {
                 Arxetip · {archetypeName}
               </p>
             )}
-            <div className="whitespace-pre-line rounded-xl border border-border/60 bg-background/60 p-5 font-body text-[15px] leading-relaxed text-foreground">
+            <div className="whitespace-pre-line rounded-[var(--radius)] border border-border/60 bg-background/60 p-5 font-body text-[15px] leading-relaxed text-foreground">
               {ahaNudge}
             </div>
             <SocialMirror />
@@ -694,7 +694,7 @@ function SocialMirror() {
   }, []);
   if (!data || (data.sameArchetype === 0 && data.samePlan === 0)) return null;
   return (
-    <div className="mt-5 rounded-xl border border-border/50 bg-background/40 p-4">
+    <div className="mt-5 rounded-[var(--radius)] border border-border/50 bg-background/40 p-4">
       <p className="font-ui text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
         Senga o'xshaganlar
       </p>
