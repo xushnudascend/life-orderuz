@@ -160,13 +160,20 @@ function Dashboard() {
       .eq("user_id", userId)
       .maybeSingle();
     const now = (st as { current_days: number } | null)?.current_days ?? 0;
+    if (!wasDone) {
+      track("habit_logged", { habit_id: h.id, xp: h.xp_reward });
+    }
     if (!wasDone && now > prevStreak && MARKS.includes(now)) {
       setMilestone(now);
       celebrate(now >= 30 ? "big" : "small");
+      track("streak_milestone", { days: now });
     } else if (!wasDone) {
       // small perimeter confetti when finishing all of today
       const doneNow = habits.filter((x) => done.has(x.id) || x.id === h.id).length;
-      if (doneNow === habits.length && habits.length > 0) celebrate("big");
+      if (doneNow === habits.length && habits.length > 0) {
+        celebrate("big");
+        track("habit_completed_all_today", { count: habits.length });
+      }
     }
   }
 
