@@ -694,7 +694,7 @@ function SocialMirror() {
   }, []);
   if (!data || (data.sameArchetype === 0 && data.samePlan === 0)) return null;
   return (
-    <div className="mt-5 rounded-xl border border-border/50 bg-background/40 p-4">
+    <div className="mt-5 rounded-[var(--radius)] border border-border/50 bg-background/40 p-4">
       <p className="font-ui text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
         Senga o'xshaganlar
       </p>
