@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 
 const SITE_URL = "https://life-orderuz.lovable.app";
 const PATH = "/blog/motivatsiya-tuzogi";
-const TITLE = "Motivatsiya tuzog'i — nima uchun \"ertadan boshlayman\" ishlamaydi";
+const TITLE = "Motivatsiya tuzog'i — nega \"ertadan\" ishlamaydi";
 const DESCRIPTION =
   "Motivatsiya — o'zgaruvchan holat. Tizim doim. BJ Fogg B=MAP formulasi va Kahneman ikki tizim modeli asosida — nima uchun rejalar buzila va nima ishlaydi.";
 

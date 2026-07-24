@@ -4,7 +4,7 @@ import { SiteFooter } from "@/components/site-footer";
 
 const SITE_URL = "https://life-orderuz.lovable.app";
 const PATH = "/blog/habit-tracker-guide";
-const TITLE = "Habit Tracker Guide — odat kuzatuvining ilmiy asosi";
+const TITLE = "Habit Tracker: odat kuzatuvi ilmi";
 const DESCRIPTION =
   "Habit tracker nima uchun ishlaydi: BJ Fogg B=MAP, James Clear Atomic Habits va Lally (2010) 66 kun qoidasi. Life Order tizimi bilan amaliy protokol.";
 
