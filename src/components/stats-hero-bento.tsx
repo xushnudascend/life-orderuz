@@ -7,9 +7,7 @@ import { CornerOrnament } from "@/components/corner-ornament";
 import { CountUpNumber } from "@/components/count-up-number";
 import { ArchetypeRow } from "@/components/archetype-row";
 import { Tilt } from "@/components/tilt";
-import { progressMessage } from "@/lib/nervous";
-
-type Archetype = { name: string; motto: string; symbol: string; hue: number } | null;
+import { progressMessage, type Archetype } from "@/lib/nervous";
 
 /**
  * StatsHeroBento — Ascend/Life Order dan port qilingan dense unified hero.
@@ -34,7 +32,7 @@ export function StatsHeroBento({
 }: {
   greeting: string;
   displayName: string | null | undefined;
-  archetype: Archetype;
+  archetype: Archetype | null;
   doneCount: number;
   totalHabits: number;
   percent: number;
