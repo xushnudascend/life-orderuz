@@ -17,7 +17,7 @@ import { PartyCommitment } from "@/components/party-commitment";
 export const Route = createFileRoute("/_authenticated/party")({
   head: () => ({
     meta: [
-      { title: `Party Challenge — ${uz.brand.name}` },
+      { title: `Davra sinovi — ${uz.brand.name}` },
       { name: "robots", content: "noindex" },
     ],
   }),
@@ -147,10 +147,10 @@ function PartyPage() {
   }
 
   return (
-    <AppShell title="Party Challenge">
+    <AppShell title="Davra sinovi">
       <PageHero
         eyebrow="Hisobdorlik guruhi"
-        title="Party Challenge."
+        title="Davra sinovi."
         subtitle="Kichik guruh — kuchli ta'sir. 3-5 kishilik hisobdorlik davrasi tuz va streaklaringni birga saqlanglar."
       />
 
