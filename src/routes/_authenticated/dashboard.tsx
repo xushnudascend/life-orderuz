@@ -39,6 +39,7 @@ import { ErrorBoundary } from "@/components/error-boundary";
 import { CountUpNumber } from "@/components/count-up-number";
 import { StreakMilestone } from "@/components/streak-milestone";
 import { celebrate, floatXp } from "@/lib/celebrate";
+import { track } from "@/lib/analytics";
 import {
   circadian,
   progressMessage,
