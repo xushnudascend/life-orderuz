@@ -11,6 +11,8 @@ import { ArrowLeft, Eye, EyeOff, Loader2 } from "lucide-react";
 import { uz } from "@/i18n";
 import { AuthCompanions } from "@/components/auth-companions";
 import { CornerOrnament } from "@/components/corner-ornament";
+import { HeroOrnament } from "@/components/hero-ornament";
+
 import { track } from "@/lib/analytics";
 
 function sanitizeNext(next: unknown): string {
@@ -78,6 +80,9 @@ function AuthPage() {
       {/* Girih-uslubidagi burchak naqshi — mintaqaviy vizual imzo */}
       <CornerOrnament position="top-right" size={260} />
       <CornerOrnament position="bottom-left" size={200} />
+      {/* Nozik orbital signature — desktop'da chap tomonda */}
+      <HeroOrnament className="pointer-events-none absolute left-[-140px] top-1/2 hidden h-[440px] w-[440px] -translate-y-1/2 opacity-30 xl:block" />
+
 
       <div className="mx-auto max-w-md px-5 py-10">
 
