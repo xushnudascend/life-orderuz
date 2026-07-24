@@ -79,6 +79,9 @@ function Workout() {
         title="Bugungi mashg'ulot."
         subtitle="Kichik jismoniy harakat — ruhiy holatingni ham tiklaydi."
       />
+      <IfThenHint trigger="ertalab tishimni yuvsam" action="10 ta sakrash qilaman" />
+
+
 
       <Panel className="mt-8 p-5">
 
