@@ -90,6 +90,7 @@ export const Route = createFileRoute("/")({
 function Landing() {
   return (
     <div className="min-h-dvh bg-background text-foreground">
+      <ScrollProgress />
       <SiteHeader />
       <main>
         <Hero />
@@ -108,6 +109,8 @@ function Landing() {
 function Hero() {
   return (
     <section className="relative overflow-hidden border-b border-border">
+      <HeroBackdrop />
+      <HeroOrnament className="pointer-events-none absolute right-[-80px] top-1/2 hidden h-[420px] w-[420px] -translate-y-1/2 opacity-40 lg:block" />
       <div
         aria-hidden
         className="pointer-events-none absolute left-1/2 top-1/2 -z-0 h-[520px] w-[520px] -translate-x-1/2 -translate-y-1/2 rounded-full halo-drift"
@@ -116,6 +119,7 @@ function Hero() {
             "radial-gradient(closest-side, hsl(var(--primary) / 0.10), transparent 70%)",
         }}
       />
+
       <div className="relative mx-auto max-w-3xl px-5 pb-16 pt-16 text-center md:pb-24 md:pt-28">
         <p className="rise-1 mb-5 inline-flex items-center gap-2 rounded-full border border-border/70 px-3 py-1 font-ui text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
           <span className="h-1.5 w-1.5 rounded-full bg-primary" />
