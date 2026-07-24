@@ -330,7 +330,7 @@ function ProfilePage() {
   );
 }
 
-function Stat({ label, value }: { label: string; value: string | number }) {
+function Stat({ label, value, context }: { label: string; value: string | number; context?: string }) {
   const isNumber = typeof value === "number";
   return (
     <Panel className="p-5">
@@ -340,9 +340,13 @@ function Stat({ label, value }: { label: string; value: string | number }) {
       <p className="mt-2 font-serif text-3xl tabular-nums">
         {isNumber ? <CountUpNumber value={value} once={`profile-${label}`} /> : value}
       </p>
+      {context && (
+        <p className="mt-1 font-ui text-[11px] text-muted-foreground">{context}</p>
+      )}
     </Panel>
   );
 }
+
 
 function ProgressTimeline({ current }: { current: number }) {
   const marks = [
