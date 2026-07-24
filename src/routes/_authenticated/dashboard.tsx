@@ -32,6 +32,8 @@ import { EasyModeRibbon } from "@/components/easy-mode-ribbon";
 import { AIInsightCard } from "@/components/ai-insight-card";
 import { RetentionPanels } from "@/components/retention-panels";
 import { HumanPotentialPanel } from "@/components/human-potential-panel";
+import { HundredDayTimeline } from "@/components/hundred-day-timeline";
+import { PeakEndCurve } from "@/components/peak-end-curve";
 import { Panel, PanelHeader, PanelValue } from "@/components/panel";
 import { ErrorBoundary } from "@/components/error-boundary";
 import { CountUpNumber } from "@/components/count-up-number";
@@ -518,8 +520,14 @@ function Dashboard() {
       </div>
 
       {/* Pastki qism — chuqurroq psixologik ma'lumot va retentsiya */}
-      <div className="mt-5 grid gap-4 lg:grid-cols-2">
+      <div className="mt-5">
+        <HundredDayTimeline streakDays={streak?.current_days ?? 0} />
+      </div>
+      <div className="mt-4 grid gap-4 lg:grid-cols-2">
+        <PeakEndCurve userId={userId} />
         <HumanPotentialPanel />
+      </div>
+      <div className="mt-4">
         <RetentionPanels />
       </div>
 
