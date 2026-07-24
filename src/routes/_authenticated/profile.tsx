@@ -46,14 +46,18 @@ function ProfilePage() {
   const [stats, setStats] = useState<Stats>(null);
   const [streak, setStreak] = useState<Streak>(null);
   const [shieldsUsed, setShieldsUsed] = useState(0);
+  const [xpDeltaPct, setXpDeltaPct] = useState<number | null>(null);
   const [loading, setLoading] = useState(true);
   const [usingShield, setUsingShield] = useState(false);
   const [usernameDraft, setUsernameDraft] = useState("");
 
   async function refresh() {
-    const sevenAgo = new Date();
-    sevenAgo.setUTCDate(sevenAgo.getUTCDate() - 7);
-    const [p, s, st, sh] = await Promise.all([
+    const now = new Date();
+    const sevenAgo = new Date(now);
+    sevenAgo.setUTCDate(now.getUTCDate() - 7);
+    const fourteenAgo = new Date(now);
+    fourteenAgo.setUTCDate(now.getUTCDate() - 14);
+    const [p, s, st, sh, xpThis, xpPrev] = await Promise.all([
       supabase
         .from("profiles")
         .select("display_name, username, plan_length_days, onboarding_completed_at, is_public")
@@ -74,6 +78,17 @@ function ProfilePage() {
         .select("id", { count: "exact", head: true })
         .eq("user_id", userId)
         .gt("used_on", sevenAgo.toISOString().slice(0, 10)),
+      supabase
+        .from("xp_events")
+        .select("amount")
+        .eq("user_id", userId)
+        .gte("created_at", sevenAgo.toISOString()),
+      supabase
+        .from("xp_events")
+        .select("amount")
+        .eq("user_id", userId)
+        .gte("created_at", fourteenAgo.toISOString())
+        .lt("created_at", sevenAgo.toISOString()),
     ]);
     const prof = (p.data as Profile | null) ?? null;
     setProfile(prof);
@@ -81,8 +96,14 @@ function ProfilePage() {
     setStats((s.data as Stats) ?? null);
     setStreak((st.data as Streak) ?? null);
     setShieldsUsed(sh.count ?? 0);
+    const sumThis = (xpThis.data ?? []).reduce((a, r) => a + (r.amount ?? 0), 0);
+    const sumPrev = (xpPrev.data ?? []).reduce((a, r) => a + (r.amount ?? 0), 0);
+    if (sumPrev > 0) setXpDeltaPct(Math.round(((sumThis - sumPrev) / sumPrev) * 100));
+    else if (sumThis > 0) setXpDeltaPct(100);
+    else setXpDeltaPct(null);
     setLoading(false);
   }
+
 
   useEffect(() => {
     refresh();
@@ -185,9 +206,22 @@ function ProfilePage() {
         <>
           <div className="mt-8 grid gap-4 sm:grid-cols-3">
             <Stat label="Daraja" value={stats?.level ?? 1} />
-            <Stat label="Umumiy XP" value={stats?.total_xp ?? 0} />
-            <Stat label="Joriy streak" value={`${streak?.current_days ?? 0} kun`} />
+            <Stat
+              label="Umumiy XP"
+              value={stats?.total_xp ?? 0}
+              context={
+                xpDeltaPct === null
+                  ? "so'nggi 7 kunda ma'lumot yig'ilyapti"
+                  : `so'nggi 7 kun: ${xpDeltaPct >= 0 ? "+" : ""}${xpDeltaPct}% oldingi haftaga nisbatan`
+              }
+            />
+            <Stat
+              label="Joriy streak"
+              value={`${streak?.current_days ?? 0} kun`}
+              context={`eng uzun: ${streak?.longest_days ?? 0} kun`}
+            />
           </div>
+
 
           <div className="mt-6">
             <ShieldIndicator usedThisWeek={shieldsUsed} max={3} />
