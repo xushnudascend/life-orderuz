@@ -42,7 +42,7 @@ export function HabitHeatmap({ userId }: { userId: string }) {
 
   return (
     <Panel className="p-5">
-      <PanelHeader title="Sen qachon eng samarali" hint="So'nggi 60 kun" />
+      <PanelHeader title="Sen qachon eng samarali" eyebrow="So'nggi 60 kun" />
       <div className="mt-4 overflow-x-auto">
         <div className="min-w-[560px]">
           <div className="grid grid-cols-[32px_repeat(24,1fr)] gap-[2px] font-ui text-[9px] text-muted-foreground">
