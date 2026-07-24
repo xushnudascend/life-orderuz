@@ -88,52 +88,21 @@ function Dashboard() {
 
 
   async function refresh() {
-    const sevenAgo = new Date();
-    sevenAgo.setUTCDate(sevenAgo.getUTCDate() - 7);
-    const [p, hs, logs, s, st, sh] = await Promise.all([
-      supabase
-        .from("profiles")
-        .select("display_name, plan_length_days, archetype, age, height_cm, weight_kg, sex, onboarding_completed_at")
-        .eq("id", userId)
-        .maybeSingle(),
-      supabase
-        .from("habits")
-        .select("id,title,xp_reward,category")
-        .eq("user_id", userId)
-        .eq("is_active", true)
-        .order("sort_order", { ascending: true })
-        .order("created_at", { ascending: true }),
-      supabase
-        .from("habit_logs")
-        .select("habit_id")
-        .eq("user_id", userId)
-        .eq("logged_date", today()),
-      supabase
-        .from("user_stats")
-        .select("total_xp, level, discipline_score")
-        .eq("user_id", userId)
-        .maybeSingle(),
-      supabase
-        .from("streaks")
-        .select("current_days")
-        .eq("user_id", userId)
-        .maybeSingle(),
-      supabase
-        .from("shields")
-        .select("id", { count: "exact", head: true })
-        .eq("user_id", userId)
-        .gt("used_on", sevenAgo.toISOString().slice(0, 10)),
-    ]);
-    setProfile((p.data as Profile | null) ?? null);
-    setHabits((hs.data as Habit[] | null) ?? []);
-    setDone(
-      new Set(
-        ((logs.data as { habit_id: string }[] | null) ?? []).map((l) => l.habit_id),
-      ),
-    );
-    setStats((s.data as Stats) ?? null);
-    setStreak((st.data as Streak) ?? null);
-    setShieldsUsed(sh.count ?? 0);
+    const { data } = await supabase.rpc("dashboard_snapshot" as never);
+    const snap = (data ?? {}) as {
+      profile?: Profile | null;
+      habits?: Habit[] | null;
+      done_today?: string[] | null;
+      stats?: Stats;
+      streak?: Streak;
+      shields_used_week?: number | null;
+    };
+    setProfile(snap.profile ?? null);
+    setHabits(snap.habits ?? []);
+    setDone(new Set(snap.done_today ?? []));
+    setStats(snap.stats ?? null);
+    setStreak(snap.streak ?? null);
+    setShieldsUsed(snap.shields_used_week ?? 0);
     setLoaded(true);
   }
 
