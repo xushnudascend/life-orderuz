@@ -17,14 +17,14 @@ export function HabitHeatmap({ userId }: { userId: string }) {
       from.setUTCDate(from.getUTCDate() - 60);
       const { data } = await supabase
         .from("habit_logs")
-        .select("logged_at")
+        .select("created_at")
         .eq("user_id", userId)
-        .gte("logged_at", from.toISOString());
+        .gte("created_at", from.toISOString());
       if (!ok) return;
       const g: number[][] = Array.from({ length: 7 }, () => Array(24).fill(0));
-      (data ?? []).forEach((r: { logged_at: string | null }) => {
-        if (!r.logged_at) return;
-        const d = new Date(r.logged_at);
+      ((data ?? []) as Array<{ created_at: string | null }>).forEach((r) => {
+        if (!r.created_at) return;
+        const d = new Date(r.created_at);
         g[d.getDay()][d.getHours()] += 1;
       });
       setGrid(g);

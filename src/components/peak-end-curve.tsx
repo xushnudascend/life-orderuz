@@ -39,7 +39,7 @@ export function PeakEndCurve({ userId }: { userId: string }) {
   if (points.length < 2) {
     return (
       <Panel className="p-5">
-        <PanelHeader title="Haftaning egri chizig'i" hint="Peak-End · Kahneman" />
+        <PanelHeader title="Haftaning egri chizig'i" eyebrow="Peak-End · Kahneman" />
         <p className="mt-3 font-ui text-sm text-muted-foreground">
           Peak-end egri chizig'i uchun kamida 2 ta mood log kerak. Kunni
           yopish kartochkasidan foydalan.
@@ -61,7 +61,7 @@ export function PeakEndCurve({ userId }: { userId: string }) {
 
   return (
     <Panel className="p-5">
-      <PanelHeader title="Haftaning egri chizig'i" hint="Peak-End · Kahneman" />
+      <PanelHeader title="Haftaning egri chizig'i" eyebrow="Peak-End · Kahneman" />
       <svg viewBox={`0 0 ${w} ${h}`} className="mt-4 w-full" role="img" aria-label="Haftalik kayfiyat egri chizig'i">
         <defs>
           <linearGradient id="peGrad" x1="0" x2="0" y1="0" y2="1">
