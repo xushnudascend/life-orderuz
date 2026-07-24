@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
+import { CornerOrnament } from "@/components/corner-ornament";
 
 /**
  * PageHero — every authenticated screen's opening block.
@@ -28,6 +29,8 @@ export function PageHero({
         className,
       )}
     >
+      {/* Regional visual signature — every hub inherits the girih mark */}
+      <CornerOrnament position="top-right" size={180} className="opacity-60" />
       <div className="min-w-0">
         {eyebrow && (
           <p className="rise-1 flex items-center gap-2 font-ui text-[11px] font-semibold uppercase tracking-[0.28em] text-primary">

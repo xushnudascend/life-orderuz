@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { AppShell } from "@/components/app-shell";
 import { PageHero } from "@/components/page-hero";
+import { HabitHeatmap } from "@/components/habit-heatmap";
 import { Button } from "@/components/ui/button";
 import { Panel, PanelHeader, PanelValue } from "@/components/panel";
 import { Loader2, Download, FileText } from "lucide-react";
@@ -238,6 +239,10 @@ function Analytics() {
               </ResponsiveContainer>
             </div>
           </Panel>
+
+          <div className="mt-4">
+            <HabitHeatmap userId={userId} />
+          </div>
         </>
       )}
     </AppShell>
