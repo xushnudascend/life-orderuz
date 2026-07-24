@@ -4,7 +4,7 @@ import { SiteFooter } from "@/components/site-footer";
 
 const SITE_URL = "https://life-orderuz.lovable.app";
 const PATH = "/blog/best-habit-tracker-apps";
-const TITLE = "Eng yaxshi habit tracker ilovalar — 2026 taqqoslash";
+const TITLE = "Eng yaxshi habit tracker ilovalar 2026";
 const DESCRIPTION =
   "Habitify, Productive, Habitica, Streaks va Life Order — 2026 yildagi eng yaxshi habit tracker ilovalar. Xususiyatlari, narxi va xulq-atvor fani asosidagi solishtiruv.";
 
