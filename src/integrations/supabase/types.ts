@@ -47,6 +47,36 @@ export type Database = {
         }
         Relationships: []
       }
+      analytics_events: {
+        Row: {
+          created_at: string
+          event: string
+          id: string
+          path: string | null
+          props: Json
+          session_id: string | null
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          event: string
+          id?: string
+          path?: string | null
+          props?: Json
+          session_id?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          event?: string
+          id?: string
+          path?: string | null
+          props?: Json
+          session_id?: string | null
+          user_id?: string | null
+        }
+        Relationships: []
+      }
       assessment_responses: {
         Row: {
           created_at: string
@@ -1254,6 +1284,7 @@ export type Database = {
           xp: number
         }[]
       }
+      dashboard_snapshot: { Args: never; Returns: Json }
       ensure_daily_quests: {
         Args: never
         Returns: {
