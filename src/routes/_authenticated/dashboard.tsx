@@ -235,40 +235,20 @@ function Dashboard() {
 
   return (
     <AppShell title="Bosh sahifa">
-      {/* Yuqori qism — salom, kontekst, ogohlantirishlar */}
+      {/* 1-QATLAM — Zarur signal */}
       <ProfileCompletionCard missing={missing} />
       <NadirNudgeBanner userId={userId} />
-      <EasyModeRibbon streakDays={streak?.current_days ?? 0} />
       <StreakAtRisk streakDays={streak?.current_days ?? 0} percent={percent} />
-      <PeakEndReflect />
-
-      {loaded && habits.length > 0 && (
-        <div className="mb-5 rounded-[var(--radius)] border border-border/70 bg-card p-4 sm:p-5">
-          <ZeigarnikRing
-            done={doneCount}
-            total={habits.length}
-            nextTitle={habits.find((h) => !done.has(h.id))?.title ?? null}
-          />
-        </div>
-      )}
-
-
-
-
-
 
       {/* Salom + kontekst */}
       <div className="relative mb-5 flex flex-col gap-2 sm:mb-6 sm:flex-row sm:items-end sm:justify-between">
         <CornerOrnament position="top-right" size={200} className="opacity-70" />
-
         <div className="min-w-0">
           <p className="font-ui text-[11px] font-semibold uppercase tracking-[0.24em] text-primary">
             {c.greeting} · {c.label}
           </p>
           <h1 className="mt-1.5 truncate font-serif text-2xl font-semibold tracking-tight sm:text-3xl">
-            {profile?.display_name?.trim()
-              ? `${profile.display_name}, `
-              : "Bugungi "}
+            {profile?.display_name?.trim() ? `${profile.display_name}, ` : "Bugungi "}
             <span className="text-muted-foreground">reja</span>
           </h1>
           <ArchetypeRow archetype={archetype} />
@@ -281,7 +261,7 @@ function Dashboard() {
       {/* KPI qatori */}
       {!loaded ? (
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-4" aria-busy="true" aria-live="polite">
-          <span className="sr-only">Bugungi ma'lumotlar yuklanmoqda…</span>
+          <span className="sr-only">Yuklanmoqda…</span>
           {[0, 1, 2, 3].map((i) => (
             <div key={i} className="rounded-[var(--radius)] border border-border/70 bg-card p-4">
               <div className="skeleton h-3 w-16" />
@@ -319,20 +299,14 @@ function Dashboard() {
               caption={`${xpProgress}% keyingi darajaga`}
             />
             <div className="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-border">
-              <div
-                className="h-full bg-primary transition-all"
-                style={{ width: `${xpProgress}%` }}
-              />
+              <div className="h-full bg-primary transition-all" style={{ width: `${xpProgress}%` }} />
             </div>
           </Panel>
           <Panel>
             <PanelHeader
               eyebrow="Himoya"
               action={
-                <Link
-                  to="/profile"
-                  className="font-ui text-[10px] uppercase tracking-[0.2em] text-muted-foreground hover:text-primary"
-                >
+                <Link to="/profile" className="font-ui text-[10px] uppercase tracking-[0.2em] text-muted-foreground hover:text-primary">
                   Rank
                 </Link>
               }
@@ -345,14 +319,17 @@ function Dashboard() {
         </div>
       )}
 
-      {/* Nadir mikro-kuzatuv */}
-      <div className="mt-4">
-        <AIInsightCard
-          context={`Foydalanuvchi: ${profile?.display_name ?? "do'st"}. Bugun ${doneCount}/${habits.length} odat (${percent}%). Streak: ${streak?.current_days ?? 0} kun. Daraja ${stats?.level ?? 1}, XP ${stats?.total_xp ?? 0}. Arxetip: ${archetype?.name ?? "-"}. Vaqt: ${c.label}.`}
-        />
-      </div>
+      {/* 2-QATLAM — Kunlik halqa */}
+      {loaded && habits.length > 0 && (
+        <div className="mt-4 rounded-[var(--radius)] border border-border/70 bg-card p-4 sm:p-5">
+          <ZeigarnikRing
+            done={doneCount}
+            total={habits.length}
+            nextTitle={habits.find((h) => !done.has(h.id))?.title ?? null}
+          />
+        </div>
+      )}
 
-      {/* Asosiy grid */}
       <div className="mt-4 grid gap-3 sm:gap-4 lg:grid-cols-12">
         {/* Habits */}
         <Panel className="lg:col-span-7">
@@ -373,13 +350,8 @@ function Dashboard() {
           />
 
           {!loaded ? (
-            <div
-              className="mt-3 space-y-1.5"
-              role="status"
-              aria-live="polite"
-              aria-busy="true"
-            >
-              <span className="sr-only">Bugungi odatlar yuklanmoqda…</span>
+            <div className="mt-3 space-y-1.5" role="status" aria-live="polite" aria-busy="true">
+              <span className="sr-only">Yuklanmoqda…</span>
               {[0, 1, 2, 3].map((i) => (
                 <div key={i} className="skeleton h-12 w-full" aria-hidden />
               ))}
@@ -389,14 +361,13 @@ function Dashboard() {
               className="mt-4"
               icon={<Sprout className="h-5 w-5" />}
               title="Bugundan boshlab bitta kichik odat"
-              description="Miya katta o'zgarishlarga qarshilik qiladi. 2 daqiqalik odatdan boshlang — Nadir siz uchun shaxsiy reja tuzib beradi."
+              description="2 daqiqalik odatdan boshlang — Nadir siz uchun shaxsiy reja tuzib beradi."
               action={
                 <Button asChild size="sm">
                   <Link to="/onboarding">Shaxsiy reja tuzish</Link>
                 </Button>
               }
             />
-
           ) : (
             <ul className="mt-3 space-y-1">
               {habits.map((h) => {
@@ -421,11 +392,7 @@ function Dashboard() {
                             : "border-border text-muted-foreground group-hover:border-primary/60 group-hover:text-primary")
                         }
                       >
-                        {isDone ? (
-                          <Check className="h-3.5 w-3.5" strokeWidth={3} />
-                        ) : (
-                          <Flame className="h-3.5 w-3.5" />
-                        )}
+                        {isDone ? <Check className="h-3.5 w-3.5" strokeWidth={3} /> : <Flame className="h-3.5 w-3.5" />}
                       </span>
                       <span
                         className={
@@ -464,10 +431,7 @@ function Dashboard() {
                 <span className="text-sm text-muted-foreground">/ {xpForNext} XP</span>
               </p>
               <div className="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-border">
-                <div
-                  className="h-full bg-primary transition-all"
-                  style={{ width: `${xpProgress}%` }}
-                />
+                <div className="h-full bg-primary transition-all" style={{ width: `${xpProgress}%` }} />
               </div>
               <Link
                 to="/analytics"
@@ -519,17 +483,29 @@ function Dashboard() {
         </Panel>
       </div>
 
-      {/* Pastki qism — chuqurroq psixologik ma'lumot va retentsiya */}
-      <div className="mt-5">
-        <HundredDayTimeline streakDays={streak?.current_days ?? 0} />
-      </div>
-      <div className="mt-4 grid gap-4 lg:grid-cols-2">
-        <PeakEndCurve userId={userId} />
-        <HumanPotentialPanel />
-      </div>
-      <div className="mt-4">
-        <RetentionPanels />
-      </div>
+      {/* 3-QATLAM — Ixtiyoriy chuqurroq ko'rinish */}
+      <details className="group mt-6 rounded-[var(--radius)] border border-border/60 bg-card/40">
+        <summary className="flex cursor-pointer list-none items-center justify-between gap-3 px-4 py-3 font-ui text-xs uppercase tracking-[0.22em] text-muted-foreground transition-colors hover:text-foreground">
+          <span className="flex items-center gap-2">
+            <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-primary/60" />
+            Chuqurroq · Nadir, retentsiya, 100 kun
+          </span>
+          <ArrowRight className="h-3.5 w-3.5 transition-transform group-open:rotate-90" />
+        </summary>
+        <div className="space-y-4 border-t border-border/60 p-4 sm:p-5">
+          <EasyModeRibbon streakDays={streak?.current_days ?? 0} />
+          <PeakEndReflect />
+          <AIInsightCard
+            context={`Foydalanuvchi: ${profile?.display_name ?? "do'st"}. Bugun ${doneCount}/${habits.length} odat (${percent}%). Streak: ${streak?.current_days ?? 0} kun. Daraja ${stats?.level ?? 1}, XP ${stats?.total_xp ?? 0}. Arxetip: ${archetype?.name ?? "-"}. Vaqt: ${c.label}.`}
+          />
+          <HundredDayTimeline streakDays={streak?.current_days ?? 0} />
+          <div className="grid gap-4 lg:grid-cols-2">
+            <PeakEndCurve userId={userId} />
+            <HumanPotentialPanel />
+          </div>
+          <RetentionPanels />
+        </div>
+      </details>
 
       {milestone !== null && (
         <StreakMilestone days={milestone} onDismiss={() => setMilestone(null)} />
