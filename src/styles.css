@@ -799,3 +799,31 @@ html[data-perf="low"] .marquee-track { animation: none; }
   .cell-hover:hover { transform: none; }
 }
 html[data-perf="low"] .halo-drift { animation: none; }
+
+/* ---------- Ported from Life Order (Ascend) — parallax + orbital ornaments ---------- */
+@keyframes lo-orbit-slow    { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+@keyframes lo-orbit-reverse { from { transform: rotate(0deg); } to { transform: rotate(-360deg); } }
+@keyframes lo-breathe       { 0%,100% { opacity: .55; transform: scale(1); } 50% { opacity: 1; transform: scale(1.04); } }
+
+.anim-orbit-slow    { animation: lo-orbit-slow 48s linear infinite; transform-origin: center; transform-box: fill-box; }
+.anim-orbit-reverse { animation: lo-orbit-reverse 60s linear infinite; transform-origin: center; transform-box: fill-box; }
+.anim-breathe       { animation: lo-breathe 6s ease-in-out infinite; transform-origin: center; transform-box: fill-box; }
+
+@media (prefers-reduced-motion: reduce) {
+  .anim-orbit-slow, .anim-orbit-reverse, .anim-breathe { animation: none !important; }
+}
+html[data-perf="low"] .anim-orbit-slow,
+html[data-perf="low"] .anim-orbit-reverse,
+html[data-perf="low"] .anim-breathe { animation: none !important; }
+
+/* Minimal grid backdrop — parallax fon */
+.backdrop-grid {
+  background-image:
+    linear-gradient(hsl(var(--foreground) / 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, hsl(var(--foreground) / 0.08) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse at 40% 30%, black 30%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse at 40% 30%, black 30%, transparent 75%);
+}
+html[data-perf="low"] .backdrop-grid { display: none; }
+
