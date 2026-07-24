@@ -9,6 +9,8 @@ import { Label } from "@/components/ui/label";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { ArrowLeft, Eye, EyeOff, Loader2 } from "lucide-react";
 import { uz } from "@/i18n";
+import { AuthCompanions } from "@/components/auth-companions";
+import { CornerOrnament } from "@/components/corner-ornament";
 
 function sanitizeNext(next: unknown): string {
   if (typeof next !== "string" || !next.startsWith("/") || next.startsWith("//")) return "/dashboard";
@@ -70,8 +72,14 @@ function AuthPage() {
         />
         <div className="absolute inset-0 opacity-[0.035] [background-image:radial-gradient(hsl(var(--foreground))_1px,transparent_1px)] [background-size:24px_24px]" />
       </div>
+      {/* Nafas oluvchi blob-hamrohlar (mobil + desktop) */}
+      <AuthCompanions />
+      {/* Girih-uslubidagi burchak naqshi — mintaqaviy vizual imzo */}
+      <CornerOrnament position="top-right" size={260} />
+      <CornerOrnament position="bottom-left" size={200} />
 
       <div className="mx-auto max-w-md px-5 py-10">
+
         <Link
           to="/"
           className="inline-flex items-center gap-1.5 font-ui text-sm text-muted-foreground transition-colors hover:text-foreground"

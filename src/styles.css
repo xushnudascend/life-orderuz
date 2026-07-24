@@ -558,6 +558,29 @@ html[data-perf="low"] .orb-breathe { animation: none; }
 .halo-spin { animation: lo-halo-spin 14s linear infinite; }
 html[data-perf="low"] .halo-spin { animation: none; }
 
+/* CornerOrnament — girih naqshning juda sekin aylanishi (nafas) */
+@keyframes lo-corner-spin {
+  from { transform: rotate(0deg);   }
+  50%  { transform: rotate(180deg); }
+  to   { transform: rotate(360deg); }
+}
+.corner-ornament-spin { animation: lo-corner-spin 60s linear infinite; transform-origin: center; }
+@media (prefers-reduced-motion: reduce) { .corner-ornament-spin { animation: none; } }
+html[data-perf="low"] .corner-ornament-spin { animation: none; }
+
+/* ---------------------------------------------------------------
+ * Archetype dinamik rang qatlami — foydalanuvchining assessment
+ * arxetipiga qarab --primary hue'sini siljitadi. Boshqa tokenlar
+ * o'zgarmaydi; faqat urg'u rangi shaxsiylashadi.
+ * --------------------------------------------------------------- */
+html[data-archetype="starter"]  { --primary: 32 96% 58%;  --primary-glow: 32 96% 68%;  }
+html[data-archetype="builder"]  { --primary: 45 96% 55%;  --primary-glow: 45 96% 65%;  }
+html[data-archetype="aspirant"] { --primary: 72 100% 50%; --primary-glow: 72 100% 60%; }
+html[data-archetype="warrior"]  { --primary: 0 84% 60%;   --primary-glow: 0 84% 70%;   }
+html[data-archetype="sage"]     { --primary: 220 90% 66%; --primary-glow: 220 90% 76%; }
+html[data-archetype="explorer"] { --primary: 172 78% 48%; --primary-glow: 172 78% 58%; }
+
+
 /* Nozik 3D tilt hover — Panel primitive uchun */
 @utility lift-3d {
   transform: perspective(800px) rotateX(0) rotateY(0) translateZ(0);

@@ -20,6 +20,8 @@ import { ProgressRing } from "@/components/progress-ring";
 import { RankBadge } from "@/components/rank-badge";
 import { ShieldIndicator } from "@/components/shield-indicator";
 import { ArchetypeRow } from "@/components/archetype-row";
+import { CornerOrnament } from "@/components/corner-ornament";
+import { applyArchetypeTheme } from "@/lib/archetype-theme";
 import { DailyTimetable } from "@/components/daily-timetable";
 import { ProfileCompletionCard } from "@/components/profile-completion-card";
 import { NadirNudgeBanner } from "@/components/nadir-nudge-banner";
@@ -204,6 +206,10 @@ function Dashboard() {
     profile?.archetype && profile.archetype in ARCHETYPES
       ? ARCHETYPES[profile.archetype as Archetype["id"]]
       : null;
+  useEffect(() => {
+    applyArchetypeTheme(profile?.archetype ?? null);
+  }, [profile?.archetype]);
+
   const score =
     stats?.discipline_score ??
     estimateDisciplineScore({
@@ -250,7 +256,9 @@ function Dashboard() {
 
 
       {/* Salom + kontekst */}
-      <div className="mb-5 flex flex-col gap-2 sm:mb-6 sm:flex-row sm:items-end sm:justify-between">
+      <div className="relative mb-5 flex flex-col gap-2 sm:mb-6 sm:flex-row sm:items-end sm:justify-between">
+        <CornerOrnament position="top-right" size={200} className="opacity-70" />
+
         <div className="min-w-0">
           <p className="font-ui text-[11px] font-semibold uppercase tracking-[0.24em] text-primary">
             {c.greeting} · {c.label}
