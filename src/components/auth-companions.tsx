@@ -1,4 +1,4 @@
-import { prefersReducedMotion } from "@/lib/motion-pref";
+import { isReducedMotion } from "@/lib/motion-pref";
 
 /**
  * AuthCompanions — Auth sahifasi orqasida nafas oluvchi 3 ta blob-maskot.
@@ -11,7 +11,7 @@ import { prefersReducedMotion } from "@/lib/motion-pref";
  * xatosi qaytarilmadi). Reduced-motion bo'lsa — statik, animatsiyasiz.
  */
 export function AuthCompanions() {
-  const reduced = prefersReducedMotion();
+  const reduced = isReducedMotion();
   const animClass = reduced ? "" : "orb-breathe";
 
   return (

@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import { prefersReducedMotion } from "@/lib/motion-pref";
+import { isReducedMotion } from "@/lib/motion-pref";
 
 /**
  * CornerOrnament — girih-uslubidagi geometrik burchak naqshi.
@@ -21,7 +21,7 @@ export function CornerOrnament({
   size?: number;
   className?: string;
 }) {
-  const reduced = prefersReducedMotion();
+  const reduced = isReducedMotion();
 
   const positionClasses: Record<typeof position, string> = {
     "top-left": "top-0 left-0 -translate-x-1/3 -translate-y-1/3",
