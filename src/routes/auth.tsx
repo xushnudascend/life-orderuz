@@ -11,6 +11,7 @@ import { ArrowLeft, Eye, EyeOff, Loader2 } from "lucide-react";
 import { uz } from "@/i18n";
 import { AuthCompanions } from "@/components/auth-companions";
 import { CornerOrnament } from "@/components/corner-ornament";
+import { track } from "@/lib/analytics";
 
 function sanitizeNext(next: unknown): string {
   if (typeof next !== "string" || !next.startsWith("/") || next.startsWith("//")) return "/dashboard";
