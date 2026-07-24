@@ -8,6 +8,9 @@ import { Reveal } from "@/components/reveal";
 import { HeroBackdrop } from "@/components/hero-backdrop";
 import { HeroOrnament } from "@/components/hero-ornament";
 import { ScrollProgress } from "@/components/scroll-progress";
+import { Magnetic } from "@/components/magnetic";
+import { CountUp } from "@/components/count-up";
+
 
 import {
   Accordion,
@@ -137,16 +140,19 @@ function Hero() {
         </p>
 
         <div className="rise-4 mt-8 flex flex-col items-stretch gap-2.5 sm:flex-row sm:items-center sm:justify-center sm:gap-3">
-          <Button asChild size="lg" className="group h-12 rounded-full px-6 font-ui font-semibold">
-            <Link to="/auth">
-              Mening rejamni ko'rish
-              <ArrowRight className="cta-arrow ml-1.5 h-4 w-4" />
-            </Link>
-          </Button>
+          <Magnetic strength={6}>
+            <Button asChild size="lg" className="group h-12 rounded-full px-6 font-ui font-semibold">
+              <Link to="/auth">
+                Mening rejamni ko'rish
+                <ArrowRight className="cta-arrow ml-1.5 h-4 w-4" />
+              </Link>
+            </Button>
+          </Magnetic>
           <Button asChild size="lg" variant="ghost" className="h-12 rounded-full px-5 font-ui">
             <a href="#how">Qanday ishlaydi</a>
           </Button>
         </div>
+
 
         <p className="rise-4 mt-5 font-ui text-xs text-muted-foreground">
           14 kun pul qaytadi · Bir bosishda bekor · Reklamasiz
@@ -185,21 +191,22 @@ function PeerMirror() {
             <div>
               <dt className="font-ui text-[10px] uppercase tracking-[0.2em] text-muted-foreground">A'zolar</dt>
               <dd className="mt-1 font-serif text-xl tracking-tight tabular-nums">
-                {hasReal ? members : "Beta"}
+                {hasReal ? <CountUp value={members ?? 0} /> : "Beta"}
               </dd>
             </div>
             <div>
               <dt className="font-ui text-[10px] uppercase tracking-[0.2em] text-muted-foreground">Bugun</dt>
               <dd className="mt-1 font-serif text-xl tracking-tight tabular-nums">
-                {hasReal ? (todayActive ?? 0) : "—"}
+                {hasReal ? <CountUp value={todayActive ?? 0} /> : "—"}
               </dd>
             </div>
             <div>
               <dt className="font-ui text-[10px] uppercase tracking-[0.2em] text-muted-foreground">Streak</dt>
               <dd className="mt-1 font-serif text-xl tracking-tight tabular-nums">
-                {hasReal ? `${streakLeader ?? 0} kun` : "—"}
+                {hasReal ? <CountUp value={streakLeader ?? 0} suffix=" kun" /> : "—"}
               </dd>
             </div>
+
           </dl>
         </div>
       </div>
