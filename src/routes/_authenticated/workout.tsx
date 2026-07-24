@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { AppShell } from "@/components/app-shell";
 import { PageHero } from "@/components/page-hero";
+import { IfThenHint } from "@/components/if-then-hint";
 import { Panel, PanelHeader } from "@/components/panel";
 import { EmptyState } from "@/components/empty-state";
 import { Button } from "@/components/ui/button";
