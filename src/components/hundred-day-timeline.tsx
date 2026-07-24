@@ -18,7 +18,7 @@ export function HundredDayTimeline({ streakDays = 0 }: { streakDays?: number }) 
     <Panel className="p-5">
       <PanelHeader
         title="100 kun · neyrobiologik yo'l"
-        hint={`Sen: ${streakDays} kun`}
+        eyebrow={`Sen: ${streakDays} kun`}
       />
       <div className="relative mt-5 h-2 rounded-full bg-primary/10">
         <div
