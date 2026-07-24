@@ -3,6 +3,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { AppShell } from "@/components/app-shell";
 import { PageHero } from "@/components/page-hero";
+import { IfThenHint } from "@/components/if-then-hint";
 import { Panel, PanelHeader } from "@/components/panel";
 import { EmptyState } from "@/components/empty-state";
 import { Button } from "@/components/ui/button";
@@ -189,6 +190,9 @@ function Diet() {
         title="Ovqatlanish kundaligi."
         subtitle="Nima yeyayotganingni ko'r — nima o'zgartirish kerakligini bil."
       />
+      <IfThenHint trigger="stakan choy quysam" action="oldin bir stakan suv ichaman" />
+
+
 
       <div className="mt-4 flex flex-wrap items-center gap-3 text-muted-foreground">
         <span>
