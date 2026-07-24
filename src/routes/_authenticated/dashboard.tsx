@@ -35,6 +35,7 @@ import { HumanPotentialPanel } from "@/components/human-potential-panel";
 import { HundredDayTimeline } from "@/components/hundred-day-timeline";
 import { PeakEndCurve } from "@/components/peak-end-curve";
 import { Panel, PanelHeader, PanelValue } from "@/components/panel";
+import { StatsHeroBento } from "@/components/stats-hero-bento";
 import { ErrorBoundary } from "@/components/error-boundary";
 import { CountUpNumber } from "@/components/count-up-number";
 import { StreakMilestone } from "@/components/streak-milestone";
@@ -217,83 +218,39 @@ function Dashboard() {
       <NadirNudgeBanner userId={userId} />
       <StreakAtRisk streakDays={streak?.current_days ?? 0} percent={percent} />
 
-      {/* Salom + kontekst */}
-      <div className="relative mb-5 flex flex-col gap-2 sm:mb-6 sm:flex-row sm:items-end sm:justify-between">
-        <CornerOrnament position="top-right" size={200} className="opacity-70" />
-        <div className="min-w-0">
-          <p className="font-ui text-[11px] font-semibold uppercase tracking-[0.24em] text-primary">
-            {c.greeting} · {c.label}
-          </p>
-          <h1 className="mt-1.5 truncate font-serif text-2xl font-semibold tracking-tight sm:text-3xl">
-            {profile?.display_name?.trim() ? `${profile.display_name}, ` : "Bugungi "}
-            <span className="text-muted-foreground">reja</span>
-          </h1>
-          <ArchetypeRow archetype={archetype} />
-        </div>
-        <p className="font-ui text-xs text-muted-foreground sm:text-right">
-          {progressMessage(percent)}
-        </p>
-      </div>
-
-      {/* KPI qatori */}
+      {/* Unified Hero — Ascend-style dense bento */}
       {!loaded ? (
-        <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-4" aria-busy="true" aria-live="polite">
-          <span className="sr-only">Yuklanmoqda…</span>
-          {[0, 1, 2, 3].map((i) => (
-            <div key={i} className="rounded-[var(--radius)] border border-border/70 bg-card p-4">
-              <div className="skeleton h-3 w-16" />
-              <div className="skeleton mt-3 h-7 w-24" />
-              <div className="skeleton mt-2 h-3 w-20" />
+        <div className="mb-5 rounded-[var(--radius)] border border-border/70 bg-card p-4 sm:mb-6 sm:p-6" aria-busy="true">
+          <div className="skeleton h-4 w-32" />
+          <div className="skeleton mt-3 h-8 w-64" />
+          <div className="mt-5 grid gap-4 sm:grid-cols-[auto_1fr]">
+            <div className="skeleton h-24 w-24 rounded-full" />
+            <div className="space-y-3">
+              <div className="skeleton h-3 w-full" />
+              <div className="grid grid-cols-2 gap-2.5">
+                <div className="skeleton h-14 w-full" />
+                <div className="skeleton h-14 w-full" />
+              </div>
             </div>
-          ))}
+          </div>
         </div>
       ) : (
-        <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-4">
-          <Panel>
-            <PanelHeader eyebrow="Bugun" />
-            <PanelValue
-              value={`${doneCount}/${habits.length || 0}`}
-              caption={`${percent}% bajarildi`}
-              trend={percent >= 70 ? "up" : "flat"}
-            />
-          </Panel>
-          <Panel>
-            <PanelHeader eyebrow="Streak" />
-            <PanelValue
-              value={
-                <span className="inline-flex items-center gap-1.5">
-                  <Flame className="h-5 w-5 text-primary" />
-                  {streak?.current_days ?? 0}
-                </span>
-              }
-              caption="ketma-ket kun"
-            />
-          </Panel>
-          <Panel>
-            <PanelHeader eyebrow={`Daraja ${stats?.level ?? 1}`} />
-            <PanelValue
-              value={<><CountUpNumber value={stats?.total_xp ?? 0} once="dash-xp" /> XP</>}
-              caption={`${xpProgress}% keyingi darajaga`}
-            />
-            <div className="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-border">
-              <div className="h-full bg-primary transition-all" style={{ width: `${xpProgress}%` }} />
-            </div>
-          </Panel>
-          <Panel>
-            <PanelHeader
-              eyebrow="Himoya"
-              action={
-                <Link to="/profile" className="font-ui text-[10px] uppercase tracking-[0.2em] text-muted-foreground hover:text-primary">
-                  Rank
-                </Link>
-              }
-            />
-            <div className="mt-2 flex items-center justify-between gap-2">
-              <ShieldIndicator usedThisWeek={shieldsUsed} max={3} />
-              <RankBadge score={score} />
-            </div>
-          </Panel>
-        </div>
+        <StatsHeroBento
+          greeting={`${c.greeting} · ${c.label}`}
+          displayName={profile?.display_name ?? null}
+          archetype={archetype}
+          doneCount={doneCount}
+          totalHabits={habits.length}
+          percent={percent}
+          streakDays={streak?.current_days ?? 0}
+          level={stats?.level ?? 1}
+          totalXp={stats?.total_xp ?? 0}
+          xpProgress={xpProgress}
+          xpForNext={xpForNext}
+          disciplineScore={stats?.discipline_score ?? 0}
+          shieldsUsed={shieldsUsed}
+          score={score}
+        />
       )}
 
       {/* 2-QATLAM — Kunlik halqa */}
