@@ -1274,27 +1274,6 @@ export type Database = {
         }
         Relationships: []
       }
-      public_profiles: {
-        Row: {
-          avatar_url: string | null
-          display_name: string | null
-          id: string | null
-          username: string | null
-        }
-        Insert: {
-          avatar_url?: string | null
-          display_name?: string | null
-          id?: string | null
-          username?: string | null
-        }
-        Update: {
-          avatar_url?: string | null
-          display_name?: string | null
-          id?: string | null
-          username?: string | null
-        }
-        Relationships: []
-      }
     }
     Functions: {
       award_action_xp: {
@@ -1382,6 +1361,21 @@ export type Database = {
           isOneToOne: true
           isSetofReturn: false
         }
+      }
+      public_profile_by_username: {
+        Args: { _username: string }
+        Returns: {
+          avatar_url: string
+          display_name: string
+          id: string
+          username: string
+        }[]
+      }
+      public_profile_ids_by_region: {
+        Args: { _viloyat: string }
+        Returns: {
+          id: string
+        }[]
       }
       rate_limit_hit: {
         Args: { _key: string; _limit: number; _window_seconds: number }
