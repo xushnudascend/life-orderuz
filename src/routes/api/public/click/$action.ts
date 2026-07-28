@@ -94,7 +94,10 @@ export const Route = createFileRoute("/api/public/click/$action")({
         await supabaseAdmin.from("payment_orders").update({
           state: "paid", perform_time: new Date().toISOString(),
         }).eq("id", order.id);
+        const { activateProForOrder } = await import("@/lib/billing.server");
+        await activateProForOrder(order.id);
         return respond({ merchant_confirm_id: order.id });
+
       },
     },
   },
