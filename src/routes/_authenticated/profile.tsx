@@ -10,6 +10,7 @@ import { toast } from "sonner";
 import { uz } from "@/i18n";
 import { RankBadge } from "@/components/rank-badge";
 import { ShieldIndicator } from "@/components/shield-indicator";
+import { useSubscription } from "@/lib/use-subscription";
 import { ShareCard } from "@/components/share-card";
 import { estimateDisciplineScore } from "@/lib/nervous";
 import { Panel, PanelHeader } from "@/components/panel";
@@ -49,6 +50,7 @@ function ProfilePage() {
   const [xpDeltaPct, setXpDeltaPct] = useState<number | null>(null);
   const [loading, setLoading] = useState(true);
   const [usingShield, setUsingShield] = useState(false);
+  const { isPro } = useSubscription();
   const [usernameDraft, setUsernameDraft] = useState("");
 
   async function refresh() {

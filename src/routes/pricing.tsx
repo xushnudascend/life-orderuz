@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/accordion";
 import { Check, ArrowRight, X } from "lucide-react";
 import { uz } from "@/i18n";
+import { CheckoutPanel } from "@/components/checkout-panel";
 import { freeTierLimits, proTierLimits, pricing } from "@/lib/limits";
 
 
@@ -81,7 +82,7 @@ function Pricing() {
         <Plans />
         <Guarantee />
         <Compare />
-        <LocalPayments />
+        <CheckoutPanel />
         <Faq />
         <FinalCta />
       </main>
@@ -145,49 +146,6 @@ function Guarantee() {
   );
 }
 
-function LocalPayments() {
-  const methods: { name: string; note: string; status: string }[] = [
-    { name: "Click", note: "UzCard / Humo", status: "Tez orada" },
-    { name: "Payme", note: "O'zbekiston kartalari", status: "Tez orada" },
-    { name: "Uzum Bank", note: "Uzum ilovasi orqali", status: "Tez orada" },
-    { name: "Visa / Mastercard", note: "Xalqaro to'lovlar", status: "Ulanmoqda" },
-  ];
-  return (
-    <section className="border-b border-border">
-      <div className="mx-auto max-w-3xl px-5 py-16">
-        <p className="font-ui text-[11px] uppercase tracking-[0.24em] text-primary">
-          To'lov usullari · Roadmap
-        </p>
-        <h2 className="mt-3 font-serif text-2xl leading-tight tracking-tight md:text-3xl">
-          Pro tez orada ochiladi
-        </h2>
-        <p className="mt-4 max-w-2xl font-ui text-sm text-muted-foreground leading-relaxed">
-          Hozircha Free rejim to'liq ochiq — kartasiz, tekin. Pro obuna va mahalliy to'lov usullari (Click, Payme, Uzum) ulanish jarayonida. Tayyor bo'lganda ro'yxatdagilar birinchi bo'lib xabar oladi.
-        </p>
-        <div className="mt-8 grid gap-3 sm:grid-cols-2">
-          {methods.map((m) => (
-            <div key={m.name} className="rounded-[var(--radius)] border border-border/60 bg-card/40 p-4">
-              <div className="flex items-start justify-between gap-3">
-                <div>
-                  <p className="font-serif text-base font-semibold text-foreground">{m.name}</p>
-                  <p className="mt-1 font-ui text-xs text-muted-foreground">{m.note}</p>
-                </div>
-                <span className="shrink-0 rounded-full border border-border/60 bg-background px-2 py-0.5 font-ui text-[10px] uppercase tracking-wider text-muted-foreground">
-                  {m.status}
-                </span>
-              </div>
-            </div>
-          ))}
-        </div>
-        <p className="mt-6 font-ui text-xs text-muted-foreground">
-          Pro ochilganda 14 kunlik to'lovni qaytarish kafolati va istalgan paytda bekor qilish imkoni bo'ladi.
-        </p>
-      </div>
-    </section>
-  );
-}
-
-
 function Hero() {
   return (
     <section className="border-b border-border">
@@ -220,9 +178,9 @@ function Plans() {
               `${freeTierLimits.habits} tagacha odat`,
               `Kunlik ${freeTierLimits.journalEntriesPerDay} ta kundalik yozuv`,
               `Nadir bilan kunda ${freeTierLimits.mentorMessagesPerDay} ta xabar`,
-              `Haftasiga ${freeTierLimits.shieldPerWeek} ta Shield (kechirim)`,
               "Kunlik 3 ta mikro-vazifa",
               "Streak, XP va intizom balli",
+
               "PWA — telefonga o'rnatiladi, offline ishlaydi",
             ]}
             ctaLabel="Bepul boshlash"
@@ -321,7 +279,8 @@ function Compare() {
     { label: "Odatlar soni", free: `${freeTierLimits.habits} ta`, pro: "Cheksiz" },
     { label: "Kunlik kundalik", free: `${freeTierLimits.journalEntriesPerDay} ta`, pro: "Cheksiz" },
     { label: "Nadir xabarlari / kun", free: `${freeTierLimits.mentorMessagesPerDay} ta`, pro: "Cheksiz" },
-    { label: "Shield / hafta", free: `${freeTierLimits.shieldPerWeek}`, pro: `${proTierLimits.shieldPerWeek}` },
+    { label: "Chuqur analitika va heatmap", free: false, pro: true },
+    { label: "Shield / hafta", free: false, pro: `${proTierLimits.shieldPerWeek} ta` },
     { label: "Kengroq AI kontekst", free: false, pro: true },
     { label: "Haftalik AI hisobot", free: false, pro: true },
     { label: "Burnout oldindan nudge", free: false, pro: true },

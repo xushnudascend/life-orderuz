@@ -857,6 +857,7 @@ export type Database = {
           plan_length_days: number | null
           sex: Database["public"]["Enums"]["sex"] | null
           subscription_tier: string
+          subscription_until: string | null
           timezone: string
           updated_at: string
           username: string | null
@@ -886,6 +887,7 @@ export type Database = {
           plan_length_days?: number | null
           sex?: Database["public"]["Enums"]["sex"] | null
           subscription_tier?: string
+          subscription_until?: string | null
           timezone?: string
           updated_at?: string
           username?: string | null
@@ -915,6 +917,7 @@ export type Database = {
           plan_length_days?: number | null
           sex?: Database["public"]["Enums"]["sex"] | null
           subscription_tier?: string
+          subscription_until?: string | null
           timezone?: string
           updated_at?: string
           username?: string | null

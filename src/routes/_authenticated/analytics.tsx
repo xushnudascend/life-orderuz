@@ -18,6 +18,8 @@ import {
 } from "recharts";
 import { toast } from "sonner";
 import { uz } from "@/i18n";
+import { useSubscription } from "@/lib/use-subscription";
+import { PremiumLock } from "@/components/premium-lock";
 
 export const Route = createFileRoute("/_authenticated/analytics")({
   head: () => ({
@@ -51,6 +53,7 @@ function Analytics() {
   const [thisWeek, setThisWeek] = useState(0);
   const [lastWeek, setLastWeek] = useState(0);
   const [loading, setLoading] = useState(true);
+  const { isPro, loading: subLoading } = useSubscription();
 
   useEffect(() => {
     (async () => {
@@ -156,6 +159,22 @@ function Analytics() {
       w.print();
       toast.success("PDF tayyor.");
     }, 300);
+  }
+
+  if (!subLoading && !isPro) {
+    return (
+      <AppShell title="Analitika hisoboti">
+        <PageHero
+          eyebrow="Pro"
+          title="Chuqur analitika."
+          subtitle="14 kunlik dinamika, heatmap, kuchli va zaif kunlar tahlili — Pro rejada."
+        />
+        <PremiumLock
+          className="mt-8"
+          title="Analitika va heatmap Pro a'zolar uchun ochiq."
+        />
+      </AppShell>
+    );
   }
 
   return (

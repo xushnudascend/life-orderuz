@@ -28,13 +28,20 @@ export function useSubscription(): SubscriptionState {
       }
       const { data } = await supabase
         .from("profiles")
-        .select("subscription_tier")
+        .select("subscription_tier, subscription_until")
         .eq("id", u.user.id)
         .maybeSingle();
       if (cancelled) return;
-      const t = (data as { subscription_tier?: string } | null)?.subscription_tier;
-      setTier(t === "pro" ? "pro" : "free");
+      const row = data as {
+        subscription_tier?: string;
+        subscription_until?: string | null;
+      } | null;
+      const until = row?.subscription_until;
+      const active =
+        row?.subscription_tier === "pro" && (!until || new Date(until) > new Date());
+      setTier(active ? "pro" : "free");
       setLoading(false);
+
     })();
     return () => {
       cancelled = true;

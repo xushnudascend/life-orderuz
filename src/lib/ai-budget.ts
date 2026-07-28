@@ -18,7 +18,7 @@ type Endpoint =
   | "onboarding-nudge";
 
 const FREE_DAILY_CAPS: Record<Endpoint, number> = {
-  chat: 10,
+  chat: 5,
   "generate-plan": 1,
   "micro-insight": 5,
   "weekly-report": 1,

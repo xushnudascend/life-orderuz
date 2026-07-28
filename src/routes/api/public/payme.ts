@@ -97,6 +97,9 @@ export const Route = createFileRoute("/api/public/payme")({
             await supabaseAdmin.from("payment_orders").update({
               state: "paid", perform_time: perform.toISOString(),
             }).eq("id", order.id);
+            const { activateProForOrder } = await import("@/lib/billing.server");
+            await activateProForOrder(order.id);
+
             return rpcResult(body.id, {
               transaction: order.id,
               perform_time: perform.getTime(),

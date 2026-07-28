@@ -1,9 +1,10 @@
-// Free tier limits — centralized configuration
+// Free / Pro tier limits — centralized configuration
 export const freeTierLimits = {
   habits: 3,
   journalEntriesPerDay: 1,
-  mentorMessagesPerDay: 10,
-  shieldPerWeek: 1,
+  mentorMessagesPerDay: 5,
+  shieldPerWeek: 0,
+  analytics: false,
 } as const;
 
 export const proTierLimits = {
@@ -11,9 +12,26 @@ export const proTierLimits = {
   journalEntriesPerDay: Infinity,
   mentorMessagesPerDay: Infinity,
   shieldPerWeek: 3,
+  analytics: true,
 } as const;
 
+export type PlanId = "monthly" | "yearly";
+
 export const pricing = {
-  monthly: { amount: 29000, currency: "UZS", label: "29 000 so'm / oy" },
-  yearly: { amount: 249000, currency: "UZS", label: "249 000 so'm / yil" },
+  monthly: {
+    id: "monthly" as const,
+    amount: 59000,
+    currency: "UZS",
+    label: "59 000 so'm / oy",
+    short: "59 000",
+    months: 1,
+  },
+  yearly: {
+    id: "yearly" as const,
+    amount: 490000,
+    currency: "UZS",
+    label: "490 000 so'm / yil",
+    short: "490 000",
+    months: 12,
+  },
 } as const;
