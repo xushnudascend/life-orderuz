@@ -90,11 +90,9 @@ function Leaderboard() {
       return;
     }
     (async () => {
-      const { data } = await supabase
-        .from("profiles")
-        .select("id")
-        .eq("viloyat", viloyat)
-        .eq("is_public", true);
+      const { data } = await supabase.rpc("public_profile_ids_by_region" as never, {
+        _viloyat: viloyat,
+      } as never);
       setRegionalIds(new Set(((data as { id: string }[] | null) ?? []).map((p) => p.id)));
     })();
   }, [viloyat]);
