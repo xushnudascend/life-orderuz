@@ -57,12 +57,10 @@ export default defineTool({
       }
       return { content: [{ type: "text", text: error.message }], isError: true };
     }
-    await supabase.from("xp_events").insert({
-      user_id: ctx.getUserId()!,
-      source: "habit",
-      amount: habit.xp_reward,
-      reference_id: habit.id,
-    });
+    await supabase.rpc("award_action_xp" as never, {
+      _source: "habit",
+      _reference_id: habit.id,
+    } as never);
     return {
       content: [{ type: "text", text: `Logged habit ${habit.id} for ${date} (+${habit.xp_reward} XP).` }],
       structuredContent: { log: data },

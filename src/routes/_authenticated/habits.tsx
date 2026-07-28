@@ -156,12 +156,10 @@ function HabitsPage() {
         logged_date: today(),
         xp_awarded: h.xp_reward,
       });
-      await supabase.from("xp_events").insert({
-        user_id: userId,
-        source: "habit",
-        amount: h.xp_reward,
-        reference_id: h.id,
-      });
+      await supabase.rpc("award_action_xp" as never, {
+        _source: "habit",
+        _reference_id: h.id,
+      } as never);
       const rem = habits.length - todayLogs.size - 1;
       if (rem === 1) toast.success("Bir qadam qoldi.");
       else if (rem === 0) toast.success("Hammasi allaqachon belgilangan.");

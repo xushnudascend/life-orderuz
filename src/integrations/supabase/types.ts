@@ -1276,6 +1276,13 @@ export type Database = {
       }
     }
     Functions: {
+      award_action_xp: {
+        Args: {
+          _reference_id?: string
+          _source: Database["public"]["Enums"]["xp_source"]
+        }
+        Returns: number
+      }
       check_achievements: { Args: { _user_id: string }; Returns: undefined }
       claim_daily_login_bonus: {
         Args: never
@@ -1354,6 +1361,21 @@ export type Database = {
           isOneToOne: true
           isSetofReturn: false
         }
+      }
+      public_profile_by_username: {
+        Args: { _username: string }
+        Returns: {
+          avatar_url: string
+          display_name: string
+          id: string
+          username: string
+        }[]
+      }
+      public_profile_ids_by_region: {
+        Args: { _viloyat: string }
+        Returns: {
+          id: string
+        }[]
       }
       rate_limit_hit: {
         Args: { _key: string; _limit: number; _window_seconds: number }
