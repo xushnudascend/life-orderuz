@@ -178,9 +178,9 @@ function Plans() {
               `${freeTierLimits.habits} tagacha odat`,
               `Kunlik ${freeTierLimits.journalEntriesPerDay} ta kundalik yozuv`,
               `Nadir bilan kunda ${freeTierLimits.mentorMessagesPerDay} ta xabar`,
-              "Streak, XP va intizom balli",
               "Kunlik 3 ta mikro-vazifa",
               "Streak, XP va intizom balli",
+
               "PWA — telefonga o'rnatiladi, offline ishlaydi",
             ]}
             ctaLabel="Bepul boshlash"
