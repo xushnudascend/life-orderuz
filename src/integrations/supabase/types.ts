@@ -1274,8 +1274,36 @@ export type Database = {
         }
         Relationships: []
       }
+      public_profiles: {
+        Row: {
+          avatar_url: string | null
+          display_name: string | null
+          id: string | null
+          username: string | null
+        }
+        Insert: {
+          avatar_url?: string | null
+          display_name?: string | null
+          id?: string | null
+          username?: string | null
+        }
+        Update: {
+          avatar_url?: string | null
+          display_name?: string | null
+          id?: string | null
+          username?: string | null
+        }
+        Relationships: []
+      }
     }
     Functions: {
+      award_action_xp: {
+        Args: {
+          _reference_id?: string
+          _source: Database["public"]["Enums"]["xp_source"]
+        }
+        Returns: number
+      }
       check_achievements: { Args: { _user_id: string }; Returns: undefined }
       claim_daily_login_bonus: {
         Args: never
