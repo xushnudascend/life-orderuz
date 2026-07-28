@@ -139,12 +139,10 @@ function Dashboard() {
         logged_date: today(),
         xp_awarded: h.xp_reward,
       });
-      await supabase.from("xp_events").insert({
-        user_id: userId,
-        source: "habit",
-        amount: h.xp_reward,
-        reference_id: h.id,
-      });
+      await supabase.rpc("award_action_xp" as never, {
+        _source: "habit",
+        _reference_id: h.id,
+      } as never);
       // Micro-reward feedback
       if (ev) {
         const rect = (ev.currentTarget as HTMLElement).getBoundingClientRect();

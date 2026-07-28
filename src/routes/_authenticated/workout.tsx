@@ -51,18 +51,21 @@ function Workout() {
 
   async function add() {
     if (!kind.trim() || duration <= 0) return;
-    const { error } = await supabase.from("workouts").insert({
-      user_id: userId,
-      kind: kind.trim(),
-      duration_min: duration,
-      notes: notes.trim() || null,
-    });
+    const { data: created, error } = await supabase
+      .from("workouts")
+      .insert({
+        user_id: userId,
+        kind: kind.trim(),
+        duration_min: duration,
+        notes: notes.trim() || null,
+      })
+      .select("id")
+      .single();
     if (error) return toast.error("Saqlab bo'lmadi");
-    await supabase.from("xp_events").insert({
-      user_id: userId,
-      source: "workout",
-      amount: Math.min(30, Math.round(duration / 2)),
-    });
+    await supabase.rpc("award_action_xp" as never, {
+      _source: "workout",
+      _reference_id: (created as { id: string }).id,
+    } as never);
     setNotes("");
     toast.success("Mashg'ulot qo'shildi");
     refresh();

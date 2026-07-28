@@ -69,11 +69,10 @@ function JournalPage() {
       content: content.trim(),
       mood,
     });
-    await supabase.from("xp_events").insert({
-      user_id: userId,
-      source: "journal",
-      amount: 5,
-    });
+    await supabase.rpc("award_action_xp" as never, {
+      _source: "journal",
+      _reference_id: null,
+    } as never);
     setContent("");
     setMood(null);
     setSaving(false);

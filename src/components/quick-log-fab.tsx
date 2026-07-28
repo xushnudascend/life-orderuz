@@ -104,12 +104,10 @@ export function QuickLogFab() {
       xp_awarded: h.xp_reward,
     });
     if (!error) {
-      await supabase.from("xp_events").insert({
-        user_id: userId,
-        source: "habit",
-        amount: h.xp_reward,
-        reference_id: h.id,
-      });
+      await supabase.rpc("award_action_xp" as never, {
+        _source: "habit",
+        _reference_id: h.id,
+      } as never);
       setDoneIds((prev) => new Set(prev).add(h.id));
       toast.success(`+${h.xp_reward} XP`);
     } else {
