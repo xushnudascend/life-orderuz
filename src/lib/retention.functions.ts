@@ -25,33 +25,13 @@ export const getWeeklyChallenge = createServerFn({ method: "GET" })
 export const bumpWeeklyChallenge = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .handler(async ({ context }) => {
-    // Fetch current
-    const { data: ch, error: e1 } = await context.supabase
-      .rpc("ensure_weekly_challenge")
+    // Progress is recomputed server-side from real habit logs; the reward is
+    // granted by the same SECURITY DEFINER routine.
+    const { data, error } = await context.supabase
+      .rpc("sync_weekly_challenge" as never)
       .single();
-    if (e1) throw e1;
-    const current = ch as WeeklyChallenge;
-    if (current.status !== "active") return current;
-    const nextProgress = Math.min(current.target, current.progress + 1);
-    const done = nextProgress >= current.target;
-    const { data: updated, error: e2 } = await context.supabase
-      .from("weekly_challenges")
-      .update({
-        progress: nextProgress,
-        status: done ? "completed" : "active",
-        completed_at: done ? new Date().toISOString() : null,
-      })
-      .eq("id", current.id)
-      .select()
-      .single();
-    if (e2) throw e2;
-    if (done) {
-      await context.supabase.rpc("award_action_xp" as never, {
-        _source: "achievement",
-        _reference_id: current.id,
-      } as never);
-    }
-    return updated as WeeklyChallenge;
+    if (error) throw error;
+    return data as WeeklyChallenge;
   });
 
 export type SeasonSummary = {
