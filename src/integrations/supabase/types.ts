@@ -1385,6 +1385,29 @@ export type Database = {
           retry_after_seconds: number
         }[]
       }
+      sync_weekly_challenge: {
+        Args: never
+        Returns: {
+          completed_at: string | null
+          created_at: string
+          description: string | null
+          id: string
+          progress: number
+          status: string
+          target: number
+          title: string
+          updated_at: string
+          user_id: string
+          week_start: string
+          xp_reward: number
+        }
+        SetofOptions: {
+          from: "*"
+          to: "weekly_challenges"
+          isOneToOne: true
+          isSetofReturn: false
+        }
+      }
       try_consume_notification: { Args: { _user_id: string }; Returns: boolean }
       use_shield: {
         Args: { _note?: string }
