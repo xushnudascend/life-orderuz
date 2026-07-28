@@ -11,12 +11,12 @@ import { ArrowLeft, User as UserIcon } from "lucide-react";
 export const Route = createFileRoute("/u/$username")({
   ssr: false,
   loader: async ({ params }) => {
-    const { data: prof } = await supabase
-      .from("profiles")
-      .select("id, username, display_name, avatar_url, is_public")
-      .eq("username", params.username)
-      .eq("is_public", true)
-      .maybeSingle();
+    const { data: rows } = await supabase.rpc("public_profile_by_username" as never, {
+      _username: params.username,
+    } as never);
+    const prof = (Array.isArray(rows) ? rows[0] : rows) as
+      | { id: string; username: string | null; display_name: string | null; avatar_url: string | null }
+      | null;
     if (!prof) throw notFound();
     const [{ data: stats }, { data: streak }] = await Promise.all([
       supabase
