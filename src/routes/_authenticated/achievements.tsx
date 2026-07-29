@@ -40,7 +40,7 @@ function Achievements() {
 
   useEffect(() => {
     (async () => {
-      await supabase.rpc("check_achievements" as never, { _user_id: userId } as never);
+      await supabase.rpc("check_my_achievements" as never);
       const [a, ua] = await Promise.all([
         supabase.from("achievements").select("id,key,title,description,tier,xp_reward"),
         supabase.from("user_achievements").select("achievement_id").eq("user_id", userId),
