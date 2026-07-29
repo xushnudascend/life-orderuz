@@ -1287,12 +1287,53 @@ export type Database = {
         Returns: number
       }
       check_achievements: { Args: { _user_id: string }; Returns: undefined }
+      check_my_achievements: { Args: never; Returns: undefined }
       claim_daily_login_bonus: {
         Args: never
         Returns: {
           awarded: boolean
           xp: number
         }[]
+      }
+      complete_daily_quest: {
+        Args: { _quest_id: string }
+        Returns: {
+          completed_at: string | null
+          created_at: string
+          description: string | null
+          difficulty: number
+          id: string
+          quest_date: string
+          status: Database["public"]["Enums"]["quest_status"]
+          title: string
+          updated_at: string
+          user_id: string
+          xp_reward: number
+        }
+        SetofOptions: {
+          from: "*"
+          to: "daily_quests"
+          isOneToOne: true
+          isSetofReturn: false
+        }
+      }
+      create_party: {
+        Args: { _goal?: string; _name: string }
+        Returns: {
+          created_at: string
+          goal: string | null
+          id: string
+          invite_code: string
+          name: string
+          owner_id: string
+          updated_at: string
+        }
+        SetofOptions: {
+          from: "*"
+          to: "party_challenges"
+          isOneToOne: true
+          isSetofReturn: false
+        }
       }
       dashboard_snapshot: { Args: never; Returns: Json }
       ensure_daily_quests: {
@@ -1361,6 +1402,24 @@ export type Database = {
         SetofOptions: {
           from: "*"
           to: "cohorts"
+          isOneToOne: true
+          isSetofReturn: false
+        }
+      }
+      join_party_by_code: {
+        Args: { _invite_code: string }
+        Returns: {
+          created_at: string
+          goal: string | null
+          id: string
+          invite_code: string
+          name: string
+          owner_id: string
+          updated_at: string
+        }
+        SetofOptions: {
+          from: "*"
+          to: "party_challenges"
           isOneToOne: true
           isSetofReturn: false
         }

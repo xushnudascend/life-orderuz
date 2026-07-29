@@ -56,11 +56,8 @@ function Quests() {
   async function complete(q: Quest) {
     if (q.status === "completed") return;
     setBusy(q.id);
-    await supabase
-      .from("daily_quests")
-      .update({ status: "completed" })
-      .eq("id", q.id);
-    await supabase.rpc("check_achievements" as never, { _user_id: userId } as never);
+    await supabase.rpc("complete_daily_quest" as never, { _quest_id: q.id } as never);
+    await supabase.rpc("check_my_achievements" as never);
     setBusy(null);
     refresh();
   }
