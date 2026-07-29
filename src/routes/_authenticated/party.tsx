@@ -102,19 +102,11 @@ function PartyPage() {
 
   async function createParty() {
     if (!name.trim()) return toast.error("Nom kerak.");
-    const { data, error } = await supabase
-      .from("party_challenges" as never)
-      .insert({ owner_id: userId, name: name.trim(), goal: goal.trim() || null } as never)
-      .select()
-      .maybeSingle();
+    const { error } = await supabase.rpc("create_party" as never, {
+      _name: name.trim(),
+      _goal: goal.trim() || null,
+    } as never);
     if (error) return toast.error("Yaratib bo'lmadi");
-    // Owner is auto a member
-    const party = data as Party | null;
-    if (party) {
-      await supabase
-        .from("party_members" as never)
-        .insert({ party_id: party.id, user_id: userId } as never);
-    }
     setName("");
     setGoal("");
     toast.success("Party yaratildi. Taklif kodi bilan do'stlaringni chaqir.");
@@ -124,17 +116,10 @@ function PartyPage() {
   async function joinByCode() {
     const code = inviteCode.trim().toLowerCase();
     if (!code) return;
-    const { data } = await supabase
-      .from("party_challenges" as never)
-      .select("id")
-      .eq("invite_code", code)
-      .maybeSingle();
-    const party = data as { id: string } | null;
-    if (!party) return toast.error("Kod noto'g'ri.");
-    const { error } = await supabase
-      .from("party_members" as never)
-      .insert({ party_id: party.id, user_id: userId } as never);
-    if (error) return toast.error("Qo'shilib bo'lmadi (balki allaqachon a'zosan).");
+    const { error } = await supabase.rpc("join_party_by_code" as never, {
+      _invite_code: code,
+    } as never);
+    if (error) return toast.error("Kod noto'g'ri yoki qo'shilib bo'lmadi.");
     setInviteCode("");
     toast.success("Partyga qo'shildingiz.");
     refresh();
