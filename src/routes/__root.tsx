@@ -110,6 +110,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:description", content: DESCRIPTION },
       { property: "og:image", content: OG_IMAGE },
       { name: "twitter:image", content: OG_IMAGE },
+      { name: "theme-color", content: "#0A0A0A" },
+      { name: "apple-mobile-web-app-capable", content: "yes" },
+      { name: "apple-mobile-web-app-status-bar-style", content: "black-translucent" },
+      { name: "apple-mobile-web-app-title", content: "Life Order" },
       { name: "google-site-verification", content: "GUEFyF8DgxSQ6fMwpi6LtCnFAc88Yabnco8MxtckDEI" },
     ],
     links: [
