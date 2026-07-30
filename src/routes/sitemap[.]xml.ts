@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { createClient } from "@supabase/supabase-js";
 import type {} from "@tanstack/react-start";
 
 const BASE_URL = "https://life-orderuz.lovable.app";
@@ -7,6 +8,39 @@ interface SitemapEntry {
   path: string;
   changefreq?: "always" | "hourly" | "daily" | "weekly" | "monthly" | "yearly" | "never";
   priority?: string;
+}
+
+/** Opt-in public profiles (/u/:username). Empty list when the DB is unreachable. */
+async function publicProfilePaths(): Promise<SitemapEntry[]> {
+  const url = process.env.SUPABASE_URL;
+  const key = process.env.SUPABASE_PUBLISHABLE_KEY;
+  if (!url || !key) return [];
+  try {
+    const client = createClient(url, key, {
+      auth: { persistSession: false },
+      global: {
+        fetch: (input, init) => {
+          const h = new Headers(init?.headers);
+          if (key.startsWith("sb_") && h.get("Authorization") === `Bearer ${key}`) {
+            h.delete("Authorization");
+          }
+          h.set("apikey", key);
+          return fetch(input, { ...init, headers: h });
+        },
+      },
+    });
+    const { data } = await client.rpc("public_profile_usernames" as never);
+    const rows = (Array.isArray(data) ? data : []) as { username: string | null }[];
+    return rows
+      .filter((r) => !!r.username)
+      .map((r) => ({
+        path: `/u/${encodeURIComponent(r.username as string)}`,
+        changefreq: "weekly" as const,
+        priority: "0.5",
+      }));
+  } catch {
+    return [];
+  }
 }
 
 export const Route = createFileRoute("/sitemap.xml")({
@@ -28,12 +62,15 @@ export const Route = createFileRoute("/sitemap.xml")({
 
           { path: "/install", changefreq: "monthly", priority: "0.6" },
           { path: "/mcp", changefreq: "monthly", priority: "0.5" },
+          { path: "/share/milestone", changefreq: "weekly", priority: "0.4" },
           { path: "/reset-password", changefreq: "yearly", priority: "0.2" },
           { path: "/terms", changefreq: "yearly", priority: "0.3" },
           { path: "/privacy", changefreq: "yearly", priority: "0.3" },
           { path: "/refund", changefreq: "yearly", priority: "0.3" },
           { path: "/security", changefreq: "yearly", priority: "0.3" },
+          ...(await publicProfilePaths()),
         ];
+
 
         const urls = entries.map((e) =>
           [
