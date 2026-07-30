@@ -44,9 +44,12 @@ const MOODS = [
 
 function JournalPage() {
   const { userId } = Route.useRouteContext();
+  const shared = Route.useSearch();
   const [entries, setEntries] = useState<Entry[]>([]);
   const [loading, setLoading] = useState(true);
-  const [content, setContent] = useState("");
+  const [content, setContent] = useState(
+    [shared.title, shared.text, shared.url].filter(Boolean).join("\n").trim(),
+  );
   const [mood, setMood] = useState<number | null>(null);
   const [saving, setSaving] = useState(false);
 
