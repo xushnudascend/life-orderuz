@@ -17,6 +17,31 @@ type Post = {
 
 const POSTS: Post[] = [
   {
+    slug: "goal-tracking-apps",
+    title: "Goal tracking vs habit tracker — qaysi biri kerak",
+    excerpt:
+      "Maqsad kuzatuvchi ilovalar va habit trackerlar farqi: natija va jarayon. Ularni bitta tizimga qanday bog'lash kerak.",
+    minutes: 8,
+    tag: "Qo'llanma",
+  },
+  {
+    slug: "best-habit-tracker-apps",
+    title: "Eng yaxshi habit tracker ilovalar — 2026",
+    excerpt:
+      "Habitify, Productive, Habitica, Streaks va Life Order: xususiyat, narx va ilmiy asos bo'yicha solishtiruv.",
+    minutes: 7,
+    tag: "Taqqoslash",
+  },
+  {
+    slug: "printable-habit-tracker-template",
+    title: "Printable habit tracker shabloni",
+    excerpt:
+      "Qog'ozda odat kuzatish: bepul shablon va uni raqamli tizimga qanday ko'chirish kerak.",
+    minutes: 5,
+    tag: "Shablon",
+  },
+
+  {
     slug: "habit-tracker-guide",
     title: "Habit Tracker Guide — odat kuzatuvining ilmiy asosi",
     excerpt:
