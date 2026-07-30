@@ -1,5 +1,4 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { createClient } from "@supabase/supabase-js";
 import type {} from "@tanstack/react-start";
 
 const BASE_URL = "https://life-orderuz.lovable.app";
@@ -10,26 +9,16 @@ interface SitemapEntry {
   priority?: string;
 }
 
-/** Opt-in public profiles (/u/:username). Empty list when the DB is unreachable. */
+/**
+ * Opt-in public profiles (/u/:username).
+ * The bulk username listing is service-role only so visitors cannot enumerate
+ * every public profile; it runs here on the server for sitemap generation.
+ * Empty list when the DB is unreachable.
+ */
 async function publicProfilePaths(): Promise<SitemapEntry[]> {
-  const url = process.env.SUPABASE_URL;
-  const key = process.env.SUPABASE_PUBLISHABLE_KEY;
-  if (!url || !key) return [];
   try {
-    const client = createClient(url, key, {
-      auth: { persistSession: false },
-      global: {
-        fetch: (input, init) => {
-          const h = new Headers(init?.headers);
-          if (key.startsWith("sb_") && h.get("Authorization") === `Bearer ${key}`) {
-            h.delete("Authorization");
-          }
-          h.set("apikey", key);
-          return fetch(input, { ...init, headers: h });
-        },
-      },
-    });
-    const { data } = await client.rpc("public_profile_usernames" as never);
+    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    const { data } = await supabaseAdmin.rpc("public_profile_usernames" as never);
     const rows = (Array.isArray(data) ? data : []) as { username: string | null }[];
     return rows
       .filter((r) => !!r.username)
@@ -42,6 +31,7 @@ async function publicProfilePaths(): Promise<SitemapEntry[]> {
     return [];
   }
 }
+
 
 export const Route = createFileRoute("/sitemap.xml")({
   server: {
