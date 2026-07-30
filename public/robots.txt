@@ -4,5 +4,6 @@ Disallow: /auth
 Disallow: /api/
 Disallow: /investors
 Disallow: /investor/
+Disallow: /.lovable/
 
 Sitemap: https://life-orderuz.lovable.app/sitemap.xml

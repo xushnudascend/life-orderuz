@@ -68,6 +68,30 @@ export const Route = createFileRoute("/blog/")({
       { property: "og:url", content: `${SITE_URL}/blog` },
     ],
     links: [{ rel: "canonical", href: `${SITE_URL}/blog` }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "CollectionPage",
+          name: TITLE,
+          description: DESCRIPTION,
+          url: `${SITE_URL}/blog`,
+          isPartOf: { "@type": "WebSite", name: "Life Order", url: SITE_URL },
+          mainEntity: {
+            "@type": "ItemList",
+            itemListOrder: "https://schema.org/ItemListOrderAscending",
+            numberOfItems: POSTS.length,
+            itemListElement: POSTS.map((p, i) => ({
+              "@type": "ListItem",
+              position: i + 1,
+              url: `${SITE_URL}/blog/${p.slug}`,
+              name: p.title,
+            })),
+          },
+        }),
+      },
+    ],
   }),
   component: BlogIndex,
 });
