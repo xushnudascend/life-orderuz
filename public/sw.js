@@ -3,7 +3,7 @@
 // Registration is guarded on the client (see src/routes/__root.tsx) so it never
 // runs in Lovable preview / iframe / dev.
 
-const VERSION = "v3-2026-07-18";
+const VERSION = "v4-2026-07-30";
 const RUNTIME_CACHE = `life-order-runtime-${VERSION}`;
 const ASSETS_CACHE = `life-order-assets-${VERSION}`;
 const OFFLINE_URL = "/offline.html";
