@@ -1439,6 +1439,12 @@ export type Database = {
           id: string
         }[]
       }
+      public_profile_usernames: {
+        Args: never
+        Returns: {
+          username: string
+        }[]
+      }
       rate_limit_hit: {
         Args: { _key: string; _limit: number; _window_seconds: number }
         Returns: {
