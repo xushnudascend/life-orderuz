@@ -31,6 +31,7 @@ import { Route as BlogPrintableHabitTrackerTemplateRouteImport } from './routes/
 import { Route as BlogMotivatsiyaTuzogiRouteImport } from './routes/blog.motivatsiya-tuzogi'
 import { Route as BlogHayotSohalariRouteImport } from './routes/blog.hayot-sohalari'
 import { Route as BlogHabitTrackerGuideRouteImport } from './routes/blog.habit-tracker-guide'
+import { Route as BlogGoalTrackingAppsRouteImport } from './routes/blog.goal-tracking-apps'
 import { Route as BlogBestHabitTrackerAppsRouteImport } from './routes/blog.best-habit-tracker-apps'
 import { Route as Blog66KunQoidasiRouteImport } from './routes/blog.66-kun-qoidasi'
 import { Route as ApiChatRouteImport } from './routes/api/chat'
@@ -177,6 +178,11 @@ const BlogHayotSohalariRoute = BlogHayotSohalariRouteImport.update({
 const BlogHabitTrackerGuideRoute = BlogHabitTrackerGuideRouteImport.update({
   id: '/blog/habit-tracker-guide',
   path: '/blog/habit-tracker-guide',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BlogGoalTrackingAppsRoute = BlogGoalTrackingAppsRouteImport.update({
+  id: '/blog/goal-tracking-apps',
+  path: '/blog/goal-tracking-apps',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BlogBestHabitTrackerAppsRoute =
@@ -410,6 +416,7 @@ export interface FileRoutesByFullPath {
   '/api/chat': typeof ApiChatRoute
   '/blog/66-kun-qoidasi': typeof Blog66KunQoidasiRoute
   '/blog/best-habit-tracker-apps': typeof BlogBestHabitTrackerAppsRoute
+  '/blog/goal-tracking-apps': typeof BlogGoalTrackingAppsRoute
   '/blog/habit-tracker-guide': typeof BlogHabitTrackerGuideRoute
   '/blog/hayot-sohalari': typeof BlogHayotSohalariRoute
   '/blog/motivatsiya-tuzogi': typeof BlogMotivatsiyaTuzogiRoute
@@ -470,6 +477,7 @@ export interface FileRoutesByTo {
   '/api/chat': typeof ApiChatRoute
   '/blog/66-kun-qoidasi': typeof Blog66KunQoidasiRoute
   '/blog/best-habit-tracker-apps': typeof BlogBestHabitTrackerAppsRoute
+  '/blog/goal-tracking-apps': typeof BlogGoalTrackingAppsRoute
   '/blog/habit-tracker-guide': typeof BlogHabitTrackerGuideRoute
   '/blog/hayot-sohalari': typeof BlogHayotSohalariRoute
   '/blog/motivatsiya-tuzogi': typeof BlogMotivatsiyaTuzogiRoute
@@ -532,6 +540,7 @@ export interface FileRoutesById {
   '/api/chat': typeof ApiChatRoute
   '/blog/66-kun-qoidasi': typeof Blog66KunQoidasiRoute
   '/blog/best-habit-tracker-apps': typeof BlogBestHabitTrackerAppsRoute
+  '/blog/goal-tracking-apps': typeof BlogGoalTrackingAppsRoute
   '/blog/habit-tracker-guide': typeof BlogHabitTrackerGuideRoute
   '/blog/hayot-sohalari': typeof BlogHayotSohalariRoute
   '/blog/motivatsiya-tuzogi': typeof BlogMotivatsiyaTuzogiRoute
@@ -594,6 +603,7 @@ export interface FileRouteTypes {
     | '/api/chat'
     | '/blog/66-kun-qoidasi'
     | '/blog/best-habit-tracker-apps'
+    | '/blog/goal-tracking-apps'
     | '/blog/habit-tracker-guide'
     | '/blog/hayot-sohalari'
     | '/blog/motivatsiya-tuzogi'
@@ -654,6 +664,7 @@ export interface FileRouteTypes {
     | '/api/chat'
     | '/blog/66-kun-qoidasi'
     | '/blog/best-habit-tracker-apps'
+    | '/blog/goal-tracking-apps'
     | '/blog/habit-tracker-guide'
     | '/blog/hayot-sohalari'
     | '/blog/motivatsiya-tuzogi'
@@ -715,6 +726,7 @@ export interface FileRouteTypes {
     | '/api/chat'
     | '/blog/66-kun-qoidasi'
     | '/blog/best-habit-tracker-apps'
+    | '/blog/goal-tracking-apps'
     | '/blog/habit-tracker-guide'
     | '/blog/hayot-sohalari'
     | '/blog/motivatsiya-tuzogi'
@@ -759,6 +771,7 @@ export interface RootRouteChildren {
   ApiChatRoute: typeof ApiChatRoute
   Blog66KunQoidasiRoute: typeof Blog66KunQoidasiRoute
   BlogBestHabitTrackerAppsRoute: typeof BlogBestHabitTrackerAppsRoute
+  BlogGoalTrackingAppsRoute: typeof BlogGoalTrackingAppsRoute
   BlogHabitTrackerGuideRoute: typeof BlogHabitTrackerGuideRoute
   BlogHayotSohalariRoute: typeof BlogHayotSohalariRoute
   BlogMotivatsiyaTuzogiRoute: typeof BlogMotivatsiyaTuzogiRoute
@@ -934,6 +947,13 @@ declare module '@tanstack/react-router' {
       path: '/blog/habit-tracker-guide'
       fullPath: '/blog/habit-tracker-guide'
       preLoaderRoute: typeof BlogHabitTrackerGuideRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog/goal-tracking-apps': {
+      id: '/blog/goal-tracking-apps'
+      path: '/blog/goal-tracking-apps'
+      fullPath: '/blog/goal-tracking-apps'
+      preLoaderRoute: typeof BlogGoalTrackingAppsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/blog/best-habit-tracker-apps': {
@@ -1283,6 +1303,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiChatRoute: ApiChatRoute,
   Blog66KunQoidasiRoute: Blog66KunQoidasiRoute,
   BlogBestHabitTrackerAppsRoute: BlogBestHabitTrackerAppsRoute,
+  BlogGoalTrackingAppsRoute: BlogGoalTrackingAppsRoute,
   BlogHabitTrackerGuideRoute: BlogHabitTrackerGuideRoute,
   BlogHayotSohalariRoute: BlogHayotSohalariRoute,
   BlogMotivatsiyaTuzogiRoute: BlogMotivatsiyaTuzogiRoute,
