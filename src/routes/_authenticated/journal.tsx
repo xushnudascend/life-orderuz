@@ -11,6 +11,12 @@ import { uz } from "@/i18n";
 import { Panel, PanelHeader } from "@/components/panel";
 
 export const Route = createFileRoute("/_authenticated/journal")({
+  // PWA share target: boshqa ilovadan ulashilgan matn shu yerga tushadi
+  validateSearch: (search: Record<string, unknown>) => ({
+    title: typeof search.title === "string" ? search.title : undefined,
+    text: typeof search.text === "string" ? search.text : undefined,
+    url: typeof search.url === "string" ? search.url : undefined,
+  }),
   head: () => ({
     meta: [
       { title: `Kundalik — ${uz.brand.name}` },
