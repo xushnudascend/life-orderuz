@@ -6,14 +6,12 @@
   "start_url": "/?source=pwa",
   "scope": "/",
   "display": "standalone",
-  "display_override": ["window-controls-overlay", "tabbed", "standalone", "minimal-ui"],
   "orientation": "any",
   "background_color": "#0A0A0A",
   "theme_color": "#0A0A0A",
   "lang": "uz",
   "dir": "ltr",
   "categories": ["productivity", "lifestyle", "health"],
-  "iarc_rating_id": "e58c174a-81d2-5c3c-32cc-34308cf0f1bf",
   "icons": [
     { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
     { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
@@ -58,76 +56,10 @@
       "description": "AI mentor bilan gaplash",
       "url": "/mentor?source=pwa-shortcut",
       "icons": [{ "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" }]
-    },
-    {
-      "name": "Odatlar",
-      "short_name": "Habits",
-      "description": "Odatlarni log qilish",
-      "url": "/habits?source=pwa-shortcut",
-      "icons": [{ "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" }]
     }
   ],
   "launch_handler": {
     "client_mode": "focus-existing"
   },
-  "handle_links": "preferred",
-  "edge_side_panel": {
-    "preferred_width": 400
-  },
-  "share_target": {
-    "action": "/journal",
-    "method": "GET",
-    "params": {
-      "title": "title",
-      "text": "text",
-      "url": "url"
-    }
-  },
-  "protocol_handlers": [
-    {
-      "protocol": "web+lifeorder",
-      "url": "/?deeplink=%s"
-    }
-  ],
-  "file_handlers": [
-    {
-      "action": "/journal",
-      "accept": {
-        "text/plain": [".txt", ".md"]
-      },
-      "icons": [{ "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" }]
-    }
-  ],
-  "scope_extensions": [
-    { "origin": "https://life-orderuz.lovable.app" }
-  ],
-  "note_taking": {
-    "new_note_url": "/journal?new=1"
-  },
-  "widgets": [
-    {
-      "name": "Bugungi streak",
-      "short_name": "Streak",
-      "description": "Bugungi streak va uchta qadam",
-      "tag": "today",
-      "ms_ac_template": "/widgets/today.json",
-      "data": "/widgets/today-data.json",
-      "type": "application/json",
-      "screenshots": [
-        {
-          "src": "/screenshots/mobile-1.jpg",
-          "sizes": "720x1280",
-          "label": "Bugungi streak widget"
-        }
-      ],
-      "icons": [
-        { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" }
-      ],
-      "backgrounds": [
-        { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png" }
-      ]
-    }
-  ],
-  "prefer_related_applications": false,
-  "related_applications": []
+  "prefer_related_applications": false
 }
