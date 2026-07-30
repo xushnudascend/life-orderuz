@@ -5,6 +5,8 @@ import { SiteFooter } from "@/components/site-footer";
 import { Panel } from "@/components/panel";
 import { Download, Smartphone, Chrome, Apple } from "lucide-react";
 
+const SITE_URL = "https://life-orderuz.lovable.app";
+
 export const Route = createFileRoute("/install")({
   head: () => ({
     meta: [
@@ -20,8 +22,10 @@ export const Route = createFileRoute("/install")({
         content: "PWA sifatida bir bosishda o'rnating yoki APK yig'ing.",
       },
       { property: "og:type", content: "website" },
+      { property: "og:url", content: `${SITE_URL}/install` },
       { name: "twitter:card", content: "summary" },
     ],
+    links: [{ rel: "canonical", href: `${SITE_URL}/install` }],
   }),
   component: InstallPage,
 });
