@@ -11,6 +11,12 @@ import { uz } from "@/i18n";
 import { Panel, PanelHeader } from "@/components/panel";
 
 export const Route = createFileRoute("/_authenticated/journal")({
+  // PWA share target: boshqa ilovadan ulashilgan matn shu yerga tushadi
+  validateSearch: (search: Record<string, unknown>) => ({
+    title: typeof search.title === "string" ? search.title : undefined,
+    text: typeof search.text === "string" ? search.text : undefined,
+    url: typeof search.url === "string" ? search.url : undefined,
+  }),
   head: () => ({
     meta: [
       { title: `Kundalik — ${uz.brand.name}` },
@@ -38,9 +44,12 @@ const MOODS = [
 
 function JournalPage() {
   const { userId } = Route.useRouteContext();
+  const shared = Route.useSearch();
   const [entries, setEntries] = useState<Entry[]>([]);
   const [loading, setLoading] = useState(true);
-  const [content, setContent] = useState("");
+  const [content, setContent] = useState(
+    [shared.title, shared.text, shared.url].filter(Boolean).join("\n").trim(),
+  );
   const [mood, setMood] = useState<number | null>(null);
   const [saving, setSaving] = useState(false);
 
