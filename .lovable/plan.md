@@ -1,135 +1,97 @@
-# ASCEND — Psixologik chuqurlashtirish rejasi
+# Life Order — To'liq Rebuild Rejasi
 
-Ilmiy asosda (QISM A) 4 bosqichli qayta qurish. Har bir bosqichdan keyin QISM A tamoyillari qayerda qo'llangani sanab beriladi. QISM B'dagi 8 band buzilmaydi, faqat kengaytiriladi. Vizual "Life Order" tili (QISM D) — libos, buzilmaydi.
+## 0. Hozirgi holat bahosi (halol, 10 ballik)
 
----
+| Mezon | Ball | Izoh |
+| --- | --- | --- |
+| Texnik poydevor (TanStack, Cloud, RLS, PWA) | 8.5 | Kuchli tomoni |
+| Xavfsizlik | 8.0 | SECURITY DEFINER, GRANT'lar tartibli |
+| SEO | 8.0 | Canonical, JSON-LD, sitemap bor |
+| Landing copywriting | 5.5 | Xabar bor, lekin isbot/struktura zaif |
+| Landing UI/UX | 5.0 | To'liq ekranga moslashmaydi, premium his yo'q |
+| Auth UX | 4.5 | Ortiqcha animatsiya, faqat Google |
+| Onboarding sifati | 5.0 | Savollar sayoz, o'tish juda tez |
+| Dashboard tartibi | 5.0 | Ma'lumot ko'p, ierarxiya yo'q |
+| Bo'limlar (13 ta) izchilligi | 4.5 | Har biri boshqacha, sekin |
+| Dizayn tizimi izchilligi | 3.5 | 3 xil tema — landing yashil, dashboard sariq/ko'k |
+| Tezlik (LCP/navigatsiya) | 5.5 | Har sahifada client fetch, skeleton yo'q |
+| Personalizatsiya (test → reja) | 3.0 | Javoblar real rejaga ulanmagan |
+| Monetizatsiya | 6.0 | Payme/Click bor, konversiya yo'li zaif |
+| Analitika | 6.0 | Event yozuvi bor, panel yo'q |
 
-## BOSQICH 1 — Nadir'ni yagona uzluksiz mentor qilish (eng katta o'zgarish)
+**Umumiy o'rtacha: 5.6 / 10** — texnik jihatdan tirik, mahsulot sifatida hali "premium" emas.
+Startap prognozi: hozirgi holatda 12 oy ichida o'sish qiyin; asosiy xavf — retention (onboarding→1-kun→7-kun), chunki foydalanuvchi birinchi 60 soniyada aniq foyda ko'rmaydi.
 
-Hozir Nadir 4 joyda alohida-alohida yashaydi (Dashboard, Body, Habits, HubAdvisor). Uni bitta doimiy oqimga birlashtiraman.
+## 1. Yagona dizayn tizimi (hamma narsaning poydevori)
 
-**Backend:**
-- `nadir_threads` va `nadir_messages` jadvallari (RLS + GRANT). Har bir foydalanuvchining bitta faol "asosiy thread"i + eski xabar tarixi.
-- `nadir_memories`'dagi profil + `peak_failure_time` + so'nggi 3 ta assessment score system-promptga avtomatik quyiladi.
-- `src/routes/api/chat.ts`'ni AI SDK `streamText` + `toUIMessageStreamResponse({ onFinish })` bilan qayta yozaman — xabarlar `onFinish`'da saqlanadi.
-- MI (OARS) elementi system-promptga qo'shiladi: "3 xabardan 1 tasida foydalanuvchini o'zi javob topishga yo'naltiruvchi ochiq savol ber". Brutal-halol persona saqlanadi.
-- Topic cheklovi ("Refuse other topics") olib tashlanadi — Nadir umumiy hayotiy murabbiy bo'ladi, lekin kontekst-page moyilligi qoladi.
+Bozor tahlili: Linear, Superhuman, Whoop, Oura, Duolingo — hammasi **bitta** rang kombinatsiyasi va past to'yinganlikdagi fon ishlatadi; urg'u rangi faqat 5–10% maydonda.
 
-**Frontend:**
-- Global `NadirFab` — istalgan sahifadan yagona chat drawer'ni ochadi. AI Elements (`Conversation`, `Message`, `MessageResponse`, `PromptInput`, `Shimmer`) bilan qurilgan.
-- Sahifa kontekstini `openNadir({ contextHint })` orqali uzatish — bu system-promptga "foydalanuvchi hozir X sahifasida" satr sifatida qo'shiladi.
-- Eski `AICoPilot`, `HubAdvisor`, `BodyHub`/`HabitsExtras` mini-chatlari FAB'ga ulanadi (o'z UI ochish tugmasi qoladi, lekin ostidagi thread bitta).
-- `/_authenticated/mentor` sahifasi yagona thread'ning to'liq ko'rinishi.
+- Bitta tema: `Obsidian + Amber`. Fon `hsl(0 0% 6%)`, sirt `hsl(0 0% 9%)`, urg'u `hsl(38 92% 55%)` (amber), matn `hsl(40 8% 96%)`.
+  Amber tanlandi: iliq ranglar intizom/odat ilovalarida "davomiylik" hissini kuchaytiradi (Whoop/Oura yondashuvi), neon yashil esa ekran charchog'ini oshiradi.
+- Landing va dashboard **bir xil** tokenlardan foydalanadi. Ortiqcha temalar (`theme-switcher` variantlari) olib tashlanadi, faqat dark qoladi.
+- Tipografika: sarlavha uchun mavjud serif, interfeys uchun `font-ui`. Bo'shliq shkalasi 4/8/16/24/40/64.
+- Animatsiya qoidasi: faqat `opacity` + `transform`, 150–320ms, `cubic-bezier(0.16,1,0.3,1)`. Parallaks orb, ko'p qatlamli glow, aylanuvchi halqalar olib tashlanadi. `prefers-reduced-motion` hurmat qilinadi.
 
-**QISM A moslashuv:** A6 (MI + Working Alliance uzluksizligi), A7 (peak_failure_time real-time ishlatiladi), A4 (mavjud etik cheklovlar saqlanadi).
+## 2. Landing (rasm 1)
 
----
+- To'liq ekran: har bo'lim `min-h-dvh` emas, `w-full` + markazlangan `max-w-6xl` konteyner; hero balandligi `min-h-[88svh]`, chetlarda bo'sh joy yo'qoladi.
+- Struktura (SaaS konversiya standarti): Hero → 3 ta natija ko'rsatkichi → "Qanday ishlaydi" 3 qadam → Nadir namunasi → Ilmiy asos → Narx → FAQ → Yakuniy CTA.
+- Copywriting qayta yoziladi: har blokda bitta va'da + bitta isbot. Soxta raqam yo'q — faqat real foydalanuvchi soni va ilmiy manba nomi (implementation intentions, habit stacking, self-determination theory).
+- Animatsiya: bir martalik `reveal` (opacity+8px), CTA'da mayin scale 1.01, boshqa hech narsa.
+- Tozalash: `hero-backdrop`, `corner-ornament`, `magnetic`, ortiqcha `tilt` — landingdan olib tashlanadi.
 
-## BOSQICH 2 — Kunlik halqa: Dashboard, Odatlar, Streak/Himoya
+## 3. Auth (rasm 2)
 
-**Dashboard:**
-- "Bugun 2/5" — Zeigarnik chala-halqa (`ProgressRing` neytral-amber, hech qanday qizil/alarm).
-- "Bugungi eng kuchli qadam" Peak-End kartochkasi kechqurun 20:00'dan keyin ochiladi — kichik animatsiya + XP tabrigi.
-- Hick qonuni: dashboard'da faqat 3 asosiy CTA (Quest, Habit, Nadir), qolganlari "Ko'proq" ostiga.
+- Fon animatsiyalari o'chiriladi; o'rniga statik gradient + juda sekin (20s) bitta nafas effekti.
+- Provayderlar: Google, Apple, Microsoft — to'g'ridan-to'g'ri OAuth tugmalari (Cloud provayderlari sozlanadi).
+- "Shifrlangan · Reklamasiz · Istagan payt o'chirasan" matni olib tashlanadi. O'rniga: **"Maxfiylik va shartlarni qabul qilaman"** checkbox — belgilanmasa tugma o'chiq (disabled), belgilanganda tugma mayin ravishda "yonadi".
+- Kartochka: 1px chegara, ichki 32px padding, input balandligi 48px, fokus holati amber halqa. Xato holatlari input ostida, qizil emas — muted amber.
 
-**Odatlar formasi:**
-- 2 ta yangi majburiy maydon: **"Qachon?"** (soat/signal) + **"Qayerda?"** (lokatsiya/kontekst).
-- Kartochkada uch qism vizual: **Signal → Rutina → Mukofot** (Duhigg halqasi bir qarashda).
-- Odat detalida "Bugun qiyinmi?" tugmasi — bosilsa avtomatik mikro-versiya (2 daqiqa) taklif etiladi.
+## 4. Onboarding (rasm 3)
 
-**Streak/Himoya matn auditi:**
-- "himoyang tugayapti" → "bugun bitta himoyang ishlatildi — xavfsizsan".
-- Streak uzilganda: "sen muvaffaqiyatsizsan" → "naqsh sindi — bu ma'lumot. Ertaga qayta quramiz."
-- `src/components/streak-at-risk.tsx`, `shield-indicator.tsx`, `streak-milestone.tsx` matnlari qayta yoziladi.
+- 9 savol saqlanadi, lekin har biri **real signal** beradi:
+  jins, yosh oralig'i, bo'y/vazn (kaloriya uchun), uyqu oynasi, ish/o'qish jadvali, asosiy muammo (multi), oldingi urinishlar, mavjud vaqt (kuniga daqiqa), 1 ta erkin maqsad matni.
+- O'tish: javob bosilganda 260ms feedback (belgi + mayin scale), keyin avtomatik emas — **"Davom etish"** tugmasi faollashadi; multi-select savollarda avtomatik o'tish umuman yo'q.
+- Progress: yuqorida yupqa chiziq + qadam raqami, sakrash yo'q.
+- Yakunda: joriy soat, hafta kuni va javoblardan kelib chiqib **bitta** bugungi vazifa generatsiya qilinadi (masalan kech soat 21:00 bo'lsa — "Telefonni 22:30da jimga qo'y, 2 daqiqa"). Vazifa `daily_tasks`ga yoziladi va "Yo'ling tayyor" ekranida ko'rsatiladi.
 
-**Yangi foydalanuvchi (kun 1-5):** `daily_quests.difficulty` va `habits.xp_reward` ataylab pasaytirilib boshlanadi (Bandura self-efficacy).
+## 5. Dashboard (rasm 4)
 
-**QISM A moslashuv:** A3 (Zeigarnik, Peak-End, Hick), A1 (Duhigg, if-then, 2-daqiqa), A2 (Bandura, Dweck til), A3 (loss aversion — xotirjam ohang).
+- Chap sidebar olib tashlanadi. Yuqori panel: chapda logo, o'ngda qidiruv + profil + **hamburger (3 chiziq)**; hamburger bosilsa o'ngdan sheet-menyu ochiladi (barcha 13 bo'lim guruhlangan holda).
+- Kontent 3 qatlam: (1) Bugun — 1 ta asosiy vazifa + streak + intizom; (2) Kunlik halqa — odatlar, jadval, tez yozuv; (3) Chuqurroq — tahlil, davra, yutuqlar (yig'ilgan holatda).
+- Bo'sh holatlar aniq matn bilan: nima qilish kerakligi bitta jumlada.
+- Animatsiya: kartochkalar 40ms kechikish bilan ketma-ket paydo bo'ladi, raqamlar odometr (faqat bir marta).
 
----
+## 6. 13 bo'lim (rasm 5)
 
-## BOSQICH 3 — Ijtimoiy qatlam va bildirishnomalar
+- Bitta shablon: `PageHero` → asosiy amal → ro'yxat/holat → chuqur ma'lumot. Har bo'lim bir xil bo'shliq va sarlavha uslubi.
+- Tezlik: har sahifa loader + `ensureQueryData` bilan oldindan yuklanadi, skeleton qo'yiladi; ketma-ket so'rovlar bitta RPCga birlashtiriladi.
+- Har bo'lim boshida 1 qatorli "bu nima uchun kerak" izohi — noaniqlik yo'qoladi.
 
-**Party:**
-- Har kuni yagona "Bugun nima qilaman" ochiq va'da posti (Cialdini izchillik). A'zolar ko'radi.
-- Reaksiyalar faqat qo'llab-quvvatlash: 🔥 💪 👏 ❤️ — qoralash/tanqid tugmalari yo'q.
-- Solishtirish blokirovkasi: hech qanday "kim ko'proq" ko'rinmaydi guruh ichida.
+## 7. Hub va FAB (rasm 6)
 
-**Leaderboard:**
-- "Sen (o'ziga nisbatan progress)" va "Global top" — ikkalasi teng kenglikda, ikki panel yonma-yon. Global birinchi emas.
+- FAB: bitta amber tugma; bosilganda 4 ta amal yoyiladi (Odat belgilash, Kundalik, Nadir, Vazifa). Ikkinchi suzuvchi tugma olib tashlanadi.
+- "Tezkor kirish" kartochkalari ikonka + nom + bir og'iz izoh bilan, teng o'lchamli grid.
 
-**Bildirishnomalar/nudge budgeti:**
-- `notification_budget` jadvali: haftada max 5 push (default). Foydalanuvchi sozlay oladi (Avtonomiya).
-- `motivational-nudge` mantig'i budjetni tekshiradi, oshib ketsa jimlik.
+## 8. Shaxsiylashtirish dvigateli
 
-**QISM A moslashuv:** A5 (Cialdini + Festinger), A2 (Avtonomiya), A4 (o'z-anti-qaramlik etikasi).
-
----
-
-## BOSQICH 4 — Pricing, Profile, Analytics, Content hublari
-
-**Pricing:** Timer/countdown/"faqat bugun" YO'Q. Shaffof narx + 7 kun sinov. Etik izohli "Nima uchun bepul rejadan yaxshiroq?" bloki.
-
-**Profile/Settings:** Har bir raqam yoniga kontekst: `47 XP → "+12% o'tgan haftaga nisbatan"`, streak → "o'rtachangdan +3 kun". Yalang'och raqam yo'q.
-
-**Analytics/Weekly Report:**
-- Hikoya-egri: **Peak kun** markazda kattaroq, **peak_failure_time** alohida "Tayyorgarlik zonasi" kartasida (ayblov emas, oldindan tayyorgarlik ohangi).
-- Nadir'ga "shu peak_failure_time uchun reja tuz" tugmasi.
-
-**Workout/Diet/Learn hublari:** if-then mikro-nusxa (`"Agar ertalab uyg'onsang → 1 stakan suv"` kabi) va "Bugun qiyin" mikro-tushirish tugmasi.
-
-**QISM A moslashuv:** A4 (Pricing etikasi), A8 (kontekstli raqamlar + Pennebaker refleksiyasi), A7 (peak_failure_time ko'rinadi), A1 (if-then hamma joyda).
-
----
+- `plan_rules` server funksiyasi: jins, yosh, vazn/bo'y, uyqu, mavjud vaqt va o'tgan 7 kunlik bajarish foizidan kelib chiqib kunlik 3 mikro-qadam va kaloriya/mashq og'irligini hisoblaydi.
+- Nadir har javobda foydalanuvchi qaysi sahifada ekanini va oxirgi 7 kunlik faoliyatini konteks sifatida oladi.
 
 ## Texnik tafsilotlar
 
-- **Yangi jadvallar:** `nadir_threads`, `nadir_messages`, `notification_budget`. Har biri RLS + `GRANT`.
-- **Yangi/o'zgaradigan fayllar:** `src/components/nadir-fab.tsx`, `src/components/nadir-chat-drawer.tsx`, `src/routes/api/chat.ts` (rewrite), `src/lib/nadir-context.tsx` (provider), `src/routes/_authenticated/mentor.tsx` (yagona thread), `src/components/daily-timetable.tsx` (Zeigarnik ring), `src/routes/_authenticated/habits.tsx` (Signal/Rutina/Mukofot + if-then form), streak/shield komponentlari, `src/routes/_authenticated/party.tsx`, `leaderboard.tsx`, `analytics.tsx`, `profile.tsx`, `pricing.tsx`, `src/routes/api/ai.weekly-report.ts`.
-- **AI Elements o'rnatish:** `bunx ai-elements@latest add conversation message prompt-input shimmer` (agar hali yo'q bo'lsa).
-- **Til:** Barcha yangi matnlar i18n (`t()`) orqali, uz/ru/en.
-- **Backward compat:** eski `HubAdvisor`, `AICoPilot` komponentlari drawer-launcherga aylanadi, eski API'lar deprecate qilinadi lekin darhol o'chirilmaydi.
+- `src/styles.css`: bitta token to'plami, ortiqcha temalar o'chiriladi.
+- Yangi: `src/components/app-topbar.tsx`, `src/components/nav-sheet.tsx`, `src/lib/plan-rules.server.ts`, `src/lib/onboarding-task.ts`.
+- O'chiriladi: `hero-backdrop.tsx`, `corner-ornament.tsx`, `magnetic.tsx`, `sidebar-nav.tsx` (topbar+sheet bilan almashadi), `theme-switcher.tsx` variantlari.
+- Migratsiya: `daily_tasks` jadvaliga `source`/`generated_reason` ustunlari, `onboarding_profile` maydonlari (jins, bo'y, vazn, uyqu, mavjud vaqt) — GRANT + RLS bilan.
+- OAuth: Apple va Microsoft provayderlari Cloud tomonida yoqiladi.
 
----
+## Bosqichlar
 
-## Amalga oshirish tartibi
+1. Dizayn tizimi + landing
+2. Auth + onboarding + bugungi vazifa generatsiyasi
+3. Dashboard + topbar/sheet + FAB
+4. 13 bo'lim izchilligi + tezlik
+5. Shaxsiylashtirish dvigateli + yakuniy audit va qayta baholash
 
-1. Migration: `nadir_threads` + `nadir_messages` + `notification_budget`.
-2. Bosqich 1 (Nadir birlashtirish) — bitta katta iteratsiya, ohirida test.
-3. Bosqich 2 → 3 → 4 ketma-ket.
-4. Har bosqich oxirida QISM A tamoyillari checklisti.
-
-Tasdiqlasangiz, Bosqich 1'dan boshlayman (avval migration).
-
----
-
-## Bajarilish holati (halol audit)
-
-- 🟢 **Bosqich 1** — Yagona Nadir: FAB, drawer, `nadir_threads`/`nadir_messages`, memory, MI-savollar.
-- 🟢 **Bosqich 2** — Zeigarnik ring, Peak-End reflect, Easy-mode ribbon, if-then quests, xotirjam streak/shield tili.
-- 🟢 **Bosqich 3** — Party commitment, Notification budget kartochkasi, Leaderboard 50/50 XP+izchillik.
-- 🟢 **Bosqich 4** — Pricing auditi (soxta shoshiltirish yo'q — tasdiqlandi), Profile raqamlari kontekstga bog'landi (`+X% oldingi haftaga nisbatan`, "eng uzun: N kun"), Analytics'da peak/weak day + this-week vs last-week (avvaldan bor edi), Workout/Diet/Learn'ga `IfThenHint` chip'lari.
-
-## A-tamoyillari xaritasi (qayerda qo'llangan)
-
-| Tamoyil | Fayl(lar) |
-|---|---|
-| A1 Fogg B=MAP + if-then | `src/components/if-then-hint.tsx`, `easy-mode-ribbon.tsx`, `ai.generate-plan.ts` |
-| A1 Duhigg Signal→Rutina→Mukofot | `habits.tsx` forma, kartochka |
-| A2 SDT (Kompetentsiya) | Profile Stat + kontekst, XP formulasi |
-| A2 SDT (Bog'lanish) | `party.tsx`, `party-commitment.tsx`, `cohorts` |
-| A2 Growth mindset | `streak-at-risk.tsx`, `shield-indicator.tsx` matn |
-| A3 Yo'qotishdan qochish (xotirjam) | `shield-indicator.tsx`, streak matnlari |
-| A3 Zeigarnik | `zeigarnik-ring.tsx`, dashboard progress |
-| A3 Peak-End | `peak-end-reflect.tsx`, `analytics.tsx` (strongestDay) |
-| A3 Hick qonuni | dashboard 3 asosiy CTA |
-| A4 Etik mukofot (fixed-ratio) | `pricing.tsx` (tekshirildi), `xp_events` triggeri (0..50 bound) |
-| A4 Anti-qaramlik | `notification_budget`, `try_consume_notification()`, `rest-nudge.tsx` |
-| A5 Cialdini izchillik | `party-commitment.tsx` (kunlik va'da) |
-| A5 O'ziga-nisbatan progress | `leaderboard.tsx` (50/50), Profile delta |
-| A6 MI/OARS | `api/chat.ts` system-prompt, `nadir-drawer.tsx` |
-| A6 Working Alliance | `nadir_threads` (yagona uzluksiz thread) |
-| A7 Sirkadian/peak_failure_time | `ai.weekly-report.ts`, `daily-timetable.tsx` |
-| A8 Pennebaker refleksiya | `journal.tsx`, `peak-end-reflect.tsx` |
-| A8 Kontekstli raqamlar | `profile.tsx` Stat `context` prop |
-
+Tasdiqlasangiz, 1-bosqichdan boshlayman.
