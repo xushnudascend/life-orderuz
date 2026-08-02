@@ -45,6 +45,9 @@ export function QuickLogFab() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const [userId, setUserId] = useState<string | null>(null);
   const [open, setOpen] = useState(false);
+  const [expanded, setExpanded] = useState(false);
+  const { open: openNadir } = useNadir();
+
   const [habits, setHabits] = useState<Habit[]>([]);
   const [doneIds, setDoneIds] = useState<Set<string>>(new Set());
   const [loading, setLoading] = useState(false);
