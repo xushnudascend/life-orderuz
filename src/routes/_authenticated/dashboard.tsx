@@ -339,8 +339,8 @@ function Dashboard() {
 
         {/* Quick access */}
         <Panel className="lg:col-span-5">
-
           <PanelHeader eyebrow="Tezkor kirish" />
+
           <div className="mt-3 grid grid-cols-2 gap-2">
             {[
               { to: "/workout", label: "Mashg'ulot", icon: Dumbbell },
