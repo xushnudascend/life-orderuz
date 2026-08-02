@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import { useRouterState } from "@tanstack/react-router";
-import { Plus, Check, Flame, X } from "lucide-react";
+import { Plus, Check, Flame, X, MessageSquare } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import { Skeleton } from "@/components/ui/skeleton";
 import { toast } from "sonner";
+import { useNadir } from "@/lib/nadir-context";
+
 
 interface Habit {
   id: string;
