@@ -363,12 +363,8 @@ html[data-motion="reduce"] *::after {
 /* High contrast — WCAG AAA yaqin foydalanuvchilar uchun */
 @media (prefers-contrast: more) {
   :root {
-    --border: 150 8% 30%;
-    --muted-foreground: 150 6% 75%;
-  }
-  .light {
-    --border: 30 12% 60%;
-    --muted-foreground: 0 0% 25%;
+    --border: 40 8% 32%;
+    --muted-foreground: 40 6% 78%;
   }
   :focus-visible {
     outline-width: 3px !important;
