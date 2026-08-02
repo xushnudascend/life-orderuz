@@ -119,15 +119,50 @@ export function QuickLogFab() {
 
   return (
     <>
-      <button
-        type="button"
-        onClick={() => setOpen(true)}
-        aria-label="Tezkor odat log qilish"
-        className="fixed right-4 z-40 grid h-14 w-14 place-items-center rounded-full bg-primary text-primary-foreground shadow-[0_10px_30px_-8px_hsl(var(--primary)/0.55)] transition-transform hover:scale-105 active:scale-95 md:right-6 md:bottom-6"
+      <div
+        className="fixed right-4 z-40 flex flex-col items-end gap-2 md:right-6 md:bottom-6"
         style={{ bottom: "calc(5.5rem + env(safe-area-inset-bottom))" }}
       >
-        <Plus className="h-6 w-6" strokeWidth={2.5} />
-      </button>
+        {expanded && (
+          <>
+            <button
+              type="button"
+              onClick={() => {
+                setExpanded(false);
+                openNadir();
+              }}
+              className="flex animate-scale-in items-center gap-2 rounded-full border border-border bg-card/95 py-2 pl-3 pr-4 font-ui text-xs font-medium shadow-lg backdrop-blur transition-colors hover:border-primary"
+            >
+              <MessageSquare className="h-4 w-4 text-primary" aria-hidden />
+              Nadir
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                setExpanded(false);
+                setOpen(true);
+              }}
+              className="flex animate-scale-in items-center gap-2 rounded-full border border-border bg-card/95 py-2 pl-3 pr-4 font-ui text-xs font-medium shadow-lg backdrop-blur transition-colors hover:border-primary"
+            >
+              <Flame className="h-4 w-4 text-primary" aria-hidden />
+              Tezkor log
+            </button>
+          </>
+        )}
+        <button
+          type="button"
+          onClick={() => setExpanded((v) => !v)}
+          aria-expanded={expanded}
+          aria-label={expanded ? "Amallarni yopish" : "Tezkor amallar"}
+          className="grid h-14 w-14 place-items-center rounded-full bg-primary text-primary-foreground shadow-[0_10px_30px_-8px_hsl(var(--primary)/0.55)] transition-transform hover:scale-105 active:scale-95"
+        >
+          <Plus
+            className={`h-6 w-6 transition-transform duration-200 ${expanded ? "rotate-45" : ""}`}
+            strokeWidth={2.5}
+          />
+        </button>
+      </div>
+
 
       <Sheet open={open} onOpenChange={setOpen}>
         <SheetContent side="bottom" className="flex max-h-[75dvh] flex-col rounded-t-2xl p-0">
