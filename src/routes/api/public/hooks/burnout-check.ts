@@ -58,11 +58,11 @@ export const Route = createFileRoute("/api/public/hooks/burnout-check")({
             const { error: insErr } = await admin
               .from("nadir_nudges" as never)
               .insert({
-              user_id: row.user_id,
-              kind: "burnout",
-              message:
-                "3 kun sokinlik ko'rindi. Bugun bitta kichik qadamdan boshla — nima eng ko'p to'sqinlik qildi?",
-            });
+                user_id: row.user_id,
+                kind: "burnout",
+                message:
+                  "3 kun sokinlik ko'rindi. Bugun bitta kichik qadamdan boshla — nima eng ko'p to'sqinlik qildi?",
+              } as never);
             if (!insErr) flagged++;
           } catch {
             /* jadval yo'q bo'lsa jim */
