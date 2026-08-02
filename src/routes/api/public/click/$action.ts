@@ -44,18 +44,29 @@ export const Route = createFileRoute("/api/public/click/$action")({
 
         const p = await parseForm(request);
         const {
-          click_trans_id, service_id, merchant_trans_id, merchant_prepare_id,
-          amount, action: act, sign_time, sign_string, error,
+          click_trans_id,
+          service_id,
+          merchant_trans_id,
+          merchant_prepare_id,
+          amount,
+          action: act,
+          sign_time,
+          sign_string,
+          error,
         } = p;
 
-        const base = action === "prepare"
-          ? `${click_trans_id}${service_id}${secret}${merchant_trans_id}${amount}${act}${sign_time}`
-          : `${click_trans_id}${service_id}${secret}${merchant_trans_id}${merchant_prepare_id}${amount}${act}${sign_time}`;
+        const base =
+          action === "prepare"
+            ? `${click_trans_id}${service_id}${secret}${merchant_trans_id}${amount}${act}${sign_time}`
+            : `${click_trans_id}${service_id}${secret}${merchant_trans_id}${merchant_prepare_id}${amount}${act}${sign_time}`;
 
         const respond = (extra: Record<string, unknown>, err = ERROR.OK, note = "Success") =>
           Response.json({
-            click_trans_id, merchant_trans_id,
-            error: err, error_note: note, ...extra,
+            click_trans_id,
+            merchant_trans_id,
+            error: err,
+            error_note: note,
+            ...extra,
           });
 
         if (md5(base) !== sign_string) return respond({}, ERROR.SIGN, "SIGN CHECK FAILED");
@@ -63,7 +74,10 @@ export const Route = createFileRoute("/api/public/click/$action")({
 
         const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
         const { data: order } = await supabaseAdmin
-          .from("payment_orders").select("*").eq("id", merchant_trans_id).maybeSingle();
+          .from("payment_orders")
+          .select("*")
+          .eq("id", merchant_trans_id)
+          .maybeSingle();
         if (!order) return respond({}, ERROR.ORDER_NOT_FOUND, "Order not found");
 
         const paidAmount = Math.round(Number(amount) * 100) / 100;
@@ -72,32 +86,45 @@ export const Route = createFileRoute("/api/public/click/$action")({
 
         // Client canceled from Click side
         if (Number(error) < 0) {
-          await supabaseAdmin.from("payment_orders").update({
-            state: "canceled", cancel_time: new Date().toISOString(),
-            provider: "click", provider_txn_id: click_trans_id,
-          }).eq("id", order.id);
+          await supabaseAdmin
+            .from("payment_orders")
+            .update({
+              state: "canceled",
+              cancel_time: new Date().toISOString(),
+              provider: "click",
+              provider_txn_id: click_trans_id,
+            })
+            .eq("id", order.id);
           return respond({ merchant_prepare_id: order.id }, ERROR.CANCELED, "Canceled");
         }
 
         if (action === "prepare") {
           if (order.state === "paid") return respond({}, ERROR.ALREADY_PAID, "Already paid");
-          await supabaseAdmin.from("payment_orders").update({
-            state: "prepared", provider: "click", provider_txn_id: click_trans_id,
-            raw_payload: p,
-          }).eq("id", order.id);
+          await supabaseAdmin
+            .from("payment_orders")
+            .update({
+              state: "prepared",
+              provider: "click",
+              provider_txn_id: click_trans_id,
+              raw_payload: p,
+            })
+            .eq("id", order.id);
           return respond({ merchant_prepare_id: order.id, merchant_confirm_id: order.id });
         }
 
         // complete
         if (order.state === "paid") return respond({}, ERROR.ALREADY_PAID, "Already paid");
         if (order.state !== "prepared") return respond({}, ERROR.ACTION, "Wrong state");
-        await supabaseAdmin.from("payment_orders").update({
-          state: "paid", perform_time: new Date().toISOString(),
-        }).eq("id", order.id);
+        await supabaseAdmin
+          .from("payment_orders")
+          .update({
+            state: "paid",
+            perform_time: new Date().toISOString(),
+          })
+          .eq("id", order.id);
         const { activateProForOrder } = await import("@/lib/billing.server");
         await activateProForOrder(order.id);
         return respond({ merchant_confirm_id: order.id });
-
       },
     },
   },

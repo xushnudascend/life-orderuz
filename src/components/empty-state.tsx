@@ -34,13 +34,9 @@ export function EmptyState({
           {icon}
         </div>
       )}
-      <h3 className="font-serif text-lg font-semibold tracking-tight">
-        {title}
-      </h3>
+      <h3 className="font-serif text-lg font-semibold tracking-tight">{title}</h3>
       {description && (
-        <p className="max-w-sm font-ui text-sm text-muted-foreground">
-          {description}
-        </p>
+        <p className="max-w-sm font-ui text-sm text-muted-foreground">{description}</p>
       )}
       {action && <div className="mt-2">{action}</div>}
     </div>

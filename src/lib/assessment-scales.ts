@@ -58,7 +58,7 @@ export const SCALES: ScaleMeta[] = [
     key: "confidence",
     title: "O'ziga ishonch",
     short: "Ishonch",
-    desc: "\"Men qila olaman\" — self-efficacy (Bandura).",
+    desc: '"Men qila olaman" — self-efficacy (Bandura).',
     higherIsBetter: true,
   },
   {
@@ -100,37 +100,107 @@ export const SCALES: ScaleMeta[] = [
 
 export const QUESTIONS: AssessmentQuestion[] = [
   // Self-Control (Tangney SCS qisqartma)
-  { key: "sc_1", scale: "self_control", prompt: "Vasvasaga qarshi turishim men uchun oson.", direction: "forward" },
-  { key: "sc_2", scale: "self_control", prompt: "Yomon odatlarni to'xtata olmayman.", direction: "reverse" },
+  {
+    key: "sc_1",
+    scale: "self_control",
+    prompt: "Vasvasaga qarshi turishim men uchun oson.",
+    direction: "forward",
+  },
+  {
+    key: "sc_2",
+    scale: "self_control",
+    prompt: "Yomon odatlarni to'xtata olmayman.",
+    direction: "reverse",
+  },
 
   // Dopamine Dependence
-  { key: "dd_1", scale: "dopamine_dependence", prompt: "Qisqa videolar (TikTok, Reels, Shorts) meni soatlab tutib qoladi.", direction: "forward" },
-  { key: "dd_2", scale: "dopamine_dependence", prompt: "5 daqiqa telefonsiz o'tirish — men uchun qiyin.", direction: "forward" },
+  {
+    key: "dd_1",
+    scale: "dopamine_dependence",
+    prompt: "Qisqa videolar (TikTok, Reels, Shorts) meni soatlab tutib qoladi.",
+    direction: "forward",
+  },
+  {
+    key: "dd_2",
+    scale: "dopamine_dependence",
+    prompt: "5 daqiqa telefonsiz o'tirish — men uchun qiyin.",
+    direction: "forward",
+  },
 
   // Goal Clarity
-  { key: "gc_1", scale: "goal_clarity", prompt: "Keyingi 90 kunda erishmoqchi bo'lgan aniq maqsadim bor.", direction: "forward" },
-  { key: "gc_3", scale: "goal_clarity", prompt: "Ko'p vaqt nima qilishim kerakligini bilmayman.", direction: "reverse" },
+  {
+    key: "gc_1",
+    scale: "goal_clarity",
+    prompt: "Keyingi 90 kunda erishmoqchi bo'lgan aniq maqsadim bor.",
+    direction: "forward",
+  },
+  {
+    key: "gc_3",
+    scale: "goal_clarity",
+    prompt: "Ko'p vaqt nima qilishim kerakligini bilmayman.",
+    direction: "reverse",
+  },
 
   // Confidence
-  { key: "cf_1", scale: "confidence", prompt: "Qiyin vazifa bo'lsa ham, yechim topa olaman.", direction: "forward" },
-  { key: "cf_2", scale: "confidence", prompt: "Xatoga yo'l qo'ysam ham, yana urina olaman.", direction: "forward" },
+  {
+    key: "cf_1",
+    scale: "confidence",
+    prompt: "Qiyin vazifa bo'lsa ham, yechim topa olaman.",
+    direction: "forward",
+  },
+  {
+    key: "cf_2",
+    scale: "confidence",
+    prompt: "Xatoga yo'l qo'ysam ham, yana urina olaman.",
+    direction: "forward",
+  },
 
   // Discipline
-  { key: "di_1", scale: "discipline", prompt: "Rejalashtirgan ishimni oxirigacha bajaraman.", direction: "forward" },
-  { key: "di_3", scale: "discipline", prompt: "So'nggi 30 kunda kamida bitta odatimni izchil bajardim.", direction: "forward" },
+  {
+    key: "di_1",
+    scale: "discipline",
+    prompt: "Rejalashtirgan ishimni oxirigacha bajaraman.",
+    direction: "forward",
+  },
+  {
+    key: "di_3",
+    scale: "discipline",
+    prompt: "So'nggi 30 kunda kamida bitta odatimni izchil bajardim.",
+    direction: "forward",
+  },
 
   // Sleep Quality
-  { key: "sq_2", scale: "sleep_quality", prompt: "Ertalab tetik uyg'onaman.", direction: "forward" },
+  {
+    key: "sq_2",
+    scale: "sleep_quality",
+    prompt: "Ertalab tetik uyg'onaman.",
+    direction: "forward",
+  },
 
   // Social Media Addiction
-  { key: "sm_1", scale: "social_media_addiction", prompt: "Ijtimoiy tarmoqlar haqida rejalashtirilganidan ko'proq o'ylayman.", direction: "forward" },
+  {
+    key: "sm_1",
+    scale: "social_media_addiction",
+    prompt: "Ijtimoiy tarmoqlar haqida rejalashtirilganidan ko'proq o'ylayman.",
+    direction: "forward",
+  },
 
   // Purpose
   { key: "pu_1", scale: "purpose", prompt: "Hayotimning aniq ma'nosi bor.", direction: "forward" },
-  { key: "pu_2", scale: "purpose", prompt: "Nima uchun uyg'onishimni bilaman.", direction: "forward" },
+  {
+    key: "pu_2",
+    scale: "purpose",
+    prompt: "Nima uchun uyg'onishimni bilaman.",
+    direction: "forward",
+  },
 
   // Environment
-  { key: "en_1", scale: "environment", prompt: "Uyimdagi joyim — diqqatimni jamlashga yordam beradi.", direction: "forward" },
+  {
+    key: "en_1",
+    scale: "environment",
+    prompt: "Uyimdagi joyim — diqqatimni jamlashga yordam beradi.",
+    direction: "forward",
+  },
 ];
 
 export const LIKERT_LABELS: Record<number, string> = {
@@ -187,9 +257,7 @@ export function computeAllScores(responses: Record<string, number>): ComputedSco
   );
   const potential = Math.round(potentialContribs.reduce((a, b) => a + b, 0) / SCALES.length);
 
-  const discipline = Math.round(
-    (s.self_control + s.discipline + s.environment) / 3,
-  );
+  const discipline = Math.round((s.self_control + s.discipline + s.environment) / 3);
 
   // Focus: high sleep + low dopamine + low social media
   const focus = Math.round(
@@ -238,7 +306,7 @@ const SCALE_ACTIONS: Record<ScaleKey, string> = {
   self_control: "Kunlik 5 daqiqalik telefonsiz nafas.",
   dopamine_dependence: "Qisqa videolarni 30 daqiqaga cheklang (app timer).",
   goal_clarity: "Har hafta yakshanba — bitta aniq maqsad yozing.",
-  confidence: "Har kuni bitta \"kichik g'alaba\" — jurnaliga.",
+  confidence: 'Har kuni bitta "kichik g\'alaba" — jurnaliga.',
   discipline: "Kuniga bitta odat, aynan bir vaqtda.",
   sleep_quality: "Uyquga 1 soat qolganda — telefon boshqa xonada.",
   social_media_addiction: "Ilovalarni ekrandan olib tashlang; brauzer orqali kirish qiyinlashadi.",
@@ -248,12 +316,10 @@ const SCALE_ACTIONS: Record<ScaleKey, string> = {
 
 export function buildRoadmap(scores: ComputedScores): RoadmapStageSeed[] {
   // 3 ta eng zaif shkala — o'sish bo'yicha
-  const sorted = SCALES
-    .map((meta) => ({
-      key: meta.key,
-      loss: meta.higherIsBetter ? 100 - scores.scales[meta.key] : scores.scales[meta.key],
-    }))
-    .sort((a, b) => b.loss - a.loss);
+  const sorted = SCALES.map((meta) => ({
+    key: meta.key,
+    loss: meta.higherIsBetter ? 100 - scores.scales[meta.key] : scores.scales[meta.key],
+  })).sort((a, b) => b.loss - a.loss);
 
   const stages: RoadmapStageSeed[] = [];
   for (let i = 0; i < 3; i++) {

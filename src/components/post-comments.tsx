@@ -20,20 +20,23 @@ export function PostComments({ postId, userId }: { postId: string; userId: strin
   const [busy, setBusy] = useState(false);
 
   async function load() {
-    const { data } = await supabase.from("post_comments")
+    const { data } = await supabase
+      .from("post_comments")
       .select("id, user_id, post_id, content, created_at")
       .eq("post_id", postId)
       .order("created_at", { ascending: true })
       .limit(200);
     const rows = (data as Comment[] | null) ?? [];
     const uids = Array.from(new Set(rows.map((r) => r.user_id)));
-    let authors: Record<string, { display_name: string | null; username: string | null }> = {};
+    const authors: Record<string, { display_name: string | null; username: string | null }> = {};
     if (uids.length) {
       const { data: profs } = await supabase
         .from("profiles")
         .select("id, display_name, username")
         .in("id", uids);
-      for (const p of (profs as { id: string; display_name: string | null; username: string | null }[] | null) ?? []) {
+      for (const p of (profs as
+        | { id: string; display_name: string | null; username: string | null }[]
+        | null) ?? []) {
         authors[p.id] = { display_name: p.display_name, username: p.username };
       }
     }
@@ -87,9 +90,7 @@ export function PostComments({ postId, userId }: { postId: string; userId: strin
           <div className="min-w-0 flex-1">
             <p className="font-ui text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
               {c.author?.display_name || c.author?.username || "A'zo"} ·{" "}
-              <span className="opacity-70">
-                {new Date(c.created_at).toLocaleString("uz-UZ")}
-              </span>
+              <span className="opacity-70">{new Date(c.created_at).toLocaleString("uz-UZ")}</span>
             </p>
             <p className="mt-0.5 whitespace-pre-wrap break-words">{c.content}</p>
           </div>

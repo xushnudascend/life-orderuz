@@ -50,17 +50,21 @@ export const Route = createFileRoute("/api/public/hooks/burnout-check")({
             .select("id", { count: "exact", head: true })
             .eq("user_id", row.user_id)
             .gte("logged_date", threeDaysAgo);
-          if ((recent as any)?.count && (recent as any).count > 0) continue;
+          const recentCount = (recent as { count?: number } | null)?.count ?? 0;
+          if (recentCount > 0) continue;
 
           // Nudge yozamiz (jadval bo'lmasa — sof no-op)
           try {
-            const { error: insErr } = await admin.from("nadir_nudges" as any).insert({
+            const { error: insErr } = await admin.from("nadir_nudges" as never).insert({
               user_id: row.user_id,
               kind: "burnout",
-              message: "3 kun sokinlik ko'rindi. Bugun bitta kichik qadamdan boshla — nima eng ko'p to'sqinlik qildi?",
-            });
+              message:
+                "3 kun sokinlik ko'rindi. Bugun bitta kichik qadamdan boshla — nima eng ko'p to'sqinlik qildi?",
+            } as never);
             if (!insErr) flagged++;
-          } catch { /* jadval yo'q bo'lsa jim */ }
+          } catch {
+            /* jadval yo'q bo'lsa jim */
+          }
         }
 
         return Response.json({ ok: true, flagged, checked: stats?.length ?? 0 });

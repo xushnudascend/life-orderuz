@@ -14,7 +14,13 @@ export default defineTool({
   title: "List journal entries",
   description: "List the signed-in user's most recent journal entries, newest first.",
   inputSchema: {
-    limit: z.number().int().min(1).max(50).optional().describe("How many entries to return (max 50, default 10)."),
+    limit: z
+      .number()
+      .int()
+      .min(1)
+      .max(50)
+      .optional()
+      .describe("How many entries to return (max 50, default 10)."),
   },
   annotations: { readOnlyHint: true, idempotentHint: true, openWorldHint: false },
   handler: async ({ limit }, ctx) => {

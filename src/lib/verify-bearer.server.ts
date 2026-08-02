@@ -9,7 +9,9 @@ import type { Database } from "@/integrations/supabase/types";
  */
 export async function verifySupabaseBearer(
   request: Request,
-): Promise<{ ok: true; userId: string; claims: Record<string, unknown> } | { ok: false; response: Response }> {
+): Promise<
+  { ok: true; userId: string; claims: Record<string, unknown> } | { ok: false; response: Response }
+> {
   const authHeader = request.headers.get("authorization") ?? request.headers.get("Authorization");
   if (!authHeader || !authHeader.startsWith("Bearer ")) {
     return { ok: false, response: new Response("Unauthorized", { status: 401 }) };
@@ -32,5 +34,9 @@ export async function verifySupabaseBearer(
   if (error || !data?.claims?.sub) {
     return { ok: false, response: new Response("Unauthorized", { status: 401 }) };
   }
-  return { ok: true, userId: String(data.claims.sub), claims: data.claims as Record<string, unknown> };
+  return {
+    ok: true,
+    userId: String(data.claims.sub),
+    claims: data.claims as Record<string, unknown>,
+  };
 }

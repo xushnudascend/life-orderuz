@@ -14,8 +14,7 @@ export function ThemeSwitcher() {
       if (detail) setThemeState(detail);
     };
     window.addEventListener("lo_theme_changed", onChange as EventListener);
-    return () =>
-      window.removeEventListener("lo_theme_changed", onChange as EventListener);
+    return () => window.removeEventListener("lo_theme_changed", onChange as EventListener);
   }, []);
 
   return (

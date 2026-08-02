@@ -18,10 +18,7 @@ export const Route = createFileRoute("/_authenticated/journal")({
     url: typeof search.url === "string" ? search.url : undefined,
   }),
   head: () => ({
-    meta: [
-      { title: `Kundalik — ${uz.brand.name}` },
-      { name: "robots", content: "noindex" },
-    ],
+    meta: [{ title: `Kundalik — ${uz.brand.name}` }, { name: "robots", content: "noindex" }],
   }),
   component: JournalPage,
 });
@@ -78,10 +75,13 @@ function JournalPage() {
       content: content.trim(),
       mood,
     });
-    await supabase.rpc("award_action_xp" as never, {
-      _source: "journal",
-      _reference_id: null,
-    } as never);
+    await supabase.rpc(
+      "award_action_xp" as never,
+      {
+        _source: "journal",
+        _reference_id: null,
+      } as never,
+    );
     setContent("");
     setMood(null);
     setSaving(false);
@@ -104,11 +104,7 @@ function JournalPage() {
       <Panel as="section" className="mt-8">
         <PanelHeader
           eyebrow="Yangi yozuv"
-          title={
-            <p className="font-serif text-lg font-semibold">
-              Bugungi ichki manzarangni yoz
-            </p>
-          }
+          title={<p className="font-serif text-lg font-semibold">Bugungi ichki manzarangni yoz</p>}
         />
         <form onSubmit={save} className="mt-4 space-y-4">
           <Textarea
@@ -155,7 +151,6 @@ function JournalPage() {
             title="Hozircha yozuv yo'q"
             description="Bugungi kayfiyatingni yoz. Fikrni qog'ozga tushirsang, u ustidan nazorat qo'ling ostiga o'tadi."
           />
-
         ) : (
           entries.map((e) => {
             const m = MOODS.find((x) => x.v === e.mood);
@@ -180,9 +175,7 @@ function JournalPage() {
                     <Trash2 className="h-4 w-4" />
                   </Button>
                 </div>
-                <p className="mt-3 whitespace-pre-wrap leading-relaxed">
-                  {e.content}
-                </p>
+                <p className="mt-3 whitespace-pre-wrap leading-relaxed">{e.content}</p>
               </Panel>
             );
           })

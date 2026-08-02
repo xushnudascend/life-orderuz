@@ -38,9 +38,7 @@ export function CheckoutPanel() {
   return (
     <section className="border-b border-border">
       <div className="mx-auto max-w-3xl px-5 py-16">
-        <p className="font-ui text-[11px] uppercase tracking-[0.24em] text-primary">
-          To'lov
-        </p>
+        <p className="font-ui text-[11px] uppercase tracking-[0.24em] text-primary">To'lov</p>
         <h2 className="mt-3 font-serif text-2xl leading-tight tracking-tight md:text-3xl">
           Pro ni hoziroq yoqish
         </h2>
@@ -103,8 +101,8 @@ export function CheckoutPanel() {
         </div>
 
         <p className="mt-5 font-ui text-xs text-muted-foreground">
-          To'lov Payme yoki Click sahifasida amalga oshiriladi. Tasdiqlangach Pro
-          darhol ochiladi. 14 kun ichida pulni qaytarish kafolati —{" "}
+          To'lov Payme yoki Click sahifasida amalga oshiriladi. Tasdiqlangach Pro darhol ochiladi.
+          14 kun ichida pulni qaytarish kafolati —{" "}
           <Link to="/refund" className="underline hover:text-foreground">
             shartlar
           </Link>

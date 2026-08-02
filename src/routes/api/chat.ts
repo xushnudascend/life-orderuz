@@ -144,8 +144,20 @@ async function persistTurnToThread(
       .maybeSingle();
     if (!thread || (thread as { user_id: string }).user_id !== userId) return;
     await supabaseAdmin.from("nadir_messages").insert([
-      { user_id: userId, thread_id: threadId, role: "user", content: userText, context_hint: contextHint ?? null },
-      { user_id: userId, thread_id: threadId, role: "assistant", content: assistantText, context_hint: contextHint ?? null },
+      {
+        user_id: userId,
+        thread_id: threadId,
+        role: "user",
+        content: userText,
+        context_hint: contextHint ?? null,
+      },
+      {
+        user_id: userId,
+        thread_id: threadId,
+        role: "assistant",
+        content: assistantText,
+        context_hint: contextHint ?? null,
+      },
     ]);
   } catch {
     // silent — persistence is best-effort; UI still shows the turn.

@@ -2,23 +2,12 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { AppShell } from "@/components/app-shell";
 import { Panel, PanelHeader } from "@/components/panel";
 import { PageHero } from "@/components/page-hero";
-import {
-  Flame,
-  Target,
-  ShieldCheck,
-  ArrowRight,
-  Zap,
-  Anchor,
-  Brain,
-} from "lucide-react";
+import { Flame, Target, ShieldCheck, ArrowRight, Zap, Anchor, Brain } from "lucide-react";
 import { uz } from "@/i18n";
 
 export const Route = createFileRoute("/_authenticated/c/habits")({
   head: () => ({
-    meta: [
-      { title: `Odatlar — ${uz.brand.name}` },
-      { name: "robots", content: "noindex" },
-    ],
+    meta: [{ title: `Odatlar — ${uz.brand.name}` }, { name: "robots", content: "noindex" }],
   }),
   component: HabitsCategory,
 });
@@ -31,7 +20,6 @@ function HabitsCategory() {
         title="Odatlar"
         subtitle="Kunlik xulqning ~43% — odat (Wendy Wood, USC). Motivatsiya emas, takror va kontekst hal qiladi."
       />
-
 
       {/* Asosiy bo'limlar */}
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
@@ -63,9 +51,7 @@ function HabitsCategory() {
         <PanelHeader
           eyebrow="Formula"
           title={
-            <p className="font-serif text-lg font-semibold">
-              Trigger → Mikro-harakat → Tasdiq
-            </p>
+            <p className="font-serif text-lg font-semibold">Trigger → Mikro-harakat → Tasdiq</p>
           }
         />
         <div className="mt-4 grid gap-3 sm:grid-cols-3">
@@ -127,9 +113,7 @@ function SectionCard({
         </span>
       </div>
       <h2 className="mt-4 font-serif text-xl">{title}</h2>
-      <p className="mt-1.5 font-ui text-[13px] leading-relaxed text-muted-foreground">
-        {body}
-      </p>
+      <p className="mt-1.5 font-ui text-[13px] leading-relaxed text-muted-foreground">{body}</p>
       <span className="mt-4 inline-flex items-center gap-1 font-ui text-[11px] font-semibold uppercase tracking-[0.2em] text-primary group-hover:gap-1.5 transition-all">
         Ochish <ArrowRight className="h-3 w-3" />
       </span>
@@ -157,9 +141,7 @@ function Step({
         </span>
       </div>
       <p className="mt-3 font-serif text-sm font-semibold">{title}</p>
-      <p className="mt-1 font-ui text-[12px] leading-relaxed text-muted-foreground">
-        {body}
-      </p>
+      <p className="mt-1 font-ui text-[12px] leading-relaxed text-muted-foreground">{body}</p>
     </div>
   );
 }

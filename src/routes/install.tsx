@@ -48,9 +48,15 @@ function InstallPage() {
               <div>
                 <h2 className="text-base font-semibold">iPhone / iPad (Safari)</h2>
                 <ol className="mt-2 list-decimal space-y-1 pl-5 text-sm text-muted-foreground">
-                  <li>Safari'da <code>life-orderuz.lovable.app</code> ni oching</li>
-                  <li>Pastdagi <span className="text-foreground">Share</span> tugmasini bosing</li>
-                  <li><span className="text-foreground">Add to Home Screen</span> ni tanlang</li>
+                  <li>
+                    Safari'da <code>life-orderuz.lovable.app</code> ni oching
+                  </li>
+                  <li>
+                    Pastdagi <span className="text-foreground">Share</span> tugmasini bosing
+                  </li>
+                  <li>
+                    <span className="text-foreground">Add to Home Screen</span> ni tanlang
+                  </li>
                 </ol>
               </div>
             </div>
@@ -60,10 +66,14 @@ function InstallPage() {
             <div className="flex items-start gap-3">
               <Chrome className="mt-0.5 h-5 w-5 shrink-0 text-amber-400" aria-hidden />
               <div>
-                <h2 className="text-base font-semibold">Android (Chrome / Edge / Samsung Internet)</h2>
+                <h2 className="text-base font-semibold">
+                  Android (Chrome / Edge / Samsung Internet)
+                </h2>
                 <ol className="mt-2 list-decimal space-y-1 pl-5 text-sm text-muted-foreground">
                   <li>Saytni oching — pastda "Install" banner chiqadi</li>
-                  <li>Yoki: menyu → <span className="text-foreground">Install app</span></li>
+                  <li>
+                    Yoki: menyu → <span className="text-foreground">Install app</span>
+                  </li>
                   <li>Ikonka home ekranga qo'shiladi</li>
                 </ol>
               </div>
@@ -77,7 +87,8 @@ function InstallPage() {
                 <h2 className="text-base font-semibold">.APK fayl kerakmi? (Android)</h2>
                 <p className="mt-2 text-sm text-muted-foreground">
                   APK generatsiyasi Google'ning rasmiy TWA (Trusted Web Activity) vositasi orqali
-                  amalga oshiriladi. Bu bir necha daqiqa oladi va qo'shimcha ilova o'rnatishni talab qilmaydi.
+                  amalga oshiriladi. Bu bir necha daqiqa oladi va qo'shimcha ilova o'rnatishni talab
+                  qilmaydi.
                 </p>
                 <ol className="mt-3 list-decimal space-y-1 pl-5 text-sm text-muted-foreground">
                   <li>
@@ -92,7 +103,9 @@ function InstallPage() {
                     'ni oching
                   </li>
                   <li>Sayt manzili avval kiritilgan — "Package for stores" ni bosing</li>
-                  <li><span className="text-foreground">Android → Generate Package</span></li>
+                  <li>
+                    <span className="text-foreground">Android → Generate Package</span>
+                  </li>
                   <li>.APK va .AAB fayllari yuklab olinadi (signed test APK ham bor)</li>
                 </ol>
                 <a

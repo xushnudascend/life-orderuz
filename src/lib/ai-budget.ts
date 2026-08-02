@@ -6,16 +6,9 @@
  */
 import { rateLimit } from "@/lib/rate-limit";
 
-export type AiBudgetResult =
-  | { ok: true; tier: "free" | "pro" }
-  | { ok: false; response: Response };
+export type AiBudgetResult = { ok: true; tier: "free" | "pro" } | { ok: false; response: Response };
 
-type Endpoint =
-  | "chat"
-  | "generate-plan"
-  | "micro-insight"
-  | "weekly-report"
-  | "onboarding-nudge";
+type Endpoint = "chat" | "generate-plan" | "micro-insight" | "weekly-report" | "onboarding-nudge";
 
 const FREE_DAILY_CAPS: Record<Endpoint, number> = {
   chat: 5,

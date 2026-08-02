@@ -101,9 +101,7 @@ export function AIInsightCard({ context, storageKey = "nadir-insight-today" }: P
             <div className="skeleton h-3 w-1/2" />
           </div>
         ) : text ? (
-          <p className="font-serif text-[15px] leading-relaxed text-foreground/90">
-            {text}
-          </p>
+          <p className="font-serif text-[15px] leading-relaxed text-foreground/90">{text}</p>
         ) : error ? (
           <p className="font-ui text-sm text-muted-foreground">
             Hozircha kuzatuv yo'q. Keyinroq urinib ko'ring.

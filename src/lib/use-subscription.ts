@@ -37,11 +37,9 @@ export function useSubscription(): SubscriptionState {
         subscription_until?: string | null;
       } | null;
       const until = row?.subscription_until;
-      const active =
-        row?.subscription_tier === "pro" && (!until || new Date(until) > new Date());
+      const active = row?.subscription_tier === "pro" && (!until || new Date(until) > new Date());
       setTier(active ? "pro" : "free");
       setLoading(false);
-
     })();
     return () => {
       cancelled = true;

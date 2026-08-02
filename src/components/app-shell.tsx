@@ -13,13 +13,7 @@ import { NadirFab } from "@/components/nadir-fab";
 import { NadirDrawer } from "@/components/nadir-drawer";
 import { ARCHETYPES, type Archetype } from "@/lib/nervous";
 
-export function AppShell({
-  title,
-  children,
-}: {
-  title?: string;
-  children: ReactNode;
-}) {
+export function AppShell({ title, children }: { title?: string; children: ReactNode }) {
   const [archetype, setArchetype] = useState<Archetype | null>(null);
   const [name, setName] = useState<string | null>(null);
   const [scrolled, setScrolled] = useState(false);
@@ -56,79 +50,79 @@ export function AppShell({
 
   return (
     <NadirProvider>
-    <div className="min-h-dvh bg-background text-foreground">
-      <SkipLink />
-      <SidebarNav />
+      <div className="min-h-dvh bg-background text-foreground">
+        <SkipLink />
+        <SidebarNav />
 
-      <div
-        className="md:pl-[var(--sidebar-width)]"
-        style={{ paddingBottom: "calc(6rem + env(safe-area-inset-bottom))" }}
-      >
-        {/* Topbar — scroll'da yengil soya, blur past-perf'da o'chadi */}
-        <header
-          className={
-            "sticky top-0 z-20 border-b bg-background/90 supports-[backdrop-filter]:bg-background/70 backdrop-blur transition-[border-color,box-shadow] duration-300 " +
-            (scrolled
-              ? "border-border shadow-[0_6px_20px_-14px_hsl(240_30%_0%/0.6)]"
-              : "border-border/40")
-          }
-          role="banner"
+        <div
+          className="md:pl-[var(--sidebar-width)]"
+          style={{ paddingBottom: "calc(6rem + env(safe-area-inset-bottom))" }}
         >
-          <div className="mx-auto flex h-14 max-w-[1400px] items-center justify-between gap-3 px-4 sm:px-6">
-            <Link
-              to="/"
-              className="flex items-center gap-2 font-serif text-base font-semibold tracking-tight md:hidden"
-              aria-label="Life Order — bosh sahifa"
-            >
-              <span
-                aria-hidden
-                className="grid h-6 w-6 place-items-center rounded-[8px] bg-primary text-primary-foreground shadow-[0_0_12px_hsl(var(--primary)/0.4)]"
-              >
-                <span className="text-[12px] font-bold leading-none">L</span>
-              </span>
-              Life<span className="text-primary">.</span>Order
-            </Link>
-            <div className="hidden min-w-0 items-center gap-3 md:flex">
-              {title && (
-                <div className="flex items-center gap-2" aria-live="polite">
-                  <span
-                    aria-hidden
-                    className="h-1.5 w-1.5 rounded-full bg-primary shadow-[0_0_8px_hsl(var(--primary)/0.7)]"
-                  />
-                  <p className="font-ui text-[11px] font-semibold uppercase tracking-[0.24em] text-muted-foreground">
-                    {title}
-                  </p>
-                </div>
-              )}
-              <CommandBar />
-            </div>
-
-            <div className="flex items-center gap-2">
+          {/* Topbar — scroll'da yengil soya, blur past-perf'da o'chadi */}
+          <header
+            className={
+              "sticky top-0 z-20 border-b bg-background/90 supports-[backdrop-filter]:bg-background/70 backdrop-blur transition-[border-color,box-shadow] duration-300 " +
+              (scrolled
+                ? "border-border shadow-[0_6px_20px_-14px_hsl(240_30%_0%/0.6)]"
+                : "border-border/40")
+            }
+            role="banner"
+          >
+            <div className="mx-auto flex h-14 max-w-[1400px] items-center justify-between gap-3 px-4 sm:px-6">
               <Link
-                to="/profile"
-                className="flex h-9 w-9 items-center justify-center rounded-full border border-border bg-card font-ui text-sm font-semibold text-foreground transition-colors hover:border-primary/50 hover:text-primary"
-                aria-label={name ? `Profil — ${name}` : "Profil"}
+                to="/"
+                className="flex items-center gap-2 font-serif text-base font-semibold tracking-tight md:hidden"
+                aria-label="Life Order — bosh sahifa"
               >
-                {initial}
+                <span
+                  aria-hidden
+                  className="grid h-6 w-6 place-items-center rounded-[8px] bg-primary text-primary-foreground shadow-[0_0_12px_hsl(var(--primary)/0.4)]"
+                >
+                  <span className="text-[12px] font-bold leading-none">L</span>
+                </span>
+                Life<span className="text-primary">.</span>Order
               </Link>
+              <div className="hidden min-w-0 items-center gap-3 md:flex">
+                {title && (
+                  <div className="flex items-center gap-2" aria-live="polite">
+                    <span
+                      aria-hidden
+                      className="h-1.5 w-1.5 rounded-full bg-primary shadow-[0_0_8px_hsl(var(--primary)/0.7)]"
+                    />
+                    <p className="font-ui text-[11px] font-semibold uppercase tracking-[0.24em] text-muted-foreground">
+                      {title}
+                    </p>
+                  </div>
+                )}
+                <CommandBar />
+              </div>
+
+              <div className="flex items-center gap-2">
+                <Link
+                  to="/profile"
+                  className="flex h-9 w-9 items-center justify-center rounded-full border border-border bg-card font-ui text-sm font-semibold text-foreground transition-colors hover:border-primary/50 hover:text-primary"
+                  aria-label={name ? `Profil — ${name}` : "Profil"}
+                >
+                  {initial}
+                </Link>
+              </div>
             </div>
-          </div>
-        </header>
+          </header>
 
-        <main
-          id="main-content"
-          tabIndex={-1}
-          className="mx-auto max-w-[1400px] px-4 py-6 sm:px-6 sm:py-8 animate-route-in focus:outline-none"
-        >
-          <ErrorBoundary boundary="app_shell_main">{children}</ErrorBoundary>
-        </main>
+          <main
+            id="main-content"
+            tabIndex={-1}
+            className="mx-auto max-w-[1400px] px-4 py-6 sm:px-6 sm:py-8 animate-route-in focus:outline-none"
+          >
+            <ErrorBoundary boundary="app_shell_main">{children}</ErrorBoundary>
+          </main>
+        </div>
+
+        <BottomNav recommendedTab={archetype?.preferredTab} />
+        <QuickLogFab />
+        <NadirFab />
+        <NadirDrawer />
       </div>
-
-      <BottomNav recommendedTab={archetype?.preferredTab} />
-      <QuickLogFab />
-      <NadirFab />
-      <NadirDrawer />
-    </div>
     </NadirProvider>
   );
 }

@@ -13,10 +13,7 @@ import { EmptyState } from "@/components/empty-state";
 
 export const Route = createFileRoute("/_authenticated/community/$channel")({
   head: () => ({
-    meta: [
-      { title: `Davra — ${uz.brand.name}` },
-      { name: "robots", content: "noindex" },
-    ],
+    meta: [{ title: `Davra — ${uz.brand.name}` }, { name: "robots", content: "noindex" }],
   }),
   component: ChannelView,
   notFoundComponent: ChannelNotFound,
@@ -59,13 +56,15 @@ function ChannelView() {
     const raw = (ps as Post[] | null) ?? [];
     // Batch fetch authors
     const uids = Array.from(new Set(raw.map((p) => p.user_id)));
-    let authors: Record<string, { display_name: string | null; username: string | null }> = {};
+    const authors: Record<string, { display_name: string | null; username: string | null }> = {};
     if (uids.length) {
       const { data: profs } = await supabase
         .from("profiles")
         .select("id, display_name, username")
         .in("id", uids);
-      for (const p of (profs as { id: string; display_name: string | null; username: string | null }[] | null) ?? []) {
+      for (const p of (profs as
+        | { id: string; display_name: string | null; username: string | null }[]
+        | null) ?? []) {
         authors[p.id] = { display_name: p.display_name, username: p.username };
       }
     }
@@ -110,7 +109,6 @@ function ChannelView() {
         title={channel?.title ?? "..."}
         subtitle={channel?.description ?? undefined}
       />
-
 
       <div className="mt-8 rounded-[var(--radius)] border border-border p-4">
         <p className="mb-3 font-ui text-[11px] uppercase tracking-[0.22em] text-muted-foreground">
@@ -174,7 +172,7 @@ function ChannelView() {
                         {p.author?.display_name ?? p.author.username}
                       </Link>
                     ) : (
-                      p.author?.display_name ?? "A'zo"
+                      (p.author?.display_name ?? "A'zo")
                     )}
                     <span className="ml-2 opacity-60">
                       {new Date(p.created_at).toLocaleString("uz-UZ")}
@@ -187,7 +185,12 @@ function ChannelView() {
                   <PostComments postId={p.id} userId={userId} />
                 </div>
                 {p.user_id === userId && (
-                  <Button variant="ghost" size="icon" aria-label="Xabarni o&apos;chirish" onClick={() => del(p.id)}>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    aria-label="Xabarni o'chirish"
+                    onClick={() => del(p.id)}
+                  >
                     <Trash2 className="h-4 w-4" />
                   </Button>
                 )}

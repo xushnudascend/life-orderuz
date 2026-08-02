@@ -12,7 +12,9 @@ export function ArchetypeRow({ archetype }: { archetype: Archetype | null }) {
         <span className="inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
         <span className="text-foreground/70">{archetype.name}</span>
       </span>
-      <span aria-hidden className="hidden sm:inline">·</span>
+      <span aria-hidden className="hidden sm:inline">
+        ·
+      </span>
       <span className="basis-full sm:basis-auto">{archetype.hint}</span>
     </p>
   );

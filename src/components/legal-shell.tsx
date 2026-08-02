@@ -21,13 +21,9 @@ export function LegalShell({
               aria-hidden
               className="grid h-7 w-7 place-items-center rounded-[10px] bg-primary text-primary-foreground"
             >
-              <span className="font-serif text-[15px] font-semibold leading-none">
-                L
-              </span>
+              <span className="font-serif text-[15px] font-semibold leading-none">L</span>
             </span>
-            <span className="font-serif text-[17px] font-bold tracking-tight">
-              {uz.brand.name}
-            </span>
+            <span className="font-serif text-[17px] font-bold tracking-tight">{uz.brand.name}</span>
           </Link>
           <Link
             to="/"
@@ -38,9 +34,7 @@ export function LegalShell({
         </div>
       </header>
       <main className="mx-auto max-w-3xl px-5 py-16 md:py-20">
-        <p className="font-ui text-[11px] uppercase tracking-[0.28em] text-primary">
-          Huquqiy
-        </p>
+        <p className="font-ui text-[11px] uppercase tracking-[0.28em] text-primary">Huquqiy</p>
         <h1 className="mt-3 font-serif text-4xl leading-[1.05] tracking-tight md:text-5xl">
           {title}
         </h1>

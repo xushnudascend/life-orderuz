@@ -16,10 +16,7 @@ import { PartyCommitment } from "@/components/party-commitment";
 
 export const Route = createFileRoute("/_authenticated/party")({
   head: () => ({
-    meta: [
-      { title: `Davra sinovi — ${uz.brand.name}` },
-      { name: "robots", content: "noindex" },
-    ],
+    meta: [{ title: `Davra sinovi — ${uz.brand.name}` }, { name: "robots", content: "noindex" }],
   }),
   component: PartyPage,
 });
@@ -67,8 +64,8 @@ function PartyPage() {
         .eq("party_id", p.id);
       const raw = (rows as { id: string; user_id: string; joined_at: string }[] | null) ?? [];
       const uids = raw.map((r) => r.user_id);
-      let profiles: Record<string, string | null> = {};
-      let streaks: Record<string, number> = {};
+      const profiles: Record<string, string | null> = {};
+      const streaks: Record<string, number> = {};
       if (uids.length) {
         const { data: profs } = await supabase
           .from("profiles")
@@ -97,15 +94,17 @@ function PartyPage() {
 
   useEffect(() => {
     refresh();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userId]);
 
   async function createParty() {
     if (!name.trim()) return toast.error("Nom kerak.");
-    const { error } = await supabase.rpc("create_party" as never, {
-      _name: name.trim(),
-      _goal: goal.trim() || null,
-    } as never);
+    const { error } = await supabase.rpc(
+      "create_party" as never,
+      {
+        _name: name.trim(),
+        _goal: goal.trim() || null,
+      } as never,
+    );
     if (error) return toast.error("Yaratib bo'lmadi");
     setName("");
     setGoal("");
@@ -116,9 +115,12 @@ function PartyPage() {
   async function joinByCode() {
     const code = inviteCode.trim().toLowerCase();
     if (!code) return;
-    const { error } = await supabase.rpc("join_party_by_code" as never, {
-      _invite_code: code,
-    } as never);
+    const { error } = await supabase.rpc(
+      "join_party_by_code" as never,
+      {
+        _invite_code: code,
+      } as never,
+    );
     if (error) return toast.error("Kod noto'g'ri yoki qo'shilib bo'lmadi.");
     setInviteCode("");
     toast.success("Partyga qo'shildingiz.");
@@ -126,7 +128,11 @@ function PartyPage() {
   }
 
   async function leave(partyId: string) {
-    await supabase.from("party_members" as never).delete().eq("party_id", partyId).eq("user_id", userId);
+    await supabase
+      .from("party_members" as never)
+      .delete()
+      .eq("party_id", partyId)
+      .eq("user_id", userId);
     toast.success("Chiqdingiz.");
     refresh();
   }
@@ -153,11 +159,22 @@ function PartyPage() {
           <div className="mt-4 space-y-3">
             <div>
               <Label htmlFor="pname">Nom</Label>
-              <Input id="pname" value={name} onChange={(e) => setName(e.target.value)} placeholder="Masalan, Ertalab Klub" />
+              <Input
+                id="pname"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                placeholder="Masalan, Ertalab Klub"
+              />
             </div>
             <div>
               <Label htmlFor="pgoal">Maqsad (ixtiyoriy)</Label>
-              <Textarea id="pgoal" value={goal} onChange={(e) => setGoal(e.target.value)} rows={2} placeholder="30 kun har kuni 6:00'da tur" />
+              <Textarea
+                id="pgoal"
+                value={goal}
+                onChange={(e) => setGoal(e.target.value)}
+                rows={2}
+                placeholder="30 kun har kuni 6:00'da tur"
+              />
             </div>
             <Button onClick={createParty}>Yaratish</Button>
           </div>
@@ -179,7 +196,9 @@ function PartyPage() {
               placeholder="8 belgili kod"
               className="uppercase tracking-widest"
             />
-            <Button variant="outline" onClick={joinByCode}>Qo'shilish</Button>
+            <Button variant="outline" onClick={joinByCode}>
+              Qo'shilish
+            </Button>
           </div>
         </Panel>
       </section>
@@ -197,7 +216,6 @@ function PartyPage() {
             title="Hali guruhing yo'q"
             description="Yuqoridan yangi guruh yarat yoki do'sting bergan taklif kodini kirit. Kichik doira — kuchli hisobdorlik."
           />
-
         ) : (
           <div className="space-y-4">
             {parties.map((p) => {
@@ -205,8 +223,6 @@ function PartyPage() {
               const list = members[p.id] ?? [];
               return (
                 <Panel key={p.id} as="article" className="p-5">
-
-
                   <div className="flex items-start justify-between gap-3">
                     <div>
                       <p className="font-serif text-2xl">{p.name}</p>

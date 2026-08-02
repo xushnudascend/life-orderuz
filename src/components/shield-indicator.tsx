@@ -5,13 +5,7 @@ import { Shield } from "lucide-react";
  * Copy rule (A3): never "himoyang tugayapti!!" — that's alarm.
  * Say the truth calmly: X ta himoyang bor, xavfsizsan.
  */
-export function ShieldIndicator({
-  usedThisWeek,
-  max = 3,
-}: {
-  usedThisWeek: number;
-  max?: number;
-}) {
+export function ShieldIndicator({ usedThisWeek, max = 3 }: { usedThisWeek: number; max?: number }) {
   const remaining = Math.max(0, max - usedThisWeek);
   return (
     <span

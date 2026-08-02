@@ -11,7 +11,6 @@ import { ScrollProgress } from "@/components/scroll-progress";
 import { Magnetic } from "@/components/magnetic";
 import { CountUp } from "@/components/count-up";
 
-
 import {
   Accordion,
   AccordionContent,
@@ -46,7 +45,7 @@ const FAQ_ITEMS: { q: string; a: string }[] = [
   },
   {
     q: "Nadir AI nima qiladi?",
-    a: "Odat, kayfiyat va kundaliging asosida \"agar X — men Y\" formatida shaxsiy protokol beradi.",
+    a: 'Odat, kayfiyat va kundaliging asosida "agar X — men Y" formatida shaxsiy protokol beradi.',
   },
   {
     q: "Karta so'raladimi?",
@@ -118,8 +117,7 @@ function Hero() {
         aria-hidden
         className="pointer-events-none absolute left-1/2 top-1/2 -z-0 h-[520px] w-[520px] -translate-x-1/2 -translate-y-1/2 rounded-full halo-drift"
         style={{
-          background:
-            "radial-gradient(closest-side, hsl(var(--primary) / 0.10), transparent 70%)",
+          background: "radial-gradient(closest-side, hsl(var(--primary) / 0.10), transparent 70%)",
         }}
       />
 
@@ -135,13 +133,17 @@ function Hero() {
         </h1>
 
         <p className="rise-4 mx-auto mt-6 max-w-xl text-[16px] leading-relaxed text-foreground/85 text-pretty">
-          Sen javob berasan — biz sen uchun kunlik reja tuzamiz. Yoshing, jinsing,
-          uyqu vaqting va xarakteringga moslashgan 3 ta mikro-qadam. Har kun. Faqat 2 daqiqa.
+          Sen javob berasan — biz sen uchun kunlik reja tuzamiz. Yoshing, jinsing, uyqu vaqting va
+          xarakteringga moslashgan 3 ta mikro-qadam. Har kun. Faqat 2 daqiqa.
         </p>
 
         <div className="rise-4 mt-8 flex flex-col items-stretch gap-2.5 sm:flex-row sm:items-center sm:justify-center sm:gap-3">
           <Magnetic strength={6}>
-            <Button asChild size="lg" className="group h-12 rounded-full px-6 font-ui font-semibold">
+            <Button
+              asChild
+              size="lg"
+              className="group h-12 rounded-full px-6 font-ui font-semibold"
+            >
               <Link to="/auth">
                 Mening rejamni ko'rish
                 <ArrowRight className="cta-arrow ml-1.5 h-4 w-4" />
@@ -152,7 +154,6 @@ function Hero() {
             <a href="#how">Qanday ishlaydi</a>
           </Button>
         </div>
-
 
         <p className="rise-4 mt-5 font-ui text-xs text-muted-foreground">
           14 kun pul qaytadi · Bir bosishda bekor · Reklamasiz
@@ -189,24 +190,29 @@ function PeerMirror() {
           </div>
           <dl className="grid w-full grid-cols-3 gap-4 sm:w-auto sm:gap-8">
             <div>
-              <dt className="font-ui text-[10px] uppercase tracking-[0.2em] text-muted-foreground">A'zolar</dt>
+              <dt className="font-ui text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
+                A'zolar
+              </dt>
               <dd className="mt-1 font-serif text-xl tracking-tight tabular-nums">
                 {hasReal ? <CountUp value={members ?? 0} /> : "Beta"}
               </dd>
             </div>
             <div>
-              <dt className="font-ui text-[10px] uppercase tracking-[0.2em] text-muted-foreground">Bugun</dt>
+              <dt className="font-ui text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
+                Bugun
+              </dt>
               <dd className="mt-1 font-serif text-xl tracking-tight tabular-nums">
                 {hasReal ? <CountUp value={todayActive ?? 0} /> : "—"}
               </dd>
             </div>
             <div>
-              <dt className="font-ui text-[10px] uppercase tracking-[0.2em] text-muted-foreground">Streak</dt>
+              <dt className="font-ui text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
+                Streak
+              </dt>
               <dd className="mt-1 font-serif text-xl tracking-tight tabular-nums">
                 {hasReal ? <CountUp value={streakLeader ?? 0} suffix=" kun" /> : "—"}
               </dd>
             </div>
-
           </dl>
         </div>
       </div>
@@ -217,7 +223,7 @@ function PeerMirror() {
 function HowItWorks() {
   const steps = [
     { n: "01", title: "Tashxis", body: "5 daqiqalik onboarding — arxetip va zaif nuqta." },
-    { n: "02", title: "Protokol", body: "Har kun 3 ta \"agar X — men Y\" mikro-qadam." },
+    { n: "02", title: "Protokol", body: 'Har kun 3 ta "agar X — men Y" mikro-qadam.' },
     { n: "03", title: "Takror", body: "Bajarilgan qadam → XP + streak. Shield xatoni kechiradi." },
     { n: "04", title: "Tahlil", body: "Haftalik AI hisobot — bitta aniq tuzatish." },
   ];
@@ -230,7 +236,9 @@ function HowItWorks() {
             <Reveal key={s.n} delay={i * 90} className="cell-hover bg-background p-5">
               <p className="font-ui text-xs uppercase tracking-[0.22em] text-primary">{s.n}</p>
               <h3 className="mt-3 font-serif text-lg">{s.title}</h3>
-              <p className="mt-2 font-ui text-[13px] leading-relaxed text-muted-foreground">{s.body}</p>
+              <p className="mt-2 font-ui text-[13px] leading-relaxed text-muted-foreground">
+                {s.body}
+              </p>
             </Reveal>
           ))}
         </div>
@@ -257,7 +265,9 @@ function Features() {
             <Reveal key={f.title} delay={i * 70} className="cell-hover bg-background p-5">
               <f.icon className="h-4 w-4 text-primary" />
               <h3 className="mt-3 font-serif text-base">{f.title}</h3>
-              <p className="mt-2 font-ui text-[13px] leading-relaxed text-muted-foreground">{f.body}</p>
+              <p className="mt-2 font-ui text-[13px] leading-relaxed text-muted-foreground">
+                {f.body}
+              </p>
             </Reveal>
           ))}
         </div>
@@ -413,9 +423,7 @@ function Faq() {
         <Accordion type="single" collapsible className="mt-8">
           {FAQ_ITEMS.map((it, i) => (
             <AccordionItem key={i} value={`q-${i}`} className="border-border/60">
-              <AccordionTrigger className="text-left font-serif text-base">
-                {it.q}
-              </AccordionTrigger>
+              <AccordionTrigger className="text-left font-serif text-base">{it.q}</AccordionTrigger>
               <AccordionContent className="font-ui text-sm text-muted-foreground leading-relaxed">
                 {it.a}
               </AccordionContent>
@@ -440,7 +448,7 @@ function Science() {
       href: "https://doi.org/10.1002/ejsp.674",
     },
     {
-      claim: "\"Agar X — men Y\" niyati bajarilishni 2–3× oshiradi",
+      claim: '"Agar X — men Y" niyati bajarilishni 2–3× oshiradi',
       src: "Gollwitzer, 1999",
       href: "https://doi.org/10.1037/0003-066X.54.7.493",
     },
@@ -483,9 +491,7 @@ function SectionHeader({ eyebrow, title }: { eyebrow: string; title: string }) {
         <span aria-hidden className="line-sweep" />
         <p className="font-ui text-xs uppercase tracking-[0.24em] text-primary">{eyebrow}</p>
       </div>
-      <h2 className="mt-3 font-serif text-2xl leading-tight tracking-tight md:text-3xl">
-        {title}
-      </h2>
+      <h2 className="mt-3 font-serif text-2xl leading-tight tracking-tight md:text-3xl">{title}</h2>
     </Reveal>
   );
 }

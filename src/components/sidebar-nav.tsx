@@ -63,9 +63,7 @@ function NavItem({ item, active }: { item: Item; active: boolean }) {
       <Icon
         className={cn(
           "h-[15px] w-[15px] shrink-0 transition-colors",
-          active
-            ? "text-primary"
-            : "text-muted-foreground group-hover:text-foreground",
+          active ? "text-primary" : "text-muted-foreground group-hover:text-foreground",
         )}
         strokeWidth={active ? 2.2 : 1.7}
       />
@@ -84,8 +82,7 @@ function Section({ label, items, pathname }: { label?: string; items: Item[]; pa
       )}
       <ul className="space-y-0.5">
         {items.map((item) => {
-          const active =
-            pathname === item.to || pathname.startsWith(item.to + "/");
+          const active = pathname === item.to || pathname.startsWith(item.to + "/");
           return (
             <li key={item.to}>
               <NavItem item={item} active={active} />

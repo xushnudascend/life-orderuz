@@ -36,7 +36,6 @@ export function Panel({
     >
       {children}
     </Tag>
-
   );
 }
 
@@ -77,9 +76,7 @@ export function PanelValue({
 }) {
   return (
     <div className="mt-2">
-      <p className="font-serif text-2xl font-semibold tracking-tight tabular-nums">
-        {value}
-      </p>
+      <p className="font-serif text-2xl font-semibold tracking-tight tabular-nums">{value}</p>
       {caption && (
         <p
           className={cn(

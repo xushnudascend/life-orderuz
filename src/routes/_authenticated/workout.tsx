@@ -15,15 +15,18 @@ import { uz } from "@/i18n";
 
 export const Route = createFileRoute("/_authenticated/workout")({
   head: () => ({
-    meta: [
-      { title: `Mashg'ulot — ${uz.brand.name}` },
-      { name: "robots", content: "noindex" },
-    ],
+    meta: [{ title: `Mashg'ulot — ${uz.brand.name}` }, { name: "robots", content: "noindex" }],
   }),
   component: Workout,
 });
 
-type Row = { id: string; kind: string; duration_min: number; notes: string | null; logged_date: string };
+type Row = {
+  id: string;
+  kind: string;
+  duration_min: number;
+  notes: string | null;
+  logged_date: string;
+};
 
 function Workout() {
   const { userId } = Route.useRouteContext();
@@ -62,10 +65,13 @@ function Workout() {
       .select("id")
       .single();
     if (error) return toast.error("Saqlab bo'lmadi");
-    await supabase.rpc("award_action_xp" as never, {
-      _source: "workout",
-      _reference_id: (created as { id: string }).id,
-    } as never);
+    await supabase.rpc(
+      "award_action_xp" as never,
+      {
+        _source: "workout",
+        _reference_id: (created as { id: string }).id,
+      } as never,
+    );
     setNotes("");
     toast.success("Mashg'ulot qo'shildi");
     refresh();
@@ -85,10 +91,7 @@ function Workout() {
       />
       <IfThenHint trigger="ertalab tishimni yuvsam" action="10 ta sakrash qilaman" />
 
-
-
       <Panel className="mt-8 p-5">
-
         <PanelHeader
           eyebrow="Yangi mashg'ulot"
           title={<h2 className="font-serif text-xl">Bugun qanday harakat qilding?</h2>}
@@ -109,7 +112,9 @@ function Workout() {
             />
           </div>
           <div className="flex items-end">
-            <Button onClick={add} className="w-full">Qo'shish</Button>
+            <Button onClick={add} className="w-full">
+              Qo'shish
+            </Button>
           </div>
           <div className="sm:col-span-3">
             <Label htmlFor="notes">Izoh (ixtiyoriy)</Label>

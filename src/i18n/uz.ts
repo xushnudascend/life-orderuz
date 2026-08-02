@@ -35,20 +35,17 @@ export const uz = {
       {
         tag: "01 · Tashxis",
         title: "Trigger tahlili",
-        body:
-          "Onboarding paytida naqshingni aniqlaymiz: e'tiborsizlik, tartibsizlik yoki maqsadsizlik. Yo'l shunga qarab yasaladi.",
+        body: "Onboarding paytida naqshingni aniqlaymiz: e'tiborsizlik, tartibsizlik yoki maqsadsizlik. Yo'l shunga qarab yasaladi.",
       },
       {
         tag: "02 · Amaliyot",
         title: "Kunlik uchta qadam",
-        body:
-          "Har kuni uchta aniq harakat — ko'p emas, kam emas. Bajarsan — XP, streak va Discipline Score o'sadi.",
+        body: "Har kuni uchta aniq harakat — ko'p emas, kam emas. Bajarsan — XP, streak va Discipline Score o'sadi.",
       },
       {
         tag: "03 · Muloqot",
         title: "Nadir — halol AI mentor",
-        body:
-          "Nadir seni maqtamaydi. Nadir haqiqatni aytadi — hurmat bilan. Reja tuzadi, savol beradi, kerak bo'lsa to'xtatadi.",
+        body: "Nadir seni maqtamaydi. Nadir haqiqatni aytadi — hurmat bilan. Reja tuzadi, savol beradi, kerak bo'lsa to'xtatadi.",
       },
     ],
   },
@@ -69,8 +66,7 @@ export const uz = {
   },
   mentor: {
     heading: "Nadir kim?",
-    body:
-      "Nadir — sensiz uxlamaydigan yordamchi emas. U — sening tanlovlaringni ko'rib, halol javob beradigan xarakter. \"Yaxshi ish qilyapsan\" degan bo'sh maqtov Nadir'da yo'q. Nima ish qilyapsan, nega qilyapsan, keyin nima bo'ladi — shu uchtasi.",
+    body: "Nadir — sensiz uxlamaydigan yordamchi emas. U — sening tanlovlaringni ko'rib, halol javob beradigan xarakter. \"Yaxshi ish qilyapsan\" degan bo'sh maqtov Nadir'da yo'q. Nima ish qilyapsan, nega qilyapsan, keyin nima bo'ladi — shu uchtasi.",
     quote:
       "«Sen bugun mashqni o'tkazib yubording. Sabab charchoq emas — sabab uyquga borishdan qo'rqishing. Ertaga soat 22:30 da telefonni jimjitga qo'y. Boshqa hech narsa.»",
     quoteBy: "— Nadir, real chat namunasi",
@@ -99,7 +95,7 @@ export const uz = {
         "Cheksiz Nadir muloqoti",
         "Kunlik AI tahlil va reja",
         "Workout + Diet moduli",
-        "\"Davra\" — jamoa va Party",
+        '"Davra" — jamoa va Party',
         "Leaderboard va yutuqlar",
       ],
       cta: "7 kun bepul boshlash",
@@ -107,8 +103,7 @@ export const uz = {
   },
   cta: {
     heading: "Bugun boshla. Ertaga — kech.",
-    body:
-      "60 soniyada onboarding. Karta so'ralmaydi. Yoqmasa, hech qanday izing qolmaydi.",
+    body: "60 soniyada onboarding. Karta so'ralmaydi. Yoqmasa, hech qanday izing qolmaydi.",
     button: "Tashxisdan o'tish",
   },
   footer: {

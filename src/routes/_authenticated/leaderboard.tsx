@@ -12,10 +12,7 @@ import { VILOYATLAR } from "@/lib/nervous";
 
 export const Route = createFileRoute("/_authenticated/leaderboard")({
   head: () => ({
-    meta: [
-      { title: `Reyting — ${uz.brand.name}` },
-      { name: "robots", content: "noindex" },
-    ],
+    meta: [{ title: `Reyting — ${uz.brand.name}` }, { name: "robots", content: "noindex" }],
   }),
   component: Leaderboard,
 });
@@ -57,7 +54,7 @@ function Leaderboard() {
         .limit(200);
       const base = (data as Omit<Row, "streak_days" | "blended">[] | null) ?? [];
       const ids = base.map((b) => b.user_id);
-      let streakMap: Record<string, number> = {};
+      const streakMap: Record<string, number> = {};
       if (ids.length > 0) {
         const { data: sts } = await supabase
           .from("streaks")
@@ -90,9 +87,12 @@ function Leaderboard() {
       return;
     }
     (async () => {
-      const { data } = await supabase.rpc("public_profile_ids_by_region" as never, {
-        _viloyat: viloyat,
-      } as never);
+      const { data } = await supabase.rpc(
+        "public_profile_ids_by_region" as never,
+        {
+          _viloyat: viloyat,
+        } as never,
+      );
       setRegionalIds(new Set(((data as { id: string }[] | null) ?? []).map((p) => p.id)));
     })();
   }, [viloyat]);
@@ -128,7 +128,9 @@ function Leaderboard() {
         >
           <option value="all">Barcha viloyatlar</option>
           {VILOYATLAR.map((v) => (
-            <option key={v} value={v}>{v}</option>
+            <option key={v} value={v}>
+              {v}
+            </option>
           ))}
         </select>
         <div className="flex gap-2">
@@ -191,7 +193,10 @@ function Leaderboard() {
                     </p>
                   </div>
                 </div>
-                <p className="font-serif text-xl tabular-nums" title="Blended score: 50% XP + 50% izchillik">
+                <p
+                  className="font-serif text-xl tabular-nums"
+                  title="Blended score: 50% XP + 50% izchillik"
+                >
                   {r.blended}
                 </p>
               </Panel>

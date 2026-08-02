@@ -42,7 +42,9 @@ export function ProgressRing({
         />
       </svg>
       <div className="absolute inset-0 flex flex-col items-center justify-center leading-none">
-        <span className="font-serif text-lg">{value}/{total}</span>
+        <span className="font-serif text-lg">
+          {value}/{total}
+        </span>
         <span className="font-ui text-[9px] uppercase tracking-[0.2em] text-muted-foreground">
           bajarildi
         </span>

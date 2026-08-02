@@ -16,10 +16,7 @@ import {
 
 export const Route = createFileRoute("/_authenticated/onboarding")({
   head: () => ({
-    meta: [
-      { title: "Onboarding — Life Order" },
-      { name: "robots", content: "noindex" },
-    ],
+    meta: [{ title: "Onboarding — Life Order" }, { name: "robots", content: "noindex" }],
   }),
   component: Onboarding,
 });
@@ -114,16 +111,14 @@ function Onboarding() {
         boshqa: "other",
         aytmayman: "prefer_not_say",
       };
-      const actMap: Record<
-        string,
-        "sedentary" | "light" | "moderate" | "active" | "very_active"
-      > = {
-        kam_harakat: "sedentary",
-        engil: "light",
-        o_rta: "moderate",
-        faol: "active",
-        juda_faol: "very_active",
-      };
+      const actMap: Record<string, "sedentary" | "light" | "moderate" | "active" | "very_active"> =
+        {
+          kam_harakat: "sedentary",
+          engil: "light",
+          o_rta: "moderate",
+          faol: "active",
+          juda_faol: "very_active",
+        };
 
       const { archetypeFromAnswers } = await import("@/lib/nervous");
       const energyTime = answers["trigger.energy_time"];
@@ -141,8 +136,8 @@ function Onboarding() {
           age: Number.isFinite(ageNum) ? ageNum : null,
           height_cm: Number.isFinite(heightNum) ? heightNum : null,
           weight_kg: Number.isFinite(weightNum) ? weightNum : null,
-          sex: typeof sexVal === "string" ? sexMap[sexVal] ?? null : null,
-          activity_level: typeof actVal === "string" ? actMap[actVal] ?? null : null,
+          sex: typeof sexVal === "string" ? (sexMap[sexVal] ?? null) : null,
+          activity_level: typeof actVal === "string" ? (actMap[actVal] ?? null) : null,
           plan_length_days: plan,
           archetype: arche.id,
           onboarding_completed_at: new Date().toISOString(),
@@ -173,8 +168,7 @@ function Onboarding() {
             },
             body: JSON.stringify({
               archetype: arche.id,
-              energyTime:
-                typeof energyTime === "string" ? energyTime : "",
+              energyTime: typeof energyTime === "string" ? energyTime : "",
               planDays: plan,
               triggers: triggers.slice(0, 10),
             }),
@@ -243,7 +237,6 @@ function Onboarding() {
   return (
     <div className="min-h-dvh bg-background text-foreground">
       <div className="mx-auto max-w-xl px-5 py-10">
-
         <ProgressBar current={step + 1} total={total} label={sectionLabel} />
 
         <div className="mt-4 flex flex-wrap gap-1.5">
@@ -294,7 +287,6 @@ function Onboarding() {
               }}
               onToggleMulti={(v) => toggleMulti(currentB.key, v)}
             />
-
           ) : (
             <FinalPage
               questions={aQuestions}
@@ -333,25 +325,13 @@ function Onboarding() {
   );
 }
 
-function ProgressBar({
-  current,
-  total,
-  label,
-}: {
-  current: number;
-  total: number;
-  label: string;
-}) {
+function ProgressBar({ current, total, label }: { current: number; total: number; label: string }) {
   const pct = Math.min(100, Math.round((current / total) * 100));
   return (
     <div>
       <div className="flex items-baseline justify-between">
-        <p className="font-ui text-xs uppercase tracking-[0.28em] text-primary">
-          {label}
-        </p>
-        <span className="font-ui text-xs text-muted-foreground tabular-nums">
-          {pct}%
-        </span>
+        <p className="font-ui text-xs uppercase tracking-[0.28em] text-primary">{label}</p>
+        <span className="font-ui text-xs text-muted-foreground tabular-nums">{pct}%</span>
       </div>
       <div className="mt-3 h-1 w-full overflow-hidden rounded-full bg-secondary">
         <div
@@ -376,13 +356,9 @@ function QuestionCard({
 }) {
   return (
     <div>
-      <h2 className="font-serif text-3xl leading-tight tracking-tight text-balance">
-        {q.prompt}
-      </h2>
+      <h2 className="font-serif text-3xl leading-tight tracking-tight text-balance">{q.prompt}</h2>
       {q.helper && (
-        <p className="mt-3 font-ui text-sm leading-relaxed text-muted-foreground">
-          {q.helper}
-        </p>
+        <p className="mt-3 font-ui text-sm leading-relaxed text-muted-foreground">{q.helper}</p>
       )}
       <div className="mt-8">
         {q.type === "number" ? (
@@ -397,11 +373,7 @@ function QuestionCard({
               className="w-40 font-serif text-3xl h-auto py-3"
             />
 
-            {q.suffix && (
-              <span className="font-ui text-sm text-muted-foreground">
-                {q.suffix}
-              </span>
-            )}
+            {q.suffix && <span className="font-ui text-sm text-muted-foreground">{q.suffix}</span>}
           </div>
         ) : (
           <OptionList q={q} value={value} onChange={onChange} onToggleMulti={onToggleMulti} />
@@ -429,9 +401,7 @@ function OptionList({
   return (
     <div className="space-y-2">
       {q.options?.map((opt) => {
-        const selected = isMulti
-          ? selectedArr.includes(opt.value)
-          : selectedStr === opt.value;
+        const selected = isMulti ? selectedArr.includes(opt.value) : selectedStr === opt.value;
         return (
           <button
             key={opt.value}
@@ -443,9 +413,7 @@ function OptionList({
                 : "lift flex w-full items-center justify-between rounded-[var(--radius)] border border-border bg-card px-5 py-4 text-left font-ui text-sm transition-colors hover:border-foreground/30"
             }
           >
-            <span className={selected ? "text-foreground" : "text-foreground/90"}>
-              {opt.label}
-            </span>
+            <span className={selected ? "text-foreground" : "text-foreground/90"}>{opt.label}</span>
             <span
               aria-hidden
               className={
@@ -601,7 +569,8 @@ function FinalPage({
         {/* Reja davomiyligi — xuddi savolga o'xshab yig'iladigan qator */}
         {(() => {
           const isOpen = openKey === "__plan__";
-          const planLabel = plan === 7 ? "7 kun — Tez sprint" : plan === 30 ? "30 kun — To'liq o'zgarish" : "—";
+          const planLabel =
+            plan === 7 ? "7 kun — Tez sprint" : plan === 30 ? "30 kun — To'liq o'zgarish" : "—";
           const answered = plan !== null;
           return (
             <div>
@@ -635,12 +604,20 @@ function FinalPage({
               {isOpen && (
                 <div className="border-t border-border/40 px-5 pb-5 pt-4 animate-fade-in">
                   <div className="grid gap-3 sm:grid-cols-2">
-                    {(
-                      [
-                        { value: 7 as const, tag: "Tez sprint", title: "7 kun", body: "Bir haftalik intensiv — tez natija." },
-                        { value: 30 as const, tag: "To'liq o'zgarish", title: "30 kun", body: "Chuqurroq qayta qurish — odat singiydi." },
-                      ]
-                    ).map((opt) => {
+                    {[
+                      {
+                        value: 7 as const,
+                        tag: "Tez sprint",
+                        title: "7 kun",
+                        body: "Bir haftalik intensiv — tez natija.",
+                      },
+                      {
+                        value: 30 as const,
+                        tag: "To'liq o'zgarish",
+                        title: "30 kun",
+                        body: "Chuqurroq qayta qurish — odat singiydi.",
+                      },
+                    ].map((opt) => {
                       const selected = plan === opt.value;
                       return (
                         <button
@@ -714,4 +691,3 @@ function SocialMirror() {
     </div>
   );
 }
-

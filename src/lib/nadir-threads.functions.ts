@@ -34,7 +34,10 @@ export const ensurePrimaryThread = createServerFn({ method: "POST" })
     return { threadId: (data as { id: string }).id };
   });
 
-const LoadInput = z.object({ threadId: z.string().uuid(), limit: z.number().int().min(1).max(200).optional() });
+const LoadInput = z.object({
+  threadId: z.string().uuid(),
+  limit: z.number().int().min(1).max(200).optional(),
+});
 
 /** Load messages of a thread (owned by caller). */
 export const loadThreadMessages = createServerFn({ method: "POST" })

@@ -20,17 +20,24 @@ export const Route = createFileRoute("/privacy")({
   component: () => (
     <LegalShell title="Maxfiylik siyosati" updated="17-iyul, 2026">
       <p>
-        Sizning ma'lumotingiz — sizniki. Biz uni sotmaymiz, reklama uchun
-        ishlatmaymiz va uchinchi tomonga o'tkazmaymiz. Quyida aniq kim, nima
-        va qancha vaqt.
+        Sizning ma'lumotingiz — sizniki. Biz uni sotmaymiz, reklama uchun ishlatmaymiz va uchinchi
+        tomonga o'tkazmaymiz. Quyida aniq kim, nima va qancha vaqt.
       </p>
 
       <h2 className="mt-8 font-serif text-2xl">Nima yig'amiz</h2>
       <ul className="ml-5 list-disc space-y-1.5">
-        <li><strong>Hisob:</strong> email, ism (ixtiyoriy), avatar.</li>
-        <li><strong>Kontent:</strong> odatlar, kundalik, kayfiyat, quest va streak.</li>
-        <li><strong>AI suhbat:</strong> Nadir bilan xabar tarixi (shaxsiy javob uchun).</li>
-        <li><strong>Texnik:</strong> qurilma turi, tili, xatolik tafsiloti (PII'siz).</li>
+        <li>
+          <strong>Hisob:</strong> email, ism (ixtiyoriy), avatar.
+        </li>
+        <li>
+          <strong>Kontent:</strong> odatlar, kundalik, kayfiyat, quest va streak.
+        </li>
+        <li>
+          <strong>AI suhbat:</strong> Nadir bilan xabar tarixi (shaxsiy javob uchun).
+        </li>
+        <li>
+          <strong>Texnik:</strong> qurilma turi, tili, xatolik tafsiloti (PII'siz).
+        </li>
       </ul>
 
       <h2 className="mt-8 font-serif text-2xl">Nima uchun</h2>
@@ -43,9 +50,16 @@ export const Route = createFileRoute("/privacy")({
 
       <h2 className="mt-8 font-serif text-2xl">Kim ko'radi</h2>
       <ul className="ml-5 list-disc space-y-1.5">
-        <li><strong>Siz</strong> — barcha ma'lumot.</li>
-        <li><strong>Xizmat provayderlari:</strong> hosting (Cloudflare), backend (Supabase), AI (Lovable AI Gateway), monitoring (Sentry). Har biri DPA bilan bog'langan.</li>
-        <li>Reklama tarmoqlari — <strong>yo'q</strong>. Ma'lumot broker'lari — <strong>yo'q</strong>.</li>
+        <li>
+          <strong>Siz</strong> — barcha ma'lumot.
+        </li>
+        <li>
+          <strong>Xizmat provayderlari:</strong> hosting (Cloudflare), backend (Supabase), AI
+          (Lovable AI Gateway), monitoring (Sentry). Har biri DPA bilan bog'langan.
+        </li>
+        <li>
+          Reklama tarmoqlari — <strong>yo'q</strong>. Ma'lumot broker'lari — <strong>yo'q</strong>.
+        </li>
       </ul>
 
       <h2 className="mt-8 font-serif text-2xl">Qancha saqlaymiz</h2>

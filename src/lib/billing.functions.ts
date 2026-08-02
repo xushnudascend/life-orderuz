@@ -14,8 +14,7 @@ export type CheckoutResult = {
 export const createCheckout = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((input: CheckoutInput) => {
-    if (input?.plan !== "monthly" && input?.plan !== "yearly")
-      throw new Error("invalid_plan");
+    if (input?.plan !== "monthly" && input?.plan !== "yearly") throw new Error("invalid_plan");
     if (input?.provider !== "payme" && input?.provider !== "click")
       throw new Error("invalid_provider");
     return input;
@@ -70,7 +69,6 @@ export const getBillingStatus = createServerFn({ method: "GET" })
       .maybeSingle();
     const row = data as { subscription_tier?: string; subscription_until?: string } | null;
     const until = row?.subscription_until ?? null;
-    const active =
-      row?.subscription_tier === "pro" && (!until || new Date(until) > new Date());
+    const active = row?.subscription_tier === "pro" && (!until || new Date(until) > new Date());
     return { tier: active ? ("pro" as const) : ("free" as const), until };
   });

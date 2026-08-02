@@ -14,7 +14,6 @@ const COLUMNS: { title: string; links: { href: string; label: string }[] }[] = [
   {
     title: "Kompaniya",
     links: [
-      
       { href: "/blog/hayot-sohalari", label: "Blog" },
       { href: "/security", label: "Xavfsizlik" },
     ],
@@ -43,9 +42,7 @@ export function SiteFooter() {
               >
                 <span className="font-serif text-base font-semibold leading-none">L</span>
               </span>
-              <span className="font-serif text-lg font-bold tracking-tight">
-                {uz.brand.name}
-              </span>
+              <span className="font-serif text-lg font-bold tracking-tight">{uz.brand.name}</span>
             </Link>
             <p className="mt-4 max-w-[240px] font-ui text-[13px] leading-relaxed text-muted-foreground">
               Motivatsiya tugaydi. Tizim qoladi. Xulq-atvor tizimi — o'zbek tilida.
@@ -75,7 +72,9 @@ export function SiteFooter() {
           ))}
         </div>
         <div className="mt-12 flex flex-wrap items-center justify-between gap-3 border-t border-border pt-6 font-ui text-xs text-muted-foreground">
-          <p>© {year} {uz.brand.name}. Barcha huquqlar himoyalangan.</p>
+          <p>
+            © {year} {uz.brand.name}. Barcha huquqlar himoyalangan.
+          </p>
           <p className="flex items-center gap-2">
             <span
               aria-hidden

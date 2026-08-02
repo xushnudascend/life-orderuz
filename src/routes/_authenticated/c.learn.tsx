@@ -17,10 +17,7 @@ import { uz } from "@/i18n";
 
 export const Route = createFileRoute("/_authenticated/c/learn")({
   head: () => ({
-    meta: [
-      { title: `O'rganish — ${uz.brand.name}` },
-      { name: "robots", content: "noindex" },
-    ],
+    meta: [{ title: `O'rganish — ${uz.brand.name}` }, { name: "robots", content: "noindex" }],
   }),
   component: LearnCategory,
 });
@@ -34,9 +31,6 @@ function LearnCategory() {
         subtitle="O'zingni tomosha qilib turmasang — o'zgarish ko'rinmaydi. Kundalik, suhbat va tahlil — refleksiya halqasi."
       />
       <IfThenHint trigger="kechqurun yotoqqa yotsam" action="3 jumla kundalik yozaman" />
-
-
-
 
       {/* Asosiy bo'limlar */}
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
@@ -67,11 +61,7 @@ function LearnCategory() {
       <Panel className="mt-6">
         <PanelHeader
           eyebrow="Halqa"
-          title={
-            <p className="font-serif text-lg font-semibold">
-              Ko'r → Ayt → O'lcha → Tuzat
-            </p>
-          }
+          title={<p className="font-serif text-lg font-semibold">Ko'r → Ayt → O'lcha → Tuzat</p>}
         />
         <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           <Step
@@ -104,6 +94,7 @@ function LearnCategory() {
       <div className="mt-6 flex flex-wrap gap-2">
         <Link
           to="/journal"
+          search={{ title: undefined, text: undefined, url: undefined }}
           className="inline-flex items-center gap-1.5 rounded-full border border-border px-3 py-1.5 font-ui text-[11px] font-semibold uppercase tracking-[0.2em] hover:border-primary/50 hover:text-primary transition-colors"
         >
           Yozuv qo'shish <ArrowRight className="h-3 w-3" />
@@ -144,9 +135,7 @@ function SectionCard({
         </span>
       </div>
       <h2 className="mt-4 font-serif text-xl">{title}</h2>
-      <p className="mt-1.5 font-ui text-[13px] leading-relaxed text-muted-foreground">
-        {body}
-      </p>
+      <p className="mt-1.5 font-ui text-[13px] leading-relaxed text-muted-foreground">{body}</p>
       <span className="mt-4 inline-flex items-center gap-1 font-ui text-[11px] font-semibold uppercase tracking-[0.2em] text-primary group-hover:gap-1.5 transition-all">
         Ochish <ArrowRight className="h-3 w-3" />
       </span>
@@ -174,9 +163,7 @@ function Step({
         </span>
       </div>
       <p className="mt-3 font-serif text-sm font-semibold">{title}</p>
-      <p className="mt-1 font-ui text-[12px] leading-relaxed text-muted-foreground">
-        {body}
-      </p>
+      <p className="mt-1 font-ui text-[12px] leading-relaxed text-muted-foreground">{body}</p>
     </div>
   );
 }

@@ -32,10 +32,7 @@ import { Shimmer } from "@/components/ai-elements/shimmer";
 
 export const Route = createFileRoute("/_authenticated/mentor")({
   head: () => ({
-    meta: [
-      { title: `Nadir — ${uz.brand.name}` },
-      { name: "robots", content: "noindex" },
-    ],
+    meta: [{ title: `Nadir — ${uz.brand.name}` }, { name: "robots", content: "noindex" }],
   }),
   component: MentorPage,
 });
@@ -85,11 +82,7 @@ async function fetchNadirStats(userId: string): Promise<UserStats> {
       .select("total_xp, level, discipline_score")
       .eq("user_id", userId)
       .maybeSingle(),
-    supabase
-      .from("streaks")
-      .select("current_days")
-      .eq("user_id", userId)
-      .maybeSingle(),
+    supabase.from("streaks").select("current_days").eq("user_id", userId).maybeSingle(),
     supabase
       .from("habit_logs")
       .select("logged_date")
@@ -108,11 +101,18 @@ async function fetchNadirStats(userId: string): Promise<UserStats> {
   const expected = totalHabits * 7;
   const done = logsData.length;
   const completion = expected > 0 ? Math.round((done / expected) * 100) : 0;
-  const missedYesterday =
-    totalHabits > 0 && !logsData.some((l) => l.logged_date === y);
+  const missedYesterday = totalHabits > 0 && !logsData.some((l) => l.logged_date === y);
 
-  const p = prof.data as { display_name: string | null; archetype: string | null; plan_length_days: number | null } | null;
-  const s = stats.data as { total_xp: number | null; level: number | null; discipline_score: number | null } | null;
+  const p = prof.data as {
+    display_name: string | null;
+    archetype: string | null;
+    plan_length_days: number | null;
+  } | null;
+  const s = stats.data as {
+    total_xp: number | null;
+    level: number | null;
+    discipline_score: number | null;
+  } | null;
   const st = streak.data as { current_days: number | null } | null;
 
   return {
@@ -213,7 +213,6 @@ function MentorPage() {
   );
 }
 
-
 function MentorChat({
   userId,
   threadId,
@@ -251,7 +250,6 @@ function MentorChat({
   });
   void userId;
 
-
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, bottomRef]);
@@ -278,7 +276,8 @@ function MentorChat({
         subtitle="Halol savol ber. Halol javob olasan. Bo'sh maqtov yo'q."
         actions={
           <span className="font-ui text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
-            Daraja {stats.level} · Streak {stats.currentStreak} · Discipline {stats.disciplineScore}/100
+            Daraja {stats.level} · Streak {stats.currentStreak} · Discipline {stats.disciplineScore}
+            /100
           </span>
         }
       />
@@ -313,9 +312,6 @@ function MentorChat({
           );
         })}
       </div>
-
-
-
 
       <div className="mt-6 flex min-h-[60vh] flex-col">
         <Conversation className="flex-1">
@@ -378,7 +374,9 @@ function MentorChat({
             })}
 
             {(() => {
-              const lastAssistant = [...(messages as UIMessage[])].reverse().find((m) => m.role === "assistant");
+              const lastAssistant = [...(messages as UIMessage[])]
+                .reverse()
+                .find((m) => m.role === "assistant");
               if (!lastAssistant || busy || messages.length === 0) return null;
               const followUps = [
                 "Bu mikro-qadamni bugun qachon bajaraman?",
@@ -406,33 +404,35 @@ function MentorChat({
                 <Shimmer className="font-ui text-sm">Nadir o'ylayapti…</Shimmer>
               </div>
             )}
-            {error && (() => {
-              const msg = error.message || "";
-              const isQuota = /daily_ai_budget_exceeded|429/i.test(msg);
-              if (isQuota) {
+            {error &&
+              (() => {
+                const msg = error.message || "";
+                const isQuota = /daily_ai_budget_exceeded|429/i.test(msg);
+                if (isQuota) {
+                  return (
+                    <div className="rounded-[var(--radius)] border border-primary/40 bg-primary/5 p-4 text-sm">
+                      <p className="mb-2 font-serif text-base text-foreground">
+                        Bugungi bepul limit tugadi.
+                      </p>
+                      <p className="mb-3 text-muted-foreground">
+                        Free rejimida kuniga 10 ta xabar. Pro'da 300 ta va boshqa AI xizmatlari
+                        cheklovsiz.
+                      </p>
+                      <a
+                        href="/pricing"
+                        className="inline-flex items-center rounded-full border border-primary bg-primary px-3 py-1.5 font-ui text-xs uppercase tracking-[0.2em] text-primary-foreground transition hover:opacity-90"
+                      >
+                        Pro'ga o'tish
+                      </a>
+                    </div>
+                  );
+                }
                 return (
-                  <div className="rounded-[var(--radius)] border border-primary/40 bg-primary/5 p-4 text-sm">
-                    <p className="mb-2 font-serif text-base text-foreground">
-                      Bugungi bepul limit tugadi.
-                    </p>
-                    <p className="mb-3 text-muted-foreground">
-                      Free rejimida kuniga 10 ta xabar. Pro'da 300 ta va boshqa AI xizmatlari cheklovsiz.
-                    </p>
-                    <a
-                      href="/pricing"
-                      className="inline-flex items-center rounded-full border border-primary bg-primary px-3 py-1.5 font-ui text-xs uppercase tracking-[0.2em] text-primary-foreground transition hover:opacity-90"
-                    >
-                      Pro'ga o'tish
-                    </a>
+                  <div className="rounded-[var(--radius)] border border-destructive/40 bg-destructive/10 p-3 text-sm text-destructive">
+                    Xato: {msg}
                   </div>
                 );
-              }
-              return (
-                <div className="rounded-[var(--radius)] border border-destructive/40 bg-destructive/10 p-3 text-sm text-destructive">
-                  Xato: {msg}
-                </div>
-              );
-            })()}
+              })()}
 
             <div ref={bottomRef} />
           </ConversationContent>

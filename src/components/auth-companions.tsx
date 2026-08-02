@@ -38,8 +38,7 @@ export function AuthCompanions() {
       <div
         className={`absolute left-1/2 top-1/4 h-40 w-40 -translate-x-1/2 rounded-full blur-2xl sm:h-56 sm:w-56 ${animClass}`}
         style={{
-          background:
-            "radial-gradient(circle, hsl(var(--primary) / 0.14), transparent 70%)",
+          background: "radial-gradient(circle, hsl(var(--primary) / 0.14), transparent 70%)",
           animationDelay: "6s",
         }}
       />

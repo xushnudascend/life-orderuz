@@ -6,7 +6,18 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
-import { Loader2, Bell, User as UserIcon, ShieldAlert, Sparkles, Languages, Clock, Wand2, HelpCircle, Palette } from "lucide-react";
+import {
+  Loader2,
+  Bell,
+  User as UserIcon,
+  ShieldAlert,
+  Sparkles,
+  Languages,
+  Clock,
+  Wand2,
+  HelpCircle,
+  Palette,
+} from "lucide-react";
 import { toast } from "sonner";
 import { uz } from "@/i18n";
 import { TIMEZONES } from "@/lib/nervous";
@@ -19,10 +30,7 @@ import { NotificationBudgetCard } from "@/components/notification-budget-card";
 
 export const Route = createFileRoute("/_authenticated/settings")({
   head: () => ({
-    meta: [
-      { title: `Sozlamalar — ${uz.brand.name}` },
-      { name: "robots", content: "noindex" },
-    ],
+    meta: [{ title: `Sozlamalar — ${uz.brand.name}` }, { name: "robots", content: "noindex" }],
   }),
   component: Settings,
 });
@@ -232,7 +240,8 @@ function Settings() {
 
         <Card icon={<Palette className="h-4 w-4 text-primary" />} title="Tema">
           <p className="mb-4 text-sm text-muted-foreground">
-            Uch tema — bir xil semantik token strukturasi. Almashtirilganda komponentlar avtomatik moslashadi.
+            Uch tema — bir xil semantik token strukturasi. Almashtirilganda komponentlar avtomatik
+            moslashadi.
           </p>
           <ThemeSwitcher />
         </Card>
@@ -241,7 +250,9 @@ function Settings() {
           <div className="space-y-4">
             <Row
               label="Barcha effektlar"
-              hint={prefs.animations_enabled ? "Animatsiyalar yoqilgan" : "Animatsiyalar o'chirilgan"}
+              hint={
+                prefs.animations_enabled ? "Animatsiyalar yoqilgan" : "Animatsiyalar o'chirilgan"
+              }
             >
               <Switch
                 checked={prefs.animations_enabled}
@@ -251,7 +262,8 @@ function Settings() {
             <div className="space-y-2">
               <p className="font-ui text-sm">Harakatlanish darajasi</p>
               <p className="text-xs text-muted-foreground">
-                <code>auto</code> — qurilma sozlamasiga ergashadi. Tinch ish uchun <code>kamaytirilgan</code> tanlang.
+                <code>auto</code> — qurilma sozlamasiga ergashadi. Tinch ish uchun{" "}
+                <code>kamaytirilgan</code> tanlang.
               </p>
               <div className="flex flex-wrap gap-2">
                 {(["auto", "reduce", "full"] as const).map((p) => {
@@ -278,7 +290,6 @@ function Settings() {
             </div>
           </div>
         </Card>
-
 
         <Card icon={<HelpCircle className="h-4 w-4 text-primary" />} title="Moslashish">
           <Row

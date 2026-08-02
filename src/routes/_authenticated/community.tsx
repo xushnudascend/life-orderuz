@@ -13,10 +13,7 @@ import { joinCohort } from "@/lib/cohort.functions";
 
 export const Route = createFileRoute("/_authenticated/community")({
   head: () => ({
-    meta: [
-      { title: `Davra — ${uz.brand.name}` },
-      { name: "robots", content: "noindex" },
-    ],
+    meta: [{ title: `Davra — ${uz.brand.name}` }, { name: "robots", content: "noindex" }],
   }),
   component: CommunityLayout,
 });
@@ -53,8 +50,8 @@ function CommunityLayout() {
 
       <CohortJoiner />
       <p className="mt-3 font-ui text-[11px] leading-relaxed text-muted-foreground/70">
-        Dunbar (1992): neokorteks hajmi ijtimoiy davra chegarasini belgilaydi. Katta guruh —
-        yuzsiz; kichik davra — javobgar. Shuning uchun bizda 5 · 15 · 50 sig'imli qat'iy davralar.
+        Dunbar (1992): neokorteks hajmi ijtimoiy davra chegarasini belgilaydi. Katta guruh — yuzsiz;
+        kichik davra — javobgar. Shuning uchun bizda 5 · 15 · 50 sig'imli qat'iy davralar.
       </p>
 
       {loading ? (
@@ -98,19 +95,41 @@ function CommunityLayout() {
 }
 
 const TIERS = [
-  { tier: "inner5" as const, cap: 5, icon: Shield, label: "Yaqin halqa", hint: "Kundalik mas'uliyat · 5 kishi" },
-  { tier: "trust15" as const, cap: 15, icon: Users, label: "Ishonch davrasi", hint: "Streak sheriklari · 15 kishi" },
-  { tier: "circle50" as const, cap: 50, icon: Globe2, label: "Kengroq doira", hint: "Mavzuli · 50 kishi" },
+  {
+    tier: "inner5" as const,
+    cap: 5,
+    icon: Shield,
+    label: "Yaqin halqa",
+    hint: "Kundalik mas'uliyat · 5 kishi",
+  },
+  {
+    tier: "trust15" as const,
+    cap: 15,
+    icon: Users,
+    label: "Ishonch davrasi",
+    hint: "Streak sheriklari · 15 kishi",
+  },
+  {
+    tier: "circle50" as const,
+    cap: 50,
+    icon: Globe2,
+    label: "Kengroq doira",
+    hint: "Mavzuli · 50 kishi",
+  },
 ];
 
 function CohortJoiner() {
   const join = useServerFn(joinCohort);
-  const [state, setState] = useState<Record<string, { members: number; loading?: boolean; error?: string }>>({});
+  const [state, setState] = useState<
+    Record<string, { members: number; loading?: boolean; error?: string }>
+  >({});
 
   useEffect(() => {
     let cancelled = false;
     (async () => {
-      const { data: { user } } = await supabase.auth.getUser();
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
       if (!user) return;
       const { data } = await supabase
         .from("cohort_members")
@@ -134,7 +153,10 @@ function CohortJoiner() {
       const res = await join({ data: { tier } });
       setState((s) => ({ ...s, [tier]: { members: res.memberCount } }));
     } catch (e) {
-      setState((s) => ({ ...s, [tier]: { ...s[tier], loading: false, error: (e as Error).message } }));
+      setState((s) => ({
+        ...s,
+        [tier]: { ...s[tier], loading: false, error: (e as Error).message },
+      }));
     }
   };
 
@@ -152,7 +174,8 @@ function CohortJoiner() {
             </div>
             <div>
               <p className="font-serif text-2xl tabular-nums">
-                {joined ? `${joined.members}` : "0"}<span className="text-muted-foreground/60"> / {cap}</span>
+                {joined ? `${joined.members}` : "0"}
+                <span className="text-muted-foreground/60"> / {cap}</span>
               </p>
               <p className="mt-1 font-ui text-xs text-muted-foreground">{hint}</p>
             </div>
@@ -167,7 +190,11 @@ function CohortJoiner() {
                 disabled={state[tier]?.loading}
                 onClick={() => handleJoin(tier)}
               >
-                {state[tier]?.loading ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : "Qo'shilish"}
+                {state[tier]?.loading ? (
+                  <Loader2 className="h-3.5 w-3.5 animate-spin" />
+                ) : (
+                  "Qo'shilish"
+                )}
               </Button>
             )}
           </Panel>

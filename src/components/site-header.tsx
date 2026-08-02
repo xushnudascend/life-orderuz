@@ -8,7 +8,7 @@ const DEFAULT_NAV: NavLink[] = [
   { href: "/#science", label: "Ilm" },
   { href: "/pricing", label: "Narx" },
   { href: "/blog", label: "Blog" },
-  
+
   { href: "/#faq", label: "Savollar" },
 ];
 
@@ -34,9 +34,7 @@ export function SiteHeader({
           >
             <span className="font-serif text-[15px] font-semibold leading-none">L</span>
           </span>
-          <span className="font-serif text-[17px] font-bold tracking-tight">
-            {uz.brand.name}
-          </span>
+          <span className="font-serif text-[17px] font-bold tracking-tight">{uz.brand.name}</span>
         </Link>
         <nav className="hidden items-center gap-7 md:flex font-ui text-[13px] text-muted-foreground">
           {nav.map((l) => (
@@ -53,14 +51,19 @@ export function SiteHeader({
             </a>
           ))}
         </nav>
-        <Button asChild size="sm" className="group rounded-full font-ui font-semibold shadow-[0_0_0_1px_hsl(var(--primary)/0.4),0_8px_24px_-12px_hsl(var(--primary)/0.55)] transition-shadow hover:shadow-[0_0_0_1px_hsl(var(--primary)/0.6),0_12px_32px_-10px_hsl(var(--primary)/0.75)]">
+        <Button
+          asChild
+          size="sm"
+          className="group rounded-full font-ui font-semibold shadow-[0_0_0_1px_hsl(var(--primary)/0.4),0_8px_24px_-12px_hsl(var(--primary)/0.55)] transition-shadow hover:shadow-[0_0_0_1px_hsl(var(--primary)/0.6),0_12px_32px_-10px_hsl(var(--primary)/0.75)]"
+        >
           <Link to={cta.to}>
             {cta.label}
-            <span aria-hidden className="cta-arrow ml-1 inline-block">→</span>
+            <span aria-hidden className="cta-arrow ml-1 inline-block">
+              →
+            </span>
           </Link>
         </Button>
       </div>
     </header>
   );
 }
-

@@ -66,7 +66,9 @@ export function MilestoneCelebration({
         visible ? "opacity-100" : "pointer-events-none opacity-0"
       }`}
     >
-      <div className={`h-56 w-56 sm:h-72 sm:w-72 ${reduced ? "" : "animate-in zoom-in-50 duration-500"}`}>
+      <div
+        className={`h-56 w-56 sm:h-72 sm:w-72 ${reduced ? "" : "animate-in zoom-in-50 duration-500"}`}
+      >
         <MilestoneGlyph />
       </div>
       <div className="px-6 text-center">

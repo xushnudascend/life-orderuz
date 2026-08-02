@@ -10,10 +10,7 @@ import { uz } from "@/i18n";
 
 export const Route = createFileRoute("/_authenticated/quests")({
   head: () => ({
-    meta: [
-      { title: `Vazifalar — ${uz.brand.name}` },
-      { name: "robots", content: "noindex" },
-    ],
+    meta: [{ title: `Vazifalar — ${uz.brand.name}` }, { name: "robots", content: "noindex" }],
   }),
   component: Quests,
 });
@@ -101,18 +98,12 @@ function Quests() {
                         : "border-border text-muted-foreground")
                     }
                   >
-                    {isDone ? (
-                      <Check className="h-4 w-4" />
-                    ) : (
-                      <Target className="h-4 w-4" />
-                    )}
+                    {isDone ? <Check className="h-4 w-4" /> : <Target className="h-4 w-4" />}
                   </span>
                   <div>
                     <p className="font-serif text-lg">{q.title}</p>
                     {q.description && (
-                      <p className="mt-1 text-sm text-muted-foreground">
-                        {q.description}
-                      </p>
+                      <p className="mt-1 text-sm text-muted-foreground">{q.description}</p>
                     )}
                     <p className="mt-2 font-ui text-xs uppercase tracking-[0.2em] text-muted-foreground/80">
                       +{q.xp_reward} XP · qiyinlik {q.difficulty}

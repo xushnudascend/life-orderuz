@@ -78,10 +78,9 @@ function GoalTrackingApps() {
             Goal tracking ilovalar va habit trackerlar: farqi nimada?
           </h1>
           <p className="mt-4 text-muted-foreground">
-            &ldquo;Best apps for goal setting&rdquo; deb qidirayotganlarning
-            aksariyati aslida ikki xil vositani bir deb o&apos;ylaydi. Goal
-            tracking — <strong>natijani</strong> kuzatadi. Habit tracker —{" "}
-            <strong>jarayonni</strong>. Ikkalasi bir-birini almashtira olmaydi:
+            &ldquo;Best apps for goal setting&rdquo; deb qidirayotganlarning aksariyati aslida ikki
+            xil vositani bir deb o&apos;ylaydi. Goal tracking — <strong>natijani</strong> kuzatadi.
+            Habit tracker — <strong>jarayonni</strong>. Ikkalasi bir-birini almashtira olmaydi:
             maqsadsiz odat ma&apos;nosiz, odatsiz maqsad esa bajarilmaydi.
           </p>
 
@@ -111,60 +110,52 @@ function GoalTrackingApps() {
             Nega faqat maqsad qo&apos;yish yetarli emas
           </h2>
           <p className="mt-3 text-muted-foreground">
-            Locke va Latham (2002) ko&apos;rsatganidek, aniq va qiyin maqsad
-            natijani oshiradi — lekin faqat <em>qayta aloqa</em> va{" "}
-            <em>bajarish rejasi</em> mavjud bo&apos;lganda. Gollwitzer&apos;ning
-            implementation intentions tadqiqoti (1999) bir qadam qo&apos;shadi:
-            &ldquo;Agar X bo&apos;lsa, men Y qilaman&rdquo; formulasi bajarish
-            ehtimolini ikki baravargacha oshiradi. Ya&apos;ni maqsad kundalik
-            turtkiga aylantirilmasa, u shunchaki niyat bo&apos;lib qoladi.
+            Locke va Latham (2002) ko&apos;rsatganidek, aniq va qiyin maqsad natijani oshiradi —
+            lekin faqat <em>qayta aloqa</em> va <em>bajarish rejasi</em> mavjud bo&apos;lganda.
+            Gollwitzer&apos;ning implementation intentions tadqiqoti (1999) bir qadam qo&apos;shadi:
+            &ldquo;Agar X bo&apos;lsa, men Y qilaman&rdquo; formulasi bajarish ehtimolini ikki
+            baravargacha oshiradi. Ya&apos;ni maqsad kundalik turtkiga aylantirilmasa, u shunchaki
+            niyat bo&apos;lib qoladi.
           </p>
 
-          <h2 className="mt-6 text-2xl font-semibold">
-            Nega faqat odat kuzatish ham yetarli emas
-          </h2>
+          <h2 className="mt-6 text-2xl font-semibold">Nega faqat odat kuzatish ham yetarli emas</h2>
           <p className="mt-3 text-muted-foreground">
-            Har kuni belgi qo&apos;yish — dopamin beradi, lekin yo&apos;nalish
-            bermaydi. 3 oydan keyin ko&apos;pchilik &ldquo;streak&rdquo;ni
-            saqlaydi, ammo hayotida o&apos;zgarish sezmaydi. Sabab: odat hech
-            qanday o&apos;lchanadigan natijaga ulanmagan.
+            Har kuni belgi qo&apos;yish — dopamin beradi, lekin yo&apos;nalish bermaydi. 3 oydan
+            keyin ko&apos;pchilik &ldquo;streak&rdquo;ni saqlaydi, ammo hayotida o&apos;zgarish
+            sezmaydi. Sabab: odat hech qanday o&apos;lchanadigan natijaga ulanmagan.
           </p>
 
-          <h2 className="mt-6 text-2xl font-semibold">
-            Ishlaydigan model: maqsad → soha → odat
-          </h2>
+          <h2 className="mt-6 text-2xl font-semibold">Ishlaydigan model: maqsad → soha → odat</h2>
           <ul className="mt-3 space-y-2 text-muted-foreground">
             <li>
-              <strong>1. Maqsad</strong> — 90 kunlik, o&apos;lchanadigan natija
-              (masalan: 8 km yugurish).
+              <strong>1. Maqsad</strong> — 90 kunlik, o&apos;lchanadigan natija (masalan: 8 km
+              yugurish).
             </li>
             <li>
-              <strong>2. Soha</strong> — maqsad qaysi hayot o&apos;qiga tegishli
-              (sog&apos;liq, ish, aloqalar).
+              <strong>2. Soha</strong> — maqsad qaysi hayot o&apos;qiga tegishli (sog&apos;liq, ish,
+              aloqalar).
             </li>
             <li>
-              <strong>3. Odat</strong> — maqsadni harakatga aylantiruvchi eng
-              kichik kundalik qadam (2 daqiqa qoidasi).
+              <strong>3. Odat</strong> — maqsadni harakatga aylantiruvchi eng kichik kundalik qadam
+              (2 daqiqa qoidasi).
             </li>
             <li>
-              <strong>4. Qayta aloqa</strong> — haftalik hisobot: odat bajarildi,
-              lekin maqsad qimirlamadimi? Unda odat noto&apos;g&apos;ri tanlangan.
+              <strong>4. Qayta aloqa</strong> — haftalik hisobot: odat bajarildi, lekin maqsad
+              qimirlamadimi? Unda odat noto&apos;g&apos;ri tanlangan.
             </li>
           </ul>
 
           <h2 className="mt-6 text-2xl font-semibold">Qaysi ilovani tanlash</h2>
           <ul className="mt-3 space-y-2 text-muted-foreground">
             <li>
-              <strong>Faqat OKR / loyiha kerak</strong> → Notion, Todoist yoki
-              klassik goal tracker.
+              <strong>Faqat OKR / loyiha kerak</strong> → Notion, Todoist yoki klassik goal tracker.
             </li>
             <li>
               <strong>Faqat kundalik belgi kerak</strong> → Streaks, Habitify.
             </li>
             <li>
-              <strong>Ikkalasi bir tizimda kerak</strong> → Life Order: maqsad
-              hayot sohasiga, soha esa kundalik odatga bog&apos;lanadi va haftalik
-              hisobot ularni solishtiradi.
+              <strong>Ikkalasi bir tizimda kerak</strong> → Life Order: maqsad hayot sohasiga, soha
+              esa kundalik odatga bog&apos;lanadi va haftalik hisobot ularni solishtiradi.
             </li>
           </ul>
 
@@ -182,10 +173,9 @@ function GoalTrackingApps() {
           </div>
 
           <p className="mt-8 text-sm text-muted-foreground">
-            Manbalar: Locke E. &amp; Latham G. <em>Building a practically useful
-            theory of goal setting</em> (2002). Gollwitzer P.{" "}
-            <em>Implementation intentions</em> (1999). Fogg BJ.{" "}
-            <em>Tiny Habits</em> (2019).
+            Manbalar: Locke E. &amp; Latham G.{" "}
+            <em>Building a practically useful theory of goal setting</em> (2002). Gollwitzer P.{" "}
+            <em>Implementation intentions</em> (1999). Fogg BJ. <em>Tiny Habits</em> (2019).
           </p>
         </article>
       </main>
