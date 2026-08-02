@@ -104,6 +104,7 @@ function LearnCategory() {
       <div className="mt-6 flex flex-wrap gap-2">
         <Link
           to="/journal"
+          search={{ title: undefined, text: undefined, url: undefined }}
           className="inline-flex items-center gap-1.5 rounded-full border border-border px-3 py-1.5 font-ui text-[11px] font-semibold uppercase tracking-[0.2em] hover:border-primary/50 hover:text-primary transition-colors"
         >
           Yozuv qo'shish <ArrowRight className="h-3 w-3" />
