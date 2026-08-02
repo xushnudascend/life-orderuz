@@ -7,11 +7,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import { ArrowLeft, Eye, EyeOff, Loader2 } from "lucide-react";
+import { ArrowLeft, Eye, EyeOff, Loader2, ShieldCheck } from "lucide-react";
 import { uz } from "@/i18n";
-import { AuthCompanions } from "@/components/auth-companions";
-import { CornerOrnament } from "@/components/corner-ornament";
-import { HeroOrnament } from "@/components/hero-ornament";
 
 import { track } from "@/lib/analytics";
 
@@ -68,43 +65,42 @@ function AuthPage() {
 
   return (
     <div className="relative min-h-dvh overflow-hidden bg-background text-foreground">
-      {/* Calm ambient — single soft halo (amygdala down-regulation) */}
-      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
-        <div
-          className="absolute left-1/2 top-[18%] h-[520px] w-[520px] -translate-x-1/2 rounded-full opacity-60 blur-[110px] halo-drift"
-          style={{
-            background:
-              "radial-gradient(closest-side, hsl(var(--primary) / 0.22), transparent 70%)",
-          }}
-        />
-        <div className="absolute inset-0 opacity-[0.035] [background-image:radial-gradient(hsl(var(--foreground))_1px,transparent_1px)] [background-size:24px_24px]" />
-      </div>
-      {/* Nafas oluvchi blob-hamrohlar (mobil + desktop) */}
-      <AuthCompanions />
-      {/* Girih-uslubidagi burchak naqshi — mintaqaviy vizual imzo */}
-      <CornerOrnament position="top-right" size={260} />
-      <CornerOrnament position="bottom-left" size={200} />
-      {/* Nozik orbital signature — desktop'da chap tomonda */}
-      <HeroOrnament className="pointer-events-none absolute left-[-140px] top-1/2 hidden h-[440px] w-[440px] -translate-y-1/2 opacity-30 xl:block" />
+      {/* Bitta sokin gradient — ortiqcha harakat yo'q */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[520px]"
+        style={{
+          background:
+            "radial-gradient(55% 45% at 50% 0%, hsl(var(--primary) / 0.12), transparent 72%)",
+        }}
+      />
 
-      <div className="mx-auto max-w-md px-5 py-10">
+      <div className="mx-auto flex min-h-dvh w-full max-w-md flex-col px-5 py-8">
         <Link
           to="/"
-          className="inline-flex items-center gap-1.5 font-ui text-sm text-muted-foreground transition-colors hover:text-foreground"
+          className="inline-flex w-fit items-center gap-1.5 font-ui text-sm text-muted-foreground transition-colors hover:text-foreground"
         >
           <ArrowLeft className="h-4 w-4" />
           Bosh sahifa
         </Link>
 
-        <div className="mt-10 text-center">
-          <h1 className="font-serif text-3xl leading-tight tracking-tight">
-            {uz.brand.name} — Kirish yoki ro'yxatdan o'tish
+        <div className="mt-10 animate-fade-in-up text-center">
+          <h1 className="font-serif text-[28px] leading-tight tracking-tight md:text-3xl">
+            Tizimingni bugun boshla
           </h1>
-          <p className="mt-2 font-ui text-sm text-muted-foreground">{uz.brand.tagline}</p>
+          <p className="mt-2 font-ui text-sm text-muted-foreground">
+            3 daqiqalik tashxis — keyin birinchi qadam seni kutadi.
+          </p>
         </div>
 
-        <div className="glass mt-8 rounded-[var(--radius)] p-6">
-          <GoogleButton next={next} />
+        <div
+          className="mt-8 animate-fade-in-up rounded-2xl border border-border bg-card/70 p-6 shadow-[var(--shadow-card)] backdrop-blur-sm"
+          style={{ animationDelay: "80ms" }}
+        >
+          <div className="space-y-2.5">
+            <OAuthButton provider="google" label="Google bilan davom etish" next={next} />
+            <OAuthButton provider="apple" label="Apple bilan davom etish" next={next} />
+          </div>
 
           <div className="relative my-6">
             <div className="absolute inset-0 flex items-center">
@@ -131,9 +127,13 @@ function AuthPage() {
           </Tabs>
         </div>
 
-        <p className="mt-6 text-center font-ui text-[11px] text-muted-foreground/70">
-          Shifrlangan · Reklamasiz · Istagan payt o'chirasan
-        </p>
+        <Link
+          to="/privacy"
+          className="group mx-auto mt-6 inline-flex items-center gap-2 rounded-full border border-border/70 px-3.5 py-1.5 font-ui text-[11px] text-muted-foreground transition-colors hover:border-primary/40 hover:text-foreground"
+        >
+          <ShieldCheck className="h-3.5 w-3.5 text-primary" />
+          Maxfiylik va xavfsizlik
+        </Link>
       </div>
     </div>
   );
@@ -268,7 +268,15 @@ function ForgotPasswordLink({ email }: { email: string }) {
   );
 }
 
-function GoogleButton({ next }: { next: string }) {
+function OAuthButton({
+  provider,
+  label,
+  next,
+}: {
+  provider: "google" | "apple";
+  label: string;
+  next: string;
+}) {
   const [loading, setLoading] = useState(false);
   async function onClick() {
     if (loading) return;
@@ -280,14 +288,15 @@ function GoogleButton({ next }: { next: string }) {
         next === "/dashboard"
           ? window.location.origin
           : `${window.location.origin}/auth?next=${encodeURIComponent(next)}`;
-      const result = await lovable.auth.signInWithOAuth("google", {
+      const result = await lovable.auth.signInWithOAuth(provider, {
         redirect_uri: redirectUri,
       });
       if (result.error) {
-        toast.error("Google orqali kirib bo'lmadi. Qayta urinib ko'ring.");
+        toast.error(`${label} amalga oshmadi. Qayta urinib ko'ring.`);
         return;
       }
       if (result.redirected) return; // full-page nav
+      track("login", { method: provider });
       window.location.replace(next);
     } finally {
       setLoading(false);
@@ -297,12 +306,18 @@ function GoogleButton({ next }: { next: string }) {
     <Button
       type="button"
       variant="secondary"
-      className="w-full font-ui"
+      className="tap w-full justify-center rounded-xl font-ui transition-transform duration-200 active:scale-[0.99]"
       onClick={onClick}
       disabled={loading}
     >
-      {loading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <GoogleIcon />}
-      Google bilan davom etish
+      {loading ? (
+        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+      ) : provider === "google" ? (
+        <GoogleIcon />
+      ) : (
+        <AppleIcon />
+      )}
+      {label}
     </Button>
   );
 }
@@ -314,6 +329,14 @@ function GoogleIcon() {
         fill="#EA4335"
         d="M12 10.2v3.9h5.5c-.24 1.4-1.7 4.1-5.5 4.1-3.3 0-6-2.7-6-6.1s2.7-6.1 6-6.1c1.9 0 3.2.8 3.9 1.5l2.7-2.6C16.9 3.4 14.7 2.5 12 2.5 6.8 2.5 2.5 6.8 2.5 12s4.3 9.5 9.5 9.5c5.5 0 9.1-3.9 9.1-9.3 0-.6-.1-1.1-.2-1.5H12z"
       />
+    </svg>
+  );
+}
+
+function AppleIcon() {
+  return (
+    <svg viewBox="0 0 24 24" className="mr-2 h-4 w-4 fill-current" aria-hidden>
+      <path d="M16.36 12.72c.02 2.6 2.28 3.47 2.3 3.48-.02.06-.36 1.24-1.19 2.45-.72 1.05-1.47 2.1-2.65 2.12-1.16.02-1.53-.69-2.85-.69-1.32 0-1.73.67-2.83.71-1.14.04-2-1.13-2.73-2.18-1.49-2.15-2.63-6.08-1.1-8.73.76-1.32 2.12-2.15 3.59-2.17 1.12-.02 2.17.75 2.85.75.68 0 1.96-.93 3.3-.79.56.02 2.14.23 3.15 1.71-.08.05-1.88 1.1-1.86 3.34M14.2 4.6c.6-.73 1.01-1.75.9-2.76-.87.04-1.92.58-2.55 1.31-.56.65-1.05 1.69-.92 2.68.97.08 1.96-.49 2.57-1.23" />
     </svg>
   );
 }

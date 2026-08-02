@@ -2,8 +2,7 @@
 @source "../src";
 @import "tw-animate-css";
 
-@custom-variant light (&:is(.light *));
-@custom-variant blue (&:is(.blue *));
+/* Yagona tema — Obsidian + Amber. Boshqa temalar olib tashlandi. */
 
 /*
  * LIFE ORDER — "Obsidian" design system.
@@ -59,111 +58,58 @@
   --font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
 }
 
-/* ---------- "Obsidian" — deep black + neon chartreuse (Life Order signature) ---------- */
+/* ---------- "Obsidian + Amber" — yagona tizim (landing va app bir xil) ---------- */
 :root {
-  --radius: 0.5rem;
+  --radius: 0.75rem;
 
-  --background: 0 0% 4%;
-  --foreground: 0 0% 92%;
-  --card: 0 0% 6%;
-  --card-foreground: 0 0% 94%;
-  --popover: 0 0% 7%;
-  --popover-foreground: 0 0% 94%;
+  --background: 0 0% 6%;
+  --foreground: 40 8% 96%;
+  --card: 0 0% 9%;
+  --card-foreground: 40 8% 96%;
+  --popover: 0 0% 10%;
+  --popover-foreground: 40 8% 96%;
 
-  /* Neon chartreuse — max cone sensitivity (~575nm), Life Order signature */
-  --primary: 72 100% 50%;
-  --primary-foreground: 0 0% 5%;
-  --primary-glow: 68 100% 60%;
+  /* Amber — iliq, davomiylik hissini beruvchi urg'u (5–10% maydon) */
+  --primary: 38 92% 55%;
+  --primary-foreground: 30 40% 8%;
+  --primary-glow: 34 96% 62%;
 
-  --secondary: 0 0% 10%;
-  --secondary-foreground: 0 0% 90%;
-  --muted: 0 0% 9%;
-  --muted-foreground: 0 0% 62%;
-  --accent: 0 0% 14%;
-  --accent-foreground: 0 0% 92%;
+  --secondary: 0 0% 12%;
+  --secondary-foreground: 40 8% 94%;
+  --muted: 0 0% 11%;
+  --muted-foreground: 40 5% 66%;
+  --accent: 0 0% 15%;
+  --accent-foreground: 40 8% 96%;
 
-  --destructive: 0 84% 60%;
+  --destructive: 8 78% 56%;
   --destructive-foreground: 0 0% 100%;
-  --success: 142 71% 45%;
-  --success-foreground: 0 0% 5%;
+  --success: 150 55% 45%;
+  --success-foreground: 0 0% 6%;
 
-  --border: 0 0% 14%;
-  --input: 0 0% 12%;
-  --ring: 72 100% 50%;
+  --border: 40 6% 17%;
+  --input: 0 0% 13%;
+  --ring: 38 92% 55%;
 
   /* Sidebar */
   --sidebar-width: 15rem;
   --sidebar-width-icon: 4rem;
 
-  /* Legacy accent scale — remapped to obsidian neutrals + chartreuse */
-  --abyss: 0 0% 2%;
-  --deep: 0 0% 5%;
-  --tide: 0 0% 18%;
-  --surf: 72 100% 55%;
-  --foam: 0 0% 82%;
-  --pearl: 0 0% 94%;
-  --coral: 12 88% 62%;
-  --sun: 72 100% 55%;
-  --kelp: 150 35% 55%;
+  /* Legacy accent scale — amber tizimga moslashtirildi */
+  --abyss: 0 0% 3%;
+  --deep: 0 0% 7%;
+  --tide: 40 6% 20%;
+  --surf: 38 92% 58%;
+  --foam: 40 6% 84%;
+  --pearl: 40 8% 96%;
+  --coral: 14 80% 60%;
+  --sun: 38 92% 58%;
+  --kelp: 150 30% 52%;
 
-  --shadow-glow: 0 0 40px hsl(72 100% 55% / 0.18);
+  --shadow-glow: 0 0 40px hsl(38 92% 55% / 0.14);
   --shadow-soft: 0 8px 32px -12px hsl(0 0% 0% / 0.75);
   --shadow-card: 0 1px 0 hsl(0 0% 100% / 0.04) inset, 0 8px 24px -12px hsl(0 0% 0% / 0.65);
-}
 
-/* ---------- "Aurora" — light monochrome theme ---------- */
-.light {
-  --background: 40 22% 98%;
-  --foreground: 0 0% 8%;
-  --card: 0 0% 100%;
-  --card-foreground: 0 0% 8%;
-  --popover: 0 0% 100%;
-  --popover-foreground: 0 0% 8%;
-
-  --primary: 0 0% 8%;
-  --primary-foreground: 0 0% 98%;
-  --primary-glow: 0 0% 18%;
-
-  --secondary: 30 15% 94%;
-  --secondary-foreground: 0 0% 8%;
-  --muted: 30 15% 94%;
-  --muted-foreground: 0 0% 42%;
-  --accent: 30 15% 90%;
-  --accent-foreground: 0 0% 8%;
-
-  --destructive: 0 72% 48%;
-  --destructive-foreground: 0 0% 98%;
-  --success: 142 65% 38%;
-  --success-foreground: 0 0% 98%;
-
-  --border: 30 12% 86%;
-  --input: 30 12% 88%;
-  --ring: 0 0% 8%;
-}
-
-/* ---------- "Premium Blue" ---------- */
-.blue {
-  --background: 222 47% 7%;
-  --foreground: 210 40% 96%;
-  --card: 222 45% 10%;
-  --card-foreground: 210 40% 96%;
-  --popover: 222 45% 11%;
-  --popover-foreground: 210 40% 96%;
-
-  --primary: 210 100% 66%;
-  --primary-foreground: 222 47% 8%;
-  --primary-glow: 205 100% 74%;
-
-  --secondary: 222 40% 14%;
-  --secondary-foreground: 210 40% 96%;
-  --muted: 222 40% 13%;
-  --muted-foreground: 215 25% 68%;
-  --accent: 222 40% 18%;
-  --accent-foreground: 210 40% 96%;
-
-  --border: 222 40% 18%;
-  --input: 222 40% 16%;
-  --ring: 210 100% 66%;
+  --ease-premium: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 @layer base {
@@ -417,12 +363,8 @@ html[data-motion="reduce"] *::after {
 /* High contrast — WCAG AAA yaqin foydalanuvchilar uchun */
 @media (prefers-contrast: more) {
   :root {
-    --border: 150 8% 30%;
-    --muted-foreground: 150 6% 75%;
-  }
-  .light {
-    --border: 30 12% 60%;
-    --muted-foreground: 0 0% 25%;
+    --border: 40 8% 32%;
+    --muted-foreground: 40 6% 78%;
   }
   :focus-visible {
     outline-width: 3px !important;

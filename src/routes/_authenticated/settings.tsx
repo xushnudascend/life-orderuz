@@ -16,13 +16,11 @@ import {
   Clock,
   Wand2,
   HelpCircle,
-  Palette,
 } from "lucide-react";
 import { toast } from "sonner";
 import { uz } from "@/i18n";
 import { TIMEZONES } from "@/lib/nervous";
 import { getLocale, setLocale as setLoc, type Locale } from "@/i18n";
-import { ThemeSwitcher } from "@/components/theme-switcher";
 import { PageHero } from "@/components/page-hero";
 import { Panel, PanelHeader } from "@/components/panel";
 import { getMotionPref, setMotionPref, type MotionPref } from "@/lib/motion-pref";
@@ -236,14 +234,6 @@ function Settings() {
               onCheckedChange={(v) => setPrefs({ ...prefs, ai_mentor_enabled: v })}
             />
           </Row>
-        </Card>
-
-        <Card icon={<Palette className="h-4 w-4 text-primary" />} title="Tema">
-          <p className="mb-4 text-sm text-muted-foreground">
-            Uch tema — bir xil semantik token strukturasi. Almashtirilganda komponentlar avtomatik
-            moslashadi.
-          </p>
-          <ThemeSwitcher />
         </Card>
 
         <Card icon={<Wand2 className="h-4 w-4 text-primary" />} title="Animatsiyalar">
