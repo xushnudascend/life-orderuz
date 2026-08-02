@@ -361,6 +361,22 @@ function Dashboard() {
             ))}
           </div>
         </Panel>
+
+        {/* Kunlik jadval */}
+        <div className="lg:col-span-12">
+          <ErrorBoundary boundary="dashboard_daily_timetable">
+            <DailyTimetable
+              profile={{
+                age: profile?.age,
+                sex: profile?.sex,
+                height_cm: profile?.height_cm,
+                weight_kg: profile?.weight_kg,
+                archetype: profile?.archetype,
+              }}
+            />
+          </ErrorBoundary>
+        </div>
+
       </div>
 
       {/* 3-QATLAM — Ixtiyoriy chuqurroq ko'rinish */}
