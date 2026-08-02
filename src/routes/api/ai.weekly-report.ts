@@ -35,7 +35,12 @@ export const Route = createFileRoute("/api/ai/weekly-report")({
         const gateway = createLovableAiGatewayProvider(key);
         const model = gateway("google/gemini-3-flash-preview");
 
-        const langInstr = language === "ru" ? "Отвечай на русском." : language === "en" ? "Answer in English." : "O'zbek tilida javob ber.";
+        const langInstr =
+          language === "ru"
+            ? "Отвечай на русском."
+            : language === "en"
+              ? "Answer in English."
+              : "O'zbek tilida javob ber.";
         const system = `Sen Nadir — halol hafta tahlilchisi. Emojisiz, maqtovsiz. ${langInstr}
 Format:
 1) Bir jumlada haftaning haqiqiy holati.

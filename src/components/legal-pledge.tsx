@@ -2,13 +2,7 @@
  * FounderPledge — "biz X qilamiz / qilmaymiz" bloki + founder imzosi.
  * Parasocial trust (Horton & Wohl, 1956) + commitment cue (Cialdini).
  */
-export function FounderPledge({
-  will,
-  wont,
-}: {
-  will: string[];
-  wont: string[];
-}) {
+export function FounderPledge({ will, wont }: { will: string[]; wont: string[] }) {
   return (
     <section className="mt-10 rounded-[var(--radius)] border border-border bg-card p-6">
       <p className="font-ui text-[10px] font-semibold uppercase tracking-[0.22em] text-primary">

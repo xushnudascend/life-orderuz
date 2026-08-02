@@ -37,7 +37,9 @@ export function PeakEndReflect() {
     const today = new Date().toISOString().slice(0, 10);
     try {
       localStorage.setItem(DISMISS_KEY, today);
-    } catch { /* ignore */ }
+    } catch {
+      /* ignore */
+    }
     setShow(false);
   }
 
@@ -53,7 +55,9 @@ export function PeakEndReflect() {
           mood: key,
         } as never);
       }
-    } catch { /* ignore */ }
+    } catch {
+      /* ignore */
+    }
     setTimeout(dismiss, 1200);
   }
 
@@ -88,7 +92,9 @@ export function PeakEndReflect() {
               ))}
               <button
                 onClick={() => {
-                  open({ contextHint: "Kunni yopish. Bugungi eng yorug' daqiqa haqida qisqa refleksiya." });
+                  open({
+                    contextHint: "Kunni yopish. Bugungi eng yorug' daqiqa haqida qisqa refleksiya.",
+                  });
                   dismiss();
                 }}
                 className="ml-auto inline-flex h-7 items-center rounded-full bg-primary px-3 font-ui text-[11px] font-semibold text-primary-foreground hover:bg-primary/90"

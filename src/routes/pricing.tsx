@@ -13,7 +13,6 @@ import { uz } from "@/i18n";
 import { CheckoutPanel } from "@/components/checkout-panel";
 import { freeTierLimits, proTierLimits, pricing } from "@/lib/limits";
 
-
 const SITE_URL = "https://life-orderuz.lovable.app";
 const DESC =
   "Life Order narxlari. Free doimiy va kartasiz. Pro — kengroq AI konteksti, cheksiz odat, haftalik hisobot. 14 kunlik to'lovni qaytarish kafolati.";
@@ -125,7 +124,12 @@ function Anchor() {
     { label: "Shaxsiy koʻch (coach)", price: "500 000+", note: "so'm / oy" },
     { label: "Terapevt seansi", price: "300 000", note: "1 uchrashuv" },
     { label: "Kitob + kurs to'plami", price: "150 000", note: "bir martalik" },
-    { label: "Life Order Pro", price: pricing.monthly.label, note: "oyiga · bekor qilinadi", accent: true },
+    {
+      label: "Life Order Pro",
+      price: pricing.monthly.label,
+      note: "oyiga · bekor qilinadi",
+      accent: true,
+    },
   ];
   return (
     <section className="border-b border-border bg-card/30">
@@ -136,14 +140,29 @@ function Anchor() {
             Xulq-atvor tizimi — bozordagi eng arzon yoʻl
           </h2>
           <p className="mt-3 font-ui text-sm text-muted-foreground leading-relaxed">
-            AI mentor, kundalik tahlil va 66 kunlik protokol — bir kishilik koʻch narxining oʻndan bir qismida.
+            AI mentor, kundalik tahlil va 66 kunlik protokol — bir kishilik koʻch narxining oʻndan
+            bir qismida.
           </p>
         </div>
         <div className="mt-8 grid gap-px overflow-hidden rounded-[var(--radius)] border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
           {items.map((it) => (
-            <div key={it.label} className={"bg-background p-5 " + (it.accent ? "ring-1 ring-inset ring-primary/40" : "")}>
-              <p className="font-ui text-[11px] uppercase tracking-[0.2em] text-muted-foreground">{it.label}</p>
-              <p className={"mt-2 font-serif text-2xl tracking-tight tabular-nums " + (it.accent ? "text-primary" : "")}>{it.price}</p>
+            <div
+              key={it.label}
+              className={
+                "bg-background p-5 " + (it.accent ? "ring-1 ring-inset ring-primary/40" : "")
+              }
+            >
+              <p className="font-ui text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
+                {it.label}
+              </p>
+              <p
+                className={
+                  "mt-2 font-serif text-2xl tracking-tight tabular-nums " +
+                  (it.accent ? "text-primary" : "")
+                }
+              >
+                {it.price}
+              </p>
               <p className="mt-1 font-ui text-xs text-muted-foreground">{it.note}</p>
             </div>
           ))}
@@ -183,7 +202,8 @@ function Hero() {
           Narxlar
         </p>
         <h1 className="mt-6 font-serif text-4xl leading-[1.05] tracking-tight md:text-5xl">
-          Halol narx.<br />
+          Halol narx.
+          <br />
           <span className="text-muted-foreground">Free — doimiy.</span>
         </h1>
         <p className="mx-auto mt-5 max-w-xl font-ui text-muted-foreground leading-relaxed">
@@ -261,9 +281,7 @@ function Plan({
     <div
       className={
         "rounded-[var(--radius)] p-7 " +
-        (highlight
-          ? "border-2 border-primary bg-background"
-          : "border border-border bg-background")
+        (highlight ? "border-2 border-primary bg-background" : "border border-border bg-background")
       }
     >
       <div className="flex items-center justify-between">
@@ -281,8 +299,7 @@ function Plan({
           <li key={f} className="flex items-start gap-3 font-ui text-sm">
             <Check
               className={
-                "mt-0.5 h-4 w-4 shrink-0 " +
-                (highlight ? "text-primary" : "text-muted-foreground")
+                "mt-0.5 h-4 w-4 shrink-0 " + (highlight ? "text-primary" : "text-muted-foreground")
               }
             />
             <span>{f}</span>
@@ -307,7 +324,11 @@ function Compare() {
   const rows: { label: string; free: string | boolean; pro: string | boolean }[] = [
     { label: "Odatlar soni", free: `${freeTierLimits.habits} ta`, pro: "Cheksiz" },
     { label: "Kunlik kundalik", free: `${freeTierLimits.journalEntriesPerDay} ta`, pro: "Cheksiz" },
-    { label: "Nadir xabarlari / kun", free: `${freeTierLimits.mentorMessagesPerDay} ta`, pro: "Cheksiz" },
+    {
+      label: "Nadir xabarlari / kun",
+      free: `${freeTierLimits.mentorMessagesPerDay} ta`,
+      pro: "Cheksiz",
+    },
     { label: "Chuqur analitika va heatmap", free: false, pro: true },
     { label: "Shield / hafta", free: false, pro: `${proTierLimits.shieldPerWeek} ta` },
     { label: "Kengroq AI kontekst", free: false, pro: true },
@@ -320,9 +341,7 @@ function Compare() {
     <section className="border-b border-border bg-card/30">
       <div className="mx-auto max-w-4xl px-5 py-16">
         <div className="max-w-xl">
-          <p className="font-ui text-xs uppercase tracking-[0.24em] text-primary">
-            Batafsil
-          </p>
+          <p className="font-ui text-xs uppercase tracking-[0.24em] text-primary">Batafsil</p>
           <h2 className="mt-3 font-serif text-2xl leading-tight tracking-tight md:text-3xl">
             Free vs Pro — solishtir
           </h2>
@@ -371,18 +390,14 @@ function Faq() {
   return (
     <section className="border-b border-border">
       <div className="mx-auto max-w-2xl px-5 py-16">
-        <p className="font-ui text-xs uppercase tracking-[0.24em] text-primary">
-          Savollar
-        </p>
+        <p className="font-ui text-xs uppercase tracking-[0.24em] text-primary">Savollar</p>
         <h2 className="mt-3 font-serif text-2xl leading-tight tracking-tight md:text-3xl">
           Narx bo'yicha ko'p so'raladi
         </h2>
         <Accordion type="single" collapsible defaultValue="q-0" className="mt-8">
           {FAQ.map((it, i) => (
             <AccordionItem key={i} value={`q-${i}`} className="border-border/60">
-              <AccordionTrigger className="text-left font-serif text-base">
-                {it.q}
-              </AccordionTrigger>
+              <AccordionTrigger className="text-left font-serif text-base">{it.q}</AccordionTrigger>
               <AccordionContent className="font-ui text-sm text-muted-foreground leading-relaxed">
                 {it.a}
               </AccordionContent>
@@ -410,4 +425,3 @@ function FinalCta() {
     </section>
   );
 }
-

@@ -18,7 +18,11 @@ export function HeroBackdrop({ className = "" }: { className?: string }) {
     const gridScrollK = 0.05;
     const pointerAmp = 24;
 
-    let tmx = 0, tmy = 0, cmx = 0, cmy = 0, sy = 0;
+    let tmx = 0,
+      tmy = 0,
+      cmx = 0,
+      cmy = 0,
+      sy = 0;
     let raf = 0;
     let running = true;
 
@@ -64,7 +68,10 @@ export function HeroBackdrop({ className = "" }: { className?: string }) {
       aria-hidden
       className={`pointer-events-none absolute inset-0 -z-10 overflow-hidden ${className}`}
     >
-      <div ref={grid} className="absolute inset-0 opacity-[0.06] backdrop-grid will-change-transform" />
+      <div
+        ref={grid}
+        className="absolute inset-0 opacity-[0.06] backdrop-grid will-change-transform"
+      />
       <div
         ref={orb}
         className="absolute -top-40 -left-24 h-[520px] w-[520px] rounded-full blur-3xl opacity-25 will-change-transform"

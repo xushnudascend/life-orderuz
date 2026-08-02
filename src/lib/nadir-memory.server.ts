@@ -23,10 +23,7 @@ export async function fetchNadirMemories(userId: string, limit = 8): Promise<Mem
   return (data ?? []) as Memory[];
 }
 
-export async function insertNadirMemories(
-  userId: string,
-  items: Memory[],
-): Promise<void> {
+export async function insertNadirMemories(userId: string, items: Memory[]): Promise<void> {
   if (!items.length) return;
   const supa = adminClient();
   const rows = items
@@ -36,9 +33,7 @@ export async function insertNadirMemories(
       user_id: userId,
       content: m.content.trim(),
       importance: Math.max(1, Math.min(5, m.importance | 0 || 3)),
-      kind: ["fact", "goal", "pattern", "preference", "trigger"].includes(m.kind)
-        ? m.kind
-        : "fact",
+      kind: ["fact", "goal", "pattern", "preference", "trigger"].includes(m.kind) ? m.kind : "fact",
     }));
   if (!rows.length) return;
   await supa.from("nadir_memories").insert(rows);

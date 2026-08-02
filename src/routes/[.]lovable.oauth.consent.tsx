@@ -16,8 +16,12 @@ type OAuthDetails = {
 type OAuthResp<T> = { data: T | null; error: { message: string } | null };
 interface OAuthApi {
   getAuthorizationDetails(id: string): Promise<OAuthResp<OAuthDetails>>;
-  approveAuthorization(id: string): Promise<OAuthResp<{ redirect_url?: string; redirect_to?: string }>>;
-  denyAuthorization(id: string): Promise<OAuthResp<{ redirect_url?: string; redirect_to?: string }>>;
+  approveAuthorization(
+    id: string,
+  ): Promise<OAuthResp<{ redirect_url?: string; redirect_to?: string }>>;
+  denyAuthorization(
+    id: string,
+  ): Promise<OAuthResp<{ redirect_url?: string; redirect_to?: string }>>;
 }
 function oauthApi(): OAuthApi {
   return (supabase.auth as unknown as { oauth: OAuthApi }).oauth;
@@ -94,14 +98,17 @@ function Consent() {
   return (
     <main className="grid min-h-dvh place-items-center bg-background px-6 text-foreground">
       <div className="glass w-full max-w-md rounded-[var(--radius)] p-8">
-        <p className="font-ui text-[11px] uppercase tracking-[0.28em] text-primary">Ruxsat berish</p>
+        <p className="font-ui text-[11px] uppercase tracking-[0.28em] text-primary">
+          Ruxsat berish
+        </p>
         <h1 className="mt-3 font-serif text-3xl leading-tight tracking-tight">
           {clientName} — {uz.brand.name} bilan ulanishi
         </h1>
         <p className="mt-4 text-sm text-muted-foreground">
-          <span className="text-foreground">{clientName}</span> sizning nomingizdan bu ilovaning vositalarini
-          chaqirishi mumkin bo'ladi: odatlar, kundalik yozuvlar va progress ma'lumotlaringizga kirish.
-          Bu ilovaning ichki qoidalari va ma'lumot ruxsatlarini chetlab o'tmaydi.
+          <span className="text-foreground">{clientName}</span> sizning nomingizdan bu ilovaning
+          vositalarini chaqirishi mumkin bo'ladi: odatlar, kundalik yozuvlar va progress
+          ma'lumotlaringizga kirish. Bu ilovaning ichki qoidalari va ma'lumot ruxsatlarini chetlab
+          o'tmaydi.
         </p>
 
         {scopes.length > 0 && (
@@ -124,7 +131,11 @@ function Consent() {
         )}
 
         <div className="mt-6 flex gap-3">
-          <Button className="flex-1 font-ui font-semibold" disabled={busy !== null} onClick={() => decide(true)}>
+          <Button
+            className="flex-1 font-ui font-semibold"
+            disabled={busy !== null}
+            onClick={() => decide(true)}
+          >
             {busy === "approve" && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
             Ruxsat berish
           </Button>

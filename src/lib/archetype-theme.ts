@@ -10,14 +10,7 @@
  * CSS qatlami (`src/styles.css`) qolganini bajaradi.
  */
 
-const KNOWN_ARCHETYPES = [
-  "starter",
-  "builder",
-  "aspirant",
-  "warrior",
-  "sage",
-  "explorer",
-] as const;
+const KNOWN_ARCHETYPES = ["starter", "builder", "aspirant", "warrior", "sage", "explorer"] as const;
 
 export type Archetype = (typeof KNOWN_ARCHETYPES)[number];
 

@@ -13,7 +13,10 @@ export const Route = createFileRoute("/_authenticated/roadmap")({
   head: () => ({
     meta: [
       { title: "Yo'l xaritangiz — Life Order" },
-      { name: "description", content: "Reclaim → Rebuild → Rise. Sizga xos 3-bosqichli o'sish yo'li." },
+      {
+        name: "description",
+        content: "Reclaim → Rebuild → Rise. Sizga xos 3-bosqichli o'sish yo'li.",
+      },
       { name: "robots", content: "noindex" },
     ],
   }),
@@ -81,8 +84,7 @@ function RoadmapPage() {
           </div>
           <div className="mt-3 flex items-center justify-between text-xs text-muted-foreground">
             <span>
-              Yangilangan:{" "}
-              {new Date(data.score.computed_at as string).toLocaleDateString("uz-UZ")}
+              Yangilangan: {new Date(data.score.computed_at as string).toLocaleDateString("uz-UZ")}
             </span>
             <Link to="/assessment" className="text-amber-400 underline underline-offset-2">
               Qayta o'tish
@@ -100,11 +102,7 @@ function RoadmapPage() {
               <Panel
                 key={stage.stage_index}
                 className={
-                  active
-                    ? "border-amber-500/40 bg-amber-500/[0.04]"
-                    : done
-                    ? "opacity-70"
-                    : ""
+                  active ? "border-amber-500/40 bg-amber-500/[0.04]" : done ? "opacity-70" : ""
                 }
               >
                 <div className="flex items-start gap-3">
@@ -125,8 +123,7 @@ function RoadmapPage() {
                     <p className="mt-2 text-sm text-muted-foreground">{stage.description}</p>
                     {stage.target_date && (
                       <p className="mt-2 text-xs text-muted-foreground">
-                        Maqsad sana:{" "}
-                        {new Date(stage.target_date).toLocaleDateString("uz-UZ")}
+                        Maqsad sana: {new Date(stage.target_date).toLocaleDateString("uz-UZ")}
                       </p>
                     )}
                     {active && (
@@ -150,15 +147,7 @@ function RoadmapPage() {
   );
 }
 
-function MiniScore({
-  label,
-  value,
-  inverse,
-}: {
-  label: string;
-  value: number;
-  inverse?: boolean;
-}) {
+function MiniScore({ label, value, inverse }: { label: string; value: number; inverse?: boolean }) {
   return (
     <div className="rounded-md border border-border/60 bg-card/40 p-3">
       <div className="text-[10px] uppercase tracking-widest text-muted-foreground">{label}</div>

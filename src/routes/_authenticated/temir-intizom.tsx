@@ -12,10 +12,7 @@ import { uz } from "@/i18n";
 
 export const Route = createFileRoute("/_authenticated/temir-intizom")({
   head: () => ({
-    meta: [
-      { title: `Temir Intizom — ${uz.brand.name}` },
-      { name: "robots", content: "noindex" },
-    ],
+    meta: [{ title: `Temir Intizom — ${uz.brand.name}` }, { name: "robots", content: "noindex" }],
   }),
   component: TemirIntizom,
 });
@@ -44,7 +41,10 @@ function TemirIntizom() {
       .select("intizom_start_date, intizom_completed")
       .eq("id", userId)
       .maybeSingle();
-    const p = prof as { intizom_start_date: string | null; intizom_completed: boolean | null } | null;
+    const p = prof as {
+      intizom_start_date: string | null;
+      intizom_completed: boolean | null;
+    } | null;
     setStartDate(p?.intizom_start_date ?? null);
     setCompleted(!!p?.intizom_completed);
 
@@ -109,10 +109,14 @@ function TemirIntizom() {
   // Auto-mark completed when 21 days achieved
   useEffect(() => {
     if (startDate && !completed && doneCount >= TOTAL_DAYS) {
-      supabase.from("profiles").update({ intizom_completed: true }).eq("id", userId).then(() => {
-        setCompleted(true);
-        toast.success("Temir Intizom yakunlandi. Endi bu sen.");
-      });
+      supabase
+        .from("profiles")
+        .update({ intizom_completed: true })
+        .eq("id", userId)
+        .then(() => {
+          setCompleted(true);
+          toast.success("Temir Intizom yakunlandi. Endi bu sen.");
+        });
     }
   }, [doneCount, startDate, completed, userId]);
 
@@ -155,7 +159,8 @@ function TemirIntizom() {
               </div>
               <div className="text-right">
                 <p className="font-serif text-4xl tabular-nums">
-                  {doneCount}<span className="text-muted-foreground">/{TOTAL_DAYS}</span>
+                  {doneCount}
+                  <span className="text-muted-foreground">/{TOTAL_DAYS}</span>
                 </p>
                 <p className="font-ui text-[11px] uppercase tracking-[0.2em] text-primary">
                   {percent}%
@@ -184,7 +189,10 @@ function TemirIntizom() {
                 return (
                   <div
                     key={d.idx}
-                    className={"flex flex-col items-center justify-center rounded-md border p-2 text-center " + cls}
+                    className={
+                      "flex flex-col items-center justify-center rounded-md border p-2 text-center " +
+                      cls
+                    }
                     title={d.date}
                   >
                     <span className="font-ui text-[10px] uppercase tracking-[0.16em]">Kun</span>

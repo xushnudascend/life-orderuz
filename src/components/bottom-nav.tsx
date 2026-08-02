@@ -6,27 +6,26 @@ import { Compass, HeartPulse, ListChecks, GraduationCap, Users, Sparkles } from 
  * Faqat mobilda ( md:hidden ).
  */
 const TABS = [
-  { to: "/dashboard", label: "Bosh",   icon: Compass,       match: ["/dashboard", "/analytics"] },
-  { to: "/c/body",    label: "Tana",   icon: HeartPulse,    match: ["/c/body", "/workout", "/diet"] },
+  { to: "/dashboard", label: "Bosh", icon: Compass, match: ["/dashboard", "/analytics"] },
+  { to: "/c/body", label: "Tana", icon: HeartPulse, match: ["/c/body", "/workout", "/diet"] },
   // FAB (Nadir) — markazda, ushbu slotni bo'sh qoldiramiz
-  { to: "/habits",    label: "Odat",   icon: ListChecks,    match: ["/habits", "/quests", "/c/habits"] },
-  { to: "/c/learn",   label: "O'rgan", icon: GraduationCap, match: ["/c/learn", "/journal"] },
-  { to: "/community", label: "Davra",  icon: Users,         match: ["/community", "/party", "/leaderboard"] },
+  { to: "/habits", label: "Odat", icon: ListChecks, match: ["/habits", "/quests", "/c/habits"] },
+  { to: "/c/learn", label: "O'rgan", icon: GraduationCap, match: ["/c/learn", "/journal"] },
+  {
+    to: "/community",
+    label: "Davra",
+    icon: Users,
+    match: ["/community", "/party", "/leaderboard"],
+  },
 ] as const;
 
-export function BottomNav({
-  recommendedTab,
-}: {
-  recommendedTab?: string;
-}) {
+export function BottomNav({ recommendedTab }: { recommendedTab?: string }) {
   const location = useLocation();
 
   const isNadirActive = location.pathname.startsWith("/mentor");
 
   const isTabActive = (t: (typeof TABS)[number]) =>
-    t.match.some(
-      (m) => location.pathname === m || location.pathname.startsWith(m + "/"),
-    );
+    t.match.some((m) => location.pathname === m || location.pathname.startsWith(m + "/"));
 
   return (
     <>

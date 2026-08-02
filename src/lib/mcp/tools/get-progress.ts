@@ -21,14 +21,8 @@ export default defineTool({
     }
     const supabase = supabaseForUser(ctx);
     const [stats, streak] = await Promise.all([
-      supabase
-        .from("user_stats")
-        .select("total_xp, level, discipline_score")
-        .maybeSingle(),
-      supabase
-        .from("streaks")
-        .select("current_days, longest_days, last_check_in")
-        .maybeSingle(),
+      supabase.from("user_stats").select("total_xp, level, discipline_score").maybeSingle(),
+      supabase.from("streaks").select("current_days, longest_days, last_check_in").maybeSingle(),
     ]);
     const summary = {
       total_xp: stats.data?.total_xp ?? 0,

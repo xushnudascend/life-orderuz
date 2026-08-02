@@ -19,8 +19,7 @@ export async function activateProForOrder(orderId: string) {
     .maybeSingle();
 
   const current = (profile as { subscription_until?: string } | null)?.subscription_until;
-  const base =
-    current && new Date(current) > new Date() ? new Date(current) : new Date();
+  const base = current && new Date(current) > new Date() ? new Date(current) : new Date();
   base.setMonth(base.getMonth() + plan.months);
 
   await supabaseAdmin

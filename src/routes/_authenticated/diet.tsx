@@ -16,10 +16,7 @@ import { PremiumLock } from "@/components/premium-lock";
 
 export const Route = createFileRoute("/_authenticated/diet")({
   head: () => ({
-    meta: [
-      { title: `Ovqatlanish — ${uz.brand.name}` },
-      { name: "robots", content: "noindex" },
-    ],
+    meta: [{ title: `Ovqatlanish — ${uz.brand.name}` }, { name: "robots", content: "noindex" }],
   }),
   component: Diet,
 });
@@ -35,10 +32,17 @@ type Row = {
 const KINDS = ["Nonushta", "Tushlik", "Kechki ovqat", "Yengil ovqat"];
 
 /** Mifflin–St Jeor formulasi */
-function mifflin(sex: "male" | "female", weightKg: number, heightCm: number, age: number, activity: number): number {
-  const base = sex === "male"
-    ? 10 * weightKg + 6.25 * heightCm - 5 * age + 5
-    : 10 * weightKg + 6.25 * heightCm - 5 * age - 161;
+function mifflin(
+  sex: "male" | "female",
+  weightKg: number,
+  heightCm: number,
+  age: number,
+  activity: number,
+): number {
+  const base =
+    sex === "male"
+      ? 10 * weightKg + 6.25 * heightCm - 5 * age + 5
+      : 10 * weightKg + 6.25 * heightCm - 5 * age - 161;
   return Math.round(base * activity);
 }
 
@@ -98,9 +102,7 @@ function Diet() {
       return;
     }
     (async () => {
-      const { data } = await supabase.storage
-        .from("meals")
-        .createSignedUrls(paths, 60 * 60);
+      const { data } = await supabase.storage.from("meals").createSignedUrls(paths, 60 * 60);
       if (cancelled || !data) return;
       const map: Record<string, string> = {};
       data.forEach((d) => {
@@ -123,7 +125,13 @@ function Diet() {
       very_active: 1.9,
     };
     const act = map[profile.activity_level ?? ""] ?? 1.375;
-    return mifflin(profile.sex as "male" | "female", Number(profile.weight_kg), Number(profile.height_cm), profile.age, act);
+    return mifflin(
+      profile.sex as "male" | "female",
+      Number(profile.weight_kg),
+      Number(profile.height_cm),
+      profile.age,
+      act,
+    );
   }, [profile]);
 
   const [pendingPath, setPendingPath] = useState<string | null>(null);
@@ -192,12 +200,9 @@ function Diet() {
       />
       <IfThenHint trigger="stakan choy quysam" action="oldin bir stakan suv ichaman" />
 
-
-
       <div className="mt-4 flex flex-wrap items-center gap-3 text-muted-foreground">
         <span>
-          Bugun jami:{" "}
-          <span className="text-foreground">{todayCal} kkal</span>
+          Bugun jami: <span className="text-foreground">{todayCal} kkal</span>
         </span>
         {dailyTarget ? (
           <span className="rounded-full border border-primary/40 bg-primary/5 px-2.5 py-1 font-ui text-[11px] uppercase tracking-[0.2em] text-primary">
@@ -205,19 +210,14 @@ function Diet() {
             Maqsad: {dailyTarget} kkal
           </span>
         ) : (
-          <span className="text-xs">
-            Bo'y, vazn va yoshni kiriting.
-          </span>
+          <span className="text-xs">Bo'y, vazn va yoshni kiriting.</span>
         )}
       </div>
 
       <Panel className="mt-8 p-5">
-
         <PanelHeader
           eyebrow="Yangi yozuv"
-          title={
-            <h2 className="font-serif text-xl">Bugun nima yeding?</h2>
-          }
+          title={<h2 className="font-serif text-xl">Bugun nima yeding?</h2>}
         />
         <div className="mt-4 grid gap-3 sm:grid-cols-[160px_1fr_120px_auto]">
           <div>
@@ -229,7 +229,9 @@ function Diet() {
               className="mt-1 h-9 w-full rounded-md border border-input bg-background px-3 text-sm"
             >
               {KINDS.map((k) => (
-                <option key={k} value={k}>{k}</option>
+                <option key={k} value={k}>
+                  {k}
+                </option>
               ))}
             </select>
           </div>
@@ -239,10 +241,18 @@ function Diet() {
           </div>
           <div>
             <Label htmlFor="cal">Kkal</Label>
-            <Input id="cal" type="number" min={0} value={cal} onChange={(e) => setCal(e.target.value)} />
+            <Input
+              id="cal"
+              type="number"
+              min={0}
+              value={cal}
+              onChange={(e) => setCal(e.target.value)}
+            />
           </div>
           <div className="flex items-end">
-            <Button onClick={add} className="w-full">Qo'shish</Button>
+            <Button onClick={add} className="w-full">
+              Qo'shish
+            </Button>
           </div>
           <div className="sm:col-span-4">
             <input
@@ -264,9 +274,7 @@ function Diet() {
                 <Camera className="mr-1 h-4 w-4" />
                 {uploading ? "Yuklanmoqda..." : "Rasm qo'shish"}
               </Button>
-              <p className="font-ui text-xs text-muted-foreground">
-                Rasm 5MB dan kichik bo'lsin.
-              </p>
+              <p className="font-ui text-xs text-muted-foreground">Rasm 5MB dan kichik bo'lsin.</p>
               {pendingImage && (
                 <img
                   src={pendingImage}
@@ -302,7 +310,11 @@ function Diet() {
                 <div className="flex items-center gap-3">
                   {r.image_url ? (
                     <img
-                      src={r.image_url.startsWith("http") ? r.image_url : signedUrls[r.image_url] ?? ""}
+                      src={
+                        r.image_url.startsWith("http")
+                          ? r.image_url
+                          : (signedUrls[r.image_url] ?? "")
+                      }
                       alt=""
                       className="h-12 w-12 rounded-md object-cover"
                     />

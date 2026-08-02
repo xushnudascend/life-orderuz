@@ -40,8 +40,8 @@ export function RestNudge() {
         <div className="flex-1 space-y-1.5">
           <p className="font-ui text-[13px] font-semibold">45 daqiqa o'tdi</p>
           <p className="text-[12px] leading-relaxed text-muted-foreground">
-            Ekrandan uzoqroq turing — 2 daqiqa nafas oling. Bu ilova sizni bog'lab
-            qolish uchun qurilmagan.
+            Ekrandan uzoqroq turing — 2 daqiqa nafas oling. Bu ilova sizni bog'lab qolish uchun
+            qurilmagan.
           </p>
           <Button
             size="sm"

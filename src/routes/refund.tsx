@@ -19,21 +19,28 @@ export const Route = createFileRoute("/refund")({
   component: () => (
     <LegalShell title="To'lovni qaytarish" updated="17-iyul, 2026">
       <p>
-        Pro obunadan mamnun bo'lmasangiz — <strong>14 kun ichida to'liq
-        pulingizni qaytaramiz</strong>. Sababini tushuntirish shart emas.
+        Pro obunadan mamnun bo'lmasangiz —{" "}
+        <strong>14 kun ichida to'liq pulingizni qaytaramiz</strong>. Sababini tushuntirish shart
+        emas.
       </p>
 
       <h2 className="mt-8 font-serif text-2xl">Kafolat shartlari</h2>
       <ul className="ml-5 list-disc space-y-1.5">
-        <li>Birinchi to'lovdan keyin <strong>14 kalendar kun</strong> davomida.</li>
+        <li>
+          Birinchi to'lovdan keyin <strong>14 kalendar kun</strong> davomida.
+        </li>
         <li>To'liq summa, komissiyasiz.</li>
         <li>Bir hisobga bir marta amal qiladi.</li>
       </ul>
 
       <h2 className="mt-8 font-serif text-2xl">Qanday so'rash</h2>
       <ol className="ml-5 list-decimal space-y-1.5">
-        <li><strong>support@lifeorder.app</strong> ga yozing.</li>
-        <li>Sarlavha: <em>"Refund"</em>.</li>
+        <li>
+          <strong>support@lifeorder.app</strong> ga yozing.
+        </li>
+        <li>
+          Sarlavha: <em>"Refund"</em>.
+        </li>
         <li>Hisob email va (agar bo'lsa) to'lov ID'sini ilova qiling.</li>
         <li>Ixtiyoriy: yoqmagan joyni ayting — biz uchun bebaho.</li>
       </ol>
@@ -47,8 +54,14 @@ export const Route = createFileRoute("/refund")({
 
       <h2 className="mt-8 font-serif text-2xl">Istisnolar</h2>
       <ul className="ml-5 list-disc space-y-1.5">
-        <li>14 kundan keyingi to'lovlar avtomatik qaytarilmaydi (biroq bekor qila olasiz — keyingi davr uchun to'lov olinmaydi).</li>
-        <li>Yillik obuna: 1-yil uchun 14 kun qoida amal qiladi; keyingi yillar avtomatik yangilanishdan oldin bekor qilinishi kerak.</li>
+        <li>
+          14 kundan keyingi to'lovlar avtomatik qaytarilmaydi (biroq bekor qila olasiz — keyingi
+          davr uchun to'lov olinmaydi).
+        </li>
+        <li>
+          Yillik obuna: 1-yil uchun 14 kun qoida amal qiladi; keyingi yillar avtomatik
+          yangilanishdan oldin bekor qilinishi kerak.
+        </li>
         <li>Shartlar buzilgani uchun bloklangan hisoblar.</li>
       </ul>
 

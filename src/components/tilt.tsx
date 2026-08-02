@@ -19,7 +19,8 @@ export function Tilt({
 
   const disabled = () => {
     if (isReducedMotion()) return true;
-    if (typeof document !== "undefined" && document.documentElement.dataset.perf === "low") return true;
+    if (typeof document !== "undefined" && document.documentElement.dataset.perf === "low")
+      return true;
     if (typeof window !== "undefined" && !window.matchMedia("(pointer: fine)").matches) return true;
     return false;
   };
@@ -48,7 +49,10 @@ export function Tilt({
       onPointerLeave={reset}
       onPointerCancel={reset}
       className={`tilt-target ${className}`}
-      style={{ transformStyle: "preserve-3d", transition: "transform 240ms cubic-bezier(0.16,1,0.3,1)" }}
+      style={{
+        transformStyle: "preserve-3d",
+        transition: "transform 240ms cubic-bezier(0.16,1,0.3,1)",
+      }}
     >
       {children}
     </div>

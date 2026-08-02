@@ -48,14 +48,11 @@ export function PageHero({
         )}
       </div>
       {actions && (
-        <div className="rise-4 flex shrink-0 flex-wrap items-center gap-2">
-          {actions}
-        </div>
+        <div className="rise-4 flex shrink-0 flex-wrap items-center gap-2">{actions}</div>
       )}
     </header>
   );
 }
-
 
 /**
  * SectionHeader — inline section divider used between panels/lists.
@@ -72,12 +69,7 @@ export function SectionHeader({
   className?: string;
 }) {
   return (
-    <div
-      className={cn(
-        "mb-3 mt-8 flex items-end justify-between gap-3",
-        className,
-      )}
-    >
+    <div className={cn("mb-3 mt-8 flex items-end justify-between gap-3", className)}>
       <div className="min-w-0">
         {eyebrow && (
           <p className="font-ui text-[10px] font-semibold uppercase tracking-[0.24em] text-muted-foreground">

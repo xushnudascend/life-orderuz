@@ -20,9 +20,7 @@ export function EasyModeRibbon({ streakDays }: { streakDays: number }) {
         {dots.map((on, i) => (
           <span
             key={i}
-            className={
-              "h-1.5 w-1.5 rounded-full " + (on ? "bg-primary" : "bg-primary/25")
-            }
+            className={"h-1.5 w-1.5 rounded-full " + (on ? "bg-primary" : "bg-primary/25")}
           />
         ))}
       </span>

@@ -12,11 +12,7 @@ import {
   ConversationContent,
   ConversationScrollButton,
 } from "@/components/ai-elements/conversation";
-import {
-  Message,
-  MessageContent,
-  MessageResponse,
-} from "@/components/ai-elements/message";
+import { Message, MessageContent, MessageResponse } from "@/components/ai-elements/message";
 import {
   PromptInput,
   PromptInputTextarea,
@@ -165,9 +161,7 @@ export function NadirDrawer() {
           />
         ) : (
           <div className="flex flex-1 items-center justify-center">
-            {isOpen ? (
-              <Loader2 className="h-4 w-4 animate-spin text-muted-foreground" />
-            ) : null}
+            {isOpen ? <Loader2 className="h-4 w-4 animate-spin text-muted-foreground" /> : null}
           </div>
         )}
       </aside>
@@ -222,20 +216,18 @@ function DrawerChat({
                 Bir jumla bilan yoz — Nadir avval eshitadi, keyin bitta aniq mikro-qadam beradi.
               </p>
               <div className="flex flex-wrap gap-2">
-                {[
-                  "Ertalab tura olmayapman",
-                  "Odatimni o'tkazib yubordim",
-                  "Fokusim tarqoq",
-                ].map((p) => (
-                  <button
-                    key={p}
-                    type="button"
-                    onClick={() => setInput(p)}
-                    className="rounded-full border border-border bg-card px-3 py-1.5 font-ui text-[11px] text-muted-foreground transition hover:border-primary/40 hover:text-foreground"
-                  >
-                    {p}
-                  </button>
-                ))}
+                {["Ertalab tura olmayapman", "Odatimni o'tkazib yubordim", "Fokusim tarqoq"].map(
+                  (p) => (
+                    <button
+                      key={p}
+                      type="button"
+                      onClick={() => setInput(p)}
+                      className="rounded-full border border-border bg-card px-3 py-1.5 font-ui text-[11px] text-muted-foreground transition hover:border-primary/40 hover:text-foreground"
+                    >
+                      {p}
+                    </button>
+                  ),
+                )}
               </div>
             </div>
           )}
@@ -268,31 +260,32 @@ function DrawerChat({
               <Shimmer className="font-ui text-sm">Nadir o'ylayapti…</Shimmer>
             </div>
           )}
-          {error && (() => {
-            const msg = error.message || "";
-            const isQuota = /daily_ai_budget_exceeded|429/i.test(msg);
-            return (
-              <div
-                className={
-                  "rounded-[var(--radius)] border p-3 text-sm " +
-                  (isQuota
-                    ? "border-primary/40 bg-primary/5"
-                    : "border-destructive/40 bg-destructive/10 text-destructive")
-                }
-              >
-                {isQuota ? (
-                  <>
-                    Bugungi bepul limit tugadi.{" "}
-                    <Link to="/pricing" className="underline">
-                      Pro rejasi
-                    </Link>
-                  </>
-                ) : (
-                  <>Xato: {msg}</>
-                )}
-              </div>
-            );
-          })()}
+          {error &&
+            (() => {
+              const msg = error.message || "";
+              const isQuota = /daily_ai_budget_exceeded|429/i.test(msg);
+              return (
+                <div
+                  className={
+                    "rounded-[var(--radius)] border p-3 text-sm " +
+                    (isQuota
+                      ? "border-primary/40 bg-primary/5"
+                      : "border-destructive/40 bg-destructive/10 text-destructive")
+                  }
+                >
+                  {isQuota ? (
+                    <>
+                      Bugungi bepul limit tugadi.{" "}
+                      <Link to="/pricing" className="underline">
+                        Pro rejasi
+                      </Link>
+                    </>
+                  ) : (
+                    <>Xato: {msg}</>
+                  )}
+                </div>
+              );
+            })()}
           <div ref={bottomRef} />
         </ConversationContent>
         <ConversationScrollButton />
@@ -314,10 +307,7 @@ function DrawerChat({
             placeholder="Nadirga yoz…"
           />
           <PromptInputFooter className="justify-end">
-            <PromptInputSubmit
-              status={busy ? "streaming" : undefined}
-              disabled={!input.trim()}
-            />
+            <PromptInputSubmit status={busy ? "streaming" : undefined} disabled={!input.trim()} />
           </PromptInputFooter>
         </PromptInput>
         <p className="mt-2 text-center font-ui text-[10px] uppercase tracking-[0.22em] text-muted-foreground">

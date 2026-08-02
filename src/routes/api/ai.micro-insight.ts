@@ -26,7 +26,8 @@ export const Route = createFileRoute("/api/ai/micro-insight")({
         const gateway = createLovableAiGatewayProvider(key);
         const model = gateway("google/gemini-3-flash-preview");
         const lang = parsed.data.language;
-        const langInstr = lang === "ru" ? "На русском." : lang === "en" ? "In English." : "O'zbek tilida.";
+        const langInstr =
+          lang === "ru" ? "На русском." : lang === "en" ? "In English." : "O'zbek tilida.";
         const system = `Sen Nadir. 1-2 jumla, emojisiz, maqtovsiz mikro-kuzatuv ber. ${langInstr}
 Bitta aniq kuzatuv + bitta kichik savol. Bo'sh iboralar YO'Q.`;
         const { text } = await generateText({ model, system, prompt: parsed.data.context });

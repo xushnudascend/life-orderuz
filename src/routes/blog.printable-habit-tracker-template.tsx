@@ -10,7 +10,8 @@ const DESCRIPTION =
 
 // Data URL — kichik, lekin haqiqiy PDF: 1 sahifalik "Habit Tracker" shabloni.
 // Foydalanuvchi <a download> orqali yuklab olishi mumkin — server yuki yo'q.
-const PDF_HREF = "data:application/pdf;base64,JVBERi0xLjQKJcTl8uXrp/Og0MTGCjMgMCBvYmoKPDwvTGVuZ3RoIDIzMD4+CnN0cmVhbQpCVAovRjEgMTggVGYKNzIgNzgwIFRkCihMaWZlIE9yZGVyIC0tIEhhYml0IFRyYWNrZXIpIFRqCjAgLTM2IFRkCi9GMSAxMiBUZgooMzAta3VuIGdyaWQuIEt1biAvIE9kYXQgLyBHYWxvY2hrYS4pIFRqCjAgLTI0IFRkCihNYWtzaW1hbCAzIG9kYXQuIEJvc2ggcXVyb2xpbmc6IDIgZGFxaXFhLikgVGoKMCAtMjQgVGQKKDY2LWt1biBzcHJpbnQgOiA3IC8gMjEgLyA2NiAvIDEwMCkgVGoKRVQKZW5kc3RyZWFtCmVuZG9iagoKMSAwIG9iago8PC9UeXBlL0NhdGFsb2cvUGFnZXMgMiAwIFI+PgplbmRvYmoKMiAwIG9iago8PC9UeXBlL1BhZ2VzL0NvdW50IDEvS2lkc1s0IDAgUl0+PgplbmRvYmoKNCAwIG9iago8PC9UeXBlL1BhZ2UvUGFyZW50IDIgMCBSL01lZGlhQm94WzAgMCA1OTUgODQyXS9SZXNvdXJjZXM8PC9Gb250PDwvRjEgNSAwIFI+Pj4+L0NvbnRlbnRzIDMgMCBSPj4KZW5kb2JqCjUgMCBvYmoKPDwvVHlwZS9Gb250L1N1YnR5cGUvVHlwZTEvQmFzZUZvbnQvSGVsdmV0aWNhPj4KZW5kb2JqCnhyZWYKMCA2CjAwMDAwMDAwMDAgNjU1MzUgZgowMDAwMDAwMzMwIDAwMDAwIG4KMDAwMDAwMDM3NSAwMDAwMCBuCjAwMDAwMDAwMTUgMDAwMDAgbgowMDAwMDAwNDIzIDAwMDAwIG4KMDAwMDAwMDUyNiAwMDAwMCBuCnRyYWlsZXIKPDwvU2l6ZSA2L1Jvb3QgMSAwIFI+PgpzdGFydHhyZWYKNTkyCiUlRU9G";
+const PDF_HREF =
+  "data:application/pdf;base64,JVBERi0xLjQKJcTl8uXrp/Og0MTGCjMgMCBvYmoKPDwvTGVuZ3RoIDIzMD4+CnN0cmVhbQpCVAovRjEgMTggVGYKNzIgNzgwIFRkCihMaWZlIE9yZGVyIC0tIEhhYml0IFRyYWNrZXIpIFRqCjAgLTM2IFRkCi9GMSAxMiBUZgooMzAta3VuIGdyaWQuIEt1biAvIE9kYXQgLyBHYWxvY2hrYS4pIFRqCjAgLTI0IFRkCihNYWtzaW1hbCAzIG9kYXQuIEJvc2ggcXVyb2xpbmc6IDIgZGFxaXFhLikgVGoKMCAtMjQgVGQKKDY2LWt1biBzcHJpbnQgOiA3IC8gMjEgLyA2NiAvIDEwMCkgVGoKRVQKZW5kc3RyZWFtCmVuZG9iagoKMSAwIG9iago8PC9UeXBlL0NhdGFsb2cvUGFnZXMgMiAwIFI+PgplbmRvYmoKMiAwIG9iago8PC9UeXBlL1BhZ2VzL0NvdW50IDEvS2lkc1s0IDAgUl0+PgplbmRvYmoKNCAwIG9iago8PC9UeXBlL1BhZ2UvUGFyZW50IDIgMCBSL01lZGlhQm94WzAgMCA1OTUgODQyXS9SZXNvdXJjZXM8PC9Gb250PDwvRjEgNSAwIFI+Pj4+L0NvbnRlbnRzIDMgMCBSPj4KZW5kb2JqCjUgMCBvYmoKPDwvVHlwZS9Gb250L1N1YnR5cGUvVHlwZTEvQmFzZUZvbnQvSGVsdmV0aWNhPj4KZW5kb2JqCnhyZWYKMCA2CjAwMDAwMDAwMDAgNjU1MzUgZgowMDAwMDAwMzMwIDAwMDAwIG4KMDAwMDAwMDM3NSAwMDAwMCBuCjAwMDAwMDAwMTUgMDAwMDAgbgowMDAwMDAwNDIzIDAwMDAwIG4KMDAwMDAwMDUyNiAwMDAwMCBuCnRyYWlsZXIKPDwvU2l6ZSA2L1Jvb3QgMSAwIFI+PgpzdGFydHhyZWYKNTkyCiUlRU9G";
 
 export const Route = createFileRoute("/blog/printable-habit-tracker-template")({
   head: () => ({
@@ -57,10 +58,9 @@ function PrintableTemplate() {
             {TITLE}
           </h1>
           <p className="mt-6 text-lg leading-relaxed text-muted-foreground text-pretty">
-            Ba'zan qog'oz raqamlidan kuchli. Qog'ozdagi galochka miyaning
-            motor korteksini yoqadi va odat izini chuqurroq qoldiradi
-            (Mueller &amp; Oppenheimer, 2014). Quyida bepul, chop etiladigan
-            Life Order habit tracker shabloni.
+            Ba'zan qog'oz raqamlidan kuchli. Qog'ozdagi galochka miyaning motor korteksini yoqadi va
+            odat izini chuqurroq qoldiradi (Mueller &amp; Oppenheimer, 2014). Quyida bepul, chop
+            etiladigan Life Order habit tracker shabloni.
           </p>
 
           <div className="mt-8 rounded-[var(--radius)] border border-primary/40 bg-card/40 p-6 text-center">
@@ -79,18 +79,29 @@ function PrintableTemplate() {
 
           <h2 className="mt-12 font-serif text-2xl">Qanday ishlatiladi</h2>
           <ol className="mt-3 space-y-3 leading-relaxed text-muted-foreground">
-            <li><strong>1.</strong> Maksimal 3 ta odatni tanlang. Har biri "kulgili darajada oson" (Fogg, 2019).</li>
-            <li><strong>2.</strong> Har kuni galochka qo'ying — jismonan, qo'l bilan. Zanjir uzilmasin.</li>
-            <li><strong>3.</strong> Bir kun tashlab qo'ysangiz — davom eting. Ikki kun — Shield ishlating.</li>
-            <li><strong>4.</strong> 7 / 21 / 66 / 100 kunlarni belgilang: bu neyrobiologik bosqichlar.</li>
+            <li>
+              <strong>1.</strong> Maksimal 3 ta odatni tanlang. Har biri "kulgili darajada oson"
+              (Fogg, 2019).
+            </li>
+            <li>
+              <strong>2.</strong> Har kuni galochka qo'ying — jismonan, qo'l bilan. Zanjir
+              uzilmasin.
+            </li>
+            <li>
+              <strong>3.</strong> Bir kun tashlab qo'ysangiz — davom eting. Ikki kun — Shield
+              ishlating.
+            </li>
+            <li>
+              <strong>4.</strong> 7 / 21 / 66 / 100 kunlarni belgilang: bu neyrobiologik bosqichlar.
+            </li>
           </ol>
 
           <h2 className="mt-10 font-serif text-2xl">Nima uchun qog'oz + raqamli birga kuchli</h2>
           <p className="mt-3 leading-relaxed text-muted-foreground">
-            Qog'oz — <strong>ritual</strong> va <strong>haptik izi</strong>.
-            Raqamli — <strong>analitika</strong>, <strong>eslatma</strong> va
-            <strong> AI mentor</strong>. Ikkalasi bir vaqtda quloqning ikkala
-            kanalidek — signal ikki barobar aniq keladi.
+            Qog'oz — <strong>ritual</strong> va <strong>haptik izi</strong>. Raqamli —{" "}
+            <strong>analitika</strong>, <strong>eslatma</strong> va
+            <strong> AI mentor</strong>. Ikkalasi bir vaqtda quloqning ikkala kanalidek — signal
+            ikki barobar aniq keladi.
           </p>
 
           <div className="mt-10 rounded-[var(--radius)] border border-primary/40 bg-card/40 p-6 text-center">

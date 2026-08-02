@@ -53,60 +53,86 @@ function HabitTrackerGuide() {
             {TITLE}
           </h1>
           <p className="mt-6 text-lg leading-relaxed text-muted-foreground text-pretty">
-            Habit tracker — bu shunchaki galochka qo'yish emas. Bu miyaning
-            mukofot tizimini boshqarish uslubi. Bu qo'llanmada nima uchun odat
-            kuzatuvi ishlashini va uni Life Order tizimida qanday qo'llashni
-            ko'rib chiqamiz.
+            Habit tracker — bu shunchaki galochka qo'yish emas. Bu miyaning mukofot tizimini
+            boshqarish uslubi. Bu qo'llanmada nima uchun odat kuzatuvi ishlashini va uni Life Order
+            tizimida qanday qo'llashni ko'rib chiqamiz.
           </p>
 
           <h2 className="mt-12 font-serif text-2xl">1. Nima uchun kuzatuv o'zi ishlaydi</h2>
           <p className="mt-3 leading-relaxed text-muted-foreground">
-            Kuzatuv uchta psixologik effektni yoqadi: <strong>Hawthorne
-            effekti</strong> (o'lchanayotgan xatti-harakat yaxshilanadi),
+            Kuzatuv uchta psixologik effektni yoqadi: <strong>Hawthorne effekti</strong>{" "}
+            (o'lchanayotgan xatti-harakat yaxshilanadi),
             <strong> vizual progress bias</strong> (zanjir uzilmasligi kerak) va
-            <strong> dopamin qaytishi</strong> (har galochka — kichik mukofot).
-            Harvard Business School (Amabile &amp; Kramer, 2011) tadqiqoti
-            "kichik yutuqlar tamoyili"ni tasdiqlagan: kunlik ko'rinadigan
-            progress motivatsiyaning eng kuchli manbai.
+            <strong> dopamin qaytishi</strong> (har galochka — kichik mukofot). Harvard Business
+            School (Amabile &amp; Kramer, 2011) tadqiqoti "kichik yutuqlar tamoyili"ni tasdiqlagan:
+            kunlik ko'rinadigan progress motivatsiyaning eng kuchli manbai.
           </p>
 
           <h2 className="mt-10 font-serif text-2xl">2. B=MAP formulasi (BJ Fogg, Stanford)</h2>
           <p className="mt-3 leading-relaxed text-muted-foreground">
-            Xatti-harakat = Motivatsiya × Qobiliyat × Trigger. Habit tracker
-            uchalasini ham mustahkamlaydi:
+            Xatti-harakat = Motivatsiya × Qobiliyat × Trigger. Habit tracker uchalasini ham
+            mustahkamlaydi:
           </p>
           <ul className="mt-3 space-y-2 leading-relaxed text-muted-foreground">
-            <li>• <strong>Motivatsiya</strong> — streak va identity ("Men bu turdagi odamman")</li>
-            <li>• <strong>Qobiliyat</strong> — mikro-vazifalar (2 daqiqa qoidasi)</li>
-            <li>• <strong>Trigger</strong> — habit stacking ("Ertalab qahvadan keyin")</li>
+            <li>
+              • <strong>Motivatsiya</strong> — streak va identity ("Men bu turdagi odamman")
+            </li>
+            <li>
+              • <strong>Qobiliyat</strong> — mikro-vazifalar (2 daqiqa qoidasi)
+            </li>
+            <li>
+              • <strong>Trigger</strong> — habit stacking ("Ertalab qahvadan keyin")
+            </li>
           </ul>
 
           <h2 className="mt-10 font-serif text-2xl">3. 66 kun qoidasi (Lally, UCL 2010)</h2>
           <p className="mt-3 leading-relaxed text-muted-foreground">
-            Odat avtomatlashishi uchun o'rtacha <strong>66 kun</strong> kerak
-            (diapazon 18–254). "21 kun" — bu afsona. Habit tracker sizga aynan
-            shu diapazonni ko'rish imkonini beradi. Life Order bu vaqtni
-            sprintlarga bo'ladi: 7 kun (issinish), 21 kun (o'rnashish), 66 kun
+            Odat avtomatlashishi uchun o'rtacha <strong>66 kun</strong> kerak (diapazon 18–254). "21
+            kun" — bu afsona. Habit tracker sizga aynan shu diapazonni ko'rish imkonini beradi. Life
+            Order bu vaqtni sprintlarga bo'ladi: 7 kun (issinish), 21 kun (o'rnashish), 66 kun
             (avtomatizatsiya), 100 kun (identitet).
           </p>
 
           <h2 className="mt-10 font-serif text-2xl">4. To'g'ri habit tracker qanday tuziladi</h2>
           <ol className="mt-3 space-y-3 leading-relaxed text-muted-foreground">
-            <li><strong>1. Aniqlik.</strong> "Sog'lom bo'lish" emas — "Har kuni soat 07:00da 10 daqiqa yurish".</li>
-            <li><strong>2. Kichiklik.</strong> Boshlanishida vazifa "kulgili darajada oson" bo'lsin (Fogg).</li>
-            <li><strong>3. Kontekst.</strong> Vaqt + joy + oldingi harakat. Bu trigger.</li>
-            <li><strong>4. Zanjir.</strong> Ketma-ketlik motivatsiyadan kuchliroq (Seinfeld strategy).</li>
-            <li><strong>5. Toqatlilik.</strong> Bir kun tashlab qo'ysang — zanjir uzilmagan. Ikki kun — uzilgan.</li>
+            <li>
+              <strong>1. Aniqlik.</strong> "Sog'lom bo'lish" emas — "Har kuni soat 07:00da 10 daqiqa
+              yurish".
+            </li>
+            <li>
+              <strong>2. Kichiklik.</strong> Boshlanishida vazifa "kulgili darajada oson" bo'lsin
+              (Fogg).
+            </li>
+            <li>
+              <strong>3. Kontekst.</strong> Vaqt + joy + oldingi harakat. Bu trigger.
+            </li>
+            <li>
+              <strong>4. Zanjir.</strong> Ketma-ketlik motivatsiyadan kuchliroq (Seinfeld strategy).
+            </li>
+            <li>
+              <strong>5. Toqatlilik.</strong> Bir kun tashlab qo'ysang — zanjir uzilmagan. Ikki kun
+              — uzilgan.
+            </li>
           </ol>
 
           <h2 className="mt-10 font-serif text-2xl">5. Habit tracker'ning uch xatosi</h2>
           <ul className="mt-3 space-y-2 leading-relaxed text-muted-foreground">
-            <li>• <strong>Ko'p odat birdaniga.</strong> 1–3 odat — maksimal. Ortiqchasi kognitiv yuk.</li>
-            <li>• <strong>Faqat "streak"ka e'tibor.</strong> Uzilgan zanjirdan qo'rqish stressni oshiradi. Life Order Shield tizimi aynan shu uchun.</li>
-            <li>• <strong>O'lchov noaniq.</strong> "Ko'proq o'qish" — kuzatib bo'lmaydi. "20 sahifa" — bo'ladi.</li>
+            <li>
+              • <strong>Ko'p odat birdaniga.</strong> 1–3 odat — maksimal. Ortiqchasi kognitiv yuk.
+            </li>
+            <li>
+              • <strong>Faqat "streak"ka e'tibor.</strong> Uzilgan zanjirdan qo'rqish stressni
+              oshiradi. Life Order Shield tizimi aynan shu uchun.
+            </li>
+            <li>
+              • <strong>O'lchov noaniq.</strong> "Ko'proq o'qish" — kuzatib bo'lmaydi. "20 sahifa" —
+              bo'ladi.
+            </li>
           </ul>
 
-          <h2 className="mt-10 font-serif text-2xl">6. Life Order habit tracker qanday farq qiladi</h2>
+          <h2 className="mt-10 font-serif text-2xl">
+            6. Life Order habit tracker qanday farq qiladi
+          </h2>
           <p className="mt-3 leading-relaxed text-muted-foreground">
             Ko'pchilik ilovalar — galochka. Life Order — <strong>tizim</strong>:
           </p>
@@ -121,10 +147,21 @@ function HabitTrackerGuide() {
           <div className="mt-10 rounded-[var(--radius)] border border-primary/40 bg-card/40 p-6">
             <p className="font-serif text-xl">Manbalar</p>
             <ul className="mt-2 space-y-2 font-ui text-sm text-muted-foreground">
-              <li>Fogg, B. J. (2019). <em>Tiny Habits: The Small Changes That Change Everything.</em> Houghton Mifflin.</li>
-              <li>Clear, J. (2018). <em>Atomic Habits.</em> Avery.</li>
-              <li>Lally, P. et al. (2010). <em>How are habits formed.</em> European Journal of Social Psychology, 40(6), 998–1009.</li>
-              <li>Amabile, T., &amp; Kramer, S. (2011). <em>The Progress Principle.</em> Harvard Business Review Press.</li>
+              <li>
+                Fogg, B. J. (2019). <em>Tiny Habits: The Small Changes That Change Everything.</em>{" "}
+                Houghton Mifflin.
+              </li>
+              <li>
+                Clear, J. (2018). <em>Atomic Habits.</em> Avery.
+              </li>
+              <li>
+                Lally, P. et al. (2010). <em>How are habits formed.</em> European Journal of Social
+                Psychology, 40(6), 998–1009.
+              </li>
+              <li>
+                Amabile, T., &amp; Kramer, S. (2011). <em>The Progress Principle.</em> Harvard
+                Business Review Press.
+              </li>
             </ul>
           </div>
 

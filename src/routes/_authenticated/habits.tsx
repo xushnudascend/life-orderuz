@@ -14,10 +14,7 @@ import { xpFromDifficulty } from "@/lib/nervous";
 
 export const Route = createFileRoute("/_authenticated/habits")({
   head: () => ({
-    meta: [
-      { title: `Odatlar — ${uz.brand.name}` },
-      { name: "robots", content: "noindex" },
-    ],
+    meta: [{ title: `Odatlar — ${uz.brand.name}` }, { name: "robots", content: "noindex" }],
   }),
   component: HabitsPage,
 });
@@ -117,9 +114,7 @@ function HabitsPage() {
         composedCue = `${base}dan keyin`;
       }
     }
-    const composed = composedCue
-      ? `${composedCue} → ${newTitle.trim()}`
-      : newTitle.trim();
+    const composed = composedCue ? `${composedCue} → ${newTitle.trim()}` : newTitle.trim();
     await supabase.from("habits").insert({
       user_id: userId,
       title: composed,
@@ -135,7 +130,6 @@ function HabitsPage() {
     refresh();
   }
 
-
   async function toggleToday(h: Habit) {
     // Faqat bugunga rejalashtirilgan bo'lsa ish beradi (scheduled_for null => today)
     if (h.scheduled_for && h.scheduled_for !== today()) {
@@ -144,11 +138,7 @@ function HabitsPage() {
     }
     const doneNow = todayLogs.has(h.id);
     if (doneNow) {
-      await supabase
-        .from("habit_logs")
-        .delete()
-        .eq("habit_id", h.id)
-        .eq("logged_date", today());
+      await supabase.from("habit_logs").delete().eq("habit_id", h.id).eq("logged_date", today());
     } else {
       await supabase.from("habit_logs").insert({
         user_id: userId,
@@ -156,10 +146,13 @@ function HabitsPage() {
         logged_date: today(),
         xp_awarded: h.xp_reward,
       });
-      await supabase.rpc("award_action_xp" as never, {
-        _source: "habit",
-        _reference_id: h.id,
-      } as never);
+      await supabase.rpc(
+        "award_action_xp" as never,
+        {
+          _source: "habit",
+          _reference_id: h.id,
+        } as never,
+      );
       const rem = habits.length - todayLogs.size - 1;
       if (rem === 1) toast.success("Bir qadam qoldi.");
       else if (rem === 0) toast.success("Hammasi allaqachon belgilangan.");
@@ -186,7 +179,10 @@ function HabitsPage() {
   const grouped = useMemo(() => {
     const g: Record<string, Habit[]> = { body: [], habit: [], learn: [], other: [] };
     for (const h of habits) {
-      const k = h.category && ["body", "habit", "learn", "other"].includes(h.category) ? h.category : "other";
+      const k =
+        h.category && ["body", "habit", "learn", "other"].includes(h.category)
+          ? h.category
+          : "other";
       g[k].push(h);
     }
     return g;
@@ -200,7 +196,8 @@ function HabitsPage() {
         title="Odatlar"
         subtitle={
           <>
-            Bugun: <span className="text-foreground">{doneCount}</span> / {todayCount} bajarildi. Kichik takror — katta o'zgarish.
+            Bugun: <span className="text-foreground">{doneCount}</span> / {todayCount} bajarildi.
+            Kichik takror — katta o'zgarish.
           </>
         }
       />
@@ -226,7 +223,9 @@ function HabitsPage() {
                 onChange={(e) => setCue(e.target.value)}
                 className="font-ui text-sm"
               />
-              <span className="hidden text-center font-ui text-sm text-muted-foreground sm:block">→</span>
+              <span className="hidden text-center font-ui text-sm text-muted-foreground sm:block">
+                →
+              </span>
               <Input
                 placeholder="Nima qilaman (2 daqiqadan kam)"
                 value={newTitle}
@@ -235,7 +234,9 @@ function HabitsPage() {
               />
             </div>
             <div className="mt-3 flex flex-wrap items-center gap-1.5">
-              <span className="font-ui text-[10px] uppercase tracking-[0.2em] text-muted-foreground">Ilgak</span>
+              <span className="font-ui text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
+                Ilgak
+              </span>
               {CUE_PICKS.map((c) => (
                 <button
                   key={c}
@@ -280,14 +281,12 @@ function HabitsPage() {
                 {stackAnchor
                   ? (() => {
                       const a = habits.find((h) => h.id === stackAnchor);
-                      const base = a
-                        ? a.title.split("→").pop()?.trim() || a.title
-                        : "";
+                      const base = a ? a.title.split("→").pop()?.trim() || a.title : "";
                       return `${base}dan keyin → `;
                     })()
                   : cue.trim()
-                  ? `${cue.trim()} → `
-                  : ""}
+                    ? `${cue.trim()} → `
+                    : ""}
                 {newTitle.trim() || "..."}
               </p>
             )}
@@ -370,7 +369,6 @@ function HabitsPage() {
             title="Hali odat qo'shilmagan"
             description="Kichkina va aniq bir odatdan boshla — masalan '2 daqiqa nafas mashqi'. Kichik boshlanish uzoq davom etadi."
           />
-
         ) : (
           CATEGORIES.map((cat) =>
             grouped[cat.id].length ? (
@@ -416,9 +414,7 @@ function HabitsPage() {
                             <p className="mt-1 font-ui text-xs uppercase tracking-[0.2em] text-primary">
                               +{h.xp_reward} XP
                               {movedAway && (
-                                <span className="ml-2 text-muted-foreground">
-                                  · Ertaga
-                                </span>
+                                <span className="ml-2 text-muted-foreground">· Ertaga</span>
                               )}
                             </p>
                           </div>

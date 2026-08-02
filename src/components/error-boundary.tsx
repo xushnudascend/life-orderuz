@@ -52,9 +52,7 @@ export class ErrorBoundary extends Component<Props, State> {
       >
         <AlertTriangle className="h-4 w-4 shrink-0" aria-hidden />
         <div className="min-w-0 flex-1">
-          <p className="font-ui text-sm font-medium text-foreground">
-            Bu bo'lim yuklanmadi
-          </p>
+          <p className="font-ui text-sm font-medium text-foreground">Bu bo'lim yuklanmadi</p>
           {!compact && (
             <p className="mt-0.5 font-ui text-xs text-muted-foreground">
               Qayta urinib ko'ring — qolgan sahifa ishlamoqda.

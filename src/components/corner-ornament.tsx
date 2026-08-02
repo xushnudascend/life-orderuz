@@ -43,10 +43,7 @@ export function CornerOrnament({
       <svg
         viewBox="0 0 200 200"
         fill="none"
-        className={cn(
-          "h-full w-full text-primary/[0.09]",
-          !reduced && "corner-ornament-spin",
-        )}
+        className={cn("h-full w-full text-primary/[0.09]", !reduced && "corner-ornament-spin")}
       >
         {/* 8-nurli girih yulduzi — 8 ta 45° burilgan kvadrat */}
         <g stroke="currentColor" strokeWidth="0.6">

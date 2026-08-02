@@ -7,14 +7,46 @@ const DESCRIPTION =
   "Hayotning 8 asosiy sohasi: sog'liq, karyera, ruhiy holat, munosabatlar va boshqalar — odat qurishda muvozanat uchun qo'llanma.";
 
 const AREAS: { n: string; title: string; body: string }[] = [
-  { n: "01", title: "Sog'liq va fizik holat", body: "Uyqu, ovqatlanish, harakat. Kunlik 20 daqiqa yurish yoki 10 daqiqa cho'zilish — asos." },
-  { n: "02", title: "Ruhiy salomatlik", body: "Meditatsiya, journal, stress bilan ishlash. Kuniga 5 daqiqa nafas mashqi ko'p narsani o'zgartiradi." },
-  { n: "03", title: "Karyera va kasb", body: "Ko'nikmalar, portfolio, tarmoqlashtirish. Haftada bitta yangi narsa o'rganish." },
-  { n: "04", title: "Moliya", body: "Byudjet, jamg'arma, investitsiya. Har oy daromadning 10% ini chetga qo'yish." },
-  { n: "05", title: "Munosabatlar", body: "Oila, do'stlar, sherik. Haftada bitta chuqur suhbat rejalashtirilgan bo'lsin." },
-  { n: "06", title: "Shaxsiy o'sish", body: "Kitob, kurs, refleksiya. Kuniga 20 daqiqa kitob yoki podkast." },
-  { n: "07", title: "Dam olish va o'yin", body: "Hobbi, sport, ijod. Ekran vaqtidan tashqari faoliyat majburiy." },
-  { n: "08", title: "Muhit va tartib", body: "Uy, ish stoli, raqamli tozalik. Haftada bir marta 15 daqiqa tartibga solish." },
+  {
+    n: "01",
+    title: "Sog'liq va fizik holat",
+    body: "Uyqu, ovqatlanish, harakat. Kunlik 20 daqiqa yurish yoki 10 daqiqa cho'zilish — asos.",
+  },
+  {
+    n: "02",
+    title: "Ruhiy salomatlik",
+    body: "Meditatsiya, journal, stress bilan ishlash. Kuniga 5 daqiqa nafas mashqi ko'p narsani o'zgartiradi.",
+  },
+  {
+    n: "03",
+    title: "Karyera va kasb",
+    body: "Ko'nikmalar, portfolio, tarmoqlashtirish. Haftada bitta yangi narsa o'rganish.",
+  },
+  {
+    n: "04",
+    title: "Moliya",
+    body: "Byudjet, jamg'arma, investitsiya. Har oy daromadning 10% ini chetga qo'yish.",
+  },
+  {
+    n: "05",
+    title: "Munosabatlar",
+    body: "Oila, do'stlar, sherik. Haftada bitta chuqur suhbat rejalashtirilgan bo'lsin.",
+  },
+  {
+    n: "06",
+    title: "Shaxsiy o'sish",
+    body: "Kitob, kurs, refleksiya. Kuniga 20 daqiqa kitob yoki podkast.",
+  },
+  {
+    n: "07",
+    title: "Dam olish va o'yin",
+    body: "Hobbi, sport, ijod. Ekran vaqtidan tashqari faoliyat majburiy.",
+  },
+  {
+    n: "08",
+    title: "Muhit va tartib",
+    body: "Uy, ish stoli, raqamli tozalik. Haftada bir marta 15 daqiqa tartibga solish.",
+  },
 ];
 
 export const Route = createFileRoute("/blog/hayot-sohalari")({
@@ -69,14 +101,20 @@ function AspectsGuide() {
           <p className="font-ui text-[11px] uppercase tracking-[0.24em] text-muted-foreground">
             Qo'llanma · 5 daqiqa o'qish
           </p>
-          <h1 className="mt-3 font-serif text-4xl leading-[1.1] tracking-tight md:text-5xl">{TITLE}</h1>
+          <h1 className="mt-3 font-serif text-4xl leading-[1.1] tracking-tight md:text-5xl">
+            {TITLE}
+          </h1>
           <p className="mt-6 text-lg leading-relaxed text-muted-foreground text-pretty">
-            Odat qurishda eng katta xato — bitta yo'nalishga haddan tashqari e'tibor berish. Hayot 8 asosiy sohaga bo'linadi; muvozanatli o'sish uchun har bir sohaga kichik qadam kerak.
+            Odat qurishda eng katta xato — bitta yo'nalishga haddan tashqari e'tibor berish. Hayot 8
+            asosiy sohaga bo'linadi; muvozanatli o'sish uchun har bir sohaga kichik qadam kerak.
           </p>
 
           <div className="mt-12 grid gap-4">
             {AREAS.map((a) => (
-              <section key={a.n} className="rounded-[var(--radius)] border border-border/60 bg-card/40 p-6">
+              <section
+                key={a.n}
+                className="rounded-[var(--radius)] border border-border/60 bg-card/40 p-6"
+              >
                 <p className="font-ui text-xs uppercase tracking-[0.24em] text-primary">{a.n}</p>
                 <h2 className="mt-3 font-serif text-2xl">{a.title}</h2>
                 <p className="mt-2 leading-relaxed text-muted-foreground">{a.body}</p>
@@ -86,7 +124,9 @@ function AspectsGuide() {
 
           <h2 className="mt-14 font-serif text-2xl">Qanday amalda qo'llash?</h2>
           <p className="mt-3 leading-relaxed text-muted-foreground">
-            Life Order'da har kuni uchta missiya olasan. Ularni turli sohalardan tanla — masalan, bittasi sog'liq, bittasi shaxsiy o'sish, bittasi munosabatlardan. Bu tizim 60 kun ichida barcha sohalarda o'sishni ta'minlaydi.
+            Life Order'da har kuni uchta missiya olasan. Ularni turli sohalardan tanla — masalan,
+            bittasi sog'liq, bittasi shaxsiy o'sish, bittasi munosabatlardan. Bu tizim 60 kun ichida
+            barcha sohalarda o'sishni ta'minlaydi.
           </p>
 
           <div className="mt-10 rounded-[var(--radius)] border border-primary/40 bg-card/40 p-6 text-center">

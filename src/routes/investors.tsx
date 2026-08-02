@@ -91,9 +91,12 @@ function InvestorsPage() {
             <span className="text-primary">Tizim qoladi.</span>
           </h1>
           <p className="mt-6 max-w-2xl font-ui text-lg leading-relaxed text-muted-foreground">
-            Life Order — O'zbekistonda xulq-atvor fani (behavioral science) asosidagi
-            shaxsiy operatsion tizim. Beta bosqichida, solo asoschi.
-            <span className="text-foreground font-semibold"> $20 000 pre-seed — 12% ulush evaziga, 18 oylik runway.</span>
+            Life Order — O'zbekistonda xulq-atvor fani (behavioral science) asosidagi shaxsiy
+            operatsion tizim. Beta bosqichida, solo asoschi.
+            <span className="text-foreground font-semibold">
+              {" "}
+              $20 000 pre-seed — 12% ulush evaziga, 18 oylik runway.
+            </span>
           </p>
 
           {/* Micro-metrics — faqat isbotlangan raqamlar */}
@@ -184,10 +187,7 @@ function InvestorsPage() {
         </Section>
 
         {/* Isbot / Ilmiy asos */}
-        <Section
-          eyebrow="03 · Isbot"
-          title="Nima uchun bu ishlaydi — ilmiy asos"
-        >
+        <Section eyebrow="03 · Isbot" title="Nima uchun bu ishlaydi — ilmiy asos">
           <div className="grid gap-4 sm:grid-cols-2">
             <ProofCard
               source="BJ Fogg (Stanford)"
@@ -221,7 +221,7 @@ function InvestorsPage() {
               label="Global habit tracking + wellness apps (2025, Grand View Research)"
             />
             <MarketCard
-                tag="SAM"
+              tag="SAM"
               value="$180M"
               label="MDH + Turkiya — behavioral wellness segmenti"
             />
@@ -232,9 +232,9 @@ function InvestorsPage() {
             />
           </div>
           <p className="mt-6 font-ui text-sm text-muted-foreground leading-relaxed max-w-3xl">
-            MDH mintaqasida 90M+ smartfon foydalanuvchisi. Rus va o'zbek tilida
-            xulq-atvor mahsulotlari deyarli yo'q. G'arb ilovalari (Fabulous,
-            Headspace, Notion) — inglizcha va boshqa madaniy kontekstda.
+            MDH mintaqasida 90M+ smartfon foydalanuvchisi. Rus va o'zbek tilida xulq-atvor
+            mahsulotlari deyarli yo'q. G'arb ilovalari (Fabulous, Headspace, Notion) — inglizcha va
+            boshqa madaniy kontekstda.
           </p>
         </Section>
 
@@ -275,34 +275,45 @@ function InvestorsPage() {
             <ul className="space-y-3 font-ui text-sm leading-relaxed">
               <li className="flex gap-3">
                 <span className="text-primary font-semibold">•</span>
-                <span><span className="text-foreground font-semibold">Mahsulot:</span> Beta — 14+ modul ishlab bo'lgan (dashboard, odat, jurnal, AI mentor, MCP integratsiya, PWA).</span>
+                <span>
+                  <span className="text-foreground font-semibold">Mahsulot:</span> Beta — 14+ modul
+                  ishlab bo'lgan (dashboard, odat, jurnal, AI mentor, MCP integratsiya, PWA).
+                </span>
               </li>
               <li className="flex gap-3">
                 <span className="text-primary font-semibold">•</span>
-                <span><span className="text-foreground font-semibold">Foydalanuvchilar:</span> Yopiq pilot bosqichida. Ommaviy raqamlar hali e'lon qilinmayapti — shaffoflik uchun.</span>
+                <span>
+                  <span className="text-foreground font-semibold">Foydalanuvchilar:</span> Yopiq
+                  pilot bosqichida. Ommaviy raqamlar hali e'lon qilinmayapti — shaffoflik uchun.
+                </span>
               </li>
               <li className="flex gap-3">
                 <span className="text-primary font-semibold">•</span>
-                <span><span className="text-foreground font-semibold">Daromad:</span> $0 — hali monetizatsiya yo'q. Free tarif ochiq, Pro Q1 2026'da.</span>
+                <span>
+                  <span className="text-foreground font-semibold">Daromad:</span> $0 — hali
+                  monetizatsiya yo'q. Free tarif ochiq, Pro Q1 2026'da.
+                </span>
               </li>
               <li className="flex gap-3">
                 <span className="text-primary font-semibold">•</span>
-                <span><span className="text-foreground font-semibold">Jamoa:</span> 1 asoschi (mahsulot + injener + dizayn). Investment bilan 1 injener + marketing byudjeti.</span>
+                <span>
+                  <span className="text-foreground font-semibold">Jamoa:</span> 1 asoschi (mahsulot
+                  + injener + dizayn). Investment bilan 1 injener + marketing byudjeti.
+                </span>
               </li>
               <li className="flex gap-3">
                 <span className="text-primary font-semibold">•</span>
-                <span><span className="text-foreground font-semibold">Xarajat:</span> ~$50/oy (Cloudflare + Supabase + AI gateway). Deyarli 0 burn.</span>
+                <span>
+                  <span className="text-foreground font-semibold">Xarajat:</span> ~$50/oy
+                  (Cloudflare + Supabase + AI gateway). Deyarli 0 burn.
+                </span>
               </li>
             </ul>
           </div>
         </Section>
 
-
         {/* Product proof — mahsulot ishonchliligi */}
-        <Section
-          eyebrow="07 · Product proof"
-          title="Nima ishlab bo'lingan — hozir jonli"
-        >
+        <Section eyebrow="07 · Product proof" title="Nima ishlab bo'lingan — hozir jonli">
           <div className="grid gap-3 sm:grid-cols-2">
             <ProofRow text="60 soniyalik onboarding — 10 savol, aniq profil" />
             <ProofRow text="Nadir AI mentor — kontekstga ega chat, foydalanuvchi profilidan o'qiydi" />
@@ -316,10 +327,7 @@ function InvestorsPage() {
         </Section>
 
         {/* Xavfsizlik */}
-        <Section
-          eyebrow="08 · Xavfsizlik"
-          title="Ma'lumot va infratuzilma"
-        >
+        <Section eyebrow="08 · Xavfsizlik" title="Ma'lumot va infratuzilma">
           <div className="grid gap-4 sm:grid-cols-3">
             <SecurityCard
               icon={Lock}
@@ -348,9 +356,7 @@ function InvestorsPage() {
                   Miqdor
                 </p>
                 <p className="mt-2 font-serif text-4xl font-semibold">$20 000</p>
-                <p className="mt-1 font-ui text-sm text-muted-foreground">
-                  Bir martalik pre-seed
-                </p>
+                <p className="mt-1 font-ui text-sm text-muted-foreground">Bir martalik pre-seed</p>
               </div>
               <div>
                 <p className="font-ui text-[11px] font-semibold uppercase tracking-[0.24em] text-primary">
@@ -366,9 +372,7 @@ function InvestorsPage() {
                   Runway
                 </p>
                 <p className="mt-2 font-serif text-4xl font-semibold">18 oy</p>
-                <p className="mt-1 font-ui text-sm text-muted-foreground">
-                  ~$1 100 / oy o'rtacha
-                </p>
+                <p className="mt-1 font-ui text-sm text-muted-foreground">~$1 100 / oy o'rtacha</p>
               </div>
             </div>
             <div className="mt-8 border-t border-primary/20 pt-6">
@@ -407,10 +411,10 @@ function InvestorsPage() {
             />
           </div>
           <p className="mt-6 font-ui text-xs text-muted-foreground leading-relaxed max-w-3xl">
-            Bu — prognoz, kafolat emas. Har bir bosqich hisobot bilan. Investor har chorak natija ko'radi.
+            Bu — prognoz, kafolat emas. Har bir bosqich hisobot bilan. Investor har chorak natija
+            ko'radi.
           </p>
         </Section>
-
 
         {/* CTA */}
         <section className="mt-24 rounded-[var(--radius)] border border-border bg-card p-10 text-center">
@@ -421,8 +425,8 @@ function InvestorsPage() {
             30 daqiqalik suhbat
           </h2>
           <p className="mx-auto mt-3 max-w-lg font-ui text-sm text-muted-foreground leading-relaxed">
-            Mahsulotni jonli ko'rsatamiz, savollaringizga javob beramiz, moliyaviy
-            model va batafsil metrikalarni yuboramiz.
+            Mahsulotni jonli ko'rsatamiz, savollaringizga javob beramiz, moliyaviy model va batafsil
+            metrikalarni yuboramiz.
           </p>
           <div className="mt-6 flex flex-wrap justify-center gap-3">
             <a
@@ -449,8 +453,7 @@ function InvestorsPage() {
 
         <footer className="mt-16 border-t border-border pt-8 text-center">
           <p className="font-ui text-[11px] text-muted-foreground">
-            © {new Date().getFullYear()} {uz.brand.name}. Konfidensial. Investor
-            uchun.
+            © {new Date().getFullYear()} {uz.brand.name}. Konfidensial. Investor uchun.
           </p>
         </footer>
       </main>
@@ -474,9 +477,7 @@ function Section({
       <p className="font-ui text-[11px] font-semibold uppercase tracking-[0.24em] text-primary">
         {eyebrow}
       </p>
-      <h2 className="mt-2 font-serif text-2xl font-semibold tracking-tight sm:text-3xl">
-        {title}
-      </h2>
+      <h2 className="mt-2 font-serif text-2xl font-semibold tracking-tight sm:text-3xl">{title}</h2>
       <div className="mt-6">{children}</div>
     </section>
   );
@@ -485,12 +486,8 @@ function Section({
 function MicroStat({ k, v }: { k: string; v: string }) {
   return (
     <div className="rounded-[var(--radius)] border border-border bg-background/30 p-4">
-      <p className="font-serif text-2xl font-semibold tabular-nums text-primary">
-        {k}
-      </p>
-      <p className="mt-1 font-ui text-[11px] leading-relaxed text-muted-foreground">
-        {v}
-      </p>
+      <p className="font-serif text-2xl font-semibold tabular-nums text-primary">{k}</p>
+      <p className="mt-1 font-ui text-[11px] leading-relaxed text-muted-foreground">{v}</p>
     </div>
   );
 }
@@ -508,9 +505,7 @@ function ProblemCard({
     <div className="rounded-[var(--radius)] border border-border bg-card p-5">
       <Icon className="h-5 w-5 text-primary" />
       <p className="mt-4 font-serif text-lg font-semibold">{title}</p>
-      <p className="mt-2 font-ui text-[13px] leading-relaxed text-muted-foreground">
-        {body}
-      </p>
+      <p className="mt-2 font-ui text-[13px] leading-relaxed text-muted-foreground">{body}</p>
     </div>
   );
 }
@@ -535,57 +530,31 @@ function SolutionStep({
         </span>
       </div>
       <p className="mt-4 font-serif text-sm font-semibold">{title}</p>
-      <p className="mt-1.5 font-ui text-[12px] leading-relaxed text-muted-foreground">
-        {body}
-      </p>
+      <p className="mt-1.5 font-ui text-[12px] leading-relaxed text-muted-foreground">{body}</p>
     </div>
   );
 }
 
-function ProofCard({
-  source,
-  claim,
-  detail,
-}: {
-  source: string;
-  claim: string;
-  detail: string;
-}) {
+function ProofCard({ source, claim, detail }: { source: string; claim: string; detail: string }) {
   return (
     <div className="rounded-[var(--radius)] border border-border bg-card p-5">
       <p className="font-ui text-[10px] font-semibold uppercase tracking-[0.2em] text-primary">
         {source}
       </p>
-      <p className="mt-2 font-serif text-base font-semibold leading-snug">
-        {claim}
-      </p>
-      <p className="mt-2 font-ui text-[13px] leading-relaxed text-muted-foreground">
-        {detail}
-      </p>
+      <p className="mt-2 font-serif text-base font-semibold leading-snug">{claim}</p>
+      <p className="mt-2 font-ui text-[13px] leading-relaxed text-muted-foreground">{detail}</p>
     </div>
   );
 }
 
-function MarketCard({
-  tag,
-  value,
-  label,
-}: {
-  tag: string;
-  value: string;
-  label: string;
-}) {
+function MarketCard({ tag, value, label }: { tag: string; value: string; label: string }) {
   return (
     <div className="rounded-[var(--radius)] border border-border bg-background/30 p-5">
       <p className="font-ui text-[10px] font-semibold uppercase tracking-[0.22em] text-primary">
         {tag}
       </p>
-      <p className="mt-2 font-serif text-3xl font-semibold tabular-nums">
-        {value}
-      </p>
-      <p className="mt-2 font-ui text-[12px] leading-relaxed text-muted-foreground">
-        {label}
-      </p>
+      <p className="mt-2 font-serif text-3xl font-semibold tabular-nums">{value}</p>
+      <p className="mt-2 font-ui text-[12px] leading-relaxed text-muted-foreground">{label}</p>
     </div>
   );
 }
@@ -606,9 +575,7 @@ function PriceTier({
   return (
     <div
       className={`rounded-[var(--radius)] border p-5 ${
-        highlight
-          ? "border-primary/60 bg-primary/5"
-          : "border-border bg-card"
+        highlight ? "border-primary/60 bg-primary/5" : "border-border bg-card"
       }`}
     >
       <p className="font-serif text-lg font-semibold">{name}</p>
@@ -620,9 +587,7 @@ function PriceTier({
           </span>
         )}
       </p>
-      <p className="mt-3 font-ui text-[13px] leading-relaxed text-muted-foreground">
-        {body}
-      </p>
+      <p className="mt-3 font-ui text-[13px] leading-relaxed text-muted-foreground">{body}</p>
     </div>
   );
 }
@@ -647,9 +612,7 @@ function TargetCard({
         </span>
       </div>
       <p className="mt-3 font-serif text-2xl font-semibold tabular-nums">{k}</p>
-      <p className="mt-1 font-ui text-[11px] leading-relaxed text-muted-foreground">
-        {v}
-      </p>
+      <p className="mt-1 font-ui text-[11px] leading-relaxed text-muted-foreground">{v}</p>
     </div>
   );
 }
@@ -676,20 +639,12 @@ function SecurityCard({
     <div className="rounded-[var(--radius)] border border-border bg-card p-5">
       <Icon className="h-5 w-5 text-primary" />
       <p className="mt-3 font-serif text-base font-semibold">{title}</p>
-      <p className="mt-1.5 font-ui text-[12px] leading-relaxed text-muted-foreground">
-        {body}
-      </p>
+      <p className="mt-1.5 font-ui text-[12px] leading-relaxed text-muted-foreground">{body}</p>
     </div>
   );
 }
 
-function RoadmapRow({
-  period,
-  milestone,
-}: {
-  period: string;
-  milestone: string;
-}) {
+function RoadmapRow({ period, milestone }: { period: string; milestone: string }) {
   return (
     <div className="flex items-start gap-4 rounded-[var(--radius)] border border-border bg-card p-4">
       <span className="font-ui text-[11px] font-semibold uppercase tracking-[0.22em] text-primary min-w-[90px]">

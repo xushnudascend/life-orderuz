@@ -44,7 +44,8 @@ function ResetPasswordPage() {
     e.preventDefault();
     setErr(null);
     if (pwd.length < 8) return setErr("Parol kamida 8 belgi bo'lishi kerak.");
-    if (!/[A-Za-z]/.test(pwd) || !/[0-9]/.test(pwd)) return setErr("Parolda harf va raqam bo'lsin.");
+    if (!/[A-Za-z]/.test(pwd) || !/[0-9]/.test(pwd))
+      return setErr("Parolda harf va raqam bo'lsin.");
     if (pwd !== confirm) return setErr("Parollar mos emas.");
     setLoading(true);
     try {

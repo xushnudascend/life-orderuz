@@ -46,16 +46,14 @@ export function NotificationBudgetCard({ userId }: { userId: string }) {
         }
       />
       <div className="mt-3 flex items-baseline gap-2">
-        <p className="font-serif text-3xl tabular-nums text-foreground">
-          {remaining ?? "—"}
-        </p>
+        <p className="font-serif text-3xl tabular-nums text-foreground">{remaining ?? "—"}</p>
         <p className="font-ui text-xs text-muted-foreground">
           / {DAILY_BUDGET} bugungi signal qoldi
         </p>
       </div>
       <p className="mt-2 font-ui text-xs text-muted-foreground">
-        Diqqatingizni himoya qilamiz — kuniga eng ko'pi bilan 3 ta signal yuboramiz.
-        Ko'proq push kelmaydi.
+        Diqqatingizni himoya qilamiz — kuniga eng ko'pi bilan 3 ta signal yuboramiz. Ko'proq push
+        kelmaydi.
       </p>
     </Panel>
   );

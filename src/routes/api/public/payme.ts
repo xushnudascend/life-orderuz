@@ -10,11 +10,30 @@ type RpcReq = {
 };
 
 const ERR = {
-  auth: { code: -32504, message: { ru: "Ошибка авторизации", uz: "Avtorizatsiya xatosi", en: "Auth error" } },
-  method: { code: -32601, message: { ru: "Метод не найден", uz: "Metod topilmadi", en: "Method not found" } },
-  order: { code: -31050, message: { ru: "Заказ не найден", uz: "Buyurtma topilmadi", en: "Order not found" } },
-  amount: { code: -31001, message: { ru: "Неверная сумма", uz: "Summa noto'g'ri", en: "Wrong amount" } },
-  state: { code: -31008, message: { ru: "Невозможно выполнить операцию", uz: "Operatsiya bajarilmaydi", en: "Cannot perform" } },
+  auth: {
+    code: -32504,
+    message: { ru: "Ошибка авторизации", uz: "Avtorizatsiya xatosi", en: "Auth error" },
+  },
+  method: {
+    code: -32601,
+    message: { ru: "Метод не найден", uz: "Metod topilmadi", en: "Method not found" },
+  },
+  order: {
+    code: -31050,
+    message: { ru: "Заказ не найден", uz: "Buyurtma topilmadi", en: "Order not found" },
+  },
+  amount: {
+    code: -31001,
+    message: { ru: "Неверная сумма", uz: "Summa noto'g'ri", en: "Wrong amount" },
+  },
+  state: {
+    code: -31008,
+    message: {
+      ru: "Невозможно выполнить операцию",
+      uz: "Operatsiya bajarilmaydi",
+      en: "Cannot perform",
+    },
+  },
 } as const;
 
 function rpcError(id: RpcReq["id"], err: { code: number; message: unknown }, data?: unknown) {
@@ -45,8 +64,7 @@ export const Route = createFileRoute("/api/public/payme")({
         if (!key) return new Response("Not configured", { status: 503 });
 
         const body = (await request.json().catch(() => null)) as RpcReq | null;
-        if (!body || typeof body !== "object")
-          return rpcError(0, ERR.method);
+        if (!body || typeof body !== "object") return rpcError(0, ERR.method);
 
         if (!checkAuth(request.headers.get("authorization"), key))
           return rpcError(body.id, ERR.auth);
@@ -61,7 +79,10 @@ export const Route = createFileRoute("/api/public/payme")({
             const orderId = account?.order_id;
             if (!orderId) return rpcError(body.id, ERR.order);
             const { data: order } = await supabaseAdmin
-              .from("payment_orders").select("*").eq("id", orderId).maybeSingle();
+              .from("payment_orders")
+              .select("*")
+              .eq("id", orderId)
+              .maybeSingle();
             if (!order) return rpcError(body.id, ERR.order);
             if (order.amount_uzs * 100 !== amount) return rpcError(body.id, ERR.amount);
             if (order.state !== "created") return rpcError(body.id, ERR.state);
@@ -74,29 +95,42 @@ export const Route = createFileRoute("/api/public/payme")({
             const orderId = (p as { account?: { order_id?: string } }).account?.order_id;
             if (!orderId) return rpcError(body.id, ERR.order);
             const { data: order } = await supabaseAdmin
-              .from("payment_orders").select("*").eq("id", orderId).maybeSingle();
+              .from("payment_orders")
+              .select("*")
+              .eq("id", orderId)
+              .maybeSingle();
             if (!order) return rpcError(body.id, ERR.order);
             if (order.amount_uzs * 100 !== amount) return rpcError(body.id, ERR.amount);
             // idempotency
             if (order.provider_txn_id && order.provider_txn_id !== id)
               return rpcError(body.id, ERR.state);
-            await supabaseAdmin.from("payment_orders").update({
-              provider: "payme",
-              provider_txn_id: id,
-              state: "prepared",
-              raw_payload: JSON.parse(JSON.stringify(p)),
-            }).eq("id", orderId);
+            await supabaseAdmin
+              .from("payment_orders")
+              .update({
+                provider: "payme",
+                provider_txn_id: id,
+                state: "prepared",
+                raw_payload: JSON.parse(JSON.stringify(p)),
+              })
+              .eq("id", orderId);
             return rpcResult(body.id, { create_time: time, transaction: orderId, state: 1 });
           }
           case "PerformTransaction": {
             const id = String((p as { id?: string }).id);
             const { data: order } = await supabaseAdmin
-              .from("payment_orders").select("*").eq("provider_txn_id", id).maybeSingle();
+              .from("payment_orders")
+              .select("*")
+              .eq("provider_txn_id", id)
+              .maybeSingle();
             if (!order) return rpcError(body.id, ERR.order);
             const perform = new Date();
-            await supabaseAdmin.from("payment_orders").update({
-              state: "paid", perform_time: perform.toISOString(),
-            }).eq("id", order.id);
+            await supabaseAdmin
+              .from("payment_orders")
+              .update({
+                state: "paid",
+                perform_time: perform.toISOString(),
+              })
+              .eq("id", order.id);
             const { activateProForOrder } = await import("@/lib/billing.server");
             await activateProForOrder(order.id);
 
@@ -110,24 +144,43 @@ export const Route = createFileRoute("/api/public/payme")({
             const id = String((p as { id?: string }).id);
             const reason = Number((p as { reason?: number }).reason ?? 0);
             const { data: order } = await supabaseAdmin
-              .from("payment_orders").select("*").eq("provider_txn_id", id).maybeSingle();
+              .from("payment_orders")
+              .select("*")
+              .eq("provider_txn_id", id)
+              .maybeSingle();
             if (!order) return rpcError(body.id, ERR.order);
             const cancel = new Date();
             const state = order.state === "paid" ? -2 : -1;
-            await supabaseAdmin.from("payment_orders").update({
-              state: "canceled", cancel_time: cancel.toISOString(), cancel_reason: reason,
-            }).eq("id", order.id);
+            await supabaseAdmin
+              .from("payment_orders")
+              .update({
+                state: "canceled",
+                cancel_time: cancel.toISOString(),
+                cancel_reason: reason,
+              })
+              .eq("id", order.id);
             return rpcResult(body.id, {
-              transaction: order.id, cancel_time: cancel.getTime(), state,
+              transaction: order.id,
+              cancel_time: cancel.getTime(),
+              state,
             });
           }
           case "CheckTransaction": {
             const id = String((p as { id?: string }).id);
             const { data: order } = await supabaseAdmin
-              .from("payment_orders").select("*").eq("provider_txn_id", id).maybeSingle();
+              .from("payment_orders")
+              .select("*")
+              .eq("provider_txn_id", id)
+              .maybeSingle();
             if (!order) return rpcError(body.id, ERR.order);
-            const state = order.state === "paid" ? 2 :
-              order.state === "canceled" ? (order.perform_time ? -2 : -1) : 1;
+            const state =
+              order.state === "paid"
+                ? 2
+                : order.state === "canceled"
+                  ? order.perform_time
+                    ? -2
+                    : -1
+                  : 1;
             return rpcResult(body.id, {
               transaction: order.id,
               create_time: new Date(order.created_at).getTime(),

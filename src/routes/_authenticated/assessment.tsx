@@ -6,14 +6,24 @@ import { ArrowLeft, ArrowRight, Loader2, Sparkles, Target, ShieldCheck, Flame } 
 import { Button } from "@/components/ui/button";
 import { Panel } from "@/components/panel";
 import { PageHero } from "@/components/page-hero";
-import { QUESTIONS, SCALES, LIKERT_LABELS, computeAllScores, type ScaleKey } from "@/lib/assessment-scales";
+import {
+  QUESTIONS,
+  SCALES,
+  LIKERT_LABELS,
+  computeAllScores,
+  type ScaleKey,
+} from "@/lib/assessment-scales";
 import { submitAssessment } from "@/lib/assessment.functions";
 
 export const Route = createFileRoute("/_authenticated/assessment")({
   head: () => ({
     meta: [
       { title: "Human Potential Assessment — Life Order" },
-      { name: "description", content: "3 daqiqada psixologik profilingizni aniqlang. Human Potential Score va shaxsiy yo'l xarita." },
+      {
+        name: "description",
+        content:
+          "3 daqiqada psixologik profilingizni aniqlang. Human Potential Score va shaxsiy yo'l xarita.",
+      },
       { name: "robots", content: "noindex" },
     ],
   }),
@@ -110,9 +120,7 @@ function AssessmentPage() {
           </div>
 
           <Panel>
-            <p className="text-xs uppercase tracking-widest text-amber-400/80">
-              {scaleMeta.title}
-            </p>
+            <p className="text-xs uppercase tracking-widest text-amber-400/80">{scaleMeta.title}</p>
             <h2 className="mt-2 text-xl font-semibold leading-snug sm:text-2xl">
               {current.prompt}
             </h2>
@@ -146,7 +154,10 @@ function AssessmentPage() {
                       aria-hidden
                     >
                       {selected ? (
-                        <svg viewBox="0 0 20 20" className="h-3.5 w-3.5 text-background animate-in zoom-in-50 duration-300">
+                        <svg
+                          viewBox="0 0 20 20"
+                          className="h-3.5 w-3.5 text-background animate-in zoom-in-50 duration-300"
+                        >
                           <path
                             d="M4 10.5l3.5 3.5L16 6"
                             fill="none"
@@ -211,9 +222,18 @@ function AssessmentPage() {
 
           <div className="mt-6 grid gap-3 sm:grid-cols-2">
             <ScoreRing label="Human Potential" value={scores.potential} accent tone="amber" />
-            <ScoreRing label="Discipline" value={scores.discipline} icon={<ShieldCheck className="h-4 w-4" />} />
+            <ScoreRing
+              label="Discipline"
+              value={scores.discipline}
+              icon={<ShieldCheck className="h-4 w-4" />}
+            />
             <ScoreRing label="Focus" value={scores.focus} icon={<Target className="h-4 w-4" />} />
-            <ScoreRing label="Addiction Risk" value={scores.addiction_risk} icon={<Flame className="h-4 w-4" />} inverse />
+            <ScoreRing
+              label="Addiction Risk"
+              value={scores.addiction_risk}
+              icon={<Flame className="h-4 w-4" />}
+              inverse
+            />
           </div>
 
           <Panel className="mt-4">
@@ -266,11 +286,7 @@ function AssessmentPage() {
               maxLength={40}
             />
             <div className="mt-4 flex flex-col gap-2 sm:flex-row">
-              <Button
-                onClick={() => navigate({ to: "/dashboard" })}
-                className="flex-1"
-                size="lg"
-              >
+              <Button onClick={() => navigate({ to: "/dashboard" })} className="flex-1" size="lg">
                 <Sparkles className="mr-2 h-4 w-4" />
                 Dashboardga o'tish
                 <ArrowRight className="ml-2 h-4 w-4" />
@@ -347,21 +363,26 @@ function ScoreRing({
     ? value > 60
       ? "#ef4444"
       : value > 40
-      ? "#f59e0b"
-      : "#10b981"
+        ? "#f59e0b"
+        : "#10b981"
     : tone === "amber"
-    ? "#f59e0b"
-    : "#e5e7eb";
+      ? "#f59e0b"
+      : "#e5e7eb";
   return (
     <div
       className={`flex items-center gap-4 rounded-lg border p-4 ${
-        accent
-          ? "border-amber-500/40 bg-amber-500/[0.04]"
-          : "border-border/60 bg-card/40"
+        accent ? "border-amber-500/40 bg-amber-500/[0.04]" : "border-border/60 bg-card/40"
       }`}
     >
       <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} className="shrink-0">
-        <circle cx={size / 2} cy={size / 2} r={r} stroke="rgba(255,255,255,0.06)" strokeWidth={stroke} fill="none" />
+        <circle
+          cx={size / 2}
+          cy={size / 2}
+          r={r}
+          stroke="rgba(255,255,255,0.06)"
+          strokeWidth={stroke}
+          fill="none"
+        />
         <circle
           cx={size / 2}
           cy={size / 2}

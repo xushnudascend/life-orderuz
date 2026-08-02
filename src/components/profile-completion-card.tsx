@@ -6,11 +6,7 @@ import { ArrowRight, UserCog } from "lucide-react";
  * Fast-track ro'yxatdan o'tgan (onboarding to'liq bo'lmagan) foydalanuvchilar
  * uchun dashboard tepasidagi karta. Bosilsa /onboarding'ga olib boradi.
  */
-export function ProfileCompletionCard({
-  missing,
-}: {
-  missing: string[];
-}) {
+export function ProfileCompletionCard({ missing }: { missing: string[] }) {
   if (missing.length === 0) return null;
   return (
     <div className="mb-6 flex flex-wrap items-center justify-between gap-3 rounded-[var(--radius)] border border-primary/40 bg-primary/5 p-4">

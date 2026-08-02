@@ -11,12 +11,18 @@ import { ArrowLeft, User as UserIcon } from "lucide-react";
 export const Route = createFileRoute("/u/$username")({
   ssr: false,
   loader: async ({ params }) => {
-    const { data: rows } = await supabase.rpc("public_profile_by_username" as never, {
-      _username: params.username,
-    } as never);
-    const prof = (Array.isArray(rows) ? rows[0] : rows) as
-      | { id: string; username: string | null; display_name: string | null; avatar_url: string | null }
-      | null;
+    const { data: rows } = await supabase.rpc(
+      "public_profile_by_username" as never,
+      {
+        _username: params.username,
+      } as never,
+    );
+    const prof = (Array.isArray(rows) ? rows[0] : rows) as {
+      id: string;
+      username: string | null;
+      display_name: string | null;
+      avatar_url: string | null;
+    } | null;
     if (!prof) throw notFound();
     const [{ data: stats }, { data: streak }] = await Promise.all([
       supabase
@@ -98,7 +104,6 @@ function PublicProfile() {
                 decoding="async"
                 className="h-full w-full object-cover"
               />
-
             ) : (
               <UserIcon className="h-6 w-6 text-muted-foreground" />
             )}
@@ -123,8 +128,8 @@ function PublicProfile() {
 
         <div className="mt-6 rounded-[var(--radius)] border border-border p-5">
           <p className="font-ui text-sm">
-            Eng uzun streak:{" "}
-            <span className="text-foreground">{streak?.longest_days ?? 0}</span> kun
+            Eng uzun streak: <span className="text-foreground">{streak?.longest_days ?? 0}</span>{" "}
+            kun
           </p>
         </div>
 
@@ -140,9 +145,7 @@ function NotPublic() {
   return (
     <div className="mx-auto max-w-lg px-5 py-20 text-center">
       <p className="font-serif text-2xl">Profil yopiq yoki topilmadi.</p>
-      <p className="mt-2 text-sm text-muted-foreground">
-        Foydalanuvchi profilni yopib qo'ygan.
-      </p>
+      <p className="mt-2 text-sm text-muted-foreground">Foydalanuvchi profilni yopib qo'ygan.</p>
       <Button asChild className="mt-6">
         <Link to="/">Bosh sahifa</Link>
       </Button>
@@ -153,9 +156,7 @@ function NotPublic() {
 function Card({ label, value }: { label: string; value: string | number }) {
   return (
     <div className="rounded-[var(--radius)] border border-border p-5">
-      <p className="font-ui text-xs uppercase tracking-[0.22em] text-muted-foreground">
-        {label}
-      </p>
+      <p className="font-ui text-xs uppercase tracking-[0.22em] text-muted-foreground">{label}</p>
       <p className="mt-2 font-serif text-3xl">{value}</p>
     </div>
   );

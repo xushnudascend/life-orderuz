@@ -32,7 +32,6 @@ async function publicProfilePaths(): Promise<SitemapEntry[]> {
   }
 }
 
-
 export const Route = createFileRoute("/sitemap.xml")({
   server: {
     handlers: {
@@ -48,9 +47,12 @@ export const Route = createFileRoute("/sitemap.xml")({
           { path: "/blog/motivatsiya-tuzogi", changefreq: "monthly", priority: "0.7" },
           { path: "/blog/habit-tracker-guide", changefreq: "monthly", priority: "0.8" },
           { path: "/blog/best-habit-tracker-apps", changefreq: "monthly", priority: "0.8" },
-          { path: "/blog/printable-habit-tracker-template", changefreq: "monthly", priority: "0.8" },
+          {
+            path: "/blog/printable-habit-tracker-template",
+            changefreq: "monthly",
+            priority: "0.8",
+          },
           { path: "/blog/goal-tracking-apps", changefreq: "monthly", priority: "0.8" },
-
 
           { path: "/install", changefreq: "monthly", priority: "0.6" },
           { path: "/mcp", changefreq: "monthly", priority: "0.5" },
@@ -62,7 +64,6 @@ export const Route = createFileRoute("/sitemap.xml")({
           { path: "/security", changefreq: "yearly", priority: "0.3" },
           ...(await publicProfilePaths()),
         ];
-
 
         const urls = entries.map((e) =>
           [

@@ -19,12 +19,9 @@ export const getPeerMirror = createServerFn({ method: "GET" }).handler(async () 
       today_active:
         typeof row.today_active === "number" ? row.today_active : Number(row.today_active ?? 0),
       streak_leader:
-        typeof row.streak_leader === "number"
-          ? row.streak_leader
-          : Number(row.streak_leader ?? 0),
+        typeof row.streak_leader === "number" ? row.streak_leader : Number(row.streak_leader ?? 0),
     };
   } catch {
     return fallback;
   }
 });
-

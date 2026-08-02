@@ -70,7 +70,8 @@ export function HumanPotentialPanel() {
         </p>
         <p className="mt-2 font-serif text-lg">Skoringiz hali hisoblanmagan.</p>
         <p className="mt-1 text-sm text-muted-foreground">
-          9 shkalali psixologik test — 3 daqiqa. Discipline, Focus va Addiction Risk balingizni ko'ring.
+          9 shkalali psixologik test — 3 daqiqa. Discipline, Focus va Addiction Risk balingizni
+          ko'ring.
         </p>
         <Link
           to="/assessment"
@@ -84,9 +85,18 @@ export function HumanPotentialPanel() {
 
   const potentialBand = bandFor(scores.potential);
   const items: Array<{ label: string; value: number; icon: React.ReactNode; inverse?: boolean }> = [
-    { label: "Discipline", value: scores.discipline, icon: <ShieldCheck className="h-3.5 w-3.5" /> },
+    {
+      label: "Discipline",
+      value: scores.discipline,
+      icon: <ShieldCheck className="h-3.5 w-3.5" />,
+    },
     { label: "Focus", value: scores.focus, icon: <Target className="h-3.5 w-3.5" /> },
-    { label: "Addiction Risk", value: scores.addiction_risk, icon: <Flame className="h-3.5 w-3.5" />, inverse: true },
+    {
+      label: "Addiction Risk",
+      value: scores.addiction_risk,
+      icon: <Flame className="h-3.5 w-3.5" />,
+      inverse: true,
+    },
   ];
 
   return (
@@ -102,7 +112,9 @@ export function HumanPotentialPanel() {
             </span>
             <span className="text-xs text-muted-foreground">/ 100</span>
           </div>
-          <p className={`mt-1 font-ui text-[11px] uppercase tracking-[0.2em] ${potentialBand.tone}`}>
+          <p
+            className={`mt-1 font-ui text-[11px] uppercase tracking-[0.2em] ${potentialBand.tone}`}
+          >
             {potentialBand.label}
           </p>
         </div>

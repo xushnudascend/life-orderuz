@@ -130,9 +130,7 @@ export function RetentionPanels() {
             </p>
           </div>
         ) : (
-          <p className="mt-3 text-[13px] text-muted-foreground">
-            Hozircha faol mavsum yo'q.
-          </p>
+          <p className="mt-3 text-[13px] text-muted-foreground">Hozircha faol mavsum yo'q.</p>
         )}
       </Panel>
     </div>

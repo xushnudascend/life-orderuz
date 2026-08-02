@@ -34,10 +34,7 @@ export function HabitHeatmap({ userId }: { userId: string }) {
     };
   }, [userId]);
 
-  const max = useMemo(
-    () => (grid ? Math.max(1, ...grid.flat()) : 1),
-    [grid],
-  );
+  const max = useMemo(() => (grid ? Math.max(1, ...grid.flat()) : 1), [grid]);
   const days = ["Yak", "Du", "Se", "Ch", "Pa", "Ju", "Sh"];
 
   return (
@@ -75,8 +72,8 @@ export function HabitHeatmap({ userId }: { userId: string }) {
         </div>
       </div>
       <p className="mt-3 font-ui text-[11px] text-muted-foreground">
-        Yorug'roq kataklar — sen aksariyat marta odatlaringni bajargan
-        soatlar. Yangi odatni shu oynaga bogʻlash — habit stacking (Clear, 2018).
+        Yorug'roq kataklar — sen aksariyat marta odatlaringni bajargan soatlar. Yangi odatni shu
+        oynaga bogʻlash — habit stacking (Clear, 2018).
       </p>
     </Panel>
   );

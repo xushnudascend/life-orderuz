@@ -7,15 +7,7 @@ import { HabitHeatmap } from "@/components/habit-heatmap";
 import { Button } from "@/components/ui/button";
 import { Panel, PanelHeader, PanelValue } from "@/components/panel";
 import { Loader2, Download, FileText } from "lucide-react";
-import {
-  Bar,
-  BarChart,
-  ResponsiveContainer,
-  Tooltip,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-} from "recharts";
+import { Bar, BarChart, ResponsiveContainer, Tooltip, XAxis, YAxis, CartesianGrid } from "recharts";
 import { toast } from "sonner";
 import { uz } from "@/i18n";
 import { useSubscription } from "@/lib/use-subscription";
@@ -101,8 +93,12 @@ function Analytics() {
         habits: pts.reduce((s, p) => s + p.habits, 0),
         journal: journals.data?.length ?? 0,
       });
-      const strong = pts.slice(-7).reduce((a, b) => (b.xp > a.xp ? b : a), pts[0] ?? { day: "—", xp: 0, habits: 0 });
-      const weak  = pts.slice(-7).reduce((a, b) => (b.xp < a.xp ? b : a), pts[0] ?? { day: "—", xp: 0, habits: 0 });
+      const strong = pts
+        .slice(-7)
+        .reduce((a, b) => (b.xp > a.xp ? b : a), pts[0] ?? { day: "—", xp: 0, habits: 0 });
+      const weak = pts
+        .slice(-7)
+        .reduce((a, b) => (b.xp < a.xp ? b : a), pts[0] ?? { day: "—", xp: 0, habits: 0 });
       setStrongestDay(strong.day);
       setWeakestDay(weak.day);
       setThisWeek(pts.slice(-7).reduce((s, p) => s + p.xp, 0));
@@ -169,10 +165,7 @@ function Analytics() {
           title="Chuqur analitika."
           subtitle="14 kunlik dinamika, heatmap, kuchli va zaif kunlar tahlili — Pro rejada."
         />
-        <PremiumLock
-          className="mt-8"
-          title="Analitika va heatmap Pro a'zolar uchun ochiq."
-        />
+        <PremiumLock className="mt-8" title="Analitika va heatmap Pro a'zolar uchun ochiq." />
       </AppShell>
     );
   }

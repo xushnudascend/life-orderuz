@@ -7,13 +7,7 @@ import { Sparkles } from "lucide-react";
  * Wording rule (A3): never "streak xavf ostida" — that's fear-mongering.
  * Say what's true and offer the smallest next step.
  */
-export function StreakAtRisk({
-  streakDays,
-  percent,
-}: {
-  streakDays: number;
-  percent: number;
-}) {
+export function StreakAtRisk({ streakDays, percent }: { streakDays: number; percent: number }) {
   const hour = new Date().getHours();
   const show = streakDays >= 3 && percent < 100 && hour >= 18;
   if (!show) return null;

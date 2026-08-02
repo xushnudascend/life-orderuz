@@ -9,10 +9,7 @@ import { uz } from "@/i18n";
 
 export const Route = createFileRoute("/_authenticated/achievements")({
   head: () => ({
-    meta: [
-      { title: `Yutuqlar — ${uz.brand.name}` },
-      { name: "robots", content: "noindex" },
-    ],
+    meta: [{ title: `Yutuqlar — ${uz.brand.name}` }, { name: "robots", content: "noindex" }],
   }),
   component: Achievements,
 });
@@ -48,9 +45,7 @@ function Achievements() {
       setAll((a.data as Ach[] | null) ?? []);
       setUnlocked(
         new Set(
-          ((ua.data as { achievement_id: string }[] | null) ?? []).map(
-            (r) => r.achievement_id,
-          ),
+          ((ua.data as { achievement_id: string }[] | null) ?? []).map((r) => r.achievement_id),
         ),
       );
       setLoading(false);
@@ -91,9 +86,7 @@ function Achievements() {
                 </span>
                 <div>
                   <p className="font-serif text-lg">{a.title}</p>
-                  <p className="mt-1 text-sm text-muted-foreground">
-                    {a.description}
-                  </p>
+                  <p className="mt-1 text-sm text-muted-foreground">{a.description}</p>
                   <p className="mt-2 font-ui text-xs uppercase tracking-[0.2em] text-muted-foreground/80">
                     {a.tier} · +{a.xp_reward} XP
                   </p>

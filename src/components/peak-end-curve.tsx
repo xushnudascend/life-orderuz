@@ -41,8 +41,8 @@ export function PeakEndCurve({ userId }: { userId: string }) {
       <Panel className="p-5">
         <PanelHeader title="Haftaning egri chizig'i" eyebrow="Peak-End · Kahneman" />
         <p className="mt-3 font-ui text-sm text-muted-foreground">
-          Peak-end egri chizig'i uchun kamida 2 ta mood log kerak. Kunni
-          yopish kartochkasidan foydalan.
+          Peak-end egri chizig'i uchun kamida 2 ta mood log kerak. Kunni yopish kartochkasidan
+          foydalan.
         </p>
       </Panel>
     );
@@ -62,25 +62,60 @@ export function PeakEndCurve({ userId }: { userId: string }) {
   return (
     <Panel className="p-5">
       <PanelHeader title="Haftaning egri chizig'i" eyebrow="Peak-End · Kahneman" />
-      <svg viewBox={`0 0 ${w} ${h}`} className="mt-4 w-full" role="img" aria-label="Haftalik kayfiyat egri chizig'i">
+      <svg
+        viewBox={`0 0 ${w} ${h}`}
+        className="mt-4 w-full"
+        role="img"
+        aria-label="Haftalik kayfiyat egri chizig'i"
+      >
         <defs>
           <linearGradient id="peGrad" x1="0" x2="0" y1="0" y2="1">
             <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0.35" />
             <stop offset="100%" stopColor="hsl(var(--primary))" stopOpacity="0" />
           </linearGradient>
         </defs>
-        <path d={`${path} L ${xs(endIdx)} ${h - pad} L ${xs(0)} ${h - pad} Z`} fill="url(#peGrad)" />
+        <path
+          d={`${path} L ${xs(endIdx)} ${h - pad} L ${xs(0)} ${h - pad} Z`}
+          fill="url(#peGrad)"
+        />
         <path d={path} fill="none" stroke="hsl(var(--primary))" strokeWidth="1.5" />
         {points.map((p, i) => (
-          <circle key={i} cx={xs(i)} cy={ys(p.mood)} r={i === peakIdx || i === endIdx ? 3.5 : 1.5}
-            fill={i === peakIdx ? "hsl(var(--primary))" : i === endIdx ? "hsl(var(--foreground))" : "hsl(var(--muted-foreground))"} />
+          <circle
+            key={i}
+            cx={xs(i)}
+            cy={ys(p.mood)}
+            r={i === peakIdx || i === endIdx ? 3.5 : 1.5}
+            fill={
+              i === peakIdx
+                ? "hsl(var(--primary))"
+                : i === endIdx
+                  ? "hsl(var(--foreground))"
+                  : "hsl(var(--muted-foreground))"
+            }
+          />
         ))}
-        <text x={xs(peakIdx)} y={Math.max(10, ys(peak.mood) - 6)} fontSize="9" fill="hsl(var(--primary))" textAnchor="middle">Peak</text>
-        <text x={xs(endIdx)} y={Math.max(10, ys(end.mood) - 6)} fontSize="9" fill="hsl(var(--foreground))" textAnchor="end">Oxir</text>
+        <text
+          x={xs(peakIdx)}
+          y={Math.max(10, ys(peak.mood) - 6)}
+          fontSize="9"
+          fill="hsl(var(--primary))"
+          textAnchor="middle"
+        >
+          Peak
+        </text>
+        <text
+          x={xs(endIdx)}
+          y={Math.max(10, ys(end.mood) - 6)}
+          fontSize="9"
+          fill="hsl(var(--foreground))"
+          textAnchor="end"
+        >
+          Oxir
+        </text>
       </svg>
       <p className="mt-3 font-ui text-[11px] leading-relaxed text-muted-foreground">
-        Miya haftani <strong>eng yuqori</strong> va <strong>oxirgi</strong> lahza
-        bilan eslaydi. Oxirni yaxshi yopsang — butun hafta yaxshi tuyuladi.
+        Miya haftani <strong>eng yuqori</strong> va <strong>oxirgi</strong> lahza bilan eslaydi.
+        Oxirni yaxshi yopsang — butun hafta yaxshi tuyuladi.
       </p>
     </Panel>
   );

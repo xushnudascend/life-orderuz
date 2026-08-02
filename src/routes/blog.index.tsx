@@ -59,7 +59,7 @@ const POSTS: Post[] = [
   },
   {
     slug: "motivatsiya-tuzogi",
-    title: "Motivatsiya tuzog'i — nima uchun \"ertadan boshlayman\" ishlamaydi",
+    title: 'Motivatsiya tuzog\'i — nima uchun "ertadan boshlayman" ishlamaydi',
     excerpt:
       "Motivatsiya — o'zgaruvchan holat, tizim doim. BJ Fogg B=MAP formulasi va Kahneman ikki tizim modeli.",
     minutes: 7,
@@ -131,7 +131,8 @@ function BlogIndex() {
           Tizim quruvchilarga o'qish
         </h1>
         <p className="mt-4 max-w-2xl font-ui text-muted-foreground leading-relaxed">
-          Har maqola real tadqiqot va tajribaga asoslangan. Motivatsion iqtiboslar emas — amaliy protokollar.
+          Har maqola real tadqiqot va tajribaga asoslangan. Motivatsion iqtiboslar emas — amaliy
+          protokollar.
         </p>
 
         <div className="mt-12 grid gap-4 md:grid-cols-2">

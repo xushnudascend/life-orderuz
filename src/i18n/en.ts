@@ -32,9 +32,21 @@ const _en = {
     subheading:
       "Not a habit tracker. Trigger analysis, three daily steps, and an honest mentor — together.",
     items: [
-      { tag: "01 · Diagnosis", title: "Trigger analysis", body: "During onboarding we identify your pattern: distraction, disorder, or purposelessness. The path is built around it." },
-      { tag: "02 · Practice",  title: "Three daily steps", body: "Every day, three clear actions — no more, no less. Complete them — XP, streak, and Discipline Score grow." },
-      { tag: "03 · Dialogue",  title: "Nadir — honest AI mentor", body: "Nadir doesn't flatter. Nadir tells the truth — with respect. Plans, asks, stops you if needed." },
+      {
+        tag: "01 · Diagnosis",
+        title: "Trigger analysis",
+        body: "During onboarding we identify your pattern: distraction, disorder, or purposelessness. The path is built around it.",
+      },
+      {
+        tag: "02 · Practice",
+        title: "Three daily steps",
+        body: "Every day, three clear actions — no more, no less. Complete them — XP, streak, and Discipline Score grow.",
+      },
+      {
+        tag: "03 · Dialogue",
+        title: "Nadir — honest AI mentor",
+        body: "Nadir doesn't flatter. Nadir tells the truth — with respect. Plans, asks, stops you if needed.",
+      },
     ],
   },
   nervous: {
@@ -42,19 +54,18 @@ const _en = {
     subheading:
       "XP, Streak, Shield and Discipline Score are linked. Computed on the server — no cheating.",
     tiers: [
-      { range: "0–19",  uz: "Boshlovchi", en: "Beginner" },
-      { range: "20–39", uz: "Intizomli",  en: "Disciplined" },
-      { range: "40–59", uz: "Kuchli",     en: "Strong" },
-      { range: "60–74", uz: "Elita",      en: "Elite" },
-      { range: "75–89", uz: "Usta",       en: "Master" },
-      { range: "90–100",uz: "Apex",       en: "Apex" },
+      { range: "0–19", uz: "Boshlovchi", en: "Beginner" },
+      { range: "20–39", uz: "Intizomli", en: "Disciplined" },
+      { range: "40–59", uz: "Kuchli", en: "Strong" },
+      { range: "60–74", uz: "Elita", en: "Elite" },
+      { range: "75–89", uz: "Usta", en: "Master" },
+      { range: "90–100", uz: "Apex", en: "Apex" },
     ],
     shield: "Shield — recovers your streak once a week. Supportive, not punitive.",
   },
   mentor: {
     heading: "Who is Nadir?",
-    body:
-      "Nadir isn't the assistant who stays up for you. Nadir is a character who watches your choices and answers honestly. No empty \"good job\". What you're doing, why, what's next — those three.",
+    body: "Nadir isn't the assistant who stays up for you. Nadir is a character who watches your choices and answers honestly. No empty \"good job\". What you're doing, why, what's next — those three.",
     quote:
       "«You skipped the workout today. The reason isn't tiredness — it's fear of going to bed. Tomorrow at 22:30, set the phone to silent. Nothing else.»",
     quoteBy: "— Nadir, real chat sample",
@@ -83,7 +94,7 @@ const _en = {
         "Unlimited Nadir chat",
         "Daily AI analysis and plan",
         "Workout + Diet module",
-        "\"Circle\" — community and Party",
+        '"Circle" — community and Party',
         "Leaderboard and achievements",
       ],
       cta: "Start 7 days free",

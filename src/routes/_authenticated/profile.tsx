@@ -19,10 +19,7 @@ import { CountUpNumber } from "@/components/count-up-number";
 
 export const Route = createFileRoute("/_authenticated/profile")({
   head: () => ({
-    meta: [
-      { title: `Profil — ${uz.brand.name}` },
-      { name: "robots", content: "noindex" },
-    ],
+    meta: [{ title: `Profil — ${uz.brand.name}` }, { name: "robots", content: "noindex" }],
   }),
   component: ProfilePage,
 });
@@ -106,7 +103,6 @@ function ProfilePage() {
     setLoading(false);
   }
 
-
   useEffect(() => {
     refresh();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -129,12 +125,12 @@ function ProfilePage() {
   }
 
   async function saveUsername() {
-    const clean = usernameDraft.trim().toLowerCase().replace(/[^a-z0-9_]/g, "");
+    const clean = usernameDraft
+      .trim()
+      .toLowerCase()
+      .replace(/[^a-z0-9_]/g, "");
     if (clean.length < 3) return toast.error("Username 3+ belgidan iborat bo'lsin.");
-    const { error } = await supabase
-      .from("profiles")
-      .update({ username: clean })
-      .eq("id", userId);
+    const { error } = await supabase.from("profiles").update({ username: clean }).eq("id", userId);
     if (error) return toast.error("Ba'zi maydonlar to'g'ri to'ldirilmagan.");
     toast.success("Username saqlandi.");
     refresh();
@@ -186,19 +182,13 @@ function ProfilePage() {
             Men — {identityFrom(stats?.level ?? 1, streak?.current_days ?? 0)}.
           </p>
           <p className="mt-2 font-ui text-xs text-muted-foreground">
-            Har bajarilgan mikro-qadam — shu jumlaning isboti. Odat ovoz berishdir:
-            har kuni sen qanday odam ekanligingga.
+            Har bajarilgan mikro-qadam — shu jumlaning isboti. Odat ovoz berishdir: har kuni sen
+            qanday odam ekanligingga.
           </p>
         </Panel>
       )}
 
-      {!loading && (
-        <ProgressTimeline current={streak?.current_days ?? 0} />
-      )}
-
-
-
-
+      {!loading && <ProgressTimeline current={streak?.current_days ?? 0} />}
 
       {loading ? (
         <div className="flex justify-center py-16">
@@ -223,7 +213,6 @@ function ProfilePage() {
               context={`eng uzun: ${streak?.longest_days ?? 0} kun`}
             />
           </div>
-
 
           <div className="mt-6">
             <ShieldIndicator usedThisWeek={shieldsUsed} max={3} />
@@ -282,10 +271,7 @@ function ProfilePage() {
                   <p className="font-ui text-xs text-muted-foreground">
                     Haftada 1 marta — bo'sh kun uchun streak saqlanadi.
                     {streak?.freeze_active_until && (
-                      <>
-                        {" "}Faol:{" "}
-                        {new Date(streak.freeze_active_until).toLocaleDateString("uz-UZ")}
-                      </>
+                      <> Faol: {new Date(streak.freeze_active_until).toLocaleDateString("uz-UZ")}</>
                     )}
                   </p>
                 </div>
@@ -332,7 +318,15 @@ function ProfilePage() {
   );
 }
 
-function Stat({ label, value, context }: { label: string; value: string | number; context?: string }) {
+function Stat({
+  label,
+  value,
+  context,
+}: {
+  label: string;
+  value: string | number;
+  context?: string;
+}) {
   const isNumber = typeof value === "number";
   return (
     <Panel className="p-5">
@@ -342,13 +336,10 @@ function Stat({ label, value, context }: { label: string; value: string | number
       <p className="mt-2 font-serif text-3xl tabular-nums">
         {isNumber ? <CountUpNumber value={value} once={`profile-${label}`} /> : value}
       </p>
-      {context && (
-        <p className="mt-1 font-ui text-[11px] text-muted-foreground">{context}</p>
-      )}
+      {context && <p className="mt-1 font-ui text-[11px] text-muted-foreground">{context}</p>}
     </Panel>
   );
 }
-
 
 function ProgressTimeline({ current }: { current: number }) {
   const marks = [
@@ -356,7 +347,7 @@ function ProgressTimeline({ current }: { current: number }) {
     { day: 7, label: "Birinchi to'lqin", note: "Prefrontal-striatal bog'lanish" },
     { day: 21, label: "Avtomatlashuv boshi", note: "Ilgak → harakat qisqaradi" },
     { day: 66, label: "O'rtacha to'liqlashuv", note: "Lally, UCL 2010" },
-    { day: 100, label: "Identitet qatlami", note: "\"Men — bunday odamman\"" },
+    { day: 100, label: "Identitet qatlami", note: '"Men — bunday odamman"' },
   ];
   const max = 100;
   const pct = Math.min(100, (current / max) * 100);
@@ -404,7 +395,12 @@ function ProgressTimeline({ current }: { current: number }) {
                   {m.day}
                   <span className="ml-1 font-ui text-[10px] uppercase tracking-[0.18em]">kun</span>
                 </p>
-                <p className={"mt-1 font-ui text-[11px] " + (reached ? "text-foreground" : "text-muted-foreground")}>
+                <p
+                  className={
+                    "mt-1 font-ui text-[11px] " +
+                    (reached ? "text-foreground" : "text-muted-foreground")
+                  }
+                >
                   {m.label}
                 </p>
                 <p className="mt-0.5 font-ui text-[10px] leading-tight text-muted-foreground">
@@ -415,7 +411,8 @@ function ProgressTimeline({ current }: { current: number }) {
           })}
         </div>
         <p className="mt-4 font-ui text-[11px] text-muted-foreground">
-          Bugungi joyingiz: <strong className="text-foreground tabular-nums">{current} kun</strong>. Har bosqich — miya darajasidagi o'zgarish, marketing emas.
+          Bugungi joyingiz: <strong className="text-foreground tabular-nums">{current} kun</strong>.
+          Har bosqich — miya darajasidagi o'zgarish, marketing emas.
         </p>
       </div>
     </Panel>
@@ -439,4 +436,3 @@ function identityFrom(level: number, streak: number): string {
   if (streak >= 3) return "boshlagan odam";
   return "yangi boshlanuvchi tizim quruvchi";
 }
-

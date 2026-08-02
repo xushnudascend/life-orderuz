@@ -3,16 +3,7 @@ import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { AppShell } from "@/components/app-shell";
 import { Button } from "@/components/ui/button";
-import {
-  ArrowRight,
-  Check,
-  Dumbbell,
-  Flame,
-  Salad,
-  Sparkles,
-  Target,
-  Sprout,
-} from "lucide-react";
+import { ArrowRight, Check, Dumbbell, Flame, Salad, Sparkles, Target, Sprout } from "lucide-react";
 import { EmptyState } from "@/components/empty-state";
 
 import { uz } from "@/i18n";
@@ -51,10 +42,7 @@ import {
 
 export const Route = createFileRoute("/_authenticated/dashboard")({
   head: () => ({
-    meta: [
-      { title: `Bugun — ${uz.brand.name}` },
-      { name: "robots", content: "noindex" },
-    ],
+    meta: [{ title: `Bugun — ${uz.brand.name}` }, { name: "robots", content: "noindex" }],
   }),
   component: Dashboard,
 });
@@ -87,7 +75,6 @@ function Dashboard() {
   const [shieldsUsed, setShieldsUsed] = useState(0);
   const [loaded, setLoaded] = useState(false);
   const [milestone, setMilestone] = useState<number | null>(null);
-
 
   async function refresh() {
     const { data } = await supabase.rpc("dashboard_snapshot" as never);
@@ -127,11 +114,7 @@ function Dashboard() {
   async function toggle(h: Habit, ev?: React.MouseEvent) {
     const wasDone = done.has(h.id);
     if (wasDone) {
-      await supabase
-        .from("habit_logs")
-        .delete()
-        .eq("habit_id", h.id)
-        .eq("logged_date", today());
+      await supabase.from("habit_logs").delete().eq("habit_id", h.id).eq("logged_date", today());
     } else {
       await supabase.from("habit_logs").insert({
         user_id: userId,
@@ -139,10 +122,13 @@ function Dashboard() {
         logged_date: today(),
         xp_awarded: h.xp_reward,
       });
-      await supabase.rpc("award_action_xp" as never, {
-        _source: "habit",
-        _reference_id: h.id,
-      } as never);
+      await supabase.rpc(
+        "award_action_xp" as never,
+        {
+          _source: "habit",
+          _reference_id: h.id,
+        } as never,
+      );
       // Micro-reward feedback
       if (ev) {
         const rect = (ev.currentTarget as HTMLElement).getBoundingClientRect();
@@ -218,7 +204,10 @@ function Dashboard() {
 
       {/* Unified Hero — Ascend-style dense bento */}
       {!loaded ? (
-        <div className="mb-5 rounded-[var(--radius)] border border-border/70 bg-card p-4 sm:mb-6 sm:p-6" aria-busy="true">
+        <div
+          className="mb-5 rounded-[var(--radius)] border border-border/70 bg-card p-4 sm:mb-6 sm:p-6"
+          aria-busy="true"
+        >
           <div className="skeleton h-4 w-32" />
           <div className="skeleton mt-3 h-8 w-64" />
           <div className="mt-5 grid gap-4 sm:grid-cols-[auto_1fr]">
@@ -324,7 +313,11 @@ function Dashboard() {
                             : "border-border text-muted-foreground group-hover:border-primary/60 group-hover:text-primary")
                         }
                       >
-                        {isDone ? <Check className="h-3.5 w-3.5" strokeWidth={3} /> : <Flame className="h-3.5 w-3.5" />}
+                        {isDone ? (
+                          <Check className="h-3.5 w-3.5" strokeWidth={3} />
+                        ) : (
+                          <Flame className="h-3.5 w-3.5" />
+                        )}
                       </span>
                       <span
                         className={
@@ -363,7 +356,10 @@ function Dashboard() {
                 <span className="text-sm text-muted-foreground">/ {xpForNext} XP</span>
               </p>
               <div className="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-border">
-                <div className="h-full bg-primary transition-all" style={{ width: `${xpProgress}%` }} />
+                <div
+                  className="h-full bg-primary transition-all"
+                  style={{ width: `${xpProgress}%` }}
+                />
               </div>
               <Link
                 to="/analytics"

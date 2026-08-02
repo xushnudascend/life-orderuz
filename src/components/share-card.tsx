@@ -101,15 +101,21 @@ export function ShareCard({
         <h3 className="mt-2 font-serif text-3xl leading-tight">{displayName}</h3>
         <div className="mt-6 grid grid-cols-3 gap-4">
           <div>
-            <p className="font-ui text-[10px] uppercase tracking-[0.22em] text-muted-foreground">Daraja</p>
+            <p className="font-ui text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
+              Daraja
+            </p>
             <p className="mt-1 font-serif text-3xl">{level}</p>
           </div>
           <div>
-            <p className="font-ui text-[10px] uppercase tracking-[0.22em] text-muted-foreground">XP</p>
+            <p className="font-ui text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
+              XP
+            </p>
             <p className="mt-1 font-serif text-3xl">{totalXp}</p>
           </div>
           <div>
-            <p className="font-ui text-[10px] uppercase tracking-[0.22em] text-muted-foreground">Streak</p>
+            <p className="font-ui text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
+              Streak
+            </p>
             <p className="mt-1 font-serif text-3xl">{currentStreak}</p>
           </div>
         </div>

@@ -29,7 +29,8 @@ export const Route = createFileRoute("/api/ai/generate-plan")({
         const gateway = createLovableAiGatewayProvider(key);
         const model = gateway("google/gemini-3-flash-preview");
 
-        const langInstr = language === "ru" ? "На русском." : language === "en" ? "In English." : "O'zbek tilida.";
+        const langInstr =
+          language === "ru" ? "На русском." : language === "en" ? "In English." : "O'zbek tilida.";
         const system = `Sen Nadir — reja tuzuvchi. Emojisiz, halol. ${langInstr}
 Faqat JSON qaytar: {"title": string, "days": [{"day": number, "focus": string, "actions": string[]}]}
 Har kun uchun 2-4 ta aniq, o'lchanadigan mikro-harakat. Motivatsion shior YO'Q.`;

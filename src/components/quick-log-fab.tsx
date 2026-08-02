@@ -59,9 +59,7 @@ export function QuickLogFab() {
   }, []);
 
   const isHidden =
-    !userId ||
-    pathname === "/" ||
-    HIDDEN_PREFIXES.some((p) => p !== "/" && pathname.startsWith(p));
+    !userId || pathname === "/" || HIDDEN_PREFIXES.some((p) => p !== "/" && pathname.startsWith(p));
 
   useEffect(() => {
     if (!open || !userId) return;
@@ -76,17 +74,11 @@ export function QuickLogFab() {
           .eq("user_id", userId)
           .eq("is_active", true)
           .order("sort_order", { ascending: true }),
-        supabase
-          .from("habit_logs")
-          .select("habit_id")
-          .eq("user_id", userId)
-          .eq("logged_date", t),
+        supabase.from("habit_logs").select("habit_id").eq("user_id", userId).eq("logged_date", t),
       ]);
       if (!alive) return;
       setHabits((hs ?? []) as Habit[]);
-      setDoneIds(
-        new Set(((logs ?? []) as { habit_id: string }[]).map((l) => l.habit_id)),
-      );
+      setDoneIds(new Set(((logs ?? []) as { habit_id: string }[]).map((l) => l.habit_id)));
       setLoading(false);
     })();
     return () => {
@@ -104,10 +96,13 @@ export function QuickLogFab() {
       xp_awarded: h.xp_reward,
     });
     if (!error) {
-      await supabase.rpc("award_action_xp" as never, {
-        _source: "habit",
-        _reference_id: h.id,
-      } as never);
+      await supabase.rpc(
+        "award_action_xp" as never,
+        {
+          _source: "habit",
+          _reference_id: h.id,
+        } as never,
+      );
       setDoneIds((prev) => new Set(prev).add(h.id));
       toast.success(`+${h.xp_reward} XP`);
     } else {
@@ -135,19 +130,14 @@ export function QuickLogFab() {
       </button>
 
       <Sheet open={open} onOpenChange={setOpen}>
-        <SheetContent
-          side="bottom"
-          className="flex max-h-[75dvh] flex-col rounded-t-2xl p-0"
-        >
+        <SheetContent side="bottom" className="flex max-h-[75dvh] flex-col rounded-t-2xl p-0">
           <SheetHeader className="flex-row items-center justify-between space-y-0 p-5 pb-3">
             <div>
               <SheetTitle className="text-left font-serif text-base font-bold">
                 Tezkor log
               </SheetTitle>
               <p className="mt-0.5 font-ui text-xs text-muted-foreground">
-                {total > 0
-                  ? `Bugun ${doneCount} / ${total} bajarilgan`
-                  : "Hali odat qo'shilmagan"}
+                {total > 0 ? `Bugun ${doneCount} / ${total} bajarilgan` : "Hali odat qo'shilmagan"}
               </p>
             </div>
             <button
@@ -172,12 +162,8 @@ export function QuickLogFab() {
             ) : undone.length === 0 ? (
               <div className="py-8 text-center">
                 <Flame className="mx-auto mb-2 h-8 w-8 text-primary" />
-                <p className="font-ui text-sm font-medium">
-                  Barcha odatlar bugun bajarildi.
-                </p>
-                <p className="mt-1 font-ui text-xs text-muted-foreground">
-                  Ertaga davom et.
-                </p>
+                <p className="font-ui text-sm font-medium">Barcha odatlar bugun bajarildi.</p>
+                <p className="mt-1 font-ui text-xs text-muted-foreground">Ertaga davom et.</p>
               </div>
             ) : (
               <>
@@ -210,10 +196,7 @@ export function QuickLogFab() {
                           className="mb-1.5 flex w-full items-center gap-3 rounded-xl border border-primary/30 bg-primary/5 p-2.5"
                         >
                           <div className="grid h-5 w-5 shrink-0 place-items-center rounded-full bg-primary">
-                            <Check
-                              className="h-3 w-3 text-primary-foreground"
-                              strokeWidth={3}
-                            />
+                            <Check className="h-3 w-3 text-primary-foreground" strokeWidth={3} />
                           </div>
                           <span className="min-w-0 flex-1 truncate font-ui text-sm text-muted-foreground line-through">
                             {h.title}

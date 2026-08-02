@@ -88,9 +88,9 @@ function BestHabitTrackerApps() {
             Eng yaxshi habit tracker ilovalar — 2026 taqqoslash
           </h1>
           <p className="mt-4 text-muted-foreground">
-            Habit tracker tanlash — bu shunchaki UI tanlash emas. Bu qaysi xulq-atvor
-            modeliga ishonish masalasi. Quyida 2026 yilning eng ko'p ishlatiladigan
-            5 ta ilovasini xulq-atvor fani nuqtai nazaridan solishtirdik.
+            Habit tracker tanlash — bu shunchaki UI tanlash emas. Bu qaysi xulq-atvor modeliga
+            ishonish masalasi. Quyida 2026 yilning eng ko'p ishlatiladigan 5 ta ilovasini xulq-atvor
+            fani nuqtai nazaridan solishtirdik.
           </p>
 
           <h2 className="mt-10 text-2xl font-semibold">Qisqacha solishtirish</h2>
@@ -121,21 +121,20 @@ function BestHabitTrackerApps() {
 
           <h2 className="mt-10 text-2xl font-semibold">Motivatsiya tuzog'i</h2>
           <p className="mt-3 text-muted-foreground">
-            Ko'pchilik habit tracker faqat <strong>kuzatadi</strong> — lekin
-            motivatsiya tabiiy ravishda tebranadi (Fogg, 2019). Ilova sizga
-            &ldquo;bugun bajarding&rdquo; deb belgi qo'yishga imkon beradi, ammo
-            motivatsiya tushganda nima qilishni bilmaydi. Natijada: 30 kundan
-            keyin ilovani ochish o'zi odatga aylanadi, harakat esa yo'q.
+            Ko'pchilik habit tracker faqat <strong>kuzatadi</strong> — lekin motivatsiya tabiiy
+            ravishda tebranadi (Fogg, 2019). Ilova sizga &ldquo;bugun bajarding&rdquo; deb belgi
+            qo'yishga imkon beradi, ammo motivatsiya tushganda nima qilishni bilmaydi. Natijada: 30
+            kundan keyin ilovani ochish o'zi odatga aylanadi, harakat esa yo'q.
           </p>
 
           <h2 className="mt-6 text-2xl font-semibold">B=MAP: nima farq qiladi</h2>
           <p className="mt-3 text-muted-foreground">
-            BJ Fogg formulasi: <em>Xatti-harakat = Motivatsiya × Qobiliyat × Turtki</em>.
-            Life Order motivatsiya tushganda <strong>Qobiliyat</strong>ni oshiradi —
-            odatni kichraytiradi (2 daqiqa qoidasi), <strong>Turtki</strong>ni
-            kontekstga bog'laydi (habit stacking) va streak yo'qolganda
-            <em> shield</em> beradi. Shu sababli 66 kunlik avtomatlashuv oynasidan
-            (Lally, 2010) o'tish ehtimoli yuqoriroq.
+            BJ Fogg formulasi: <em>Xatti-harakat = Motivatsiya × Qobiliyat × Turtki</em>. Life Order
+            motivatsiya tushganda <strong>Qobiliyat</strong>ni oshiradi — odatni kichraytiradi (2
+            daqiqa qoidasi), <strong>Turtki</strong>ni kontekstga bog'laydi (habit stacking) va
+            streak yo'qolganda
+            <em> shield</em> beradi. Shu sababli 66 kunlik avtomatlashuv oynasidan (Lally, 2010)
+            o'tish ehtimoli yuqoriroq.
           </p>
 
           <h2 className="mt-6 text-2xl font-semibold">Qaysi birini tanlash kerak?</h2>
@@ -144,12 +143,11 @@ function BestHabitTrackerApps() {
               <strong>Faqat kuzatuv kerak</strong> → Habitify yoki Streaks.
             </li>
             <li>
-              <strong>O'yin elementi yoqadi</strong> → Habitica (lekin motivatsiya
-              tugashi xavfli).
+              <strong>O'yin elementi yoqadi</strong> → Habitica (lekin motivatsiya tugashi xavfli).
             </li>
             <li>
-              <strong>Xulq-atvor tizimi kerak</strong> → Life Order. Sabab: shunchaki
-              belgilash emas, motivatsiya tugagach ham ishlaydigan protokol.
+              <strong>Xulq-atvor tizimi kerak</strong> → Life Order. Sabab: shunchaki belgilash
+              emas, motivatsiya tugagach ham ishlaydigan protokol.
             </li>
           </ul>
 
@@ -167,9 +165,8 @@ function BestHabitTrackerApps() {
           </div>
 
           <p className="mt-8 text-sm text-muted-foreground">
-            Manbalar: Fogg BJ. <em>Tiny Habits</em> (2019). Clear J.{" "}
-            <em>Atomic Habits</em> (2018). Lally P. et al.{" "}
-            <em>How are habits formed</em>. Eur J Soc Psychol (2010).
+            Manbalar: Fogg BJ. <em>Tiny Habits</em> (2019). Clear J. <em>Atomic Habits</em> (2018).
+            Lally P. et al. <em>How are habits formed</em>. Eur J Soc Psychol (2010).
           </p>
         </article>
       </main>

@@ -83,7 +83,10 @@ export function DailyQuoteModal() {
         </button>
         <div className="flex items-center gap-2">
           <Sparkles className="h-5 w-5 text-primary" />
-          <h2 id="daily-quote-title" className="font-ui text-[11px] uppercase tracking-[0.28em] text-muted-foreground">
+          <h2
+            id="daily-quote-title"
+            className="font-ui text-[11px] uppercase tracking-[0.28em] text-muted-foreground"
+          >
             Bugungi iqtibos
           </h2>
         </div>
@@ -93,7 +96,9 @@ export function DailyQuoteModal() {
             — {q.a}
           </p>
         </div>
-        <Button onClick={close} className="w-full">Boshladik</Button>
+        <Button onClick={close} className="w-full">
+          Boshladik
+        </Button>
         <label className="mt-3 flex cursor-pointer items-center justify-center gap-2 font-ui text-[11px] text-muted-foreground hover:text-foreground">
           <input
             type="checkbox"
@@ -104,12 +109,7 @@ export function DailyQuoteModal() {
           Boshqa ko'rsatma
         </label>
       </div>
-      <button
-        aria-hidden
-        tabIndex={-1}
-        className="absolute inset-0 -z-10"
-        onClick={close}
-      />
+      <button aria-hidden tabIndex={-1} className="absolute inset-0 -z-10" onClick={close} />
     </div>
   );
 }

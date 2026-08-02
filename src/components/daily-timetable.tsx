@@ -50,29 +50,25 @@ function buildBlocks(p: TimetableProfile): Block[] {
     b && b >= 25
       ? "10 daqiqa yurish + suv"
       : b && b < 18.5
-      ? "Nonushta + oqsil"
-      : isMale
-      ? "5 daqiqa mobilizatsiya"
-      : "5 daqiqa cho'zilish";
+        ? "Nonushta + oqsil"
+        : isMale
+          ? "5 daqiqa mobilizatsiya"
+          : "5 daqiqa cho'zilish";
 
   // Peak vaqti — kognitiv zo'r ish
   const peakLabel =
     arch.includes("achiever") || arch.includes("scholar")
       ? "Chuqur ish — eng qiyin vazifa"
       : arch.includes("creator")
-      ? "Ijodiy blok — telefon off"
-      : "Bir vazifaga fokus (25 min)";
+        ? "Ijodiy blok — telefon off"
+        : "Bir vazifaga fokus (25 min)";
 
   // Kunduzgi
-  const midLabel = arch.includes("connector")
-    ? "Aloqa va javoblar"
-    : "Reja tekshir · qisqa yurish";
+  const midLabel = arch.includes("connector") ? "Aloqa va javoblar" : "Reja tekshir · qisqa yurish";
 
   // Kechki mikro-qadam
   const eveningLabel =
-    (p.age && p.age > 40)
-      ? "Yengil cho'zilish + kundalik"
-      : "Bugungi 3-qadam · streak";
+    p.age && p.age > 40 ? "Yengil cho'zilish + kundalik" : "Bugungi 3-qadam · streak";
 
   const nightLabel = "Ekran off · nafas · uyquga tayyorlik";
 
@@ -127,7 +123,11 @@ function buildBlocks(p: TimetableProfile): Block[] {
       tone: "rest",
     },
   ];
-  return raw.map((x) => ({ ...x, from: Math.max(0, Math.min(23, x.from)), to: Math.max(1, Math.min(24, x.to)) }));
+  return raw.map((x) => ({
+    ...x,
+    from: Math.max(0, Math.min(23, x.from)),
+    to: Math.max(1, Math.min(24, x.to)),
+  }));
 }
 
 export function DailyTimetable({ profile }: { profile?: TimetableProfile }) {
@@ -166,15 +166,16 @@ export function DailyTimetable({ profile }: { profile?: TimetableProfile }) {
               <div className="flex items-center justify-between gap-3">
                 <span className="flex items-center gap-2 tabular-nums">
                   {active && (
-                    <span className="inline-block h-1.5 w-1.5 rounded-full bg-primary" aria-hidden />
+                    <span
+                      className="inline-block h-1.5 w-1.5 rounded-full bg-primary"
+                      aria-hidden
+                    />
                   )}
                   {String(b.from).padStart(2, "0")}:00–{String(b.to).padStart(2, "0")}:00
                 </span>
                 <span className={"text-right " + (active ? "text-foreground" : "")}>{b.label}</span>
               </div>
-              {active && (
-                <p className="mt-1 text-[11px] text-muted-foreground">{b.hint}</p>
-              )}
+              {active && <p className="mt-1 text-[11px] text-muted-foreground">{b.hint}</p>}
             </li>
           );
         })}

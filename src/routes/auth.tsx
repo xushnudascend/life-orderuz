@@ -16,7 +16,8 @@ import { HeroOrnament } from "@/components/hero-ornament";
 import { track } from "@/lib/analytics";
 
 function sanitizeNext(next: unknown): string {
-  if (typeof next !== "string" || !next.startsWith("/") || next.startsWith("//")) return "/dashboard";
+  if (typeof next !== "string" || !next.startsWith("/") || next.startsWith("//"))
+    return "/dashboard";
   return next;
 }
 
@@ -71,7 +72,10 @@ function AuthPage() {
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
         <div
           className="absolute left-1/2 top-[18%] h-[520px] w-[520px] -translate-x-1/2 rounded-full opacity-60 blur-[110px] halo-drift"
-          style={{ background: "radial-gradient(closest-side, hsl(var(--primary) / 0.22), transparent 70%)" }}
+          style={{
+            background:
+              "radial-gradient(closest-side, hsl(var(--primary) / 0.22), transparent 70%)",
+          }}
         />
         <div className="absolute inset-0 opacity-[0.035] [background-image:radial-gradient(hsl(var(--foreground))_1px,transparent_1px)] [background-size:24px_24px]" />
       </div>
@@ -83,9 +87,7 @@ function AuthPage() {
       {/* Nozik orbital signature — desktop'da chap tomonda */}
       <HeroOrnament className="pointer-events-none absolute left-[-140px] top-1/2 hidden h-[440px] w-[440px] -translate-y-1/2 opacity-30 xl:block" />
 
-
       <div className="mx-auto max-w-md px-5 py-10">
-
         <Link
           to="/"
           className="inline-flex items-center gap-1.5 font-ui text-sm text-muted-foreground transition-colors hover:text-foreground"
@@ -98,9 +100,7 @@ function AuthPage() {
           <h1 className="font-serif text-3xl leading-tight tracking-tight">
             {uz.brand.name} — Kirish yoki ro'yxatdan o'tish
           </h1>
-          <p className="mt-2 font-ui text-sm text-muted-foreground">
-            {uz.brand.tagline}
-          </p>
+          <p className="mt-2 font-ui text-sm text-muted-foreground">{uz.brand.tagline}</p>
         </div>
 
         <div className="glass mt-8 rounded-[var(--radius)] p-6">
@@ -201,9 +201,7 @@ function EmailForm({ mode, next }: { mode: "signin" | "signup"; next: string }) 
       <div className="space-y-1.5">
         <div className="flex items-center justify-between">
           <Label htmlFor="password">Parol</Label>
-          {mode === "signin" && (
-            <ForgotPasswordLink email={email} />
-          )}
+          {mode === "signin" && <ForgotPasswordLink email={email} />}
         </div>
         <div className="relative">
           <Input
@@ -228,11 +226,7 @@ function EmailForm({ mode, next }: { mode: "signin" | "signup"; next: string }) 
           </button>
         </div>
       </div>
-      <Button
-        type="submit"
-        className="w-full font-ui font-semibold"
-        disabled={loading}
-      >
+      <Button type="submit" className="w-full font-ui font-semibold" disabled={loading}>
         {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
         {mode === "signup" ? "Hisob yaratish" : "Kirish"}
       </Button>
@@ -307,11 +301,7 @@ function GoogleButton({ next }: { next: string }) {
       onClick={onClick}
       disabled={loading}
     >
-      {loading ? (
-        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-      ) : (
-        <GoogleIcon />
-      )}
+      {loading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <GoogleIcon />}
       Google bilan davom etish
     </Button>
   );
@@ -338,7 +328,8 @@ function translateAuthError(msg: string): string {
     return "Email hali tasdiqlanmagan. Pochtangizni tekshiring — havola yuborilgan.";
   if (s.includes("rate limit") || s.includes("too many"))
     return "Ko'p urinish bo'ldi. Bir daqiqadan keyin qayta urinib ko'ring.";
-  if (s.includes("password")) return "Parol kuchsizroq — kamida 8 belgi va turli-tuman kombinatsiya bering.";
+  if (s.includes("password"))
+    return "Parol kuchsizroq — kamida 8 belgi va turli-tuman kombinatsiya bering.";
   if (s.includes("network") || s.includes("fetch"))
     return "Internet aloqasi uzildi. Ulanish tiklanganda qayta urinib ko'ring.";
   return "Xato yuz berdi. Qayta urinib ko'ring — hech narsa buzilmadi.";

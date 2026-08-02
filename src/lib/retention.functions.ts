@@ -15,9 +15,7 @@ export type WeeklyChallenge = {
 export const getWeeklyChallenge = createServerFn({ method: "GET" })
   .middleware([requireSupabaseAuth])
   .handler(async ({ context }) => {
-    const { data, error } = await context.supabase
-      .rpc("ensure_weekly_challenge")
-      .single();
+    const { data, error } = await context.supabase.rpc("ensure_weekly_challenge").single();
     if (error) throw error;
     return data as WeeklyChallenge;
   });
@@ -27,9 +25,7 @@ export const bumpWeeklyChallenge = createServerFn({ method: "POST" })
   .handler(async ({ context }) => {
     // Progress is recomputed server-side from real habit logs; the reward is
     // granted by the same SECURITY DEFINER routine.
-    const { data, error } = await context.supabase
-      .rpc("sync_weekly_challenge" as never)
-      .single();
+    const { data, error } = await context.supabase.rpc("sync_weekly_challenge" as never).single();
     if (error) throw error;
     return data as WeeklyChallenge;
   });

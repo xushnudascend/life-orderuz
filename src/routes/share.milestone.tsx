@@ -45,19 +45,12 @@ function MilestonePage() {
     <main className="min-h-dvh bg-background text-foreground flex items-center justify-center px-4 py-16">
       <div className="w-full max-w-md">
         <div className="rounded-3xl border border-border bg-card p-10 text-center shadow-xl">
-          <div className="text-xs uppercase tracking-widest text-muted-foreground">
-            Life Order
-          </div>
+          <div className="text-xs uppercase tracking-widest text-muted-foreground">Life Order</div>
           <h1 className="mt-6 text-5xl font-bold text-primary">{label}</h1>
-          <p className="mt-6 text-sm text-muted-foreground">
-            Motivatsiya tugaydi. Tizim qoladi.
-          </p>
+          <p className="mt-6 text-sm text-muted-foreground">Motivatsiya tugaydi. Tizim qoladi.</p>
         </div>
         <div className="mt-6 text-center">
-          <a
-            href="/"
-            className="text-sm font-medium text-primary hover:underline"
-          >
+          <a href="/" className="text-sm font-medium text-primary hover:underline">
             life-order.uz — sen ham boshla →
           </a>
         </div>
