@@ -28,7 +28,7 @@ export function PostComments({ postId, userId }: { postId: string; userId: strin
       .limit(200);
     const rows = (data as Comment[] | null) ?? [];
     const uids = Array.from(new Set(rows.map((r) => r.user_id)));
-    let authors: Record<string, { display_name: string | null; username: string | null }> = {};
+    const authors: Record<string, { display_name: string | null; username: string | null }> = {};
     if (uids.length) {
       const { data: profs } = await supabase
         .from("profiles")

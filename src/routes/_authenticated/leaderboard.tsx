@@ -54,7 +54,7 @@ function Leaderboard() {
         .limit(200);
       const base = (data as Omit<Row, "streak_days" | "blended">[] | null) ?? [];
       const ids = base.map((b) => b.user_id);
-      let streakMap: Record<string, number> = {};
+      const streakMap: Record<string, number> = {};
       if (ids.length > 0) {
         const { data: sts } = await supabase
           .from("streaks")

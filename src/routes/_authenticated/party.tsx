@@ -64,8 +64,8 @@ function PartyPage() {
         .eq("party_id", p.id);
       const raw = (rows as { id: string; user_id: string; joined_at: string }[] | null) ?? [];
       const uids = raw.map((r) => r.user_id);
-      let profiles: Record<string, string | null> = {};
-      let streaks: Record<string, number> = {};
+      const profiles: Record<string, string | null> = {};
+      const streaks: Record<string, number> = {};
       if (uids.length) {
         const { data: profs } = await supabase
           .from("profiles")
@@ -94,7 +94,6 @@ function PartyPage() {
 
   useEffect(() => {
     refresh();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userId]);
 
   async function createParty() {

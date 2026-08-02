@@ -56,7 +56,7 @@ function ChannelView() {
     const raw = (ps as Post[] | null) ?? [];
     // Batch fetch authors
     const uids = Array.from(new Set(raw.map((p) => p.user_id)));
-    let authors: Record<string, { display_name: string | null; username: string | null }> = {};
+    const authors: Record<string, { display_name: string | null; username: string | null }> = {};
     if (uids.length) {
       const { data: profs } = await supabase
         .from("profiles")
