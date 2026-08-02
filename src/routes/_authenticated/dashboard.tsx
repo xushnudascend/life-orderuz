@@ -337,56 +337,9 @@ function Dashboard() {
           )}
         </Panel>
 
-        {/* Progress ring + XP */}
-        <Panel className="relative overflow-hidden lg:col-span-5">
-          <div
-            aria-hidden
-            className="orb-breathe pointer-events-none absolute -bottom-16 -left-16 h-40 w-40 rounded-full bg-primary/15 blur-3xl"
-          />
-          <PanelHeader eyebrow="Kun progressi" />
-          <div className="mt-3 grid grid-cols-[auto_1fr] items-center gap-4">
-            <ProgressRing value={doneCount} total={Math.max(1, habits.length)} />
-            <div className="min-w-0">
-              <p className="font-ui text-xs uppercase tracking-[0.2em] text-muted-foreground">
-                Daraja {stats?.level ?? 1}
-              </p>
-              <p className="mt-1 font-serif text-xl font-semibold tabular-nums">
-                {stats?.total_xp ?? 0}{" "}
-                <span className="text-sm text-muted-foreground">/ {xpForNext} XP</span>
-              </p>
-              <div className="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-border">
-                <div
-                  className="h-full bg-primary transition-all"
-                  style={{ width: `${xpProgress}%` }}
-                />
-              </div>
-              <Link
-                to="/analytics"
-                className="mt-3 inline-flex items-center gap-1 font-ui text-xs uppercase tracking-[0.2em] text-muted-foreground transition-colors hover:text-primary"
-              >
-                Batafsil tahlil <ArrowRight className="h-3 w-3" />
-              </Link>
-            </div>
-          </div>
-        </Panel>
-
-        {/* Timetable */}
-        <div className="lg:col-span-7">
-          <ErrorBoundary boundary="dashboard_daily_timetable">
-            <DailyTimetable
-              profile={{
-                age: profile?.age,
-                sex: profile?.sex,
-                height_cm: profile?.height_cm,
-                weight_kg: profile?.weight_kg,
-                archetype: profile?.archetype,
-              }}
-            />
-          </ErrorBoundary>
-        </div>
-
         {/* Quick access */}
         <Panel className="lg:col-span-5">
+
           <PanelHeader eyebrow="Tezkor kirish" />
           <div className="mt-3 grid grid-cols-2 gap-2">
             {[
