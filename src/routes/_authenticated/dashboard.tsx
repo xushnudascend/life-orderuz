@@ -7,11 +7,6 @@ import { ArrowRight, Check, Dumbbell, Flame, Salad, Sparkles, Target, Sprout } f
 import { EmptyState } from "@/components/empty-state";
 
 import { uz } from "@/i18n";
-import { ProgressRing } from "@/components/progress-ring";
-import { RankBadge } from "@/components/rank-badge";
-import { ShieldIndicator } from "@/components/shield-indicator";
-import { ArchetypeRow } from "@/components/archetype-row";
-import { CornerOrnament } from "@/components/corner-ornament";
 import { applyArchetypeTheme } from "@/lib/archetype-theme";
 import { DailyTimetable } from "@/components/daily-timetable";
 import { ProfileCompletionCard } from "@/components/profile-completion-card";
@@ -25,10 +20,10 @@ import { RetentionPanels } from "@/components/retention-panels";
 import { HumanPotentialPanel } from "@/components/human-potential-panel";
 import { HundredDayTimeline } from "@/components/hundred-day-timeline";
 import { PeakEndCurve } from "@/components/peak-end-curve";
-import { Panel, PanelHeader, PanelValue } from "@/components/panel";
+import { Panel, PanelHeader } from "@/components/panel";
 import { StatsHeroBento } from "@/components/stats-hero-bento";
 import { ErrorBoundary } from "@/components/error-boundary";
-import { CountUpNumber } from "@/components/count-up-number";
+
 import { StreakMilestone } from "@/components/streak-milestone";
 import { celebrate, floatXp } from "@/lib/celebrate";
 import { track } from "@/lib/analytics";
@@ -337,57 +332,10 @@ function Dashboard() {
           )}
         </Panel>
 
-        {/* Progress ring + XP */}
-        <Panel className="relative overflow-hidden lg:col-span-5">
-          <div
-            aria-hidden
-            className="orb-breathe pointer-events-none absolute -bottom-16 -left-16 h-40 w-40 rounded-full bg-primary/15 blur-3xl"
-          />
-          <PanelHeader eyebrow="Kun progressi" />
-          <div className="mt-3 grid grid-cols-[auto_1fr] items-center gap-4">
-            <ProgressRing value={doneCount} total={Math.max(1, habits.length)} />
-            <div className="min-w-0">
-              <p className="font-ui text-xs uppercase tracking-[0.2em] text-muted-foreground">
-                Daraja {stats?.level ?? 1}
-              </p>
-              <p className="mt-1 font-serif text-xl font-semibold tabular-nums">
-                {stats?.total_xp ?? 0}{" "}
-                <span className="text-sm text-muted-foreground">/ {xpForNext} XP</span>
-              </p>
-              <div className="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-border">
-                <div
-                  className="h-full bg-primary transition-all"
-                  style={{ width: `${xpProgress}%` }}
-                />
-              </div>
-              <Link
-                to="/analytics"
-                className="mt-3 inline-flex items-center gap-1 font-ui text-xs uppercase tracking-[0.2em] text-muted-foreground transition-colors hover:text-primary"
-              >
-                Batafsil tahlil <ArrowRight className="h-3 w-3" />
-              </Link>
-            </div>
-          </div>
-        </Panel>
-
-        {/* Timetable */}
-        <div className="lg:col-span-7">
-          <ErrorBoundary boundary="dashboard_daily_timetable">
-            <DailyTimetable
-              profile={{
-                age: profile?.age,
-                sex: profile?.sex,
-                height_cm: profile?.height_cm,
-                weight_kg: profile?.weight_kg,
-                archetype: profile?.archetype,
-              }}
-            />
-          </ErrorBoundary>
-        </div>
-
         {/* Quick access */}
         <Panel className="lg:col-span-5">
           <PanelHeader eyebrow="Tezkor kirish" />
+
           <div className="mt-3 grid grid-cols-2 gap-2">
             {[
               { to: "/workout", label: "Mashg'ulot", icon: Dumbbell },
@@ -408,6 +356,21 @@ function Dashboard() {
             ))}
           </div>
         </Panel>
+
+        {/* Kunlik jadval */}
+        <div className="lg:col-span-12">
+          <ErrorBoundary boundary="dashboard_daily_timetable">
+            <DailyTimetable
+              profile={{
+                age: profile?.age,
+                sex: profile?.sex,
+                height_cm: profile?.height_cm,
+                weight_kg: profile?.weight_kg,
+                archetype: profile?.archetype,
+              }}
+            />
+          </ErrorBoundary>
+        </div>
       </div>
 
       {/* 3-QATLAM — Ixtiyoriy chuqurroq ko'rinish */}
