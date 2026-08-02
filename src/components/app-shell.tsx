@@ -9,7 +9,6 @@ import { QuickLogFab } from "@/components/quick-log-fab";
 import { SkipLink } from "@/components/skip-link";
 import { ErrorBoundary } from "@/components/error-boundary";
 import { NadirProvider } from "@/lib/nadir-context";
-import { NadirFab } from "@/components/nadir-fab";
 import { NadirDrawer } from "@/components/nadir-drawer";
 import { ARCHETYPES, type Archetype } from "@/lib/nervous";
 
@@ -116,7 +115,6 @@ export function AppShell({ title, children }: { title?: string; children: ReactN
 
         <BottomNav recommendedTab={archetype?.preferredTab} />
         <QuickLogFab />
-        <NadirFab />
         <NadirDrawer />
       </div>
     </NadirProvider>

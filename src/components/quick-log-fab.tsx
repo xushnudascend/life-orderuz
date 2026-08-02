@@ -7,7 +7,6 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { toast } from "sonner";
 import { useNadir } from "@/lib/nadir-context";
 
-
 interface Habit {
   id: string;
   title: string;
@@ -167,7 +166,6 @@ export function QuickLogFab() {
           />
         </button>
       </div>
-
 
       <Sheet open={open} onOpenChange={setOpen}>
         <SheetContent side="bottom" className="flex max-h-[75dvh] flex-col rounded-t-2xl p-0">
