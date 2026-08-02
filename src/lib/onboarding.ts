@@ -127,6 +127,44 @@ export const ONBOARDING_QUESTIONS: OnboardingQuestion[] = [
       { value: "kech_tun", label: "Kech tun — 22:00 dan keyin" },
     ],
   },
+  {
+    key: "trigger.sleep_hours",
+    section: "B",
+    prompt: "Odatda kechasi necha soat uxlaysan?",
+    helper: "Uyqu — ertangi irodangning asosiy manbai.",
+    type: "single",
+    options: [
+      { value: "kam_5", label: "5 soatdan kam" },
+      { value: "5_6", label: "5–6 soat" },
+      { value: "7_8", label: "7–8 soat" },
+      { value: "9_ortiq", label: "9 soatdan ko'p" },
+    ],
+  },
+  {
+    key: "trigger.free_minutes",
+    section: "B",
+    prompt: "Kuningda o'zingga ajrata oladigan real vaqt qancha?",
+    helper: "Rostini tanla — reja shu vaqtga moslanadi, ko'proqqa emas.",
+    type: "single",
+    options: [
+      { value: "5_10", label: "5–10 daqiqa" },
+      { value: "15_30", label: "15–30 daqiqa" },
+      { value: "30_60", label: "30–60 daqiqa" },
+      { value: "60_ortiq", label: "1 soatdan ko'p" },
+    ],
+  },
+  {
+    key: "trigger.fail_point",
+    section: "B",
+    prompt: "Rejang odatda kun davomida qachon buziladi?",
+    type: "single",
+    options: [
+      { value: "ertalab", label: "Ertalab — umuman boshlay olmayman" },
+      { value: "tushdan_keyin", label: "Tushdan keyin — energiya tushadi" },
+      { value: "kechqurun", label: "Kechqurun — charchoq yutadi" },
+      { value: "hafta_oxiri", label: "Hafta oxiri — tartib butunlay yo'qoladi" },
+    ],
+  },
 ] as const;
 
 export function sectionQuestions(section: "A" | "B"): OnboardingQuestion[] {
@@ -146,4 +184,89 @@ export function bmiLabel(bmi: number | null): string | null {
   if (bmi < 25) return "Normal";
   if (bmi < 30) return "Ortiqcha vazn";
   return "Semizlik";
+}
+
+
+/**
+ * Onboarding javoblariga qarab bugungi BITTA eng oson, ammo foydali qadam.
+ * Real vaqt (soat, hafta kuni) va foydalanuvchi signallari hisobga olinadi.
+ */
+export function firstTaskFromAnswers(
+  answers: Record<string, string | string[]>,
+  now: Date = new Date(),
+): { title: string; why: string; when: string; minutes: number } {
+  const get = (k: string): string => {
+    const v = answers[k];
+    if (Array.isArray(v)) return v[0] ?? "";
+    return typeof v === "string" ? v : "";
+  };
+  const core = Array.isArray(answers["trigger.core"]) ? (answers["trigger.core"] as string[]) : [];
+  const hour = now.getHours();
+  const isWeekend = now.getDay() === 0 || now.getDay() === 6;
+  const free = get("trigger.free_minutes");
+  const minutes = free === "5_10" ? 2 : free === "15_30" ? 5 : 10;
+
+  const when =
+    hour < 11
+      ? "Bugun ertalab — keyingi 60 daqiqa ichida"
+      : hour < 17
+        ? "Bugun kunduzi — keyingi 2 soat ichida"
+        : hour < 22
+          ? "Bugun kechqurun — uxlashdan oldin"
+          : "Hozir, uxlashdan avval";
+
+  if (get("trigger.sleep_hours") === "kam_5" || get("trigger.sleep_hours") === "5_6") {
+    return {
+      title: `Bugun odatdagidan ${minutes >= 5 ? "20" : "15"} daqiqa erta yot`,
+      why: "Uyqu — ertangi irodangning zaxirasi. Bitta erta yotish keyingi kunni butunlay o'zgartiradi.",
+      when: "Bugun kechqurun",
+      minutes,
+    };
+  }
+  if (core.includes("telefon_qaramlik") || get("trigger.morning") === "telefon") {
+    return {
+      title: `Telefonni ${minutes} daqiqaga boshqa xonaga qo'y`,
+      why: "Ilgakni yo'q qilsang, xulq o'z-o'zidan to'xtaydi — iroda kerak emas.",
+      when,
+      minutes,
+    };
+  }
+  if (core.includes("kechiktirish") || get("trigger.fail_point") === "ertalab") {
+    return {
+      title: `Eng qo'rqinchli ishingni ${minutes} daqiqa qil — keyin to'xta`,
+      why: "Boshlash to'sig'i tugagach, davom etish osonlashadi (Zeigarnik effekti).",
+      when,
+      minutes,
+    };
+  }
+  if (core.includes("maqsadsizlik")) {
+    return {
+      title: "Ertangi kun uchun 1 ta aniq maqsad yoz",
+      why: "Noaniqlik — harakatsizlikning eng katta sababi. Bitta yozilgan maqsad yo'nalish beradi.",
+      when,
+      minutes,
+    };
+  }
+  if (core.includes("diqqat_toza_emas")) {
+    return {
+      title: `${minutes} daqiqa telefonsiz, bitta ish bilan o'tir`,
+      why: "Diqqat mushak kabi — qisqa, toza takrorlar bilan mustahkamlanadi.",
+      when,
+      minutes,
+    };
+  }
+  if (isWeekend) {
+    return {
+      title: "Ertangi kunning birinchi 30 daqiqasini rejalashtir",
+      why: "Hafta oxiri tartibni yo'qotadigan joy — kichik reja uni ushlab qoladi.",
+      when: "Bugun, istalgan payt",
+      minutes,
+    };
+  }
+  return {
+    title: `${minutes} daqiqa yurish yoki cho'zilish`,
+    why: "Tana harakati kayfiyat va diqqatni bir vaqtda ko'taradi — eng arzon g'alaba.",
+    when,
+    minutes,
+  };
 }
