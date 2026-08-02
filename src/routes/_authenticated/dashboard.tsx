@@ -371,7 +371,6 @@ function Dashboard() {
             />
           </ErrorBoundary>
         </div>
-
       </div>
 
       {/* 3-QATLAM — Ixtiyoriy chuqurroq ko'rinish */}
