@@ -97,6 +97,7 @@ export function PeakEndReflect() {
               </button>
               <Link
                 to="/journal"
+                search={{ title: undefined, text: undefined, url: undefined }}
                 onClick={dismiss}
                 className="inline-flex h-7 items-center rounded-full border border-border px-2.5 font-ui text-[11px] text-muted-foreground hover:text-foreground"
               >
