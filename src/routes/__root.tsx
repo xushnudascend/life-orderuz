@@ -14,7 +14,6 @@ import { reportLovableError } from "../lib/lovable-error-reporting";
 import { Toaster } from "@/components/ui/sonner";
 import { OfflineBanner } from "@/components/offline-banner";
 import { PerfDetector } from "@/components/perf-detector";
-import { THEME_INIT_SCRIPT } from "@/lib/theme";
 import { initSentry } from "@/lib/sentry";
 
 function NotFoundComponent() {
@@ -137,8 +136,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
     ],
     scripts: [
-      // Anti-flash tema init — SSR javobida <head>'ga inline yoziladi
-      { children: THEME_INIT_SCRIPT },
       {
         type: "application/ld+json",
         children: JSON.stringify({
