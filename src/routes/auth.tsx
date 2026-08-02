@@ -7,11 +7,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import { ArrowLeft, Eye, EyeOff, Loader2 } from "lucide-react";
+import { ArrowLeft, Eye, EyeOff, Loader2, ShieldCheck } from "lucide-react";
 import { uz } from "@/i18n";
-import { AuthCompanions } from "@/components/auth-companions";
-import { CornerOrnament } from "@/components/corner-ornament";
-import { HeroOrnament } from "@/components/hero-ornament";
 
 import { track } from "@/lib/analytics";
 
@@ -68,43 +65,42 @@ function AuthPage() {
 
   return (
     <div className="relative min-h-dvh overflow-hidden bg-background text-foreground">
-      {/* Calm ambient — single soft halo (amygdala down-regulation) */}
-      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
-        <div
-          className="absolute left-1/2 top-[18%] h-[520px] w-[520px] -translate-x-1/2 rounded-full opacity-60 blur-[110px] halo-drift"
-          style={{
-            background:
-              "radial-gradient(closest-side, hsl(var(--primary) / 0.22), transparent 70%)",
-          }}
-        />
-        <div className="absolute inset-0 opacity-[0.035] [background-image:radial-gradient(hsl(var(--foreground))_1px,transparent_1px)] [background-size:24px_24px]" />
-      </div>
-      {/* Nafas oluvchi blob-hamrohlar (mobil + desktop) */}
-      <AuthCompanions />
-      {/* Girih-uslubidagi burchak naqshi — mintaqaviy vizual imzo */}
-      <CornerOrnament position="top-right" size={260} />
-      <CornerOrnament position="bottom-left" size={200} />
-      {/* Nozik orbital signature — desktop'da chap tomonda */}
-      <HeroOrnament className="pointer-events-none absolute left-[-140px] top-1/2 hidden h-[440px] w-[440px] -translate-y-1/2 opacity-30 xl:block" />
+      {/* Bitta sokin gradient — ortiqcha harakat yo'q */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[520px]"
+        style={{
+          background:
+            "radial-gradient(55% 45% at 50% 0%, hsl(var(--primary) / 0.12), transparent 72%)",
+        }}
+      />
 
-      <div className="mx-auto max-w-md px-5 py-10">
+      <div className="mx-auto flex min-h-dvh w-full max-w-md flex-col px-5 py-8">
         <Link
           to="/"
-          className="inline-flex items-center gap-1.5 font-ui text-sm text-muted-foreground transition-colors hover:text-foreground"
+          className="inline-flex w-fit items-center gap-1.5 font-ui text-sm text-muted-foreground transition-colors hover:text-foreground"
         >
           <ArrowLeft className="h-4 w-4" />
           Bosh sahifa
         </Link>
 
-        <div className="mt-10 text-center">
-          <h1 className="font-serif text-3xl leading-tight tracking-tight">
-            {uz.brand.name} — Kirish yoki ro'yxatdan o'tish
+        <div className="mt-10 animate-fade-in-up text-center">
+          <h1 className="font-serif text-[28px] leading-tight tracking-tight md:text-3xl">
+            Tizimingni bugun boshla
           </h1>
-          <p className="mt-2 font-ui text-sm text-muted-foreground">{uz.brand.tagline}</p>
+          <p className="mt-2 font-ui text-sm text-muted-foreground">
+            3 daqiqalik tashxis — keyin birinchi qadam seni kutadi.
+          </p>
         </div>
 
-        <div className="glass mt-8 rounded-[var(--radius)] p-6">
-          <GoogleButton next={next} />
+        <div
+          className="mt-8 animate-fade-in-up rounded-2xl border border-border bg-card/70 p-6 shadow-[var(--shadow-card)] backdrop-blur-sm"
+          style={{ animationDelay: "80ms" }}
+        >
+          <div className="space-y-2.5">
+            <OAuthButton provider="google" label="Google bilan davom etish" next={next} />
+            <OAuthButton provider="apple" label="Apple bilan davom etish" next={next} />
+          </div>
 
           <div className="relative my-6">
             <div className="absolute inset-0 flex items-center">
@@ -131,9 +127,13 @@ function AuthPage() {
           </Tabs>
         </div>
 
-        <p className="mt-6 text-center font-ui text-[11px] text-muted-foreground/70">
-          Shifrlangan · Reklamasiz · Istagan payt o'chirasan
-        </p>
+        <Link
+          to="/privacy"
+          className="group mx-auto mt-6 inline-flex items-center gap-2 rounded-full border border-border/70 px-3.5 py-1.5 font-ui text-[11px] text-muted-foreground transition-colors hover:border-primary/40 hover:text-foreground"
+        >
+          <ShieldCheck className="h-3.5 w-3.5 text-primary" />
+          Maxfiylik va xavfsizlik
+        </Link>
       </div>
     </div>
   );
