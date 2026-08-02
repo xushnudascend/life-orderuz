@@ -3,7 +3,7 @@ import type { ReactNode } from "react";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { BottomNav } from "@/components/bottom-nav";
-import { SidebarNav } from "@/components/sidebar-nav";
+import { NavMenu } from "@/components/nav-menu";
 import { CommandBar } from "@/components/command-bar";
 import { QuickLogFab } from "@/components/quick-log-fab";
 import { SkipLink } from "@/components/skip-link";
@@ -52,12 +52,7 @@ export function AppShell({ title, children }: { title?: string; children: ReactN
     <NadirProvider>
       <div className="min-h-dvh bg-background text-foreground">
         <SkipLink />
-        <SidebarNav />
-
-        <div
-          className="md:pl-[var(--sidebar-width)]"
-          style={{ paddingBottom: "calc(6rem + env(safe-area-inset-bottom))" }}
-        >
+        <div style={{ paddingBottom: "calc(6rem + env(safe-area-inset-bottom))" }}>
           {/* Topbar — scroll'da yengil soya, blur past-perf'da o'chadi */}
           <header
             className={
@@ -71,7 +66,7 @@ export function AppShell({ title, children }: { title?: string; children: ReactN
             <div className="mx-auto flex h-14 max-w-[1400px] items-center justify-between gap-3 px-4 sm:px-6">
               <Link
                 to="/"
-                className="flex items-center gap-2 font-serif text-base font-semibold tracking-tight md:hidden"
+                className="flex items-center gap-2 font-serif text-base font-semibold tracking-tight"
                 aria-label="Life Order — bosh sahifa"
               >
                 <span
@@ -82,7 +77,7 @@ export function AppShell({ title, children }: { title?: string; children: ReactN
                 </span>
                 Life<span className="text-primary">.</span>Order
               </Link>
-              <div className="hidden min-w-0 items-center gap-3 md:flex">
+              <div className="hidden min-w-0 flex-1 items-center justify-center gap-3 md:flex">
                 {title && (
                   <div className="flex items-center gap-2" aria-live="polite">
                     <span
@@ -98,6 +93,7 @@ export function AppShell({ title, children }: { title?: string; children: ReactN
               </div>
 
               <div className="flex items-center gap-2">
+                <NavMenu />
                 <Link
                   to="/profile"
                   className="flex h-9 w-9 items-center justify-center rounded-full border border-border bg-card font-ui text-sm font-semibold text-foreground transition-colors hover:border-primary/50 hover:text-primary"
