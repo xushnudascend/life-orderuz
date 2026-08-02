@@ -7,11 +7,6 @@ import { ArrowRight, Check, Dumbbell, Flame, Salad, Sparkles, Target, Sprout } f
 import { EmptyState } from "@/components/empty-state";
 
 import { uz } from "@/i18n";
-import { ProgressRing } from "@/components/progress-ring";
-import { RankBadge } from "@/components/rank-badge";
-import { ShieldIndicator } from "@/components/shield-indicator";
-import { ArchetypeRow } from "@/components/archetype-row";
-import { CornerOrnament } from "@/components/corner-ornament";
 import { applyArchetypeTheme } from "@/lib/archetype-theme";
 import { DailyTimetable } from "@/components/daily-timetable";
 import { ProfileCompletionCard } from "@/components/profile-completion-card";
@@ -25,10 +20,10 @@ import { RetentionPanels } from "@/components/retention-panels";
 import { HumanPotentialPanel } from "@/components/human-potential-panel";
 import { HundredDayTimeline } from "@/components/hundred-day-timeline";
 import { PeakEndCurve } from "@/components/peak-end-curve";
-import { Panel, PanelHeader, PanelValue } from "@/components/panel";
+import { Panel, PanelHeader } from "@/components/panel";
 import { StatsHeroBento } from "@/components/stats-hero-bento";
 import { ErrorBoundary } from "@/components/error-boundary";
-import { CountUpNumber } from "@/components/count-up-number";
+
 import { StreakMilestone } from "@/components/streak-milestone";
 import { celebrate, floatXp } from "@/lib/celebrate";
 import { track } from "@/lib/analytics";
