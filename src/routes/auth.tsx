@@ -341,7 +341,6 @@ function AppleIcon() {
   );
 }
 
-
 function translateAuthError(msg: string): string {
   const s = msg.toLowerCase();
   if (s.includes("invalid login") || s.includes("invalid credentials"))

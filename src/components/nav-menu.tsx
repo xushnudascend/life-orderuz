@@ -58,10 +58,7 @@ function NavItem({ item, active, onClick }: { item: Item; active: boolean; onCli
       )}
     >
       {active && (
-        <span
-          aria-hidden
-          className="absolute inset-y-2 left-0 w-[3px] rounded-full bg-primary"
-        />
+        <span aria-hidden className="absolute inset-y-2 left-0 w-[3px] rounded-full bg-primary" />
       )}
       <Icon
         className={cn(

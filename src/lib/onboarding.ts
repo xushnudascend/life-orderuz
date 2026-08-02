@@ -186,7 +186,6 @@ export function bmiLabel(bmi: number | null): string | null {
   return "Semizlik";
 }
 
-
 /**
  * Onboarding javoblariga qarab bugungi BITTA eng oson, ammo foydali qadam.
  * Real vaqt (soat, hafta kuni) va foydalanuvchi signallari hisobga olinadi.

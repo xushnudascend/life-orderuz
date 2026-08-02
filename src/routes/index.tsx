@@ -193,7 +193,11 @@ function Hero() {
             className="animate-fade-in-up mt-9 flex flex-col items-stretch gap-3 sm:flex-row sm:justify-center"
             style={{ animationDelay: "160ms" }}
           >
-            <Button asChild size="lg" className="group h-12 rounded-full px-7 font-ui font-semibold">
+            <Button
+              asChild
+              size="lg"
+              className="group h-12 rounded-full px-7 font-ui font-semibold"
+            >
               <Link to="/auth">
                 Mening rejamni ko'rish
                 <ArrowRight className="ml-1.5 h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" />
@@ -250,10 +254,7 @@ function PeerMirror() {
           </div>
           <dl className="grid w-full grid-cols-3 gap-4 sm:w-auto sm:gap-10">
             <Stat label="A'zolar" value={hasReal ? <CountUp value={members ?? 0} /> : "Beta"} />
-            <Stat
-              label="Bugun faol"
-              value={hasReal ? <CountUp value={todayActive ?? 0} /> : "—"}
-            />
+            <Stat label="Bugun faol" value={hasReal ? <CountUp value={todayActive ?? 0} /> : "—"} />
             <Stat
               label="Eng uzun streak"
               value={hasReal ? <CountUp value={streakLeader ?? 0} suffix=" kun" /> : "—"}
@@ -632,7 +633,9 @@ function Faq() {
         <Accordion type="single" collapsible className="w-full">
           {FAQ_ITEMS.map((it, i) => (
             <AccordionItem key={i} value={`q-${i}`} className="border-border/60">
-              <AccordionTrigger className="text-left font-serif text-[16px]">{it.q}</AccordionTrigger>
+              <AccordionTrigger className="text-left font-serif text-[16px]">
+                {it.q}
+              </AccordionTrigger>
               <AccordionContent className="font-ui text-sm leading-relaxed text-muted-foreground">
                 {it.a}
               </AccordionContent>
