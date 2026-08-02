@@ -187,16 +187,9 @@ function Onboarding() {
         // ignore — fall through to redirect
       }
 
+      // AI nudge bo'lmasa ham "Aha" ekrani ko'rsatiladi — birinchi qadam u yerda.
       setAhaNudge((cur) => cur ?? "");
       setSaving(false);
-      return;
-
-      // eslint-disable-next-line no-unreachable
-      // Hard nav — _authenticated layout profilni qaytadan o'qishi shart,
-      // aks holda eski state onboarded=false qolib, /onboarding'ga qaytaradi.
-      // Onboarding tugagach, to'g'ridan-to'g'ri dashboardga. Chuqur test —
-      // dashboarddan ixtiyoriy ravishda yechiladi.
-      window.location.assign("/dashboard");
     } catch (err) {
       const msg = err instanceof Error ? err.message : "Saqlanmadi";
       toast.error(msg);
