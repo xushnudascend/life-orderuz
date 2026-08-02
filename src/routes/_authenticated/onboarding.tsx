@@ -11,6 +11,7 @@ import {
   bmiLabel,
   calcBMI,
   sectionQuestions,
+  firstTaskFromAnswers,
   type OnboardingQuestion,
 } from "@/lib/onboarding";
 
@@ -48,7 +49,7 @@ function Onboarding() {
   const isFinalStep = step === bQuestions.length;
   const currentB: OnboardingQuestion | null = isFinalStep ? null : bQuestions[step];
 
-  const sectionLabel = currentB ? "A · Naqshing" : "B · Sen haqingda + Reja";
+  const sectionLabel = currentB ? "A · Naqshing" : "B · Sen haqingda + reja";
 
   const bmi = useMemo(() => {
     const h = Number(answers["profile.height_cm"]);
@@ -186,6 +187,11 @@ function Onboarding() {
         // ignore — fall through to redirect
       }
 
+      setAhaNudge((cur) => cur ?? "");
+      setSaving(false);
+      return;
+
+      // eslint-disable-next-line no-unreachable
       // Hard nav — _authenticated layout profilni qaytadan o'qishi shart,
       // aks holda eski state onboarded=false qolib, /onboarding'ga qaytaradi.
       // Onboarding tugagach, to'g'ridan-to'g'ri dashboardga. Chuqur test —
@@ -198,7 +204,7 @@ function Onboarding() {
     }
   }
 
-  if (ahaNudge) {
+  if (ahaNudge !== null) {
     return (
       <div className="min-h-dvh bg-background text-foreground">
         <div className="mx-auto max-w-xl px-5 py-16">
@@ -215,9 +221,12 @@ function Onboarding() {
                 Arxetip · {archetypeName}
               </p>
             )}
-            <div className="whitespace-pre-line rounded-[var(--radius)] border border-border/60 bg-background/60 p-5 font-body text-[15px] leading-relaxed text-foreground">
-              {ahaNudge}
-            </div>
+            {ahaNudge && (
+              <div className="whitespace-pre-line rounded-[var(--radius)] border border-border/60 bg-background/60 p-5 font-body text-[15px] leading-relaxed text-foreground">
+                {ahaNudge}
+              </div>
+            )}
+            <FirstTaskCard answers={answers} />
             <SocialMirror />
 
             <Button
@@ -280,9 +289,10 @@ function Onboarding() {
                 setAnswer(currentB.key, v);
                 // Single-choice — avtomatik keyingi savolga o'tish
                 if (currentB.type === "single") {
+                  // Tanlov ko'rinib ulgurishi uchun ataylab sekinroq (feedback → o'tish)
                   setTimeout(() => {
                     setStep((s) => (s < total - 1 ? s + 1 : s));
-                  }, 220);
+                  }, 620);
                 }
               }}
               onToggleMulti={(v) => toggleMulti(currentB.key, v)}
@@ -311,13 +321,16 @@ function Onboarding() {
           </Button>
 
           <Button
-            className="font-ui font-semibold"
+            size="lg"
+            className="group h-12 rounded-full px-7 font-ui font-semibold transition-all duration-300 hover:shadow-[0_12px_40px_-16px_hsl(var(--primary)/0.7)] active:scale-[0.98] disabled:opacity-40"
             onClick={goNext}
             disabled={!canAdvance || saving}
           >
             {saving && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
             {isFinalStep ? "Yo'lni tuzish" : "Davom etish"}
-            {!isFinalStep && <ArrowRight className="ml-1.5 h-4 w-4" />}
+            {!isFinalStep && (
+              <ArrowRight className="ml-1.5 h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" />
+            )}
           </Button>
         </div>
       </div>
@@ -687,6 +700,22 @@ function SocialMirror() {
       </p>
       <p className="mt-2 font-ui text-[11px] text-muted-foreground/70">
         Yolg'iz emassan — lekin bu senga tayyor javob emas, faqat tasdiq.
+      </p>
+    </div>
+  );
+}
+
+function FirstTaskCard({ answers }: { answers: Answers }) {
+  const task = useMemo(() => firstTaskFromAnswers(answers), [answers]);
+  return (
+    <div className="mt-6 rounded-2xl border border-primary/40 bg-primary/5 p-5">
+      <p className="font-ui text-[10px] uppercase tracking-[0.24em] text-primary">
+        Bugungi birinchi qadam · {task.minutes} daqiqa
+      </p>
+      <h2 className="mt-3 font-serif text-xl leading-snug tracking-tight">{task.title}</h2>
+      <p className="mt-2 font-ui text-[13px] leading-relaxed text-muted-foreground">{task.why}</p>
+      <p className="mt-3 font-ui text-[11px] uppercase tracking-[0.18em] text-foreground/70">
+        {task.when}
       </p>
     </div>
   );
