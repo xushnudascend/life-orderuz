@@ -44,10 +44,10 @@ export function Reveal({
     return () => io.disconnect();
   }, []);
 
-  const Component = Tag as any;
+  const Component = Tag as React.ElementType;
   return (
     <Component
-      ref={ref as any}
+      ref={ref as React.Ref<HTMLElement>}
       style={{ transitionDelay: shown ? `${delay}ms` : "0ms" }}
       className={
         "transition-[opacity,transform] duration-[700ms] ease-out will-change-[opacity,transform] " +
