@@ -268,7 +268,15 @@ function ForgotPasswordLink({ email }: { email: string }) {
   );
 }
 
-function GoogleButton({ next }: { next: string }) {
+function OAuthButton({
+  provider,
+  label,
+  next,
+}: {
+  provider: "google" | "apple";
+  label: string;
+  next: string;
+}) {
   const [loading, setLoading] = useState(false);
   async function onClick() {
     if (loading) return;
@@ -280,14 +288,15 @@ function GoogleButton({ next }: { next: string }) {
         next === "/dashboard"
           ? window.location.origin
           : `${window.location.origin}/auth?next=${encodeURIComponent(next)}`;
-      const result = await lovable.auth.signInWithOAuth("google", {
+      const result = await lovable.auth.signInWithOAuth(provider, {
         redirect_uri: redirectUri,
       });
       if (result.error) {
-        toast.error("Google orqali kirib bo'lmadi. Qayta urinib ko'ring.");
+        toast.error(`${label} amalga oshmadi. Qayta urinib ko'ring.`);
         return;
       }
       if (result.redirected) return; // full-page nav
+      track("login", { method: provider });
       window.location.replace(next);
     } finally {
       setLoading(false);
@@ -297,12 +306,18 @@ function GoogleButton({ next }: { next: string }) {
     <Button
       type="button"
       variant="secondary"
-      className="w-full font-ui"
+      className="tap w-full justify-center rounded-xl font-ui transition-transform duration-200 active:scale-[0.99]"
       onClick={onClick}
       disabled={loading}
     >
-      {loading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <GoogleIcon />}
-      Google bilan davom etish
+      {loading ? (
+        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+      ) : provider === "google" ? (
+        <GoogleIcon />
+      ) : (
+        <AppleIcon />
+      )}
+      {label}
     </Button>
   );
 }
@@ -317,6 +332,15 @@ function GoogleIcon() {
     </svg>
   );
 }
+
+function AppleIcon() {
+  return (
+    <svg viewBox="0 0 24 24" className="mr-2 h-4 w-4 fill-current" aria-hidden>
+      <path d="M16.36 12.72c.02 2.6 2.28 3.47 2.3 3.48-.02.06-.36 1.24-1.19 2.45-.72 1.05-1.47 2.1-2.65 2.12-1.16.02-1.53-.69-2.85-.69-1.32 0-1.73.67-2.83.71-1.14.04-2-1.13-2.73-2.18-1.49-2.15-2.63-6.08-1.1-8.73.76-1.32 2.12-2.15 3.59-2.17 1.12-.02 2.17.75 2.85.75.68 0 1.96-.93 3.3-.79.56.02 2.14.23 3.15 1.71-.08.05-1.88 1.1-1.86 3.34M14.2 4.6c.6-.73 1.01-1.75.9-2.76-.87.04-1.92.58-2.55 1.31-.56.65-1.05 1.69-.92 2.68.97.08 1.96-.49 2.57-1.23" />
+    </svg>
+  );
+}
+
 
 function translateAuthError(msg: string): string {
   const s = msg.toLowerCase();
