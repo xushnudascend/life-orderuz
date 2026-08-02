@@ -2,8 +2,7 @@
 @source "../src";
 @import "tw-animate-css";
 
-@custom-variant light (&:is(.light *));
-@custom-variant blue (&:is(.blue *));
+/* Yagona tema — Obsidian + Amber. Boshqa temalar olib tashlandi. */
 
 /*
  * LIFE ORDER — "Obsidian" design system.
