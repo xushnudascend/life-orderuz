@@ -39,6 +39,15 @@ export function AppShell({ title, children }: { title?: string; children: ReactN
     };
   }, []);
 
+  // Kunlik eslatmani rejalashtirish (qurilma ichida).
+  useEffect(() => {
+    const prefs = loadReminderPrefs();
+    if (!prefs) return;
+    return scheduleDailyReminder(prefs);
+  }, []);
+
+
+
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 4);
     onScroll();
