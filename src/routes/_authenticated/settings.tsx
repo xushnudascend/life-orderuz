@@ -98,7 +98,15 @@ function Settings() {
       .eq("id", userId);
     setSaving(false);
     if (error) toast.error("Saqlab bo'lmadi");
-    else toast.success("Sozlamalar saqlandi");
+    else {
+      // Qurilma ichidagi eslatmani ham yangilaymiz.
+      saveReminderPrefs({
+        notifyDaily: prefs.notify_daily,
+        notifyStreak: prefs.notify_streak,
+        time: prefs.daily_reminder_time.slice(0, 5),
+      });
+      toast.success("Sozlamalar saqlandi");
+    }
   }
 
   async function requestBrowserNotifications() {
@@ -107,9 +115,16 @@ function Settings() {
       return;
     }
     const perm = await Notification.requestPermission();
-    if (perm === "granted") toast.success("Bildirishnomalar yoqildi");
-    else toast.error("Ruxsat berilmadi");
+    if (perm === "granted") {
+      saveReminderPrefs({
+        notifyDaily: prefs.notify_daily,
+        notifyStreak: prefs.notify_streak,
+        time: prefs.daily_reminder_time.slice(0, 5),
+      });
+      toast.success("Bildirishnomalar yoqildi — eslatma belgilangan vaqtda keladi");
+    } else toast.error("Ruxsat berilmadi");
   }
+
 
   async function exportData() {
     const [habits, journal, chats, stats, meals, workouts] = await Promise.all([
