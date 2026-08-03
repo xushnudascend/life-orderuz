@@ -46,8 +46,6 @@ export function AppShell({ title, children }: { title?: string; children: ReactN
     return scheduleDailyReminder(prefs);
   }, []);
 
-
-
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 4);
     onScroll();

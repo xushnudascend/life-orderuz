@@ -16,7 +16,10 @@ export const Route = createFileRoute("/api/public/hooks/weekly-report")({
         }
 
         const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
-        const { data, error } = await supabaseAdmin.rpc("build_weekly_reports" as never, {} as never);
+        const { data, error } = await supabaseAdmin.rpc(
+          "build_weekly_reports" as never,
+          {} as never,
+        );
 
         if (error) {
           console.error("weekly-report failed:", error.message);

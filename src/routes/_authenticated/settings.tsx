@@ -128,7 +128,6 @@ function Settings() {
     } else toast.error("Ruxsat berilmadi");
   }
 
-
   async function exportData() {
     const [habits, journal, chats, stats, meals, workouts] = await Promise.all([
       supabase.from("habits").select("*").eq("user_id", userId),
