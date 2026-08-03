@@ -11,6 +11,7 @@ import { ErrorBoundary } from "@/components/error-boundary";
 import { NadirProvider } from "@/lib/nadir-context";
 import { NadirDrawer } from "@/components/nadir-drawer";
 import { ARCHETYPES, type Archetype } from "@/lib/nervous";
+import { loadReminderPrefs, scheduleDailyReminder } from "@/lib/reminders";
 
 export function AppShell({ title, children }: { title?: string; children: ReactNode }) {
   const [archetype, setArchetype] = useState<Archetype | null>(null);
