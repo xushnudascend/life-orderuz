@@ -8,6 +8,11 @@ import { supabase } from "@/integrations/supabase/client";
 import { useNadir } from "@/lib/nadir-context";
 import { ensurePrimaryThread, loadThreadMessages } from "@/lib/nadir-threads.functions";
 import {
+  offlineNadirReply,
+  queueOfflineMessage,
+  drainOfflineQueue,
+} from "@/lib/nadir-offline";
+import {
   Conversation,
   ConversationContent,
   ConversationScrollButton,
