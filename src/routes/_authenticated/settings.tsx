@@ -117,11 +117,13 @@ function Settings() {
     }
     const perm = await Notification.requestPermission();
     if (perm === "granted") {
-      saveReminderPrefs({
-        notifyDaily: prefs.notify_daily,
-        notifyStreak: prefs.notify_streak,
-        time: prefs.daily_reminder_time.slice(0, 5),
-      });
+      if (prefs) {
+        saveReminderPrefs({
+          notifyDaily: prefs.notify_daily,
+          notifyStreak: prefs.notify_streak,
+          time: prefs.daily_reminder_time.slice(0, 5),
+        });
+      }
       toast.success("Bildirishnomalar yoqildi — eslatma belgilangan vaqtda keladi");
     } else toast.error("Ruxsat berilmadi");
   }
