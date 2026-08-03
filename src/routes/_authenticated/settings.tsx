@@ -25,6 +25,7 @@ import { PageHero } from "@/components/page-hero";
 import { Panel, PanelHeader } from "@/components/panel";
 import { getMotionPref, setMotionPref, type MotionPref } from "@/lib/motion-pref";
 import { NotificationBudgetCard } from "@/components/notification-budget-card";
+import { saveReminderPrefs } from "@/lib/reminders";
 
 export const Route = createFileRoute("/_authenticated/settings")({
   head: () => ({
