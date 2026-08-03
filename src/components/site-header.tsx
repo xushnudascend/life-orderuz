@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 import { uz } from "@/i18n";
+import { LanguageSwitcher } from "@/components/language-switcher";
 
 type NavLink = { href: string; label: string };
 
@@ -51,18 +52,21 @@ export function SiteHeader({
             </a>
           ))}
         </nav>
-        <Button
-          asChild
-          size="sm"
-          className="group rounded-full font-ui font-semibold shadow-[0_0_0_1px_hsl(var(--primary)/0.4),0_8px_24px_-12px_hsl(var(--primary)/0.55)] transition-shadow hover:shadow-[0_0_0_1px_hsl(var(--primary)/0.6),0_12px_32px_-10px_hsl(var(--primary)/0.75)]"
-        >
-          <Link to={cta.to}>
-            {cta.label}
-            <span aria-hidden className="cta-arrow ml-1 inline-block">
-              →
-            </span>
-          </Link>
-        </Button>
+        <div className="flex items-center gap-2">
+          <LanguageSwitcher className="hidden sm:inline-flex" />
+          <Button
+            asChild
+            size="sm"
+            className="group rounded-full font-ui font-semibold shadow-[0_0_0_1px_hsl(var(--primary)/0.4),0_8px_24px_-12px_hsl(var(--primary)/0.55)] transition-shadow hover:shadow-[0_0_0_1px_hsl(var(--primary)/0.6),0_12px_32px_-10px_hsl(var(--primary)/0.75)]"
+          >
+            <Link to={cta.to}>
+              {cta.label}
+              <span aria-hidden className="cta-arrow ml-1 inline-block">
+                →
+              </span>
+            </Link>
+          </Button>
+        </div>
       </div>
     </header>
   );

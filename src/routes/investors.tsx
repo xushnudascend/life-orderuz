@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
 import {
   ArrowRight,
   Brain,
@@ -43,8 +44,84 @@ export const Route = createFileRoute("/investors")({
     ],
     links: [{ rel: "canonical", href: CANONICAL }],
   }),
-  component: InvestorsPage,
+  component: InvestorsGate,
 });
+
+/** Kirish kodi — deck hech kimga ochiq ko'rinmasin. */
+const ACCESS_CODE = "lifeorder2026";
+const STORAGE_KEY = "lo_investor_access";
+
+function InvestorsGate() {
+  const [unlocked, setUnlocked] = useState(false);
+  const [code, setCode] = useState("");
+  const [error, setError] = useState(false);
+  const [ready, setReady] = useState(false);
+
+  useEffect(() => {
+    const url = new URL(window.location.href);
+    const fromUrl = url.searchParams.get("k");
+    if (fromUrl === ACCESS_CODE) {
+      sessionStorage.setItem(STORAGE_KEY, "1");
+    }
+    setUnlocked(sessionStorage.getItem(STORAGE_KEY) === "1");
+    setReady(true);
+  }, []);
+
+  if (!ready) return <div className="min-h-dvh bg-background" />;
+
+  if (!unlocked) {
+    return (
+      <div className="grid min-h-dvh place-items-center bg-background px-6 text-foreground">
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            if (code.trim() === ACCESS_CODE) {
+              sessionStorage.setItem(STORAGE_KEY, "1");
+              setUnlocked(true);
+            } else {
+              setError(true);
+            }
+          }}
+          className="w-full max-w-sm rounded-2xl border border-border bg-card/60 p-6 text-center"
+        >
+          <Lock className="mx-auto h-5 w-5 text-primary" />
+          <h1 className="mt-3 font-serif text-lg font-semibold">Konfidensial</h1>
+          <p className="mt-1 font-ui text-[12px] text-muted-foreground">
+            Bu sahifa faqat taklif qilingan investorlar uchun.
+          </p>
+          <input
+            type="password"
+            value={code}
+            onChange={(e) => {
+              setCode(e.target.value);
+              setError(false);
+            }}
+            placeholder="Kirish kodi"
+            aria-label="Kirish kodi"
+            className="mt-4 w-full rounded-lg border border-border bg-background px-3 py-2 font-ui text-sm outline-none focus:border-primary"
+          />
+          {error && (
+            <p className="mt-2 font-ui text-[11px] text-destructive">Kod noto'g'ri.</p>
+          )}
+          <button
+            type="submit"
+            className="mt-3 w-full rounded-lg bg-primary px-3 py-2 font-ui text-[12px] font-semibold text-primary-foreground"
+          >
+            Ochish
+          </button>
+          <Link
+            to="/"
+            className="mt-4 inline-block font-ui text-[11px] text-muted-foreground hover:text-foreground"
+          >
+            ← Bosh sahifa
+          </Link>
+        </form>
+      </div>
+    );
+  }
+
+  return <InvestorsPage />;
+}
 
 function InvestorsPage() {
   return (

@@ -194,7 +194,7 @@ function DrawerChat({
       }),
     [persona, threadId, contextHint],
   );
-  const { messages, sendMessage, status, error } = useChat({
+  const { messages, sendMessage, setMessages, status, error } = useChat({
     id: `nadir:${threadId}`,
     messages: initialMessages,
     transport,
@@ -204,6 +204,43 @@ function DrawerChat({
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
+
+  // Internet holati — offline'da Nadir qurilmada javob beradi.
+  const [online, setOnline] = useState(true);
+  useEffect(() => {
+    setOnline(navigator.onLine);
+    const on = () => setOnline(true);
+    const off = () => setOnline(false);
+    window.addEventListener("online", on);
+    window.addEventListener("offline", off);
+    return () => {
+      window.removeEventListener("online", on);
+      window.removeEventListener("offline", off);
+    };
+  }, []);
+
+  // Internet qaytganda navbatdagi xabarlarni yuboramiz.
+  useEffect(() => {
+    if (!online) return;
+    const queued = drainOfflineQueue();
+    if (queued.length === 0) return;
+    const last = queued[queued.length - 1];
+    if (last) void sendMessage({ text: last.text });
+  }, [online, sendMessage]);
+
+  const handleOffline = (text: string) => {
+    queueOfflineMessage(text);
+    setMessages((prev) => [
+      ...prev,
+      { id: `off-u-${Date.now()}`, role: "user", parts: [{ type: "text", text }] } as UIMessage,
+      {
+        id: `off-a-${Date.now() + 1}`,
+        role: "assistant",
+        parts: [{ type: "text", text: offlineNadirReply(text) }],
+      } as UIMessage,
+    ]);
+  };
+
 
   return (
     <div className="flex min-h-0 flex-1 flex-col">

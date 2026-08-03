@@ -67,6 +67,7 @@ import { Route as AuthenticatedCHabitsRouteImport } from './routes/_authenticate
 import { Route as AuthenticatedCBodyRouteImport } from './routes/_authenticated/c.body'
 import { Route as Char91DotmcpChar93InvokeToolToolRouteImport } from './routes/[.mcp]/invoke-tool/$tool'
 import { Route as DotlovableOauthConsentRouteImport } from './routes/[.]lovable.oauth.consent'
+import { Route as ApiPublicHooksWeeklyReportRouteImport } from './routes/api/public/hooks/weekly-report'
 import { Route as ApiPublicHooksBurnoutCheckRouteImport } from './routes/api/public/hooks/burnout-check'
 import { Route as ApiPublicClickActionRouteImport } from './routes/api/public/click/$action'
 
@@ -368,6 +369,12 @@ const DotlovableOauthConsentRoute = DotlovableOauthConsentRouteImport.update({
   path: '/.lovable/oauth/consent',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicHooksWeeklyReportRoute =
+  ApiPublicHooksWeeklyReportRouteImport.update({
+    id: '/api/public/hooks/weekly-report',
+    path: '/api/public/hooks/weekly-report',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ApiPublicHooksBurnoutCheckRoute =
   ApiPublicHooksBurnoutCheckRouteImport.update({
     id: '/api/public/hooks/burnout-check',
@@ -440,6 +447,7 @@ export interface FileRoutesByFullPath {
   '/api/public/payme': typeof ApiPublicPaymeRoute
   '/api/public/click/$action': typeof ApiPublicClickActionRoute
   '/api/public/hooks/burnout-check': typeof ApiPublicHooksBurnoutCheckRoute
+  '/api/public/hooks/weekly-report': typeof ApiPublicHooksWeeklyReportRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -501,6 +509,7 @@ export interface FileRoutesByTo {
   '/api/public/payme': typeof ApiPublicPaymeRoute
   '/api/public/click/$action': typeof ApiPublicClickActionRoute
   '/api/public/hooks/burnout-check': typeof ApiPublicHooksBurnoutCheckRoute
+  '/api/public/hooks/weekly-report': typeof ApiPublicHooksWeeklyReportRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -564,6 +573,7 @@ export interface FileRoutesById {
   '/api/public/payme': typeof ApiPublicPaymeRoute
   '/api/public/click/$action': typeof ApiPublicClickActionRoute
   '/api/public/hooks/burnout-check': typeof ApiPublicHooksBurnoutCheckRoute
+  '/api/public/hooks/weekly-report': typeof ApiPublicHooksWeeklyReportRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -627,6 +637,7 @@ export interface FileRouteTypes {
     | '/api/public/payme'
     | '/api/public/click/$action'
     | '/api/public/hooks/burnout-check'
+    | '/api/public/hooks/weekly-report'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -688,6 +699,7 @@ export interface FileRouteTypes {
     | '/api/public/payme'
     | '/api/public/click/$action'
     | '/api/public/hooks/burnout-check'
+    | '/api/public/hooks/weekly-report'
   id:
     | '__root__'
     | '/'
@@ -750,6 +762,7 @@ export interface FileRouteTypes {
     | '/api/public/payme'
     | '/api/public/click/$action'
     | '/api/public/hooks/burnout-check'
+    | '/api/public/hooks/weekly-report'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -791,6 +804,7 @@ export interface RootRouteChildren {
   ApiPublicPaymeRoute: typeof ApiPublicPaymeRoute
   ApiPublicClickActionRoute: typeof ApiPublicClickActionRoute
   ApiPublicHooksBurnoutCheckRoute: typeof ApiPublicHooksBurnoutCheckRoute
+  ApiPublicHooksWeeklyReportRoute: typeof ApiPublicHooksWeeklyReportRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -1201,6 +1215,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DotlovableOauthConsentRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/hooks/weekly-report': {
+      id: '/api/public/hooks/weekly-report'
+      path: '/api/public/hooks/weekly-report'
+      fullPath: '/api/public/hooks/weekly-report'
+      preLoaderRoute: typeof ApiPublicHooksWeeklyReportRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/hooks/burnout-check': {
       id: '/api/public/hooks/burnout-check'
       path: '/api/public/hooks/burnout-check'
@@ -1324,17 +1345,8 @@ const rootRouteChildren: RootRouteChildren = {
   ApiPublicPaymeRoute: ApiPublicPaymeRoute,
   ApiPublicClickActionRoute: ApiPublicClickActionRoute,
   ApiPublicHooksBurnoutCheckRoute: ApiPublicHooksBurnoutCheckRoute,
+  ApiPublicHooksWeeklyReportRoute: ApiPublicHooksWeeklyReportRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
