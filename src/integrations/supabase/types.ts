@@ -1485,6 +1485,15 @@ export type Database = {
           username: string
         }[]
       }
+      public_stats: {
+        Args: never
+        Returns: {
+          habit_logs_count: number
+          journal_count: number
+          longest_streak: number
+          users_count: number
+        }[]
+      }
       rate_limit_hit: {
         Args: { _key: string; _limit: number; _window_seconds: number }
         Returns: {
