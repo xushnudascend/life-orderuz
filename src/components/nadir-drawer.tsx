@@ -334,26 +334,35 @@ function DrawerChat({
       </Conversation>
 
       <div className="border-t border-border/60 px-3 py-3">
+        {!online && (
+          <p className="mb-2 rounded-[var(--radius)] border border-primary/30 bg-primary/5 px-3 py-2 font-ui text-[11px] text-muted-foreground">
+            Internet yo'q — Nadir qurilmangda javob beradi. Ulanish qaytganda suhbat davom etadi.
+          </p>
+        )}
         <PromptInput
           onSubmit={(_msg, e) => {
             e.preventDefault();
             const text = input.trim();
             if (!text || busy) return;
             setInput("");
+            if (!online) {
+              handleOffline(text);
+              return;
+            }
             void sendMessage({ text });
           }}
         >
           <PromptInputTextarea
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder="Nadirga yoz…"
+            placeholder={online ? "Nadirga yoz…" : "Nadirga yoz… (offline)"}
           />
           <PromptInputFooter className="justify-end">
             <PromptInputSubmit status={busy ? "streaming" : undefined} disabled={!input.trim()} />
           </PromptInputFooter>
         </PromptInput>
         <p className="mt-2 text-center font-ui text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
-          suhbat saqlanadi · esc yopadi
+          {online ? "suhbat saqlanadi · esc yopadi" : "offline rejim · esc yopadi"}
         </p>
       </div>
     </div>
