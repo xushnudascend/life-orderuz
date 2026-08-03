@@ -1206,6 +1206,45 @@ export type Database = {
         }
         Relationships: []
       }
+      weekly_reports: {
+        Row: {
+          active_days: number
+          created_at: string
+          habit_completion_pct: number
+          id: string
+          journal_entries: number
+          streak: number
+          summary: string
+          user_id: string
+          week_start: string
+          xp_gained: number
+        }
+        Insert: {
+          active_days?: number
+          created_at?: string
+          habit_completion_pct?: number
+          id?: string
+          journal_entries?: number
+          streak?: number
+          summary?: string
+          user_id: string
+          week_start: string
+          xp_gained?: number
+        }
+        Update: {
+          active_days?: number
+          created_at?: string
+          habit_completion_pct?: number
+          id?: string
+          journal_entries?: number
+          streak?: number
+          summary?: string
+          user_id?: string
+          week_start?: string
+          xp_gained?: number
+        }
+        Relationships: []
+      }
       workouts: {
         Row: {
           created_at: string
@@ -1286,6 +1325,7 @@ export type Database = {
         }
         Returns: number
       }
+      build_weekly_reports: { Args: { _week_start?: string }; Returns: number }
       check_achievements: { Args: { _user_id: string }; Returns: undefined }
       check_my_achievements: { Args: never; Returns: undefined }
       claim_daily_login_bonus: {
@@ -1443,6 +1483,15 @@ export type Database = {
         Args: never
         Returns: {
           username: string
+        }[]
+      }
+      public_stats: {
+        Args: never
+        Returns: {
+          habit_logs_count: number
+          journal_count: number
+          longest_streak: number
+          users_count: number
         }[]
       }
       rate_limit_hit: {

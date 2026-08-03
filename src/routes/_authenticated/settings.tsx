@@ -25,6 +25,7 @@ import { PageHero } from "@/components/page-hero";
 import { Panel, PanelHeader } from "@/components/panel";
 import { getMotionPref, setMotionPref, type MotionPref } from "@/lib/motion-pref";
 import { NotificationBudgetCard } from "@/components/notification-budget-card";
+import { saveReminderPrefs } from "@/lib/reminders";
 
 export const Route = createFileRoute("/_authenticated/settings")({
   head: () => ({
@@ -98,7 +99,15 @@ function Settings() {
       .eq("id", userId);
     setSaving(false);
     if (error) toast.error("Saqlab bo'lmadi");
-    else toast.success("Sozlamalar saqlandi");
+    else {
+      // Qurilma ichidagi eslatmani ham yangilaymiz.
+      saveReminderPrefs({
+        notifyDaily: prefs.notify_daily,
+        notifyStreak: prefs.notify_streak,
+        time: prefs.daily_reminder_time.slice(0, 5),
+      });
+      toast.success("Sozlamalar saqlandi");
+    }
   }
 
   async function requestBrowserNotifications() {
@@ -107,8 +116,16 @@ function Settings() {
       return;
     }
     const perm = await Notification.requestPermission();
-    if (perm === "granted") toast.success("Bildirishnomalar yoqildi");
-    else toast.error("Ruxsat berilmadi");
+    if (perm === "granted") {
+      if (prefs) {
+        saveReminderPrefs({
+          notifyDaily: prefs.notify_daily,
+          notifyStreak: prefs.notify_streak,
+          time: prefs.daily_reminder_time.slice(0, 5),
+        });
+      }
+      toast.success("Bildirishnomalar yoqildi — eslatma belgilangan vaqtda keladi");
+    } else toast.error("Ruxsat berilmadi");
   }
 
   async function exportData() {
