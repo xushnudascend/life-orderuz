@@ -252,6 +252,8 @@ function Analytics() {
             </div>
           </Panel>
 
+          <DeepAnalytics userId={userId} />
+
           <div className="mt-4">
             <HabitHeatmap userId={userId} />
           </div>
