@@ -4,6 +4,7 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { CheckCircle2, Circle, PlayCircle, ArrowRight } from "lucide-react";
 import { Panel } from "@/components/panel";
+import { AppShell } from "@/components/app-shell";
 import { PageHero } from "@/components/page-hero";
 import { Button } from "@/components/ui/button";
 import { loadAssessment, completeStage } from "@/lib/assessment.functions";
@@ -48,7 +49,7 @@ function RoadmapPage() {
   }
 
   return (
-    <main className="mx-auto min-h-dvh w-full max-w-3xl px-4 py-8 sm:px-6">
+    <AppShell title="Yo'l xaritasi">
       <PageHero
         eyebrow="Yo'l xaritangiz"
         title="Reclaim → Rebuild → Rise"
@@ -86,7 +87,7 @@ function RoadmapPage() {
             <span>
               Yangilangan: {new Date(data.score.computed_at as string).toLocaleDateString("uz-UZ")}
             </span>
-            <Link to="/assessment" className="text-amber-400 underline underline-offset-2">
+            <Link to="/assessment" className="text-primary underline underline-offset-2">
               Qayta o'tish
             </Link>
           </div>
@@ -102,15 +103,15 @@ function RoadmapPage() {
               <Panel
                 key={stage.stage_index}
                 className={
-                  active ? "border-amber-500/40 bg-amber-500/[0.04]" : done ? "opacity-70" : ""
+                  active ? "border-primary/40 bg-primary/[0.05]" : done ? "opacity-70" : ""
                 }
               >
                 <div className="flex items-start gap-3">
                   <div className="mt-0.5 shrink-0">
                     {done ? (
-                      <CheckCircle2 className="h-5 w-5 text-emerald-400" aria-hidden />
+                      <CheckCircle2 className="h-5 w-5 text-success" aria-hidden />
                     ) : active ? (
-                      <PlayCircle className="h-5 w-5 text-amber-400" aria-hidden />
+                      <PlayCircle className="h-5 w-5 text-primary" aria-hidden />
                     ) : (
                       <Circle className="h-5 w-5 text-muted-foreground" aria-hidden />
                     )}
@@ -143,7 +144,7 @@ function RoadmapPage() {
           })}
         </div>
       )}
-    </main>
+    </AppShell>
   );
 }
 
