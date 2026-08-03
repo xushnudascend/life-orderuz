@@ -109,7 +109,7 @@ function RoadmapPage() {
                 <div className="flex items-start gap-3">
                   <div className="mt-0.5 shrink-0">
                     {done ? (
-                      <CheckCircle2 className="h-5 w-5 text-[hsl(var(--success,142_60%_45%))]" aria-hidden />
+                      <CheckCircle2 className="h-5 w-5 text-success" aria-hidden />
                     ) : active ? (
                       <PlayCircle className="h-5 w-5 text-primary" aria-hidden />
                     ) : (
