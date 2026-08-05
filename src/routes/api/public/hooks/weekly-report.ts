@@ -9,11 +9,20 @@ export const Route = createFileRoute("/api/public/hooks/weekly-report")({
   server: {
     handlers: {
       POST: async ({ request }) => {
-        const apikey = request.headers.get("apikey");
-        const expected = process.env["SUPABASE_PUBLISHABLE_KEY"];
-        if (!expected || apikey !== expected) {
+        // Authenticate via dedicated server-only CRON_SECRET (never the public anon key).
+        const provided = request.headers.get("x-cron-secret") ?? "";
+        const expected = process.env.CRON_SECRET ?? "";
+        if (!expected || provided.length !== expected.length) {
           return Response.json({ error: "Unauthorized" }, { status: 401 });
         }
+        let diff = 0;
+        for (let i = 0; i < expected.length; i++) {
+          diff |= provided.charCodeAt(i) ^ expected.charCodeAt(i);
+        }
+        if (diff !== 0) {
+          return Response.json({ error: "Unauthorized" }, { status: 401 });
+        }
+
 
         const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
         const { data, error } = await supabaseAdmin.rpc(
