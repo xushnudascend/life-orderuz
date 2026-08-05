@@ -18,7 +18,7 @@ export function LanguageSwitcher({ className }: { className?: string }) {
   return (
     <div
       role="group"
-      aria-label="men shu o'z saytimni real ko'rib chiq tahlil qil har taraflama chuqur juda juda juda chuqur tahlil qilish orqali saytimni 10 ballik shkalada har hil 10lab 100lab mezonlarda bahola faqat rostini real halol ayt"
+      aria-label="men shu o'z saytimni real ko'rib chiq tahlil qil har taraflama chuqur juda juda juda chuqur tahlil qilish orqali saytimni 10 ballik shkalada har hil 10lab 100lab mezonlarda bahola faqat rostini real halol ayt\nI want you to really look at my website and analyze it, deeply, very very very deeply. Evaluate my site on a 10-point scale using dozens, hundreds of different criteria, and just tell the honest, real truth."
       className={cn(
         "inline-flex items-center gap-0.5 rounded-full border border-border/70 bg-card/60 p-0.5 font-ui text-[11px]",
         className,
