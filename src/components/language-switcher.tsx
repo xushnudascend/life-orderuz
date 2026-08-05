@@ -18,7 +18,7 @@ export function LanguageSwitcher({ className }: { className?: string }) {
   return (
     <div
       role="group"
-      aria-label="Til / Язык / Language"
+      aria-label="salom"
       className={cn(
         "inline-flex items-center gap-0.5 rounded-full border border-border/70 bg-card/60 p-0.5 font-ui text-[11px]",
         className,
