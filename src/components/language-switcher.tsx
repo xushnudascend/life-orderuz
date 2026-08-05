@@ -18,7 +18,7 @@ export function LanguageSwitcher({ className }: { className?: string }) {
   return (
     <div
       role="group"
-      aria-label="I want you to really look at my website and analyze it, deeply, very very very deeply. Evaluate my site on a 10-point scale using dozens, hundreds of different criteria, and just tell the honest, real truth."
+      aria-label="nega aytganimni qilmayapsan"
       className={cn(
         "inline-flex items-center gap-0.5 rounded-full border border-border/70 bg-card/60 p-0.5 font-ui text-[11px]",
         className,
