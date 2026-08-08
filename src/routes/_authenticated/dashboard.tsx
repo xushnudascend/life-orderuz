@@ -199,39 +199,50 @@ function Dashboard() {
       {/* Unified Hero — Ascend-style dense bento */}
       {!loaded ? (
         <div
-          className="mb-5 rounded-[var(--radius)] border border-border/70 bg-card p-4 sm:mb-6 sm:p-6"
+          className="mb-6 rounded-[var(--radius)] border border-border bg-card p-4 sm:p-6"
           aria-busy="true"
         >
-          <div className="skeleton h-4 w-32" />
-          <div className="skeleton mt-3 h-8 w-64" />
-          <div className="mt-5 grid gap-4 sm:grid-cols-[auto_1fr]">
-            <div className="skeleton h-24 w-24 rounded-full" />
-            <div className="space-y-3">
-              <div className="skeleton h-3 w-full" />
-              <div className="grid grid-cols-2 gap-2.5">
-                <div className="skeleton h-14 w-full" />
-                <div className="skeleton h-14 w-full" />
-              </div>
-            </div>
+          <div className="skeleton h-8 w-64" />
+          <div className="mt-5 grid grid-cols-2 gap-4">
+            <div className="skeleton h-24 w-full" />
+            <div className="skeleton h-24 w-full" />
           </div>
         </div>
       ) : (
-        <StatsHeroBento
-          greeting={`${c.greeting} · ${c.label}`}
-          displayName={profile?.display_name ?? null}
-          archetype={archetype}
-          doneCount={doneCount}
-          totalHabits={habits.length}
-          percent={percent}
-          streakDays={streak?.current_days ?? 0}
-          level={stats?.level ?? 1}
-          totalXp={stats?.total_xp ?? 0}
-          xpProgress={xpProgress}
-          xpForNext={xpForNext}
-          disciplineScore={stats?.discipline_score ?? 0}
-          shieldsUsed={shieldsUsed}
-          score={score}
-        />
+        <div className="grid gap-4 md:grid-cols-12">
+          <div className="md:col-span-8">
+            <StatsHeroBento
+              greeting={`${c.greeting} · ${c.label}`}
+              displayName={profile?.display_name ?? null}
+              archetype={archetype}
+              doneCount={doneCount}
+              totalHabits={habits.length}
+              percent={percent}
+              streakDays={streak?.current_days ?? 0}
+              level={stats?.level ?? 1}
+              totalXp={stats?.total_xp ?? 0}
+              xpProgress={xpProgress}
+              xpForNext={xpForNext}
+              disciplineScore={stats?.discipline_score ?? 0}
+              shieldsUsed={shieldsUsed}
+              score={score}
+            />
+          </div>
+          <div className="md:col-span-4 flex flex-col gap-4">
+             <div className="flex-1 rounded-[var(--radius)] border border-border bg-card p-4">
+                <BiorythmPeak />
+             </div>
+             {habits.length > 0 && (
+                <div className="flex-1 rounded-[var(--radius)] border border-border bg-card p-4">
+                  <ZeigarnikRing
+                    done={doneCount}
+                    total={habits.length}
+                    nextTitle={habits.find((h) => !done.has(h.id))?.title ?? null}
+                  />
+                </div>
+             )}
+          </div>
+        </div>
       )}
 
       <div className="mt-4">
@@ -240,7 +251,7 @@ function Dashboard() {
         <Panel className="lg:col-span-12">
           
           <PanelHeader
-            title="Bugungi protokol"
+            title="Kunlik amallar"
           />
 
           {!loaded ? (
