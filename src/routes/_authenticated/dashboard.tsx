@@ -26,6 +26,7 @@ import { ErrorBoundary } from "@/components/error-boundary";
 import { BiorythmPeak } from "@/components/biorythm-peak";
 
 import { StreakMilestone } from "@/components/streak-milestone";
+import { PsychologicalFocus } from "@/components/dashboard/psychological-focus";
 import { celebrate, floatXp } from "@/lib/celebrate";
 import { track } from "@/lib/analytics";
 import {
@@ -255,6 +256,11 @@ function Dashboard() {
         </div>
       </div>
       <div className="mt-4 grid gap-3 sm:gap-4 lg:grid-cols-12">
+        {/* Psychological Focus Section */}
+        <div className="lg:col-span-12">
+          <PsychologicalFocus archetype={profile?.archetype ?? null} />
+        </div>
+        
         {/* Habits */}
         <Panel className="border-primary/30 shadow-[0_0_20px_-10px_hsl(var(--primary)/0.2)] lg:col-span-12">
           <PanelHeader
