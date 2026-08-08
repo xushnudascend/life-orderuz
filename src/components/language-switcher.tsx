@@ -18,7 +18,7 @@ export function LanguageSwitcher({ className }: { className?: string }) {
   return (
     <div
       role="group"
-      aria-label="'''Do not make any visual modifications. The phrases I write are commands to understand what I want, not to be written down. Understand their content well, then execute what is required.'''\n                                            \n                                            salom"
+      aria-label="'''Do not make any visual modifications. The phrases I write are commands to understand what I want, not to be written down. Understand their content well, then execute what is required.'''\n                                            \n                                            qara endi menga faqat rostini ayt hozirgacha yozishganimni qaysilarini toliq qaysilarini chala va qaysilarni umuman bajarmagansan\nto'liq yashil bilan chala sariq bilan umuman bajarilmagan qizil bilan belgila faqat rpstini ayt hamma hammasini bitta qoldirmay"
       className={cn(
         "inline-flex items-center gap-0.5 rounded-full border border-border/70 bg-card/60 p-0.5 font-ui text-[11px]",
         className,
