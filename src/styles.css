@@ -2,125 +2,83 @@
 
 @theme {
   --font-serif: "Instrument Serif", serif;
-  --font-ui: "Inter", system-ui, sans-serif;
-  --font-body: "Inter", system-ui, sans-serif;
+  --font-ui: "Inter", sans-serif;
+  --font-body: "Inter", sans-serif;
 
-  --radius: 0.75rem;
+  --color-background: hsl(187 15% 2%);
+  --color-foreground: hsl(187 10% 98%);
+  
+  --color-card: hsl(187 15% 4%);
+  --color-card-foreground: hsl(187 10% 98%);
+  
+  --color-popover: hsl(187 15% 4%);
+  --color-popover-foreground: hsl(187 10% 98%);
+  
+  --color-primary: hsl(187 65% 42%) !important;
+  --color-primary-foreground: hsl(187 10% 98%);
+  
+  --color-secondary: hsl(187 15% 10%);
+  --color-secondary-foreground: hsl(187 10% 98%);
+  
+  --color-muted: hsl(187 15% 10%);
+  --color-muted-foreground: hsl(187 10% 65%);
+  
+  --color-accent: hsl(187 15% 10%);
+  --color-accent-foreground: hsl(187 10% 98%);
+  
+  --color-destructive: hsl(0 62.8% 30.6%);
+  --color-destructive-foreground: hsl(187 10% 98%);
+  
+  --color-border: hsl(187 15% 12%);
+  --color-input: hsl(187 15% 12%);
+  --color-ring: hsl(187 65% 42%);
 
-  /* Colors - Deep Obsidian with Scientific Teal for Focus & Trust */
-  --background: 240 10% 2%;
-  --foreground: 0 0% 98%;
+  --radius-lg: 0.75rem;
+  --radius-md: calc(0.75rem - 2px);
+  --radius-sm: calc(0.75rem - 4px);
 
-  --card: 240 10% 4%;
-  --card-foreground: 0 0% 98%;
-
-  --popover: 240 10% 4%;
-  --popover-foreground: 0 0% 98%;
-
-  /* PRIMARY COLOR: HSL 187 65% 42% (Deep Teal) */
-  --primary: 187 65% 42%;
-  --primary-foreground: 0 0% 6%;
-
-  --secondary: 240 5% 10%;
-  --secondary-foreground: 0 0% 98%;
-
-  --muted: 240 5% 10%;
-  --muted-foreground: 240 5% 65%;
-
-  --accent: 240 5% 15%;
-  --accent-foreground: 0 0% 98%;
-
-  --destructive: 0 84% 60%;
-  --destructive-foreground: 0 0% 98%;
-
-  --border: 240 5% 12%;
-  --input: 240 5% 12%;
-  --ring: 187 65% 42%;
-
-  --animate-orb-float: orb-float 20s ease-in-out infinite;
-  --animate-orb-float-delayed: orb-float 25s ease-in-out infinite 5s;
-
-  @keyframes orb-float {
-    0%, 100% { transform: translate(0, 0) scale(1); }
-    33% { transform: translate(2%, 4%) scale(1.1); }
-    66% { transform: translate(-2%, 2%) scale(0.9); }
-  }
+  --shadow-card: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+  --shadow-glow: 0 0 20px -5px hsl(187 65% 42% / 0.3);
 }
 
-/* Base definitions using HSL variables */
 @layer base {
-  :root {
-    --background: hsl(240 10% 2%);
-    --foreground: hsl(0 0% 98%);
-    --card: hsl(240 10% 4%);
-    --card-foreground: hsl(0 0% 98%);
-    --popover: hsl(240 10% 4%);
-    --popover-foreground: hsl(0 0% 98%);
-    
-    /* PRIMARY COLOR: HSL 187 65% 42% */
-    --primary: hsl(187 65% 42%);
-    --primary-foreground: hsl(0 0% 6%);
-    
-    --secondary: hsl(240 5% 10%);
-    --secondary-foreground: hsl(0 0% 98%);
-    --muted: hsl(240 5% 10%);
-    --muted-foreground: hsl(240 5% 65%);
-    --accent: hsl(240 5% 15%);
-    --accent-foreground: hsl(0 0% 98%);
-    --destructive: hsl(0 84% 60%);
-    --destructive-foreground: hsl(0 0% 98%);
-    --border: hsl(240 5% 12%);
-    --input: hsl(240 5% 12%);
-    --ring: hsl(187 65% 42%);
-    --primary-glow: hsl(187 70% 52%);
-    --shadow-glow: 0 0 40px hsl(187 65% 42% / 0.14);
+  * {
+    @apply border-border;
   }
-
-  /* Global Override: Force Deep Teal everywhere, removing dynamic archetype changes */
-  html, :root {
-    --primary: hsl(187 65% 42%) !important;
-    --primary-foreground: hsl(0 0% 6%) !important;
-    --ring: hsl(187 65% 42%) !important;
-  }
-
-  /* Remove any existing data-archetype overrides to ensure 100% uniformity */
-  html[data-archetype] {
-    --primary: hsl(187 65% 42%) !important;
-    --ring: hsl(187 65% 42%) !important;
-  }
-
   body {
-    background-color: var(--background);
-    color: var(--foreground);
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    font-family: var(--font-body);
-  }
-
-  ::selection {
-    background-color: color-mix(in srgb, var(--primary) 20%, transparent);
-    color: var(--primary);
-  }
-
-  /* High-fidelity UI Polish */
-  .glow-primary {
-    box-shadow: 0 0 20px -5px var(--primary);
+    @apply bg-background text-foreground font-body antialiased;
+    background-color: var(--color-background);
+    color: var(--color-foreground);
   }
 }
 
-@utility tap {
-  @apply active:scale-[0.98] transition-transform duration-100;
+@utility glow-primary {
+  box-shadow: 0 0 20px -5px hsl(187 65% 42% / 0.4);
 }
 
 @utility lift {
-  @apply hover:-translate-y-0.5 transition-transform duration-200;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-@utility animate-route-in {
-  animation: route-in 0.4s ease-out forwards;
+@utility lift:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
 }
 
-@keyframes route-in {
-  from { opacity: 0; transform: translateY(4px); }
-  to { opacity: 1; transform: translateY(0); }
+@keyframes orb-float {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(20px, -20px) scale(1.1); }
+}
+
+@keyframes orb-float-delayed {
+  0%, 100% { transform: translate(0, 0) scale(1.1); }
+  50% { transform: translate(-20px, 20px) scale(1); }
+}
+
+.animate-orb-float {
+  animation: orb-float 10s ease-in-out infinite;
+}
+
+.animate-orb-float-delayed {
+  animation: orb-float-delayed 12s ease-in-out infinite;
 }
