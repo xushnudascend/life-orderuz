@@ -20,15 +20,15 @@ export const getPeerMirror = createServerFn({ method: "GET" }).handler(async () 
 
   // 3. Eng uzun streak
   const { data: streakData } = await supabaseAdmin
-    .from("user_stats")
-    .select("current_streak")
-    .order("current_streak", { ascending: false })
+    .from("streaks")
+    .select("current_days")
+    .order("current_days", { ascending: false })
     .limit(1)
     .maybeSingle();
 
   return {
     members: (members ?? 0) + 1240, // Beta launch offset for social proof
     today_active: (todayActive ?? 0) + 42,
-    streak_leader: streakData?.current_streak ?? 14,
+    streak_leader: streakData?.current_days ?? 14,
   };
 });
