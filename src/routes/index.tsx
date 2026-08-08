@@ -104,7 +104,7 @@ function Landing() {
       <main>
         <Hero />
         <PeerMirror />
-        <HowItWorks />
+        
         <Pricing />
         <Faq />
       </main>
@@ -223,7 +223,7 @@ function Hero() {
               variant="ghost"
               className="h-14 rounded-full px-8 font-ui text-base text-muted-foreground hover:text-foreground"
             >
-              <a href="#problem">Nima uchun biz?</a>
+              <a href="#pricing">Nima uchun biz?</a>
             </Button>
           </div>
         </Reveal>
