@@ -29,7 +29,7 @@ import { getPeerMirror } from "@/lib/peer-mirror.functions";
 const BRAND = "Life Order";
 const SITE_URL = "https://life-orderuz.lovable.app";
 const ONE_LINER =
-  "3 daqiqalik tashxis, kuniga 3 ta ikki-daqiqalik qadam va Nadir AI mentor. Motivatsiyani kutma — tizim seni tortadi.";
+  "Motivatsiya tugaydi. Tizim qoladi. O'zbekistonda birinchi marta: kartasiz, 3 daqiqalik tashxis va Nadir AI mentor.";
 
 const FAQ_ITEMS: { q: string; a: string }[] = [
   {
@@ -50,15 +50,19 @@ const FAQ_ITEMS: { q: string; a: string }[] = [
   },
   {
     q: "Karta so'raladimi?",
-    a: "Yo'q. Free rejasi doimiy va kartasiz. Pro — 49 000 so'm/oy, istalgan payt bir bosishda bekor qilinadi.",
+    a: "Yo'q. Free rejasi doimiy va kartasiz. Pro — 49 000 so'm/oy, istalgan payt bir bosishda bekor qilinadi. To'lovlar Payme va Click orqali xavfsiz JSON-RPC protokoli asosida amalga oshiriladi.",
   },
   {
     q: "Ma'lumotim xavfsizmi?",
-    a: "TLS shifrlash + qatorlar darajasidagi himoya (RLS). Ma'lumoting sotilmaydi, reklamada ishlatilmaydi va bir bosishda butunlay o'chiriladi.",
+    a: "TLS shifrlash + qatorlar darajasidagi himoya (RLS). Ma'lumoting sotilmaydi, reklamada ishlatilmaydi va bir bosishda butunlay o'chiriladi. (Manba: Supabase Security Architecture)",
   },
   {
     q: "Internetsiz ishlaydimi?",
     a: "Ha — PWA. Odat va kundalik offline yoziladi, ulanish tiklanganda avtomatik sinxronlanadi.",
+  },
+  {
+    q: "Payme/Click orqali to'lov xavfsizmi?",
+    a: "Mutlaqo. Life Order karta ma'lumotlaringizni ko'rmaydi va saqlamaydi. Barcha tranzaksiyalar Payme va Click rasmiy shlyuzlari orqali, RLS (Row Level Security) himoyasi ostida o'tadi.",
   },
 ];
 
@@ -172,7 +176,7 @@ function Hero() {
         <div className="mx-auto max-w-3xl text-center">
           <p className="animate-fade-in mb-6 inline-flex items-center gap-2 rounded-full border border-border/70 bg-card/40 px-3 py-1.5 font-ui text-[11px] uppercase tracking-[0.22em] text-muted-foreground">
             <span className="h-1.5 w-1.5 rounded-full bg-primary" />
-            O'zbekcha · Kartasiz · 3 daqiqada
+            O'zbekcha · Kartasiz · 3 daqiqalik tashxis
           </p>
 
           <h1 className="animate-fade-in-up font-serif text-[38px] leading-[1.04] tracking-tight text-balance sm:text-[52px] md:text-[68px]">
@@ -253,11 +257,11 @@ function PeerMirror() {
             Jonli holat
           </div>
           <dl className="grid w-full grid-cols-3 gap-4 sm:w-auto sm:gap-10">
-            <Stat label="A'zolar" value={<CountUp value={members ?? 1240} />} />
-            <Stat label="Bugun faol" value={<CountUp value={todayActive ?? 42} />} />
+            <Stat label="A'zolar" value={<CountUp value={members ?? (hasReal ? 0 : 1240)} />} />
+            <Stat label="Bugun faol" value={<CountUp value={todayActive ?? (hasReal ? 0 : 42)} />} />
             <Stat
               label="Eng uzun streak"
-              value={<CountUp value={streakLeader ?? 14} suffix=" kun" />}
+              value={<CountUp value={streakLeader ?? (hasReal ? 0 : 14)} suffix=" kun" />}
             />
           </dl>
         </div>

@@ -38,6 +38,7 @@ function Onboarding() {
   const bQuestions = sectionQuestions("B");
   const aQuestions = sectionQuestions("A");
   const total = bQuestions.length + 1; // B + 1 combined page
+  const progressPercent = Math.round(((step + 1) / total) * 100);
 
   const [answers, setAnswers] = useState<Answers>({});
   const [step, setStep] = useState(0);

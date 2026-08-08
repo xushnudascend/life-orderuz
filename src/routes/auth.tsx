@@ -90,6 +90,10 @@ function AuthPage() {
           </h1>
           <p className="mt-2 font-ui text-sm text-muted-foreground">
             3 daqiqalik tashxis — keyin birinchi qadam seni kutadi.
+            <br />
+            <span className="mt-1 block text-[11px] opacity-80">
+              Ma'lumotlaringiz shifrlangan holda saqlanadi (TLS + RLS)
+            </span>
           </p>
         </div>
 
@@ -215,6 +219,23 @@ function EmailForm({ mode, next }: { mode: "signin" | "signup"; next: string }) 
             placeholder="Kamida 8 belgi"
             className="pr-10"
           />
+          {mode === "signup" && password.length > 0 && (
+            <div className="mt-1 flex gap-1">
+              {[1, 2, 3, 4].map((i) => (
+                <div
+                  key={i}
+                  className={`h-1 w-full rounded-full ${
+                    i <= Math.min(4, Math.floor(password.length / 3))
+                      ? "bg-primary"
+                      : "bg-border"
+                  }`}
+                />
+              ))}
+              <span className="ml-2 font-ui text-[10px] uppercase text-muted-foreground">
+                {password.length < 8 ? "Kuchsiz" : password.length < 12 ? "O'rtacha" : "Kuchli"}
+              </span>
+            </div>
+          )}
           <button
             type="button"
             onClick={() => setShowPassword((v) => !v)}
@@ -292,7 +313,7 @@ function OAuthButton({
         redirect_uri: redirectUri,
       });
       if (result.error) {
-        toast.error(`${label} amalga oshmadi. Qayta urinib ko'ring.`);
+        toast.error(`${label} amalga oshmadi. Qayta urinib ko'ring yoki email orqali davom eting.`);
         return;
       }
       if (result.redirected) return; // full-page nav
