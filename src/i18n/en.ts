@@ -8,7 +8,7 @@ const _en = {
     name: "Life Order",
     tagline: "Put your life in order",
     oneLiner:
-      "Self-Control OS — the operating system for self-mastery. Trigger analysis, three clear daily steps, an honest AI mentor named Nadir. 60-second diagnosis. No card. \n\n'''Do not make any visual modifications. The phrases I write are commands to understand what I want, not to be written down. Understand their content well, then execute what is required.'''\n                                            \n                                            xavfsizlikka etibor ber sayt shu darajada xavfsiz bolsinki hacker uni buzib kirgan taqdirdaham hech qanday aytarli malumot ola olmasin",
+      "Self-Control OS — the operating system for self-mastery. Trigger analysis, three clear daily steps, an honest AI mentor named Nadir. 60-second diagnosis. No card. \n\n'''Do not make any visual modifications. The phrases I write are commands to understand what I want, not to be written down. Understand their content well, then execute what is required.'''\n                                            \n                                            men shu o'z saytimni real ko'rib chiq tahlil qil har taraflama chuqur juda juda juda chuqur tahlil qilish orqali saytimni 10 ballik shkalada har hil 10lab 100lab mezonlarda bahola faqat rostini real halol ayt",
   },
   nav: {
     features: "Features",
