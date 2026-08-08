@@ -115,10 +115,12 @@ function AuthPage() {
           className="mt-8 animate-fade-in-up rounded-2xl border border-border bg-card/70 p-6 shadow-[var(--shadow-card)] backdrop-blur-sm"
           style={{ animationDelay: "80ms" }}
         >
-          <div className="space-y-2.5">
+          <div className="space-y-3">
             <OAuthButton provider="google" label="Google bilan davom etish" next={next} />
-            <OAuthButton provider="apple" label="Apple bilan davom etish" next={next} />
-            <OAuthButton provider="microsoft" label="Microsoft bilan davom etish" next={next} />
+            <div className="grid grid-cols-2 gap-3">
+              <OAuthButton provider="apple" label="Apple" next={next} />
+              <OAuthButton provider="microsoft" label="Microsoft" next={next} />
+            </div>
           </div>
 
           <div className="relative my-6">
