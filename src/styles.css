@@ -46,27 +46,7 @@
   }
 }
 
-/* Archetype Theme Overrides */
-[data-archetype="focus_seeker"] {
-  --primary: 217 91% 60%; /* Blue */
-  --ring: 217 91% 60%;
-}
-
-[data-archetype="body_builder"] {
-  --primary: 0 84% 60%; /* Red/Orange */
-  --ring: 0 84% 60%;
-}
-
-[data-archetype="night_scholar"] {
-  --primary: 262 83% 58%; /* Purple */
-  --ring: 262 83% 58%;
-}
-
-[data-archetype="steady_walker"] {
-  --primary: 47 95% 55%; /* Gold/Amber */
-  --ring: 47 95% 55%;
-}
-
+/* Base definitions using HSL variables */
 @layer base {
   :root {
     --background: hsl(240 10% 3.9%);
@@ -88,7 +68,27 @@
     --border: hsl(240 3.7% 15.9%);
     --input: hsl(240 3.7% 15.9%);
     --ring: hsl(142 71% 45%);
-    --radius: 0.5rem;
+  }
+
+  /* Archetype Theme Overrides using [data-archetype] selector */
+  html[data-archetype="focus_seeker"] {
+    --primary: hsl(217 91% 60%); /* Blue */
+    --ring: hsl(217 91% 60%);
+  }
+
+  html[data-archetype="body_builder"] {
+    --primary: hsl(0 84% 60%); /* Red/Orange */
+    --ring: hsl(0 84% 60%);
+  }
+
+  html[data-archetype="night_scholar"] {
+    --primary: hsl(262 83% 58%); /* Purple */
+    --ring: hsl(262 83% 58%);
+  }
+
+  html[data-archetype="steady_walker"] {
+    --primary: hsl(47 95% 55%); /* Gold/Amber */
+    --ring: hsl(47 95% 55%);
   }
 
   body {

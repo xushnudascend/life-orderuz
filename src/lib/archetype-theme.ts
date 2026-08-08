@@ -10,7 +10,7 @@
  * CSS qatlami (`src/styles.css`) qolganini bajaradi.
  */
 
-const KNOWN_ARCHETYPES = ["starter", "builder", "aspirant", "warrior", "sage", "explorer"] as const;
+const KNOWN_ARCHETYPES = ["focus_seeker", "body_builder", "night_scholar", "steady_walker"] as const;
 
 export type Archetype = (typeof KNOWN_ARCHETYPES)[number];
 
@@ -24,6 +24,6 @@ export function applyArchetypeTheme(archetype: string | null | undefined) {
   const normalized = archetype.trim().toLowerCase();
   const known = (KNOWN_ARCHETYPES as readonly string[]).includes(normalized)
     ? normalized
-    : "starter";
+    : "focus_seeker";
   html.setAttribute("data-archetype", known);
 }
