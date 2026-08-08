@@ -88,8 +88,8 @@ export const uz = {
     },
     premium: {
       title: "Premium",
-      price: "$4.99",
-      period: "oyiga · 7 kun bepul sinov",
+      price: "59 000 so'm",
+      period: "oyiga · cheksiz mentor",
       badge: "Tavsiya",
       features: [
         "Cheksiz Nadir muloqoti",

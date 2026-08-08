@@ -191,7 +191,7 @@ function Dashboard() {
   }
 
   return (
-    <AppShell title={t("nav.signIn")}>
+    <AppShell title="Dashboard">
       {/* 1-QATLAM — Zarur signal (Visual Hierarchy: Primary Action focus) */}
       <div className="space-y-4">
         <ProfileCompletionCard missing={missing} />
@@ -250,7 +250,7 @@ function Dashboard() {
 
       <div className="mt-4 grid gap-3 sm:gap-4 lg:grid-cols-12">
         {/* Habits */}
-        <Panel className="border-primary/30 shadow-[0_0_20px_-10px_hsl(var(--primary)/0.2)] lg:col-span-7">
+        <Panel className="border-primary/30 shadow-[0_0_20px_-10px_hsl(var(--primary)/0.2)] lg:col-span-12">
           <PanelHeader
             eyebrow="Bugungi protokol"
             title={
@@ -336,7 +336,7 @@ function Dashboard() {
         </Panel>
 
         {/* Quick access */}
-        <Panel className="lg:col-span-5">
+        <Panel className="lg:col-span-12">
           <PanelHeader eyebrow="OS Modullari" />
 
           <div className="mt-3 grid grid-cols-2 gap-2">

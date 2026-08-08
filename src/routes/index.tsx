@@ -176,7 +176,7 @@ function Hero() {
         <div className="mx-auto max-w-3xl text-center">
           <p className="animate-fade-in mb-6 inline-flex items-center gap-2 rounded-full border border-border/70 bg-card/40 px-3 py-1.5 font-ui text-[11px] uppercase tracking-[0.22em] text-muted-foreground">
             <span className="h-1.5 w-1.5 rounded-full bg-primary" />
-            O'zbekcha · Kartasiz · 3 daqiqalik tashxis
+            O'zbekcha · Kartasiz · 3 daqiqada tashxis
           </p>
 
           <h1 className="animate-fade-in-up font-serif text-[38px] leading-[1.04] tracking-tight text-balance sm:text-[52px] md:text-[68px]">
@@ -243,7 +243,7 @@ function PeerMirror() {
   const members = data?.members ?? null;
   const todayActive = data?.today_active ?? null;
   const streakLeader = data?.streak_leader ?? null;
-  const hasReal = (members ?? 0) > 10;
+  const hasReal = (members ?? 0) > 5;
 
   return (
     <section className="border-b border-border bg-card/30">
