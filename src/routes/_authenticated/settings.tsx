@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { useServerFn } from "@tanstack/react-start";
 import { supabase } from "@/integrations/supabase/client";
@@ -13,6 +13,7 @@ import {
   Bell,
   User as UserIcon,
   ShieldAlert,
+  Shield,
   Sparkles,
   Languages,
   Clock,
