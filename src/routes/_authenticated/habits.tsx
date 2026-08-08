@@ -6,8 +6,7 @@ import { PageHero } from "@/components/page-hero";
 import { EmptyState } from "@/components/empty-state";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Loader2, Plus, Trash2, Flame, ArrowRight, Info, Target, Zap, Check } from "lucide-react";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import { Loader2, Plus, Trash2, Flame, ArrowRight, Target, Zap, Check } from "lucide-react";
 import { toast } from "sonner";
 import { uz } from "@/i18n";
 import { Panel, PanelHeader } from "@/components/panel";
@@ -47,13 +46,6 @@ const QUICK_PICKS = [
   "Ertalab mashq",
 ];
 
-const CUE_PICKS = [
-  "Ertalab tishimni yuvgandan keyin",
-  "Nonushtadan keyin",
-  "Ishga borishdan oldin",
-  "Kechqurun yotishdan oldin",
-  "Tushlik tanaffusida",
-];
 
 function today(): string {
   return new Date().toISOString().slice(0, 10);
@@ -70,8 +62,6 @@ function HabitsPage() {
   const [habits, setHabits] = useState<Habit[]>([]);
   const [todayLogs, setTodayLogs] = useState<Set<string>>(new Set());
   const [newTitle, setNewTitle] = useState("");
-  const [cue, setCue] = useState("");
-  const [stackAnchor, setStackAnchor] = useState<string>("");
   const [difficulty, setDifficulty] = useState<1 | 2 | 3 | 4 | 5>(2);
   const [category, setCategory] = useState<string>("habit");
   const [saving, setSaving] = useState(false);
