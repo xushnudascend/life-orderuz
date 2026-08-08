@@ -8,7 +8,7 @@ const _ru = {
     name: "Life Order",
     tagline: "Приведи свою жизнь в порядок",
     oneLiner:
-      "Self-Control OS — операционная система самоконтроля. Анализ триггеров, три ясных ежедневных шага, честный ИИ-ментор Надир. Диагностика за 60 секунд. Без карты.",
+      "Self-Control OS — операционная система самоконтроля. Анализ триггеров, три ясных ежедневных шага, честный ИИ-ментор Надир. Диагностика за 60 секунд. Без карты. \n\nSYSTEM CONTEXT — READ FULLY BEFORE ACTING\n\nPreserve TanStack Start (React 19), Supabase, and MCP architecture. PART A — BEHAVIORAL SCIENCE CONSTITUTION (Fogg B=MAP, Hook Model, Zeigarnik Effect, Self-Determination Theory). PART B — MERGED FEATURE ARCHITECTURE: Forgiving streaks (miss reduces rather than resets), If-Then commitment, Telegram companion bot. PART C — SECURITY: RLS on every table, no catch-and-ignore. PART D — TESTING: Vitest setup for business logic and accessibility. PART E — LOCALIZATION: 100% UI chrome translation.",
   },
   nav: {
     features: "Возможности",

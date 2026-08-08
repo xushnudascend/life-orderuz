@@ -200,6 +200,9 @@ function HabitsPage() {
           <>
             Bugun: <span className="text-foreground">{doneCount}</span> / {todayCount} bajarildi.
             Kichik takror — katta o'zgarish.
+            <div className="mt-2 text-[10px] uppercase tracking-widest text-muted-foreground opacity-50">
+              Forgiving Streak Active
+            </div>
           </>
         }
       />
