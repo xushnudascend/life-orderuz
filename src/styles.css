@@ -7,34 +7,34 @@
 
   --radius: 0.75rem;
 
-  /* Colors - Deep Obsidian with refined saturation */
-  --background: 240 10% 3.9%;
+  /* Colors - Deep Obsidian with Scientific Teal for Focus & Trust */
+  --background: 240 10% 2%;
   --foreground: 0 0% 98%;
 
-  --card: 240 10% 3.9%;
+  --card: 240 10% 4%;
   --card-foreground: 0 0% 98%;
 
-  --popover: 240 10% 3.9%;
+  --popover: 240 10% 4%;
   --popover-foreground: 0 0% 98%;
 
-  --primary: 142 71% 45%; /* Emerald green */
-  --primary-foreground: 144 33% 97%;
+  --primary: 187 65% 42%; /* Deep Teal: Calm, Mental Clarity, and Financial Trust */
+  --primary-foreground: 187 70% 5%;
 
-  --secondary: 240 3.7% 15.9%;
+  --secondary: 240 5% 10%;
   --secondary-foreground: 0 0% 98%;
 
-  --muted: 240 3.7% 15.9%;
-  --muted-foreground: 240 5% 64.9%;
+  --muted: 240 5% 10%;
+  --muted-foreground: 240 5% 65%;
 
-  --accent: 240 3.7% 15.9%;
+  --accent: 240 5% 15%;
   --accent-foreground: 0 0% 98%;
 
-  --destructive: 0 62.8% 30.6%;
+  --destructive: 0 84% 60%;
   --destructive-foreground: 0 0% 98%;
 
-  --border: 240 3.7% 15.9%;
-  --input: 240 3.7% 15.9%;
-  --ring: 142 71% 45%;
+  --border: 240 5% 12%;
+  --input: 240 5% 12%;
+  --ring: 187 65% 42%;
 
   --animate-orb-float: orb-float 20s ease-in-out infinite;
   --animate-orb-float-delayed: orb-float 25s ease-in-out infinite 5s;
@@ -49,46 +49,48 @@
 /* Base definitions using HSL variables */
 @layer base {
   :root {
-    --background: hsl(240 10% 3.9%);
+    --background: hsl(240 10% 2%);
     --foreground: hsl(0 0% 98%);
-    --card: hsl(240 10% 3.9%);
+    --card: hsl(240 10% 4%);
     --card-foreground: hsl(0 0% 98%);
-    --popover: hsl(240 10% 3.9%);
+    --popover: hsl(240 10% 4%);
     --popover-foreground: hsl(0 0% 98%);
-    --primary: hsl(142 71% 45%);
-    --primary-foreground: hsl(144 33% 97%);
-    --secondary: hsl(240 3.7% 15.9%);
+    --primary: hsl(187 65% 42%);
+    --primary-foreground: hsl(187 70% 5%);
+    --secondary: hsl(240 5% 10%);
     --secondary-foreground: hsl(0 0% 98%);
-    --muted: hsl(240 3.7% 15.9%);
-    --muted-foreground: hsl(240 5% 64.9%);
-    --accent: hsl(240 3.7% 15.9%);
+    --muted: hsl(240 5% 10%);
+    --muted-foreground: hsl(240 5% 65%);
+    --accent: hsl(240 5% 15%);
     --accent-foreground: hsl(0 0% 98%);
-    --destructive: hsl(0 62.8% 30.6%);
+    --destructive: hsl(0 84% 60%);
     --destructive-foreground: hsl(0 0% 98%);
-    --border: hsl(240 3.7% 15.9%);
-    --input: hsl(240 3.7% 15.9%);
-    --ring: hsl(142 71% 45%);
+    --border: hsl(240 5% 12%);
+    --input: hsl(240 5% 12%);
+    --ring: hsl(187 65% 42%);
+    --primary-glow: hsl(187 70% 52%);
+    --shadow-glow: 0 0 40px hsl(187 65% 42% / 0.14);
   }
 
   /* Archetype Theme Overrides using [data-archetype] selector */
   html[data-archetype="focus_seeker"] {
-    --primary: hsl(217 91% 60%); /* Blue */
-    --ring: hsl(217 91% 60%);
+    --primary: hsl(210 100% 66%); /* Deep Azure for clarity */
+    --ring: hsl(210 100% 66%);
   }
 
   html[data-archetype="body_builder"] {
-    --primary: hsl(0 84% 60%); /* Red/Orange */
-    --ring: hsl(0 84% 60%);
+    --primary: hsl(12 100% 63%); /* Crimson Energy */
+    --ring: hsl(12 100% 63%);
   }
 
   html[data-archetype="night_scholar"] {
-    --primary: hsl(262 83% 58%); /* Purple */
-    --ring: hsl(262 83% 58%);
+    --primary: hsl(270 95% 75%); /* Electric Violet/Lavender */
+    --ring: hsl(270 95% 75%);
   }
 
   html[data-archetype="steady_walker"] {
-    --primary: hsl(47 95% 55%); /* Gold/Amber */
-    --ring: hsl(47 95% 55%);
+    --primary: hsl(42 100% 62%); /* Golden Amber of consistency */
+    --ring: hsl(42 100% 62%);
   }
 
   body {
