@@ -1,3 +1,4 @@
+import * as React from "react";
 import { Brain, Info } from "lucide-react";
 import { Panel, PanelHeader } from "@/components/panel";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
@@ -6,26 +7,12 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/comp
  * PsychologicalFocus — Injects scientific context into the daily workflow.
  * Based on Fogg, Clear, and Huberman research analyzed.
  */
-export function PsychologicalFocus({ archetype }: { archetype: string | null }) {
-  const insights = [
-    {
-      title: "Zeigarnik effekti",
-      body: "Miya tugallanmagan ishlarni og'riq deb biladi. Faqat 2 daqiqa boshlang, qolganini miya o'zi tortadi.",
-      tip: "Locke goal-setting"
-    },
-    {
-      title: "B=MAP Modeli",
-      body: "Agar motivatsiya past bo'lsa, vazifani osonlashtiring. Kichik qadam — katta natija.",
-      tip: "BJ Fogg"
-    },
-    {
-      title: "Dopamine Baseline",
-      body: "Natijadan emas, qiyinchilikni yengishdan rohatlaning. Bu dofamin darajasini stabil ushlaydi.",
-      tip: "Huberman Lab"
-    }
-  ];
+import { PSYCHOLOGICAL_INSIGHTS } from "@/lib/research/behavioral-engine";
 
-  const current = insights[Math.floor(Math.random() * insights.length)];
+export function PsychologicalFocus({ archetype }: { archetype: string | null }) {
+  const current = React.useMemo(() => {
+    return PSYCHOLOGICAL_INSIGHTS[Math.floor(Math.random() * PSYCHOLOGICAL_INSIGHTS.length)];
+  }, []);
 
   return (
     <Panel className="border-l-4 border-l-primary/50 bg-primary/[0.02]">
@@ -49,12 +36,12 @@ export function PsychologicalFocus({ archetype }: { archetype: string | null }) 
           <Brain className="h-4 w-4" />
         </div>
         <div>
-          <h4 className="font-serif text-[15px] font-semibold leading-none">{current.title}</h4>
+          <h4 className="font-serif text-[15px] font-semibold leading-none">{current.concept}</h4>
           <p className="mt-1.5 font-ui text-[13px] leading-relaxed text-muted-foreground">
-            {current.body}
+            {current.application}
           </p>
           <div className="mt-2 inline-flex items-center rounded-full bg-border/50 px-2 py-0.5 font-ui text-[9px] uppercase tracking-wider text-muted-foreground">
-            Manba: {current.tip}
+            Manba: {current.source}
           </div>
         </div>
       </div>
