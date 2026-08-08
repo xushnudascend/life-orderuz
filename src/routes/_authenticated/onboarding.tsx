@@ -5,7 +5,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { ArrowLeft, ArrowRight, Loader2, Sparkles } from "lucide-react";
+import { ArrowLeft, ArrowRight, Check, Loader2, Sparkles, Target } from "lucide-react";
 import {
   ONBOARDING_QUESTIONS,
   bmiLabel,
@@ -700,8 +700,8 @@ function SocialMirror() {
           </p>
         </div>
         <p className="font-ui text-[14px] leading-relaxed text-foreground/90">
-          Aynan shu arxetipda <span className="font-serif font-bold text-primary">{data.sameArchetype + 1240}</span> ta odam yo'lda.
-          Ulardan <span className="font-serif font-bold text-primary">{data.samePlan + 820}</span> tasi hozir siz kabi o'zgarishni boshlamoqda.
+          Aynan shu arxetipda <span className="font-serif font-bold text-primary">{(data?.sameArchetype ?? 0) + 1240}</span> ta odam yo'lda.
+          Ulardan <span className="font-serif font-bold text-primary">{(data?.samePlan ?? 0) + 820}</span> tasi hozir siz kabi o'zgarishni boshlamoqda.
         </p>
         <div className="mt-3 flex items-center gap-1.5 font-ui text-[11px] text-muted-foreground/60 italic">
           <Check className="h-3 w-3 text-primary" />
