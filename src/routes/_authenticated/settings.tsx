@@ -1,8 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
+import { useServerFn } from "@tanstack/react-start";
 import { supabase } from "@/integrations/supabase/client";
 import { AppShell } from "@/components/app-shell";
 import { Button } from "@/components/ui/button";
+import { getTelegramLinkToken } from "@/lib/telegram.functions";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
@@ -16,6 +18,7 @@ import {
   Clock,
   Wand2,
   HelpCircle,
+  MessageSquare,
 } from "lucide-react";
 import { toast } from "sonner";
 import { useT } from "@/i18n/use-t";
@@ -49,9 +52,11 @@ type Prefs = {
 function Settings() {
   const { userId } = Route.useRouteContext();
   const { t, locale, setLocale } = useT();
+  const getTelegramToken = useServerFn(getTelegramLinkToken);
   const [prefs, setPrefs] = useState<Prefs | null>(null);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
+  const [telegramLoading, setTelegramLoading] = useState(false);
   const [motionPref, setMotionPrefState] = useState<MotionPref>(getMotionPref());
 
   useEffect(() => {
@@ -126,6 +131,19 @@ function Settings() {
       }
       toast.success("Bildirishnomalar yoqildi — eslatma belgilangan vaqtda keladi");
     } else toast.error("Ruxsat berilmadi");
+  }
+
+  async function linkTelegram() {
+    setTelegramLoading(true);
+    try {
+      const { token } = await getTelegramToken();
+      // Replace with your actual bot username
+      window.open(`https://t.me/lifeorderuz_bot?start=${token}`, "_blank");
+    } catch (e) {
+      toast.error("Telegram tokenini olib bo'lmadi");
+    } finally {
+      setTelegramLoading(false);
+    }
   }
 
   async function exportData() {
@@ -237,6 +255,22 @@ function Settings() {
             </div>
             <Button variant="outline" size="sm" onClick={requestBrowserNotifications}>
               Brauzer bildirishnomalariga ruxsat
+            </Button>
+          </div>
+        </Card>
+
+        <Card icon={<MessageSquare className="h-4 w-4 text-primary" />} title="Telegram Hamroh">
+          <div className="space-y-3">
+            <p className="text-sm text-muted-foreground">
+              Telegram orqali kunlik eslatmalarni oling va odatlarni to'g'ridan-to'g'ri messenjerda bajaring.
+            </p>
+            <Button variant="outline" size="sm" onClick={linkTelegram} disabled={telegramLoading}>
+              {telegramLoading ? (
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              ) : (
+                <MessageSquare className="mr-2 h-4 w-4" />
+              )}
+              Telegram orqali eslatma olish
             </Button>
           </div>
         </Card>
