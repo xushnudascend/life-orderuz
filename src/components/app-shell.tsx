@@ -66,9 +66,12 @@ export function AppShell({ title, children }: { title?: string; children: ReactN
 
   return (
     <NadirProvider>
-      <div className="min-h-dvh bg-background text-foreground relative">
-        {/* Girih ornament in background for logged in shell too */}
-        <div className="girih-corner absolute inset-0 -z-10 opacity-5 pointer-events-none" />
+      <div className="min-h-dvh bg-[#0a0502] text-foreground relative">
+        {/* Girih ornament + Premium dark background with subtle warmth */}
+        <div className="pointer-events-none absolute inset-0 -z-10">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,hsl(25_40%_15%/0.1),transparent_70%)]" />
+          <div className="girih-corner absolute inset-0 opacity-5" />
+        </div>
         <SkipLink />
         <div style={{ paddingBottom: "calc(6rem + env(safe-area-inset-bottom))" }}>
           {/* Topbar — scroll'da yengil soya, blur past-perf'da o'chadi */}
