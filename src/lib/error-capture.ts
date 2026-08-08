@@ -4,6 +4,19 @@
  */
 import { supabaseAdmin } from "@/integrations/supabase/client.server";
 
+let lastCapturedError: Error | null = null;
+
+export function captureError(error: Error) {
+  lastCapturedError = error;
+  console.error("[ERROR_CAPTURE]", error);
+}
+
+export function consumeLastCapturedError(): Error | null {
+  const err = lastCapturedError;
+  lastCapturedError = null;
+  return err;
+}
+
 export async function recordFailedWebhook(opts: {
   provider: string;
   payload: any;
@@ -21,9 +34,6 @@ export async function recordFailedWebhook(opts: {
       payload: opts.payload,
       error_message: errorMessage,
     });
-    
-    // In a real production environment, this would also trigger a Telegram/Slack alert.
-    // For now, it logs to the database for audit.
   } catch (dbError) {
     console.error("[CRITICAL] Failed to record webhook failure in database", dbError);
   }
@@ -31,5 +41,5 @@ export async function recordFailedWebhook(opts: {
 
 export function alertCritical(message: string, context: Record<string, any> = {}) {
   console.error(`[CRITICAL_ALERT] ${message}`, context);
-  // Implementation for external alerting would go here.
 }
+

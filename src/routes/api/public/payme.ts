@@ -61,139 +61,164 @@ export const Route = createFileRoute("/api/public/payme")({
     handlers: {
       POST: async ({ request }) => {
         const key = process.env.PAYME_KEY;
-        if (!key) return new Response("Not configured", { status: 503 });
+        const { recordFailedWebhook } = await import("@/lib/error-capture");
 
-        const body = (await request.json().catch(() => null)) as RpcReq | null;
-        if (!body || typeof body !== "object") return rpcError(0, ERR.method);
+        try {
+          if (!key) throw new Error("Payme key not configured");
 
-        if (!checkAuth(request.headers.get("authorization"), key))
-          return rpcError(body.id, ERR.auth);
+          const body = (await request.json().catch(() => null)) as RpcReq | null;
+          if (!body || typeof body !== "object") return rpcError(0, ERR.method);
 
-        const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
-        const p = body.params ?? {};
+          if (!checkAuth(request.headers.get("authorization"), key))
+            return rpcError(body.id, ERR.auth);
 
-        switch (body.method) {
-          case "CheckPerformTransaction": {
-            const account = (p as { account?: { order_id?: string } }).account;
-            const amount = Number((p as { amount?: number }).amount ?? 0);
-            const orderId = account?.order_id;
-            if (!orderId) return rpcError(body.id, ERR.order);
-            const { data: order } = await supabaseAdmin
-              .from("payment_orders")
-              .select("*")
-              .eq("id", orderId)
-              .maybeSingle();
-            if (!order) return rpcError(body.id, ERR.order);
-            if (order.amount_uzs * 100 !== amount) return rpcError(body.id, ERR.amount);
-            if (order.state !== "created") return rpcError(body.id, ERR.state);
-            return rpcResult(body.id, { allow: true });
-          }
-          case "CreateTransaction": {
-            const id = String((p as { id?: string }).id);
-            const time = Number((p as { time?: number }).time);
-            const amount = Number((p as { amount?: number }).amount ?? 0);
-            const orderId = (p as { account?: { order_id?: string } }).account?.order_id;
-            if (!orderId) return rpcError(body.id, ERR.order);
-            const { data: order } = await supabaseAdmin
-              .from("payment_orders")
-              .select("*")
-              .eq("id", orderId)
-              .maybeSingle();
-            if (!order) return rpcError(body.id, ERR.order);
-            if (order.amount_uzs * 100 !== amount) return rpcError(body.id, ERR.amount);
-            // idempotency
-            if (order.provider_txn_id && order.provider_txn_id !== id)
-              return rpcError(body.id, ERR.state);
-            await supabaseAdmin
-              .from("payment_orders")
-              .update({
-                provider: "payme",
-                provider_txn_id: id,
-                state: "prepared",
-                raw_payload: JSON.parse(JSON.stringify(p)),
-              })
-              .eq("id", orderId);
-            return rpcResult(body.id, { create_time: time, transaction: orderId, state: 1 });
-          }
-          case "PerformTransaction": {
-            const id = String((p as { id?: string }).id);
-            const { data: order } = await supabaseAdmin
-              .from("payment_orders")
-              .select("*")
-              .eq("provider_txn_id", id)
-              .maybeSingle();
-            if (!order) return rpcError(body.id, ERR.order);
-            const perform = new Date();
-            await supabaseAdmin
-              .from("payment_orders")
-              .update({
-                state: "paid",
-                perform_time: perform.toISOString(),
-              })
-              .eq("id", order.id);
-            const { activateProForOrder } = await import("@/lib/billing.server");
-            await activateProForOrder(order.id);
+          const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+          const p = body.params ?? {};
 
-            return rpcResult(body.id, {
-              transaction: order.id,
-              perform_time: perform.getTime(),
-              state: 2,
-            });
+          switch (body.method) {
+            case "CheckPerformTransaction": {
+              const account = (p as { account?: { order_id?: string } }).account;
+              const amount = Number((p as { amount?: number }).amount ?? 0);
+              const orderId = account?.order_id;
+              if (!orderId) return rpcError(body.id, ERR.order);
+              const { data: order } = await supabaseAdmin
+                .from("payment_orders")
+                .select("*")
+                .eq("id", orderId)
+                .maybeSingle();
+              if (!order) return rpcError(body.id, ERR.order);
+              if (order.amount_uzs * 100 !== amount) return rpcError(body.id, ERR.amount);
+              if (order.state !== "created") return rpcError(body.id, ERR.state);
+              return rpcResult(body.id, { allow: true });
+            }
+            case "CreateTransaction": {
+              const id = String((p as { id?: string }).id);
+              const time = Number((p as { time?: number }).time);
+              const amount = Number((p as { amount?: number }).amount ?? 0);
+              const orderId = (p as { account?: { order_id?: string } }).account?.order_id;
+              if (!orderId) return rpcError(body.id, ERR.order);
+              const { data: order } = await supabaseAdmin
+                .from("payment_orders")
+                .select("*")
+                .eq("id", orderId)
+                .maybeSingle();
+              if (!order) return rpcError(body.id, ERR.order);
+              if (order.amount_uzs * 100 !== amount) return rpcError(body.id, ERR.amount);
+              if (order.provider_txn_id && order.provider_txn_id !== id)
+                return rpcError(body.id, ERR.state);
+              await supabaseAdmin
+                .from("payment_orders")
+                .update({
+                  provider: "payme",
+                  provider_txn_id: id,
+                  state: "prepared",
+                  raw_payload: JSON.parse(JSON.stringify(p)),
+                })
+                .eq("id", orderId);
+              return rpcResult(body.id, { create_time: time, transaction: orderId, state: 1 });
+            }
+            case "PerformTransaction": {
+              const id = String((p as { id?: string }).id);
+              const { data: order } = await supabaseAdmin
+                .from("payment_orders")
+                .select("*")
+                .eq("provider_txn_id", id)
+                .maybeSingle();
+              if (!order) return rpcError(body.id, ERR.order);
+              if (order.state === "paid") {
+                return rpcResult(body.id, {
+                  transaction: order.id,
+                  perform_time: new Date(order.perform_time!).getTime(),
+                  state: 2,
+                });
+              }
+              const perform = new Date();
+              await supabaseAdmin
+                .from("payment_orders")
+                .update({
+                  state: "paid",
+                  perform_time: perform.toISOString(),
+                })
+                .eq("id", order.id);
+              const { activateProForOrder } = await import("@/lib/billing.server");
+              await activateProForOrder(order.id);
+
+              return rpcResult(body.id, {
+                transaction: order.id,
+                perform_time: perform.getTime(),
+                state: 2,
+              });
+            }
+            case "CancelTransaction": {
+              const id = String((p as { id?: string }).id);
+              const reason = Number((p as { reason?: number }).reason ?? 0);
+              const { data: order } = await supabaseAdmin
+                .from("payment_orders")
+                .select("*")
+                .eq("provider_txn_id", id)
+                .maybeSingle();
+              if (!order) return rpcError(body.id, ERR.order);
+              if (order.state === "canceled") {
+                return rpcResult(body.id, {
+                  transaction: order.id,
+                  cancel_time: new Date(order.cancel_time!).getTime(),
+                  state: order.perform_time ? -2 : -1,
+                });
+              }
+              const cancel = new Date();
+              const state = order.state === "paid" ? -2 : -1;
+              await supabaseAdmin
+                .from("payment_orders")
+                .update({
+                  state: "canceled",
+                  cancel_time: cancel.toISOString(),
+                  cancel_reason: reason,
+                })
+                .eq("id", order.id);
+              return rpcResult(body.id, {
+                transaction: order.id,
+                cancel_time: cancel.getTime(),
+                state,
+              });
+            }
+            case "CheckTransaction": {
+              const id = String((p as { id?: string }).id);
+              const { data: order } = await supabaseAdmin
+                .from("payment_orders")
+                .select("*")
+                .eq("provider_txn_id", id)
+                .maybeSingle();
+              if (!order) return rpcError(body.id, ERR.order);
+              const state =
+                order.state === "paid"
+                  ? 2
+                  : order.state === "canceled"
+                    ? order.perform_time
+                      ? -2
+                      : -1
+                    : 1;
+              return rpcResult(body.id, {
+                transaction: order.id,
+                create_time: new Date(order.created_at).getTime(),
+                perform_time: order.perform_time ? new Date(order.perform_time).getTime() : 0,
+                cancel_time: order.cancel_time ? new Date(order.cancel_time).getTime() : 0,
+                state,
+                reason: order.cancel_reason,
+              });
+            }
+            case "GetStatement":
+              return rpcResult(body.id, { transactions: [] });
+            default:
+              return rpcError(body.id, ERR.method);
           }
-          case "CancelTransaction": {
-            const id = String((p as { id?: string }).id);
-            const reason = Number((p as { reason?: number }).reason ?? 0);
-            const { data: order } = await supabaseAdmin
-              .from("payment_orders")
-              .select("*")
-              .eq("provider_txn_id", id)
-              .maybeSingle();
-            if (!order) return rpcError(body.id, ERR.order);
-            const cancel = new Date();
-            const state = order.state === "paid" ? -2 : -1;
-            await supabaseAdmin
-              .from("payment_orders")
-              .update({
-                state: "canceled",
-                cancel_time: cancel.toISOString(),
-                cancel_reason: reason,
-              })
-              .eq("id", order.id);
-            return rpcResult(body.id, {
-              transaction: order.id,
-              cancel_time: cancel.getTime(),
-              state,
-            });
-          }
-          case "CheckTransaction": {
-            const id = String((p as { id?: string }).id);
-            const { data: order } = await supabaseAdmin
-              .from("payment_orders")
-              .select("*")
-              .eq("provider_txn_id", id)
-              .maybeSingle();
-            if (!order) return rpcError(body.id, ERR.order);
-            const state =
-              order.state === "paid"
-                ? 2
-                : order.state === "canceled"
-                  ? order.perform_time
-                    ? -2
-                    : -1
-                  : 1;
-            return rpcResult(body.id, {
-              transaction: order.id,
-              create_time: new Date(order.created_at).getTime(),
-              perform_time: order.perform_time ? new Date(order.perform_time).getTime() : 0,
-              cancel_time: order.cancel_time ? new Date(order.cancel_time).getTime() : 0,
-              state,
-              reason: order.cancel_reason,
-            });
-          }
-          case "GetStatement":
-            return rpcResult(body.id, { transactions: [] });
-          default:
-            return rpcError(body.id, ERR.method);
+        } catch (error) {
+          const body = await request.clone().json().catch(() => ({}));
+          await recordFailedWebhook({
+            provider: "payme",
+            payload: body,
+            error: error as Error,
+          });
+          return new Response("Internal Server Error", { status: 500 });
         }
       },
     },
