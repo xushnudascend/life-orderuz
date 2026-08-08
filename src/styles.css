@@ -49,25 +49,27 @@
 /* Base definitions using HSL variables */
 @layer base {
   :root {
-    --background: hsl(240 10% 3.9%);
+    --background: hsl(240 10% 2%);
     --foreground: hsl(0 0% 98%);
-    --card: hsl(240 10% 3.9%);
+    --card: hsl(240 10% 4%);
     --card-foreground: hsl(0 0% 98%);
-    --popover: hsl(240 10% 3.9%);
+    --popover: hsl(240 10% 4%);
     --popover-foreground: hsl(0 0% 98%);
-    --primary: hsl(142 71% 45%);
-    --primary-foreground: hsl(144 33% 97%);
-    --secondary: hsl(240 3.7% 15.9%);
+    --primary: hsl(187 65% 42%);
+    --primary-foreground: hsl(187 70% 5%);
+    --secondary: hsl(240 5% 10%);
     --secondary-foreground: hsl(0 0% 98%);
-    --muted: hsl(240 3.7% 15.9%);
-    --muted-foreground: hsl(240 5% 64.9%);
-    --accent: hsl(240 3.7% 15.9%);
+    --muted: hsl(240 5% 10%);
+    --muted-foreground: hsl(240 5% 65%);
+    --accent: hsl(240 5% 15%);
     --accent-foreground: hsl(0 0% 98%);
-    --destructive: hsl(0 62.8% 30.6%);
+    --destructive: hsl(0 84% 60%);
     --destructive-foreground: hsl(0 0% 98%);
-    --border: hsl(240 3.7% 15.9%);
-    --input: hsl(240 3.7% 15.9%);
-    --ring: hsl(142 71% 45%);
+    --border: hsl(240 5% 12%);
+    --input: hsl(240 5% 12%);
+    --ring: hsl(187 65% 42%);
+    --primary-glow: hsl(187 70% 52%);
+    --shadow-glow: 0 0 40px hsl(187 65% 42% / 0.14);
   }
 
   /* Archetype Theme Overrides using [data-archetype] selector */
