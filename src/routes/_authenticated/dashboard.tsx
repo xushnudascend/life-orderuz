@@ -4,7 +4,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { AppShell } from "@/components/app-shell";
 import { Button } from "@/components/ui/button";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
-import { ArrowRight, Check, Dumbbell, Flame, Salad, Sparkles, Target, Sprout } from "lucide-react";
+import { ArrowRight, Check, Dumbbell, Flame, Salad, Sparkles, Target, Sprout, Shield } from "lucide-react";
 import { EmptyState } from "@/components/empty-state";
 
 import { useT } from "@/i18n/use-t";
