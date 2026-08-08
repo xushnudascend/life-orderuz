@@ -7,30 +7,98 @@
 
   --radius: 0.75rem;
 
+  /* Colors - Obsidian/Slate-like Dark Theme */
+  --background: 240 10% 3.9%;
+  --foreground: 0 0% 98%;
+
+  --card: 240 10% 3.9%;
+  --card-foreground: 0 0% 98%;
+
+  --popover: 240 10% 3.9%;
+  --popover-foreground: 0 0% 98%;
+
+  --primary: 142 71% 45%; /* Emerald green */
+  --primary-foreground: 144 33% 97%;
+
+  --secondary: 240 3.7% 15.9%;
+  --secondary-foreground: 0 0% 98%;
+
+  --muted: 240 3.7% 15.9%;
+  --muted-foreground: 240 5% 64.9%;
+
+  --accent: 240 3.7% 15.9%;
+  --accent-foreground: 0 0% 98%;
+
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 0 0% 98%;
+
+  --border: 240 3.7% 15.9%;
+  --input: 240 3.7% 15.9%;
+  --ring: 142 71% 45%;
+
   --animate-orb-float: orb-float 20s ease-in-out infinite;
   --animate-orb-float-delayed: orb-float 25s ease-in-out infinite 5s;
 
   @keyframes orb-float {
-    0%, 100% {
-      transform: translate(0, 0) scale(1);
-    }
-    33% {
-      transform: translate(2%, 4%) scale(1.1);
-    }
-    66% {
-      transform: translate(-2%, 2%) scale(0.9);
-    }
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(2%, 4%) scale(1.1); }
+    66% { transform: translate(-2%, 2%) scale(0.9); }
   }
 }
 
+/* Base definitions using HSL variables */
 @layer base {
+  :root {
+    --background: hsl(240 10% 3.9%);
+    --foreground: hsl(0 0% 98%);
+    --card: hsl(240 10% 3.9%);
+    --card-foreground: hsl(0 0% 98%);
+    --popover: hsl(240 10% 3.9%);
+    --popover-foreground: hsl(0 0% 98%);
+    --primary: hsl(142 71% 45%);
+    --primary-foreground: hsl(144 33% 97%);
+    --secondary: hsl(240 3.7% 15.9%);
+    --secondary-foreground: hsl(0 0% 98%);
+    --muted: hsl(240 3.7% 15.9%);
+    --muted-foreground: hsl(240 5% 64.9%);
+    --accent: hsl(240 3.7% 15.9%);
+    --accent-foreground: hsl(0 0% 98%);
+    --destructive: hsl(0 62.8% 30.6%);
+    --destructive-foreground: hsl(0 0% 98%);
+    --border: hsl(240 3.7% 15.9%);
+    --input: hsl(240 3.7% 15.9%);
+    --ring: hsl(142 71% 45%);
+  }
+
+  /* Archetype Theme Overrides using [data-archetype] selector */
+  html[data-archetype="focus_seeker"] {
+    --primary: hsl(217 91% 60%); /* Blue */
+    --ring: hsl(217 91% 60%);
+  }
+
+  html[data-archetype="body_builder"] {
+    --primary: hsl(0 84% 60%); /* Red/Orange */
+    --ring: hsl(0 84% 60%);
+  }
+
+  html[data-archetype="night_scholar"] {
+    --primary: hsl(262 83% 58%); /* Purple */
+    --ring: hsl(262 83% 58%);
+  }
+
+  html[data-archetype="steady_walker"] {
+    --primary: hsl(47 95% 55%); /* Gold/Amber */
+    --ring: hsl(47 95% 55%);
+  }
+
   body {
     background-color: var(--background);
     color: var(--foreground);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    font-family: var(--font-body);
   }
-  
+
   ::selection {
     background-color: color-mix(in srgb, var(--primary) 20%, transparent);
     color: var(--primary);
@@ -50,12 +118,6 @@
 }
 
 @keyframes route-in {
-  from {
-    opacity: 0;
-    transform: translateY(4px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
 }
