@@ -124,7 +124,9 @@ function HabitsPage() {
       category,
       if_trigger: cue.trim() || null,
       then_action: newTitle.trim() || null,
-      context_trigger: cue.trim() || null,
+      context_trigger: (cue.trim() || composedCue.trim()) || null,
+      if_trigger: (cue.trim() || composedCue.trim()) || null,
+      then_action: newTitle.trim() || null,
     } as any);
     setNewTitle("");
     setCue("");
