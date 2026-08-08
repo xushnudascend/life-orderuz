@@ -121,6 +121,8 @@ function HabitsPage() {
       xp_reward: xpFromDifficulty(difficulty),
       sort_order: habits.length,
       category,
+      if_trigger: cue.trim() || null,
+      then_action: newTitle.trim() || null,
     });
     setNewTitle("");
     setCue("");

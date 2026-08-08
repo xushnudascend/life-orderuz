@@ -399,9 +399,11 @@ export type Database = {
           description: string | null
           frequency: string
           id: string
+          if_trigger: string | null
           is_active: boolean
           scheduled_for: string | null
           sort_order: number
+          then_action: string | null
           title: string
           updated_at: string
           user_id: string
@@ -413,9 +415,11 @@ export type Database = {
           description?: string | null
           frequency?: string
           id?: string
+          if_trigger?: string | null
           is_active?: boolean
           scheduled_for?: string | null
           sort_order?: number
+          then_action?: string | null
           title: string
           updated_at?: string
           user_id: string
@@ -427,9 +431,11 @@ export type Database = {
           description?: string | null
           frequency?: string
           id?: string
+          if_trigger?: string | null
           is_active?: boolean
           scheduled_for?: string | null
           sort_order?: number
+          then_action?: string | null
           title?: string
           updated_at?: string
           user_id?: string
@@ -801,6 +807,30 @@ export type Database = {
         }
         Relationships: []
       }
+      payment_webhook_failures: {
+        Row: {
+          created_at: string | null
+          error_message: string
+          id: string
+          payload: Json
+          provider: string
+        }
+        Insert: {
+          created_at?: string | null
+          error_message: string
+          id?: string
+          payload: Json
+          provider: string
+        }
+        Update: {
+          created_at?: string | null
+          error_message?: string
+          id?: string
+          payload?: Json
+          provider?: string
+        }
+        Relationships: []
+      }
       post_comments: {
         Row: {
           content: string
@@ -856,6 +886,7 @@ export type Database = {
           onboarding_completed_at: string | null
           plan_length_days: number | null
           sex: Database["public"]["Enums"]["sex"] | null
+          stage_of_change: string | null
           subscription_tier: string
           subscription_until: string | null
           timezone: string
@@ -886,6 +917,7 @@ export type Database = {
           onboarding_completed_at?: string | null
           plan_length_days?: number | null
           sex?: Database["public"]["Enums"]["sex"] | null
+          stage_of_change?: string | null
           subscription_tier?: string
           subscription_until?: string | null
           timezone?: string
@@ -916,6 +948,7 @@ export type Database = {
           onboarding_completed_at?: string | null
           plan_length_days?: number | null
           sex?: Database["public"]["Enums"]["sex"] | null
+          stage_of_change?: string | null
           subscription_tier?: string
           subscription_until?: string | null
           timezone?: string
@@ -1102,6 +1135,27 @@ export type Database = {
         }
         Relationships: []
       }
+      telegram_users: {
+        Row: {
+          created_at: string | null
+          telegram_chat_id: number
+          user_id: string
+          username: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          telegram_chat_id: number
+          user_id: string
+          username?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          telegram_chat_id?: number
+          user_id?: string
+          username?: string | null
+        }
+        Relationships: []
+      }
       user_achievements: {
         Row: {
           achievement_id: string
@@ -1130,6 +1184,24 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      user_roles: {
+        Row: {
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
       }
       user_stats: {
         Row: {
@@ -1429,6 +1501,13 @@ export type Database = {
           today_active: number
         }[]
       }
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
       join_cohort: {
         Args: { _tier: Database["public"]["Enums"]["cohort_tier"] }
         Returns: {
@@ -1553,6 +1632,7 @@ export type Database = {
         | "moderate"
         | "active"
         | "very_active"
+      app_role: "admin" | "moderator" | "user"
       cohort_tier: "inner5" | "trust15" | "circle50"
       quest_status: "pending" | "completed" | "skipped" | "failed"
       sex: "male" | "female" | "other" | "prefer_not_say"
@@ -1702,6 +1782,7 @@ export const Constants = {
         "active",
         "very_active",
       ],
+      app_role: ["admin", "moderator", "user"],
       cohort_tier: ["inner5", "trust15", "circle50"],
       quest_status: ["pending", "completed", "skipped", "failed"],
       sex: ["male", "female", "other", "prefer_not_say"],
