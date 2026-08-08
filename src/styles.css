@@ -33,6 +33,7 @@
   --color-input: hsl(187 15% 10%);
   --color-ring: hsl(187 65% 42%);
 
+  --radius-xl: 1.75rem;
   --radius-lg: 1.25rem;
   --radius-md: 1rem;
   --radius-sm: 0.75rem;

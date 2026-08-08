@@ -33,8 +33,8 @@ export function NavMenu({ onClose }: { onClose?: () => void }) {
   ];
 
   return (
-    <div className="flex flex-col h-full bg-card border-r border-border w-72 p-8 overflow-y-auto relative">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,hsl(var(--primary)/0.1),transparent_70%)] pointer-events-none" />
+    <div className="flex flex-col h-full bg-[#0a0502] border-r border-border/40 w-80 p-10 overflow-y-auto relative backdrop-blur-3xl">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,hsl(var(--primary)/0.12),transparent_75%)] pointer-events-none" />
       
       <div className="mb-10 flex items-center justify-between relative z-10">
         <div className="flex items-center gap-4">

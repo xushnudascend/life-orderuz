@@ -156,7 +156,7 @@ function SectionHeader({
 
 function Hero() {
   return (
-    <section className="relative flex min-h-[90dvh] flex-col items-center justify-center overflow-hidden border-b border-border bg-[#0a0502]">
+    <section className="relative flex min-h-[92dvh] flex-col items-center justify-center overflow-hidden border-b border-border bg-[#0a0502]">
       {/* 3D Orb Backgrounds */}
       <div className="absolute top-[-10%] right-[-10%] h-[600px] w-[600px] animate-orb-float rounded-full bg-primary/10 blur-[120px]" />
       <div className="absolute bottom-[-10%] left-[-10%] h-[500px] w-[500px] animate-orb-float-delayed rounded-full bg-primary/5 blur-[100px]" />
@@ -171,7 +171,7 @@ function Hero() {
         </Reveal>
 
         <Reveal delay={250}>
-          <h1 className="font-serif text-[56px] leading-[0.95] tracking-tighter text-balance sm:text-[84px] md:text-[110px] lg:text-[124px]">
+          <h1 className="font-serif text-[64px] leading-[0.92] tracking-tighter text-balance sm:text-[92px] md:text-[116px] lg:text-[132px]">
             Motivatsiya tugaydi,<br />
             <span className="text-primary italic relative">
               Tizim qoladi.
@@ -192,7 +192,7 @@ function Hero() {
             <Button
               asChild
               size="lg"
-              className="group relative h-14 rounded-full px-10 font-ui text-base font-semibold transition-all hover:scale-105 active:scale-[0.98] shadow-[0_20px_40px_-12px_hsl(var(--primary)/0.5)]"
+              className="group relative h-15 rounded-full px-12 font-ui text-lg font-semibold transition-all hover:scale-105 active:scale-[0.98] shadow-[0_20px_50px_-12px_hsl(var(--primary)/0.5)]"
             >
               <Link to="/auth">
                 Tashxisni boshlash

@@ -29,8 +29,8 @@ export function BottomNav({ recommendedTab }: { recommendedTab?: string }) {
         aria-current={isNadirActive ? "page" : undefined}
         className={
           "fixed bottom-[calc(2rem+env(safe-area-inset-bottom))] left-1/2 z-50 -translate-x-1/2 md:hidden " +
-          "grid h-16 w-16 place-items-center rounded-2xl bg-primary text-primary-foreground " +
-          "shadow-[0_20px_40px_-10px_hsl(var(--primary)/0.6),0_0_0_5px_hsl(var(--background))] " +
+          "grid h-18 w-18 place-items-center rounded-2xl bg-primary text-primary-foreground " +
+          "shadow-[0_25px_50px_-10px_hsl(var(--primary)/0.7),0_0_0_6px_hsl(var(--background))] " +
           "transition-all duration-300 hover:scale-110 active:scale-90 " +
           (isNadirActive ? "ring-2 ring-primary shadow-[0_0_30px_hsl(var(--primary)/0.4)]" : "")
         }

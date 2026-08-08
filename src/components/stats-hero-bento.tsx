@@ -51,12 +51,12 @@ export function StatsHeroBento({
   return (
     <section
         aria-label="Bugungi holat"
-        className="relative h-full overflow-hidden rounded-[28px] border border-border/60 bg-card/40 p-6 sm:p-10 backdrop-blur-2xl shadow-[0_32px_64px_-16px_rgba(0,0,0,0.5)]"
+        className="relative h-full overflow-hidden rounded-[28px] border border-border/40 bg-[#0c0c0c]/40 p-8 sm:p-12 backdrop-blur-3xl shadow-[0_40px_80px_-20px_rgba(0,0,0,0.6)]"
       >
 
         {/* Left Side Content */}
         <div className="relative z-10 flex items-center justify-between">
-          <h1 className="font-serif text-3xl font-bold leading-[0.95] tracking-tight sm:text-5xl">
+          <h1 className="font-serif text-4xl font-bold leading-[0.9] tracking-tight sm:text-6xl">
             {displayName?.trim() ? `${displayName}, ` : t("dashboard.hero.greetingPrefix") + " "}
             <span className="text-muted-foreground/60">{t("dashboard.hero.plan")}</span>
           </h1>
@@ -97,7 +97,7 @@ export function StatsHeroBento({
         </div>
 
         {/* Stats Grid */}
-        <div className="relative z-10 mt-6 grid grid-cols-2 gap-3">
+        <div className="relative z-10 mt-10 grid grid-cols-2 gap-4">
           <Link
             to="/habits"
             className="group relative overflow-hidden rounded-[20px] border border-border/60 bg-background/40 p-5 transition-all hover:border-primary/50 hover:bg-primary/5 hover:shadow-[0_0_20px_hsl(var(--primary)/0.15)]"
