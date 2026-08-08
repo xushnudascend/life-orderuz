@@ -22,60 +22,6 @@ export type OnboardingQuestion = {
 };
 
 export const ONBOARDING_QUESTIONS: OnboardingQuestion[] = [
-  // A · Sen haqingda
-  {
-    key: "profile.age",
-    section: "A",
-    prompt: "Yoshing nechida?",
-    type: "number",
-    min: 13,
-    max: 90,
-    suffix: "yosh",
-  },
-  {
-    key: "profile.sex",
-    section: "A",
-    prompt: "Jinsing?",
-    type: "single",
-    options: [
-      { value: "erkak", label: "Erkak" },
-      { value: "ayol", label: "Ayol" },
-      { value: "boshqa", label: "Boshqa" },
-      { value: "aytmayman", label: "Aytishni istamayman" },
-    ],
-  },
-  {
-    key: "profile.height_cm",
-    section: "A",
-    prompt: "Bo'ying?",
-    type: "number",
-    min: 120,
-    max: 230,
-    suffix: "sm",
-  },
-  {
-    key: "profile.weight_kg",
-    section: "A",
-    prompt: "Vazning?",
-    type: "number",
-    min: 30,
-    max: 200,
-    suffix: "kg",
-  },
-  {
-    key: "profile.activity",
-    section: "A",
-    prompt: "Kunlik faolliging qanday?",
-    helper: "Bu ovqatlanish va mashqlar rejasini shakllantirish uchun kerak.",
-    type: "single",
-    options: [
-      { value: "kam_harakat", label: "Kam harakat — asosan o'tirib ishlayman" },
-      { value: "engil", label: "Engil — haftada 1-2 marta yuraman" },
-      { value: "o_rta", label: "O'rtacha — haftada 3-4 marta mashq" },
-      { value: "faol", label: "Faol — deyarli har kuni tana bilan ishlayman" },
-      { value: "juda_faol", label: "Juda faol — kuchli sportchi" },
-    ],
-  },
   // B · Naqshing (trigger)
   {
     key: "trigger.core",
@@ -164,6 +110,60 @@ export const ONBOARDING_QUESTIONS: OnboardingQuestion[] = [
       { value: "tushdan_keyin", label: "Tushdan keyin — energiya tushadi" },
       { value: "kechqurun", label: "Kechqurun — charchoq yutadi" },
       { value: "hafta_oxiri", label: "Hafta oxiri — tartib butunlay yo'qoladi" },
+    ],
+  },
+  // A · Sen haqingda
+  {
+    key: "profile.age",
+    section: "A",
+    prompt: "Yoshing nechida?",
+    type: "number",
+    min: 13,
+    max: 90,
+    suffix: "yosh",
+  },
+  {
+    key: "profile.sex",
+    section: "A",
+    prompt: "Jinsing?",
+    type: "single",
+    options: [
+      { value: "erkak", label: "Erkak" },
+      { value: "ayol", label: "Ayol" },
+      { value: "boshqa", label: "Boshqa" },
+      { value: "aytmayman", label: "Aytishni istamayman" },
+    ],
+  },
+  {
+    key: "profile.height_cm",
+    section: "A",
+    prompt: "Bo'ying?",
+    type: "number",
+    min: 120,
+    max: 230,
+    suffix: "sm",
+  },
+  {
+    key: "profile.weight_kg",
+    section: "A",
+    prompt: "Vazning?",
+    type: "number",
+    min: 30,
+    max: 200,
+    suffix: "kg",
+  },
+  {
+    key: "profile.activity",
+    section: "A",
+    prompt: "Kunlik faolliging qanday?",
+    helper: "Bu ovqatlanish va mashqlar rejasini shakllantirish uchun kerak.",
+    type: "single",
+    options: [
+      { value: "kam_harakat", label: "Kam harakat — asosan o'tirib ishlayman" },
+      { value: "engil", label: "Engil — haftada 1-2 marta yuraman" },
+      { value: "o_rta", label: "O'rtacha — haftada 3-4 marta mashq" },
+      { value: "faol", label: "Faol — deyarli har kuni tana bilan ishlayman" },
+      { value: "juda_faol", label: "Juda faol — kuchli sportchi" },
     ],
   },
 ] as const;

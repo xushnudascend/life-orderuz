@@ -58,22 +58,25 @@ export function BottomNav({ recommendedTab }: { recommendedTab?: string }) {
         className="fixed bottom-0 left-0 right-0 z-40 border-t border-border/70 bg-background/85 pb-[env(safe-area-inset-bottom)] backdrop-blur-xl supports-[backdrop-filter]:bg-background/70 md:hidden"
         aria-label="Asosiy navigatsiya"
       >
-        <div className="mx-auto grid max-w-6xl grid-cols-5 items-stretch px-1">
+        <div className="mx-auto flex max-w-6xl items-center justify-around px-2">
           {TABS.map((t, idx) => {
             const active = isTabActive(t);
             const recommended = recommendedTab === t.to && !active;
             const Icon = t.icon;
-            // Markaziy slot (index 2) — FAB uchun bo'sh joy
-            const insertGap = idx === 2;
+            
+            // Layout order: [Bosh, Tana, <NadirGap>, Odat, O'rgan, Davra]
+            // We need to insert a gap in the middle for the FAB
+            const isFirstGroup = idx < 2;
+            const isSecondGroup = idx >= 2;
+            
             return (
               <div key={t.to} className="contents">
-                {insertGap && <span aria-hidden className="pointer-events-none" />}
+                {idx === 2 && <div className="w-14 shrink-0" aria-hidden="true" />}
                 <Link
                   to={t.to}
                   aria-current={active ? "page" : undefined}
                   className={
-                    "tap relative flex flex-col items-center justify-center gap-1 py-2 font-ui text-[10px] uppercase tracking-[0.16em] transition-all duration-200 " +
-                    (idx === 2 ? "col-start-auto " : "") +
+                    "tap relative flex min-w-[64px] flex-1 flex-col items-center justify-center gap-1 py-2 font-ui text-[10px] uppercase tracking-[0.16em] transition-all duration-200 " +
                     (active
                       ? "text-primary"
                       : "text-muted-foreground hover:text-foreground active:scale-[0.97]")
@@ -95,7 +98,7 @@ export function BottomNav({ recommendedTab }: { recommendedTab?: string }) {
                     className={"h-5 w-5 transition-transform " + (active ? "scale-[1.05]" : "")}
                     strokeWidth={active ? 2.2 : 1.6}
                   />
-                  <span>{t.label}</span>
+                  <span className="truncate">{t.label}</span>
                   {recommended && (
                     <span
                       aria-hidden

@@ -34,11 +34,11 @@ function Onboarding() {
   const { userId } = Route.useRouteContext();
   const navigate = useNavigate();
 
-  // Ketma-ketlik: avval B bo'lim (naqsh) — 4 ta savol alohida qadamlarda.
-  // Oxirgi qadam — A bo'lim (5 ta savol) + reja davomiyligi bitta sahifada.
-  const bQuestions = sectionQuestions("B");
-  const aQuestions = sectionQuestions("A");
-  const total = bQuestions.length + 1; // B + 1 combined page
+  // Ketma-ketlik: avval B bo'lim (naqsh) — barcha savollar alohida qadamlarda.
+  // Oxirgi qadam — A bo'lim (barcha savollar) bitta sahifada.
+  const bQuestions = useMemo(() => sectionQuestions("B"), []);
+  const aQuestions = useMemo(() => sectionQuestions("A"), []);
+  const total = bQuestions.length + 1; // B sections + 1 final page for A
 
   const [answers, setAnswers] = useState<Answers>({});
   const [step, setStep] = useState(0);
@@ -51,8 +51,7 @@ function Onboarding() {
 
   const isFinalStep = step === bQuestions.length;
   const currentB: OnboardingQuestion | null = isFinalStep ? null : bQuestions[step];
-
-  const sectionLabel = currentB ? "QISM A · Naqshing" : "QISM B · Sen haqingda + reja";
+  const sectionLabel = currentB ? `QISM B · Naqshing` : "QISM A · Sen haqingda";
 
   const bmi = useMemo(() => {
     const h = Number(answers["profile.height_cm"]);
@@ -293,7 +292,7 @@ function Onboarding() {
                 if (currentB.type === "single") {
                   setTimeout(() => {
                     setStep((s) => (s < total - 1 ? s + 1 : s));
-                  }, 400);
+                  }, 300);
                 }
               }}
               onToggleMulti={(v) => toggleMulti(currentB.key, v)}

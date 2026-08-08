@@ -35,36 +35,40 @@ export function NavMenu({ onClose }: { onClose?: () => void }) {
   ];
 
   return (
-    <div className="flex flex-col h-full bg-card border-r border-border w-64 p-6 overflow-y-auto">
-      <div className="mb-8 flex items-center gap-3">
-        <div className="h-8 w-8 rounded-lg bg-primary/20 flex items-center justify-center">
-          <Shield className="h-5 w-5 text-primary" />
+    <div className="flex flex-col h-full bg-card border-r border-border w-64 p-6 overflow-y-auto relative">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,hsl(var(--primary)/0.05),transparent_70%)] pointer-events-none" />
+      
+      <div className="mb-8 flex items-center justify-between relative z-10">
+        <div className="flex items-center gap-3">
+          <div className="h-8 w-8 rounded-lg bg-primary/20 flex items-center justify-center shadow-[0_0_15px_hsl(var(--primary)/0.3)]">
+            <Shield className="h-5 w-5 text-primary" />
+          </div>
+          <span className="font-serif text-xl font-bold tracking-tight">Life Order</span>
         </div>
-        <span className="font-serif text-xl font-bold tracking-tight">Life Order</span>
       </div>
 
-      <nav className="flex-1 space-y-1">
+      <nav className="flex-1 space-y-1 relative z-10">
         {links.map((link) => (
           <Link
             key={link.to}
             to={link.to as any}
             onClick={onClose}
-            className="flex items-center gap-3 px-3 py-2.5 rounded-xl font-ui text-sm text-muted-foreground transition-all hover:bg-primary/10 hover:text-primary group"
-            activeProps={{ className: "bg-primary/10 text-primary" }}
+            className="flex items-center gap-3 px-3 py-2.5 rounded-xl font-ui text-sm text-muted-foreground transition-all hover:bg-primary/10 hover:text-primary group active:scale-[0.98]"
+            activeProps={{ className: "bg-primary/15 text-primary shadow-[0_0_20px_-10px_hsl(var(--primary)/0.4)]" }}
           >
             <link.icon className="h-4 w-4 transition-transform group-hover:scale-110" />
-            {link.label}
+            <span className="font-medium tracking-wide">{link.label}</span>
           </Link>
         ))}
       </nav>
 
-      <div className="mt-auto pt-6 border-t border-border">
+      <div className="mt-auto pt-6 border-t border-border relative z-10">
         <button
           onClick={handleLogout}
-          className="flex items-center gap-3 w-full px-3 py-2.5 rounded-xl font-ui text-sm text-muted-foreground transition-all hover:bg-destructive/10 hover:text-destructive"
+          className="flex items-center gap-3 w-full px-3 py-2.5 rounded-xl font-ui text-sm text-muted-foreground transition-all hover:bg-destructive/10 hover:text-destructive active:scale-[0.98]"
         >
           <LogOut className="h-4 w-4" />
-          Chiqish
+          <span className="font-medium">Chiqish</span>
         </button>
       </div>
     </div>
