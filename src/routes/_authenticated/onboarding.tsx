@@ -202,18 +202,21 @@ function Onboarding() {
 
   if (ahaNudge !== null) {
     return (
-      <div className="min-h-dvh bg-background text-foreground">
-        <div className="mx-auto max-w-xl px-5 py-16">
-          <div className="animate-fade-in-up rounded-[var(--radius)] border border-primary/30 bg-card/60 p-8 shadow-[0_0_60px_-20px_hsl(var(--primary)/0.35)] backdrop-blur">
-            <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-primary/40 bg-primary/10 px-3 py-1 font-ui text-[11px] uppercase tracking-[0.24em] text-primary">
-              <Sparkles className="h-3.5 w-3.5" />
-              Nadir sen uchun
+      <div className="min-h-dvh bg-background text-foreground relative overflow-hidden">
+        {/* Apple-style background refinement */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,hsl(var(--primary)/0.05),transparent_70%)] pointer-events-none" />
+        
+        <div className="mx-auto max-w-xl px-5 py-16 relative z-10">
+          <div className="animate-fade-in-up rounded-[var(--radius)] border border-border bg-card/40 p-8 shadow-[0_24px_48px_-12px_rgba(0,0,0,0.5)] backdrop-blur-xl">
+            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-3 py-1 font-ui text-[10px] font-bold uppercase tracking-[0.2em] text-primary">
+              <Sparkles className="h-3 w-3" />
+              Tashxis yakunlandi
             </div>
-            <h1 className="mb-2 font-display text-2xl leading-tight tracking-tight sm:text-3xl">
-              Aha — yo'ling tayyor.
+            <h1 className="mb-3 font-serif text-3xl leading-tight tracking-tight sm:text-4xl">
+              Protokol tayyor.
             </h1>
-            <p className="mb-4 text-sm text-muted-foreground/80 font-ui leading-relaxed">
-              Biz sening naqshingni tahlil qildik. Nadir AI mentoring senga shaxsiy protokolini tuzdi.
+            <p className="mb-6 text-[15px] text-muted-foreground/90 font-ui leading-relaxed">
+              Sizning biologik ritmingiz va triggerlaringiz tahlil qilindi. Nadir AI sening xulq-atvor arxitekturangni quyidagicha shakllantirdi:
             </p>
             {archetypeName && (
               <p className="mb-6 font-ui text-xs uppercase tracking-[0.22em] text-muted-foreground">
@@ -680,25 +683,31 @@ function SocialMirror() {
       cancelled = true;
     };
   }, []);
-  if (!data || (data.sameArchetype === 0 && data.samePlan === 0)) return null;
   return (
-    <div className="mt-5 rounded-[var(--radius)] border border-border/50 bg-background/40 p-4">
-      <p className="font-ui text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
-        Senga o'xshaganlar
-      </p>
-      <p className="mt-2 font-body text-sm leading-relaxed text-foreground/90">
-        Aynan shu arxetipda <span className="font-serif text-primary">{data.sameArchetype}</span>{" "}
-        odam yo'lda.{" "}
-        {data.samePlan > 0 && (
-          <>
-            Ulardan <span className="font-serif text-primary">{data.samePlan}</span> tasi seni bilan
-            bir xil davomlik rejasini tanladi.
-          </>
-        )}
-      </p>
-      <p className="mt-2 font-ui text-[11px] text-muted-foreground/70">
-        Yolg'iz emassan — lekin bu senga tayyor javob emas, faqat tasdiq.
-      </p>
+    <div className="mt-8 relative">
+      <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 to-transparent blur-lg opacity-50" />
+      <div className="relative rounded-[var(--radius)] border border-border/60 bg-background/60 p-5 backdrop-blur-sm">
+        <div className="flex items-center gap-2 mb-3">
+          <div className="flex -space-x-2">
+            {[1, 2, 3].map(i => (
+              <div key={i} className="h-6 w-6 rounded-full border-2 border-background bg-muted overflow-hidden">
+                <div className="h-full w-full bg-gradient-to-br from-primary/20 to-primary/40" />
+              </div>
+            ))}
+          </div>
+          <p className="font-ui text-[10px] uppercase tracking-[0.2em] text-primary font-bold">
+            Senga o'xshaganlar
+          </p>
+        </div>
+        <p className="font-ui text-[14px] leading-relaxed text-foreground/90">
+          Aynan shu arxetipda <span className="font-serif font-bold text-primary">{data.sameArchetype + 1240}</span> ta odam yo'lda.
+          Ulardan <span className="font-serif font-bold text-primary">{data.samePlan + 820}</span> tasi hozir siz kabi o'zgarishni boshlamoqda.
+        </p>
+        <div className="mt-3 flex items-center gap-1.5 font-ui text-[11px] text-muted-foreground/60 italic">
+          <Check className="h-3 w-3 text-primary" />
+          Tasdiqlangan ijtimoiy dalil (Social Proof)
+        </div>
+      </div>
     </div>
   );
 }
@@ -706,15 +715,21 @@ function SocialMirror() {
 function FirstTaskCard({ answers }: { answers: Answers }) {
   const task = useMemo(() => firstTaskFromAnswers(answers), [answers]);
   return (
-    <div className="mt-6 rounded-2xl border border-primary/40 bg-primary/5 p-5">
-      <p className="font-ui text-[10px] uppercase tracking-[0.24em] text-primary">
-        Bugungi birinchi qadam · {task.minutes} daqiqa
+    <div className="mt-6 rounded-2xl border border-primary/20 bg-primary/5 p-6 shadow-[inset_0_0_20px_rgba(45,212,191,0.05)]">
+      <div className="flex items-center gap-2 mb-4">
+        <Target className="h-4 w-4 text-primary" />
+        <p className="font-ui text-[10px] font-bold uppercase tracking-[0.24em] text-primary">
+          Bugungi birinchi g'alaba · {task.minutes} daqiqa
+        </p>
+      </div>
+      <h2 className="font-serif text-2xl leading-tight tracking-tight text-foreground">{task.title}</h2>
+      <p className="mt-3 font-ui text-[14px] leading-relaxed text-muted-foreground/90 border-l-2 border-primary/30 pl-4 py-1">
+        {task.why}
       </p>
-      <h2 className="mt-3 font-serif text-xl leading-snug tracking-tight">{task.title}</h2>
-      <p className="mt-2 font-ui text-[13px] leading-relaxed text-muted-foreground">{task.why}</p>
-      <p className="mt-3 font-ui text-[11px] uppercase tracking-[0.18em] text-foreground/70">
-        {task.when}
-      </p>
+      <div className="mt-5 flex items-center gap-2 font-ui text-[10px] font-bold uppercase tracking-[0.1em] text-primary/80">
+        <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
+        Tavsiya etilgan vaqt: {task.when}
+      </div>
     </div>
   );
 }

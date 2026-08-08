@@ -262,20 +262,41 @@ function Dashboard() {
         </div>
         
         {/* Habits */}
-        <Panel className="border-primary/30 shadow-[0_0_20px_-10px_hsl(var(--primary)/0.2)] lg:col-span-12">
+        <Panel className="lg:col-span-12 relative overflow-hidden">
+          {/* Fogg B=MAP Motivation Indicator */}
+          <div className="absolute top-0 right-0 h-1 w-full bg-gradient-to-r from-transparent via-primary/20 to-primary/40" />
+          
           <PanelHeader
-            eyebrow="Bugungi protokol"
+            eyebrow="Bugungi protokol · Xulq-atvor arxitekturasi"
             title={
-              <p className="font-serif text-lg font-semibold">
-                {doneCount} / {habits.length} — {percent}%
-              </p>
+              <div className="flex items-baseline gap-2">
+                <p className="font-serif text-xl font-bold tracking-tight">
+                  {doneCount} / {habits.length}
+                </p>
+                <span className="font-ui text-xs text-muted-foreground">tugallandi</span>
+              </div>
             }
             action={
-              <Button asChild variant="ghost" size="sm" className="h-8">
-                <Link to="/habits">
-                  Boshqarish <ArrowRight className="ml-1 h-3.5 w-3.5" />
-                </Link>
-              </Button>
+              <div className="flex items-center gap-2">
+                <TooltipProvider>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <div className="flex h-7 items-center gap-1 rounded-full border border-border bg-background/50 px-2 font-ui text-[10px] text-muted-foreground">
+                        <Target className="h-3 w-3" />
+                        <span>{percent}%</span>
+                      </div>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <p className="text-[11px]">Sizning bugungi dofamin zaxirangiz</p>
+                    </TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
+                <Button asChild variant="ghost" size="sm" className="h-8">
+                  <Link to="/habits">
+                    Boshqarish <ArrowRight className="ml-1 h-3.5 w-3.5" />
+                  </Link>
+                </Button>
+              </div>
             }
           />
 
