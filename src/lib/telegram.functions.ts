@@ -1,16 +1,17 @@
 import { createServerFn } from "@tanstack/react-start";
+import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 
 export const getTelegramLinkToken = createServerFn({ method: "POST" })
-  .handler(async ({ request }) => {
+  .middleware([requireSupabaseAuth])
+  .handler(async ({ context }) => {
+    const { userId } = context;
     const { supabaseAdmin: sb } = await import("@/integrations/supabase/client.server");
-    const authHeader = request.headers.get("authorization") || request.headers.get("Authorization");
     
-    const { data: { user } } = await sb.auth.getUser(authHeader?.split(" ")[1] ?? "");
-    if (!user) throw new Error("Unauthorized");
+    if (!userId) throw new Error("Unauthorized");
 
     const token = Math.random().toString(36).substring(2, 15);
     await (sb as any).from("telegram_link_tokens").insert({
-      user_id: user.id,
+      user_id: userId,
       token: token
     });
 
