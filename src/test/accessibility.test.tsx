@@ -1,4 +1,4 @@
-import { describe, it, expect, vi } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import { render } from '@testing-library/react';
 import { axe, toHaveNoViolations } from 'jest-axe';
 import React from 'react';
@@ -18,12 +18,14 @@ describe('Accessibility Audit', () => {
   it('landing page should have no violations', async () => {
     const { container } = render(<MockPage title="Life Order" />);
     const results = await axe(container);
+    // @ts-ignore - vitest matchers extension
     expect(results).toHaveNoViolations();
   });
 
   it('auth page should have no violations', async () => {
     const { container } = render(<MockPage title="Kirish" />);
     const results = await axe(container);
+    // @ts-ignore - vitest matchers extension
     expect(results).toHaveNoViolations();
   });
 });
