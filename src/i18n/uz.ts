@@ -37,50 +37,6 @@ export const uz = {
     ctaSecondary: "Uslubimiz haqida",
     trustLine: "Kartasiz · O'zbek tilida · Milliy intizom tizimi",
   },
-  pillars: {
-    heading: "Uchta ustun — bir tizim",
-    subheading:
-      "Odat-tracker emas. Trigger tahlili, kunlik uchta qadam va halol mentor — bir joyda birlashgan.",
-    items: [
-      {
-        tag: "01 · Tashxis",
-        title: "Trigger tahlili",
-        body: "Onboarding paytida naqshingni aniqlaymiz: e'tiborsizlik, tartibsizlik yoki maqsadsizlik. Yo'l shunga qarab yasaladi.",
-      },
-      {
-        tag: "02 · Amaliyot",
-        title: "Kunlik uchta qadam",
-        body: "Har kuni uchta aniq harakat — ko'p emas, kam emas. Bajarsan — XP, streak va Discipline Score o'sadi.",
-      },
-      {
-        tag: "03 · Muloqot",
-        title: "Nadir — halol AI mentor",
-        body: "Nadir seni maqtamaydi. Nadir haqiqatni aytadi — hurmat bilan. Reja tuzadi, savol beradi, kerak bo'lsa to'xtatadi.",
-      },
-    ],
-  },
-  nervous: {
-    heading: "Nerv tizimi — ko'zga ko'rinmas, lekin sen his qilasan",
-    subheading:
-      "XP, Streak, Shield va Discipline Score bir-biri bilan bog'langan. Server tomonida hisoblanadi — soxtalashtirish yo'q.",
-    tiers: [
-      { range: "0–19", uz: "Boshlovchi", en: "Beginner" },
-      { range: "20–39", uz: "Intizomli", en: "Disciplined" },
-      { range: "40–59", uz: "Kuchli", en: "Strong" },
-      { range: "60–74", uz: "Elita", en: "Elite" },
-      { range: "75–89", uz: "Usta", en: "Master" },
-      { range: "90–100", uz: "Apex", en: "Apex" },
-    ],
-    shield:
-      "Himoya (Shield) — haftada bir marta streak uzilishidan qaytaradi. Bu jazolovchi emas, qo'llab-quvvatlovchi mexanika.",
-  },
-  mentor: {
-    heading: "Nadir kim?",
-    body: "Nadir — sensiz uxlamaydigan yordamchi emas. U — sening tanlovlaringni ko'rib, halol javob beradigan xarakter. \"Yaxshi ish qilyapsan\" degan bo'sh maqtov Nadir'da yo'q. Nima ish qilyapsan, nega qilyapsan, keyin nima bo'ladi — shu uchtasi.",
-    quote:
-      "«Sen bugun mashqni o'tkazib yubording. Sabab charchoq emas — sabab nafsingga qul bo'lishing. Ertaga soat 22:30 da telefonni yig'ishtir. Boshqa hech narsa.»",
-    quoteBy: "— Nadir, sening halol mentoring",
-  },
   pricing: {
     heading: "Narxlar — sodda",
     subheading: "Kartasiz sinash. Yoqmasa — hech qanday yozuv qolmaydi.",

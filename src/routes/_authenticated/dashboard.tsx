@@ -197,9 +197,7 @@ function Dashboard() {
     <AppShell title="Dashboard">
       {/* 1-QATLAM — Zarur signal (Visual Hierarchy: Primary Action focus) */}
       <div className="space-y-4">
-        <ProfileCompletionCard missing={missing} />
         <NadirNudgeBanner userId={userId} />
-        <StreakAtRisk streakDays={streak?.current_days ?? 0} percent={percent} />
       </div>
 
       {/* Unified Hero — Ascend-style dense bento */}
@@ -260,23 +258,6 @@ function Dashboard() {
         {/* Psychological Focus Section */}
         <div className="lg:col-span-12">
           <PsychologicalFocus archetype={profile?.archetype ?? null} />
-          {/* Freemium Limit Indicator */}
-          <div className="mt-3 rounded-lg border border-primary/20 bg-primary/5 p-3 sm:p-4">
-            <div className="flex items-center justify-between gap-3">
-              <div className="flex items-center gap-2">
-                <Shield className="h-4 w-4 text-primary shrink-0" />
-                <p className="font-ui text-[12px] font-semibold text-foreground/90">
-                  Self-Control OS: <span className="text-primary">Shaffof Billing</span>
-                </p>
-              </div>
-              <Button asChild variant="ghost" size="sm" className="h-7 text-[10px] font-bold uppercase tracking-widest hover:bg-primary/10">
-                <Link to="/settings/subscription">Boshqarish</Link>
-              </Button>
-            </div>
-            <p className="mt-2 font-ui text-[11px] leading-relaxed text-muted-foreground">
-              O'zbekistonda yagona: soxta shoshiltirishlar yo'q. Free reja doimiy, Pro esa chuqur AI tahlili uchun.
-            </p>
-          </div>
         </div>
         
         {/* Habits */}
@@ -411,59 +392,8 @@ function Dashboard() {
           </div>
         </Panel>
 
-        {/* Kunlik jadval */}
-        <div className="lg:col-span-12">
-          <ErrorBoundary boundary="dashboard_daily_timetable">
-            <DailyTimetable
-              profile={{
-                age: profile?.age,
-                sex: profile?.sex,
-                height_cm: profile?.height_cm,
-                weight_kg: profile?.weight_kg,
-                archetype: profile?.archetype,
-              }}
-            />
-          </ErrorBoundary>
-        </div>
       </div>
 
-      {/* 3-QATLAM — Ixtiyoriy chuqurroq ko'rinish */}
-      <details className="group mt-6 rounded-[var(--radius)] border border-border/60 bg-card/40">
-        <summary className="flex cursor-pointer list-none items-center justify-between gap-3 px-4 py-3 font-ui text-xs uppercase tracking-[0.22em] text-muted-foreground transition-colors hover:text-foreground">
-          <span className="flex items-center gap-2">
-            <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-primary/60" />
-            {t("dashboard.depth.title")} · Tizim chuqurligi
-          </span>
-          <ArrowRight className="h-3.5 w-3.5 transition-transform group-open:rotate-90" />
-        </summary>
-        <div className="space-y-4 border-t border-border/60 p-4 sm:p-5">
-          <EasyModeRibbon streakDays={streak?.current_days ?? 0} />
-          <PeakEndReflect />
-          <AIInsightCard
-            context={t("dashboard.depth.insightContext", {
-              name: profile?.display_name ?? "do'st",
-              done: doneCount,
-              total: habits.length,
-              percent: percent,
-              streak: streak?.current_days ?? 0,
-              level: stats?.level ?? 1,
-              xp: stats?.total_xp ?? 0,
-              archetype: archetype?.name ?? "-",
-              label: c.label,
-            })}
-          />
-          <HundredDayTimeline streakDays={streak?.current_days ?? 0} />
-          <div className="grid gap-4 lg:grid-cols-2">
-            <PeakEndCurve userId={userId} />
-            <HumanPotentialPanel />
-          </div>
-          <RetentionPanels />
-        </div>
-      </details>
-
-      {milestone !== null && (
-        <StreakMilestone days={milestone} onDismiss={() => setMilestone(null)} />
-      )}
     </AppShell>
   );
 }
