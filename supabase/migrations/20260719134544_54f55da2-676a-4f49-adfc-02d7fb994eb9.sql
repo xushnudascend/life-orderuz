@@ -10,6 +10,7 @@ GRANT SELECT, INSERT, UPDATE, DELETE ON public.post_comments TO authenticated;
 GRANT ALL ON public.post_comments TO service_role;
 ALTER TABLE public.post_comments ENABLE ROW LEVEL SECURITY;
 DROP POLICY IF EXISTS "Comments are viewable by authenticated" ON public.post_comments;
+-- Comments are viewable by authenticated policy intentionally public for authenticated users
 CREATE POLICY "Comments are viewable by authenticated" ON public.post_comments FOR SELECT TO authenticated USING (true);
 DROP POLICY IF EXISTS "Users can insert their own comments" ON public.post_comments;
 CREATE POLICY "Users can insert their own comments" ON public.post_comments FOR INSERT TO authenticated WITH CHECK (auth.uid() = user_id);
