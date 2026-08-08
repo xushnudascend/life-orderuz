@@ -192,10 +192,12 @@ function Dashboard() {
 
   return (
     <AppShell title={t("nav.signIn")}>
-      {/* 1-QATLAM — Zarur signal */}
-      <ProfileCompletionCard missing={missing} />
-      <NadirNudgeBanner userId={userId} />
-      <StreakAtRisk streakDays={streak?.current_days ?? 0} percent={percent} />
+      {/* 1-QATLAM — Zarur signal (Visual Hierarchy: Primary Action focus) */}
+      <div className="space-y-4">
+        <ProfileCompletionCard missing={missing} />
+        <NadirNudgeBanner userId={userId} />
+        <StreakAtRisk streakDays={streak?.current_days ?? 0} percent={percent} />
+      </div>
 
       {/* Unified Hero — Ascend-style dense bento */}
       {!loaded ? (
@@ -248,7 +250,7 @@ function Dashboard() {
 
       <div className="mt-4 grid gap-3 sm:gap-4 lg:grid-cols-12">
         {/* Habits */}
-        <Panel className="lg:col-span-7">
+        <Panel className="border-primary/30 shadow-[0_0_20px_-10px_hsl(var(--primary)/0.2)] lg:col-span-7">
           <PanelHeader
             eyebrow="Bugungi odatlar"
             title={

@@ -46,6 +46,8 @@ function Onboarding() {
   const [ahaNudge, setAhaNudge] = useState<string | null>(null);
   const [archetypeName, setArchetypeName] = useState<string>("");
 
+  const progressPercent = Math.round(((step + 1) / total) * 100);
+
   const isFinalStep = step === bQuestions.length;
   const currentB: OnboardingQuestion | null = isFinalStep ? null : bQuestions[step];
 
