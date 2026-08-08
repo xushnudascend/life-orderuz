@@ -51,7 +51,7 @@ function Onboarding() {
 
   const isFinalStep = step === bQuestions.length;
   const currentB: OnboardingQuestion | null = isFinalStep ? null : bQuestions[step];
-  const sectionLabel = currentB ? `QISM B · Naqshing` : "QISM A · Sen haqingda";
+  const sectionLabel = currentB ? `Naqshingiz tahlili` : "Siz haqingizda";
 
   const bmi = useMemo(() => {
     const h = Number(answers["profile.height_cm"]);

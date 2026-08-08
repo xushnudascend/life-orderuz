@@ -103,13 +103,13 @@ export const ONBOARDING_QUESTIONS: OnboardingQuestion[] = [
   {
     key: "trigger.fail_point",
     section: "B",
-    prompt: "Kun davomida qaysi paytda maqsaddan chalg'ish ehtimolingiz yuqori?",
+    prompt: "Kuningizning qaysi qismida chalg'ish ehtimoli yuqori deb o'ylaysiz?",
     type: "single",
     options: [
-      { value: "ertalab", label: "Ertalab — umuman boshlay olmayman" },
-      { value: "tushdan_keyin", label: "Tushdan keyin — energiya tushadi" },
-      { value: "kechqurun", label: "Kechqurun — charchoq yutadi" },
-      { value: "hafta_oxiri", label: "Hafta oxiri — tartib butunlay yo'qoladi" },
+      { value: "ertalab", label: "Ertalab — kunga kirishish qiyinroq" },
+      { value: "tushdan_keyin", label: "Tushdan keyin — diqqat susayadi" },
+      { value: "kechqurun", label: "Kechqurun — iroda charchaydi" },
+      { value: "hafta_oxiri", label: "Hafta oxiri — odatiy tartib o'zgaradi" },
     ],
   },
   // A · Sen haqingda

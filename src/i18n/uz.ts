@@ -103,11 +103,12 @@ export const uz = {
       period: "oyiga · cheksiz mentor",
       badge: "Tavsiya",
       features: [
-        "Cheksiz odat va kundalik",
+        "Kutubxona: Cheksiz kitob va maqolalar",
+        "Kurslar: Maxsus video darsliklar",
+        "Kundalik: Cheksiz tahliliy yozuvlar",
         "Nadir Pro (Cheksiz xotira)",
-        "Haftalik AI audit",
+        "Haftalik AI audit va hisobot",
         "Haftasiga 3 ta Shield",
-        "Premium jamoat kanallari",
         "Burnout signalizatsiyasi",
       ],
       cta: "7 kun bepul boshlash",
@@ -143,8 +144,8 @@ export const uz = {
       urgent: "Zarur",
       dailyLoop: "Kunlik halqa",
       depth: "Chuqurroq",
-      habits: "Bugungi odatlar",
-      quickAccess: "Tezkor kirish",
+      habits: "Bugungi protokol",
+      quickAccess: "Modullar",
       timetable: "Kunlik jadval",
     },
     habits: {
@@ -157,7 +158,7 @@ export const uz = {
     quick: {
       workout: "Tana",
       diet: "Ovqatlanish",
-      quests: "O'rganish",
+      quests: "Kurslar & Kutubxona",
       mentor: "Mentor",
     },
     depth: {

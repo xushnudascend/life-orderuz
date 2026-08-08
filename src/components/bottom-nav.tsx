@@ -10,7 +10,7 @@ const TABS = [
   { to: "/c/body", label: "Tana", icon: HeartPulse, match: ["/c/body", "/workout", "/diet"] },
   // FAB (Nadir) — markazda
   { to: "/habits", label: "Odat", icon: ListChecks, match: ["/habits", "/c/habits"] },
-  { to: "/c/learn", label: "O'rgan", icon: GraduationCap, match: ["/c/learn", "/journal"] },
+  { to: "/journal", label: "Kundalik", icon: GraduationCap, match: ["/journal"] },
   {
     to: "/community",
     label: "Davra",
