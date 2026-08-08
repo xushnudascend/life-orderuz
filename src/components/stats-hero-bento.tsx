@@ -123,8 +123,6 @@ export function StatsHeroBento({
           </div>
         </div>
 
-        {/* Footer message (mobile only) */}
-        <p className="relative mt-4 block font-ui text-[10px] uppercase tracking-[0.18em] text-muted-foreground/60 sm:hidden">
       </section>
   );
 }
