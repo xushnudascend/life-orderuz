@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
@@ -32,6 +32,7 @@ type Answers = Record<string, AnswerValue>;
 
 function Onboarding() {
   const { userId } = Route.useRouteContext();
+  const navigate = useNavigate();
 
   // Ketma-ketlik: avval B bo'lim (naqsh) — 4 ta savol alohida qadamlarda.
   // Oxirgi qadam — A bo'lim (5 ta savol) + reja davomiyligi bitta sahifada.
@@ -230,7 +231,7 @@ function Onboarding() {
             <Button
               className="mt-8 w-full font-ui font-semibold"
               size="lg"
-              onClick={() => window.location.assign("/dashboard")}
+              onClick={() => navigate({ to: "/dashboard" })}
             >
               Boshlash — dashboardga o'tish
               <ArrowRight className="ml-2 h-4 w-4" />
