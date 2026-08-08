@@ -10,6 +10,7 @@ import { SkipLink } from "@/components/skip-link";
 import { ErrorBoundary } from "@/components/error-boundary";
 import { NadirProvider } from "@/lib/nadir-context";
 import { NadirDrawer } from "@/components/nadir-drawer";
+import { applyArchetypeTheme } from "@/lib/archetype-theme";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu } from "lucide-react";
 import { ARCHETYPES, type Archetype } from "@/lib/nervous";
@@ -17,6 +18,7 @@ import { loadReminderPrefs, scheduleDailyReminder } from "@/lib/reminders";
 
 export function AppShell({ title, children }: { title?: string; children: ReactNode }) {
   const [archetype, setArchetype] = useState<Archetype | null>(null);
+  const [archetypeId, setArchetypeId] = useState<string | null>(null);
   const [name, setName] = useState<string | null>(null);
   const [scrolled, setScrolled] = useState(false);
 
@@ -34,12 +36,17 @@ export function AppShell({ title, children }: { title?: string; children: ReactN
       const key = (data as { archetype?: string } | null)?.archetype;
       const dn = (data as { display_name?: string } | null)?.display_name ?? null;
       setName(dn);
+      setArchetypeId(key ?? null);
       if (key && key in ARCHETYPES) setArchetype(ARCHETYPES[key as Archetype["id"]]);
     })();
     return () => {
       alive = false;
     };
   }, []);
+
+  useEffect(() => {
+    applyArchetypeTheme(archetypeId);
+  }, [archetypeId]);
 
   // Kunlik eslatmani rejalashtirish (qurilma ichida).
   useEffect(() => {
@@ -59,7 +66,9 @@ export function AppShell({ title, children }: { title?: string; children: ReactN
 
   return (
     <NadirProvider>
-      <div className="min-h-dvh bg-background text-foreground">
+      <div className="min-h-dvh bg-background text-foreground relative">
+        {/* Girih ornament in background for logged in shell too */}
+        <div className="girih-corner absolute inset-0 -z-10 opacity-5 pointer-events-none" />
         <SkipLink />
         <div style={{ paddingBottom: "calc(6rem + env(safe-area-inset-bottom))" }}>
           {/* Topbar — scroll'da yengil soya, blur past-perf'da o'chadi */}

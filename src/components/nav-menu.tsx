@@ -31,6 +31,7 @@ export function NavMenu({ onClose }: { onClose?: () => void }) {
     { to: "/community", label: "Davra", icon: Users },
     { to: "/profile", label: "Profil", icon: User },
     { to: "/settings", label: "Sozlamalar", icon: Settings },
+    { to: "/settings/subscription", label: "Obunani boshqarish", icon: Shield },
   ];
 
   return (

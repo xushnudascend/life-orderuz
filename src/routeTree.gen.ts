@@ -61,6 +61,7 @@ import { Route as ApiAiWeeklyReportRouteImport } from './routes/api/ai.weekly-re
 import { Route as ApiAiOnboardingNudgeRouteImport } from './routes/api/ai.onboarding-nudge'
 import { Route as ApiAiMicroInsightRouteImport } from './routes/api/ai.micro-insight'
 import { Route as ApiAiGeneratePlanRouteImport } from './routes/api/ai.generate-plan'
+import { Route as AuthenticatedSettingsSubscriptionRouteImport } from './routes/_authenticated/settings/subscription'
 import { Route as AuthenticatedCommunityChannelRouteImport } from './routes/_authenticated/community.$channel'
 import { Route as AuthenticatedCLearnRouteImport } from './routes/_authenticated/c.learn'
 import { Route as AuthenticatedCHabitsRouteImport } from './routes/_authenticated/c.habits'
@@ -338,6 +339,12 @@ const ApiAiGeneratePlanRoute = ApiAiGeneratePlanRouteImport.update({
   path: '/api/ai/generate-plan',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedSettingsSubscriptionRoute =
+  AuthenticatedSettingsSubscriptionRouteImport.update({
+    id: '/subscription',
+    path: '/subscription',
+    getParentRoute: () => AuthenticatedSettingsRoute,
+  } as any)
 const AuthenticatedCommunityChannelRoute =
   AuthenticatedCommunityChannelRouteImport.update({
     id: '/$channel',
@@ -424,7 +431,7 @@ export interface FileRoutesByFullPath {
   '/profile': typeof AuthenticatedProfileRoute
   '/quests': typeof AuthenticatedQuestsRoute
   '/roadmap': typeof AuthenticatedRoadmapRoute
-  '/settings': typeof AuthenticatedSettingsRoute
+  '/settings': typeof AuthenticatedSettingsRouteWithChildren
   '/temir-intizom': typeof AuthenticatedTemirIntizomRoute
   '/workout': typeof AuthenticatedWorkoutRoute
   '/api/chat': typeof ApiChatRoute
@@ -446,6 +453,7 @@ export interface FileRoutesByFullPath {
   '/c/habits': typeof AuthenticatedCHabitsRoute
   '/c/learn': typeof AuthenticatedCLearnRoute
   '/community/$channel': typeof AuthenticatedCommunityChannelRoute
+  '/settings/subscription': typeof AuthenticatedSettingsSubscriptionRoute
   '/api/ai/generate-plan': typeof ApiAiGeneratePlanRoute
   '/api/ai/micro-insight': typeof ApiAiMicroInsightRoute
   '/api/ai/onboarding-nudge': typeof ApiAiOnboardingNudgeRoute
@@ -487,7 +495,7 @@ export interface FileRoutesByTo {
   '/profile': typeof AuthenticatedProfileRoute
   '/quests': typeof AuthenticatedQuestsRoute
   '/roadmap': typeof AuthenticatedRoadmapRoute
-  '/settings': typeof AuthenticatedSettingsRoute
+  '/settings': typeof AuthenticatedSettingsRouteWithChildren
   '/temir-intizom': typeof AuthenticatedTemirIntizomRoute
   '/workout': typeof AuthenticatedWorkoutRoute
   '/api/chat': typeof ApiChatRoute
@@ -509,6 +517,7 @@ export interface FileRoutesByTo {
   '/c/habits': typeof AuthenticatedCHabitsRoute
   '/c/learn': typeof AuthenticatedCLearnRoute
   '/community/$channel': typeof AuthenticatedCommunityChannelRoute
+  '/settings/subscription': typeof AuthenticatedSettingsSubscriptionRoute
   '/api/ai/generate-plan': typeof ApiAiGeneratePlanRoute
   '/api/ai/micro-insight': typeof ApiAiMicroInsightRoute
   '/api/ai/onboarding-nudge': typeof ApiAiOnboardingNudgeRoute
@@ -552,7 +561,7 @@ export interface FileRoutesById {
   '/_authenticated/profile': typeof AuthenticatedProfileRoute
   '/_authenticated/quests': typeof AuthenticatedQuestsRoute
   '/_authenticated/roadmap': typeof AuthenticatedRoadmapRoute
-  '/_authenticated/settings': typeof AuthenticatedSettingsRoute
+  '/_authenticated/settings': typeof AuthenticatedSettingsRouteWithChildren
   '/_authenticated/temir-intizom': typeof AuthenticatedTemirIntizomRoute
   '/_authenticated/workout': typeof AuthenticatedWorkoutRoute
   '/api/chat': typeof ApiChatRoute
@@ -574,6 +583,7 @@ export interface FileRoutesById {
   '/_authenticated/c/habits': typeof AuthenticatedCHabitsRoute
   '/_authenticated/c/learn': typeof AuthenticatedCLearnRoute
   '/_authenticated/community/$channel': typeof AuthenticatedCommunityChannelRoute
+  '/_authenticated/settings/subscription': typeof AuthenticatedSettingsSubscriptionRoute
   '/api/ai/generate-plan': typeof ApiAiGeneratePlanRoute
   '/api/ai/micro-insight': typeof ApiAiMicroInsightRoute
   '/api/ai/onboarding-nudge': typeof ApiAiOnboardingNudgeRoute
@@ -639,6 +649,7 @@ export interface FileRouteTypes {
     | '/c/habits'
     | '/c/learn'
     | '/community/$channel'
+    | '/settings/subscription'
     | '/api/ai/generate-plan'
     | '/api/ai/micro-insight'
     | '/api/ai/onboarding-nudge'
@@ -702,6 +713,7 @@ export interface FileRouteTypes {
     | '/c/habits'
     | '/c/learn'
     | '/community/$channel'
+    | '/settings/subscription'
     | '/api/ai/generate-plan'
     | '/api/ai/micro-insight'
     | '/api/ai/onboarding-nudge'
@@ -766,6 +778,7 @@ export interface FileRouteTypes {
     | '/_authenticated/c/habits'
     | '/_authenticated/c/learn'
     | '/_authenticated/community/$channel'
+    | '/_authenticated/settings/subscription'
     | '/api/ai/generate-plan'
     | '/api/ai/micro-insight'
     | '/api/ai/onboarding-nudge'
@@ -1187,6 +1200,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiAiGeneratePlanRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/settings/subscription': {
+      id: '/_authenticated/settings/subscription'
+      path: '/subscription'
+      fullPath: '/settings/subscription'
+      preLoaderRoute: typeof AuthenticatedSettingsSubscriptionRouteImport
+      parentRoute: typeof AuthenticatedSettingsRoute
+    }
     '/_authenticated/community/$channel': {
       id: '/_authenticated/community/$channel'
       path: '/$channel'
@@ -1274,6 +1294,20 @@ const AuthenticatedCommunityRouteWithChildren =
     AuthenticatedCommunityRouteChildren,
   )
 
+interface AuthenticatedSettingsRouteChildren {
+  AuthenticatedSettingsSubscriptionRoute: typeof AuthenticatedSettingsSubscriptionRoute
+}
+
+const AuthenticatedSettingsRouteChildren: AuthenticatedSettingsRouteChildren = {
+  AuthenticatedSettingsSubscriptionRoute:
+    AuthenticatedSettingsSubscriptionRoute,
+}
+
+const AuthenticatedSettingsRouteWithChildren =
+  AuthenticatedSettingsRoute._addFileChildren(
+    AuthenticatedSettingsRouteChildren,
+  )
+
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedAchievementsRoute: typeof AuthenticatedAchievementsRoute
   AuthenticatedAnalyticsRoute: typeof AuthenticatedAnalyticsRoute
@@ -1290,7 +1324,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedProfileRoute: typeof AuthenticatedProfileRoute
   AuthenticatedQuestsRoute: typeof AuthenticatedQuestsRoute
   AuthenticatedRoadmapRoute: typeof AuthenticatedRoadmapRoute
-  AuthenticatedSettingsRoute: typeof AuthenticatedSettingsRoute
+  AuthenticatedSettingsRoute: typeof AuthenticatedSettingsRouteWithChildren
   AuthenticatedTemirIntizomRoute: typeof AuthenticatedTemirIntizomRoute
   AuthenticatedWorkoutRoute: typeof AuthenticatedWorkoutRoute
   AuthenticatedCBodyRoute: typeof AuthenticatedCBodyRoute
@@ -1314,7 +1348,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedProfileRoute: AuthenticatedProfileRoute,
   AuthenticatedQuestsRoute: AuthenticatedQuestsRoute,
   AuthenticatedRoadmapRoute: AuthenticatedRoadmapRoute,
-  AuthenticatedSettingsRoute: AuthenticatedSettingsRoute,
+  AuthenticatedSettingsRoute: AuthenticatedSettingsRouteWithChildren,
   AuthenticatedTemirIntizomRoute: AuthenticatedTemirIntizomRoute,
   AuthenticatedWorkoutRoute: AuthenticatedWorkoutRoute,
   AuthenticatedCBodyRoute: AuthenticatedCBodyRoute,

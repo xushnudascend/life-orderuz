@@ -122,9 +122,10 @@ function HabitsPage() {
       xp_reward: xpFromDifficulty(difficulty),
       sort_order: habits.length,
       category,
-      if_trigger: cue.trim() || null,
+      if_trigger: (cue.trim() || composedCue.trim()) || null,
       then_action: newTitle.trim() || null,
-    });
+      context_trigger: (cue.trim() || composedCue.trim()) || null,
+    } as any);
     setNewTitle("");
     setCue("");
     setStackAnchor("");
@@ -222,7 +223,7 @@ function HabitsPage() {
           <div className="rounded-[var(--radius)] border border-border/60 bg-background/40 p-4 transition-all hover:border-primary/30">
             <div className="flex items-center justify-between">
               <p className="font-ui text-[10px] font-bold uppercase tracking-[0.22em] text-primary">
-                Implementation Intentions · Agar X — men Y
+                Implementation Intentions · Agar VAQT + JOY + TRIGGER bo'lsa, unda HARAKAT
               </p>
               <TooltipProvider>
                 <Tooltip>
@@ -230,15 +231,16 @@ function HabitsPage() {
                     <Info className="h-3.5 w-3.5 text-muted-foreground cursor-help" />
                   </TooltipTrigger>
                   <TooltipContent className="max-w-[200px] text-[11px]">
-                    Peter Gollwitzer tadqiqoti: aniq 'Agar-Unda' formulasi muvaffaqiyatni 300% ga oshiradi.
+                    Peter Gollwitzer tadqiqoti: 'Agar [Vaqt/Joy/Trigger] bo'lsa, unda [Harakat] qilaman' formulasi muvaffaqiyatni 300% ga oshiradi.
                   </TooltipContent>
                 </Tooltip>
               </TooltipProvider>
             </div>
             <div className="mt-2 grid gap-2 sm:grid-cols-[1fr_auto_1fr] sm:items-center">
               <Input
-                placeholder="Qachon / qayerda (masalan, ertalab nonushtadan keyin)"
+                placeholder="Qachon, qayerda va nima bo'lganda (Trigger)"
                 value={cue}
+                required
                 onChange={(e) => setCue(e.target.value)}
                 className="font-ui text-sm"
               />

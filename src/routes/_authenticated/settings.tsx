@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { useServerFn } from "@tanstack/react-start";
 import { supabase } from "@/integrations/supabase/client";
@@ -13,6 +13,7 @@ import {
   Bell,
   User as UserIcon,
   ShieldAlert,
+  Shield,
   Sparkles,
   Languages,
   Clock,
@@ -377,6 +378,17 @@ function Settings() {
                 {l === "uz" ? "O'zbek" : l === "ru" ? "Русский" : "English"}
               </button>
             ))}
+          </div>
+        </Card>
+
+        <Card icon={<Shield className="h-4 w-4 text-primary" />} title="Obuna">
+          <div className="space-y-3">
+            <p className="text-sm text-muted-foreground">
+              Joriy reja, billing tarixi va obunani boshqarish.
+            </p>
+            <Button variant="outline" size="sm" asChild>
+              <Link to="/settings/subscription">Obunani boshqarish</Link>
+            </Button>
           </div>
         </Card>
 

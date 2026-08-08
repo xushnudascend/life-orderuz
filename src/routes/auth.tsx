@@ -80,10 +80,13 @@ function AuthPage() {
         }}
       />
       
-      {/* 3D-ish Floating shapes */}
+      {/* 3D-ish Floating shapes with Breathing Blob */}
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+        <div className="girih-corner absolute inset-0 opacity-20" />
         <div className="absolute top-[10%] left-[5%] h-64 w-64 animate-orb-float rounded-full bg-primary/10 blur-3xl" />
         <div className="absolute bottom-[20%] right-[10%] h-80 w-80 animate-orb-float-delayed rounded-full bg-primary/5 blur-3xl" />
+        {/* Breathing Blob Maskot */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[500px] w-[500px] animate-blob-breathe rounded-full bg-primary/5 blur-[100px]" />
       </div>
 
       <div className="mx-auto flex min-h-dvh w-full max-w-md flex-col px-5 py-8">
@@ -112,10 +115,12 @@ function AuthPage() {
           className="mt-8 animate-fade-in-up rounded-2xl border border-border bg-card/70 p-6 shadow-[var(--shadow-card)] backdrop-blur-sm"
           style={{ animationDelay: "80ms" }}
         >
-          <div className="space-y-2.5">
+          <div className="space-y-3">
             <OAuthButton provider="google" label="Google bilan davom etish" next={next} />
-            <OAuthButton provider="apple" label="Apple bilan davom etish" next={next} />
-            <OAuthButton provider="microsoft" label="Microsoft bilan davom etish" next={next} />
+            <div className="grid grid-cols-2 gap-3">
+              <OAuthButton provider="apple" label="Apple" next={next} />
+              <OAuthButton provider="microsoft" label="Microsoft" next={next} />
+            </div>
           </div>
 
           <div className="relative my-6">
