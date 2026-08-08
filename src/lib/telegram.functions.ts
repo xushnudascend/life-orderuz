@@ -1,15 +1,13 @@
 import { createServerFn } from "@tanstack/react-start";
-import { supabaseAdmin } from "@/integrations/supabase/client.server";
+import { getEvent } from "vinxi/http";
 
 export const getTelegramLinkToken = createServerFn({ method: "POST" })
-  .handler(async ({ request }) => {
-    // In TanStack Start, we extract auth context usually via a middleware or directly if context is shaped
-    // For this implementation, we will use the standard Supabase user check within the handler
+  .handler(async () => {
     const { supabaseAdmin: sb } = await import("@/integrations/supabase/client.server");
+    const event = getEvent();
+    const authHeader = event.headers.get("authorization") || event.headers.get("Authorization");
     
-    // We need to verify the user from the session
-    // This is a simplified version; in production, you'd use a middleware to populate context.userId
-    const { data: { user } } = await sb.auth.getUser(request.headers.get("Authorization")?.split(" ")[1] ?? "");
+    const { data: { user } } = await sb.auth.getUser(authHeader?.split(" ")[1] ?? "");
     if (!user) throw new Error("Unauthorized");
 
     const token = Math.random().toString(36).substring(2, 15);
