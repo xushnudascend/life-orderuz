@@ -17,7 +17,8 @@
   --popover: 240 10% 4%;
   --popover-foreground: 0 0% 98%;
 
-  --primary: 187 65% 42%; /* Scientific Deep Teal */
+  /* PRIMARY COLOR: HSL 187 65% 42% (Deep Teal) */
+  --primary: 187 65% 42%;
   --primary-foreground: 0 0% 6%;
 
   --secondary: 240 5% 10%;
@@ -55,8 +56,11 @@
     --card-foreground: hsl(0 0% 98%);
     --popover: hsl(240 10% 4%);
     --popover-foreground: hsl(0 0% 98%);
+    
+    /* PRIMARY COLOR: HSL 187 65% 42% */
     --primary: hsl(187 65% 42%);
     --primary-foreground: hsl(0 0% 6%);
+    
     --secondary: hsl(240 5% 10%);
     --secondary-foreground: hsl(0 0% 98%);
     --muted: hsl(240 5% 10%);
@@ -72,10 +76,17 @@
     --shadow-glow: 0 0 40px hsl(187 65% 42% / 0.14);
   }
 
-  /* Force Deep Teal across all states as requested */
-  html {
-    --primary: hsl(187 65% 42%);
-    --ring: hsl(187 65% 42%);
+  /* Global Override: Force Deep Teal everywhere, removing dynamic archetype changes */
+  html, :root {
+    --primary: hsl(187 65% 42%) !important;
+    --primary-foreground: hsl(0 0% 6%) !important;
+    --ring: hsl(187 65% 42%) !important;
+  }
+
+  /* Remove any existing data-archetype overrides to ensure 100% uniformity */
+  html[data-archetype] {
+    --primary: hsl(187 65% 42%) !important;
+    --ring: hsl(187 65% 42%) !important;
   }
 
   body {
@@ -89,6 +100,11 @@
   ::selection {
     background-color: color-mix(in srgb, var(--primary) 20%, transparent);
     color: var(--primary);
+  }
+
+  /* High-fidelity UI Polish */
+  .glow-primary {
+    box-shadow: 0 0 20px -5px var(--primary);
   }
 }
 
