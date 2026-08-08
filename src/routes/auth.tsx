@@ -115,6 +115,7 @@ function AuthPage() {
           <div className="space-y-2.5">
             <OAuthButton provider="google" label="Google bilan davom etish" next={next} />
             <OAuthButton provider="apple" label="Apple bilan davom etish" next={next} />
+            <OAuthButton provider="microsoft" label="Microsoft bilan davom etish" next={next} />
           </div>
 
           <div className="relative my-6">
@@ -305,7 +306,7 @@ function OAuthButton({
   label,
   next,
 }: {
-  provider: "google" | "apple";
+  provider: "google" | "apple" | "microsoft";
   label: string;
   next: string;
 }) {
@@ -346,8 +347,10 @@ function OAuthButton({
         <Loader2 className="mr-2 h-4 w-4 animate-spin" />
       ) : provider === "google" ? (
         <GoogleIcon />
-      ) : (
+      ) : provider === "apple" ? (
         <AppleIcon />
+      ) : (
+        <MicrosoftIcon />
       )}
       {label}
     </Button>
@@ -369,6 +372,17 @@ function AppleIcon() {
   return (
     <svg viewBox="0 0 24 24" className="mr-2 h-4 w-4 fill-current" aria-hidden>
       <path d="M16.36 12.72c.02 2.6 2.28 3.47 2.3 3.48-.02.06-.36 1.24-1.19 2.45-.72 1.05-1.47 2.1-2.65 2.12-1.16.02-1.53-.69-2.85-.69-1.32 0-1.73.67-2.83.71-1.14.04-2-1.13-2.73-2.18-1.49-2.15-2.63-6.08-1.1-8.73.76-1.32 2.12-2.15 3.59-2.17 1.12-.02 2.17.75 2.85.75.68 0 1.96-.93 3.3-.79.56.02 2.14.23 3.15 1.71-.08.05-1.88 1.1-1.86 3.34M14.2 4.6c.6-.73 1.01-1.75.9-2.76-.87.04-1.92.58-2.55 1.31-.56.65-1.05 1.69-.92 2.68.97.08 1.96-.49 2.57-1.23" />
+    </svg>
+  );
+}
+
+function MicrosoftIcon() {
+  return (
+    <svg viewBox="0 0 23 23" className="mr-2 h-4 w-4" aria-hidden>
+      <path fill="#f3f3f3" d="M0 0h11v11H0z" />
+      <path fill="#f3f3f3" d="M12 0h11v11H12z" />
+      <path fill="#f3f3f3" d="M0 12h11v11H0z" />
+      <path fill="#f3f3f3" d="M12 12h11v11H12z" />
     </svg>
   );
 }
