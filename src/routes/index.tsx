@@ -243,7 +243,7 @@ function PeerMirror() {
   const members = data?.members ?? null;
   const todayActive = data?.today_active ?? null;
   const streakLeader = data?.streak_leader ?? null;
-  const hasReal = (members ?? 0) > 0;
+  const hasReal = (members ?? 0) > 10;
 
   return (
     <section className="border-b border-border bg-card/30">
