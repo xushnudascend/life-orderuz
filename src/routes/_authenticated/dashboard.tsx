@@ -255,9 +255,6 @@ function Dashboard() {
         </div>
       </div>
       <div className="mt-4 grid gap-3 sm:gap-4 lg:grid-cols-12">
-        {/* Psychological Focus Section */}
-        <div className="lg:col-span-12">
-          <PsychologicalFocus archetype={profile?.archetype ?? null} />
         </div>
         
         {/* Habits */}
@@ -367,30 +364,6 @@ function Dashboard() {
           )}
         </Panel>
 
-        {/* Quick access */}
-        <Panel className="lg:col-span-12">
-          <PanelHeader eyebrow="OS Modullari (Kutubxona & Kurslar)" />
-
-          <div className="mt-3 grid grid-cols-2 gap-2">
-            {[
-              { to: "/workout", label: "Tana", icon: Dumbbell },
-              { to: "/diet", label: "Ovqatlanish", icon: Salad },
-              { to: "/quests", label: "Kurslar & Kutubxona", icon: Target },
-              { to: "/mentor", label: "Mentor", icon: Sparkles },
-            ].map(({ to, label, icon: Icon }) => (
-              <Link
-                key={to}
-                to={to}
-                className="tap group flex items-center gap-2.5 rounded-md border border-border bg-background/30 px-3 py-2.5 transition-all hover:-translate-y-0.5 hover:border-primary/50 hover:bg-background/60"
-              >
-                <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-border text-muted-foreground transition-colors group-hover:border-primary group-hover:text-primary">
-                  <Icon className="h-3.5 w-3.5" />
-                </span>
-                <span className="font-ui text-sm font-medium">{label}</span>
-              </Link>
-            ))}
-          </div>
-        </Panel>
 
       </div>
 

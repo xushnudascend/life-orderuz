@@ -115,9 +115,6 @@ export function StatsHeroBento({
         <div className="relative z-10 mt-6 grid grid-cols-1 gap-3 lg:mt-0">
           <div className="flex justify-end gap-2 mb-2 lg:mb-4">
             <ShieldIndicator usedThisWeek={shieldsUsed} max={3} />
-            <Link to="/settings/subscription">
-              <RankBadge score={score} />
-            </Link>
           </div>
 
           <div className="grid grid-cols-2 gap-3 lg:grid-cols-1">
