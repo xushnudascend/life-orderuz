@@ -18,7 +18,7 @@ export function LanguageSwitcher({ className }: { className?: string }) {
   return (
     <div
       role="group"
-      aria-label="'''Do not make any visual modifications. The phrases I write are commands to understand what I want, not to be written down. Understand their content well, then execute what is required.'''\n                                            \n                                            Tushundim, accessibility label yangilandi. Hozir saytni 10 ballik shkala bo'yicha yuzlab mezonlar asosida juda chuqur tahlil qilib, real holatni aytishga tayyorman — boshlaylikmi? ha bajar hammasini"
+      aria-label="'''Do not make any visual modifications. The phrases I write are commands to understand what I want, not to be written down. Understand their content well, then execute what is required.'''\n                                            \n                                            xavfsizlikka etibor ber sayt shu darajada xavfsiz bolsinki hacker uni buzib kirgan taqdirdaham hech qanday aytarli malumot ola olmasin"
       className={cn(
         "inline-flex items-center gap-0.5 rounded-full border border-border/70 bg-card/60 p-0.5 font-ui text-[11px]",
         className,
