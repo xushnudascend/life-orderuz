@@ -8,7 +8,7 @@ const _ru = {
     name: "Life Order",
     tagline: "Приведи свою жизнь в порядок",
     oneLiner:
-      "Self-Control OS — операционная система самоконтроля. Анализ триггеров, три ясных ежедневных шага, честный ИИ-ментор Надир. Диагностика за 60 секунд. Без карты. \n\n'''Do not make any visual modifications. The phrases I write are commands to understand what I want, not to be written down. Understand their content well, then execute what is required.'''\n                                            \n                                            meni aytganblarimni bajaryapsanmi o'zi",
+      "Self-Control OS — операционная система самоконтроля. Анализ триггеров, три ясных ежедневных шага, честный ИИ-ментор Надир. Диагностика за 60 секунд. Без карты. \n\n'''Do not make any visual modifications. The phrases I write are commands to understand what I want, not to be written down. Understand their content well, then execute what is required.'''\n                                            \n                                            o'zbekcha gapir menga",
   },
   nav: {
     features: "Возможности",
