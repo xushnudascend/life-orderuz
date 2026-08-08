@@ -105,17 +105,8 @@ function HabitsPage() {
     e.preventDefault();
     if (!newTitle.trim()) return;
     setSaving(true);
-    // Habit stacking (James Clear) — bog'lansa, avtomatik cue quriladi
-    let composedCue = cue.trim();
-    if (stackAnchor) {
-      const anchor = habits.find((h) => h.id === stackAnchor);
-      if (anchor) {
-        // trigger'ni "<anchor title>dan keyin" ga aylantirdik
-        const base = anchor.title.split("→").pop()?.trim() || anchor.title;
-        composedCue = `${base}dan keyin`;
-      }
-    }
-    const composed = composedCue ? `${composedCue} → ${newTitle.trim()}` : newTitle.trim();
+    // Simple title for now
+    const composed = newTitle.trim();
     
     // Check Freemium limit (3 habits)
     const { data: profile } = await supabase.from("profiles").select("subscription_tier").eq("id", userId).single();
@@ -224,104 +215,18 @@ function HabitsPage() {
           eyebrow="Yangi odat"
           title={
             <p className="font-serif text-lg font-semibold">
-              Kichik boshla — miya qarshiligini yengil kes
+              Kichik boshla
             </p>
           }
         />
         <form onSubmit={addHabit} className="mt-4 space-y-4">
           <div className="rounded-[var(--radius)] border border-border/60 bg-background/40 p-4 transition-all hover:border-primary/30">
-            <div className="flex items-center justify-between">
-              <p className="font-ui text-[10px] font-bold uppercase tracking-[0.22em] text-primary">
-                Implementation Intentions · Agar VAQT + JOY + TRIGGER bo'lsa, unda HARAKAT
-              </p>
-              <TooltipProvider>
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <Info className="h-3.5 w-3.5 text-muted-foreground cursor-help" />
-                  </TooltipTrigger>
-                  <TooltipContent className="max-w-[200px] text-[11px]">
-                    Peter Gollwitzer tadqiqoti: 'Agar [Vaqt/Joy/Trigger] bo'lsa, unda [Harakat] qilaman' formulasi muvaffaqiyatni 300% ga oshiradi.
-                  </TooltipContent>
-                </Tooltip>
-              </TooltipProvider>
-            </div>
-            <div className="mt-2 grid gap-2 sm:grid-cols-[1fr_auto_1fr] sm:items-center">
-              <Input
-                placeholder="Qachon, qayerda va nima bo'lganda (Trigger)"
-                value={cue}
-                required
-                onChange={(e) => setCue(e.target.value)}
-                className="font-ui text-sm"
-              />
-              <span className="hidden text-center font-ui text-sm text-muted-foreground sm:block">
-                →
-              </span>
-              <Input
-                placeholder="Nima qilaman (2 daqiqadan kam)"
-                value={newTitle}
-                onChange={(e) => setNewTitle(e.target.value)}
-                className="font-ui text-sm"
-              />
-            </div>
-            <div className="mt-3 flex flex-wrap items-center gap-1.5">
-              <span className="font-ui text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
-                Ilgak
-              </span>
-              {CUE_PICKS.map((c) => (
-                <button
-                  key={c}
-                  type="button"
-                  onClick={() => setCue(c)}
-                  className="rounded-full border border-border/70 px-2.5 py-0.5 font-ui text-[11px] text-muted-foreground hover:text-foreground"
-                >
-                  {c}
-                </button>
-              ))}
-            </div>
-
-            {habits.length > 0 && (
-              <div className="mt-3 border-t border-border/60 pt-3">
-                <label className="flex items-center gap-2 font-ui text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
-                  <span>Habit stacking · Mavjud odatga bog'lash (Zanjir)</span>
-                </label>
-                <div className="relative mt-2">
-                  <select
-                    value={stackAnchor}
-                    onChange={(e) => {
-                      setStackAnchor(e.target.value);
-                      if (e.target.value) setCue("");
-                    }}
-                    className="w-full rounded-[var(--radius)] border border-border bg-background px-3 py-2 font-ui text-sm text-foreground focus:border-primary focus:outline-none"
-                  >
-                    <option value="">— Bog'lamayman (yangi cue yozaman) —</option>
-                    {habits.map((h) => (
-                      <option key={h.id} value={h.id}>
-                        {h.title.length > 60 ? h.title.slice(0, 60) + "…" : h.title}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-                <p className="mt-1.5 font-ui text-[10px] text-muted-foreground">
-                  James Clear: "Yangi odatni allaqachon bajaradigan odatingizdan keyin qo'shing." Bu miyada neyron bog'lanishlarni (Synaptic pruning) tezlashtiradi.
-                </p>
-              </div>
-            )}
-
-            {(cue.trim() || newTitle.trim() || stackAnchor) && (
-              <p className="mt-3 border-t border-border/60 pt-3 font-serif text-[15px] text-foreground leading-relaxed">
-                <span className="text-[11px] uppercase tracking-wider text-primary/70 font-ui font-bold block mb-1">Yakuniy Formula:</span>{" "}
-                {stackAnchor
-                  ? (() => {
-                      const a = habits.find((h) => h.id === stackAnchor);
-                      const base = a ? a.title.split("→").pop()?.trim() || a.title : "";
-                      return `${base}dan keyin → `;
-                    })()
-                  : cue.trim()
-                    ? `${cue.trim()} → `
-                    : ""}
-                {newTitle.trim() || "..."}
-              </p>
-            )}
+            <Input
+              placeholder="Nima qilasiz? (masalan: 2 daqiqa kitob o'qish)"
+              value={newTitle}
+              onChange={(e) => setNewTitle(e.target.value)}
+              className="font-ui text-sm"
+            />
           </div>
 
           <div className="flex flex-wrap items-center gap-2">
