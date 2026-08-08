@@ -195,10 +195,6 @@ function Dashboard() {
 
   return (
     <AppShell title="Dashboard">
-      {/* 1-QATLAM — Zarur signal (Visual Hierarchy: Primary Action focus) */}
-      <div className="space-y-4">
-        <NadirNudgeBanner userId={userId} />
-      </div>
 
       {/* Unified Hero — Ascend-style dense bento */}
       {!loaded ? (
@@ -238,61 +234,13 @@ function Dashboard() {
         />
       )}
 
-      {/* 2-QATLAM — Kunlik halqa */}
-      <div className="mt-4 grid gap-4 lg:grid-cols-12">
-        {loaded && habits.length > 0 && (
-          <div className="rounded-[var(--radius)] border border-border/70 bg-card p-4 sm:p-5 lg:col-span-8">
-            <ZeigarnikRing
-              done={doneCount}
-              total={habits.length}
-              nextTitle={habits.find((h) => !done.has(h.id))?.title ?? null}
-            />
-          </div>
-        )}
-        
-        <div className="rounded-[var(--radius)] border border-border/70 bg-card p-4 sm:p-5 lg:col-span-4">
-          <BiorythmPeak />
-        </div>
-      </div>
       <div className="mt-4">
         
         {/* Habits */}
-        <Panel className="lg:col-span-12 relative overflow-hidden">
-          {/* Fogg B=MAP Motivation Indicator */}
-          <div className="absolute top-0 right-0 h-1 w-full bg-gradient-to-r from-transparent via-primary/20 to-primary/40" />
+        <Panel className="lg:col-span-12">
           
           <PanelHeader
-            eyebrow="Bugungi protokol · Xulq-atvor arxitekturasi"
-            title={
-              <div className="flex items-baseline gap-2">
-                <p className="font-serif text-xl font-bold tracking-tight">
-                  {doneCount} / {habits.length}
-                </p>
-                <span className="font-ui text-xs text-muted-foreground">tugallandi</span>
-              </div>
-            }
-            action={
-              <div className="flex items-center gap-2">
-                <TooltipProvider>
-                  <Tooltip>
-                    <TooltipTrigger asChild>
-                      <div className="flex h-7 items-center gap-1 rounded-full border border-border bg-background/50 px-2 font-ui text-[10px] text-muted-foreground">
-                        <Target className="h-3 w-3" />
-                        <span>{percent}%</span>
-                      </div>
-                    </TooltipTrigger>
-                    <TooltipContent>
-                      <p className="text-[11px]">Sizning bugungi dofamin zaxirangiz</p>
-                    </TooltipContent>
-                  </Tooltip>
-                </TooltipProvider>
-                <Button asChild variant="ghost" size="sm" className="h-8">
-                  <Link to="/habits">
-                    Boshqarish <ArrowRight className="ml-1 h-3.5 w-3.5" />
-                  </Link>
-                </Button>
-              </div>
-            }
+            title="Bugungi protokol"
           />
 
           {!loaded ? (

@@ -1,22 +1,15 @@
 import { Link, useLocation } from "@tanstack/react-router";
-import { Compass, HeartPulse, ListChecks, GraduationCap, Users, Sparkles } from "lucide-react";
+import { Compass, ListChecks, GraduationCap, Sparkles, User } from "lucide-react";
 
 /**
  * 5 tab bottom nav + markazda Nadir FAB (floating action button).
  * Faqat mobilda ( md:hidden ).
  */
 const TABS = [
-  { to: "/dashboard", label: "Bosh", icon: Compass, match: ["/dashboard", "/analytics", "/roadmap"] },
-  { to: "/c/body", label: "Tana", icon: HeartPulse, match: ["/c/body", "/workout", "/diet"] },
-  // FAB (Nadir) — markazda
-  { to: "/habits", label: "Odat", icon: ListChecks, match: ["/habits", "/c/habits"] },
+  { to: "/dashboard", label: "Bosh", icon: Compass, match: ["/dashboard"] },
+  { to: "/habits", label: "Odat", icon: ListChecks, match: ["/habits"] },
   { to: "/journal", label: "Kundalik", icon: GraduationCap, match: ["/journal"] },
-  {
-    to: "/community",
-    label: "Davra",
-    icon: Users,
-    match: ["/community", "/party", "/leaderboard"],
-  },
+  { to: "/profile", label: "Profil", icon: User, match: ["/profile"] },
 ] as const;
 
 export function BottomNav({ recommendedTab }: { recommendedTab?: string }) {
