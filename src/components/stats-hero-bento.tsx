@@ -57,7 +57,7 @@ export function StatsHeroBento({
         {/* Left Side Content */}
         <div className="relative z-10 flex items-center justify-between">
           <h1 className="font-serif text-2xl font-semibold tracking-tight sm:text-3xl">
-            {displayName?.trim() ? `${displayName}, ` : "Bugungi "}
+            {displayName?.trim() ? `${displayName}, ` : t("dashboard.hero.greetingPrefix") + " "}
             <span className="text-muted-foreground">{t("dashboard.hero.plan")}</span>
           </h1>
           <div className="flex items-center gap-2">

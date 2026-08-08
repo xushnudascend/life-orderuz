@@ -252,7 +252,7 @@ function Dashboard() {
         <Panel className="lg:col-span-12">
           
           <PanelHeader
-            title="Kunlik amallar"
+            title="protokol"
           />
 
           {!loaded ? (

@@ -85,13 +85,13 @@ export const uz = {
   },
   dashboard: {
     hero: {
-      plan: "reja",
-      level: "Daraja",
+      plan: "holat",
+      level: "daraja",
       xp: "XP",
-      streak: "Streak",
+      streak: "streak",
       kun: "kun",
-      discipline: "Intizom",
-      greetingPrefix: "Bugungi",
+      discipline: "intizom",
+      greetingPrefix: "bugungi",
     },
     sections: {
       urgent: "Zarur",
