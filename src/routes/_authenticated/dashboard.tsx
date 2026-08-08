@@ -240,37 +240,7 @@ function Dashboard() {
         <Panel className="lg:col-span-12">
           
           <PanelHeader
-            eyebrow="Bugungi protokol · Xulq-atvor arxitekturasi"
-            title={
-              <div className="flex items-baseline gap-2">
-                <p className="font-serif text-xl font-bold tracking-tight">
-                  {doneCount} / {habits.length}
-                </p>
-                <span className="font-ui text-xs text-muted-foreground">tugallandi</span>
-              </div>
-            }
-            action={
-              <div className="flex items-center gap-2">
-                <TooltipProvider>
-                  <Tooltip>
-                    <TooltipTrigger asChild>
-                      <div className="flex h-7 items-center gap-1 rounded-full border border-border bg-background/50 px-2 font-ui text-[10px] text-muted-foreground">
-                        <Target className="h-3 w-3" />
-                        <span>{percent}%</span>
-                      </div>
-                    </TooltipTrigger>
-                    <TooltipContent>
-                      <p className="text-[11px]">Sizning bugungi dofamin zaxirangiz</p>
-                    </TooltipContent>
-                  </Tooltip>
-                </TooltipProvider>
-                <Button asChild variant="ghost" size="sm" className="h-8">
-                  <Link to="/habits">
-                    Boshqarish <ArrowRight className="ml-1 h-3.5 w-3.5" />
-                  </Link>
-                </Button>
-              </div>
-            }
+            title="Bugungi protokol"
           />
 
           {!loaded ? (

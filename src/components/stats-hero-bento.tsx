@@ -58,9 +58,6 @@ export function StatsHeroBento({
         <div className="relative z-10 space-y-6">
           <div className="flex flex-wrap items-start justify-between gap-3">
             <div className="min-w-0 flex-1">
-              <p className="font-ui text-[11px] font-semibold uppercase tracking-[0.24em] text-primary">
-                {greeting}
-              </p>
               <h1 className="mt-2 truncate font-serif text-2xl font-semibold tracking-tight sm:text-3xl">
                 {displayName?.trim() ? `${displayName}, ` : "Bugungi "}
                 <span className="text-muted-foreground">{t("dashboard.hero.plan")}</span>

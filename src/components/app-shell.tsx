@@ -88,13 +88,7 @@ export function AppShell({ title, children }: { title?: string; children: ReactN
                 className="flex items-center gap-2 font-serif text-base font-semibold tracking-tight"
                 aria-label="Life Order — bosh sahifa"
               >
-                <span
-                  aria-hidden
-                  className="grid h-6 w-6 place-items-center rounded-[8px] bg-primary text-primary-foreground shadow-[0_0_12px_hsl(var(--primary)/0.4)]"
-                >
-                  <span className="text-[12px] font-bold leading-none">L</span>
-                </span>
-                Life<span className="text-primary">.</span>Order
+                Life Order
               </Link>
               <div className="hidden min-w-0 flex-1 items-center justify-center gap-3 md:flex">
                 <CommandBar />
