@@ -25,10 +25,12 @@ export function BiorythmPeak() {
   const phase = getPhase();
 
   return (
-    <div className="flex flex-col gap-3">
-      <div className="flex items-center gap-2">
-        <Clock className="h-4 w-4 text-primary" />
-        <p className="font-ui text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
+    <div className="flex flex-col gap-4">
+      <div className="flex items-center gap-2.5">
+        <div className="h-7 w-7 rounded-lg bg-primary/10 flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
+          <Clock className="h-4 w-4" />
+        </div>
+        <p className="font-ui text-[9px] font-bold uppercase tracking-[0.25em] text-muted-foreground">
           Biologik Ritm
         </p>
       </div>

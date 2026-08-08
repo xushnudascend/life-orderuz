@@ -232,11 +232,11 @@ function Dashboard() {
             />
           </div>
           <div className="md:col-span-12 lg:col-span-1 flex flex-col gap-4">
-             <div className="flex-1 rounded-[var(--radius)] border border-border bg-card p-4 transition-all hover:bg-card/80">
+             <div className="flex-1 rounded-[28px] border border-border/60 bg-card/40 p-6 transition-all hover:bg-primary/5 hover:border-primary/40 backdrop-blur-xl group">
                 <BiorythmPeak />
              </div>
              {habits.length > 0 && (
-                <div className="flex-1 rounded-[var(--radius)] border border-border bg-card p-4 transition-all hover:bg-card/80">
+                <div className="flex-1 rounded-[28px] border border-border/60 bg-card/40 p-6 transition-all hover:bg-primary/5 hover:border-primary/40 backdrop-blur-xl group">
                   <ZeigarnikRing
                     done={doneCount}
                     total={habits.length}
