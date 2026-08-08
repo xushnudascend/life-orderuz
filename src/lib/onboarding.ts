@@ -217,7 +217,7 @@ export function firstTaskFromAnswers(
   if (get("trigger.sleep_hours") === "kam_5" || get("trigger.sleep_hours") === "5_6") {
     return {
       title: `Bugun odatdagidan ${minutes >= 5 ? "20" : "15"} daqiqa erta yot`,
-      why: "Uyqu — ertangi irodangning zaxirasi. Bitta erta yotish keyingi kunni butunlay o'zgartiradi.",
+      why: "Uyqu — ertangi irodangning zaxirasi. 'Forgiving Streak' (kechiruvchi streak) tizimi Pro da faol, lekin uyqu zaxirangni bugun to'ldirishing shart.",
       when: "Bugun kechqurun",
       minutes,
     };
@@ -225,7 +225,7 @@ export function firstTaskFromAnswers(
   if (core.includes("telefon_qaramlik") || get("trigger.morning") === "telefon") {
     return {
       title: `Telefonni ${minutes} daqiqaga boshqa xonaga qo'y`,
-      why: "Ilgakni yo'q qilsang, xulq o'z-o'zidan to'xtaydi — iroda kerak emas.",
+      why: "Ilgakni (Trigger) yo'q qilsang, xulq o'z-o'zidan to'xtaydi — iroda kerak emas. B=MAP modelining 'Qobiliyat' (Ability) qismini osonlashtiramiz.",
       when,
       minutes,
     };
@@ -233,7 +233,7 @@ export function firstTaskFromAnswers(
   if (core.includes("kechiktirish") || get("trigger.fail_point") === "ertalab") {
     return {
       title: `Eng qo'rqinchli ishingni ${minutes} daqiqa qil — keyin to'xta`,
-      why: "Boshlash to'sig'i tugagach, davom etish osonlashadi (Zeigarnik effekti).",
+      why: "Boshlash to'sig'i tugagach, davom etish osonlashadi (Zeigarnik effekti). Zeigarnik halqasi senga bugun yordam beradi.",
       when,
       minutes,
     };
