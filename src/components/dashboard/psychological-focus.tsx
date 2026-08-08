@@ -1,3 +1,4 @@
+import * as React from "react";
 import { Brain, Info } from "lucide-react";
 import { Panel, PanelHeader } from "@/components/panel";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";

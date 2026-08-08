@@ -6,7 +6,7 @@ import { PageHero } from "@/components/page-hero";
 import { EmptyState } from "@/components/empty-state";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Loader2, Plus, Trash2, Flame, ArrowRight, Info, Target, Zap } from "lucide-react";
+import { Loader2, Plus, Trash2, Flame, ArrowRight, Info, Target, Zap, Check } from "lucide-react";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { toast } from "sonner";
 import { uz } from "@/i18n";
