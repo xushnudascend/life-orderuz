@@ -9,6 +9,17 @@ export const uz = {
     oneLiner:
       "Self-Control OS — o'zbekona intizom va zamonaviy fan uyg'unligi. Tashxis, protokol va halol mentor Nadir.",
   },
+  errors: {
+    auth: {
+      invalid: "Email yoki parol mos kelmadi. Qayta tekshirib ko'ring — hech narsa yo'qolmadi.",
+      exists: "Bu email allaqachon ro'yxatdan o'tgan. Kirish tabini tanlang yoki parolni tiklang.",
+      confirm: "Email hali tasdiqlanmagan. Pochtangizni tekshiring — havola yuborilgan.",
+      rate: "Ko'p urinish bo'ldi. Bir daqiqadan keyin qayta urinib ko'ring.",
+      weak: "Parol kuchsizroq — kamida 8 belgi va turli-tuman kombinatsiya bering.",
+      network: "Internet aloqasi uzildi. Ulanish tiklanganda qayta urinib ko'ring.",
+      generic: "Xato yuz berdi. Qayta urinib ko'ring — hech narsa buzilmadi.",
+    }
+  },
   nav: {
     features: "Imkoniyatlar",
     method: "Uslub",
