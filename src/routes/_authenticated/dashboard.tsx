@@ -254,8 +254,7 @@ function Dashboard() {
           <BiorythmPeak />
         </div>
       </div>
-      <div className="mt-4 grid gap-3 sm:gap-4 lg:grid-cols-12">
-        </div>
+      <div className="mt-4">
         
         {/* Habits */}
         <Panel className="lg:col-span-12 relative overflow-hidden">
