@@ -173,8 +173,6 @@ function ProfilePage() {
         </p>
       )}
 
-      {!loading && (
-      )}
 
       
 
