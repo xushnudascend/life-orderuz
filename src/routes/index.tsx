@@ -546,26 +546,28 @@ function Pricing() {
           price="0 so'm"
           period="doimiy"
           features={[
-            "3 ta kunlik mikro-missiya",
-            "Streak, XP, intizom",
-            "Nadir asosiy suhbat",
-            "Kundalik + kayfiyat",
-            "PWA — offline ishlaydi",
+            "3 tagacha odat",
+            "Sirkadian ritm xaritasi",
+            "Psixologik fokuslar",
+            "Nadir (kuniga 5 xabar)",
+            "Streak, XP, intizom balli",
+            "PWA — offline ishlash",
           ]}
           cta="Bepul boshlash"
           variant="outline"
         />
         <PricingCard
           title="Pro"
-          price="49 000 so'm"
+          price="59 000 so'm"
           period="oyiga"
-          badge="Eng mashhur"
+          badge="Tavsiya"
           features={[
-            "Free'dagi hammasi",
-            "Nadir Pro — kengroq xotira",
-            "Cheksiz odat va quest",
-            "Haftalik AI hisobot",
-            "Burnout erta signali",
+            "Cheksiz odat va kundalik",
+            "Nadir Pro (Cheksiz xotira)",
+            "Haftalik AI audit",
+            "Burnout signalizatsiyasi",
+            "Haftasiga 3 ta Shield",
+            "Premium jamoat kanallari",
           ]}
           cta="Pro'ga o'tish"
           variant="primary"
@@ -574,9 +576,14 @@ function Pricing() {
           title="Yillik"
           price="490 000 so'm"
           period="yiliga"
-          equivalent="12 oy narxida 10"
-          features={["Pro'dagi hammasi", "Ikki oy tekin", "Yillik retrospektiv", "Narx qotiriladi"]}
-          cta="Yillik olish"
+          equivalent="~40 000 so'm / oy"
+          features={[
+            "Pro'dagi barcha imkoniyatlar",
+            "2 oy mutlaqo tekin",
+            "Yillik intizom tahlili",
+            "Narx o'zgarishidan himoya",
+          ]}
+          cta="Yillik reja"
           variant="outline"
         />
       </div>
