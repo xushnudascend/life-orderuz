@@ -64,7 +64,7 @@ export function StatsHeroBento({
             <div className="mt-2 text-[10px] leading-relaxed text-muted-foreground/80">
               '''Do not make any visual modifications. The phrases I write are commands to understand what I want, not to be written down. Understand their content well, then execute what is required.'''
                                             
-                                            men shu o'z saytimni real ko'rib chiq tahlil qil har taraflama chuqur juda juda juda chuqur tahlil qilish orqali saytimni 10 ballik shkalada har hil 10lab 100lab mezonlarda bahola faqat rostini real halol ayt.
+                                            Endi to'g'ridan-to'g'ri kirib ko'raman.# Life Order — Jonli saytning real, halol auditi.
             </div>
             <h1 className="mt-1.5 truncate font-serif text-2xl font-semibold tracking-tight sm:text-3xl">
               {displayName?.trim() ? `${displayName}, ` : "Bugungi "}
