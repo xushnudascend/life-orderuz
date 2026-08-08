@@ -38,7 +38,6 @@ function Onboarding() {
   const bQuestions = sectionQuestions("B");
   const aQuestions = sectionQuestions("A");
   const total = bQuestions.length + 1; // B + 1 combined page
-  const progressPercent = Math.round(((step + 1) / total) * 100);
 
   const [answers, setAnswers] = useState<Answers>({});
   const [step, setStep] = useState(0);
@@ -46,6 +45,8 @@ function Onboarding() {
   const [saving, setSaving] = useState(false);
   const [ahaNudge, setAhaNudge] = useState<string | null>(null);
   const [archetypeName, setArchetypeName] = useState<string>("");
+
+  const progressPercent = Math.round(((step + 1) / total) * 100);
 
   const isFinalStep = step === bQuestions.length;
   const currentB: OnboardingQuestion | null = isFinalStep ? null : bQuestions[step];
