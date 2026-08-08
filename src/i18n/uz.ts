@@ -97,7 +97,7 @@ export const uz = {
       urgent: "Zarur",
       dailyLoop: "Kunlik halqa",
       depth: "Chuqurroq",
-      habits: "Bugungi protokol",
+      habits: "Protokol",
       quickAccess: "Modullar",
       timetable: "Kunlik jadval",
     },

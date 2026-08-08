@@ -51,7 +51,7 @@ export function StatsHeroBento({
   return (
     <section
         aria-label="Bugungi holat"
-        className="relative overflow-hidden rounded-[var(--radius)] border border-border bg-card p-4 sm:p-6 lg:grid lg:grid-cols-[1fr_280px] lg:gap-8"
+        className="relative h-full overflow-hidden rounded-[var(--radius)] border border-border bg-card p-4 sm:p-6"
       >
 
         {/* Left Side Content */}
@@ -79,45 +79,33 @@ export function StatsHeroBento({
           </div>
         </div>
 
-        {/* Right Side Stats Grid */}
-        <div className="relative z-10 mt-6 grid grid-cols-1 gap-3 lg:mt-0">
-          <div className="flex justify-end gap-2 mb-2 lg:mb-4">
-            <ShieldIndicator usedThisWeek={shieldsUsed} max={3} />
-          </div>
+        {/* Stats Grid */}
+        <div className="relative z-10 mt-6 grid grid-cols-2 gap-3">
+          <Link
+            to="/habits"
+            className="group relative overflow-hidden rounded-xl border border-border bg-background/40 p-3.5 transition-all hover:border-primary/50"
+          >
+            <p className="flex items-center gap-1.5 font-ui text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
+              <Flame className="h-3 w-3 text-primary" /> {t("dashboard.hero.streak")}
+            </p>
+            <p className="mt-1 font-serif text-2xl tabular-nums">
+              <CountUpNumber value={streakDays} once="hero-streak" />
+              <span className="ml-1 text-[12px] text-muted-foreground">{t("dashboard.hero.kun")}</span>
+            </p>
+          </Link>
 
-          <div className="grid grid-cols-2 gap-3 lg:grid-cols-1">
-            <Link
-              to="/habits"
-              className="group relative overflow-hidden rounded-xl border border-border/60 bg-background/40 p-3.5 transition-all hover:border-primary/50 hover:bg-background/60 active:scale-[0.98]"
-            >
-              <div className="absolute top-0 right-0 p-2 opacity-5 group-hover:opacity-10 transition-opacity">
-                <Flame className="h-8 w-8 text-primary" />
-              </div>
-              <p className="flex items-center gap-1.5 font-ui text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
-                <Flame className="h-3 w-3 text-primary" /> {t("dashboard.hero.streak")}
-              </p>
-              <p className="mt-1 font-serif text-2xl tabular-nums">
-                <CountUpNumber value={streakDays} once="hero-streak" />
-                <span className="ml-1 text-[12px] text-muted-foreground">{t("dashboard.hero.kun")}</span>
-              </p>
-            </Link>
-
-            <Link
-              to="/profile"
-              className="group relative overflow-hidden rounded-xl border border-border/60 bg-background/40 p-3.5 transition-all hover:border-primary/50 hover:bg-background/60 active:scale-[0.98]"
-            >
-              <div className="absolute top-0 right-0 p-2 opacity-5 group-hover:opacity-10 transition-opacity">
-                <Shield className="h-8 w-8 text-primary" />
-              </div>
-              <p className="flex items-center gap-1.5 font-ui text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
-                <Shield className="h-3 w-3 text-primary" /> {t("dashboard.hero.discipline")}
-              </p>
-              <p className="mt-1 font-serif text-2xl tabular-nums">
-                <CountUpNumber value={disciplineScore} once="hero-disc" />
-                <span className="ml-1 text-[12px] text-muted-foreground">/100</span>
-              </p>
-            </Link>
-          </div>
+          <Link
+            to="/profile"
+            className="group relative overflow-hidden rounded-xl border border-border bg-background/40 p-3.5 transition-all hover:border-primary/50"
+          >
+            <p className="flex items-center gap-1.5 font-ui text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
+              <Shield className="h-3 w-3 text-primary" /> {t("dashboard.hero.discipline")}
+            </p>
+            <p className="mt-1 font-serif text-2xl tabular-nums">
+              <CountUpNumber value={disciplineScore} once="hero-disc" />
+              <span className="ml-1 text-[12px] text-muted-foreground">/100</span>
+            </p>
+          </Link>
         </div>
 
       </section>

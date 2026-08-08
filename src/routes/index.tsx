@@ -156,7 +156,7 @@ function SectionHeader({
 
 function Hero() {
   return (
-    <section className="relative flex min-h-[85dvh] flex-col items-center justify-center overflow-hidden border-b border-border bg-[#0a0502]">
+    <section className="relative flex min-h-[75dvh] flex-col items-center justify-center overflow-hidden border-b border-border bg-[#0a0502]">
       <div className="relative mx-auto w-full max-w-4xl px-6 py-12 text-center md:px-8">
         <Reveal delay={250}>
           <h1 className="font-serif text-[48px] leading-[1.05] tracking-tighter text-balance sm:text-[72px] md:text-[84px]">
