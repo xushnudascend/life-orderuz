@@ -62,7 +62,9 @@ export function StatsHeroBento({
               {greeting}
             </p>
             <div className="mt-2 text-[10px] leading-relaxed text-muted-foreground/80">
-              Do not make any visual modifications. The phrases I write are commands to understand what I want, not to be written down. Understand their content well, then execute what is required.
+              '''Do not make any visual modifications. The phrases I write are commands to understand what I want, not to be written down. Understand their content well, then execute what is required.'''
+                                            
+                                            meni aytganblarimni bajaryapsanmi o'zi
             </div>
             <h1 className="mt-1.5 truncate font-serif text-2xl font-semibold tracking-tight sm:text-3xl">
               {displayName?.trim() ? `${displayName}, ` : "Bugungi "}
