@@ -8,6 +8,7 @@ import { CountUpNumber } from "@/components/count-up-number";
 import { ArchetypeRow } from "@/components/archetype-row";
 import { Tilt } from "@/components/tilt";
 import { progressMessage, type Archetype } from "@/lib/nervous";
+import { useT } from "@/i18n/use-t";
 
 /**
  * StatsHeroBento — Ascend/Life Order dan port qilingan dense unified hero.
@@ -45,6 +46,7 @@ export function StatsHeroBento({
   shieldsUsed: number;
   score: number;
 }) {
+  const { t } = useT();
   return (
     <Tilt max={3} className="mb-5 sm:mb-6">
       <section
@@ -61,7 +63,7 @@ export function StatsHeroBento({
             </p>
             <h1 className="mt-1.5 truncate font-serif text-2xl font-semibold tracking-tight sm:text-3xl">
               {displayName?.trim() ? `${displayName}, ` : "Bugungi "}
-              <span className="text-muted-foreground">reja</span>
+              <span className="text-muted-foreground">{t("dashboard.hero.plan")}</span>
             </h1>
             <ArchetypeRow archetype={archetype} />
           </div>
@@ -89,11 +91,11 @@ export function StatsHeroBento({
               <div className="flex items-baseline justify-between gap-2">
                 <div className="min-w-0">
                   <p className="font-ui text-[10px] uppercase tracking-[0.24em] text-muted-foreground">
-                    Daraja {level}
+                    {t("dashboard.hero.level")} {level}
                   </p>
                   <p className="mt-0.5 font-serif text-xl tabular-nums">
                     <CountUpNumber value={totalXp} once="hero-xp" />
-                    <span className="ml-1 text-sm text-muted-foreground">XP</span>
+                    <span className="ml-1 text-sm text-muted-foreground">{t("dashboard.hero.xp")}</span>
                   </p>
                 </div>
                 <p className="font-ui text-[10px] tabular-nums text-muted-foreground">
@@ -112,11 +114,11 @@ export function StatsHeroBento({
             <div className="grid grid-cols-2 gap-2.5">
               <div className="rounded-md border border-border/60 bg-background/30 px-3 py-2.5">
                 <p className="flex items-center gap-1.5 font-ui text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
-                  <Flame className="h-3 w-3 text-primary" /> Streak
+                  <Flame className="h-3 w-3 text-primary" /> {t("dashboard.hero.streak")}
                 </p>
                 <p className="mt-1 font-serif text-lg tabular-nums">
                   <CountUpNumber value={streakDays} once="hero-streak" />
-                  <span className="ml-1 text-[11px] text-muted-foreground">kun</span>
+                  <span className="ml-1 text-[11px] text-muted-foreground">{t("dashboard.hero.kun")}</span>
                 </p>
               </div>
               <Link
@@ -124,7 +126,7 @@ export function StatsHeroBento({
                 className="group rounded-md border border-border/60 bg-background/30 px-3 py-2.5 transition-colors hover:border-primary/50 hover:bg-background/60"
               >
                 <p className="flex items-center gap-1.5 font-ui text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
-                  <Shield className="h-3 w-3 text-primary" /> Intizom
+                  <Shield className="h-3 w-3 text-primary" /> {t("dashboard.hero.discipline")}
                 </p>
                 <p className="mt-1 font-serif text-lg tabular-nums">
                   <CountUpNumber value={disciplineScore} once="hero-disc" />

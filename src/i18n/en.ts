@@ -116,6 +116,102 @@ const _en = {
     },
     rights: "© 2026 Life Order. All rights reserved.",
   },
+  dashboard: {
+    hero: {
+      plan: "plan",
+      level: "Level",
+      xp: "XP",
+      kun: "days",
+      discipline: "Discipline",
+      greetingPrefix: "Today's",
+    },
+    sections: {
+      urgent: "Urgent",
+      dailyLoop: "Daily Loop",
+      depth: "Depth",
+      habits: "Today's habits",
+      quickAccess: "Quick access",
+      timetable: "Daily timetable",
+    },
+    habits: {
+      manage: "Manage",
+      emptyTitle: "One small habit starting today",
+      emptyDesc: "Start with a 2-minute habit — Nadir will create a personalized plan for you.",
+      emptyCta: "Create a plan",
+      loading: "Loading...",
+    },
+    quick: {
+      workout: "Workout",
+      diet: "Diet",
+      quests: "Quests",
+      mentor: "Nadir",
+    },
+    depth: {
+      title: "Depth · Nadir, retention, 100 days",
+      insightContext: "User: {name}. Today {done}/{total} habits ({percent}%). Streak: {streak} days. Level {level}, XP {xp}. Archetype: {archetype}. Time: {label}.",
+    },
+  },
+  settings: {
+    hero: {
+      title: "Customize the app for yourself.",
+      subtitle: "Manage notifications, language, theme, and profile in one place.",
+    },
+    profile: {
+      title: "Profile",
+      name: "Your name",
+      public: "Public profile",
+      publicHint: "Profile is public. Everyone can see it.",
+      privateHint: "Profile is private. Only you can see it.",
+    },
+    notifications: {
+      title: "Notifications",
+      daily: "Daily reminder",
+      dailyHint: "Every day at the set time",
+      streak: "Streak warning",
+      streakHint: "When streak is at risk",
+      time: "Reminder time",
+      browserCta: "Allow browser notifications",
+    },
+    mentor: {
+      title: "AI mentor",
+      nadir: "Deep dialogue with Nadir",
+      nadirHint: "If enabled — the AI panel on the dashboard will be active",
+    },
+    animations: {
+      title: "Animations",
+      all: "All effects",
+      enabled: "Animations enabled",
+      disabled: "Animations disabled",
+      level: "Motion level",
+      autoHint: "auto — follows device settings. Select reduced for a quieter experience.",
+      reduce: "Reduced",
+      full: "Full",
+    },
+    adaptive: {
+      title: "Adaptation",
+      shrink: "Automatically scales down tasks on excuses",
+      shrinkHint: "Does not punish you — adapts",
+    },
+    timezone: {
+      title: "Timezone",
+    },
+    language: {
+      title: "Language",
+    },
+    data: {
+      title: "Data",
+      desc: "You can download all your data in JSON format.",
+      download: "Download data",
+    },
+    contact: {
+      title: "Contact us",
+      desc: "If you have questions or suggestions:",
+    },
+    save: "Save",
+    saving: "Saving...",
+    success: "Settings saved",
+    error: "Failed to save",
+  },
 };
 
 export const en = _en as unknown as Dict;

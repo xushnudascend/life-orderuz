@@ -18,9 +18,9 @@ import {
   HelpCircle,
 } from "lucide-react";
 import { toast } from "sonner";
-import { uz } from "@/i18n";
+import { useT } from "@/i18n/use-t";
 import { TIMEZONES } from "@/lib/nervous";
-import { getLocale, setLocale as setLoc, type Locale } from "@/i18n";
+import { type Locale } from "@/i18n";
 import { PageHero } from "@/components/page-hero";
 import { Panel, PanelHeader } from "@/components/panel";
 import { getMotionPref, setMotionPref, type MotionPref } from "@/lib/motion-pref";
@@ -29,7 +29,7 @@ import { saveReminderPrefs } from "@/lib/reminders";
 
 export const Route = createFileRoute("/_authenticated/settings")({
   head: () => ({
-    meta: [{ title: `Sozlamalar — ${uz.brand.name}` }, { name: "robots", content: "noindex" }],
+    meta: [{ title: `Settings — Life Order` }, { name: "robots", content: "noindex" }],
   }),
   component: Settings,
 });
@@ -48,10 +48,10 @@ type Prefs = {
 
 function Settings() {
   const { userId } = Route.useRouteContext();
+  const { t, locale, setLocale } = useT();
   const [prefs, setPrefs] = useState<Prefs | null>(null);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
-  const [locale, setLocaleState] = useState<Locale>(getLocale());
   const [motionPref, setMotionPrefState] = useState<MotionPref>(getMotionPref());
 
   useEffect(() => {

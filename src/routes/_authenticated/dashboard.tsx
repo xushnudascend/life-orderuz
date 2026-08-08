@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, Check, Dumbbell, Flame, Salad, Sparkles, Target, Sprout } from "lucide-react";
 import { EmptyState } from "@/components/empty-state";
 
-import { uz } from "@/i18n";
+import { useT } from "@/i18n/use-t";
 import { applyArchetypeTheme } from "@/lib/archetype-theme";
 import { DailyTimetable } from "@/components/daily-timetable";
 import { ProfileCompletionCard } from "@/components/profile-completion-card";
@@ -37,7 +37,7 @@ import {
 
 export const Route = createFileRoute("/_authenticated/dashboard")({
   head: () => ({
-    meta: [{ title: `Bugun — ${uz.brand.name}` }, { name: "robots", content: "noindex" }],
+    meta: [{ title: `Dashboard — Life Order` }, { name: "robots", content: "noindex" }],
   }),
   component: Dashboard,
 });
@@ -62,6 +62,7 @@ function today(): string {
 
 function Dashboard() {
   const { userId } = Route.useRouteContext();
+  const { t } = useT();
   const [profile, setProfile] = useState<Profile | null>(null);
   const [habits, setHabits] = useState<Habit[]>([]);
   const [done, setDone] = useState<Set<string>>(new Set());
@@ -190,7 +191,7 @@ function Dashboard() {
   }
 
   return (
-    <AppShell title="Bosh sahifa">
+    <AppShell title={t("nav.signIn")}>
       {/* 1-QATLAM — Zarur signal */}
       <ProfileCompletionCard missing={missing} />
       <NadirNudgeBanner userId={userId} />
@@ -266,7 +267,7 @@ function Dashboard() {
 
           {!loaded ? (
             <div className="mt-3 space-y-1.5" role="status" aria-live="polite" aria-busy="true">
-              <span className="sr-only">Yuklanmoqda…</span>
+              <span className="sr-only">{t("dashboard.habits.loading")}</span>
               {[0, 1, 2, 3].map((i) => (
                 <div key={i} className="skeleton h-12 w-full" aria-hidden />
               ))}
@@ -275,11 +276,11 @@ function Dashboard() {
             <EmptyState
               className="mt-4"
               icon={<Sprout className="h-5 w-5" />}
-              title="Bugundan boshlab bitta kichik odat"
-              description="2 daqiqalik odatdan boshlang — Nadir siz uchun shaxsiy reja tuzib beradi."
+              title={t("dashboard.habits.emptyTitle")}
+              description={t("dashboard.habits.emptyDesc")}
               action={
                 <Button asChild size="sm">
-                  <Link to="/onboarding">Shaxsiy reja tuzish</Link>
+                  <Link to="/onboarding">{t("dashboard.habits.emptyCta")}</Link>
                 </Button>
               }
             />
@@ -338,10 +339,10 @@ function Dashboard() {
 
           <div className="mt-3 grid grid-cols-2 gap-2">
             {[
-              { to: "/workout", label: "Mashg'ulot", icon: Dumbbell },
-              { to: "/diet", label: "Ovqatlanish", icon: Salad },
-              { to: "/quests", label: "Vazifalar", icon: Target },
-              { to: "/mentor", label: "Nadir", icon: Sparkles },
+              { to: "/workout", label: t("dashboard.quick.workout"), icon: Dumbbell },
+              { to: "/diet", label: t("dashboard.quick.diet"), icon: Salad },
+              { to: "/quests", label: t("dashboard.quick.quests"), icon: Target },
+              { to: "/mentor", label: t("dashboard.quick.mentor"), icon: Sparkles },
             ].map(({ to, label, icon: Icon }) => (
               <Link
                 key={to}
@@ -378,7 +379,7 @@ function Dashboard() {
         <summary className="flex cursor-pointer list-none items-center justify-between gap-3 px-4 py-3 font-ui text-xs uppercase tracking-[0.22em] text-muted-foreground transition-colors hover:text-foreground">
           <span className="flex items-center gap-2">
             <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-primary/60" />
-            Chuqurroq · Nadir, retentsiya, 100 kun
+            {t("dashboard.depth.title")}
           </span>
           <ArrowRight className="h-3.5 w-3.5 transition-transform group-open:rotate-90" />
         </summary>
@@ -386,7 +387,17 @@ function Dashboard() {
           <EasyModeRibbon streakDays={streak?.current_days ?? 0} />
           <PeakEndReflect />
           <AIInsightCard
-            context={`Foydalanuvchi: ${profile?.display_name ?? "do'st"}. Bugun ${doneCount}/${habits.length} odat (${percent}%). Streak: ${streak?.current_days ?? 0} kun. Daraja ${stats?.level ?? 1}, XP ${stats?.total_xp ?? 0}. Arxetip: ${archetype?.name ?? "-"}. Vaqt: ${c.label}.`}
+            context={t("dashboard.depth.insightContext", {
+              name: profile?.display_name ?? "do'st",
+              done: doneCount,
+              total: habits.length,
+              percent: percent,
+              streak: streak?.current_days ?? 0,
+              level: stats?.level ?? 1,
+              xp: stats?.total_xp ?? 0,
+              archetype: archetype?.name ?? "-",
+              label: c.label,
+            })}
           />
           <HundredDayTimeline streakDays={streak?.current_days ?? 0} />
           <div className="grid gap-4 lg:grid-cols-2">
