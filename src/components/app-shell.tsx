@@ -10,6 +10,8 @@ import { SkipLink } from "@/components/skip-link";
 import { ErrorBoundary } from "@/components/error-boundary";
 import { NadirProvider } from "@/lib/nadir-context";
 import { NadirDrawer } from "@/components/nadir-drawer";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Menu } from "lucide-react";
 import { ARCHETYPES, type Archetype } from "@/lib/nervous";
 import { loadReminderPrefs, scheduleDailyReminder } from "@/lib/reminders";
 
@@ -100,7 +102,16 @@ export function AppShell({ title, children }: { title?: string; children: ReactN
               </div>
 
               <div className="flex items-center gap-3">
-                <NavMenu />
+                <Sheet>
+                  <SheetTrigger asChild>
+                    <button className="flex h-9 w-9 items-center justify-center rounded-xl border border-border bg-card transition-all hover:border-primary/50">
+                      <Menu className="h-4 w-4" />
+                    </button>
+                  </SheetTrigger>
+                  <SheetContent side="left" className="p-0 border-none w-64">
+                    <NavMenu />
+                  </SheetContent>
+                </Sheet>
                 <div className="flex items-center gap-2">
                   <Link
                     to="/profile"
