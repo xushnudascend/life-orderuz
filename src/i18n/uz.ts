@@ -59,11 +59,8 @@ export const uz = {
       period: "oyiga · cheksiz mentor",
       badge: "Tavsiya",
       features: [
-        "Kutubxona: Cheksiz kitob va maqolalar",
-        "Kurslar: Maxsus video darsliklar",
-        "Kundalik: Cheksiz tahliliy yozuvlar",
         "Nadir Pro (Cheksiz xotira)",
-        "Haftalik AI audit va hisobot",
+        "Haftalik AI hisobot",
         "Haftasiga 3 ta Shield",
         "Burnout signalizatsiyasi",
       ],
@@ -114,12 +111,12 @@ export const uz = {
     quick: {
       workout: "Tana",
       diet: "Ovqatlanish",
-      quests: "Kurslar & Kutubxona",
+      quests: "Nadir AI",
       mentor: "Mentor",
     },
     depth: {
-      title: "Chuqurroq · Nadir, retentsiya, 100 kun",
-      insightContext: "Psixologik profil: {name}. Bugungi progress: {done}/{total} ({percent}%). Streak: {streak} kun. Arxetip: {archetype}. Ilmiy tavsiya: {label}.",
+      title: "Nadir",
+      insightContext: "Psixologik profil: {name}. Bugungi progress: {done}/{total} ({percent}%). Streak: {streak} kun. Arxetip: {archetype}.",
     },
   },
   settings: {
