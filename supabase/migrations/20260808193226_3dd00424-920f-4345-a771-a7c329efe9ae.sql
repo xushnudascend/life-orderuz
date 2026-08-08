@@ -1,0 +1,14 @@
+ALTER FUNCTION public.handle_new_user() SECURITY INVOKER;
+ALTER FUNCTION public.handle_new_profile() SECURITY INVOKER;
+ALTER FUNCTION public.apply_xp_event() SECURITY INVOKER;
+ALTER FUNCTION public.ensure_daily_quests() SECURITY INVOKER;
+ALTER FUNCTION public.apply_quest_completion() SECURITY INVOKER;
+ALTER FUNCTION public.apply_habit_log() SECURITY INVOKER;
+ALTER FUNCTION public.enforce_free_tier_journal() SECURITY INVOKER;
+ALTER FUNCTION public.prevent_self_billing_change() SECURITY INVOKER;
+ALTER FUNCTION public.enforce_xp_event_bounds() SECURITY INVOKER;
+ALTER FUNCTION public.enforce_habit_xp_bounds() SECURITY INVOKER;
+ALTER FUNCTION public.apply_season_xp() SECURITY INVOKER;
+ALTER FUNCTION public.sync_weekly_challenge() SECURITY INVOKER;
+ALTER FUNCTION public.ensure_weekly_challenge() SECURITY INVOKER;
+ALTER FUNCTION public.enforce_free_tier_habits() SECURITY INVOKER;
