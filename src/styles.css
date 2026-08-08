@@ -8,33 +8,33 @@
   --radius: 0.75rem;
 
   /* Colors - Deep Obsidian with refined saturation */
-  --background: 240 10% 2%;
+  --background: 240 10% 3.9%;
   --foreground: 0 0% 98%;
 
-  --card: 240 10% 4%;
+  --card: 240 10% 3.9%;
   --card-foreground: 0 0% 98%;
 
-  --popover: 240 10% 4%;
+  --popover: 240 10% 3.9%;
   --popover-foreground: 0 0% 98%;
 
-  --primary: 158 94% 61%; /* High-vibrancy Emerald for Dopamine/Progress */
-  --primary-foreground: 144 33% 2%;
+  --primary: 142 71% 45%; /* Emerald green */
+  --primary-foreground: 144 33% 97%;
 
-  --secondary: 240 5% 10%;
+  --secondary: 240 3.7% 15.9%;
   --secondary-foreground: 0 0% 98%;
 
-  --muted: 240 5% 10%;
-  --muted-foreground: 240 5% 65%;
+  --muted: 240 3.7% 15.9%;
+  --muted-foreground: 240 5% 64.9%;
 
-  --accent: 240 5% 15%;
+  --accent: 240 3.7% 15.9%;
   --accent-foreground: 0 0% 98%;
 
-  --destructive: 0 84% 60%;
+  --destructive: 0 62.8% 30.6%;
   --destructive-foreground: 0 0% 98%;
 
-  --border: 240 5% 12%;
-  --input: 240 5% 12%;
-  --ring: 158 94% 61%;
+  --border: 240 3.7% 15.9%;
+  --input: 240 3.7% 15.9%;
+  --ring: 142 71% 45%;
 
   --animate-orb-float: orb-float 20s ease-in-out infinite;
   --animate-orb-float-delayed: orb-float 25s ease-in-out infinite 5s;
@@ -49,46 +49,46 @@
 /* Base definitions using HSL variables */
 @layer base {
   :root {
-    --background: hsl(240 10% 2%);
+    --background: hsl(240 10% 3.9%);
     --foreground: hsl(0 0% 98%);
-    --card: hsl(240 10% 4%);
+    --card: hsl(240 10% 3.9%);
     --card-foreground: hsl(0 0% 98%);
-    --popover: hsl(240 10% 4%);
+    --popover: hsl(240 10% 3.9%);
     --popover-foreground: hsl(0 0% 98%);
-    --primary: hsl(158 94% 61%);
-    --primary-foreground: hsl(144 33% 2%);
-    --secondary: hsl(240 5% 10%);
+    --primary: hsl(142 71% 45%);
+    --primary-foreground: hsl(144 33% 97%);
+    --secondary: hsl(240 3.7% 15.9%);
     --secondary-foreground: hsl(0 0% 98%);
-    --muted: hsl(240 5% 10%);
-    --muted-foreground: hsl(240 5% 65%);
-    --accent: hsl(240 5% 15%);
+    --muted: hsl(240 3.7% 15.9%);
+    --muted-foreground: hsl(240 5% 64.9%);
+    --accent: hsl(240 3.7% 15.9%);
     --accent-foreground: hsl(0 0% 98%);
-    --destructive: hsl(0 84% 60%);
+    --destructive: hsl(0 62.8% 30.6%);
     --destructive-foreground: hsl(0 0% 98%);
-    --border: hsl(240 5% 12%);
-    --input: hsl(240 5% 12%);
-    --ring: hsl(158 94% 61%);
+    --border: hsl(240 3.7% 15.9%);
+    --input: hsl(240 3.7% 15.9%);
+    --ring: hsl(142 71% 45%);
   }
 
   /* Archetype Theme Overrides using [data-archetype] selector */
   html[data-archetype="focus_seeker"] {
-    --primary: hsl(210 100% 66%); /* Deep Azure for clarity */
-    --ring: hsl(210 100% 66%);
+    --primary: hsl(217 91% 60%); /* Blue */
+    --ring: hsl(217 91% 60%);
   }
 
   html[data-archetype="body_builder"] {
-    --primary: hsl(12 100% 63%); /* Crimson Energy */
-    --ring: hsl(12 100% 63%);
+    --primary: hsl(0 84% 60%); /* Red/Orange */
+    --ring: hsl(0 84% 60%);
   }
 
   html[data-archetype="night_scholar"] {
-    --primary: hsl(270 95% 75%); /* Electric Violet/Lavender */
-    --ring: hsl(270 95% 75%);
+    --primary: hsl(262 83% 58%); /* Purple */
+    --ring: hsl(262 83% 58%);
   }
 
   html[data-archetype="steady_walker"] {
-    --primary: hsl(42 100% 62%); /* Golden Amber of consistency */
-    --ring: hsl(42 100% 62%);
+    --primary: hsl(47 95% 55%); /* Gold/Amber */
+    --ring: hsl(47 95% 55%);
   }
 
   body {
