@@ -57,7 +57,7 @@ export function StatsHeroBento({
         {/* Left Side Content */}
         <div className="relative z-10 flex items-center justify-between">
           <h1 className="font-serif text-2xl font-semibold tracking-tight sm:text-3xl">
-            {displayName?.trim() ? `${displayName}, ` : "Bugungi "}
+            {displayName?.trim() ? `${displayName}, ` : t("dashboard.hero.greetingPrefix") + " "}
             <span className="text-muted-foreground">{t("dashboard.hero.plan")}</span>
           </h1>
           <div className="flex items-center gap-2">
@@ -65,20 +65,32 @@ export function StatsHeroBento({
           </div>
         </div>
 
-        <div className="relative z-10 mt-6 flex items-center gap-6">
-          <ProgressRing value={doneCount} total={totalHabits || 0} size={100} strokeWidth={8} />
-          <div className="flex-1 space-y-1">
-            <div className="flex items-baseline justify-between text-[10px] uppercase tracking-widest text-muted-foreground">
-              <span>Level {level}</span>
+        <div className="relative z-10 mt-6 flex flex-col sm:flex-row sm:items-center gap-6">
+          <div className="flex items-center gap-4">
+             <ProgressRing value={doneCount} total={totalHabits || 0} size={80} strokeWidth={6} />
+             <div className="sm:hidden flex-1">
+               <div className="h-1.5 w-full overflow-hidden rounded-full bg-border/50">
+                 <div
+                   className="h-full bg-primary transition-all duration-700"
+                   style={{ width: `${xpProgress}%` }}
+                 />
+               </div>
+               <p className="mt-1 text-[10px] uppercase tracking-widest text-muted-foreground">LVL {level} · {totalXp} XP</p>
+             </div>
+          </div>
+          
+          <div className="flex-1 space-y-2">
+            <div className="hidden sm:flex items-baseline justify-between text-[10px] uppercase tracking-widest text-muted-foreground">
+              <span>Daraja {level}</span>
               <span>{totalXp} XP</span>
             </div>
-            <div className="h-1.5 w-full overflow-hidden rounded-full bg-border/50">
+            <div className="hidden sm:block h-1.5 w-full overflow-hidden rounded-full bg-border/50">
               <div
                 className="h-full bg-primary transition-all duration-700"
                 style={{ width: `${xpProgress}%` }}
               />
             </div>
-            <p className="text-[10px] italic text-muted-foreground opacity-70">
+            <p className="text-[11px] font-medium text-foreground">
               {progressMessage(percent)}
             </p>
           </div>

@@ -209,8 +209,8 @@ function Dashboard() {
           </div>
         </div>
       ) : (
-        <div className="grid gap-4 md:grid-cols-12">
-          <div className="md:col-span-8">
+        <div className="grid gap-4 md:grid-cols-12 lg:grid-cols-3">
+          <div className="md:col-span-12 lg:col-span-2">
             <StatsHeroBento
               greeting={`${c.greeting} · ${c.label}`}
               displayName={profile?.display_name ?? null}
@@ -228,12 +228,12 @@ function Dashboard() {
               score={score}
             />
           </div>
-          <div className="md:col-span-4 flex flex-col gap-4">
-             <div className="flex-1 rounded-[var(--radius)] border border-border bg-card p-4">
+          <div className="md:col-span-12 lg:col-span-1 flex flex-col gap-4">
+             <div className="flex-1 rounded-[var(--radius)] border border-border bg-card p-4 transition-all hover:bg-card/80">
                 <BiorythmPeak />
              </div>
              {habits.length > 0 && (
-                <div className="flex-1 rounded-[var(--radius)] border border-border bg-card p-4">
+                <div className="flex-1 rounded-[var(--radius)] border border-border bg-card p-4 transition-all hover:bg-card/80">
                   <ZeigarnikRing
                     done={doneCount}
                     total={habits.length}
@@ -241,6 +241,7 @@ function Dashboard() {
                   />
                 </div>
              )}
+             <DailyTimetable profile={profile || {}} />
           </div>
         </div>
       )}
@@ -251,7 +252,7 @@ function Dashboard() {
         <Panel className="lg:col-span-12">
           
           <PanelHeader
-            title="Kunlik amallar"
+            title="protokol"
           />
 
           {!loaded ? (
