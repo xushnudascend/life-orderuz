@@ -121,6 +121,7 @@ const _en = {
       plan: "plan",
       level: "Level",
       xp: "XP",
+      streak: "Streak",
       kun: "days",
       discipline: "Discipline",
       greetingPrefix: "Today's",

@@ -324,15 +324,14 @@ function Settings() {
           </select>
         </Card>
 
-        <Card icon={<Languages className="h-4 w-4 text-primary" />} title="Til">
+        <Card icon={<Languages className="h-4 w-4 text-primary" />} title={t("settings.language.title")}>
           <div className="flex flex-wrap gap-2">
             {(["uz", "ru", "en"] as Locale[]).map((l) => (
               <button
                 key={l}
                 onClick={() => {
-                  setLoc(l);
-                  setLocaleState(l);
-                  toast.success("Til o'zgartirildi");
+                  setLocale(l);
+                  toast.success(t("settings.success"));
                 }}
                 className={
                   "rounded-full border px-3 py-1 font-ui text-xs uppercase tracking-[0.18em] transition-colors " +

@@ -122,6 +122,7 @@ export const uz = {
       plan: "reja",
       level: "Daraja",
       xp: "XP",
+      streak: "Streak",
       kun: "kun",
       discipline: "Intizom",
       greetingPrefix: "Bugungi",

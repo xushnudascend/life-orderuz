@@ -121,6 +121,7 @@ const _ru = {
       plan: "план",
       level: "Уровень",
       xp: "XP",
+      streak: "Стрик",
       kun: "дн",
       discipline: "Дисциплина",
       greetingPrefix: "Сегодняшний",
