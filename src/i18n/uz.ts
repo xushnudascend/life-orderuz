@@ -117,6 +117,102 @@ export const uz = {
     },
     rights: "© 2026 Life Order. Barcha huquqlar himoyalangan.",
   },
+  dashboard: {
+    hero: {
+      plan: "reja",
+      level: "Daraja",
+      xp: "XP",
+      kun: "kun",
+      discipline: "Intizom",
+      greetingPrefix: "Bugungi",
+    },
+    sections: {
+      urgent: "Zarur",
+      dailyLoop: "Kunlik halqa",
+      depth: "Chuqurroq",
+      habits: "Bugungi odatlar",
+      quickAccess: "Tezkor kirish",
+      timetable: "Kunlik jadval",
+    },
+    habits: {
+      manage: "Boshqarish",
+      emptyTitle: "Bugundan boshlab bitta kichik odat",
+      emptyDesc: "2 daqiqalik odatdan boshlang — Nadir siz uchun shaxsiy reja tuzib beradi.",
+      emptyCta: "Shaxsiy reja tuzish",
+      loading: "Yuklanmoqda...",
+    },
+    quick: {
+      workout: "Mashg'ulot",
+      diet: "Ovqatlanish",
+      quests: "Vazifalar",
+      mentor: "Nadir",
+    },
+    depth: {
+      title: "Chuqurroq · Nadir, retentsiya, 100 kun",
+      insightContext: "Foydalanuvchi: {name}. Bugun {done}/{total} odat ({percent}%). Streak: {streak} kun. Daraja {level}, XP {xp}. Arxetip: {archetype}. Vaqt: {label}.",
+    },
+  },
+  settings: {
+    hero: {
+      title: "Ilovani o'zingga moslashtir.",
+      subtitle: "Bildirishnomalar, til, mavzu va profilingni bir joyda boshqar.",
+    },
+    profile: {
+      title: "Profil",
+      name: "Ismingiz",
+      public: "Ochiq profil",
+      publicHint: "Profil ochiq. Hamma ko'ra oladi.",
+      privateHint: "Profil yopiq. Faqat siz ko'rasiz.",
+    },
+    notifications: {
+      title: "Bildirishnomalar",
+      daily: "Kunlik eslatma",
+      dailyHint: "Har kuni belgilangan vaqtda",
+      streak: "Streak ogohlantirishi",
+      streakHint: "Streak yo'qolayotganda",
+      time: "Eslatma vaqti",
+      browserCta: "Brauzer bildirishnomalariga ruxsat",
+    },
+    mentor: {
+      title: "AI mentor",
+      nadir: "Nadir bilan chuqurroq gaplashish",
+      nadirHint: "Yoqilsa — dashboard'da AI paneli faol bo'ladi",
+    },
+    animations: {
+      title: "Animatsiyalar",
+      all: "Barcha effektlar",
+      enabled: "Animatsiyalar yoqilgan",
+      disabled: "Animatsiyalar o'chirilgan",
+      level: "Harakatlanish darajasi",
+      autoHint: "auto — qurilma sozlamasiga ergashadi. Tinch ish uchun kamaytirilgan tanlang.",
+      reduce: "Kamaytirilgan",
+      full: "To'liq",
+    },
+    adaptive: {
+      title: "Moslashish",
+      shrink: "Bahona chiqqanda vazifani avtomatik kichraytiradi",
+      shrinkHint: "Sizni jazolamaydi — moslashadi",
+    },
+    timezone: {
+      title: "Vaqt zonasi",
+    },
+    language: {
+      title: "Til",
+    },
+    data: {
+      title: "Ma'lumotlar",
+      desc: "Barcha ma'lumotlaringizni JSON ko'rinishida yuklab olishingiz mumkin.",
+      download: "Ma'lumotlarni yuklab olish",
+    },
+    contact: {
+      title: "Biz bilan bog'lanish",
+      desc: "Savol yoki taklif bo'lsa:",
+    },
+    save: "Saqlash",
+    saving: "Saqlanmoqda...",
+    success: "Sozlamalar saqlandi",
+    error: "Saqlab bo'lmadi",
+  },
 } as const;
 
 export type Dict = typeof uz;
