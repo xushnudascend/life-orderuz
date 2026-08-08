@@ -67,6 +67,7 @@ import { Route as AuthenticatedCHabitsRouteImport } from './routes/_authenticate
 import { Route as AuthenticatedCBodyRouteImport } from './routes/_authenticated/c.body'
 import { Route as Char91DotmcpChar93InvokeToolToolRouteImport } from './routes/[.mcp]/invoke-tool/$tool'
 import { Route as DotlovableOauthConsentRouteImport } from './routes/[.]lovable.oauth.consent'
+import { Route as ApiPublicTelegramWebhookRouteImport } from './routes/api/public/telegram/webhook'
 import { Route as ApiPublicHooksWeeklyReportRouteImport } from './routes/api/public/hooks/weekly-report'
 import { Route as ApiPublicHooksBurnoutCheckRouteImport } from './routes/api/public/hooks/burnout-check'
 import { Route as ApiPublicClickActionRouteImport } from './routes/api/public/click/$action'
@@ -369,6 +370,12 @@ const DotlovableOauthConsentRoute = DotlovableOauthConsentRouteImport.update({
   path: '/.lovable/oauth/consent',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicTelegramWebhookRoute =
+  ApiPublicTelegramWebhookRouteImport.update({
+    id: '/api/public/telegram/webhook',
+    path: '/api/public/telegram/webhook',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ApiPublicHooksWeeklyReportRoute =
   ApiPublicHooksWeeklyReportRouteImport.update({
     id: '/api/public/hooks/weekly-report',
@@ -448,6 +455,7 @@ export interface FileRoutesByFullPath {
   '/api/public/click/$action': typeof ApiPublicClickActionRoute
   '/api/public/hooks/burnout-check': typeof ApiPublicHooksBurnoutCheckRoute
   '/api/public/hooks/weekly-report': typeof ApiPublicHooksWeeklyReportRoute
+  '/api/public/telegram/webhook': typeof ApiPublicTelegramWebhookRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -510,6 +518,7 @@ export interface FileRoutesByTo {
   '/api/public/click/$action': typeof ApiPublicClickActionRoute
   '/api/public/hooks/burnout-check': typeof ApiPublicHooksBurnoutCheckRoute
   '/api/public/hooks/weekly-report': typeof ApiPublicHooksWeeklyReportRoute
+  '/api/public/telegram/webhook': typeof ApiPublicTelegramWebhookRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -574,6 +583,7 @@ export interface FileRoutesById {
   '/api/public/click/$action': typeof ApiPublicClickActionRoute
   '/api/public/hooks/burnout-check': typeof ApiPublicHooksBurnoutCheckRoute
   '/api/public/hooks/weekly-report': typeof ApiPublicHooksWeeklyReportRoute
+  '/api/public/telegram/webhook': typeof ApiPublicTelegramWebhookRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -638,6 +648,7 @@ export interface FileRouteTypes {
     | '/api/public/click/$action'
     | '/api/public/hooks/burnout-check'
     | '/api/public/hooks/weekly-report'
+    | '/api/public/telegram/webhook'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -700,6 +711,7 @@ export interface FileRouteTypes {
     | '/api/public/click/$action'
     | '/api/public/hooks/burnout-check'
     | '/api/public/hooks/weekly-report'
+    | '/api/public/telegram/webhook'
   id:
     | '__root__'
     | '/'
@@ -763,6 +775,7 @@ export interface FileRouteTypes {
     | '/api/public/click/$action'
     | '/api/public/hooks/burnout-check'
     | '/api/public/hooks/weekly-report'
+    | '/api/public/telegram/webhook'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -805,6 +818,7 @@ export interface RootRouteChildren {
   ApiPublicClickActionRoute: typeof ApiPublicClickActionRoute
   ApiPublicHooksBurnoutCheckRoute: typeof ApiPublicHooksBurnoutCheckRoute
   ApiPublicHooksWeeklyReportRoute: typeof ApiPublicHooksWeeklyReportRoute
+  ApiPublicTelegramWebhookRoute: typeof ApiPublicTelegramWebhookRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -1215,6 +1229,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DotlovableOauthConsentRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/telegram/webhook': {
+      id: '/api/public/telegram/webhook'
+      path: '/api/public/telegram/webhook'
+      fullPath: '/api/public/telegram/webhook'
+      preLoaderRoute: typeof ApiPublicTelegramWebhookRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/hooks/weekly-report': {
       id: '/api/public/hooks/weekly-report'
       path: '/api/public/hooks/weekly-report'
@@ -1346,6 +1367,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiPublicClickActionRoute: ApiPublicClickActionRoute,
   ApiPublicHooksBurnoutCheckRoute: ApiPublicHooksBurnoutCheckRoute,
   ApiPublicHooksWeeklyReportRoute: ApiPublicHooksWeeklyReportRoute,
+  ApiPublicTelegramWebhookRoute: ApiPublicTelegramWebhookRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
