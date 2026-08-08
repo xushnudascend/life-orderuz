@@ -1,154 +1,71 @@
-import { Link, useLocation } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
-import {
-  Compass,
-  ListChecks,
-  Sparkles,
-  BookText,
-  Trophy,
-  Target,
-  Dumbbell,
-  Salad,
+import { Link } from "@tanstack/react-router";
+import { 
+  Home, 
+  User, 
+  Settings, 
+  LogOut, 
+  Shield, 
+  Zap, 
+  BookOpen, 
   Users,
-  BarChart3,
-  User,
-  Settings,
-  Menu,
-  type LucideIcon,
+  LayoutDashboard,
+  Dumbbell,
+  Target
 } from "lucide-react";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { cn } from "@/lib/utils";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
 
-type Item = { to: string; label: string; icon: LucideIcon; hint?: string };
+export function NavMenu({ onClose }: { onClose?: () => void }) {
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+    toast.success("Tizimdan chiqdingiz");
+    window.location.href = "/";
+  };
 
-const PRIMARY: Item[] = [
-  { to: "/dashboard", label: "Bosh sahifa", icon: Compass, hint: "Bugungi reja" },
-  { to: "/roadmap", label: "Yo'l xarita", icon: Target, hint: "Reclaim → Rebuild → Rise" },
-  { to: "/habits", label: "Odatlar", icon: ListChecks, hint: "Kunlik odatlar" },
-  { to: "/quests", label: "Vazifalar", icon: Trophy, hint: "Haftalik questlar" },
-  { to: "/journal", label: "Kundalik", icon: BookText, hint: "Fikrlar" },
-  { to: "/mentor", label: "Nadir AI", icon: Sparkles, hint: "AI mentor" },
-];
-
-const SECONDARY: Item[] = [
-  { to: "/workout", label: "Mashg'ulot", icon: Dumbbell },
-  { to: "/diet", label: "Ovqatlanish", icon: Salad },
-  { to: "/analytics", label: "Tahlil", icon: BarChart3 },
-  { to: "/community", label: "Davra", icon: Users },
-  { to: "/leaderboard", label: "Reyting", icon: Trophy },
-];
-
-const ACCOUNT: Item[] = [
-  { to: "/profile", label: "Profil", icon: User },
-  { to: "/settings", label: "Sozlamalar", icon: Settings },
-  { to: "/logout", label: "Chiqish", icon: Menu },
-];
-
-function NavItem({ item, active, onClick }: { item: Item; active: boolean; onClick: () => void }) {
-  const Icon = item.icon;
-  return (
-    <Link
-      to={item.to}
-      onClick={onClick}
-      aria-current={active ? "page" : undefined}
-      className={cn(
-        "group relative flex items-center gap-3 rounded-xl px-3 py-2.5 font-ui text-sm transition-all duration-200",
-        active
-          ? "bg-primary/10 text-foreground shadow-[inset_0_0_0_1px_hsl(var(--primary)/0.2)]"
-          : "text-muted-foreground hover:bg-accent/50 hover:text-foreground",
-      )}
-    >
-      {active && (
-        <span aria-hidden className="absolute inset-y-2 left-0 w-[3px] rounded-full bg-primary" />
-      )}
-      <Icon
-        className={cn(
-          "h-4 w-4 shrink-0 transition-colors",
-          active ? "text-primary" : "text-muted-foreground group-hover:text-foreground",
-        )}
-        strokeWidth={active ? 2.2 : 1.7}
-      />
-      <span className="truncate">{item.label}</span>
-    </Link>
-  );
-}
-
-function Group({
-  label,
-  items,
-  pathname,
-  onNavigate,
-}: {
-  label: string;
-  items: Item[];
-  pathname: string;
-  onNavigate: () => void;
-}) {
-  return (
-    <div>
-      <p className="mb-1.5 px-3 font-ui text-[10px] font-semibold uppercase tracking-[0.22em] text-muted-foreground/60">
-        {label}
-      </p>
-      <ul className="space-y-0.5">
-        {items.map((item) => (
-          <li key={item.to}>
-            <NavItem
-              item={item}
-              active={pathname === item.to || pathname.startsWith(item.to + "/")}
-              onClick={onNavigate}
-            />
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-}
-
-/** Yagona navigatsiya — topbar'dagi 3 chiziqcha orqali ochiladi. */
-export function NavMenu() {
-  const location = useLocation();
-  const pathname = location.pathname;
-  const [open, setOpen] = useState(false);
-
-  // Route almashsa panel yopiladi
-  useEffect(() => {
-    setOpen(false);
-  }, [pathname]);
-
-  const close = () => setOpen(false);
+  const links = [
+    { to: "/dashboard", label: "Bosh sahifa", icon: LayoutDashboard },
+    { to: "/habits", label: "Odatlar", icon: Zap },
+    { to: "/workout", label: "Tana", icon: Dumbbell },
+    { to: "/quests", label: "Vazifalar", icon: Target },
+    { to: "/mentor", label: "Nadir AI", icon: BookOpen },
+    { to: "/community", label: "Davra", icon: Users },
+    { to: "/profile", label: "Profil", icon: User },
+    { to: "/settings", label: "Sozlamalar", icon: Settings },
+  ];
 
   return (
-    <Sheet open={open} onOpenChange={setOpen}>
-      <SheetTrigger
-        className="tap grid h-9 w-9 place-items-center rounded-full border border-border bg-card text-muted-foreground transition-colors hover:border-primary/50 hover:text-foreground"
-        aria-label="Menyuni ochish"
-      >
-        <Menu className="h-4 w-4" />
-      </SheetTrigger>
-      <SheetContent side="right" className="w-[19rem] border-border bg-background p-0">
-        <div className="flex h-14 items-center gap-2.5 border-b border-border px-5">
-          <span
-            aria-hidden
-            className="grid h-7 w-7 place-items-center rounded-[10px] bg-primary text-primary-foreground"
-          >
-            <span className="font-serif text-[14px] font-bold leading-none">L</span>
-          </span>
-          <span className="font-serif text-[15px] font-semibold tracking-tight">
-            Life<span className="text-primary">.</span>Order
-          </span>
+    <div className="flex flex-col h-full bg-card border-r border-border w-64 p-6 overflow-y-auto">
+      <div className="mb-8 flex items-center gap-3">
+        <div className="h-8 w-8 rounded-lg bg-primary/20 flex items-center justify-center">
+          <Shield className="h-5 w-5 text-primary" />
         </div>
+        <span className="font-serif text-xl font-bold tracking-tight">Life Order</span>
+      </div>
 
-        <nav className="space-y-6 overflow-y-auto px-3 py-5" aria-label="Asosiy navigatsiya">
-          <Group label="Asosiy" items={PRIMARY} pathname={pathname} onNavigate={close} />
-          <Group
-            label="Sog'liq va o'sish"
-            items={SECONDARY}
-            pathname={pathname}
-            onNavigate={close}
-          />
-          <Group label="Hisob" items={ACCOUNT} pathname={pathname} onNavigate={close} />
-        </nav>
-      </SheetContent>
-    </Sheet>
+      <nav className="flex-1 space-y-1">
+        {links.map((link) => (
+          <Link
+            key={link.to}
+            to={link.to as any}
+            onClick={onClose}
+            className="flex items-center gap-3 px-3 py-2.5 rounded-xl font-ui text-sm text-muted-foreground transition-all hover:bg-primary/10 hover:text-primary group"
+            activeProps={{ className: "bg-primary/10 text-primary" }}
+          >
+            <link.icon className="h-4 w-4 transition-transform group-hover:scale-110" />
+            {link.label}
+          </Link>
+        ))}
+      </nav>
+
+      <div className="mt-auto pt-6 border-t border-border">
+        <button
+          onClick={handleLogout}
+          className="flex items-center gap-3 w-full px-3 py-2.5 rounded-xl font-ui text-sm text-muted-foreground transition-all hover:bg-destructive/10 hover:text-destructive"
+        >
+          <LogOut className="h-4 w-4" />
+          Chiqish
+        </button>
+      </div>
+    </div>
   );
 }
