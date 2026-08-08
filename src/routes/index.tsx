@@ -103,10 +103,7 @@ function Landing() {
       <SiteHeader />
       <main>
         <Hero />
-        <PeerMirror />
-        
         <Pricing />
-        <Faq />
       </main>
       <SiteFooter />
     </div>
@@ -126,7 +123,7 @@ function Section({
 }) {
   return (
     <section id={id} className={"border-b border-border " + className}>
-      <div className="mx-auto w-full max-w-6xl px-5 py-16 md:px-8 md:py-24">{children}</div>
+      <div className="mx-auto w-full max-w-5xl px-5 py-12 md:px-8 md:py-20">{children}</div>
     </section>
   );
 }
@@ -159,89 +156,40 @@ function SectionHeader({
 
 function Hero() {
   return (
-    <section className="relative flex min-h-[95dvh] flex-col items-center justify-center overflow-hidden border-b border-border bg-[#0a0502]">
-      {/* Premium Brownish Obsidian Gradient */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 -z-10"
-        style={{
-          background:
-            "radial-gradient(circle at 50% -20%, hsl(25 40% 15% / 0.4), transparent 70%), radial-gradient(circle at 80% 80%, hsl(25 40% 10% / 0.3), transparent 60%)",
-        }}
-      />
-      
-      {/* Staircase Climber visual metaphor layer (SVG or CSS representation) */}
-      <div className="absolute bottom-0 right-0 w-full h-full opacity-10 pointer-events-none overflow-hidden">
-        <svg width="100%" height="100%" viewBox="0 0 1000 1000" preserveAspectRatio="xMaxYMax slice">
-          <path d="M0,1000 L200,1000 L200,800 L400,800 L400,600 L600,600 L600,400 L800,400 L800,200 L1000,200" fill="none" stroke="currentColor" strokeWidth="2" className="text-primary/20" />
-          <circle cx="900" cy="150" r="20" className="fill-primary/40 animate-pulse" />
-        </svg>
-      </div>
-      
-      <div className="relative mx-auto w-full max-w-5xl px-6 py-20 text-center md:px-8">
-        <Reveal delay={100}>
-          <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-2 font-ui text-[11px] font-medium uppercase tracking-[0.2em] text-primary backdrop-blur-sm">
-            <span className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary/60" />
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
-            </span>
-            Self-Control OS · v2.0
-          </div>
-        </Reveal>
-
+    <section className="relative flex min-h-[85dvh] flex-col items-center justify-center overflow-hidden border-b border-border bg-[#0a0502]">
+      <div className="relative mx-auto w-full max-w-4xl px-6 py-12 text-center md:px-8">
         <Reveal delay={250}>
-          <h1 className="font-serif text-[42px] leading-[1.1] tracking-tighter text-balance sm:text-[64px] md:text-[84px] lg:text-[92px]">
-            Motivatsiya <span className="text-muted-foreground/40 italic">tugaydi,</span>
-            <br />
-            <span className="bg-gradient-to-b from-foreground to-foreground/70 bg-clip-text text-transparent">
-              Tizim qoladi.
-            </span>
+          <h1 className="font-serif text-[48px] leading-[1.05] tracking-tighter text-balance sm:text-[72px] md:text-[84px]">
+            Motivatsiya tugaydi,<br />
+            <span className="text-primary italic">Tizim qoladi.</span>
           </h1>
         </Reveal>
 
         <Reveal delay={400}>
-          <p className="mx-auto mt-8 max-w-2xl font-ui text-lg leading-relaxed text-muted-foreground md:text-xl">
-            Life Order — bu shunchaki ilova emas, bu sening sirkad ritming va biologik imkoniyatlaringga moslangan yagona <b>Self-Control OS</b>.
+          <p className="mx-auto mt-6 max-w-xl font-ui text-base leading-relaxed text-muted-foreground">
+            Life Order — sening biologik imkoniyatlaringga moslangan yagona Self-Control OS.
           </p>
         </Reveal>
 
         <Reveal delay={550}>
-          <div className="mt-12 flex flex-col items-center justify-center gap-4 sm:flex-row">
+          <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <Button
               asChild
               size="lg"
-              className="group h-14 rounded-full px-10 font-ui text-base font-semibold shadow-[0_20px_50px_-12px_hsl(var(--primary)/0.5)] transition-all hover:scale-[1.02] active:scale-[0.98]"
+              className="group h-12 rounded-full px-8 font-ui text-sm font-semibold transition-all active:scale-[0.98]"
             >
               <Link to="/auth">
-                Hisob yaratish va boshlash
-                <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
+                Boshlash
               </Link>
             </Button>
             <Button
               asChild
               size="lg"
               variant="ghost"
-              className="h-14 rounded-full px-8 font-ui text-base text-muted-foreground hover:text-foreground"
+              className="h-12 rounded-full px-6 font-ui text-sm text-muted-foreground hover:text-foreground"
             >
-              <a href="#pricing">Nima uchun biz?</a>
+              <a href="#pricing">Narxlar</a>
             </Button>
-          </div>
-        </Reveal>
-        
-        <Reveal delay={700}>
-          <div className="mt-16 flex items-center justify-center gap-8 grayscale opacity-40 contrast-125">
-             <div className="flex flex-col items-center gap-1">
-               <span className="font-serif text-xl">UCL</span>
-               <span className="text-[9px] uppercase tracking-widest font-ui">Lally et al.</span>
-             </div>
-             <div className="flex flex-col items-center gap-1">
-               <span className="font-serif text-xl">Stanford</span>
-               <span className="text-[9px] uppercase tracking-widest font-ui">BJ Fogg Lab</span>
-             </div>
-             <div className="flex flex-col items-center gap-1">
-               <span className="font-serif text-xl">Harvard</span>
-               <span className="text-[9px] uppercase tracking-widest font-ui">Behavioral Sci</span>
-             </div>
           </div>
         </Reveal>
       </div>
@@ -398,9 +346,9 @@ function PricingCard({
   return (
     <div
       className={
-        "relative flex h-full flex-col rounded-2xl p-7 transition-transform duration-300 hover:-translate-y-1 " +
+        "relative flex h-full flex-col rounded-xl p-7 " +
         (variant === "primary"
-          ? "border border-primary/70 bg-card shadow-[0_24px_70px_-40px_hsl(var(--primary)/0.6)]"
+          ? "border border-primary bg-card"
           : "border border-border bg-background")
       }
     >

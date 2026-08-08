@@ -195,10 +195,6 @@ function Dashboard() {
 
   return (
     <AppShell title="Dashboard">
-      {/* 1-QATLAM — Zarur signal (Visual Hierarchy: Primary Action focus) */}
-      <div className="space-y-4">
-        <NadirNudgeBanner userId={userId} />
-      </div>
 
       {/* Unified Hero — Ascend-style dense bento */}
       {!loaded ? (
@@ -238,28 +234,10 @@ function Dashboard() {
         />
       )}
 
-      {/* 2-QATLAM — Kunlik halqa */}
-      <div className="mt-4 grid gap-4 lg:grid-cols-12">
-        {loaded && habits.length > 0 && (
-          <div className="rounded-[var(--radius)] border border-border/70 bg-card p-4 sm:p-5 lg:col-span-8">
-            <ZeigarnikRing
-              done={doneCount}
-              total={habits.length}
-              nextTitle={habits.find((h) => !done.has(h.id))?.title ?? null}
-            />
-          </div>
-        )}
-        
-        <div className="rounded-[var(--radius)] border border-border/70 bg-card p-4 sm:p-5 lg:col-span-4">
-          <BiorythmPeak />
-        </div>
-      </div>
       <div className="mt-4">
         
         {/* Habits */}
-        <Panel className="lg:col-span-12 relative overflow-hidden">
-          {/* Fogg B=MAP Motivation Indicator */}
-          <div className="absolute top-0 right-0 h-1 w-full bg-gradient-to-r from-transparent via-primary/20 to-primary/40" />
+        <Panel className="lg:col-span-12">
           
           <PanelHeader
             eyebrow="Bugungi protokol · Xulq-atvor arxitekturasi"

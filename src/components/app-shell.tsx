@@ -69,8 +69,6 @@ export function AppShell({ title, children }: { title?: string; children: ReactN
       <div className="min-h-dvh bg-[#0a0502] text-foreground relative">
         {/* Girih ornament + Premium dark background with subtle warmth */}
         <div className="pointer-events-none absolute inset-0 -z-10">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,hsl(25_40%_15%/0.1),transparent_70%)]" />
-          <div className="girih-corner absolute inset-0 opacity-5" />
         </div>
         <SkipLink />
         <div style={{ paddingBottom: "calc(6rem + env(safe-area-inset-bottom))" }}>
@@ -99,17 +97,6 @@ export function AppShell({ title, children }: { title?: string; children: ReactN
                 Life<span className="text-primary">.</span>Order
               </Link>
               <div className="hidden min-w-0 flex-1 items-center justify-center gap-3 md:flex">
-                {title && (
-                  <div className="flex items-center gap-2" aria-live="polite">
-                    <span
-                      aria-hidden
-                      className="h-1.5 w-1.5 rounded-full bg-primary shadow-[0_0_8px_hsl(var(--primary)/0.7)]"
-                    />
-                    <p className="font-ui text-[11px] font-semibold uppercase tracking-[0.24em] text-muted-foreground">
-                      {title}
-                    </p>
-                  </div>
-                )}
                 <CommandBar />
               </div>
 
