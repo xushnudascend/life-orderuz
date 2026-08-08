@@ -69,36 +69,28 @@ function AuthPage() {
   }, [next, navigate]);
 
   return (
-    <div className="relative min-h-dvh overflow-hidden bg-background text-foreground">
-      {/* Bitta sokin gradient — ortiqcha harakat yo'q */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[600px]"
-        style={{
-          background:
-            "radial-gradient(65% 50% at 50% 10%, hsl(var(--primary) / 0.15), transparent 80%)",
-        }}
-      />
-      
-      {/* 3D-ish Floating shapes with Breathing Blob */}
-      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
-        <div className="girih-corner absolute inset-0 opacity-20" />
-        <div className="absolute top-[10%] left-[5%] h-64 w-64 animate-orb-float rounded-full bg-primary/10 blur-3xl" />
-        <div className="absolute bottom-[20%] right-[10%] h-80 w-80 animate-orb-float-delayed rounded-full bg-primary/5 blur-3xl" />
-        {/* Breathing Blob Maskot */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[500px] w-[500px] animate-blob-breathe rounded-full bg-primary/5 blur-[100px]" />
+    <div className="relative min-h-dvh overflow-hidden bg-background text-foreground flex items-center justify-center p-4">
+      {/* Visual signatures from Life Order (Deep Obsidian + 3D Orbs) */}
+      <div className="absolute inset-0 -z-10 overflow-hidden">
+        <div className="girih-corner absolute inset-0 opacity-10" />
+        <div className="absolute top-[-10%] right-[-10%] h-[500px] w-[500px] animate-orb-float rounded-full bg-primary/10 blur-[120px]" />
+        <div className="absolute bottom-[-10%] left-[-10%] h-[400px] w-[400px] animate-orb-float-delayed rounded-full bg-primary/5 blur-[100px]" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[600px] w-[600px] animate-blob-breathe rounded-full bg-primary/[0.03] blur-[150px]" />
       </div>
 
-      <div className="mx-auto flex min-h-dvh w-full max-w-md flex-col px-5 py-8">
-        <Link
-          to="/"
-          className="inline-flex w-fit items-center gap-1.5 font-ui text-sm text-muted-foreground transition-colors hover:text-foreground"
-        >
-          <ArrowLeft className="h-4 w-4" />
-          Bosh sahifa
-        </Link>
+      <div className="w-full max-w-[420px] space-y-8 animate-fade-in-up">
+        <div className="text-center">
+          <Link to="/" className="inline-block mb-8">
+            <div className="flex items-center gap-2 font-serif text-2xl font-bold tracking-tight">
+              <span className="grid h-8 w-8 place-items-center rounded-xl bg-primary text-primary-foreground shadow-[0_0_20px_hsl(var(--primary)/0.4)]">
+                L
+              </span>
+              Life<span className="text-primary">.</span>Order
+            </div>
+          </Link>
+        </div>
 
-        <div className="mt-10 animate-fade-in-up text-center">
+        <div className="animate-fade-in-up text-center">
           <div className="mx-auto mb-6 grid h-12 w-12 place-items-center rounded-2xl bg-primary/10 text-primary shadow-[0_0_20px_hsl(var(--primary)/0.2)]">
             <ShieldCheck className="h-6 w-6" strokeWidth={2.2} />
           </div>
@@ -112,7 +104,7 @@ function AuthPage() {
         </div>
 
         <div
-          className="mt-8 animate-fade-in-up rounded-2xl border border-border bg-card/70 p-6 shadow-[var(--shadow-card)] backdrop-blur-sm"
+          className="animate-fade-in-up rounded-[28px] border border-border/50 bg-card/40 p-8 shadow-[0_24px_48px_-12px_rgba(0,0,0,0.5)] backdrop-blur-xl"
           style={{ animationDelay: "80ms" }}
         >
           <div className="space-y-3">
