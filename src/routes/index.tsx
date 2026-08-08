@@ -163,67 +163,82 @@ function SectionHeader({
 
 function Hero() {
   return (
-    <section className="relative overflow-hidden border-b border-border">
+    <section className="relative flex min-h-[90dvh] flex-col items-center justify-center overflow-hidden border-b border-border bg-background">
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-0 h-[560px]"
+        className="pointer-events-none absolute inset-0 -z-10"
         style={{
           background:
-            "radial-gradient(60% 50% at 50% 0%, hsl(var(--primary) / 0.10), transparent 70%)",
+            "radial-gradient(circle at 50% -20%, hsl(var(--primary) / 0.15), transparent 70%)",
         }}
       />
-      <div className="relative mx-auto w-full max-w-6xl px-5 pb-20 pt-20 md:px-8 md:pb-28 md:pt-28">
-        <div className="mx-auto max-w-3xl text-center">
-          <p className="animate-fade-in mb-6 inline-flex items-center gap-2 rounded-full border border-border/70 bg-card/40 px-3 py-1.5 font-ui text-[11px] uppercase tracking-[0.22em] text-muted-foreground">
-            <span className="h-1.5 w-1.5 rounded-full bg-primary" />
-            O'zbekcha · Kartasiz · 3 daqiqada tashxis
-          </p>
+      
+      <div className="relative mx-auto w-full max-w-5xl px-6 py-20 text-center md:px-8">
+        <Reveal delay={100}>
+          <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-2 font-ui text-[11px] font-medium uppercase tracking-[0.2em] text-primary backdrop-blur-sm">
+            <span className="relative flex h-2 w-2">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary/60" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
+            </span>
+            Self-Control OS · v2.0
+          </div>
+        </Reveal>
 
-          <h1 className="animate-fade-in-up font-serif text-[38px] leading-[1.04] tracking-tight text-balance sm:text-[52px] md:text-[68px]">
-            O'zingni boshqara olmaslik
+        <Reveal delay={250}>
+          <h1 className="font-serif text-[42px] leading-[1.1] tracking-tighter text-balance sm:text-[64px] md:text-[84px] lg:text-[92px]">
+            Motivatsiya <span className="text-muted-foreground/40 italic">tugaydi.</span>
             <br />
-            <span className="text-primary text-balance">— tizim yo'qligidir.</span>
+            <span className="bg-gradient-to-b from-foreground to-foreground/70 bg-clip-text text-transparent">
+              Tizim qoladi.
+            </span>
           </h1>
+        </Reveal>
 
-          <p
-            className="animate-fade-in-up mx-auto mt-6 max-w-xl font-ui text-[16px] leading-relaxed text-foreground/80 text-pretty md:text-[17px]"
-            style={{ animationDelay: "90ms" }}
-          >
-            Yoshing, jinsing, uyqu vaqting va xarakteringga moslashgan kunlik reja. Har kuni 3 ta
-            mikro-qadam — har biri 2 daqiqa. Iroda emas, arxitektura.
+        <Reveal delay={400}>
+          <p className="mx-auto mt-8 max-w-2xl font-ui text-lg leading-relaxed text-muted-foreground md:text-xl">
+            Iroda kuchiga tayanmang — u cheklangan resurs. Life Order sizning biologik ritmingizga moslashgan shaxsiy xulq-atvor arxitekturasini quradi.
           </p>
+        </Reveal>
 
-          <div
-            className="animate-fade-in-up mt-9 flex flex-col items-stretch gap-3 sm:flex-row sm:justify-center"
-            style={{ animationDelay: "160ms" }}
-          >
+        <Reveal delay={550}>
+          <div className="mt-12 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <Button
               asChild
               size="lg"
-              className="group h-12 rounded-full px-7 font-ui font-semibold"
+              className="group h-14 rounded-full px-10 font-ui text-base font-semibold shadow-[0_20px_50px_-12px_hsl(var(--primary)/0.5)] transition-all hover:scale-[1.02] active:scale-[0.98]"
             >
               <Link to="/auth">
-                Mening rejamni ko'rish
-                <ArrowRight className="ml-1.5 h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" />
+                Tizimni ishga tushirish
+                <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
               </Link>
             </Button>
             <Button
               asChild
               size="lg"
-              variant="outline"
-              className="h-12 rounded-full px-6 font-ui text-foreground/80"
+              variant="ghost"
+              className="h-14 rounded-full px-8 font-ui text-base text-muted-foreground hover:text-foreground"
             >
-              <a href="#how">Qanday ishlaydi</a>
+              <a href="#how">Ilmiy asosni ko'rish</a>
             </Button>
           </div>
-
-          <p
-            className="animate-fade-in mt-6 font-ui text-xs text-muted-foreground"
-            style={{ animationDelay: "240ms" }}
-          >
-            Kartasiz boshlanadi · Bir bosishda bekor · Reklamasiz
-          </p>
-        </div>
+        </Reveal>
+        
+        <Reveal delay={700}>
+          <div className="mt-16 flex items-center justify-center gap-8 grayscale opacity-40 contrast-125">
+             <div className="flex flex-col items-center gap-1">
+               <span className="font-serif text-xl">UCL</span>
+               <span className="text-[9px] uppercase tracking-widest font-ui">Lally et al.</span>
+             </div>
+             <div className="flex flex-col items-center gap-1">
+               <span className="font-serif text-xl">Stanford</span>
+               <span className="text-[9px] uppercase tracking-widest font-ui">BJ Fogg Lab</span>
+             </div>
+             <div className="flex flex-col items-center gap-1">
+               <span className="font-serif text-xl">Harvard</span>
+               <span className="text-[9px] uppercase tracking-widest font-ui">Behavioral Sci</span>
+             </div>
+          </div>
+        </Reveal>
       </div>
     </section>
   );
