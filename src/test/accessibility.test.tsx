@@ -12,7 +12,7 @@ const MockPage = ({ title }: { title: string }) => (
   <main>
     <h1>{title}</h1>
     <button aria-label="Action">Click</button>
-    <div role="progressbar" aria-valuenow={50} aria-valuemin={0} aria-valuemax={100}></div>
+    <div role="progressbar" aria-label="Progress" aria-valuenow={50} aria-valuemin={0} aria-valuemax={100}></div>
   </main>
 );
 
