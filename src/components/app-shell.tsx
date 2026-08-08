@@ -99,15 +99,17 @@ export function AppShell({ title, children }: { title?: string; children: ReactN
                 <CommandBar />
               </div>
 
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-3">
                 <NavMenu />
-                <Link
-                  to="/profile"
-                  className="flex h-9 w-9 items-center justify-center rounded-full border border-border bg-card font-ui text-sm font-semibold text-foreground transition-colors hover:border-primary/50 hover:text-primary"
-                  aria-label={name ? `Profil — ${name}` : "Profil"}
-                >
-                  {initial}
-                </Link>
+                <div className="flex items-center gap-2">
+                  <Link
+                    to="/profile"
+                    className="flex h-9 w-9 items-center justify-center rounded-full border border-border bg-card font-ui text-sm font-semibold text-foreground transition-all hover:border-primary/50 hover:shadow-[0_0_12px_hsl(var(--primary)/0.2)]"
+                    aria-label={name ? `Profil — ${name}` : "Profil"}
+                  >
+                    {initial}
+                  </Link>
+                </div>
               </div>
             </div>
           </header>

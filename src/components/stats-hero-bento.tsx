@@ -116,7 +116,10 @@ export function StatsHeroBento({
 
             {/* Streak + discipline mini row */}
             <div className="grid grid-cols-2 gap-2.5">
-              <div className="rounded-md border border-border/60 bg-background/30 px-3 py-2.5">
+              <Link
+                to="/habits"
+                className="group rounded-md border border-border/60 bg-background/30 px-3 py-2.5 transition-colors hover:border-primary/50 hover:bg-background/60"
+              >
                 <p className="flex items-center gap-1.5 font-ui text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
                   <Flame className="h-3 w-3 text-primary" /> {t("dashboard.hero.streak")}
                 </p>
@@ -124,7 +127,7 @@ export function StatsHeroBento({
                   <CountUpNumber value={streakDays} once="hero-streak" />
                   <span className="ml-1 text-[11px] text-muted-foreground">{t("dashboard.hero.kun")}</span>
                 </p>
-              </div>
+              </Link>
               <Link
                 to="/profile"
                 className="group rounded-md border border-border/60 bg-background/30 px-3 py-2.5 transition-colors hover:border-primary/50 hover:bg-background/60"

@@ -6,9 +6,9 @@ import { Compass, HeartPulse, ListChecks, GraduationCap, Users, Sparkles } from 
  * Faqat mobilda ( md:hidden ).
  */
 const TABS = [
-  { to: "/dashboard", label: "Bosh", icon: Compass, match: ["/dashboard", "/analytics"] },
+  { to: "/dashboard", label: "Bosh", icon: Compass, match: ["/dashboard", "/analytics", "/roadmap"] },
   { to: "/c/body", label: "Tana", icon: HeartPulse, match: ["/c/body", "/workout", "/diet"] },
-  // FAB (Nadir) — markazda, ushbu slotni bo'sh qoldiramiz
+  // FAB (Nadir) — markazda
   { to: "/habits", label: "Odat", icon: ListChecks, match: ["/habits", "/quests", "/c/habits"] },
   { to: "/c/learn", label: "O'rgan", icon: GraduationCap, match: ["/c/learn", "/journal"] },
   {

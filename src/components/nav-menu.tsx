@@ -41,6 +41,7 @@ const SECONDARY: Item[] = [
 const ACCOUNT: Item[] = [
   { to: "/profile", label: "Profil", icon: User },
   { to: "/settings", label: "Sozlamalar", icon: Settings },
+  { to: "/logout", label: "Chiqish", icon: Menu },
 ];
 
 function NavItem({ item, active, onClick }: { item: Item; active: boolean; onClick: () => void }) {

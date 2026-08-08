@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
@@ -50,30 +50,41 @@ function AuthPage() {
   const search = Route.useSearch();
   const next = search.next ?? "/dashboard";
   const [tab, setTab] = useState<"signin" | "signup">("signup");
+  const navigate = useNavigate();
 
   // If already signed in → return to `next` (defaults to /dashboard).
   useEffect(() => {
     let mounted = true;
     supabase.auth.getSession().then(({ data }) => {
       if (!mounted) return;
-      if (data.session) window.location.replace(next);
+      if (data.session) {
+        // First time signup should go to onboarding
+        const isNew = data.session.user.created_at === data.session.user.last_sign_in_at;
+        navigate({ to: isNew ? "/onboarding" : next });
+      }
     });
     return () => {
       mounted = false;
     };
-  }, [next]);
+  }, [next, navigate]);
 
   return (
     <div className="relative min-h-dvh overflow-hidden bg-background text-foreground">
       {/* Bitta sokin gradient — ortiqcha harakat yo'q */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[520px]"
+        className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[600px]"
         style={{
           background:
-            "radial-gradient(55% 45% at 50% 0%, hsl(var(--primary) / 0.12), transparent 72%)",
+            "radial-gradient(65% 50% at 50% 10%, hsl(var(--primary) / 0.15), transparent 80%)",
         }}
       />
+      
+      {/* 3D-ish Floating shapes */}
+      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+        <div className="absolute top-[10%] left-[5%] h-64 w-64 animate-orb-float rounded-full bg-primary/10 blur-3xl" />
+        <div className="absolute bottom-[20%] right-[10%] h-80 w-80 animate-orb-float-delayed rounded-full bg-primary/5 blur-3xl" />
+      </div>
 
       <div className="mx-auto flex min-h-dvh w-full max-w-md flex-col px-5 py-8">
         <Link
