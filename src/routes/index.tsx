@@ -547,10 +547,9 @@ function Pricing() {
           period="doimiy"
           features={[
             "3 tagacha odat",
-            "Sirkadian ritm xaritasi",
+            "Sirkad ritm (Energy Map)",
             "Psixologik fokuslar",
-            "Nadir (kuniga 5 xabar)",
-            "Streak, XP, intizom balli",
+            "Nadir (5 xabar / kun)",
             "PWA — offline ishlash",
           ]}
           cta="Bepul boshlash"
@@ -565,23 +564,23 @@ function Pricing() {
             "Cheksiz odat va kundalik",
             "Nadir Pro (Cheksiz xotira)",
             "Haftalik AI audit",
-            "Burnout signalizatsiyasi",
             "Haftasiga 3 ta Shield",
             "Premium jamoat kanallari",
+            "Burnout signalizatsiyasi",
           ]}
           cta="Pro'ga o'tish"
           variant="primary"
         />
         <PricingCard
           title="Yillik"
-          price="490 000 so'm"
+          price="590 000 so'm"
           period="yiliga"
-          equivalent="~40 000 so'm / oy"
+          equivalent="~49 000 so'm / oy"
           features={[
-            "Pro'dagi barcha imkoniyatlar",
-            "2 oy mutlaqo tekin",
-            "Yillik intizom tahlili",
-            "Narx o'zgarishidan himoya",
+            "Barcha Pro imkoniyatlar",
+            "2 oy bepul",
+            "Ustuvor Nadir javobi",
+            "Eksklyuziv 'Life Order' girih nishoni",
           ]}
           cta="Yillik reja"
           variant="outline"
