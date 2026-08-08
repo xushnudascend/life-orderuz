@@ -303,38 +303,48 @@ function Problem() {
     {
       before: "Yanvarda katta reja tuzasan",
       after: "Fevralda reja seni ayblaydi",
+      why: "Miya katta o'zgarishdan qo'rqadi (Amygdala hijack).",
     },
     {
       before: "Kayfiyat bo'lsa bajarasan",
-      after: "Kayfiyat yo'q kunda halqa uziladi",
+      after: "Iroda tugasa halqa uziladi",
+      why: "Iroda kuchi — cheklangan resurs (Ego depletion).",
     },
     {
       before: "Bir kun o'tkazib yuborasan",
-      after: '"Endi baribir" — va hammasi to\'xtaydi',
+      after: '"Endi baribir" — hammasi to\'xtaydi',
+      why: "Mukammallik tuzog'i (What-the-hell effect).",
     },
   ];
   return (
     <Section id="problem">
       <SectionHeader
         eyebrow="Muammo"
-        title="Sen dangasa emassan. Tizimingda 'Ilgak' yo'q."
-        lead="Xulq-atvor tadqiqotlari bir narsani takrorlaydi: uzilish irodadan emas, dizayndan kelib chiqadi. Reja qanchalik katta bo'lsa, boshlash shunchalik qimmat."
+        title="Sen dangasa emassan. Sening tiziming 'Ilgaksiz'."
+        lead="Ko'pchilik 'iroda' yetishmaydi deb o'ylaydi. Aslida esa, ular miya biologiyasiga qarshi kurashmoqda. Katta maqsadlar qarshilikni oshiradi, uzilish esa aybdorlik hissini tug'diradi."
       />
       <div className="mt-10 grid gap-px overflow-hidden rounded-2xl border border-border bg-border md:grid-cols-3">
         {rows.map((r, i) => (
           <Reveal key={r.before} delay={i * 80} className="bg-background p-6">
-            <p className="font-ui text-[13px] text-muted-foreground line-through decoration-border">
+            <p className="font-ui text-[12px] text-muted-foreground/60 line-through decoration-border italic">
               {r.before}
             </p>
-            <p className="mt-3 font-serif text-[17px] leading-snug">{r.after}</p>
+            <p className="mt-3 font-serif text-[18px] leading-tight text-foreground font-bold">{r.after}</p>
+            <p className="mt-3 font-ui text-[11px] text-primary/70 uppercase tracking-wider font-semibold">
+              Ilmiy sabab: {r.why}
+            </p>
           </Reveal>
         ))}
       </div>
       <Reveal delay={260}>
-        <p className="mt-8 max-w-2xl font-ui text-[15px] leading-relaxed text-foreground/80">
-          Life Order buni teskari qiladi: qadam shunchalik kichikki, uni bajarmaslik uchun bahona
-          topish qiyin. Keyin takror avtomatizmga aylanadi.
-        </p>
+        <div className="mt-12 rounded-2xl border border-primary/20 bg-primary/5 p-8 text-center md:text-left">
+          <h3 className="font-serif text-2xl font-bold">Nega ayni Life Order?</h3>
+          <p className="mt-4 max-w-2xl font-ui text-[15px] leading-relaxed text-foreground/80">
+            Biz shunchaki 'habit tracker' emasmiz. Biz — <b>Self-Control OS</b>. Biz miyangizdagi 
+            mukofot tizimi (Dopamine pathway) va biologik ritmingizni (Circadian rhythm) birlashtirib, 
+            irodangiz minimal sarflanadigan <b>Intizom Arxitekturasini</b> quramiz.
+          </p>
+        </div>
       </Reveal>
     </Section>
   );
@@ -536,37 +546,43 @@ function Pricing() {
           price="0 so'm"
           period="doimiy"
           features={[
-            "3 ta kunlik mikro-missiya",
-            "Streak, XP, intizom",
-            "Nadir asosiy suhbat",
-            "Kundalik + kayfiyat",
-            "PWA — offline ishlaydi",
+            "3 tagacha odat",
+            "Sirkad ritm (Energy Map)",
+            "Psixologik fokuslar",
+            "Nadir (5 xabar / kun)",
+            "PWA — offline ishlash",
           ]}
           cta="Bepul boshlash"
           variant="outline"
         />
         <PricingCard
           title="Pro"
-          price="49 000 so'm"
+          price="59 000 so'm"
           period="oyiga"
-          badge="Eng mashhur"
+          badge="Tavsiya"
           features={[
-            "Free'dagi hammasi",
-            "Nadir Pro — kengroq xotira",
-            "Cheksiz odat va quest",
-            "Haftalik AI hisobot",
-            "Burnout erta signali",
+            "Cheksiz odat va kundalik",
+            "Nadir Pro (Cheksiz xotira)",
+            "Haftalik AI audit",
+            "Haftasiga 3 ta Shield",
+            "Premium jamoat kanallari",
+            "Burnout signalizatsiyasi",
           ]}
           cta="Pro'ga o'tish"
           variant="primary"
         />
         <PricingCard
           title="Yillik"
-          price="490 000 so'm"
+          price="590 000 so'm"
           period="yiliga"
-          equivalent="12 oy narxida 10"
-          features={["Pro'dagi hammasi", "Ikki oy tekin", "Yillik retrospektiv", "Narx qotiriladi"]}
-          cta="Yillik olish"
+          equivalent="~49 000 so'm / oy"
+          features={[
+            "Barcha Pro imkoniyatlar",
+            "2 oy bepul",
+            "Ustuvor Nadir javobi",
+            "Eksklyuziv 'Life Order' girih nishoni",
+          ]}
+          cta="Yillik reja"
           variant="outline"
         />
       </div>

@@ -5,6 +5,7 @@ export const freeTierLimits = {
   mentorMessagesPerDay: 5,
   shieldPerWeek: 0,
   analytics: false,
+  advancedInsights: false,
 } as const;
 
 export const proTierLimits = {
@@ -13,6 +14,7 @@ export const proTierLimits = {
   mentorMessagesPerDay: Infinity,
   shieldPerWeek: 3,
   analytics: true,
+  advancedInsights: true,
 } as const;
 
 export type PlanId = "monthly" | "yearly";

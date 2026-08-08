@@ -116,6 +116,15 @@ function HabitsPage() {
       }
     }
     const composed = composedCue ? `${composedCue} → ${newTitle.trim()}` : newTitle.trim();
+    
+    // Check Freemium limit (3 habits)
+    const { data: profile } = await supabase.from("profiles").select("subscription_tier").eq("id", userId).single();
+    if (profile?.subscription_tier !== 'pro' && habits.length >= 3) {
+      toast.error("Free rejada 3 ta odat limiti. Ko'proq uchun Pro'ga o'ting.");
+      setSaving(false);
+      return;
+    }
+
     await supabase.from("habits").insert({
       user_id: userId,
       title: composed,
