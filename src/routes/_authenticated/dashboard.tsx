@@ -388,13 +388,13 @@ function Dashboard() {
 
         {/* Quick access */}
         <Panel className="lg:col-span-12">
-          <PanelHeader eyebrow="OS Modullari" />
+          <PanelHeader eyebrow="OS Modullari (Kutubxona & Kurslar)" />
 
           <div className="mt-3 grid grid-cols-2 gap-2">
             {[
               { to: "/workout", label: "Tana", icon: Dumbbell },
               { to: "/diet", label: "Ovqatlanish", icon: Salad },
-              { to: "/quests", label: "O'rganish", icon: Target },
+              { to: "/quests", label: "Kurslar & Kutubxona", icon: Target },
               { to: "/mentor", label: "Mentor", icon: Sparkles },
             ].map(({ to, label, icon: Icon }) => (
               <Link

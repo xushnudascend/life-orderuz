@@ -144,8 +144,8 @@ export const uz = {
       urgent: "Zarur",
       dailyLoop: "Kunlik halqa",
       depth: "Chuqurroq",
-      habits: "Bugungi odatlar",
-      quickAccess: "Tezkor kirish",
+      habits: "Bugungi protokol",
+      quickAccess: "Modullar",
       timetable: "Kunlik jadval",
     },
     habits: {
@@ -158,7 +158,7 @@ export const uz = {
     quick: {
       workout: "Tana",
       diet: "Ovqatlanish",
-      quests: "O'rganish",
+      quests: "Kurslar & Kutubxona",
       mentor: "Mentor",
     },
     depth: {
