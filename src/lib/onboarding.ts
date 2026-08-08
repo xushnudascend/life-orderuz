@@ -43,7 +43,7 @@ export const ONBOARDING_QUESTIONS: OnboardingQuestion[] = [
     prompt: "Ertalab uyg'onganingda birinchi qilgan ishing?",
     type: "single",
     options: [
-      { value: "telefon", label: "Telefonni olaman — 30+ daqiqa yotib qolaman" },
+      { value: "telefon", label: "Ekran bilan vaqt o'tkazaman" },
       { value: "namoz", label: "Ibodat / duo qilaman, keyin turaman" },
       { value: "yuvinish", label: "Darhol turib yuvinaman" },
       { value: "yotib_qolaman", label: "Uzoq yotib qolaman, kechga qolaman" },
@@ -56,7 +56,7 @@ export const ONBOARDING_QUESTIONS: OnboardingQuestion[] = [
     prompt: "Kechqurun uyquga qanday borasan?",
     type: "single",
     options: [
-      { value: "telefon_bilan", label: "Telefon aralashib ketaman, allamahalgacha" },
+      { value: "telefon_bilan", label: "Ekran qarshisida uzoq qolib ketaman" },
       { value: "kitob", label: "Kitob o'qib uxlayman" },
       { value: "jadval", label: "Aniq vaqtda yotaman" },
       { value: "tartibsiz", label: "Har kun har xil vaqt — tartib yo'q" },
