@@ -58,11 +58,11 @@
 
 @utility lift {
   transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
 
-@utility lift:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+  }
 }
 
 @keyframes orb-float {
