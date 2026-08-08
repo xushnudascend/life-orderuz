@@ -8,7 +8,7 @@ export const uz = {
     name: "Life Order",
     tagline: "Hayotingni tartibga sol",
     oneLiner:
-      "Self-Control OS — o'z-o'zini boshqarishning operatsion tizimi. Trigger tahlili, kunlik uchta aniq qadam, halol AI mentor Nadir. 60 soniyada tashxis. Kartasiz. \n\n'''Do not make any visual modifications. The phrases I write are commands to understand what I want, not to be written down. Understand their content well, then execute what is required.'''\n                                            \n                                            men shu o'z saytimni real ko'rib chiq tahlil qil har taraflama chuqur juda juda juda chuqur tahlil qilish orqali saytimni 10 ballik shkalada har hil 10lab 100lab mezonlarda bahola faqat rostini real halol ayt",
+      "Self-Control OS — o'z-o'zini boshqarishning operatsion tizimi. Trigger tahlili, kunlik uchta aniq qadam, halol AI mentor Nadir. 3 daqiqada tashxis. Kartasiz. \n\n'''Do not make any visual modifications. The phrases I write are commands to understand what I want, not to be written down. Understand their content well, then execute what is required.'''\n                                            \n                                            men shu o'z saytimni real ko'rib chiq tahlil qil har taraflama chuqur juda juda juda chuqur tahlil qilish orqali saytimni 10 ballik shkalada har hil 10lab 100lab mezonlarda bahola faqat rostini real halol ayt",
   },
   nav: {
     features: "Imkoniyatlar",
@@ -23,7 +23,7 @@ export const uz = {
     title: "O'zingni boshqara olmaslik — kasallik emas, tizim yo'qligidir.",
     subtitle:
       "Life Order sening kunlaringni uchta aniq qadamga aylantiradi. Emojisiz. Ustozliksiz. Nadir — halol AI mentor — sen bilan haqiqatni gaplashadi.",
-    ctaPrimary: "60 soniyada tashxisni ol",
+    ctaPrimary: "3 daqiqada tashxisni ol",
     ctaSecondary: "Uslubni ko'rish",
     trustLine: "Kartasiz · O'zbek tilida · PWA — telefonga o'rnatiladi",
   },
@@ -103,7 +103,7 @@ export const uz = {
   },
   cta: {
     heading: "Bugun boshla. Ertaga — kech.",
-    body: "60 soniyada onboarding. Karta so'ralmaydi. Yoqmasa, hech qanday izing qolmaydi.",
+    body: "3 daqiqada onboarding. Karta so'ralmaydi. Yoqmasa, hech qanday izing qolmaydi.",
     button: "Tashxisdan o'tish",
   },
   footer: {

@@ -50,7 +50,7 @@ const FAQ_ITEMS: { q: string; a: string }[] = [
   },
   {
     q: "Karta so'raladimi?",
-    a: "Yo'q. Free rejasi doimiy va kartasiz. Pro — 49 000 so'm/oy, istalgan payt bir bosishda bekor qilinadi. To'lovlar Payme va Click orqali xavfsiz JSON-RPC protokoli asosida amalga oshiriladi.",
+    a: "Yo'q. Free rejasi doimiy va kartasiz. Pro — 59 000 so'm/oy, istalgan payt bir bosishda bekor qilinadi. To'lovlar Payme va Click orqali xavfsiz JSON-RPC protokoli asosida amalga oshiriladi.",
   },
   {
     q: "Ma'lumotim xavfsizmi?",
