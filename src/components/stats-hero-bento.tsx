@@ -73,7 +73,9 @@ export function StatsHeroBento({
           </div>
           <div className="flex shrink-0 items-center gap-2">
             <ShieldIndicator usedThisWeek={shieldsUsed} max={3} />
-            <RankBadge score={score} />
+            <Link to="/settings/subscription">
+              <RankBadge score={score} />
+            </Link>
           </div>
         </div>
 

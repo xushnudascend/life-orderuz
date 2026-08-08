@@ -260,6 +260,23 @@ function Dashboard() {
         {/* Psychological Focus Section */}
         <div className="lg:col-span-12">
           <PsychologicalFocus archetype={profile?.archetype ?? null} />
+          {/* Freemium Limit Indicator */}
+          <div className="mt-3 rounded-lg border border-primary/20 bg-primary/5 p-3 sm:p-4">
+            <div className="flex items-center justify-between gap-3">
+              <div className="flex items-center gap-2">
+                <Shield className="h-4 w-4 text-primary shrink-0" />
+                <p className="font-ui text-[12px] font-semibold text-foreground/90">
+                  Self-Control OS: <span className="text-primary">Shaffof Billing</span>
+                </p>
+              </div>
+              <Button asChild variant="ghost" size="sm" className="h-7 text-[10px] font-bold uppercase tracking-widest hover:bg-primary/10">
+                <Link to="/settings/subscription">Boshqarish</Link>
+              </Button>
+            </div>
+            <p className="mt-2 font-ui text-[11px] leading-relaxed text-muted-foreground">
+              O'zbekistonda yagona: soxta shoshiltirishlar yo'q. Free reja doimiy, Pro esa chuqur AI tahlili uchun.
+            </p>
+          </div>
         </div>
         
         {/* Habits */}
