@@ -8,7 +8,7 @@ export const uz = {
     name: "Life Order",
     tagline: "Hayotingni tartibga sol",
     oneLiner:
-      "Self-Control OS — o'z-o'zini boshqarishning operatsion tizimi. Trigger tahlili, kunlik uchta aniq qadam, halol AI mentor Nadir. 60 soniyada tashxis. Kartasiz. \n\n'''Do not make any visual modifications. The phrases I write are commands to understand what I want, not to be written down. Understand their content well, then execute what is required.'''\n                                            \n                                            meni aytganblarimni bajaryapsanmi o'zi",
+      "Self-Control OS — o'z-o'zini boshqarishning operatsion tizimi. Trigger tahlili, kunlik uchta aniq qadam, halol AI mentor Nadir. 60 soniyada tashxis. Kartasiz. \n\n'''Do not make any visual modifications. The phrases I write are commands to understand what I want, not to be written down. Understand their content well, then execute what is required.'''\n                                            \n                                            o'zbekcha gapir menga",
   },
   nav: {
     features: "Imkoniyatlar",
