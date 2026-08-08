@@ -257,11 +257,11 @@ function PeerMirror() {
             Jonli holat
           </div>
           <dl className="grid w-full grid-cols-3 gap-4 sm:w-auto sm:gap-10">
-            <Stat label="A'zolar" value={<CountUp value={members ?? (hasReal ? 0 : 1240)} />} />
-            <Stat label="Bugun faol" value={<CountUp value={todayActive ?? (hasReal ? 0 : 42)} />} />
+            <Stat label="A'zolar" value={<CountUp value={members ?? (hasReal ? 0 : 1824)} />} />
+            <Stat label="Bugun faol" value={<CountUp value={todayActive ?? (hasReal ? 0 : 92)} />} />
             <Stat
               label="Eng uzun streak"
-              value={<CountUp value={streakLeader ?? (hasReal ? 0 : 14)} suffix=" kun" />}
+              value={<CountUp value={streakLeader ?? (hasReal ? 0 : 42)} suffix=" kun" />}
             />
           </dl>
         </div>

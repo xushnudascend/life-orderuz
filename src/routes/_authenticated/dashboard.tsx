@@ -163,7 +163,7 @@ function Dashboard() {
   const c = circadian();
   const archetype: Archetype | null =
     profile?.archetype && profile.archetype in ARCHETYPES
-      ? ARCHETYPES[profile.archetype as Archetype["id"]]
+      ? ARCHETYPES[profile.archetype as keyof typeof ARCHETYPES]
       : null;
   useEffect(() => {
     applyArchetypeTheme(profile?.archetype ?? null);
