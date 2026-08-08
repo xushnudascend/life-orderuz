@@ -17,8 +17,8 @@
   --popover: 240 10% 4%;
   --popover-foreground: 0 0% 98%;
 
-  --primary: 187 65% 42%; /* Deep Teal: Calm, Mental Clarity, and Financial Trust */
-  --primary-foreground: 187 70% 5%;
+  --primary: 187 65% 42%; /* Scientific Deep Teal */
+  --primary-foreground: 0 0% 6%;
 
   --secondary: 240 5% 10%;
   --secondary-foreground: 0 0% 98%;
@@ -56,7 +56,7 @@
     --popover: hsl(240 10% 4%);
     --popover-foreground: hsl(0 0% 98%);
     --primary: hsl(187 65% 42%);
-    --primary-foreground: hsl(187 70% 5%);
+    --primary-foreground: hsl(0 0% 6%);
     --secondary: hsl(240 5% 10%);
     --secondary-foreground: hsl(0 0% 98%);
     --muted: hsl(240 5% 10%);
@@ -72,25 +72,10 @@
     --shadow-glow: 0 0 40px hsl(187 65% 42% / 0.14);
   }
 
-  /* Archetype Theme Overrides using [data-archetype] selector */
-  html[data-archetype="focus_seeker"] {
-    --primary: hsl(210 100% 66%); /* Deep Azure for clarity */
-    --ring: hsl(210 100% 66%);
-  }
-
-  html[data-archetype="body_builder"] {
-    --primary: hsl(12 100% 63%); /* Crimson Energy */
-    --ring: hsl(12 100% 63%);
-  }
-
-  html[data-archetype="night_scholar"] {
-    --primary: hsl(270 95% 75%); /* Electric Violet/Lavender */
-    --ring: hsl(270 95% 75%);
-  }
-
-  html[data-archetype="steady_walker"] {
-    --primary: hsl(42 100% 62%); /* Golden Amber of consistency */
-    --ring: hsl(42 100% 62%);
+  /* Force Deep Teal across all states as requested */
+  html {
+    --primary: hsl(187 65% 42%);
+    --ring: hsl(187 65% 42%);
   }
 
   body {
