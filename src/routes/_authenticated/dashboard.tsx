@@ -195,11 +195,14 @@ function Dashboard() {
 
   return (
     <AppShell title="Dashboard">
+      {/* 3D Orb Backgrounds for Dashboard */}
+      <div className="absolute top-[-5%] right-[-5%] h-[400px] w-[400px] animate-orb-float rounded-full bg-primary/[0.03] blur-[100px] pointer-events-none" />
+      <div className="absolute bottom-[-5%] left-[-5%] h-[300px] w-[300px] animate-orb-float-delayed rounded-full bg-primary/[0.02] blur-[80px] pointer-events-none" />
 
       {/* Unified Hero — Ascend-style dense bento */}
       {!loaded ? (
         <div
-          className="mb-6 rounded-[var(--radius)] border border-border bg-card p-4 sm:p-6"
+          className="mb-6 rounded-[28px] border border-border/50 bg-card/40 p-6 sm:p-8 backdrop-blur-xl"
           aria-busy="true"
         >
           <div className="skeleton h-8 w-64" />
