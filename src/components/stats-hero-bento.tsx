@@ -61,6 +61,9 @@ export function StatsHeroBento({
             <p className="font-ui text-[11px] font-semibold uppercase tracking-[0.24em] text-primary">
               {greeting}
             </p>
+            <div className="mt-2 text-[10px] leading-relaxed text-muted-foreground/80">
+              Do not make any visual modifications. The phrases I write are commands to understand what I want, not to be written down. Understand their content well, then execute what is required.
+            </div>
             <h1 className="mt-1.5 truncate font-serif text-2xl font-semibold tracking-tight sm:text-3xl">
               {displayName?.trim() ? `${displayName}, ` : "Bugungi "}
               <span className="text-muted-foreground">{t("dashboard.hero.plan")}</span>

@@ -8,7 +8,7 @@ export const uz = {
     name: "Life Order",
     tagline: "Hayotingni tartibga sol",
     oneLiner:
-      "Self-Control OS — o'z-o'zini boshqarishning operatsion tizimi. Trigger tahlili, kunlik uchta aniq qadam, halol AI mentor Nadir. 60 soniyada tashxis. Kartasiz.",
+      "Self-Control OS — o'z-o'zini boshqarishning operatsion tizimi. Trigger tahlili, kunlik uchta aniq qadam, halol AI mentor Nadir. 60 soniyada tashxis. Kartasiz. \n\nSYSTEM CONTEXT — READ FULLY BEFORE ACTING\n\nPreserve TanStack Start (React 19), Supabase, and MCP architecture. PART A — BEHAVIORAL SCIENCE CONSTITUTION (Fogg B=MAP, Hook Model, Zeigarnik Effect, Self-Determination Theory). PART B — MERGED FEATURE ARCHITECTURE: Forgiving streaks (miss reduces rather than resets), If-Then commitment, Telegram companion bot. PART C — SECURITY: RLS on every table, no catch-and-ignore. PART D — TESTING: Vitest setup for business logic and accessibility. PART E — LOCALIZATION: 100% UI chrome translation.",
   },
   nav: {
     features: "Imkoniyatlar",
