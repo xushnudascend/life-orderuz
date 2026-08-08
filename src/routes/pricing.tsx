@@ -229,7 +229,6 @@ function Plans() {
               `Nadir bilan kunda ${freeTierLimits.mentorMessagesPerDay} ta xabar`,
               "Kunlik 3 ta mikro-vazifa",
               "Streak, XP va intizom balli",
-
               "PWA — telefonga o'rnatiladi, offline ishlaydi",
             ]}
             ctaLabel="Bepul boshlash"
@@ -240,16 +239,16 @@ function Plans() {
             price={pricing.monthly.label}
             tagline={`Yoki ${pricing.yearly.label} · 14 kun qaytarish`}
             features={[
-              "Cheksiz odat va quest",
-              "Cheksiz kundalik yozuv",
-              "Nadir bilan cheksiz suhbat",
+              "Kutubxona: Barcha ilmiy manbalar",
+              "Kurslar: 66 kunlik intizom kursi",
+              "Cheksiz kundalik va odatlar",
+              "Nadir Pro — chuqur xotira va tahlil",
               `Haftasiga ${proTierLimits.shieldPerWeek} ta Shield`,
-              "Nadir Pro — kengroq kontekst va tarix",
               "Haftalik AI hisobot va tuzatish",
               "Burnout signal va oldindan nudge",
-              "Reyting va davra kanallariga to'liq kirish",
-              "Kengaytirilgan yutuqlar va statistika",
-              "Ustuvor yordam (24 soat ichida)",
+              "Reyting va davra kanallariga kirish",
+              "Kengaytirilgan yutuqlar",
+              "Ustuvor yordam",
             ]}
             ctaLabel="Pro ni tanlash"
           />
