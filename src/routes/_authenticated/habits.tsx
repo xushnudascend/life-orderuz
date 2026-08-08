@@ -6,7 +6,8 @@ import { PageHero } from "@/components/page-hero";
 import { EmptyState } from "@/components/empty-state";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Loader2, Plus, Trash2, Flame, ArrowRight } from "lucide-react";
+import { Loader2, Plus, Trash2, Flame, ArrowRight, Info, Target, Zap } from "lucide-react";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { toast } from "sonner";
 import { uz } from "@/i18n";
 import { Panel, PanelHeader } from "@/components/panel";
@@ -156,8 +157,9 @@ function HabitsPage() {
         } as never,
       );
       const rem = habits.length - todayLogs.size - 1;
-      if (rem === 1) toast.success("Bir qadam qoldi.");
-      else if (rem === 0) toast.success("Hammasi allaqachon belgilangan.");
+      if (rem === 1) toast.success("Bir qadam qoldi. Iroda kuchi — bu mushak.");
+      else if (rem === 0) toast.success("G'alaba! Bugungi protokol 100% yopildi.");
+      else toast.success(`+${h.xp_reward} XP. Kichik qadam, katta natija.`);
     }
     refresh();
   }
@@ -216,11 +218,23 @@ function HabitsPage() {
             </p>
           }
         />
-        <form onSubmit={addHabit} className="mt-4 space-y-3">
-          <div className="rounded-[var(--radius)] border border-dashed border-border/70 bg-background/40 p-3">
-            <p className="font-ui text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
-              Niyat formulasi · Agar X — men Y
-            </p>
+        <form onSubmit={addHabit} className="mt-4 space-y-4">
+          <div className="rounded-[var(--radius)] border border-border/60 bg-background/40 p-4 transition-all hover:border-primary/30">
+            <div className="flex items-center justify-between">
+              <p className="font-ui text-[10px] font-bold uppercase tracking-[0.22em] text-primary">
+                Implementation Intentions · Agar X — men Y
+              </p>
+              <TooltipProvider>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Info className="h-3.5 w-3.5 text-muted-foreground cursor-help" />
+                  </TooltipTrigger>
+                  <TooltipContent className="max-w-[200px] text-[11px]">
+                    Peter Gollwitzer tadqiqoti: aniq 'Agar-Unda' formulasi muvaffaqiyatni 300% ga oshiradi.
+                  </TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
+            </div>
             <div className="mt-2 grid gap-2 sm:grid-cols-[1fr_auto_1fr] sm:items-center">
               <Input
                 placeholder="Qachon / qayerda (masalan, ertalab nonushtadan keyin)"
@@ -257,9 +271,9 @@ function HabitsPage() {
             {habits.length > 0 && (
               <div className="mt-3 border-t border-border/60 pt-3">
                 <label className="flex items-center gap-2 font-ui text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
-                  <span>Habit stacking · mavjud odatga bog'lash</span>
+                  <span>Habit stacking · Mavjud odatga bog'lash (Zanjir)</span>
                 </label>
-                <select
+                <div className="relative mt-2">
                   value={stackAnchor}
                   onChange={(e) => {
                     setStackAnchor(e.target.value);
@@ -274,15 +288,16 @@ function HabitsPage() {
                     </option>
                   ))}
                 </select>
+                </div>
                 <p className="mt-1.5 font-ui text-[10px] text-muted-foreground">
-                  James Clear: yangi odat mavjud odatga bog'lansa — 2-3x mustahkam qoladi.
+                  James Clear: "Yangi odatni allaqachon bajaradigan odatingizdan keyin qo'shing." Bu miyada neyron bog'lanishlarni (Synaptic pruning) tezlashtiradi.
                 </p>
               </div>
             )}
 
             {(cue.trim() || newTitle.trim() || stackAnchor) && (
-              <p className="mt-3 border-t border-border/60 pt-3 font-serif text-sm text-foreground">
-                <span className="text-muted-foreground">Ko'rinish:</span>{" "}
+              <p className="mt-3 border-t border-border/60 pt-3 font-serif text-[15px] text-foreground leading-relaxed">
+                <span className="text-[11px] uppercase tracking-wider text-primary/70 font-ui font-bold block mb-1">Yakuniy Formula:</span>{" "}
                 {stackAnchor
                   ? (() => {
                       const a = habits.find((h) => h.id === stackAnchor);
@@ -400,20 +415,27 @@ function HabitsPage() {
                         <button
                           type="button"
                           onClick={() => toggleToday(h)}
-                          className="flex flex-1 items-center gap-4 text-left"
+                          className="group/habit flex flex-1 items-center gap-4 text-left"
                         >
-                          <span
-                            className={
-                              "flex h-9 w-9 items-center justify-center rounded-full border transition-colors " +
-                              (doneRow
-                                ? "border-primary bg-primary text-primary-foreground"
-                                : "border-border text-muted-foreground")
-                            }
-                          >
-                            <Flame className="h-4 w-4" />
-                          </span>
-                          <div className={doneRow ? "opacity-70" : ""}>
-                            <p className={"font-serif text-lg " + (doneRow ? "line-through" : "")}>
+                          <div className="relative">
+                            <span
+                              className={
+                                "flex h-10 w-10 items-center justify-center rounded-full border transition-all duration-300 " +
+                                (doneRow
+                                  ? "border-primary bg-primary text-primary-foreground scale-110 shadow-[0_0_15px_rgba(45,212,191,0.4)]"
+                                  : "border-border bg-background text-muted-foreground group-hover/habit:border-primary/50 group-hover/habit:text-primary")
+                              }
+                            >
+                              {doneRow ? <Check className="h-5 w-5" /> : <Flame className="h-5 w-5" />}
+                            </span>
+                            {!doneRow && (
+                              <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-primary text-[8px] font-bold text-primary-foreground animate-pulse">
+                                XP
+                              </span>
+                            )}
+                          </div>
+                          <div className={doneRow ? "opacity-50" : ""}>
+                            <p className={"font-serif text-[17px] leading-tight " + (doneRow ? "line-through text-muted-foreground" : "text-foreground")}>
                               {h.title}
                             </p>
                             <p className="mt-1 font-ui text-xs uppercase tracking-[0.2em] text-primary">
