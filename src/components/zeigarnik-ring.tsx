@@ -22,24 +22,26 @@ export function ZeigarnikRing({
   const eta = remaining * avgMinutes;
 
   return (
-    <div className="flex items-center gap-4">
-      <ProgressRing value={done} total={total} />
+    <div className="flex items-center gap-3">
+      <div className="shrink-0">
+        <ProgressRing value={done} total={total} size={50} strokeWidth={4} />
+      </div>
       <div className="min-w-0 flex-1">
         <div className="flex items-center gap-2">
-          <span className="font-ui text-[10px] font-semibold uppercase tracking-[0.22em] text-primary">
-            {closed ? "Halqa yopildi" : "Ochiq halqa"}
+          <span className="font-ui text-[9px] font-semibold uppercase tracking-[0.22em] text-primary">
+            {closed ? "Yopildi" : "Halqa"}
           </span>
-          <span aria-hidden className="h-px flex-1 bg-border/60" />
-          <span className="font-ui text-[10px] tabular-nums uppercase tracking-[0.18em] text-muted-foreground">
+          <span aria-hidden className="h-px flex-1 bg-border/40" />
+          <span className="font-ui text-[9px] tabular-nums uppercase tracking-[0.18em] text-muted-foreground">
             {pct}%
           </span>
         </div>
-        <p className="mt-1 font-serif text-[17px] leading-snug text-foreground">
+        <p className="mt-0.5 font-serif text-[15px] leading-tight text-foreground">
           {closed
-            ? "Bugun tugadi. Dam ol."
+            ? "Bugun tugadi."
             : remaining === 1
-              ? "Yana 1 ta — bugun yopiladi."
-              : `Yana ${remaining} ta — halqa yopiladi.`}
+              ? "Oxirgi qadam."
+              : `Yana ${remaining} ta.`}
         </p>
         {!closed && (nextTitle || eta > 0) && (
           <p className="mt-1 flex items-center gap-2 font-ui text-xs text-muted-foreground">

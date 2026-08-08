@@ -141,10 +141,10 @@ export function DailyTimetable({ profile }: { profile?: TimetableProfile }) {
   const personalized = !!(profile && (profile.age || profile.archetype));
 
   return (
-    <div className="rounded-[var(--radius)] border border-border p-5">
+    <div className="rounded-[var(--radius)] border border-border bg-card/40 p-4 transition-all hover:bg-card/60">
       <div className="flex items-center justify-between">
-        <p className="font-ui text-[11px] uppercase tracking-[0.22em] text-muted-foreground">
-          Kunlik jadval
+        <p className="font-ui text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
+          Jadval
         </p>
         {personalized && (
           <span className="font-ui text-[10px] uppercase tracking-[0.2em] text-primary">
