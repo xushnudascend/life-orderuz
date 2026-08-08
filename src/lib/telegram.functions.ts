@@ -1,11 +1,9 @@
 import { createServerFn } from "@tanstack/react-start";
-import { getEvent } from "vinxi/http";
 
 export const getTelegramLinkToken = createServerFn({ method: "POST" })
-  .handler(async () => {
+  .handler(async ({ request }) => {
     const { supabaseAdmin: sb } = await import("@/integrations/supabase/client.server");
-    const event = getEvent();
-    const authHeader = event.headers.get("authorization") || event.headers.get("Authorization");
+    const authHeader = request.headers.get("authorization") || request.headers.get("Authorization");
     
     const { data: { user } } = await sb.auth.getUser(authHeader?.split(" ")[1] ?? "");
     if (!user) throw new Error("Unauthorized");
