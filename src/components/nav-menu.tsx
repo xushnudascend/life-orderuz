@@ -33,15 +33,15 @@ export function NavMenu({ onClose }: { onClose?: () => void }) {
   ];
 
   return (
-    <div className="flex flex-col h-full bg-card border-r border-border w-64 p-6 overflow-y-auto relative">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,hsl(var(--primary)/0.05),transparent_70%)] pointer-events-none" />
+    <div className="flex flex-col h-full bg-card border-r border-border w-72 p-8 overflow-y-auto relative">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,hsl(var(--primary)/0.1),transparent_70%)] pointer-events-none" />
       
-      <div className="mb-8 flex items-center justify-between relative z-10">
-        <div className="flex items-center gap-3">
-          <div className="h-8 w-8 rounded-lg bg-primary/20 flex items-center justify-center shadow-[0_0_15px_hsl(var(--primary)/0.3)]">
-            <Shield className="h-5 w-5 text-primary" />
+      <div className="mb-10 flex items-center justify-between relative z-10">
+        <div className="flex items-center gap-4">
+          <div className="h-10 w-10 rounded-2xl bg-primary text-primary-foreground flex items-center justify-center shadow-[0_0_20px_hsl(var(--primary)/0.5)]">
+            <Shield className="h-6 w-6" />
           </div>
-          <span className="font-serif text-xl font-bold tracking-tight">Life Order</span>
+          <span className="font-serif text-2xl font-bold tracking-tight">Life Order</span>
         </div>
       </div>
 

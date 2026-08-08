@@ -51,14 +51,14 @@ export function StatsHeroBento({
   return (
     <section
         aria-label="Bugungi holat"
-        className="relative h-full overflow-hidden rounded-[var(--radius)] border border-border bg-card p-4 sm:p-6"
+        className="relative h-full overflow-hidden rounded-[28px] border border-border/60 bg-card/40 p-6 sm:p-10 backdrop-blur-2xl shadow-[0_32px_64px_-16px_rgba(0,0,0,0.5)]"
       >
 
         {/* Left Side Content */}
         <div className="relative z-10 flex items-center justify-between">
-          <h1 className="font-serif text-2xl font-semibold tracking-tight sm:text-3xl">
+          <h1 className="font-serif text-3xl font-bold leading-[0.95] tracking-tight sm:text-5xl">
             {displayName?.trim() ? `${displayName}, ` : t("dashboard.hero.greetingPrefix") + " "}
-            <span className="text-muted-foreground">{t("dashboard.hero.plan")}</span>
+            <span className="text-muted-foreground/60">{t("dashboard.hero.plan")}</span>
           </h1>
           <div className="flex items-center gap-2">
             <ShieldIndicator usedThisWeek={shieldsUsed} max={3} />
@@ -100,7 +100,7 @@ export function StatsHeroBento({
         <div className="relative z-10 mt-6 grid grid-cols-2 gap-3">
           <Link
             to="/habits"
-            className="group relative overflow-hidden rounded-xl border border-border bg-background/40 p-3.5 transition-all hover:border-primary/50"
+            className="group relative overflow-hidden rounded-[20px] border border-border/60 bg-background/40 p-5 transition-all hover:border-primary/50 hover:bg-primary/5 hover:shadow-[0_0_20px_hsl(var(--primary)/0.15)]"
           >
             <p className="flex items-center gap-1.5 font-ui text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
               <Flame className="h-3 w-3 text-primary" /> {t("dashboard.hero.streak")}
@@ -113,7 +113,7 @@ export function StatsHeroBento({
 
           <Link
             to="/profile"
-            className="group relative overflow-hidden rounded-xl border border-border bg-background/40 p-3.5 transition-all hover:border-primary/50"
+            className="group relative overflow-hidden rounded-[20px] border border-border/60 bg-background/40 p-5 transition-all hover:border-primary/50 hover:bg-primary/5 hover:shadow-[0_0_20px_hsl(var(--primary)/0.15)]"
           >
             <p className="flex items-center gap-1.5 font-ui text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
               <Shield className="h-3 w-3 text-primary" /> {t("dashboard.hero.discipline")}

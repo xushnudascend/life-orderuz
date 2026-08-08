@@ -27,9 +27,9 @@ export function ZeigarnikRing({
         <ProgressRing value={done} total={total} size={50} strokeWidth={4} />
       </div>
       <div className="min-w-0 flex-1">
-        <div className="flex items-center gap-2">
-          <span className="font-ui text-[9px] font-semibold uppercase tracking-[0.22em] text-primary">
-            {closed ? "Yopildi" : "Halqa"}
+        <div className="flex items-center gap-2.5">
+          <span className="font-ui text-[9px] font-bold uppercase tracking-[0.25em] text-primary">
+            {closed ? "Yopildi" : "Protokol Halqasi"}
           </span>
           <span aria-hidden className="h-px flex-1 bg-border/40" />
           <span className="font-ui text-[9px] tabular-nums uppercase tracking-[0.18em] text-muted-foreground">

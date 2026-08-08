@@ -156,40 +156,65 @@ function SectionHeader({
 
 function Hero() {
   return (
-    <section className="relative flex min-h-[75dvh] flex-col items-center justify-center overflow-hidden border-b border-border bg-[#0a0502]">
-      <div className="relative mx-auto w-full max-w-4xl px-6 py-12 text-center md:px-8">
+    <section className="relative flex min-h-[90dvh] flex-col items-center justify-center overflow-hidden border-b border-border bg-[#0a0502]">
+      {/* 3D Orb Backgrounds */}
+      <div className="absolute top-[-10%] right-[-10%] h-[600px] w-[600px] animate-orb-float rounded-full bg-primary/10 blur-[120px]" />
+      <div className="absolute bottom-[-10%] left-[-10%] h-[500px] w-[500px] animate-orb-float-delayed rounded-full bg-primary/5 blur-[100px]" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[700px] w-[700px] animate-blob-breathe rounded-full bg-primary/[0.04] blur-[150px]" />
+      
+      <div className="relative z-10 mx-auto w-full max-w-5xl px-6 py-20 text-center md:px-8">
+        <Reveal delay={100}>
+          <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-1.5 font-ui text-[10px] font-bold uppercase tracking-[0.2em] text-primary shadow-[0_0_20px_hsl(var(--primary)/0.2)]">
+            <Sparkles className="h-3.5 w-3.5" />
+            Beta 2.0 · Self-Control OS
+          </div>
+        </Reveal>
+
         <Reveal delay={250}>
-          <h1 className="font-serif text-[48px] leading-[1.05] tracking-tighter text-balance sm:text-[72px] md:text-[84px]">
+          <h1 className="font-serif text-[56px] leading-[0.95] tracking-tighter text-balance sm:text-[84px] md:text-[110px] lg:text-[124px]">
             Motivatsiya tugaydi,<br />
-            <span className="text-primary italic">Tizim qoladi.</span>
+            <span className="text-primary italic relative">
+              Tizim qoladi.
+              <span className="absolute -bottom-2 left-0 h-1 w-full bg-primary/20 blur-sm" />
+            </span>
           </h1>
         </Reveal>
 
         <Reveal delay={400}>
-          <p className="mx-auto mt-6 max-w-xl font-ui text-base leading-relaxed text-muted-foreground">
-            Life Order — sening biologik imkoniyatlaringga moslangan yagona Self-Control OS.
+          <p className="mx-auto mt-10 max-w-2xl font-ui text-lg leading-relaxed text-muted-foreground/80 md:text-xl">
+            Life Order — biologik ritming va xulq-atvor arxitekturangga moslangan,<br className="hidden md:block" />
+            o'zbek tilidagi yagona premium intizom tizimi.
           </p>
         </Reveal>
 
         <Reveal delay={550}>
-          <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
+          <div className="mt-14 flex flex-col items-center justify-center gap-6 sm:flex-row">
             <Button
               asChild
               size="lg"
-              className="group h-12 rounded-full px-8 font-ui text-sm font-semibold transition-all active:scale-[0.98]"
+              className="group relative h-14 rounded-full px-10 font-ui text-base font-semibold transition-all hover:scale-105 active:scale-[0.98] shadow-[0_20px_40px_-12px_hsl(var(--primary)/0.5)]"
             >
               <Link to="/auth">
-                Boshlash
+                Tashxisni boshlash
+                <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
               </Link>
             </Button>
             <Button
               asChild
               size="lg"
               variant="ghost"
-              className="h-12 rounded-full px-6 font-ui text-sm text-muted-foreground hover:text-foreground"
+              className="h-14 rounded-full px-8 font-ui text-base text-muted-foreground hover:text-foreground hover:bg-white/5"
             >
-              <a href="#pricing">Narxlar</a>
+              <a href="#pricing">Imkoniyatlar</a>
             </Button>
+          </div>
+        </Reveal>
+
+        <Reveal delay={700}>
+          <div className="mt-20 flex flex-wrap justify-center gap-8 md:gap-16 opacity-50 grayscale transition-all hover:opacity-80 hover:grayscale-0">
+             <div className="flex items-center gap-2 font-ui text-xs uppercase tracking-widest"><Shield className="h-4 w-4" /> Bank-grade Security</div>
+             <div className="flex items-center gap-2 font-ui text-xs uppercase tracking-widest"><Flame className="h-4 w-4" /> Habit Science</div>
+             <div className="flex items-center gap-2 font-ui text-xs uppercase tracking-widest"><Sparkles className="h-4 w-4" /> Nadir AI</div>
           </div>
         </Reveal>
       </div>
