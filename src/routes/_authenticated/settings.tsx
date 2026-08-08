@@ -380,6 +380,17 @@ function Settings() {
           </div>
         </Card>
 
+        <Card icon={<Shield className="h-4 w-4 text-primary" />} title="Obuna">
+          <div className="space-y-3">
+            <p className="text-sm text-muted-foreground">
+              Joriy reja, billing tarixi va obunani boshqarish.
+            </p>
+            <Button variant="outline" size="sm" asChild>
+              <Link to="/settings/subscription">Obunani boshqarish</Link>
+            </Button>
+          </div>
+        </Card>
+
         <Card icon={<ShieldAlert className="h-4 w-4 text-primary" />} title="Ma'lumotlar">
           <div className="space-y-3">
             <p className="text-sm text-muted-foreground">
