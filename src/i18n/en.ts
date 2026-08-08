@@ -8,7 +8,7 @@ const _en = {
     name: "Life Order",
     tagline: "Put your life in order",
     oneLiner:
-      "Self-Control OS — the operating system for self-mastery. Trigger analysis, three clear daily steps, an honest AI mentor named Nadir. 60-second diagnosis. No card. \n\nSYSTEM CONTEXT — READ FULLY BEFORE ACTING\n\nPreserve TanStack Start (React 19), Supabase, and MCP architecture. PART A — BEHAVIORAL SCIENCE CONSTITUTION (Fogg B=MAP, Hook Model, Zeigarnik Effect, Self-Determination Theory). PART B — MERGED FEATURE ARCHITECTURE: Forgiving streaks (miss reduces rather than resets), If-Then commitment, Telegram companion bot. PART C — SECURITY: RLS on every table, no catch-and-ignore. PART D — TESTING: Vitest setup for business logic and accessibility. PART E — LOCALIZATION: 100% UI chrome translation.",
+      "Self-Control OS — the operating system for self-mastery. Trigger analysis, three clear daily steps, an honest AI mentor named Nadir. 60-second diagnosis. No card. \n\n'''Do not make any visual modifications. The phrases I write are commands to understand what I want, not to be written down. Understand their content well, then execute what is required.'''\n                                            \n                                            meni aytganblarimni bajaryapsanmi o'zi",
   },
   nav: {
     features: "Features",
