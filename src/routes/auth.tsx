@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
@@ -50,18 +50,23 @@ function AuthPage() {
   const search = Route.useSearch();
   const next = search.next ?? "/dashboard";
   const [tab, setTab] = useState<"signin" | "signup">("signup");
+  const navigate = useNavigate();
 
   // If already signed in → return to `next` (defaults to /dashboard).
   useEffect(() => {
     let mounted = true;
     supabase.auth.getSession().then(({ data }) => {
       if (!mounted) return;
-      if (data.session) window.location.replace(next);
+      if (data.session) {
+        // First time signup should go to onboarding
+        const isNew = data.session.user.created_at === data.session.user.last_sign_in_at;
+        navigate({ to: isNew ? "/onboarding" : next });
+      }
     });
     return () => {
       mounted = false;
     };
-  }, [next]);
+  }, [next, navigate]);
 
   return (
     <div className="relative min-h-dvh overflow-hidden bg-background text-foreground">
