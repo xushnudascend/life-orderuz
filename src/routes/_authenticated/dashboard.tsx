@@ -23,6 +23,7 @@ import { PeakEndCurve } from "@/components/peak-end-curve";
 import { Panel, PanelHeader } from "@/components/panel";
 import { StatsHeroBento } from "@/components/stats-hero-bento";
 import { ErrorBoundary } from "@/components/error-boundary";
+import { BiorythmPeak } from "@/components/biorythm-peak";
 
 import { StreakMilestone } from "@/components/streak-milestone";
 import { celebrate, floatXp } from "@/lib/celebrate";
@@ -250,14 +251,7 @@ function Dashboard() {
         )}
         
         <div className="rounded-[var(--radius)] border border-border/70 bg-card p-4 sm:p-5 lg:col-span-4">
-           <p className="font-ui text-[10px] uppercase tracking-[0.2em] text-muted-foreground">Hozirgi holat</p>
-           <h3 className="mt-2 font-serif text-lg leading-tight">Biologik ritm</h3>
-           <div className="mt-3 flex items-center gap-3">
-              <div className="h-2 flex-1 rounded-full bg-border overflow-hidden">
-                 <div className="h-full bg-primary/60 w-[65%]" />
-              </div>
-              <span className="font-ui text-[11px] text-muted-foreground">Pik</span>
-           </div>
+          <BiorythmPeak />
         </div>
       </div>
       <div className="mt-4 grid gap-3 sm:gap-4 lg:grid-cols-12">
