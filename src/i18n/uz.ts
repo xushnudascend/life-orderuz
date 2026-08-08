@@ -1,14 +1,13 @@
 /**
  * O'zbek — asosiy manba til.
- * Ru/En keyingi bosqichda qo'shiladi (i18next bilan almashtiriladi).
- * Kalitlar mavzu bo'yicha guruhlangan, nuqta bilan bo'lingan.
+ * O'zbek madaniyati va qadriyatlariga moslashtirilgan.
  */
 export const uz = {
   brand: {
     name: "Life Order",
-    tagline: "Hayotingni tartibga sol",
+    tagline: "Intizom — iroda mevasidir",
     oneLiner:
-      "Self-Control OS — o'z-o'zini boshqarishning operatsion tizimi. Trigger tahlili, kunlik uchta aniq qadam, halol AI mentor Nadir. 3 daqiqada tashxis. Kartasiz.",
+      "Self-Control OS — o'zbekona intizom va zamonaviy fan uyg'unligi. Tashxis, protokol va halol mentor Nadir.",
   },
   nav: {
     features: "Imkoniyatlar",
@@ -20,12 +19,12 @@ export const uz = {
   },
   hero: {
     eyebrow: "Beta bosqichida · Kartasiz",
-    title: "O'zingni boshqara olmaslik — kasallik emas, tizim yo'qligidir.",
+    title: "O'zingni yengish — eng katta g'alabadir.",
     subtitle:
-      "Life Order sening kunlaringni uchta aniq qadamga aylantiradi. Emojisiz. Ustozliksiz. Nadir — halol AI mentor — sen bilan haqiqatni gaplashadi.",
-    ctaPrimary: "3 daqiqada tashxisni ol",
-    ctaSecondary: "Uslubni ko'rish",
-    trustLine: "Kartasiz · O'zbek tilida · PWA — telefonga o'rnatiladi",
+      "Life Order sening kunlaringni tartibli amallar zanjiriga aylantiradi. Ortiqcha gaplarsiz. Nadir — sening vijdoningdek halol AI mentor.",
+    ctaPrimary: "3 daqiqada tashxisdan o't",
+    ctaSecondary: "Uslubimiz haqida",
+    trustLine: "Kartasiz · O'zbek tilida · Milliy intizom tizimi",
   },
   pillars: {
     heading: "Uchta ustun — bir tizim",
@@ -68,8 +67,8 @@ export const uz = {
     heading: "Nadir kim?",
     body: "Nadir — sensiz uxlamaydigan yordamchi emas. U — sening tanlovlaringni ko'rib, halol javob beradigan xarakter. \"Yaxshi ish qilyapsan\" degan bo'sh maqtov Nadir'da yo'q. Nima ish qilyapsan, nega qilyapsan, keyin nima bo'ladi — shu uchtasi.",
     quote:
-      "«Sen bugun mashqni o'tkazib yubording. Sabab charchoq emas — sabab uyquga borishdan qo'rqishing. Ertaga soat 22:30 da telefonni jimjitga qo'y. Boshqa hech narsa.»",
-    quoteBy: "— Nadir, real chat namunasi",
+      "«Sen bugun mashqni o'tkazib yubording. Sabab charchoq emas — sabab nafsingga qul bo'lishing. Ertaga soat 22:30 da telefonni yig'ishtir. Boshqa hech narsa.»",
+    quoteBy: "— Nadir, sening halol mentoring",
   },
   pricing: {
     heading: "Narxlar — sodda",
@@ -102,9 +101,9 @@ export const uz = {
     },
   },
   cta: {
-    heading: "Bugun boshla. Ertaga — kech.",
-    body: "3 daqiqada onboarding. Karta so'ralmaydi. Yoqmasa, hech qanday izing qolmaydi.",
-    button: "Tashxisdan o'tish",
+    heading: "Bugun boshla. Ertaga — g'animat.",
+    body: "3 daqiqalik tashxis. Hech qanday karta shart emas. Sen uchun yangi yo'l.",
+    button: "Tashxisni boshlash",
   },
   footer: {
     tagline: "Self-Control OS — o'zbek tilida qurilgan.",

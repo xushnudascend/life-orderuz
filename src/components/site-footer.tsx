@@ -45,7 +45,7 @@ export function SiteFooter() {
               <span className="font-serif text-lg font-bold tracking-tight">{uz.brand.name}</span>
             </Link>
             <p className="mt-4 max-w-[240px] font-ui text-[13px] leading-relaxed text-muted-foreground">
-              Motivatsiya tugaydi. Tizim qoladi. Xulq-atvor tizimi — o'zbek tilida.
+              Intizom — iroda mevasidir. Xulq-atvor tizimi — o'zbek tilida.
             </p>
             <p className="mt-4 font-ui text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
               Toshkent · O'zbekiston

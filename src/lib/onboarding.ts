@@ -97,7 +97,7 @@ export const ONBOARDING_QUESTIONS: OnboardingQuestion[] = [
     type: "single",
     options: [
       { value: "telefon", label: "Telefonni olaman — 30+ daqiqa yotib qolaman" },
-      { value: "namoz", label: "Ibodat/duo qilaman, keyin turaman" },
+      { value: "namoz", label: "Ibodat / duo qilaman, keyin turaman" },
       { value: "yuvinish", label: "Darhol turib yuvinaman" },
       { value: "yotib_qolaman", label: "Uzoq yotib qolaman, kechga qolaman" },
       { value: "sport", label: "Mashq / harakat qilaman" },

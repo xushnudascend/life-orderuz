@@ -29,7 +29,7 @@ import { getPeerMirror } from "@/lib/peer-mirror.functions";
 const BRAND = "Life Order";
 const SITE_URL = "https://life-orderuz.lovable.app";
 const ONE_LINER =
-  "Self-Control OS — Motivatsiya tugaydi. Tizim qoladi. 3 daqiqalik tashxis va Nadir AI mentor.";
+  "Self-Control OS — Intizom — iroda mevasidir. 3 daqiqalik tashxis va Nadir AI mentor.";
 
 const FAQ_ITEMS: { q: string; a: string }[] = [
   {
@@ -186,17 +186,17 @@ function Hero() {
 
         <Reveal delay={250}>
           <h1 className="font-serif text-[42px] leading-[1.1] tracking-tighter text-balance sm:text-[64px] md:text-[84px] lg:text-[92px]">
-            Motivatsiya <span className="text-muted-foreground/40 italic">tugaydi.</span>
+            O'zingni <span className="text-muted-foreground/40 italic">yengish.</span>
             <br />
             <span className="bg-gradient-to-b from-foreground to-foreground/70 bg-clip-text text-transparent">
-              Tizim qoladi.
+              Eng oliy g'alaba.
             </span>
           </h1>
         </Reveal>
 
         <Reveal delay={400}>
           <p className="mx-auto mt-8 max-w-2xl font-ui text-lg leading-relaxed text-muted-foreground md:text-xl">
-            Iroda kuchiga tayanmang — u cheklangan resurs. Life Order sizning biologik ritmingizga moslashgan shaxsiy xulq-atvor arxitekturasini quradi.
+            Iroda kuchi — sarflanadigan ne'mat. Life Order sening tabiating va biologik ritmingga moslangan shaxsiy intizom arxitekturasini quradi.
           </p>
         </Reveal>
 
@@ -208,7 +208,7 @@ function Hero() {
               className="group h-14 rounded-full px-10 font-ui text-base font-semibold shadow-[0_20px_50px_-12px_hsl(var(--primary)/0.5)] transition-all hover:scale-[1.02] active:scale-[0.98]"
             >
               <Link to="/auth">
-                Tizimni ishga tushirish
+                Tashxisni boshlash
                 <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
               </Link>
             </Button>

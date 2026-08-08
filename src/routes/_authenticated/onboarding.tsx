@@ -149,7 +149,7 @@ function Onboarding() {
         .eq("id", userId);
       if (profErr) throw profErr;
 
-      toast.success("Tashxis tugadi. Yo'l tuzildi.");
+      toast.success("Tashxis tugadi. O'zbekona intizom yo'li tuzildi.");
       setArchetypeName(arche.id);
 
       // "Aha!" — shaxsiy nudge (best-effort, xatolarda dashbordga to'g'ridan-to'g'ri o'tamiz)
