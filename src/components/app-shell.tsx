@@ -82,33 +82,34 @@ export function AppShell({ title, children }: { title?: string; children: ReactN
             }
             role="banner"
           >
-            <div className="mx-auto flex h-14 max-w-[1400px] items-center justify-between gap-3 px-4 sm:px-6">
+            <div className="mx-auto flex h-16 max-w-[1400px] items-center justify-between gap-3 px-4 sm:px-8">
               <Link
                 to="/"
-                className="flex items-center gap-2 font-serif text-base font-semibold tracking-tight"
+                className="flex items-center gap-2.5 font-serif text-xl font-bold tracking-tight transition-transform active:scale-95"
                 aria-label="Life Order — bosh sahifa"
               >
+                <span className="grid h-7 w-7 place-items-center rounded-lg bg-primary text-[10px] text-primary-foreground shadow-[0_0_15px_hsl(var(--primary)/0.4)]">L</span>
                 Life Order
               </Link>
-              <div className="hidden min-w-0 flex-1 items-center justify-center gap-3 md:flex">
+              <div className="hidden min-w-0 flex-1 items-center justify-center gap-4 md:flex">
                 <CommandBar />
               </div>
 
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-4">
                 <Sheet>
                   <SheetTrigger asChild>
-                    <button className="flex h-9 w-9 items-center justify-center rounded-xl border border-border bg-card transition-all hover:border-primary/50">
-                      <Menu className="h-4 w-4" />
+                    <button className="flex h-10 w-10 items-center justify-center rounded-2xl border border-border bg-card shadow-sm transition-all hover:border-primary/50 hover:bg-primary/5 group active:scale-90">
+                      <Menu className="h-5 w-5 transition-transform group-hover:rotate-12" />
                     </button>
                   </SheetTrigger>
-                  <SheetContent side="left" className="p-0 border-none w-64">
+                  <SheetContent side="left" className="p-0 border-none w-72">
                     <NavMenu />
                   </SheetContent>
                 </Sheet>
                 <div className="flex items-center gap-2">
                   <Link
                     to="/profile"
-                    className="flex h-9 w-9 items-center justify-center rounded-full border border-border bg-card font-ui text-sm font-semibold text-foreground transition-all hover:border-primary/50 hover:shadow-[0_0_12px_hsl(var(--primary)/0.2)]"
+                    className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-border bg-card font-ui text-sm font-bold text-foreground transition-all hover:border-primary/60 hover:shadow-[0_0_20px_hsl(var(--primary)/0.3)] active:scale-90 overflow-hidden"
                     aria-label={name ? `Profil — ${name}` : "Profil"}
                   >
                     {initial}

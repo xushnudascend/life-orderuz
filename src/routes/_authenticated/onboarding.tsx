@@ -201,42 +201,44 @@ function Onboarding() {
 
   if (ahaNudge !== null) {
     return (
-      <div className="min-h-dvh bg-background text-foreground relative overflow-hidden">
+      <div className="min-h-dvh bg-[#0a0502] text-foreground relative overflow-hidden flex items-center justify-center">
         {/* Apple-style background refinement */}
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,hsl(var(--primary)/0.05),transparent_70%)] pointer-events-none" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,hsl(var(--primary)/0.1),transparent_70%)] pointer-events-none" />
+        <div className="absolute top-[-10%] right-[-10%] h-[500px] w-[500px] animate-orb-float rounded-full bg-primary/5 blur-[120px]" />
         
-        <div className="mx-auto max-w-xl px-5 py-16 relative z-10">
-          <div className="animate-fade-in-up rounded-[var(--radius)] border border-border bg-card/40 p-8 shadow-[0_24px_48px_-12px_rgba(0,0,0,0.5)] backdrop-blur-xl">
-            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-3 py-1 font-ui text-[10px] font-bold uppercase tracking-[0.2em] text-primary">
-              <Sparkles className="h-3 w-3" />
+        <div className="mx-auto max-w-2xl px-5 py-16 relative z-10 w-full">
+          <div className="animate-fade-in-up rounded-[28px] border border-border/50 bg-card/40 p-8 md:p-12 shadow-[0_32px_64px_-16px_rgba(0,0,0,0.6)] backdrop-blur-2xl">
+            <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-1.5 font-ui text-[11px] font-bold uppercase tracking-[0.2em] text-primary shadow-[0_0_20px_hsl(var(--primary)/0.2)]">
+              <Sparkles className="h-4 w-4" />
               Tashxis yakunlandi
             </div>
-            <h1 className="mb-3 font-serif text-3xl leading-tight tracking-tight sm:text-4xl">
+            <h1 className="mb-4 font-serif text-[42px] leading-[0.95] tracking-tighter sm:text-[54px]">
               Protokol tayyor.
             </h1>
-            <p className="mb-6 text-[15px] text-muted-foreground/90 font-ui leading-relaxed">
-              Sizning biologik ritmingiz va triggerlaringiz tahlil qilindi. Nadir AI sening xulq-atvor arxitekturangni quyidagicha shakllantirdi:
+            <p className="mb-8 text-lg text-muted-foreground/80 font-ui leading-relaxed">
+              Biologik ritming va triggerlaring tahlil qilindi. Nadir AI sening xulq-atvor arxitekturangni quyidagicha shakllantirdi:
             </p>
             {archetypeName && (
-              <p className="mb-6 font-ui text-xs uppercase tracking-[0.22em] text-muted-foreground">
-                Arxetip · {archetypeName}
+              <p className="mb-6 font-ui text-[10px] font-bold uppercase tracking-[0.3em] text-primary/80">
+                Arxetip · {archetypeName.replace('_', ' ')}
               </p>
             )}
             {ahaNudge && (
-              <div className="whitespace-pre-line rounded-[var(--radius)] border border-border/60 bg-background/60 p-5 font-body text-[15px] leading-relaxed text-foreground">
+              <div className="whitespace-pre-line rounded-2xl border border-primary/20 bg-primary/5 p-6 font-body text-base leading-relaxed text-foreground shadow-inner">
                 {ahaNudge}
               </div>
             )}
-            <FirstTaskCard answers={answers} />
-            <SocialMirror />
-
+            <div className="mt-8">
+              <FirstTaskCard answers={answers} />
+            </div>
+            
             <Button
-              className="mt-8 w-full font-ui font-semibold"
+              className="mt-10 w-full h-14 rounded-full font-ui text-base font-semibold shadow-[0_20px_40px_-12px_hsl(var(--primary)/0.5)] transition-all hover:scale-[1.02]"
               size="lg"
               onClick={() => navigate({ to: "/dashboard" })}
             >
-              Boshlash — dashboardga o'tish
-              <ArrowRight className="ml-2 h-4 w-4" />
+              Protokolni boshlash
+              <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
           </div>
         </div>
