@@ -104,14 +104,9 @@ function Landing() {
       <main>
         <Hero />
         <PeerMirror />
-        <Problem />
-        <HowItWorks />
-        <Features />
-        <Science />
+        
         <Pricing />
-        <AppVision />
         <Faq />
-        <FinalCta />
       </main>
       <SiteFooter />
     </div>
@@ -228,7 +223,7 @@ function Hero() {
               variant="ghost"
               className="h-14 rounded-full px-8 font-ui text-base text-muted-foreground hover:text-foreground"
             >
-              <a href="#problem">Nima uchun biz?</a>
+              <a href="#pricing">Nima uchun biz?</a>
             </Button>
           </div>
         </Reveal>
@@ -306,226 +301,7 @@ function Stat({ label, value }: { label: string; value: React.ReactNode }) {
   );
 }
 
-/* ---------- Problem ---------- */
 
-function Problem() {
-  const rows = [
-    {
-      before: "Yanvarda katta reja tuzasan",
-      after: "Fevralda reja seni ayblaydi",
-      why: "Miya katta o'zgarishdan qo'rqadi (Amygdala hijack).",
-    },
-    {
-      before: "Kayfiyat bo'lsa bajarasan",
-      after: "Iroda tugasa halqa uziladi",
-      why: "Iroda kuchi — cheklangan resurs (Ego depletion).",
-    },
-    {
-      before: "Bir kun o'tkazib yuborasan",
-      after: '"Endi baribir" — hammasi to\'xtaydi',
-      why: "Mukammallik tuzog'i (What-the-hell effect).",
-    },
-  ];
-  return (
-    <Section id="problem">
-      <SectionHeader
-        eyebrow="Muammo"
-        title="Sen dangasa emassan. Sening tiziming 'Ilgaksiz'."
-        lead="Ko'pchilik 'iroda' yetishmaydi deb o'ylaydi. Aslida esa, ular miya biologiyasiga qarshi kurashmoqda. Katta maqsadlar qarshilikni oshiradi, uzilish esa aybdorlik hissini tug'diradi."
-      />
-      <div className="mt-10 grid gap-px overflow-hidden rounded-2xl border border-border bg-border md:grid-cols-3">
-        {rows.map((r, i) => (
-          <Reveal key={r.before} delay={i * 80} className="bg-background p-6">
-            <p className="font-ui text-[12px] text-muted-foreground/60 line-through decoration-border italic">
-              {r.before}
-            </p>
-            <p className="mt-3 font-serif text-[18px] leading-tight text-foreground font-bold">{r.after}</p>
-            <p className="mt-3 font-ui text-[11px] text-primary/70 uppercase tracking-wider font-semibold">
-              Ilmiy sabab: {r.why}
-            </p>
-          </Reveal>
-        ))}
-      </div>
-      <Reveal delay={260}>
-        <div className="mt-12 rounded-2xl border border-primary/20 bg-primary/5 p-8 text-center md:text-left">
-          <h3 className="font-serif text-2xl font-bold">Nega ayni Life Order?</h3>
-          <p className="mt-4 max-w-2xl font-ui text-[15px] leading-relaxed text-foreground/80">
-            Biz shunchaki 'habit tracker' emasmiz. Biz — <b>Self-Control OS</b>. Biz miyangizdagi 
-            mukofot tizimi (Dopamine pathway) va biologik ritmingizni (Circadian rhythm) birlashtirib, 
-            irodangiz minimal sarflanadigan <b>Intizom Arxitekturasini</b> quramiz.
-          </p>
-        </div>
-      </Reveal>
-    </Section>
-  );
-}
-
-/* ---------- How ---------- */
-
-function HowItWorks() {
-  const steps = [
-    {
-      n: "01",
-      title: "Tashxis",
-      body: "3 daqiqada 9 ta savol — arxetiping, uyqu ritming va eng zaif nuqtang aniqlanadi.",
-    },
-    {
-      n: "02",
-      title: "Protokol",
-      body: 'Har kuni 3 ta "agar X — men Y" mikro-qadam. Sening kuningga moslangan, tayyor ro\'yxat emas.',
-    },
-    {
-      n: "03",
-      title: "Takror",
-      body: "Bajarilgan qadam → XP va streak. Shield esa bitta xato kunni kechiradi.",
-    },
-    {
-      n: "04",
-      title: "Tuzatish",
-      body: "Haftalik AI hisobot bitta aniq o'zgarish taklif qiladi — o'ntasini emas.",
-    },
-  ];
-  return (
-    <Section id="how">
-      <SectionHeader
-        eyebrow="Jarayon"
-        title="To'rt bosqichli halqa"
-        lead="Har halqa keyingisini osonlashtiradi. Bu tasodif emas — takrorlanuvchi sikl shunday ishlaydi."
-      />
-      <div className="mt-10 grid gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
-        {steps.map((s, i) => (
-          <Reveal
-            key={s.n}
-            delay={i * 80}
-            className="group bg-background p-6 transition-colors duration-300 hover:bg-card"
-          >
-            <p className="font-ui text-xs uppercase tracking-[0.24em] text-primary">{s.n}</p>
-            <h3 className="mt-4 font-serif text-lg">{s.title}</h3>
-            <p className="mt-2 font-ui text-[13px] leading-relaxed text-muted-foreground">
-              {s.body}
-            </p>
-          </Reveal>
-        ))}
-      </div>
-    </Section>
-  );
-}
-
-/* ---------- Features ---------- */
-
-function Features() {
-  const items = [
-    {
-      icon: Sparkles,
-      title: "Nadir AI mentor",
-      body: "Kundalik, odat va kayfiyat kontekstida javob beradi. Har suhbat oldingisini eslaydi.",
-    },
-    {
-      icon: Flame,
-      title: "Streak va XP",
-      body: "Har mikro-qadam ballanadi. Ko'rinadigan progress — davom etishning eng kuchli sababi.",
-    },
-    {
-      icon: Shield,
-      title: "Shield",
-      body: "Haftada bitta kechirim. Bitta o'tkazib yuborilgan kun butun tizimni buzmaydi.",
-    },
-    {
-      icon: BookText,
-      title: "Kundalik",
-      body: "Uch satr yetadi. Pastlik signali sezilsa, tizim o'zi yumshoq nudge yuboradi.",
-    },
-    {
-      icon: Clock,
-      title: "Sirkadian ritm",
-      body: "Ertalab, kunduz va kech uchun alohida blok — energiyang bilan urushmaysan.",
-    },
-    {
-      icon: BarChart3,
-      title: "Haftalik hisobot",
-      body: "Nima ishladi, nima ishlamadi va keyingi hafta uchun bitta aniq tuzatish.",
-    },
-  ];
-  return (
-    <Section id="features">
-      <SectionHeader
-        eyebrow="Modullar"
-        title="Kerakligicha, ortiqchasisiz"
-        lead="Har modul bitta xulq muammosini yechadi. Ishlatilmaydigan funksiya qo'shilmaydi."
-      />
-      <div className="mt-10 grid gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
-        {items.map((f, i) => (
-          <Reveal
-            key={f.title}
-            delay={i * 60}
-            className="group bg-background p-6 transition-colors duration-300 hover:bg-card"
-          >
-            <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-border bg-card transition-colors duration-300 group-hover:border-primary/40">
-              <f.icon className="h-4 w-4 text-primary" />
-            </span>
-            <h3 className="mt-4 font-serif text-[17px]">{f.title}</h3>
-            <p className="mt-2 font-ui text-[13px] leading-relaxed text-muted-foreground">
-              {f.body}
-            </p>
-          </Reveal>
-        ))}
-      </div>
-    </Section>
-  );
-}
-
-/* ---------- Science ---------- */
-
-function Science() {
-  const refs = [
-    {
-      claim: "Kunlik xulqning ~43% — ongsiz odat",
-      src: "Wood et al., 2002",
-      href: "https://doi.org/10.1037/0022-3514.83.6.1281",
-    },
-    {
-      claim: "Odat avtomatlashuvi o'rtacha 66 kun",
-      src: "Lally et al., 2010",
-      href: "https://doi.org/10.1002/ejsp.674",
-    },
-    {
-      claim: '"Agar X — men Y" niyati bajarilishni 2–3× oshiradi',
-      src: "Gollwitzer, 1999",
-      href: "https://doi.org/10.1037/0003-066X.54.7.493",
-    },
-    {
-      claim: "Xulq = Motivatsiya × Qobiliyat × Ilgak",
-      src: "Fogg, Stanford",
-      href: "https://behaviormodel.org/",
-    },
-  ];
-  return (
-    <Section id="science">
-      <SectionHeader
-        eyebrow="Ilmiy asos"
-        title="Nima uchun ishlaydi"
-        lead="Har mexanika ortida tekshiriladigan manba turadi. Havolani bosib, o'zing o'qishing mumkin."
-      />
-      <ul className="mt-10 divide-y divide-border overflow-hidden rounded-2xl border border-border">
-        {refs.map((r, i) => (
-          <Reveal key={i} delay={i * 60}>
-            <li className="flex flex-col gap-2 bg-background p-6 transition-colors duration-300 hover:bg-card sm:flex-row sm:items-baseline sm:justify-between sm:gap-6">
-              <p className="font-serif text-[17px] leading-snug">{r.claim}</p>
-              <a
-                href={r.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="shrink-0 font-ui text-[11px] uppercase tracking-[0.16em] text-muted-foreground underline-offset-4 transition-colors hover:text-primary hover:underline"
-              >
-                {r.src}
-              </a>
-            </li>
-          </Reveal>
-        ))}
-      </ul>
-    </Section>
-  );
-}
 
 /* ---------- Pricing ---------- */
 
@@ -668,33 +444,6 @@ function PricingCard({
   );
 }
 
-/* ---------- App Vision ---------- */
-
-function AppVision() {
-  const items = [
-    { title: "Telefon bloklovchi", body: "Diqqatni jamlash uchun xalaqit beradigan ilovalarni vaqtinchalik cheklash." },
-    { title: "Smart eslatmalar", body: "Sening biologik ritmingga mos, miyangni toliqtirmaydigan xabarlar." },
-    { title: "Butun tizimga ulanish", body: "Mobil ilova, desktop va brauzer — barchasi yagona intizom markazida." },
-    { title: "Yomon odatlarni yo'qotish", body: "Impulsiv harakatlarni ilmiy metodlar (Pattern Interrupt) bilan bartaraf etish." }
-  ];
-  return (
-    <Section id="vision" className="bg-[#0c0805]">
-      <SectionHeader 
-        eyebrow="Kelajak"
-        title="To'liq nazorat ekotizimi"
-        lead="Biz sening maqsading va telefoning orasidagi barcha to'siqlarni olib tashlaymiz."
-      />
-      <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-        {items.map((it, i) => (
-          <Reveal key={it.title} delay={i * 100} className="rounded-2xl border border-primary/10 bg-card/40 p-6 backdrop-blur-md transition-all hover:border-primary/30">
-            <h3 className="font-serif text-lg font-bold">{it.title}</h3>
-            <p className="mt-3 font-ui text-sm text-muted-foreground leading-relaxed">{it.body}</p>
-          </Reveal>
-        ))}
-      </div>
-    </Section>
-  );
-}
 
 /* ---------- FAQ ---------- */
 
@@ -720,40 +469,3 @@ function Faq() {
   );
 }
 
-/* ---------- Final CTA ---------- */
-
-function FinalCta() {
-  return (
-    <section className="relative overflow-hidden border-b border-border">
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0"
-        style={{
-          background:
-            "radial-gradient(50% 60% at 50% 100%, hsl(var(--primary) / 0.10), transparent 70%)",
-        }}
-      />
-      <div className="relative mx-auto w-full max-w-3xl px-5 py-20 text-center md:px-8 md:py-28">
-        <Reveal>
-          <h2 className="font-serif text-[30px] leading-tight tracking-tight text-balance md:text-[42px]">
-            Ertaga emas. Bugun, ikki daqiqada.
-          </h2>
-          <p className="mx-auto mt-5 max-w-lg font-ui text-[15px] leading-relaxed text-muted-foreground text-pretty">
-            Tashxisdan keyin sen darhol bitta aniq vazifa olasan — bugungi kuningga mos, bajarish
-            oson va foydasi real.
-          </p>
-          <Button
-            asChild
-            size="lg"
-            className="group mt-9 h-12 rounded-full px-8 font-ui font-semibold"
-          >
-            <Link to="/auth">
-              Tashxisni boshlash
-              <ArrowRight className="ml-1.5 h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" />
-            </Link>
-          </Button>
-        </Reveal>
-      </div>
-    </section>
-  );
-}

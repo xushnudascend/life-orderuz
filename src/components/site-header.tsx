@@ -6,10 +6,8 @@ import { LanguageSwitcher } from "@/components/language-switcher";
 type NavLink = { href: string; label: string };
 
 const DEFAULT_NAV: NavLink[] = [
-  { href: "/#science", label: "Ilm" },
   { href: "/pricing", label: "Narx" },
   { href: "/blog", label: "Blog" },
-
   { href: "/#faq", label: "Savollar" },
 ];
 

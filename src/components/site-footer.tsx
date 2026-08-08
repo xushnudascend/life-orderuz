@@ -7,8 +7,8 @@ const COLUMNS: { title: string; links: { href: string; label: string }[] }[] = [
     links: [
       { href: "/", label: "Bosh sahifa" },
       { href: "/pricing", label: "Narxlar" },
-      { href: "/#how", label: "Qanday ishlaydi" },
-      { href: "/#science", label: "Ilmiy asos" },
+      { href: "/pricing", label: "Narxlar" },
+      { href: "/#faq", label: "Savollar" },
     ],
   },
   {
