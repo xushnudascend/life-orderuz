@@ -23,6 +23,7 @@ export const pricing = {
   monthly: {
     id: "monthly" as const,
     amount: 59000,
+    originalAmount: 75000,
     currency: "UZS",
     label: "59 000 so'm / oy",
     short: "59 000",
@@ -31,10 +32,11 @@ export const pricing = {
   yearly: {
     id: "yearly" as const,
     amount: 490000,
+    originalAmount: 708000, // 59000 * 12
     currency: "UZS",
     label: "490 000 so'm / yil",
     short: "490 000",
-    discount: "Yillik obuna (15% tejamkorlik)",
+    discount: "Yillik obuna (30% tejamkorlik)",
     months: 12,
   },
 } as const;

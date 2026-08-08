@@ -295,15 +295,17 @@ function Plan({
       <p className="mt-3 font-serif text-3xl tracking-tight tabular-nums">
         {name === "Pro" ? (
           <span className="flex flex-col">
-            <span className="text-muted-foreground/50 line-through text-lg">75 000 so'm</span>
+            <span className="text-muted-foreground/50 line-through text-lg">
+              {pricing.monthly.originalAmount.toLocaleString("uz-UZ")} so'm
+            </span>
             <span>{price}</span>
           </span>
         ) : (
           price
         )}
       </p>
-      <p className="mt-1 font-ui text-sm text-muted-foreground">
-        {name === "Pro" ? "Yillik obunada 15% tejamkorlik bilan" : tagline}
+      <p className="mt-1 font-ui text-sm text-muted-foreground text-balance">
+        {name === "Pro" ? "Yillik obunada yanada ko'proq tejamkorlik bilan" : tagline}
       </p>
       <ul className="mt-6 space-y-2.5">
         {features.map((f) => (
