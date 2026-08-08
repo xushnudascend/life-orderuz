@@ -68,12 +68,18 @@ function AuthPage() {
       {/* Bitta sokin gradient — ortiqcha harakat yo'q */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[520px]"
+        className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[600px]"
         style={{
           background:
-            "radial-gradient(55% 45% at 50% 0%, hsl(var(--primary) / 0.12), transparent 72%)",
+            "radial-gradient(65% 50% at 50% 10%, hsl(var(--primary) / 0.15), transparent 80%)",
         }}
       />
+      
+      {/* 3D-ish Floating shapes */}
+      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+        <div className="absolute top-[10%] left-[5%] h-64 w-64 animate-orb-float rounded-full bg-primary/10 blur-3xl" />
+        <div className="absolute bottom-[20%] right-[10%] h-80 w-80 animate-orb-float-delayed rounded-full bg-primary/5 blur-3xl" />
+      </div>
 
       <div className="mx-auto flex min-h-dvh w-full max-w-md flex-col px-5 py-8">
         <Link

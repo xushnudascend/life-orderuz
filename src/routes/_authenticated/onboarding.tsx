@@ -287,10 +287,9 @@ function Onboarding() {
                 setAnswer(currentB.key, v);
                 // Single-choice — avtomatik keyingi savolga o'tish
                 if (currentB.type === "single") {
-                  // Tanlov ko'rinib ulgurishi uchun ataylab sekinroq (feedback → o'tish)
                   setTimeout(() => {
                     setStep((s) => (s < total - 1 ? s + 1 : s));
-                  }, 620);
+                  }, 400);
                 }
               }}
               onToggleMulti={(v) => toggleMulti(currentB.key, v)}

@@ -59,16 +59,27 @@ function CommunityLayout() {
           <Loader2 className="h-5 w-5 animate-spin text-muted-foreground" />
         </div>
       ) : channels.length === 0 ? (
-        <EmptyState
-          icon={<Hash className="h-5 w-5" />}
-          title="Davra tez orada ochiladi"
-          description="Kitobxonlik, streak partnyorlik va tematik davralar shu yerda paydo bo'ladi. Ayni paytda o'z tizimingga fokus qil — jamoa tayyor bo'lganda seni topamiz."
-          action={
-            <Link to="/dashboard" className="font-ui text-sm text-primary hover:underline">
-              Bugungi kunga qaytish →
-            </Link>
-          }
-        />
+        <div className="mt-8 space-y-3">
+          {[
+            { id: "1", slug: "umumiy", title: "Umumiy", description: "Barcha uchun ochiq muloqot" },
+            { id: "2", slug: "kitobxonlik", title: "Kitobxonlik", description: "Haftalik kitob tahlillari" },
+            { id: "3", slug: "intizom-vazifalari", title: "Intizom vazifalari", description: "Birgalikda yengish" }
+          ].map((c) => (
+            <Panel key={c.id} interactive className="p-0 border-primary/20 bg-primary/[0.02]">
+              <Link
+                to="/community/$channel"
+                params={{ channel: c.slug }}
+                className="flex items-start gap-4 p-4"
+              >
+                <Hash className="mt-1 h-5 w-5 text-primary" />
+                <div>
+                  <p className="font-serif text-xl">{c.title}</p>
+                  <p className="font-ui text-sm text-muted-foreground">{c.description}</p>
+                </div>
+              </Link>
+            </Panel>
+          ))}
+        </div>
       ) : (
         <div className="mt-8 space-y-2">
           {channels.map((c) => (
