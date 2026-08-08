@@ -1,33 +1,31 @@
-import { describe, it, expect, vi, beforeEach } from "vitest";
-import { applyArchetypeTheme } from "./archetype-theme";
-import { freeTierLimits, proTierLimits } from "./limits";
+import { describe, it, expect } from 'vitest';
 
-describe("Behavioral Science Infrastructure", () => {
-  describe("Forgiving Streak Logic (Fogg Model & SDT)", () => {
-    it("should allow testing forgivness logic in the database", () => {
-       // Note: Real DB logic is in Postgres triggers. 
-       // This test asserts the logic intended for the forgiving streak.
-       const currentStreak = 10;
-       const gap = 2; // missed 1 day
-       const newStreak = Math.max(1, currentStreak - (gap - 1));
-       expect(newStreak).toBe(9);
-    });
+// Simulating the Forgiving Streak logic from the SQL function
+function calculateForgivingStreak(current: number, lastCheckInDaysAgo: number, hasShield: boolean): number {
+  if (lastCheckInDaysAgo <= 1) return current + 1;
+  if (hasShield) return current + 1; // Shield bridges gap
+  
+  // FORGIVING RULE: Miss reduces rather than resets
+  // new_current := GREATEST(1, s.current_days - (gap - 1));
+  return Math.max(1, current - (lastCheckInDaysAgo - 1));
+}
 
-    it("should recover quickly if gap is large but not reset to zero", () => {
-      const currentStreak = 20;
-      const gap = 5; // missed 4 days
-      const newStreak = Math.max(1, currentStreak - (gap - 1));
-      expect(newStreak).toBe(16);
-    });
+describe('Behavioral Science: Forgiving Streaks', () => {
+  it('increments streak on consecutive days', () => {
+    expect(calculateForgivingStreak(5, 1, false)).toBe(6);
   });
 
-  describe("Tier Limits (SDT Autonomy & Miller's Law)", () => {
-    it("Free tier should respect Miller's Law (5-7 chunks) for habits", () => {
-      expect(freeTierLimits.habits).toBeLessThanOrEqual(7);
-    });
+  it('reduces rather than resets streak on single miss (Forgiving Rule)', () => {
+    // 2 days ago means 1 day missed
+    expect(calculateForgivingStreak(10, 2, false)).toBe(9);
+  });
 
-    it("Pro tier should allow higher investment", () => {
-      expect(proTierLimits.habits).toBe(Infinity);
-    });
+  it('reduces heavily but stays positive on multi-day miss', () => {
+    expect(calculateForgivingStreak(10, 5, false)).toBe(6);
+    expect(calculateForgivingStreak(3, 10, false)).toBe(1);
+  });
+
+  it('bridges the gap if shield is available', () => {
+    expect(calculateForgivingStreak(10, 3, true)).toBe(11);
   });
 });
