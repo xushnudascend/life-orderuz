@@ -36,6 +36,7 @@ export const Route = createFileRoute("/api/public/click/$action")({
   server: {
     handlers: {
       POST: async ({ request, params }) => {
+        const { recordFailedWebhook } = await import("@/lib/error-capture");
         const secret = process.env.CLICK_SECRET_KEY;
         if (!secret) return new Response("Not configured", { status: 503 });
         const action = params.action;
