@@ -388,17 +388,18 @@ function MicrosoftIcon() {
 
 function translateAuthError(msg: string): string {
   const s = msg.toLowerCase();
+  const e = uz.errors.auth;
   if (s.includes("invalid login") || s.includes("invalid credentials"))
-    return "Email yoki parol mos kelmadi. Qayta tekshirib ko'ring — hech narsa yo'qolmadi.";
+    return e.invalid;
   if (s.includes("already registered") || s.includes("user already"))
-    return "Bu email allaqachon ro'yxatdan o'tgan. Kirish tabini tanlang yoki parolni tiklang.";
+    return e.exists;
   if (s.includes("email not confirmed"))
-    return "Email hali tasdiqlanmagan. Pochtangizni tekshiring — havola yuborilgan.";
+    return e.confirm;
   if (s.includes("rate limit") || s.includes("too many"))
-    return "Ko'p urinish bo'ldi. Bir daqiqadan keyin qayta urinib ko'ring.";
+    return e.rate;
   if (s.includes("password"))
-    return "Parol kuchsizroq — kamida 8 belgi va turli-tuman kombinatsiya bering.";
+    return e.weak;
   if (s.includes("network") || s.includes("fetch"))
-    return "Internet aloqasi uzildi. Ulanish tiklanganda qayta urinib ko'ring.";
-  return "Xato yuz berdi. Qayta urinib ko'ring — hech narsa buzilmadi.";
+    return e.network;
+  return e.generic;
 }

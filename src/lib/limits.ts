@@ -34,6 +34,7 @@ export const pricing = {
     currency: "UZS",
     label: "490 000 so'm / yil",
     short: "490 000",
+    discount: "Yillik obuna (15% tejamkorlik)",
     months: 12,
   },
 } as const;
