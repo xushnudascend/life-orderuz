@@ -144,10 +144,10 @@ export const uz = {
       loading: "Yuklanmoqda...",
     },
     quick: {
-      workout: "Mashg'ulot",
+      workout: "Tana",
       diet: "Ovqatlanish",
-      quests: "Vazifalar",
-      mentor: "Nadir",
+      quests: "O'rganish",
+      mentor: "Mentor",
     },
     depth: {
       title: "Chuqurroq · Nadir, retentsiya, 100 kun",
