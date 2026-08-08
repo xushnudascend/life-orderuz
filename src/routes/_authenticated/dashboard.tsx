@@ -252,10 +252,10 @@ function Dashboard() {
       <div className="mt-4">
         
         {/* Habits */}
-        <Panel className="lg:col-span-12">
+        <Panel className="lg:col-span-12 rounded-[28px] border-border/60 bg-card/40 backdrop-blur-xl p-8">
           
           <PanelHeader
-            title="protokol"
+            title={<span className="font-serif text-3xl font-bold tracking-tight">protokol</span>}
           />
 
           {!loaded ? (
@@ -287,18 +287,18 @@ function Dashboard() {
                       onClick={(ev) => toggle(h, ev)}
                       aria-pressed={isDone}
                       className={
-                        "tap group flex w-full items-center gap-3 rounded-md border px-3 py-2 text-left transition-all active:scale-[0.995] " +
+                        "tap group flex w-full items-center gap-4 rounded-2xl border px-4 py-4 text-left transition-all hover:shadow-lg active:scale-[0.99] " +
                         (isDone
-                          ? "border-primary/40 bg-primary/[0.06]"
-                          : "border-border bg-background/30 hover:border-primary/40 hover:bg-background/60")
+                          ? "border-primary/20 bg-primary/5 opacity-80"
+                          : "border-border/60 bg-background/40 hover:border-primary/40 hover:bg-primary/[0.02]")
                       }
                     >
                       <span
                         className={
-                          "flex h-7 w-7 shrink-0 items-center justify-center rounded-full border transition-colors " +
+                          "flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border transition-all duration-300 " +
                           (isDone
-                            ? "border-primary bg-primary text-primary-foreground"
-                            : "border-border text-muted-foreground group-hover:border-primary/60 group-hover:text-primary")
+                            ? "border-primary bg-primary text-primary-foreground shadow-[0_0_15px_hsl(var(--primary)/0.4)]"
+                            : "border-border bg-card text-muted-foreground group-hover:border-primary/60 group-hover:text-primary")
                         }
                       >
                         {isDone ? (
