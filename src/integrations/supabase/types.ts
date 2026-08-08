@@ -395,6 +395,7 @@ export type Database = {
       habits: {
         Row: {
           category: string
+          context_trigger: string | null
           created_at: string
           description: string | null
           frequency: string
@@ -411,6 +412,7 @@ export type Database = {
         }
         Insert: {
           category?: string
+          context_trigger?: string | null
           created_at?: string
           description?: string | null
           frequency?: string
@@ -427,6 +429,7 @@ export type Database = {
         }
         Update: {
           category?: string
+          context_trigger?: string | null
           created_at?: string
           description?: string | null
           frequency?: string

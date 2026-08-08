@@ -124,8 +124,8 @@ function HabitsPage() {
       category,
       if_trigger: cue.trim() || null,
       then_action: newTitle.trim() || null,
-      context_trigger: cue.trim() || null, // Majburiy VAQT + JOY + TRIGGER uchun
-    });
+      context_trigger: cue.trim() || null,
+    } as any);
     setNewTitle("");
     setCue("");
     setStackAnchor("");
