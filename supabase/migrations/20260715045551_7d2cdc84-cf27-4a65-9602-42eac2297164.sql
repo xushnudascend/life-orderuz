@@ -93,6 +93,7 @@ CREATE TABLE public.achievements (
 GRANT SELECT ON public.achievements TO authenticated, anon;
 GRANT ALL ON public.achievements TO service_role;
 ALTER TABLE public.achievements ENABLE ROW LEVEL SECURITY;
+-- achievements are public for all users to see rewards
 CREATE POLICY "achievements are public" ON public.achievements FOR SELECT TO authenticated, anon USING (true);
 
 -- ============ USER ACHIEVEMENTS ============

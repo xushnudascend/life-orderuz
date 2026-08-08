@@ -36,6 +36,7 @@ export const Route = createFileRoute("/api/public/click/$action")({
   server: {
     handlers: {
       POST: async ({ request, params }) => {
+        const { recordFailedWebhook } = await import("@/lib/error-capture");
         const secret = process.env.CLICK_SECRET_KEY;
         if (!secret) return new Response("Not configured", { status: 503 });
         const action = params.action;
@@ -69,8 +70,14 @@ export const Route = createFileRoute("/api/public/click/$action")({
             ...extra,
           });
 
-        if (md5(base) !== sign_string) return respond({}, ERROR.SIGN, "SIGN CHECK FAILED");
-        if (!merchant_trans_id) return respond({}, ERROR.ORDER_NOT_FOUND, "Order not found");
+        if (md5(base) !== sign_string) {
+          await recordFailedWebhook({ provider: "click", payload: p, error: "SIGN CHECK FAILED" });
+          return respond({}, ERROR.SIGN, "SIGN CHECK FAILED");
+        }
+        if (!merchant_trans_id) {
+          await recordFailedWebhook({ provider: "click", payload: p, error: "Order ID missing" });
+          return respond({}, ERROR.ORDER_NOT_FOUND, "Order not found");
+        }
 
         const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
         const { data: order } = await supabaseAdmin
@@ -78,11 +85,16 @@ export const Route = createFileRoute("/api/public/click/$action")({
           .select("*")
           .eq("id", merchant_trans_id)
           .maybeSingle();
-        if (!order) return respond({}, ERROR.ORDER_NOT_FOUND, "Order not found");
+        if (!order) {
+          await recordFailedWebhook({ provider: "click", payload: p, error: "Order not found in DB" });
+          return respond({}, ERROR.ORDER_NOT_FOUND, "Order not found");
+        }
 
         const paidAmount = Math.round(Number(amount) * 100) / 100;
-        if (paidAmount !== Number(order.amount_uzs))
+        if (paidAmount !== Number(order.amount_uzs)) {
+          await recordFailedWebhook({ provider: "click", payload: p, error: "Invalid amount" });
           return respond({}, ERROR.INVALID_AMOUNT, "Invalid amount");
+        }
 
         // Client canceled from Click side
         if (Number(error) < 0) {

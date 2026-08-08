@@ -6,7 +6,7 @@ import { createCheckout } from "@/lib/billing.functions";
 import { pricing, type PlanId } from "@/lib/limits";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-import { Loader2, ArrowRight } from "lucide-react";
+import { Loader2, ArrowRight, Shield } from "lucide-react";
 
 const PROVIDERS = [
   { id: "payme" as const, name: "Payme", note: "Uzcard / Humo / Visa" },
@@ -77,7 +77,13 @@ export function CheckoutPanel() {
           })}
         </div>
 
-        <div className="mt-4 grid gap-3 sm:grid-cols-2">
+        <div className="mt-6 mb-4 flex items-center justify-center gap-2 text-muted-foreground/60">
+          <Shield className="h-3.5 w-3.5" />
+          <span className="font-ui text-[11px] tracking-wide">
+            Xavfsiz to'lov · TLS shifrlash · Payme va Click rasmiy integratsiyasi
+          </span>
+        </div>
+        <div className="grid gap-3 sm:grid-cols-2">
           {PROVIDERS.map((pr) => (
             <Button
               key={pr.id}
