@@ -303,38 +303,48 @@ function Problem() {
     {
       before: "Yanvarda katta reja tuzasan",
       after: "Fevralda reja seni ayblaydi",
+      why: "Miya katta o'zgarishdan qo'rqadi (Amygdala hijack).",
     },
     {
       before: "Kayfiyat bo'lsa bajarasan",
-      after: "Kayfiyat yo'q kunda halqa uziladi",
+      after: "Iroda tugasa halqa uziladi",
+      why: "Iroda kuchi — cheklangan resurs (Ego depletion).",
     },
     {
       before: "Bir kun o'tkazib yuborasan",
-      after: '"Endi baribir" — va hammasi to\'xtaydi',
+      after: '"Endi baribir" — hammasi to\'xtaydi',
+      why: "Mukammallik tuzog'i (What-the-hell effect).",
     },
   ];
   return (
     <Section id="problem">
       <SectionHeader
         eyebrow="Muammo"
-        title="Sen dangasa emassan. Tizimingda 'Ilgak' yo'q."
-        lead="Xulq-atvor tadqiqotlari bir narsani takrorlaydi: uzilish irodadan emas, dizayndan kelib chiqadi. Reja qanchalik katta bo'lsa, boshlash shunchalik qimmat."
+        title="Sen dangasa emassan. Sening tiziming 'Ilgaksiz'."
+        lead="Ko'pchilik 'iroda' yetishmaydi deb o'ylaydi. Aslida esa, ular miya biologiyasiga qarshi kurashmoqda. Katta maqsadlar qarshilikni oshiradi, uzilish esa aybdorlik hissini tug'diradi."
       />
       <div className="mt-10 grid gap-px overflow-hidden rounded-2xl border border-border bg-border md:grid-cols-3">
         {rows.map((r, i) => (
           <Reveal key={r.before} delay={i * 80} className="bg-background p-6">
-            <p className="font-ui text-[13px] text-muted-foreground line-through decoration-border">
+            <p className="font-ui text-[12px] text-muted-foreground/60 line-through decoration-border italic">
               {r.before}
             </p>
-            <p className="mt-3 font-serif text-[17px] leading-snug">{r.after}</p>
+            <p className="mt-3 font-serif text-[18px] leading-tight text-foreground font-bold">{r.after}</p>
+            <p className="mt-3 font-ui text-[11px] text-primary/70 uppercase tracking-wider font-semibold">
+              Ilmiy sabab: {r.why}
+            </p>
           </Reveal>
         ))}
       </div>
       <Reveal delay={260}>
-        <p className="mt-8 max-w-2xl font-ui text-[15px] leading-relaxed text-foreground/80">
-          Life Order buni teskari qiladi: qadam shunchalik kichikki, uni bajarmaslik uchun bahona
-          topish qiyin. Keyin takror avtomatizmga aylanadi.
-        </p>
+        <div className="mt-12 rounded-2xl border border-primary/20 bg-primary/5 p-8 text-center md:text-left">
+          <h3 className="font-serif text-2xl font-bold">Nega ayni Life Order?</h3>
+          <p className="mt-4 max-w-2xl font-ui text-[15px] leading-relaxed text-foreground/80">
+            Biz shunchaki 'habit tracker' emasmiz. Biz — <b>Self-Control OS</b>. Biz miyangizdagi 
+            mukofot tizimi (Dopamine pathway) va biologik ritmingizni (Circadian rhythm) birlashtirib, 
+            irodangiz minimal sarflanadigan <b>Intizom Arxitekturasini</b> quramiz.
+          </p>
+        </div>
       </Reveal>
     </Section>
   );
