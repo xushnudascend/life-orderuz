@@ -149,7 +149,7 @@ export const uz = {
     },
     depth: {
       title: "Chuqurroq · Nadir, retentsiya, 100 kun",
-      insightContext: "Foydalanuvchi: {name}. Bugun {done}/{total} odat ({percent}%). Streak: {streak} kun. Daraja {level}, XP {xp}. Arxetip: {archetype}. Vaqt: {label}.",
+      insightContext: "Psixologik profil: {name}. Bugungi progress: {done}/{total} ({percent}%). Streak: {streak} kun. Arxetip: {archetype}. Ilmiy tavsiya: {label}.",
     },
   },
   settings: {
