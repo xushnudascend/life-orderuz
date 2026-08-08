@@ -23,7 +23,7 @@ export function useT() {
     };
   }, []);
 
-  const t = useCallback((key: TKey) => translate(key, locale), [locale]);
+  const t = useCallback((key: TKey, params?: Record<string, string | number>) => translate(key, locale, params), [locale]);
 
   const change = useCallback((next: Locale) => {
     setLocale(next);

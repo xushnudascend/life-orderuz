@@ -37,7 +37,7 @@ export function getLocale(): Locale {
   return readLocale();
 }
 
-export function t(key: TKey, locale?: Locale): string {
+export function t(key: TKey, locale?: Locale, params?: Record<string, string | number>): string {
   const loc = locale ?? readLocale();
   const dict = DICTS[loc];
   const value = key.split(".").reduce<unknown>((acc, part) => {
@@ -46,18 +46,29 @@ export function t(key: TKey, locale?: Locale): string {
     }
     return undefined;
   }, dict);
-  if (typeof value === "string") return value;
+
+  let result = typeof value === "string" ? value : "";
+
   // Fallback to uz if translation missing
-  if (loc !== "uz") {
+  if (!result && loc !== "uz") {
     const fb = key.split(".").reduce<unknown>((acc, part) => {
       if (acc && typeof acc === "object" && part in (acc as object)) {
         return (acc as Record<string, unknown>)[part];
       }
       return undefined;
     }, uz);
-    if (typeof fb === "string") return fb;
+    if (typeof fb === "string") result = fb;
   }
-  return key;
+
+  if (!result) return key;
+
+  if (params) {
+    Object.entries(params).forEach(([k, v]) => {
+      result = result.replace(new RegExp(`\\{${k}\\}`, "g"), String(v));
+    });
+  }
+
+  return result;
 }
 
 export { uz };
