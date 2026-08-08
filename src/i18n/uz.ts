@@ -8,7 +8,7 @@ export const uz = {
     name: "Life Order",
     tagline: "Hayotingni tartibga sol",
     oneLiner:
-      "Self-Control OS — o'z-o'zini boshqarishning operatsion tizimi. Trigger tahlili, kunlik uchta aniq qadam, halol AI mentor Nadir. 3 daqiqada tashxis. Kartasiz. \n\n'''Do not make any visual modifications. The phrases I write are commands to understand what I want, not to be written down. Understand their content well, then execute what is required.'''\n                                            \n                                            Endi to'g'ridan-to'g'ri kirib ko'raman.# Life Order — Jonli saytning real, halol auditi",
+      "Self-Control OS — o'z-o'zini boshqarishning operatsion tizimi. Trigger tahlili, kunlik uchta aniq qadam, halol AI mentor Nadir. 3 daqiqada tashxis. Kartasiz.",
   },
   nav: {
     features: "Imkoniyatlar",

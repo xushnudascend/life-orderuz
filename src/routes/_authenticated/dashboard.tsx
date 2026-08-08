@@ -252,7 +252,7 @@ function Dashboard() {
         {/* Habits */}
         <Panel className="border-primary/30 shadow-[0_0_20px_-10px_hsl(var(--primary)/0.2)] lg:col-span-7">
           <PanelHeader
-            eyebrow="Bugungi odatlar"
+            eyebrow="Bugungi protokol"
             title={
               <p className="font-serif text-lg font-semibold">
                 {doneCount} / {habits.length} — {percent}%
@@ -337,7 +337,7 @@ function Dashboard() {
 
         {/* Quick access */}
         <Panel className="lg:col-span-5">
-          <PanelHeader eyebrow="Tezkor kirish" />
+          <PanelHeader eyebrow="OS Modullari" />
 
           <div className="mt-3 grid grid-cols-2 gap-2">
             {[
@@ -381,7 +381,7 @@ function Dashboard() {
         <summary className="flex cursor-pointer list-none items-center justify-between gap-3 px-4 py-3 font-ui text-xs uppercase tracking-[0.22em] text-muted-foreground transition-colors hover:text-foreground">
           <span className="flex items-center gap-2">
             <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-primary/60" />
-            {t("dashboard.depth.title")}
+            {t("dashboard.depth.title")} · Tizim chuqurligi
           </span>
           <ArrowRight className="h-3.5 w-3.5 transition-transform group-open:rotate-90" />
         </summary>

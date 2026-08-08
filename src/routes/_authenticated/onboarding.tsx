@@ -51,7 +51,7 @@ function Onboarding() {
   const isFinalStep = step === bQuestions.length;
   const currentB: OnboardingQuestion | null = isFinalStep ? null : bQuestions[step];
 
-  const sectionLabel = currentB ? "A · Naqshing" : "B · Sen haqingda + reja";
+  const sectionLabel = currentB ? "QISM A · Naqshing" : "QISM B · Sen haqingda + reja";
 
   const bmi = useMemo(() => {
     const h = Number(answers["profile.height_cm"]);
@@ -211,6 +211,9 @@ function Onboarding() {
             <h1 className="mb-2 font-display text-2xl leading-tight tracking-tight sm:text-3xl">
               Aha — yo'ling tayyor.
             </h1>
+            <p className="mb-4 text-sm text-muted-foreground/80 font-ui leading-relaxed">
+              Biz sening naqshingni tahlil qildik. Nadir AI mentoring senga shaxsiy protokolini tuzdi.
+            </p>
             {archetypeName && (
               <p className="mb-6 font-ui text-xs uppercase tracking-[0.22em] text-muted-foreground">
                 Arxetip · {archetypeName}

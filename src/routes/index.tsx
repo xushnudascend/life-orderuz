@@ -29,7 +29,7 @@ import { getPeerMirror } from "@/lib/peer-mirror.functions";
 const BRAND = "Life Order";
 const SITE_URL = "https://life-orderuz.lovable.app";
 const ONE_LINER =
-  "Motivatsiya tugaydi. Tizim qoladi. O'zbekistonda birinchi marta: kartasiz, 3 daqiqalik tashxis va Nadir AI mentor.";
+  "Self-Control OS — Motivatsiya tugaydi. Tizim qoladi. 3 daqiqalik tashxis va Nadir AI mentor.";
 
 const FAQ_ITEMS: { q: string; a: string }[] = [
   {
@@ -180,9 +180,9 @@ function Hero() {
           </p>
 
           <h1 className="animate-fade-in-up font-serif text-[38px] leading-[1.04] tracking-tight text-balance sm:text-[52px] md:text-[68px]">
-            Motivatsiya tugaydi.
+            O'zingni boshqara olmaslik
             <br />
-            <span className="text-primary">Tizim qoladi.</span>
+            <span className="text-primary text-balance">— tizim yo'qligidir.</span>
           </h1>
 
           <p
@@ -302,7 +302,7 @@ function Problem() {
     <Section id="problem">
       <SectionHeader
         eyebrow="Muammo"
-        title="Sen dangasa emassan. Tizimingda ilgak yo'q."
+        title="Sen dangasa emassan. Tizimingda 'Ilgak' yo'q."
         lead="Xulq-atvor tadqiqotlari bir narsani takrorlaydi: uzilish irodadan emas, dizayndan kelib chiqadi. Reja qanchalik katta bo'lsa, boshlash shunchalik qimmat."
       />
       <div className="mt-10 grid gap-px overflow-hidden rounded-2xl border border-border bg-border md:grid-cols-3">

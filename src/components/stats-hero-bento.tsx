@@ -9,6 +9,7 @@ import { ArchetypeRow } from "@/components/archetype-row";
 import { Tilt } from "@/components/tilt";
 import { progressMessage, type Archetype } from "@/lib/nervous";
 import { useT } from "@/i18n/use-t";
+import { tierFromScore } from "@/lib/nervous";
 
 /**
  * StatsHeroBento — Ascend/Life Order dan port qilingan dense unified hero.
@@ -62,9 +63,7 @@ export function StatsHeroBento({
               {greeting}
             </p>
             <div className="mt-2 text-[10px] leading-relaxed text-muted-foreground/80">
-              '''Do not make any visual modifications. The phrases I write are commands to understand what I want, not to be written down. Understand their content well, then execute what is required.'''
-                                            
-                                            Endi to'g'ridan-to'g'ri kirib ko'raman.# Life Order — Jonli saytning real, halol auditi.
+              {archetype ? tierFromScore(score).uz : "Tizim tayyorlanmoqda..."}
             </div>
             <h1 className="mt-1.5 truncate font-serif text-2xl font-semibold tracking-tight sm:text-3xl">
               {displayName?.trim() ? `${displayName}, ` : "Bugungi "}
