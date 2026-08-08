@@ -252,7 +252,7 @@ function Dashboard() {
       <div className="mt-4">
         
         {/* Habits */}
-        <Panel className="lg:col-span-12 rounded-[28px] border-border/60 bg-card/40 backdrop-blur-xl p-8">
+        <Panel className="lg:col-span-12 rounded-[32px] border-border/40 bg-[#0c0c0c]/40 backdrop-blur-3xl p-10 shadow-[0_32px_64px_-16px_rgba(0,0,0,0.5)]">
           
           <PanelHeader
             title={<span className="font-serif text-3xl font-bold tracking-tight">protokol</span>}

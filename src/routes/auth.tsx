@@ -106,7 +106,7 @@ function AuthPage() {
         </div>
 
         <div
-          className="animate-fade-in-up rounded-[28px] border border-border/50 bg-card/40 p-8 shadow-[0_24px_48px_-12px_rgba(0,0,0,0.5)] backdrop-blur-xl"
+          className="animate-fade-in-up rounded-[32px] border border-border/40 bg-[#0c0c0c]/40 p-10 shadow-[0_40px_80px_-20px_rgba(0,0,0,0.6)] backdrop-blur-3xl"
           style={{ animationDelay: "80ms" }}
         >
           <div className="space-y-3">
