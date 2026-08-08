@@ -67,8 +67,8 @@ export const uz = {
     heading: "Nadir kim?",
     body: "Nadir — sensiz uxlamaydigan yordamchi emas. U — sening tanlovlaringni ko'rib, halol javob beradigan xarakter. \"Yaxshi ish qilyapsan\" degan bo'sh maqtov Nadir'da yo'q. Nima ish qilyapsan, nega qilyapsan, keyin nima bo'ladi — shu uchtasi.",
     quote:
-      "«Sen bugun mashqni o'tkazib yubording. Sabab charchoq emas — sabab uyquga borishdan qo'rqishing. Ertaga soat 22:30 da telefonni jimjitga qo'y. Boshqa hech narsa.»",
-    quoteBy: "— Nadir, real chat namunasi",
+      "«Sen bugun mashqni o'tkazib yubording. Sabab charchoq emas — sabab nafsingga qul bo'lishing. Ertaga soat 22:30 da telefonni yig'ishtir. Boshqa hech narsa.»",
+    quoteBy: "— Nadir, sening halol mentoring",
   },
   pricing: {
     heading: "Narxlar — sodda",
