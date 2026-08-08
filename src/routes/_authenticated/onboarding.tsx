@@ -207,7 +207,7 @@ function Onboarding() {
         <div className="absolute top-[-10%] right-[-10%] h-[500px] w-[500px] animate-orb-float rounded-full bg-primary/5 blur-[120px]" />
         
         <div className="mx-auto max-w-2xl px-5 py-16 relative z-10 w-full">
-          <div className="animate-fade-in-up rounded-[28px] border border-border/50 bg-card/40 p-8 md:p-12 shadow-[0_32px_64px_-16px_rgba(0,0,0,0.6)] backdrop-blur-2xl">
+          <div className="animate-fade-in-up rounded-[32px] border border-border/40 bg-[#0c0c0c]/40 p-10 md:p-16 shadow-[0_48px_96px_-24px_rgba(0,0,0,0.7)] backdrop-blur-3xl">
             <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-1.5 font-ui text-[11px] font-bold uppercase tracking-[0.2em] text-primary shadow-[0_0_20px_hsl(var(--primary)/0.2)]">
               <Sparkles className="h-4 w-4" />
               Tashxis yakunlandi
