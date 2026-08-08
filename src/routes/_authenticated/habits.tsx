@@ -274,20 +274,21 @@ function HabitsPage() {
                   <span>Habit stacking · Mavjud odatga bog'lash (Zanjir)</span>
                 </label>
                 <div className="relative mt-2">
-                  value={stackAnchor}
-                  onChange={(e) => {
-                    setStackAnchor(e.target.value);
-                    if (e.target.value) setCue("");
-                  }}
-                  className="mt-2 w-full rounded-[var(--radius)] border border-border bg-background px-3 py-2 font-ui text-sm text-foreground focus:border-primary focus:outline-none"
-                >
-                  <option value="">— Bog'lamayman (yangi cue yozaman) —</option>
-                  {habits.map((h) => (
-                    <option key={h.id} value={h.id}>
-                      {h.title.length > 60 ? h.title.slice(0, 60) + "…" : h.title}
-                    </option>
-                  ))}
-                </select>
+                  <select
+                    value={stackAnchor}
+                    onChange={(e) => {
+                      setStackAnchor(e.target.value);
+                      if (e.target.value) setCue("");
+                    }}
+                    className="w-full rounded-[var(--radius)] border border-border bg-background px-3 py-2 font-ui text-sm text-foreground focus:border-primary focus:outline-none"
+                  >
+                    <option value="">— Bog'lamayman (yangi cue yozaman) —</option>
+                    {habits.map((h) => (
+                      <option key={h.id} value={h.id}>
+                        {h.title.length > 60 ? h.title.slice(0, 60) + "…" : h.title}
+                      </option>
+                    ))}
+                  </select>
                 </div>
                 <p className="mt-1.5 font-ui text-[10px] text-muted-foreground">
                   James Clear: "Yangi odatni allaqachon bajaradigan odatingizdan keyin qo'shing." Bu miyada neyron bog'lanishlarni (Synaptic pruning) tezlashtiradi.

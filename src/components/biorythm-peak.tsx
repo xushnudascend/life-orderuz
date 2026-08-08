@@ -1,69 +1,59 @@
-import { Zap } from "lucide-react";
+import { Clock, Info } from "lucide-react";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import { useEffect, useState } from "react";
 
-/**
- * BiorythmPeak — Based on Circadian Rhythm (Huberman Lab / Rise Science)
- * Displays the current energy phase of the user.
- */
-export function BiorythmPeak({ userWakeTime = 7 }: { userWakeTime?: number }) {
-  const now = new Date();
-  const currentHour = now.getHours();
-  
-  // Circadian logic: 
-  // 0-2 hours after waking: Grogginess / Adenosine clearance
-  // 2-6 hours: Morning peak (Deep work)
-  // 7-9 hours: Afternoon dip
-  // 10-14 hours: Evening second wind
-  const hoursSinceWaking = (currentHour - userWakeTime + 24) % 24;
+export function BiorythmPeak() {
+  const [now, setNow] = useState(new Date());
 
-  let phase = "O'rtacha";
-  let status = "Stabil";
-  let percent = 50;
-  let color = "bg-primary/40";
+  useEffect(() => {
+    const t = setInterval(() => setNow(new Date()), 60000);
+    return () => clearInterval(t);
+  }, []);
 
-  if (hoursSinceWaking < 2) {
-    phase = "Uyg'onish";
-    status = "Past (Adenozin)";
-    percent = 20;
-    color = "bg-blue-500/40";
-  } else if (hoursSinceWaking < 6) {
-    phase = "Pik";
-    status = "Yuqori (Fokus)";
-    percent = 90;
-    color = "bg-emerald-500/60";
-  } else if (hoursSinceWaking < 9) {
-    phase = "Tushkunlik";
-    status = "Past (Dip)";
-    percent = 30;
-    color = "bg-amber-500/40";
-  } else if (hoursSinceWaking < 14) {
-    phase = "Ikkinchi to'lqin";
-    status = "O'rta-Yuqori";
-    percent = 70;
-    color = "bg-primary/60";
-  } else {
-    phase = "Tayyorgarlik";
-    status = "Past (Melatonin)";
-    percent = 15;
-    color = "bg-indigo-500/40";
-  }
+  const h = now.getHours();
+
+  const getPhase = () => {
+    // Andrew Huberman / Rise Science logic
+    if (h >= 0 && h < 2) return { label: "Tiklanish", color: "text-blue-400", bg: "bg-blue-400/10", info: "Miya neyronlarini tozalash va xotirani mustahkamlash vaqti." };
+    if (h >= 2 && h < 6) return { label: "Chuqur uyqu", color: "text-indigo-400", bg: "bg-indigo-400/10", info: "Gormonal muvozanat va jismoniy tiklanish cho'qqisi." };
+    if (h >= 7 && h < 9) return { label: "Kortizol cho'qqisi", color: "text-orange-400", bg: "bg-orange-400/10", info: "Eng muhim vazifani boshlash uchun eng yaxshi vaqt." };
+    if (h >= 10 && h < 14) return { label: "Chuqur fokus", color: "text-emerald-400", bg: "bg-emerald-400/10", info: "Analitik va kreativ ishlar uchun ideal biologik oyna." };
+    if (h >= 14 && h < 16) return { label: "Sirkad tushish", color: "text-amber-400", bg: "bg-amber-400/10", info: "Energiya pasayishi. Yengil vazifalar yoki qisqa dam olish tavsiya etiladi." };
+    return { label: "Barqarorlik", color: "text-primary", bg: "bg-primary/10", info: "O'rtacha darajadagi faollik oynasi." };
+  };
+
+  const phase = getPhase();
 
   return (
-    <div className="flex flex-col h-full justify-between">
-      <div className="flex items-center justify-between">
-        <p className="font-ui text-[10px] uppercase tracking-[0.2em] text-muted-foreground">Biologik ritm</p>
-        <Zap className="h-3 w-3 text-primary animate-pulse" />
+    <div className="flex flex-col gap-3">
+      <div className="flex items-center gap-2">
+        <Clock className="h-4 w-4 text-primary" />
+        <p className="font-ui text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
+          Biologik Ritm
+        </p>
       </div>
-      <h3 className="mt-2 font-serif text-lg leading-tight">{phase} fazasi</h3>
-      <div className="mt-3 space-y-2">
-        <div className="flex items-center justify-between font-ui text-[10px] text-muted-foreground">
-          <span>{status}</span>
-          <span>{percent}%</span>
+
+      <div className="space-y-1">
+        <div className="flex items-center justify-between">
+          <p className="font-serif text-sm font-semibold text-foreground">Hozirgi holat</p>
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Info className="h-3 w-3 text-muted-foreground cursor-help" />
+              </TooltipTrigger>
+              <TooltipContent className="max-w-[180px] text-[10px]">
+                {phase.info}
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
         </div>
-        <div className="h-2 w-full rounded-full bg-border overflow-hidden">
-          <div 
-            className={`h-full transition-all duration-1000 ${color}`} 
-            style={{ width: `${percent}%` }} 
-          />
+        <div className={`mt-2 flex items-center justify-between rounded-md ${phase.bg} px-3 py-2 transition-colors`}>
+          <span className={`font-ui text-xs font-bold ${phase.color}`}>
+            {phase.label}
+          </span>
+          <span className="font-mono text-[10px] text-muted-foreground">
+            {now.toLocaleTimeString("uz-UZ", { hour: "2-digit", minute: "2-digit" })}
+          </span>
         </div>
       </div>
     </div>
