@@ -238,16 +238,28 @@ function Dashboard() {
       )}
 
       {/* 2-QATLAM — Kunlik halqa */}
-      {loaded && habits.length > 0 && (
-        <div className="mt-4 rounded-[var(--radius)] border border-border/70 bg-card p-4 sm:p-5">
-          <ZeigarnikRing
-            done={doneCount}
-            total={habits.length}
-            nextTitle={habits.find((h) => !done.has(h.id))?.title ?? null}
-          />
+      <div className="mt-4 grid gap-4 lg:grid-cols-12">
+        {loaded && habits.length > 0 && (
+          <div className="rounded-[var(--radius)] border border-border/70 bg-card p-4 sm:p-5 lg:col-span-8">
+            <ZeigarnikRing
+              done={doneCount}
+              total={habits.length}
+              nextTitle={habits.find((h) => !done.has(h.id))?.title ?? null}
+            />
+          </div>
+        )}
+        
+        <div className="rounded-[var(--radius)] border border-border/70 bg-card p-4 sm:p-5 lg:col-span-4">
+           <p className="font-ui text-[10px] uppercase tracking-[0.2em] text-muted-foreground">Hozirgi holat</p>
+           <h3 className="mt-2 font-serif text-lg leading-tight">Biologik ritm</h3>
+           <div className="mt-3 flex items-center gap-3">
+              <div className="h-2 flex-1 rounded-full bg-border overflow-hidden">
+                 <div className="h-full bg-primary/60 w-[65%]" />
+              </div>
+              <span className="font-ui text-[11px] text-muted-foreground">Pik</span>
+           </div>
         </div>
-      )}
-
+      </div>
       <div className="mt-4 grid gap-3 sm:gap-4 lg:grid-cols-12">
         {/* Habits */}
         <Panel className="border-primary/30 shadow-[0_0_20px_-10px_hsl(var(--primary)/0.2)] lg:col-span-12">

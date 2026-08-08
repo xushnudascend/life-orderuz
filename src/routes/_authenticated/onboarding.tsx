@@ -290,7 +290,7 @@ function Onboarding() {
                 if (currentB.type === "single") {
                   setTimeout(() => {
                     setStep((s) => (s < total - 1 ? s + 1 : s));
-                  }, 400);
+                  }, 600);
                 }
               }}
               onToggleMulti={(v) => toggleMulti(currentB.key, v)}
