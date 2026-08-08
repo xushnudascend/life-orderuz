@@ -392,10 +392,10 @@ function Dashboard() {
 
           <div className="mt-3 grid grid-cols-2 gap-2">
             {[
-              { to: "/workout", label: t("dashboard.quick.workout"), icon: Dumbbell },
-              { to: "/diet", label: t("dashboard.quick.diet"), icon: Salad },
-              { to: "/quests", label: t("dashboard.quick.quests"), icon: Target },
-              { to: "/mentor", label: t("dashboard.quick.mentor"), icon: Sparkles },
+              { to: "/workout", label: "Tana", icon: Dumbbell },
+              { to: "/diet", label: "Ovqatlanish", icon: Salad },
+              { to: "/quests", label: "O'rganish", icon: Target },
+              { to: "/mentor", label: "Mentor", icon: Sparkles },
             ].map(({ to, label, icon: Icon }) => (
               <Link
                 key={to}

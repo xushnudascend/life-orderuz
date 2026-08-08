@@ -29,7 +29,7 @@ import { getPeerMirror } from "@/lib/peer-mirror.functions";
 const BRAND = "Life Order";
 const SITE_URL = "https://life-orderuz.lovable.app";
 const ONE_LINER =
-  "Self-Control OS — Hayotingni ilmiy tartibga sol. Intizom — iroda mevasidir. 3 daqiqalik tashxis va Nadir AI mentor.";
+  "Self-Control OS — Motivatsiya tugaydi, tizim qoladi. 3 daqiqalik tashxis va Nadir AI mentor.";
 
 const FAQ_ITEMS: { q: string; a: string }[] = [
   {
@@ -109,6 +109,7 @@ function Landing() {
         <Features />
         <Science />
         <Pricing />
+        <AppVision />
         <Faq />
         <FinalCta />
       </main>
@@ -163,15 +164,24 @@ function SectionHeader({
 
 function Hero() {
   return (
-    <section className="relative flex min-h-[90dvh] flex-col items-center justify-center overflow-hidden border-b border-border bg-background">
+    <section className="relative flex min-h-[95dvh] flex-col items-center justify-center overflow-hidden border-b border-border bg-[#0a0502]">
+      {/* Premium Brownish Obsidian Gradient */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 -z-10"
         style={{
           background:
-            "radial-gradient(circle at 50% -20%, hsl(var(--primary) / 0.15), transparent 70%)",
+            "radial-gradient(circle at 50% -20%, hsl(25 40% 15% / 0.4), transparent 70%), radial-gradient(circle at 80% 80%, hsl(25 40% 10% / 0.3), transparent 60%)",
         }}
       />
+      
+      {/* Staircase Climber visual metaphor layer (SVG or CSS representation) */}
+      <div className="absolute bottom-0 right-0 w-full h-full opacity-10 pointer-events-none overflow-hidden">
+        <svg width="100%" height="100%" viewBox="0 0 1000 1000" preserveAspectRatio="xMaxYMax slice">
+          <path d="M0,1000 L200,1000 L200,800 L400,800 L400,600 L600,600 L600,400 L800,400 L800,200 L1000,200" fill="none" stroke="currentColor" strokeWidth="2" className="text-primary/20" />
+          <circle cx="900" cy="150" r="20" className="fill-primary/40 animate-pulse" />
+        </svg>
+      </div>
       
       <div className="relative mx-auto w-full max-w-5xl px-6 py-20 text-center md:px-8">
         <Reveal delay={100}>
@@ -186,17 +196,17 @@ function Hero() {
 
         <Reveal delay={250}>
           <h1 className="font-serif text-[42px] leading-[1.1] tracking-tighter text-balance sm:text-[64px] md:text-[84px] lg:text-[92px]">
-            O'zingni <span className="text-muted-foreground/40 italic">boshqar.</span>
+            Motivatsiya <span className="text-muted-foreground/40 italic">tugaydi,</span>
             <br />
             <span className="bg-gradient-to-b from-foreground to-foreground/70 bg-clip-text text-transparent">
-              Hayotingni tartibla.
+              Tizim qoladi.
             </span>
           </h1>
         </Reveal>
 
         <Reveal delay={400}>
           <p className="mx-auto mt-8 max-w-2xl font-ui text-lg leading-relaxed text-muted-foreground md:text-xl">
-            Iroda kuchi — sarflanadigan ne'mat. Life Order sening tabiating va biologik ritmingga moslangan shaxsiy intizom arxitekturasini qurish orqali hayotingni tartibga soladi.
+            Life Order — bu shunchaki ilova emas, bu sening sirkad ritming va biologik imkoniyatlaringga moslangan yagona <b>Self-Control OS</b>.
           </p>
         </Reveal>
 
@@ -655,6 +665,34 @@ function PricingCard({
         <Link to="/auth">{cta}</Link>
       </Button>
     </div>
+  );
+}
+
+/* ---------- App Vision ---------- */
+
+function AppVision() {
+  const items = [
+    { title: "Telefon bloklovchi", body: "Diqqatni jamlash uchun xalaqit beradigan ilovalarni vaqtinchalik cheklash." },
+    { title: "Smart eslatmalar", body: "Sening biologik ritmingga mos, miyangni toliqtirmaydigan xabarlar." },
+    { title: "Butun tizimga ulanish", body: "Mobil ilova, desktop va brauzer — barchasi yagona intizom markazida." },
+    { title: "Yomon odatlarni yo'qotish", body: "Impulsiv harakatlarni ilmiy metodlar (Pattern Interrupt) bilan bartaraf etish." }
+  ];
+  return (
+    <Section id="vision" className="bg-[#0c0805]">
+      <SectionHeader 
+        eyebrow="Kelajak"
+        title="To'liq nazorat ekotizimi"
+        lead="Biz sening maqsading va telefoning orasidagi barcha to'siqlarni olib tashlaymiz."
+      />
+      <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+        {items.map((it, i) => (
+          <Reveal key={it.title} delay={i * 100} className="rounded-2xl border border-primary/10 bg-card/40 p-6 backdrop-blur-md transition-all hover:border-primary/30">
+            <h3 className="font-serif text-lg font-bold">{it.title}</h3>
+            <p className="mt-3 font-ui text-sm text-muted-foreground leading-relaxed">{it.body}</p>
+          </Reveal>
+        ))}
+      </div>
+    </Section>
   );
 }
 
