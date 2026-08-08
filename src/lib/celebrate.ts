@@ -12,7 +12,7 @@ export async function celebrate(intensity: "small" | "big" = "small") {
     particleCount: count,
     spread: intensity === "big" ? 90 : 60,
     origin: { y: 0.7 },
-    colors: ["#f59e0b", "#fbbf24", "#fde68a", "#22c55e", "#e5e7eb"],
+    colors: ["#2dd4bf", "#14b8a6", "#0d9488", "#22c55e", "#e5e7eb"], // Deep Teal palette + emerald
     scalar: intensity === "big" ? 1.1 : 0.85,
     disableForReducedMotion: true,
   });
