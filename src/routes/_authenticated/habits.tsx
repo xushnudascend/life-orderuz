@@ -116,9 +116,6 @@ function HabitsPage() {
       then_action: composed || null,
       context_trigger: null,
     } as any);
-    setNewTitle("");
-    setCue("");
-    setStackAnchor("");
     setDifficulty(2);
     setSaving(false);
     refresh();
