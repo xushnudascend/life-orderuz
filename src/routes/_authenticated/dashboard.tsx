@@ -260,6 +260,7 @@ function Dashboard() {
            </div>
         </div>
       </div>
+      <div className="mt-4 grid gap-3 sm:gap-4 lg:grid-cols-12">
         {/* Habits */}
         <Panel className="border-primary/30 shadow-[0_0_20px_-10px_hsl(var(--primary)/0.2)] lg:col-span-12">
           <PanelHeader
