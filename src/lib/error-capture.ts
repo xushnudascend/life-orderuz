@@ -1,24 +1,35 @@
-let lastCapturedError: { error: unknown; at: number } | undefined;
-const TTL_MS = 5_000;
+/**
+ * Centralized error reporting and observability for critical flows.
+ * Ports the pattern from ascend-daily to life-orderuz.
+ */
+import { supabaseAdmin } from "@/integrations/supabase/client.server";
 
-function record(error: unknown) {
-  lastCapturedError = { error, at: Date.now() };
-}
+export async function recordFailedWebhook(opts: {
+  provider: string;
+  payload: any;
+  error: Error | string;
+}) {
+  const errorMessage = typeof opts.error === "string" ? opts.error : opts.error.message;
+  
+  console.error(`[WEBHOOK_FAILURE] Provider: ${opts.provider} | Error: ${errorMessage}`, {
+    payload: opts.payload,
+  });
 
-if (typeof globalThis.addEventListener === "function") {
-  globalThis.addEventListener("error", (event) => record((event as ErrorEvent).error ?? event));
-  globalThis.addEventListener("unhandledrejection", (event) =>
-    record((event as PromiseRejectionEvent).reason),
-  );
-}
-
-export function consumeLastCapturedError(): unknown {
-  if (!lastCapturedError) return undefined;
-  if (Date.now() - lastCapturedError.at > TTL_MS) {
-    lastCapturedError = undefined;
-    return undefined;
+  try {
+    await supabaseAdmin.from("payment_webhook_failures").insert({
+      provider: opts.provider,
+      payload: opts.payload,
+      error_message: errorMessage,
+    });
+    
+    // In a real production environment, this would also trigger a Telegram/Slack alert.
+    // For now, it logs to the database for audit.
+  } catch (dbError) {
+    console.error("[CRITICAL] Failed to record webhook failure in database", dbError);
   }
-  const { error } = lastCapturedError;
-  lastCapturedError = undefined;
-  return error;
+}
+
+export function alertCritical(message: string, context: Record<string, any> = {}) {
+  console.error(`[CRITICAL_ALERT] ${message}`, context);
+  // Implementation for external alerting would go here.
 }
