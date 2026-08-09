@@ -137,3 +137,80 @@
 .animate-blob-breathe {
   animation: blob-breathe 3.5s ease-in-out infinite;
 }
+
+/* Typography Hierarchy Tokens from Life Order */
+:root {
+  --fs-display: 2.5rem;   /* 40px  — hero mobile */
+  --fs-h1:      2rem;     /* 32px */
+  --fs-h2:      1.5rem;   /* 24px */
+  --fs-h3:      1.125rem; /* 18px */
+  --fs-body:    0.9375rem;/* 15px */
+  --fs-small:   0.8125rem;/* 13px */
+  --fs-caption: 0.6875rem;/* 11px — eyebrow/meta */
+  --lh-tight:   1.05;
+  --lh-snug:    1.25;
+  --lh-body:    1.55;
+  --tracking-eyebrow: 0.18em;
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-fast: 150ms;
+  --dur-base: 300ms;
+  --dur-slow: 700ms;
+}
+
+/* Obsidian Premium Shadows */
+:root {
+  --shadow-soft: 0 8px 32px -12px hsl(0 0% 0% / 0.7);
+  --shadow-card: 0 1px 0 hsl(0 0% 100% / 0.04) inset, 0 8px 24px -12px hsl(0 0% 0% / 0.6);
+}
+
+@layer utilities {
+  .eyebrow { 
+    font-size: 10px; 
+    line-height: 1; 
+    letter-spacing: 0.14em; 
+    text-transform: uppercase; 
+    font-weight: 500; 
+    color: hsl(var(--color-muted-foreground)); 
+  }
+  
+  .lift {
+    transition: transform var(--dur-base) var(--ease-out), border-color var(--dur-base) ease;
+  }
+  .lift:hover {
+    transform: translateY(-2px);
+  }
+
+  /* Backdrop grid — minimalist chiziqli fon */
+  .backdrop-grid {
+    background-image:
+      linear-gradient(hsl(var(--color-foreground) / 0.08) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(var(--color-foreground) / 0.08) 1px, transparent 1px);
+    background-size: 48px 48px;
+    mask-image: radial-gradient(ellipse at 40% 30%, black 30%, transparent 75%);
+    -webkit-mask-image: radial-gradient(ellipse at 40% 30%, black 30%, transparent 75%);
+  }
+
+  .hairline { border: 1px solid hsl(var(--color-border) / 0.7); }
+  .hairline-t { border-top: 1px solid hsl(var(--color-border) / 0.7); }
+  .hairline-b { border-bottom: 1px solid hsl(var(--color-border) / 0.7); }
+  
+  /* Standardized opaque surfaces */
+  .surface { 
+    background: hsl(0 0% 8%); 
+    border: 1px solid hsl(var(--color-border) / 0.7); 
+    border-radius: var(--radius-md); 
+  }
+  .surface-strong { 
+    background: hsl(0 0% 10%); 
+    border: 1px solid hsl(var(--color-border)); 
+    border-radius: var(--radius-md); 
+  }
+}
+
+/* Route transitions */
+@keyframes routeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+main#main-content > * { animation: routeIn 180ms ease-out both; }
