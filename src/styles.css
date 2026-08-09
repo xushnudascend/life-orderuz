@@ -5,33 +5,33 @@
   --font-ui: "Inter", sans-serif;
   --font-body: "Inter", sans-serif;
 
-  --color-background: hsl(187 15% 2%);
-  --color-foreground: hsl(187 10% 98%);
+  --color-background: hsl(0 0% 4%);
+  --color-foreground: hsl(0 0% 90%);
   
-  --color-card: hsl(187 15% 4%);
-  --color-card-foreground: hsl(187 10% 98%);
+  --color-card: hsl(0 0% 6%);
+  --color-card-foreground: hsl(0 0% 92%);
   
-  --color-popover: hsl(187 15% 4%);
-  --color-popover-foreground: hsl(187 10% 98%);
+  --color-popover: hsl(0 0% 7%);
+  --color-popover-foreground: hsl(0 0% 92%);
   
-  --color-primary: hsl(187 65% 42%) !important;
-  --color-primary-foreground: hsl(187 10% 98%);
+  --color-primary: hsl(72 100% 50%) !important;
+  --color-primary-foreground: hsl(0 0% 5%);
   
-  --color-secondary: hsl(187 15% 6%);
-  --color-secondary-foreground: hsl(187 10% 98%);
+  --color-secondary: hsl(0 0% 10%);
+  --color-secondary-foreground: hsl(0 0% 88%);
   
-  --color-muted: hsl(187 15% 8%);
-  --color-muted-foreground: hsl(187 10% 60%);
+  --color-muted: hsl(0 0% 9%);
+  --color-muted-foreground: hsl(0 0% 60%);
   
-  --color-accent: hsl(187 65% 42% / 0.1);
-  --color-accent-foreground: hsl(187 10% 98%);
+  --color-accent: hsl(0 0% 14%);
+  --color-accent-foreground: hsl(0 0% 90%);
   
   --color-destructive: hsl(0 84% 60%);
-  --color-destructive-foreground: hsl(187 10% 98%);
+  --color-destructive-foreground: hsl(0 0% 100%);
   
-  --color-border: hsl(187 15% 10%);
-  --color-input: hsl(187 15% 10%);
-  --color-ring: hsl(187 65% 42%);
+  --color-border: hsl(0 0% 14%);
+  --color-input: hsl(0 0% 12%);
+  --color-ring: hsl(72 100% 50%);
 
   --radius-xl: 2rem;
   --radius-lg: 1.5rem;
@@ -39,7 +39,7 @@
   --radius-sm: 1rem;
 
   --shadow-card: 0 40px 80px -20px rgba(0, 0, 0, 0.7);
-  --shadow-glow: 0 0 40px -5px hsl(187 65% 42% / 0.5);
+  --shadow-glow: 0 0 40px -5px hsl(72 100% 50% / 0.5);
   --shadow-premium: 0 48px 96px -24px rgba(0, 0, 0, 0.8);
 }
 
@@ -55,7 +55,7 @@
 }
 
 @utility glow-primary {
-  box-shadow: 0 0 20px -5px hsl(187 65% 42% / 0.4);
+  box-shadow: 0 0 20px -5px hsl(72 100% 50% / 0.4);
 }
 
 @utility lift {
@@ -87,7 +87,7 @@
 
 /* Girih Pattern Utility */
 .girih-corner {
-  background-image: url("data:image/svg+xml,%3Csvg width='120' height='120' viewBox='0 0 120 120' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0L20 20M20 20L40 0M40 0L60 20M60 20L80 0M80 0L100 20M100 20L120 0M0 20L20 40M20 40L40 20M40 20L60 40M60 40L80 20M80 20L100 40M100 40L120 20M0 40L20 60M20 60L40 40M40 40L60 60M60 60L80 40M80 40L100 60M100 60L120 40' stroke='%232dd4bf' stroke-width='0.5' stroke-opacity='0.15'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg width='120' height='120' viewBox='0 0 120 120' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0L20 20M20 20L40 0M40 0L60 20M60 20L80 0M80 0L100 20M100 20L120 0M0 20L20 40M20 40L40 20M40 20L60 40M60 40L80 20M80 20L100 40M100 40L120 20M0 40L20 60M20 60L40 40M40 40L60 60M60 60L80 40M80 40L100 60M100 60L120 40' stroke='%23d7ff00' stroke-width='0.5' stroke-opacity='0.15'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: top right;
   pointer-events: none;
@@ -95,8 +95,8 @@
 
 /* Dynamic Archetype Themes */
 [data-archetype="focus_seeker"] {
-  --color-primary: hsl(187 65% 42%) !important;
-  --shadow-glow: 0 0 20px -5px hsl(187 65% 42% / 0.3);
+  --color-primary: hsl(72 100% 50%) !important;
+  --shadow-glow: 0 0 20px -5px hsl(72 100% 50% / 0.3);
 }
 
 [data-archetype="body_builder"] {
