@@ -33,13 +33,14 @@
   --color-input: hsl(187 15% 10%);
   --color-ring: hsl(187 65% 42%);
 
-  --radius-xl: 1.75rem;
-  --radius-lg: 1.25rem;
-  --radius-md: 1rem;
-  --radius-sm: 0.75rem;
+  --radius-xl: 2rem;
+  --radius-lg: 1.5rem;
+  --radius-md: 1.25rem;
+  --radius-sm: 1rem;
 
-  --shadow-card: 0 20px 50px -12px rgba(0, 0, 0, 0.7);
-  --shadow-glow: 0 0 30px -5px hsl(187 65% 42% / 0.4);
+  --shadow-card: 0 40px 80px -20px rgba(0, 0, 0, 0.7);
+  --shadow-glow: 0 0 40px -5px hsl(187 65% 42% / 0.5);
+  --shadow-premium: 0 48px 96px -24px rgba(0, 0, 0, 0.8);
 }
 
 @layer base {

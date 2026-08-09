@@ -156,47 +156,47 @@ function SectionHeader({
 
 function Hero() {
   return (
-    <section className="relative flex min-h-[92dvh] flex-col items-center justify-center overflow-hidden border-b border-border bg-[#0a0502]">
-      {/* 3D Orb Backgrounds */}
-      <div className="absolute top-[-10%] right-[-10%] h-[600px] w-[600px] animate-orb-float rounded-full bg-primary/10 blur-[120px]" />
-      <div className="absolute bottom-[-10%] left-[-10%] h-[500px] w-[500px] animate-orb-float-delayed rounded-full bg-primary/5 blur-[100px]" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[700px] w-[700px] animate-blob-breathe rounded-full bg-primary/[0.04] blur-[150px]" />
+    <section className="relative flex min-h-[96dvh] flex-col items-center justify-center overflow-hidden border-b border-border bg-[#0a0502]">
+      {/* Premium 3D Orb Backgrounds */}
+      <div className="absolute top-[-15%] right-[-15%] h-[800px] w-[800px] animate-orb-float rounded-full bg-primary/15 blur-[140px] pointer-events-none" />
+      <div className="absolute bottom-[-15%] left-[-15%] h-[700px] w-[700px] animate-orb-float-delayed rounded-full bg-primary/8 blur-[120px] pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[900px] w-[900px] animate-blob-breathe rounded-full bg-primary/[0.05] blur-[180px] pointer-events-none" />
       
-      <div className="relative z-10 mx-auto w-full max-w-5xl px-6 py-20 text-center md:px-8">
+      <div className="relative z-10 mx-auto w-full max-w-6xl px-6 py-20 text-center md:px-8">
         <Reveal delay={100}>
-          <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-1.5 font-ui text-[10px] font-bold uppercase tracking-[0.2em] text-primary shadow-[0_0_20px_hsl(var(--primary)/0.2)]">
-            <Sparkles className="h-3.5 w-3.5" />
+          <div className="mb-10 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-6 py-2 font-ui text-[11px] font-bold uppercase tracking-[0.25em] text-primary shadow-[0_0_30px_hsl(var(--primary)/0.25)] backdrop-blur-md">
+            <Sparkles className="h-4 w-4" />
             Beta 2.0 · Self-Control OS
           </div>
         </Reveal>
 
         <Reveal delay={250}>
-          <h1 className="font-serif text-[64px] leading-[0.92] tracking-tighter text-balance sm:text-[92px] md:text-[116px] lg:text-[132px]">
+          <h1 className="font-serif text-[72px] leading-[0.88] tracking-tighter text-balance sm:text-[104px] md:text-[128px] lg:text-[152px]">
             Motivatsiya tugaydi,<br />
             <span className="text-primary italic relative">
               Tizim qoladi.
-              <span className="absolute -bottom-2 left-0 h-1 w-full bg-primary/20 blur-sm" />
+              <span className="absolute -bottom-4 left-0 h-1.5 w-full bg-primary/25 blur-md" />
             </span>
           </h1>
         </Reveal>
 
         <Reveal delay={400}>
-          <p className="mx-auto mt-10 max-w-2xl font-ui text-lg leading-relaxed text-muted-foreground/80 md:text-xl">
+          <p className="mx-auto mt-14 max-w-3xl font-ui text-xl leading-relaxed text-muted-foreground/80 md:text-2xl">
             Life Order — biologik ritming va xulq-atvor arxitekturangga moslangan,<br className="hidden md:block" />
             o'zbek tilidagi yagona premium intizom tizimi.
           </p>
         </Reveal>
 
         <Reveal delay={550}>
-          <div className="mt-14 flex flex-col items-center justify-center gap-6 sm:flex-row">
+          <div className="mt-20 flex flex-col items-center justify-center gap-8 sm:flex-row">
             <Button
               asChild
               size="lg"
-              className="group relative h-15 rounded-full px-12 font-ui text-lg font-semibold transition-all hover:scale-105 active:scale-[0.98] shadow-[0_20px_50px_-12px_hsl(var(--primary)/0.5)]"
+              className="group relative h-18 rounded-full px-16 font-ui text-xl font-bold transition-all hover:scale-105 active:scale-[0.98] shadow-[0_32px_64px_-16px_hsl(var(--primary)/0.6)]"
             >
               <Link to="/auth">
                 Tashxisni boshlash
-                <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+                <ArrowRight className="ml-2.5 h-6 w-6 transition-transform group-hover:translate-x-1.5" />
               </Link>
             </Button>
             <Button

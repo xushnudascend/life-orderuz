@@ -29,10 +29,10 @@ export function BottomNav({ recommendedTab }: { recommendedTab?: string }) {
         aria-current={isNadirActive ? "page" : undefined}
         className={
           "fixed bottom-[calc(2rem+env(safe-area-inset-bottom))] left-1/2 z-50 -translate-x-1/2 md:hidden " +
-          "grid h-18 w-18 place-items-center rounded-2xl bg-primary text-primary-foreground " +
-          "shadow-[0_25px_50px_-10px_hsl(var(--primary)/0.7),0_0_0_6px_hsl(var(--background))] " +
+          "grid h-20 w-20 place-items-center rounded-[24px] bg-primary text-primary-foreground " +
+          "shadow-[0_32px_64px_-12px_hsl(var(--primary)/0.7),0_0_0_8px_hsl(var(--background))] " +
           "transition-all duration-300 hover:scale-110 active:scale-90 " +
-          (isNadirActive ? "ring-2 ring-primary shadow-[0_0_30px_hsl(var(--primary)/0.4)]" : "")
+          (isNadirActive ? "ring-2 ring-primary shadow-[0_0_40px_hsl(var(--primary)/0.5)]" : "")
         }
       >
         <Sparkles className="h-7 w-7" strokeWidth={2.2} aria-hidden />

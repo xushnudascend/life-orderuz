@@ -51,7 +51,7 @@ export function StatsHeroBento({
   return (
     <section
         aria-label="Bugungi holat"
-        className="relative h-full overflow-hidden rounded-[28px] border border-border/40 bg-[#0c0c0c]/40 p-8 sm:p-12 backdrop-blur-3xl shadow-[0_40px_80px_-20px_rgba(0,0,0,0.6)]"
+        className="relative h-full overflow-hidden rounded-[40px] border border-border/40 bg-[#0c0c0c]/40 p-10 sm:p-14 backdrop-blur-4xl shadow-[0_64px_128px_-32px_rgba(0,0,0,0.7)]"
       >
 
         {/* Left Side Content */}

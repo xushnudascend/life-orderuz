@@ -80,11 +80,11 @@ function AuthPage() {
         <div className="absolute top-1/4 left-1/4 h-[300px] w-[300px] rounded-full bg-amber-900/10 blur-[100px]" />
       </div>
 
-      <div className="w-full max-w-[440px] space-y-10 animate-fade-in-up">
+      <div className="w-full max-w-[480px] space-y-12 animate-fade-in-up">
         <div className="text-center">
-          <Link to="/" className="inline-block mb-10 group transition-transform hover:scale-105">
-            <div className="flex items-center gap-3 font-serif text-3xl font-bold tracking-tight">
-              <span className="grid h-10 w-10 place-items-center rounded-2xl bg-primary text-primary-foreground shadow-[0_0_25px_hsl(var(--primary)/0.5)]">
+          <Link to="/" className="inline-block mb-12 group transition-transform hover:scale-105">
+            <div className="flex items-center gap-4 font-serif text-4xl font-bold tracking-tight">
+              <span className="grid h-12 w-12 place-items-center rounded-[20px] bg-primary text-primary-foreground shadow-[0_0_30px_hsl(var(--primary)/0.5)]">
                 L
               </span>
               Life<span className="text-primary italic">.</span>Order
@@ -93,20 +93,20 @@ function AuthPage() {
         </div>
 
         <div className="animate-fade-in-up text-center">
-          <div className="mx-auto mb-6 grid h-14 w-14 place-items-center rounded-2xl bg-primary/10 text-primary shadow-[0_0_30px_hsl(var(--primary)/0.2)] border border-primary/20">
-            <ShieldCheck className="h-7 w-7" strokeWidth={2} />
+          <div className="mx-auto mb-8 grid h-16 w-16 place-items-center rounded-[24px] bg-primary/10 text-primary shadow-[0_0_40px_hsl(var(--primary)/0.25)] border border-primary/20 backdrop-blur-md">
+            <ShieldCheck className="h-8 w-8" strokeWidth={2.2} />
           </div>
-          <h1 className="font-serif text-[38px] leading-[0.95] tracking-tight md:text-[46px]">
+          <h1 className="font-serif text-[44px] leading-[0.9] tracking-tighter md:text-[54px]">
             Tizimga kirish
           </h1>
-          <p className="mt-4 font-ui text-[16px] leading-relaxed text-muted-foreground/70 text-pretty">
+          <p className="mt-6 font-ui text-[17px] leading-relaxed text-muted-foreground/75 text-pretty max-w-sm mx-auto">
             Bank darajasidagi shifrlash (AES-256) va TLS 1.3 himoyasi bilan 
             shaxsiy ma'lumotlaringiz xavfsizligi kafolatlanadi.
           </p>
         </div>
 
         <div
-          className="animate-fade-in-up rounded-[32px] border border-border/40 bg-[#0c0c0c]/40 p-10 shadow-[0_40px_80px_-20px_rgba(0,0,0,0.6)] backdrop-blur-3xl"
+          className="animate-fade-in-up rounded-[40px] border border-border/40 bg-[#0c0c0c]/40 p-12 shadow-[0_64px_128px_-32px_rgba(0,0,0,0.7)] backdrop-blur-4xl"
           style={{ animationDelay: "80ms" }}
         >
           <div className="space-y-3">
