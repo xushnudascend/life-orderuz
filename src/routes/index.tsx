@@ -82,7 +82,7 @@ function Hero() {
         </Reveal>
 
         <Reveal delay={250}>
-          <h1 className="font-serif text-[64px] leading-[0.9] tracking-tighter text-balance sm:text-[88px] md:text-[104px] lg:text-[132px]">
+          <h1 className="font-serif text-[68px] leading-[0.9] tracking-tighter text-balance sm:text-[96px] md:text-[112px] lg:text-[144px]">
             Motivatsiya tugaydi,<br />
             <span className="text-primary italic">
               Tizim qoladi.
@@ -91,7 +91,7 @@ function Hero() {
         </Reveal>
 
         <Reveal delay={400}>
-          <p className="mx-auto mt-10 max-w-2xl font-ui text-lg leading-relaxed text-muted-foreground/80 md:text-xl">
+          <p className="mx-auto mt-10 max-w-2xl font-ui text-xl leading-relaxed text-text-secondary md:text-2xl">
             Biologik ritm va psixologiyaga asoslangan,<br className="hidden md:block" />
             hayotingizni tartibga soluvchi premium tizim.
           </p>
