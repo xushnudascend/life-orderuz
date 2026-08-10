@@ -1,0 +1,24 @@
+{
+  "short_name": "Life Order",
+  "name": "Life Order \u2014 Self-Control OS",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#0B1220",
+  "display": "standalone",
+  "scope": "/",
+  "theme_color": "#0B1220",
+  "description": "Premium self-discipline and habit architecture system."
+}
