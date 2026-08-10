@@ -18,15 +18,20 @@ export const Route = createFileRoute("/share/milestone")({
           ? `${value}-daraja — Life Order`
           : `${name ?? "Achievement"} — Life Order`;
     const description = "Motivatsiya tugaydi. Tizim qoladi. Life Order — intizom OS.";
+    const SITE_URL = "https://life-orderuz.lovable.app";
+    const CANONICAL = `${SITE_URL}/share/milestone`;
+
     return {
       meta: [
         { title },
         { name: "description", content: description },
         { property: "og:title", content: title },
         { property: "og:description", content: description },
+        { property: "og:url", content: CANONICAL },
         { property: "og:type", content: "article" },
         { name: "twitter:card", content: "summary_large_image" },
       ],
+      links: [{ rel: "canonical", href: CANONICAL }],
     };
   },
   component: MilestonePage,
