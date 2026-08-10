@@ -13,6 +13,7 @@
   --color-card-foreground: var(--text-primary);
   
   --color-popover: var(--bg-tertiary);
+  --color-tertiary: var(--bg-tertiary);
   --color-popover-foreground: var(--text-primary);
   
   --color-primary: var(--accent);
@@ -279,7 +280,6 @@ main#main-content > * { animation: routeIn var(--dur-base) var(--ease-out) both;
 
 /* Skeleton Screens */
 .skeleton {
-  @apply animate-pulse rounded bg-tertiary/20;
-  background-color: var(--bg-tertiary);
+  @apply animate-pulse rounded bg-tertiary;
   opacity: 0.2;
 }
