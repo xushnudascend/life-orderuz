@@ -51,12 +51,12 @@ export function StatsHeroBento({
   return (
     <section
         aria-label="Bugungi holat"
-        className="relative h-full overflow-hidden rounded-[32px] border border-border/40 bg-[#0c0c0c]/40 p-8 sm:p-10 backdrop-blur-4xl shadow-[0_32px_64px_-16px_rgba(0,0,0,0.7)]"
+        className="relative h-full overflow-hidden rounded-[32px] border border-border/40 bg-[#0c0c0c]/40 p-6 sm:p-8 backdrop-blur-4xl shadow-[0_32px_64px_-16px_rgba(0,0,0,0.7)]"
       >
 
         {/* Left Side Content */}
         <div className="relative z-10 flex items-center justify-between">
-          <h1 className="font-serif text-3xl font-bold leading-[0.9] tracking-tight sm:text-5xl">
+          <h1 className="font-serif text-2xl font-bold leading-[0.9] tracking-tight sm:text-4xl">
             {displayName?.trim() ? `${displayName}, ` : t("dashboard.hero.greetingPrefix") + " "}
             <span className="text-muted-foreground/60">{t("dashboard.hero.plan")}</span>
           </h1>

@@ -82,7 +82,7 @@ function Hero() {
         </Reveal>
 
         <Reveal delay={250}>
-          <h1 className="font-serif text-[56px] leading-[0.9] tracking-tighter text-balance sm:text-[84px] md:text-[100px] lg:text-[124px]">
+          <h1 className="font-serif text-[48px] leading-[0.9] tracking-tighter text-balance sm:text-[72px] md:text-[84px] lg:text-[104px]">
             Motivatsiya tugaydi,<br />
             <span className="text-primary italic">
               Tizim qoladi.
@@ -98,22 +98,21 @@ function Hero() {
         </Reveal>
 
         <Reveal delay={550}>
-          <div className="mt-20 flex flex-col items-center justify-center gap-6 sm:flex-row">
+          <div className="mt-16 flex flex-col items-center justify-center gap-5 sm:flex-row">
             <Button
               asChild
               size="lg"
-              className="group relative h-16 rounded-full px-12 font-ui text-lg font-bold transition-all hover:scale-105 active:scale-[0.98] shadow-premium bg-primary text-primary-foreground"
+              className="group relative h-14 rounded-full px-10 font-ui text-base font-bold transition-all hover:scale-105 active:scale-[0.98] shadow-premium bg-primary text-primary-foreground"
             >
               <Link to="/auth">
                 Boshlash
-                <ArrowRight className="ml-2.5 h-6 w-6 transition-transform group-hover:translate-x-1.5" />
+                <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1.5" />
               </Link>
             </Button>
             <Button
               asChild
-              variant="outline"
               size="lg"
-              className="h-16 rounded-full px-12 font-ui text-lg font-bold border-border bg-transparent hover:bg-muted/30 transition-all active:scale-[0.98]"
+              className="h-14 rounded-full px-10 font-ui text-base font-bold border-border bg-transparent hover:bg-muted/30 transition-all active:scale-[0.98]"
             >
               <Link to="/pricing">Narxlar</Link>
             </Button>

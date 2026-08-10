@@ -101,7 +101,7 @@ function AuthPage() {
           <div className="mx-auto mb-8 grid h-16 w-16 place-items-center rounded-[24px] bg-primary/10 text-primary shadow-[0_0_40px_hsl(var(--primary)/0.25)] border border-primary/20 backdrop-blur-md">
             <ShieldCheck className="h-8 w-8" strokeWidth={2.2} />
           </div>
-          <h1 className="font-serif text-[44px] leading-[0.9] tracking-tighter md:text-[54px]">
+          <h1 className="font-serif text-[36px] leading-[0.9] tracking-tighter md:text-[44px]">
             Tizimga kirish
           </h1>
           <p className="mt-6 font-ui text-[17px] leading-relaxed text-muted-foreground/75 text-pretty max-w-sm mx-auto">
@@ -110,8 +110,8 @@ function AuthPage() {
           </p>
         </div>
 
-        <div
-          className="animate-fade-in-up rounded-[40px] border border-border/40 bg-[#0c0c0c]/40 p-12 shadow-[0_64px_128px_-32px_rgba(0,0,0,0.7)] backdrop-blur-4xl"
+          <div
+            className="animate-fade-in-up rounded-[32px] border border-border/40 bg-[#0c0c0c]/40 p-8 md:p-10 shadow-[0_64px_128px_-32px_rgba(0,0,0,0.7)] backdrop-blur-4xl"
           style={{ animationDelay: "80ms" }}
         >
           <div className="space-y-3">
