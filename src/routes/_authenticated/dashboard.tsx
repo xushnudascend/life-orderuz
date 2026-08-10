@@ -212,39 +212,34 @@ function Dashboard() {
           </div>
         </div>
       ) : (
-        <div className="grid gap-4 md:grid-cols-12 lg:grid-cols-3">
-          <div className="md:col-span-12 lg:col-span-2">
-            <StatsHeroBento
-              greeting={`${c.greeting} · ${c.label}`}
-              displayName={profile?.display_name ?? null}
-              archetype={archetype}
-              doneCount={doneCount}
-              totalHabits={habits.length}
-              percent={percent}
-              streakDays={streak?.current_days ?? 0}
-              level={stats?.level ?? 1}
-              totalXp={stats?.total_xp ?? 0}
-              xpProgress={xpProgress}
-              xpForNext={xpForNext}
-              disciplineScore={stats?.discipline_score ?? 0}
-              shieldsUsed={shieldsUsed}
-              score={score}
-            />
-          </div>
-          <div className="md:col-span-12 lg:col-span-1 flex flex-col gap-4">
-             <div className="flex-1 rounded-[32px] border border-border/60 bg-secondary p-6 transition-all hover:bg-primary/5 hover:border-primary/40 backdrop-blur-xl group">
+        <div className="flex flex-col gap-4">
+          <StatsHeroBento
+            greeting={`${c.greeting} · ${c.label}`}
+            displayName={profile?.display_name ?? null}
+            archetype={archetype}
+            doneCount={doneCount}
+            totalHabits={habits.length}
+            percent={percent}
+            streakDays={streak?.current_days ?? 0}
+            level={stats?.level ?? 1}
+            totalXp={stats?.total_xp ?? 0}
+            xpProgress={xpProgress}
+            xpForNext={xpForNext}
+            disciplineScore={stats?.discipline_score ?? 0}
+            shieldsUsed={shieldsUsed}
+            score={score}
+          />
+          
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+             <div className="rounded-[32px] border border-border/60 bg-secondary p-6 transition-all hover:bg-primary/5 hover:border-primary/40 backdrop-blur-xl group">
                 <BiorythmPeak />
              </div>
-             {habits.length > 0 && (
-                <div className="flex-1 rounded-[32px] border border-border/60 bg-secondary p-6 transition-all hover:bg-primary/5 hover:border-primary/40 backdrop-blur-xl group">
-                  <ZeigarnikRing
-                    done={doneCount}
-                    total={habits.length}
-                    nextTitle={habits.find((h) => !done.has(h.id))?.title ?? null}
-                  />
-                </div>
-             )}
-             <DailyTimetable profile={profile || {}} />
+             <div className="rounded-[32px] border border-border/60 bg-secondary p-6 transition-all hover:bg-primary/5 hover:border-primary/40 backdrop-blur-xl group flex items-center justify-center">
+               <Link to="/mentor" className="flex items-center gap-3 text-primary font-serif text-xl">
+                 <Sparkles className="h-6 w-6" />
+                 Mentor bilan suhbat
+               </Link>
+             </div>
           </div>
         </div>
       )}

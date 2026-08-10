@@ -26,11 +26,11 @@ export function NavMenu({ onClose }: { onClose?: () => void }) {
   };
 
   const links = [
-    { to: "/dashboard", label: "Bosh sahifa", icon: LayoutDashboard },
+    { to: "/dashboard", label: "Bugun", icon: LayoutDashboard },
+    { to: "/hub", label: "Ekotizim (Hub)", icon: Compass },
     { to: "/habits", label: "Odatlar", icon: Zap },
-    { to: "/workout", label: "Tana", icon: Dumbbell },
+    { to: "/community", label: "Davra", icon: Users },
     { to: "/mentor", label: "Nadir AI", icon: BookOpen },
-    { to: "/profile", label: "Profil", icon: User },
     { to: "/settings", label: "Sozlamalar", icon: Settings },
     { to: "/settings/subscription", label: "Obunani boshqarish", icon: Shield },
   ];

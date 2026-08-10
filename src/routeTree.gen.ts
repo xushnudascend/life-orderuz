@@ -46,6 +46,7 @@ import { Route as AuthenticatedOnboardingRouteImport } from './routes/_authentic
 import { Route as AuthenticatedMentorRouteImport } from './routes/_authenticated/mentor'
 import { Route as AuthenticatedLeaderboardRouteImport } from './routes/_authenticated/leaderboard'
 import { Route as AuthenticatedJournalRouteImport } from './routes/_authenticated/journal'
+import { Route as AuthenticatedHubRouteImport } from './routes/_authenticated/hub'
 import { Route as AuthenticatedHabitsRouteImport } from './routes/_authenticated/habits'
 import { Route as AuthenticatedDietRouteImport } from './routes/_authenticated/diet'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
@@ -261,6 +262,11 @@ const AuthenticatedJournalRoute = AuthenticatedJournalRouteImport.update({
   path: '/journal',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedHubRoute = AuthenticatedHubRouteImport.update({
+  id: '/hub',
+  path: '/hub',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedHabitsRoute = AuthenticatedHabitsRouteImport.update({
   id: '/habits',
   path: '/habits',
@@ -423,6 +429,7 @@ export interface FileRoutesByFullPath {
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/diet': typeof AuthenticatedDietRoute
   '/habits': typeof AuthenticatedHabitsRoute
+  '/hub': typeof AuthenticatedHubRoute
   '/journal': typeof AuthenticatedJournalRoute
   '/leaderboard': typeof AuthenticatedLeaderboardRoute
   '/mentor': typeof AuthenticatedMentorRoute
@@ -487,6 +494,7 @@ export interface FileRoutesByTo {
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/diet': typeof AuthenticatedDietRoute
   '/habits': typeof AuthenticatedHabitsRoute
+  '/hub': typeof AuthenticatedHubRoute
   '/journal': typeof AuthenticatedJournalRoute
   '/leaderboard': typeof AuthenticatedLeaderboardRoute
   '/mentor': typeof AuthenticatedMentorRoute
@@ -553,6 +561,7 @@ export interface FileRoutesById {
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/_authenticated/diet': typeof AuthenticatedDietRoute
   '/_authenticated/habits': typeof AuthenticatedHabitsRoute
+  '/_authenticated/hub': typeof AuthenticatedHubRoute
   '/_authenticated/journal': typeof AuthenticatedJournalRoute
   '/_authenticated/leaderboard': typeof AuthenticatedLeaderboardRoute
   '/_authenticated/mentor': typeof AuthenticatedMentorRoute
@@ -619,6 +628,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/diet'
     | '/habits'
+    | '/hub'
     | '/journal'
     | '/leaderboard'
     | '/mentor'
@@ -683,6 +693,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/diet'
     | '/habits'
+    | '/hub'
     | '/journal'
     | '/leaderboard'
     | '/mentor'
@@ -748,6 +759,7 @@ export interface FileRouteTypes {
     | '/_authenticated/dashboard'
     | '/_authenticated/diet'
     | '/_authenticated/habits'
+    | '/_authenticated/hub'
     | '/_authenticated/journal'
     | '/_authenticated/leaderboard'
     | '/_authenticated/mentor'
@@ -1095,6 +1107,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedJournalRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/hub': {
+      id: '/_authenticated/hub'
+      path: '/hub'
+      fullPath: '/hub'
+      preLoaderRoute: typeof AuthenticatedHubRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/habits': {
       id: '/_authenticated/habits'
       path: '/habits'
@@ -1316,6 +1335,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
   AuthenticatedDietRoute: typeof AuthenticatedDietRoute
   AuthenticatedHabitsRoute: typeof AuthenticatedHabitsRoute
+  AuthenticatedHubRoute: typeof AuthenticatedHubRoute
   AuthenticatedJournalRoute: typeof AuthenticatedJournalRoute
   AuthenticatedLeaderboardRoute: typeof AuthenticatedLeaderboardRoute
   AuthenticatedMentorRoute: typeof AuthenticatedMentorRoute
@@ -1340,6 +1360,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
   AuthenticatedDietRoute: AuthenticatedDietRoute,
   AuthenticatedHabitsRoute: AuthenticatedHabitsRoute,
+  AuthenticatedHubRoute: AuthenticatedHubRoute,
   AuthenticatedJournalRoute: AuthenticatedJournalRoute,
   AuthenticatedLeaderboardRoute: AuthenticatedLeaderboardRoute,
   AuthenticatedMentorRoute: AuthenticatedMentorRoute,
