@@ -9,6 +9,7 @@ import { SiteFooter } from "@/components/site-footer";
 
 const BRAND = "Life Order";
 const SITE_URL = "https://life-orderuz.lovable.app";
+const CANONICAL_URL = "https://life-orderuz.lovable.app/";
 const ONE_LINER = "Self-Control OS — Motivatsiya tugaydi, tizim qoladi. Har kuni uchta aniq qadam va Nadir AI mentor.";
 
 export const Route = createFileRoute("/")({
@@ -22,7 +23,7 @@ export const Route = createFileRoute("/")({
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
-    links: [{ rel: "canonical", href: `${SITE_URL}/` }],
+    links: [{ rel: "canonical", href: CANONICAL_URL }],
   }),
   component: Landing,
 });
