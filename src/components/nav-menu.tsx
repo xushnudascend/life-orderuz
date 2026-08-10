@@ -41,7 +41,7 @@ export function NavMenu({ onClose }: { onClose?: () => void }) {
       
       <div className="mb-14 flex items-center justify-between relative z-10">
         <div className="flex items-center gap-5">
-          <div className="h-12 w-12 rounded-[20px] bg-primary text-primary-foreground flex items-center justify-center shadow-[0_0_25px_hsl(var(--primary)/0.5)]">
+          <div className="h-12 w-12 rounded-2xl bg-primary text-primary-foreground flex items-center justify-center shadow-[0_0_25px_hsl(var(--primary)/0.5)]">
             <Shield className="h-7 w-7" />
           </div>
           <span className="font-serif text-2xl font-bold tracking-tight">Life Order</span>
