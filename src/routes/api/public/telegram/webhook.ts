@@ -13,19 +13,18 @@ export const Route = createFileRoute("/api/public/telegram/webhook")({
           const token = message.text.split(" ")[1];
           const chatId = message.chat.id;
           
-          // Verify token and link user using type-safe table names (suppressing TS if generation lags)
-          const { data: linkReq } = await (supabaseAdmin as any)
-            .from("telegram_link_tokens")
-            .select("user_id")
-            .eq("token", token)
-            .maybeSingle();
-
-          if (linkReq?.user_id) {
-            await (supabaseAdmin as any).from("telegram_links").upsert({
-              user_id: linkReq.user_id,
-              telegram_chat_id: chatId
+          // Use the secure RPC to consume the token and link the user
+          const { data: success } = await (supabaseAdmin as any)
+            .rpc("consume_telegram_link_token", {
+              _token: token,
+              _telegram_chat_id: chatId.toString()
             });
-            return Response.json({ status: "ok" });
+
+          if (success) {
+            // Optional: send a welcome message back to the user via Telegram Bot API
+            return Response.json({ status: "ok", linked: true });
+          } else {
+            return Response.json({ status: "error", message: "Invalid or expired token" });
           }
         }
 
