@@ -67,93 +67,67 @@ function Landing() {
 
 function Hero() {
   return (
-    <section className="relative flex min-h-[90dvh] flex-col items-center justify-center overflow-hidden border-b border-border bg-background py-20">
-      <div className="mx-auto w-full max-w-7xl px-6 md:px-8">
-        <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
-          {/* Left: Simple Animation */}
-          <Reveal delay={200} className="relative order-2 lg:order-1 flex justify-center items-center">
-            <div className="relative w-full max-w-md aspect-square flex items-center justify-center">
-               {/* Minimalist Man Climbing Stairs SVG */}
-               <svg viewBox="0 0 400 400" className="w-full h-full text-accent opacity-90" fill="none" xmlns="http://www.w3.org/2000/svg">
-                 {/* Stairs */}
-                 <path d="M50 350H120V280H190V210H260V140H330V70" stroke="currentColor" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
-                 {/* Man (Minimalist figure) */}
-                 <g className="animate-[bounce_3s_infinite]">
-                   <circle cx="205" cy="165" r="10" stroke="currentColor" strokeWidth="3" />
-                   <path d="M205 175L205 200M205 185L190 195M205 185L220 195M205 200L195 215M205 200L215 215" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
-                 </g>
-                 {/* Decorative simple lines */}
-                 <path d="M350 350L380 350" stroke="currentColor" strokeWidth="2" strokeDasharray="4 4" className="opacity-30" />
-               </svg>
-            </div>
-          </Reveal>
-
-          {/* Right: Content */}
-          <div className="order-1 text-left lg:order-2 lg:pl-10">
-            <Reveal delay={100}>
-              <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-accent/20 bg-accent/5 px-6 py-2 font-ui text-[11px] font-bold uppercase tracking-[0.25em] text-accent">
-                <Sparkles className="h-4 w-4" />
-                Life Order · Tizim
-              </div>
-            </Reveal>
-
-            <Reveal delay={300}>
-              <h1 className="font-serif text-[48px] leading-[0.95] tracking-tighter text-balance sm:text-[60px] md:text-[72px] lg:text-[84px] text-text-primary">
-                Motivatsiya tugaydi,<br />
-                <span className="text-accent italic">Tizim qoladi.</span>
-              </h1>
-            </Reveal>
-
-            <Reveal delay={450}>
-              <p className="mt-10 max-w-xl font-ui text-lg leading-relaxed text-text-secondary md:text-xl">
-                Ortiqcha narsalarsiz. Faqat siz, maqsadingiz va har kuni ishlaydigan tartib.
-              </p>
-            </Reveal>
-
-            <Reveal delay={600}>
-              <div className="mt-14 flex flex-col gap-5 sm:flex-row">
-                <Button
-                  asChild
-                  size="lg"
-                  className="group relative h-16 rounded-full px-10 font-ui text-lg font-bold transition-all hover:scale-105 active:scale-[0.98] shadow-premium bg-accent text-white hover:bg-accent-hover"
-                >
-                  <Link to="/auth">
-                    Boshlash
-                    <ArrowRight className="ml-2 h-6 w-6 transition-transform group-hover:translate-x-1.5" />
-                  </Link>
-                </Button>
-              </div>
-            </Reveal>
+    <section className="relative flex min-h-dvh flex-col items-center justify-center overflow-hidden border-b border-border bg-background">
+      {/* Premium 3D Orb Backgrounds */}
+      <div className="absolute top-[-15%] right-[-15%] h-[800px] w-[800px] animate-orb-float rounded-full bg-primary/10 blur-[140px] pointer-events-none" />
+      <div className="absolute bottom-[-15%] left-[-15%] h-[700px] w-[700px] animate-orb-float-delayed rounded-full bg-primary/5 blur-[120px] pointer-events-none" />
+      
+      <div className="relative z-10 mx-auto w-full max-w-6xl px-6 py-20 text-center md:px-8">
+        <Reveal delay={100}>
+          <div className="mb-10 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-6 py-2 font-ui text-[11px] font-bold uppercase tracking-[0.25em] text-primary shadow-[0_0_30px_hsl(var(--primary)/0.25)] backdrop-blur-md">
+            <Sparkles className="h-4 w-4" />
+            Beta 2.0 · Self-Control OS
           </div>
-        </div>
+        </Reveal>
 
-        {/* Problems and Solutions Section */}
-        <div className="mt-32 grid gap-8 md:grid-cols-2">
-          <Reveal delay={700}>
-            <div className="rounded-[32px] bg-secondary p-10 border border-border/50">
-              <h3 className="font-serif text-2xl font-bold mb-6 text-text-primary flex items-center gap-3">
-                <Minus className="h-6 w-6 text-accent" /> Muammolar
-              </h3>
-              <ul className="space-y-4 font-ui text-lg text-text-secondary">
-                <li className="flex gap-3"><span>•</span> Motivatsiya tez o'ladi.</li>
-                <li className="flex gap-3"><span>•</span> Kuningiz tartibsiz.</li>
-                <li className="flex gap-3"><span>•</span> Doimiy charchoq hissi.</li>
-              </ul>
-            </div>
-          </Reveal>
-          <Reveal delay={800}>
-            <div className="rounded-[32px] bg-accent/5 p-10 border border-accent/20">
-              <h3 className="font-serif text-2xl font-bold mb-6 text-text-primary flex items-center gap-3">
-                <Sparkles className="h-6 w-6 text-accent" /> Yechimlar
-              </h3>
-              <ul className="space-y-4 font-ui text-lg text-text-secondary">
-                <li className="flex gap-3"><span>•</span> Mustahkam tartib-intizom.</li>
-                <li className="flex gap-3"><span>•</span> Kunlik 3 ta muhim vazifa.</li>
-                <li className="flex gap-3"><span>•</span> AI Mentor nazorati.</li>
-              </ul>
-            </div>
-          </Reveal>
-        </div>
+        <Reveal delay={250}>
+          <h1 className="font-serif text-[48px] leading-[0.9] tracking-tighter text-balance sm:text-[72px] md:text-[84px] lg:text-[104px] text-text-primary">
+            Motivatsiya tugaydi,<br />
+            <span className="text-primary italic">
+              Tizim qoladi.
+            </span>
+          </h1>
+        </Reveal>
+
+        <Reveal delay={400}>
+          <p className="mx-auto mt-10 max-w-2xl font-ui text-xl leading-relaxed text-text-secondary md:text-2xl">
+            Biologik ritm va psixologiyaga asoslangan,<br className="hidden md:block" />
+            hayotingizni tartibga soluvchi premium tizim.
+          </p>
+        </Reveal>
+
+        <Reveal delay={550}>
+          <div className="mt-16 flex flex-col items-center justify-center gap-5 sm:flex-row">
+            <Button
+              asChild
+              size="lg"
+              className="group relative h-14 rounded-full px-10 font-ui text-base font-bold transition-all hover:scale-105 active:scale-[0.98] shadow-premium bg-primary text-primary-foreground"
+            >
+              <Link to="/auth">
+                Boshlash
+                <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1.5" />
+              </Link>
+            </Button>
+            <Button
+              asChild
+              size="lg"
+              className="h-14 rounded-full px-10 font-ui text-base font-bold border-border bg-transparent hover:bg-muted/30 transition-all active:scale-[0.98]"
+            >
+              <Link to="/pricing">Narxlar</Link>
+            </Button>
+          </div>
+        </Reveal>
+        
+        <Reveal delay={700}>
+          <div className="mt-24 flex items-center justify-center gap-12 grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-700">
+            <div className="text-[10px] uppercase tracking-[0.3em] font-bold">Identity Shift</div>
+            <div className="h-1 w-1 rounded-full bg-border" />
+            <div className="text-[10px] uppercase tracking-[0.3em] font-bold">Deep Work</div>
+            <div className="h-1 w-1 rounded-full bg-border" />
+            <div className="text-[10px] uppercase tracking-[0.3em] font-bold">Habit Design</div>
+          </div>
+        </Reveal>
+
       </div>
     </section>
   );
