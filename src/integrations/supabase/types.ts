@@ -1138,6 +1138,51 @@ export type Database = {
         }
         Relationships: []
       }
+      telegram_link_tokens: {
+        Row: {
+          consumed_at: string | null
+          created_at: string | null
+          expires_at: string | null
+          token: string
+          user_id: string
+        }
+        Insert: {
+          consumed_at?: string | null
+          created_at?: string | null
+          expires_at?: string | null
+          token?: string
+          user_id: string
+        }
+        Update: {
+          consumed_at?: string | null
+          created_at?: string | null
+          expires_at?: string | null
+          token?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      telegram_links: {
+        Row: {
+          created_at: string | null
+          id: string
+          telegram_chat_id: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          telegram_chat_id: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          telegram_chat_id?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       telegram_users: {
         Row: {
           created_at: string | null
@@ -1431,6 +1476,10 @@ export type Database = {
           isOneToOne: true
           isSetofReturn: false
         }
+      }
+      consume_telegram_link_token: {
+        Args: { _telegram_chat_id: string; _token: string }
+        Returns: boolean
       }
       create_party: {
         Args: { _goal?: string; _name: string }
