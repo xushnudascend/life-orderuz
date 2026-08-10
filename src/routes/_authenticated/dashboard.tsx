@@ -255,7 +255,7 @@ function Dashboard() {
         <Panel className="lg:col-span-12 rounded-[32px] border-border/40 bg-card/40 backdrop-blur-4xl p-8 shadow-premium">
           
           <PanelHeader
-            title={<span className="font-serif text-4xl font-bold tracking-tighter">protokol</span>}
+            title={<span className="font-serif text-[var(--fs-h2)] font-bold tracking-tighter">protokol</span>}
           />
 
           {!loaded ? (
