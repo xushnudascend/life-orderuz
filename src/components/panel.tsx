@@ -20,12 +20,11 @@ export function Panel({
   return (
     <Tag
       className={cn(
-        // Base surface: subtle inner top-highlight, soft outer shadow, amber focus ring
-        "group/panel relative rounded-[var(--radius)] border border-border/70 bg-card p-4",
-        "shadow-[inset_0_1px_0_hsl(var(--foreground)/0.04),0_1px_2px_hsl(240_30%_0%/0.35)]",
-        "transition-[border-color,transform,box-shadow] duration-300 ease-out",
-        "hover:border-border focus-within:border-primary/60",
-        "focus-within:shadow-[inset_0_1px_0_hsl(var(--foreground)/0.04),0_0_0_1px_hsl(var(--primary)/0.4),0_8px_24px_-12px_hsl(var(--primary)/0.45)]",
+        // Base surface: standardized opaque surface from Life Order tokens
+        "group/panel relative rounded-xl border border-border/70 bg-background-secondary p-4",
+        "shadow-card",
+        "transition-all duration-300 ease-out",
+        "hover:border-border/100 hover:bg-background-tertiary",
         // ambient corner highlight — reveals on hover (visual reward without gamification)
         "before:pointer-events-none before:absolute before:inset-0 before:rounded-[inherit] before:opacity-0 before:transition-opacity before:duration-500",
         "before:bg-[radial-gradient(circle_at_top_right,hsl(var(--primary)/0.08),transparent_60%)]",

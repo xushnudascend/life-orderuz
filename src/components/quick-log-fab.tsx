@@ -158,7 +158,7 @@ export function QuickLogFab() {
           onClick={() => setExpanded((v) => !v)}
           aria-expanded={expanded}
           aria-label={expanded ? "Amallarni yopish" : "Tezkor amallar"}
-          className="grid h-12 w-12 place-items-center rounded-full bg-primary text-primary-foreground shadow-[0_8px_24px_-6px_hsl(var(--primary)/0.5)] transition-transform hover:scale-105 active:scale-95"
+          className="grid h-12 w-12 place-items-center rounded-full bg-primary text-primary-foreground shadow-glow transition-transform hover:scale-105 active:scale-95"
         >
           <Plus
             className={`h-5 w-5 transition-transform duration-200 ${expanded ? "rotate-45" : ""}`}
@@ -210,7 +210,7 @@ export function QuickLogFab() {
                     key={h.id}
                     onClick={() => handleLog(h)}
                     disabled={logging === h.id}
-                    className="flex w-full items-center gap-3 rounded-xl border border-border p-3 text-left transition-all hover:border-primary hover:bg-primary/5 active:scale-[0.98] disabled:opacity-60"
+                    className="flex w-full items-center gap-3 rounded-xl border border-border bg-background-secondary p-3 text-left transition-all hover:border-primary hover:bg-primary/5 active:scale-[0.98] disabled:opacity-60"
                   >
                     <div className="h-6 w-6 shrink-0 rounded-full border-2 border-muted-foreground" />
                     <span className="min-w-0 flex-1 truncate font-ui text-sm font-medium">

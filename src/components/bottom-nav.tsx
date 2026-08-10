@@ -35,7 +35,7 @@ export function BottomNav({ recommendedTab }: { recommendedTab?: string }) {
         className={
           "fixed bottom-[calc(1.5rem+env(safe-area-inset-bottom))] left-1/2 z-50 -translate-x-1/2 md:hidden " +
           "grid h-14 w-14 place-items-center rounded-[18px] bg-primary text-primary-foreground " +
-          "shadow-[0_20px_40px_-8px_hsl(var(--primary)/0.6),0_0_0_6px_hsl(var(--background))] " +
+          "shadow-glow " +
           "transition-all duration-300 hover:scale-110 active:scale-90 " +
           (isNadirActive ? "ring-2 ring-primary shadow-[0_0_30px_hsl(var(--primary)/0.5)]" : "")
         }
@@ -53,7 +53,7 @@ export function BottomNav({ recommendedTab }: { recommendedTab?: string }) {
       </Link>
 
       <nav
-        className="fixed bottom-0 left-0 right-0 z-40 border-t border-border/60 bg-background/90 pb-[env(safe-area-inset-bottom)] backdrop-blur-3xl supports-[backdrop-filter]:bg-background/80 md:hidden h-16"
+        className="fixed bottom-0 left-0 right-0 z-40 border-t border-border bg-background-primary pb-[env(safe-area-inset-bottom)] backdrop-blur-3xl md:hidden h-16"
         aria-label="Asosiy navigatsiya"
       >
         <div className="mx-auto flex max-w-6xl items-center justify-around px-1">

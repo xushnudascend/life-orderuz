@@ -36,12 +36,12 @@ export function NavMenu({ onClose }: { onClose?: () => void }) {
   ];
 
   return (
-    <div className="flex flex-col h-full bg-[#06080d] border-r border-border/40 w-64 p-6 overflow-y-auto relative backdrop-blur-4xl">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,hsl(var(--primary)/0.15),transparent_75%)] pointer-events-none" />
+    <div className="flex flex-col h-full bg-background-primary border-r border-border/40 w-64 p-6 overflow-y-auto relative backdrop-blur-4xl">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,var(--accent)/0.05,transparent_75%)] pointer-events-none" />
       
       <div className="mb-10 flex items-center justify-between relative z-10">
         <div className="flex items-center gap-4">
-          <div className="h-10 w-10 rounded-[14px] bg-primary text-primary-foreground flex items-center justify-center shadow-[0_0_20px_hsl(var(--primary)/0.4)]">
+          <div className="h-10 w-10 rounded-[14px] bg-primary text-primary-foreground flex items-center justify-center shadow-glow">
             <Shield className="h-6 w-6" />
           </div>
           <span className="font-serif text-xl font-bold tracking-tight">Life Order</span>
@@ -54,8 +54,8 @@ export function NavMenu({ onClose }: { onClose?: () => void }) {
             key={link.to}
             to={link.to as any}
             onClick={onClose}
-            className="flex items-center gap-3 px-2.5 py-2 rounded-lg font-ui text-xs text-muted-foreground transition-all hover:bg-primary/10 hover:text-primary group active:scale-[0.98]"
-            activeProps={{ className: "bg-primary/15 text-primary shadow-[0_0_20px_-10px_hsl(var(--primary)/0.4)]" }}
+            className="flex items-center gap-3 px-2.5 py-2 rounded-lg font-ui text-xs text-text-secondary transition-all hover:bg-white/5 hover:text-text-primary group active:scale-[0.98]"
+            activeProps={{ className: "bg-primary text-primary-foreground shadow-glow" }}
           >
             <link.icon className="h-4 w-4 transition-transform group-hover:scale-110" />
             <span className="font-medium tracking-wide">{link.label}</span>
