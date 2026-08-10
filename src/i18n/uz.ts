@@ -27,6 +27,7 @@ export const uz = {
     pricing: "Narxlar",
     signIn: "Kirish",
     startFree: "Bepul boshlash",
+    upgrade: "Premiumga o'tish",
   },
   hero: {
     eyebrow: "Beta bosqichida · Kartasiz",
