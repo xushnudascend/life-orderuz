@@ -33,21 +33,21 @@ export function BottomNav({ recommendedTab }: { recommendedTab?: string }) {
         aria-label="Nadir AI mentor"
         aria-current={isNadirActive ? "page" : undefined}
         className={
-          "fixed bottom-[calc(2rem+env(safe-area-inset-bottom))] left-1/2 z-50 -translate-x-1/2 md:hidden " +
-          "grid h-16 w-16 place-items-center rounded-[20px] bg-primary text-primary-foreground " +
-          "shadow-[0_32px_64px_-12px_hsl(var(--primary)/0.7),0_0_0_8px_hsl(var(--background))] " +
+          "fixed bottom-[calc(1.5rem+env(safe-area-inset-bottom))] left-1/2 z-50 -translate-x-1/2 md:hidden " +
+          "grid h-14 w-14 place-items-center rounded-[18px] bg-primary text-primary-foreground " +
+          "shadow-[0_20px_40px_-8px_hsl(var(--primary)/0.6),0_0_0_6px_hsl(var(--background))] " +
           "transition-all duration-300 hover:scale-110 active:scale-90 " +
-          (isNadirActive ? "ring-2 ring-primary shadow-[0_0_40px_hsl(var(--primary)/0.5)]" : "")
+          (isNadirActive ? "ring-2 ring-primary shadow-[0_0_30px_hsl(var(--primary)/0.5)]" : "")
         }
       >
-        <Sparkles className="h-7 w-7" strokeWidth={2.2} aria-hidden />
+        <Sparkles className="h-6 w-6" strokeWidth={2.2} aria-hidden />
         <span
           aria-hidden
-          className="halo-spin absolute inset-[-8px] -z-10 rounded-2xl bg-[conic-gradient(from_0deg,hsl(var(--primary)/0.6),transparent_40%,hsl(var(--primary)/0.6)_80%,transparent)] blur-md opacity-80"
+          className="halo-spin absolute inset-[-6px] -z-10 rounded-2xl bg-[conic-gradient(from_0deg,hsl(var(--primary)/0.6),transparent_40%,hsl(var(--primary)/0.6)_80%,transparent)] blur-md opacity-70"
         />
         <span
           aria-hidden
-          className="orb-breathe absolute inset-0 -z-10 rounded-full bg-primary/60 blur-2xl"
+          className="orb-breathe absolute inset-0 -z-10 rounded-full bg-primary/40 blur-xl"
         />
         <span className="sr-only">Nadir</span>
       </Link>
@@ -73,7 +73,7 @@ export function BottomNav({ recommendedTab }: { recommendedTab?: string }) {
                   to={t.to}
                   aria-current={active ? "page" : undefined}
                   className={
-                    "tap relative flex min-w-[60px] flex-1 flex-col items-center justify-center gap-1 py-1.5 font-ui text-[8px] font-bold uppercase tracking-[0.15em] transition-all duration-300 " +
+                    "tap relative flex min-w-[56px] flex-1 flex-col items-center justify-center gap-1 py-1 font-ui text-[7.5px] font-bold uppercase tracking-[0.12em] transition-all duration-300 " +
                     (active
                       ? "text-primary"
                       : t.highlight 

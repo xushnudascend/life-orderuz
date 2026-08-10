@@ -280,19 +280,19 @@ function Plan({
   return (
     <div
       className={
-        "rounded-[var(--radius)] p-7 " +
+        "rounded-2xl p-6 " +
         (highlight ? "border-2 border-primary bg-background" : "border border-border bg-background")
       }
     >
       <div className="flex items-center justify-between">
-        <h2 className="font-serif text-2xl">{name}</h2>
+        <h2 className="font-serif text-xl">{name}</h2>
         {highlight && (
           <span className="rounded-full border border-primary/40 bg-primary/10 px-2.5 py-0.5 font-ui text-[10px] uppercase tracking-[0.18em] text-primary">
             Tavsiya
           </span>
         )}
       </div>
-      <p className="mt-3 font-serif text-3xl tracking-tight tabular-nums">
+      <p className="mt-3 font-serif text-2xl tracking-tight tabular-nums">
         {name === "Pro" ? (
           <span className="flex flex-col">
             <span className="text-muted-foreground/50 line-through text-lg">
