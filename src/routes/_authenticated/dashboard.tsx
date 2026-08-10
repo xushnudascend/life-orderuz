@@ -252,10 +252,10 @@ function Dashboard() {
       <div className="mt-4">
         
         {/* Habits */}
-        <Panel className="lg:col-span-12 rounded-[32px] border-border/40 bg-card/40 backdrop-blur-4xl p-8 shadow-premium">
+        <Panel className="lg:col-span-12 rounded-[28px] border-border/40 bg-card/40 backdrop-blur-4xl p-8 shadow-premium">
           
           <PanelHeader
-            title={<span className="font-serif text-4xl font-bold tracking-tighter">protokol</span>}
+            title={<span className="font-serif text-3xl font-bold tracking-tighter uppercase opacity-80">protokol</span>}
           />
 
           {!loaded ? (

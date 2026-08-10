@@ -6,45 +6,45 @@
   --font-body: "Karla", sans-serif;
   --font-display: "Karla", sans-serif;
 
-  --color-background: #0B1220;
-  --color-foreground: #F5F5F0;
-  --color-text-primary: #F5F5F0;
-  --color-text-secondary: #A0A8BD;
-  --color-text-muted: #5C6478;
+  --color-background: #06080d;
+  --color-foreground: #ececed;
+  --color-text-primary: #ececed;
+  --color-text-secondary: #9ea4b0;
+  --color-text-muted: #646b7a;
   
-  --color-card: #141B2E;
-  --color-card-foreground: #F5F5F0;
+  --color-card: #0c111d;
+  --color-card-foreground: #ececed;
   
-  --color-popover: #1C2438;
-  --color-popover-foreground: #F5F5F0;
+  --color-popover: #0c111d;
+  --color-popover-foreground: #ececed;
   
-  --color-primary: #D4AF37 !important;
-  --color-primary-foreground: #0B1220;
+  --color-primary: #ffd700 !important;
+  --color-primary-foreground: #06080d;
   
-  --color-secondary: #1C2438;
-  --color-secondary-foreground: #A0A8BD;
+  --color-secondary: #121826;
+  --color-secondary-foreground: #9ea4b0;
   
-  --color-muted: #1C2438;
-  --color-muted-foreground: #5C6478;
+  --color-muted: #121826;
+  --color-muted-foreground: #646b7a;
   
-  --color-accent: #3A331A;
-  --color-accent-foreground: #D4AF37;
+  --color-accent: #2d240a;
+  --color-accent-foreground: #ffd700;
   
-  --color-destructive: #EF5350;
-  --color-destructive-foreground: #F5F5F0;
+  --color-destructive: #ff4d4d;
+  --color-destructive-foreground: #ececed;
   
-  --color-border: #2A3348;
-  --color-input: #2A3348;
-  --color-ring: #D4AF37;
+  --color-border: #1e2533;
+  --color-input: #1e2533;
+  --color-ring: #ffd700;
 
   --radius-xl: 1.5rem;
   --radius-lg: 1rem;
   --radius-md: 0.75rem;
   --radius-sm: 0.5rem;
 
-  --shadow-card: 0 40px 80px -20px rgba(0, 0, 0, 0.7);
-  --shadow-glow: 0 0 40px -5px #D4AF37;
-  --shadow-premium: 0 48px 96px -24px rgba(0, 0, 0, 0.8);
+  --shadow-card: 0 4px 24px -8px rgba(0, 0, 0, 0.5);
+  --shadow-glow: 0 0 20px -5px #ffd700;
+  --shadow-premium: 0 32px 64px -16px rgba(0, 0, 0, 0.6);
 }
 
 @layer base {
@@ -160,12 +160,12 @@
 /* Typography Hierarchy Tokens from Life Order */
 :root {
   --fs-display: 2rem;      /* 32px  — hero mobile */
-  --fs-h1:      1.625rem;  /* 26px */
-  --fs-h2:      1.25rem;   /* 20px */
-  --fs-h3:      1rem;      /* 16px */
-  --fs-body:    0.875rem;  /* 14px */
-  --fs-small:   0.75rem;   /* 12px */
-  --fs-caption: 0.625rem;  /* 10px */
+  --fs-h1:      1.5rem;    /* 24px */
+  --fs-h2:      1.125rem;  /* 18px */
+  --fs-h3:      0.9375rem; /* 15px */
+  --fs-body:    0.8125rem; /* 13px */
+  --fs-small:   0.6875rem; /* 11px */
+  --fs-caption: 0.5625rem; /* 9px */
   --lh-tight:   1.05;
   --lh-snug:    1.25;
   --lh-body:    1.55;
