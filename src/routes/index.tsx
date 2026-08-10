@@ -82,9 +82,9 @@ function Hero() {
         </Reveal>
 
         <Reveal delay={250}>
-          <h1 className="font-serif text-[var(--fs-display)] leading-[var(--lh-tight)] tracking-tighter text-balance">
+          <h1 className="font-serif text-[68px] leading-[0.9] tracking-tighter text-balance sm:text-[96px] md:text-[112px] lg:text-[144px]">
             Motivatsiya tugaydi,<br />
-            <span className="text-primary italic decoration-primary/30 underline-offset-[12px] underline">
+            <span className="text-primary italic">
               Tizim qoladi.
             </span>
           </h1>
