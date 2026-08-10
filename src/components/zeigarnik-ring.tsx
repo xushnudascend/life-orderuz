@@ -36,7 +36,7 @@ export function ZeigarnikRing({
             {pct}%
           </span>
         </div>
-        <p className="mt-0.5 font-serif text-[15px] leading-tight text-foreground">
+        <p className="mt-0.5 font-serif text-sm leading-tight text-foreground">
           {closed
             ? "Bugun tugadi."
             : remaining === 1

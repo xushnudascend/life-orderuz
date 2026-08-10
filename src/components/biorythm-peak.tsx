@@ -37,7 +37,7 @@ export function BiorythmPeak() {
 
       <div className="space-y-1">
         <div className="flex items-center justify-between">
-          <p className="font-serif text-sm font-semibold text-foreground">Hozirgi holat</p>
+          <p className="font-serif text-xs font-semibold text-foreground">Hozirgi holat</p>
           <TooltipProvider>
             <Tooltip>
               <TooltipTrigger asChild>
