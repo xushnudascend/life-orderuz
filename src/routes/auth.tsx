@@ -101,7 +101,7 @@ function AuthPage() {
           <div className="mx-auto mb-8 grid h-16 w-16 place-items-center rounded-[24px] bg-primary/10 text-primary shadow-[0_0_40px_hsl(var(--primary)/0.25)] border border-primary/20 backdrop-blur-md">
             <ShieldCheck className="h-8 w-8" strokeWidth={2.2} />
           </div>
-          <h1 className="font-serif text-[44px] leading-[0.9] tracking-tighter md:text-[54px]">
+          <h1 className="font-serif text-[36px] leading-[0.9] tracking-tighter md:text-[44px]">
             Tizimga kirish
           </h1>
           <p className="mt-6 font-ui text-[17px] leading-relaxed text-muted-foreground/75 text-pretty max-w-sm mx-auto">

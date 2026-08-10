@@ -212,7 +212,7 @@ function Onboarding() {
               <Sparkles className="h-4 w-4" />
               Tashxis yakunlandi
             </div>
-            <h1 className="mb-4 font-serif text-[42px] leading-[0.95] tracking-tighter sm:text-[54px]">
+            <h1 className="mb-4 font-serif text-[36px] leading-[0.95] tracking-tighter sm:text-[48px]">
               Protokol tayyor.
             </h1>
             <p className="mb-8 text-lg text-muted-foreground/80 font-ui leading-relaxed">
