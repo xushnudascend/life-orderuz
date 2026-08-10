@@ -7,10 +7,10 @@ import { useT } from "@/i18n/use-t";
  * Faqat mobilda ( md:hidden ).
  */
 const TABS = [
-  { to: "/dashboard", label: "Bosh", icon: Compass, match: ["/dashboard"] },
-  { to: "/habits", label: "Odat", icon: ListChecks, match: ["/habits"] },
+  { to: "/dashboard", label: "Bugun", icon: Compass, match: ["/dashboard"] },
+  { to: "/hub", label: "Hub", icon: ListChecks, match: ["/hub"] },
   { to: "/pricing", label: "Premium", icon: Zap, match: ["/pricing"], highlight: true },
-  { to: "/journal", label: "Kundalik", icon: GraduationCap, match: ["/journal"] },
+  { to: "/community", label: "Davra", icon: Users, match: ["/community"] },
   { to: "/profile", label: "Profil", icon: User, match: ["/profile"] },
 ] as const;
 
