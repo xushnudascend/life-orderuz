@@ -1,19 +1,23 @@
-# Life Order
+# Life Order (Self-Control OS)
 
-> Self-Control OS — o'z-o'zini boshqarishning operatsion tizimi. Trigger tahlili, kunlik uchta aniq qadam va halol AI mentor Nadir bir joyda.
+System focus: Discipline, Behavioral Science, and Habit Architecture.
 
-Life Order — bepul boshlanadigan, kartasiz, o'zbek tilida ishlaydigan shaxsiy rivojlanish super-app. Streak, XP, intizom balli va haftalik AI hisobot bilan odat qurish tizimi.
+## Core Features
+- Diagnostic Onboarding (60s)
+- Nadir AI Mentor (Personalized contextual feedback)
+- Habit Protocol (3 daily missions, XP, Streak, Shield)
+- Circadian Scheduling
+- Burnout Detection
 
-## Pages
+## Technical Stack
+- Framework: TanStack Start v1
+- Database: Supabase (PostgreSQL)
+- Auth: Supabase Auth (OAuth 2.1, Google)
+- Styles: Tailwind CSS v4 (Obsidian Premium theme)
+- Icons: Lucide React
+- Deployment: Lovable Cloud (Edge Functions)
 
-- [Bosh sahifa](/): Life Order haqida umumiy tanishuv va 60 soniyalik tashxis.
-- [Narxlar](/pricing): Free va Pro rejalar, xususiyatlar taqqoslash.
-- [Hayot sohalari qo'llanmasi](/blog/hayot-sohalari): Odatlarni kategoriyalash uchun 8 asosiy hayot sohasi.
-- [Foydalanish shartlari](/terms): Xizmatdan foydalanish shartlari.
-- [Maxfiylik siyosati](/privacy): Ma'lumotlarni saqlash va himoya siyosati.
-- [To'lovni qaytarish](/refund): Refund shartlari.
-- [Xavfsizlik](/security): Akkount va ma'lumot xavfsizligi.
-
-## Optional
-
-- [Kirish](/auth): Ro'yxatdan o'tish va kirish sahifasi.
+## Access
+- URL: https://life-orderuz.lovable.app
+- API: /api/public/*
+- Investors: /investors (Confidential)

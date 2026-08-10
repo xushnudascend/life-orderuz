@@ -24,6 +24,25 @@ export const Route = createFileRoute("/")({
       { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [{ rel: "canonical", href: CANONICAL_URL }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "WebApplication",
+          name: BRAND,
+          url: SITE_URL,
+          description: ONE_LINER,
+          applicationCategory: "LifestyleApplication",
+          operatingSystem: "Web, iOS, Android",
+          offers: {
+            "@type": "Offer",
+            price: "0",
+            priceCurrency: "UZS",
+          },
+        }),
+      },
+    ],
   }),
   component: Landing,
 });
