@@ -6,33 +6,33 @@
   --font-body: "Karla", sans-serif;
   --font-display: "Karla", sans-serif;
 
-  --color-background: hsl(0 0% 4%);
-  --color-foreground: hsl(0 0% 90%);
+  --color-background: #0B1220;
+  --color-foreground: #F5F5F0;
   
-  --color-card: hsl(0 0% 6%);
-  --color-card-foreground: hsl(0 0% 92%);
+  --color-card: #141B2E;
+  --color-card-foreground: #F5F5F0;
   
-  --color-popover: hsl(0 0% 7%);
-  --color-popover-foreground: hsl(0 0% 92%);
+  --color-popover: #1C2438;
+  --color-popover-foreground: #F5F5F0;
   
-  --color-primary: hsl(72 100% 50%) !important;
-  --color-primary-foreground: hsl(0 0% 5%);
+  --color-primary: #D4AF37 !important;
+  --color-primary-foreground: #0B1220;
   
-  --color-secondary: hsl(0 0% 10%);
-  --color-secondary-foreground: hsl(0 0% 88%);
+  --color-secondary: #1C2438;
+  --color-secondary-foreground: #A0A8BD;
   
-  --color-muted: hsl(0 0% 9%);
-  --color-muted-foreground: hsl(0 0% 60%);
+  --color-muted: #1C2438;
+  --color-muted-foreground: #5C6478;
   
-  --color-accent: hsl(0 0% 14%);
-  --color-accent-foreground: hsl(0 0% 90%);
+  --color-accent: #3A331A;
+  --color-accent-foreground: #D4AF37;
   
-  --color-destructive: hsl(0 84% 60%);
-  --color-destructive-foreground: hsl(0 0% 100%);
+  --color-destructive: #EF5350;
+  --color-destructive-foreground: #F5F5F0;
   
-  --color-border: hsl(0 0% 14%);
-  --color-input: hsl(0 0% 12%);
-  --color-ring: hsl(72 100% 50%);
+  --color-border: #2A3348;
+  --color-input: #2A3348;
+  --color-ring: #D4AF37;
 
   --radius-xl: 1.5rem;
   --radius-lg: 1rem;
@@ -40,7 +40,7 @@
   --radius-sm: 0.5rem;
 
   --shadow-card: 0 40px 80px -20px rgba(0, 0, 0, 0.7);
-  --shadow-glow: 0 0 40px -5px hsl(72 100% 50% / 0.5);
+  --shadow-glow: 0 0 40px -5px #D4AF37;
   --shadow-premium: 0 48px 96px -24px rgba(0, 0, 0, 0.8);
 }
 
@@ -70,7 +70,7 @@
 }
 
 @utility glow-primary {
-  box-shadow: 0 0 20px -5px hsl(72 100% 50% / 0.4);
+  box-shadow: 0 0 20px -5px #D4AF37;
 }
 
 @utility lift {
@@ -110,8 +110,8 @@
 
 /* Dynamic Archetype Themes */
 [data-archetype="focus_seeker"] {
-  --color-primary: hsl(72 100% 50%) !important;
-  --shadow-glow: 0 0 20px -5px hsl(72 100% 50% / 0.3);
+  --color-primary: #D4AF37 !important;
+  --shadow-glow: 0 0 20px -5px rgba(212, 175, 55, 0.3);
 }
 
 [data-archetype="body_builder"] {
@@ -207,12 +207,12 @@
   
   /* Standardized opaque surfaces */
   .surface { 
-    background: hsl(0 0% 8%); 
+    background: #141B2E; 
     border: 1px solid hsl(var(--color-border) / 0.7); 
     border-radius: var(--radius-md); 
   }
   .surface-strong { 
-    background: hsl(0 0% 10%); 
+    background: #1C2438; 
     border: 1px solid hsl(var(--color-border)); 
     border-radius: var(--radius-md); 
   }

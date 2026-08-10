@@ -67,7 +67,7 @@ function Landing() {
 
 function Hero() {
   return (
-    <section className="relative flex min-h-[96dvh] flex-col items-center justify-center overflow-hidden border-b border-border bg-[#0a0502]">
+    <section className="relative flex min-h-[96dvh] flex-col items-center justify-center overflow-hidden border-b border-border bg-background">
       {/* Premium 3D Orb Backgrounds */}
       <div className="absolute top-[-15%] right-[-15%] h-[800px] w-[800px] animate-orb-float rounded-full bg-primary/15 blur-[140px] pointer-events-none" />
       <div className="absolute bottom-[-15%] left-[-15%] h-[700px] w-[700px] animate-orb-float-delayed rounded-full bg-primary/8 blur-[120px] pointer-events-none" />
