@@ -74,30 +74,35 @@
 }
 
 @utility lift {
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform var(--dur-base) var(--ease-out), box-shadow var(--dur-base) var(--ease-out), filter var(--dur-base) var(--ease-out);
 
   &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+    transform: translateY(-4px) scale(1.01);
+    box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.6);
+    filter: brightness(1.05);
+  }
+  &:active {
+    transform: translateY(-1px) scale(0.98);
   }
 }
 
 @keyframes orb-float {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  50% { transform: translate(20px, -20px) scale(1.1); }
+  0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); opacity: 0.8; }
+  33% { transform: translate(30px, -40px) scale(1.15) rotate(2deg); opacity: 1; }
+  66% { transform: translate(-20px, 20px) scale(0.9) rotate(-1deg); opacity: 0.9; }
 }
 
 @keyframes orb-float-delayed {
-  0%, 100% { transform: translate(0, 0) scale(1.1); }
-  50% { transform: translate(-20px, 20px) scale(1); }
+  0%, 100% { transform: translate(0, 0) scale(1.1) rotate(0deg); opacity: 0.7; }
+  50% { transform: translate(-40px, 30px) scale(0.95) rotate(-3deg); opacity: 0.9; }
 }
 
 .animate-orb-float {
-  animation: orb-float 10s ease-in-out infinite;
+  animation: orb-float 15s var(--ease-in-out) infinite;
 }
 
 .animate-orb-float-delayed {
-  animation: orb-float-delayed 12s ease-in-out infinite;
+  animation: orb-float-delayed 18s var(--ease-in-out) infinite;
 }
 
 /* Girih Pattern Utility */
@@ -163,9 +168,10 @@
   --tracking-eyebrow: 0.18em;
 
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
   --dur-fast: 150ms;
-  --dur-base: 300ms;
-  --dur-slow: 700ms;
+  --dur-base: 350ms;
+  --dur-slow: 800ms;
 }
 
 /* Obsidian Premium Shadows */
@@ -220,7 +226,7 @@
 
 /* Route transitions */
 @keyframes routeIn {
-  from { opacity: 0; transform: translateY(4px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; transform: translateY(6px) scale(0.99); filter: blur(4px); }
+  to   { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
 }
-main#main-content > * { animation: routeIn 150ms var(--ease-out) both; }
+main#main-content > * { animation: routeIn var(--dur-base) var(--ease-out) both; }
