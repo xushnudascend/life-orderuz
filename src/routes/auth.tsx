@@ -76,7 +76,7 @@ function AuthPage() {
   return (
     <div className="relative min-h-dvh overflow-hidden bg-background text-foreground flex items-center justify-center p-4">
       {/* Visual signatures from Life Order (Deep Obsidian + 3D Orbs) */}
-      <div className="absolute inset-0 -z-10 overflow-hidden bg-background-primary">
+      <div className="absolute inset-0 -z-10 overflow-hidden bg-background">
         <div className="girih-corner absolute inset-0 opacity-10" />
         <div className="absolute top-[-10%] right-[-10%] h-[500px] w-[500px] animate-orb-float rounded-full bg-primary/5 blur-[120px]" />
         <div className="absolute bottom-[-10%] left-[-10%] h-[400px] w-[400px] animate-orb-float-delayed rounded-full bg-primary/5 blur-[100px]" />
@@ -108,7 +108,7 @@ function AuthPage() {
         </div>
 
           <div
-            className="animate-fade-in-up rounded-[32px] border border-border/40 bg-background-secondary p-8 md:p-10 shadow-premium backdrop-blur-4xl"
+            className="animate-fade-in-up rounded-[32px] border border-border/40 bg-secondary p-8 md:p-10 shadow-premium backdrop-blur-4xl"
           style={{ animationDelay: "80ms" }}
         >
           <div className="space-y-3">
