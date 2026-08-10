@@ -232,11 +232,11 @@ function Dashboard() {
             />
           </div>
           <div className="md:col-span-12 lg:col-span-1 flex flex-col gap-4">
-             <div className="flex-1 rounded-[28px] border border-border/60 bg-card/40 p-6 transition-all hover:bg-primary/5 hover:border-primary/40 backdrop-blur-xl group">
+             <div className="flex-1 rounded-[32px] border border-border/60 bg-background-secondary p-6 transition-all hover:bg-primary/5 hover:border-primary/40 backdrop-blur-xl group">
                 <BiorythmPeak />
              </div>
              {habits.length > 0 && (
-                <div className="flex-1 rounded-[28px] border border-border/60 bg-card/40 p-6 transition-all hover:bg-primary/5 hover:border-primary/40 backdrop-blur-xl group">
+                <div className="flex-1 rounded-[32px] border border-border/60 bg-background-secondary p-6 transition-all hover:bg-primary/5 hover:border-primary/40 backdrop-blur-xl group">
                   <ZeigarnikRing
                     done={doneCount}
                     total={habits.length}
@@ -252,7 +252,7 @@ function Dashboard() {
       <div className="mt-4">
         
         {/* Habits */}
-        <Panel className="lg:col-span-12 rounded-[28px] border-border/40 bg-card/40 backdrop-blur-4xl p-6 sm:p-8 shadow-premium">
+        <Panel className="lg:col-span-12 rounded-[32px] border-border/40 bg-background-secondary backdrop-blur-4xl p-6 sm:p-8 shadow-premium">
           
           <PanelHeader
             title={<span className="font-serif text-2xl font-bold tracking-tighter uppercase opacity-80">protokol</span>}
@@ -290,7 +290,7 @@ function Dashboard() {
                         "tap group flex w-full items-center gap-3 rounded-xl border px-3 py-3 text-left transition-all hover:shadow-md active:scale-[0.99] " +
                         (isDone
                           ? "border-primary/20 bg-primary/5 opacity-80"
-                          : "border-border/60 bg-background/40 hover:border-primary/40 hover:bg-primary/[0.02]")
+                          : "border-border/60 bg-background-tertiary hover:border-primary/40 hover:bg-primary/[0.02]")
                       }
                     >
                       <span

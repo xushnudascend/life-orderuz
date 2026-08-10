@@ -51,7 +51,7 @@ export function StatsHeroBento({
   return (
     <section
         aria-label="Bugungi holat"
-        className="relative h-full overflow-hidden rounded-[32px] border border-border/40 bg-[#0c0c0c]/40 p-6 sm:p-8 backdrop-blur-4xl shadow-[0_32px_64px_-16px_rgba(0,0,0,0.7)]"
+        className="relative h-full overflow-hidden rounded-[32px] border border-border/40 bg-background-secondary p-6 sm:p-8 backdrop-blur-4xl shadow-premium"
       >
 
         {/* Left Side Content */}
@@ -100,7 +100,7 @@ export function StatsHeroBento({
         <div className="relative z-10 mt-10 grid grid-cols-2 gap-4">
           <Link
             to="/habits"
-            className="group relative overflow-hidden rounded-[20px] border border-border/60 bg-background/40 p-5 transition-all hover:border-primary/50 hover:bg-primary/5 hover:shadow-[0_0_20px_hsl(var(--primary)/0.15)]"
+            className="group relative overflow-hidden rounded-[20px] border border-border/60 bg-background-tertiary p-5 transition-all hover:border-primary/50 hover:bg-primary/5 hover:shadow-[0_0_20px_hsl(var(--primary)/0.15)]"
           >
             <p className="flex items-center gap-1.5 font-ui text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
               <Flame className="h-3 w-3 text-primary" /> {t("dashboard.hero.streak")}
@@ -113,7 +113,7 @@ export function StatsHeroBento({
 
           <Link
             to="/profile"
-            className="group relative overflow-hidden rounded-[20px] border border-border/60 bg-background/40 p-5 transition-all hover:border-primary/50 hover:bg-primary/5 hover:shadow-[0_0_20px_hsl(var(--primary)/0.15)]"
+            className="group relative overflow-hidden rounded-[20px] border border-border/60 bg-background-tertiary p-5 transition-all hover:border-primary/50 hover:bg-primary/5 hover:shadow-[0_0_20px_hsl(var(--primary)/0.15)]"
           >
             <p className="flex items-center gap-1.5 font-ui text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
               <Shield className="h-3 w-3 text-primary" /> {t("dashboard.hero.discipline")}

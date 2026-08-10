@@ -133,7 +133,7 @@ function Anchor() {
     },
   ];
   return (
-    <section className="border-b border-border bg-card/30">
+    <section className="border-b border-border bg-background-secondary">
       <div className="mx-auto max-w-5xl px-5 py-14">
         <div className="max-w-xl">
           <p className="font-ui text-[11px] uppercase tracking-[0.24em] text-primary">Solishtir</p>
@@ -150,7 +150,7 @@ function Anchor() {
             <div
               key={it.label}
               className={
-                "bg-background p-5 " + (it.accent ? "ring-1 ring-inset ring-primary/40" : "")
+                "bg-background-primary p-5 " + (it.accent ? "ring-1 ring-inset ring-primary/40" : "")
               }
             >
               <p className="font-ui text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
@@ -359,10 +359,10 @@ function Compare() {
             Free vs Pro — solishtir
           </h2>
         </div>
-        <div className="mt-8 overflow-hidden rounded-[var(--radius)] border border-border bg-background">
+        <div className="mt-8 overflow-hidden rounded-xl border border-border bg-background-primary">
           <table className="w-full font-ui text-sm">
             <thead>
-              <tr className="border-b border-border bg-card/40">
+              <tr className="border-b border-border bg-background-tertiary">
                 <th className="px-4 py-3 text-left font-semibold">Imkoniyat</th>
                 <th className="px-4 py-3 text-center font-semibold">Free</th>
                 <th className="px-4 py-3 text-center font-semibold text-primary">Pro</th>

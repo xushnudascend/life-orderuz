@@ -124,8 +124,8 @@ function JournalPage() {
                   className={
                     "flex h-9 w-9 items-center justify-center rounded-full border text-lg transition-colors " +
                     (mood === m.v
-                      ? "border-primary bg-primary/10"
-                      : "border-border hover:border-foreground/30")
+                      ? "border-primary bg-primary/10 text-primary"
+                      : "border-border bg-background-tertiary hover:border-text-primary")
                   }
                   aria-label={`Kayfiyat ${m.v}`}
                 >

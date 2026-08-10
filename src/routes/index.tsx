@@ -67,11 +67,10 @@ function Landing() {
 
 function Hero() {
   return (
-    <section className="relative flex min-h-[96dvh] flex-col items-center justify-center overflow-hidden border-b border-border bg-background">
+    <section className="relative flex min-h-dvh flex-col items-center justify-center overflow-hidden border-b border-border bg-background-primary">
       {/* Premium 3D Orb Backgrounds */}
-      <div className="absolute top-[-15%] right-[-15%] h-[800px] w-[800px] animate-orb-float rounded-full bg-primary/15 blur-[140px] pointer-events-none" />
-      <div className="absolute bottom-[-15%] left-[-15%] h-[700px] w-[700px] animate-orb-float-delayed rounded-full bg-primary/8 blur-[120px] pointer-events-none" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[900px] w-[900px] animate-blob-breathe rounded-full bg-primary/[0.05] blur-[180px] pointer-events-none" />
+      <div className="absolute top-[-15%] right-[-15%] h-[800px] w-[800px] animate-orb-float rounded-full bg-primary/10 blur-[140px] pointer-events-none" />
+      <div className="absolute bottom-[-15%] left-[-15%] h-[700px] w-[700px] animate-orb-float-delayed rounded-full bg-primary/5 blur-[120px] pointer-events-none" />
       
       <div className="relative z-10 mx-auto w-full max-w-6xl px-6 py-20 text-center md:px-8">
         <Reveal delay={100}>
@@ -82,7 +81,7 @@ function Hero() {
         </Reveal>
 
         <Reveal delay={250}>
-          <h1 className="font-serif text-[48px] leading-[0.9] tracking-tighter text-balance sm:text-[72px] md:text-[84px] lg:text-[104px]">
+          <h1 className="font-serif text-[48px] leading-[0.9] tracking-tighter text-balance sm:text-[72px] md:text-[84px] lg:text-[104px] text-text-primary">
             Motivatsiya tugaydi,<br />
             <span className="text-primary italic">
               Tizim qoladi.
@@ -166,8 +165,8 @@ function Features() {
                 <div className="mb-8 flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
                   <span className="font-serif text-lg font-bold">{f.n}</span>
                 </div>
-                <h3 className="font-serif text-2xl font-bold mb-4 tracking-tight group-hover:text-primary transition-colors">{f.t}</h3>
-                <p className="font-ui text-[15px] leading-relaxed text-muted-foreground/80">{f.d}</p>
+                <h3 className="font-serif text-2xl font-bold mb-4 tracking-tight group-hover:text-text-primary transition-colors">{f.t}</h3>
+                <p className="font-ui text-[15px] leading-relaxed text-text-secondary">{f.d}</p>
               </div>
             </Reveal>
           ))}
