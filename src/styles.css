@@ -6,44 +6,46 @@
   --font-body: "Karla", sans-serif;
   --font-display: "Karla", sans-serif;
 
-  --color-background: #06080d;
-  --color-foreground: #ececed;
-  --color-text-primary: #ececed;
-  --color-text-secondary: #9ea4b0;
-  --color-text-muted: #646b7a;
+  --color-background: var(--bg-primary);
+  --color-foreground: var(--text-primary);
   
-  --color-card: #0c111d;
-  --color-card-foreground: #ececed;
+  --color-card: var(--bg-secondary);
+  --color-card-foreground: var(--text-primary);
   
-  --color-popover: #0c111d;
-  --color-popover-foreground: #ececed;
+  --color-popover: var(--bg-tertiary);
+  --color-popover-foreground: var(--text-primary);
   
-  --color-primary: #ffd700 !important;
-  --color-primary-foreground: #06080d;
+  --color-primary: var(--accent);
+  --color-primary-foreground: var(--bg-primary);
   
-  --color-secondary: #121826;
-  --color-secondary-foreground: #9ea4b0;
+  --color-secondary: var(--bg-secondary);
+  --color-secondary-foreground: var(--text-secondary);
   
-  --color-muted: #121826;
-  --color-muted-foreground: #646b7a;
+  --color-muted: var(--bg-tertiary);
+  --color-muted-foreground: var(--text-muted);
   
-  --color-accent: #2d240a;
-  --color-accent-foreground: #ffd700;
+  --color-accent: var(--accent-muted);
+  --color-accent-foreground: var(--accent);
   
-  --color-destructive: #ff4d4d;
-  --color-destructive-foreground: #ececed;
-  
-  --color-border: #1e2533;
-  --color-input: #1e2533;
-  --color-ring: #ffd700;
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-error: var(--error);
+  --color-info: var(--info);
 
-  --radius-xl: 1.5rem;
-  --radius-lg: 1rem;
-  --radius-md: 0.75rem;
-  --radius-sm: 0.5rem;
+  --color-destructive: var(--error);
+  --color-destructive-foreground: var(--text-primary);
+  
+  --color-border: var(--border);
+  --color-input: var(--border);
+  --color-ring: var(--accent);
+
+  --radius-xl: 32px;
+  --radius-lg: 24px;
+  --radius-md: 16px;
+  --radius-sm: 8px;
 
   --shadow-card: 0 4px 24px -8px rgba(0, 0, 0, 0.5);
-  --shadow-glow: 0 0 20px -5px #ffd700;
+  --shadow-glow: 0 0 20px -5px var(--accent);
   --shadow-premium: 0 32px 64px -16px rgba(0, 0, 0, 0.6);
 }
 
@@ -236,14 +238,48 @@
 main#main-content > * { animation: routeIn var(--dur-base) var(--ease-out) both; }
 
 /* --- DESIGN SYSTEM OVERHAUL: LIFE ORDER (ASCEND) --- */
-@import "./design_system.css";
+:root {
+  --bg-primary: #0B1220;
+  --bg-secondary: #141B2E;
+  --bg-tertiary: #1C2438;
+  --border: #2A3348;
+  --accent: #D4AF37;
+  --accent-hover: #E5C158;
+  --accent-muted: #3A331A;
+  --text-primary: #F5F5F0;
+  --text-secondary: #A0A8BD;
+  --text-muted: #5C6478;
+  --success: #4ADE80;
+  --warning: #F5A623;
+  --error: #EF5350;
+  --info: #5B8DEF;
 
-body {
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
+  /* Spacing Scale */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 16px;
+  --space-4: 24px;
+  --space-5: 32px;
+  --space-6: 48px;
 }
 
-.bg-card { background-color: var(--bg-secondary); }
-.border-border { border-color: var(--border); }
-.text-primary { color: var(--accent); }
-.text-muted-foreground { color: var(--text-secondary); }
+@layer base {
+  body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+  }
+  
+  /* Normalize Typography Scale */
+  h1 { font-size: 3rem; line-height: 1.1; }
+  h2 { font-size: 2.25rem; line-height: 1.2; }
+  h3 { font-size: 1.5rem; line-height: 1.3; }
+  body { font-size: 0.875rem; line-height: 1.6; }
+  .text-caption { font-size: 0.75rem; line-height: 1.4; }
+}
+
+/* Skeleton Screens */
+.skeleton {
+  @apply animate-pulse rounded bg-tertiary/20;
+  background-color: var(--bg-tertiary);
+  opacity: 0.2;
+}
