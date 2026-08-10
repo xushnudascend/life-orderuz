@@ -220,7 +220,7 @@
 
 /* Route transitions */
 @keyframes routeIn {
-  from { opacity: 0; transform: translateY(8px); }
+  from { opacity: 0; transform: translateY(4px); }
   to   { opacity: 1; transform: translateY(0); }
 }
-main#main-content > * { animation: routeIn 250ms var(--ease-out) both; }
+main#main-content > * { animation: routeIn 150ms var(--ease-out) both; }

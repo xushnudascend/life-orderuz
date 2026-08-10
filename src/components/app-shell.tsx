@@ -66,12 +66,12 @@ export function AppShell({ title, children }: { title?: string; children: ReactN
 
   return (
     <NadirProvider>
-      <div className="min-h-dvh bg-[#0a0502] text-foreground relative selection:bg-primary/20">
+      <div className="min-h-dvh bg-background text-foreground relative selection:bg-primary/20">
         {/* Girih ornament + Premium dark background with subtle warmth */}
         <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(circle_at_50%_0%,hsl(var(--primary)/0.08),transparent_60%)]">
         </div>
         <SkipLink />
-        <div style={{ paddingBottom: "calc(6rem + env(safe-area-inset-bottom))" }}>
+        <div className="flex flex-col min-h-dvh" style={{ paddingBottom: "calc(5rem + env(safe-area-inset-bottom))" }}>
           {/* Topbar — scroll'da yengil soya, blur past-perf'da o'chadi */}
           <header
             className={
@@ -122,7 +122,7 @@ export function AppShell({ title, children }: { title?: string; children: ReactN
           <main
             id="main-content"
             tabIndex={-1}
-            className="mx-auto max-w-[1400px] px-4 py-6 sm:px-6 sm:py-8 animate-route-in focus:outline-none"
+            className="flex-1 mx-auto w-full max-w-[1400px] px-4 py-4 sm:px-6 sm:py-6 animate-route-in focus:outline-none"
           >
             <ErrorBoundary boundary="app_shell_main">{children}</ErrorBoundary>
           </main>
