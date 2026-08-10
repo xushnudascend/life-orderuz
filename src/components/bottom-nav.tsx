@@ -1,5 +1,6 @@
 import { Link, useLocation } from "@tanstack/react-router";
-import { Compass, ListChecks, GraduationCap, Sparkles, User } from "lucide-react";
+import { Compass, ListChecks, GraduationCap, Sparkles, User, Zap } from "lucide-react";
+import { useT } from "@/i18n/use-t";
 
 /**
  * 5 tab bottom nav + markazda Nadir FAB (floating action button).
@@ -8,17 +9,21 @@ import { Compass, ListChecks, GraduationCap, Sparkles, User } from "lucide-react
 const TABS = [
   { to: "/dashboard", label: "Bosh", icon: Compass, match: ["/dashboard"] },
   { to: "/habits", label: "Odat", icon: ListChecks, match: ["/habits"] },
+  { to: "/pricing", label: "Premium", icon: Zap, match: ["/pricing"], highlight: true },
   { to: "/journal", label: "Kundalik", icon: GraduationCap, match: ["/journal"] },
   { to: "/profile", label: "Profil", icon: User, match: ["/profile"] },
 ] as const;
 
+type TabItem = typeof TABS[number] & { highlight?: boolean };
+
 export function BottomNav({ recommendedTab }: { recommendedTab?: string }) {
+  const { t } = useT();
   const location = useLocation();
 
   const isNadirActive = location.pathname.startsWith("/mentor");
 
-  const isTabActive = (t: (typeof TABS)[number]) =>
-    t.match.some((m) => location.pathname === m || location.pathname.startsWith(m + "/"));
+  const isTabActive = (tab: any) =>
+    tab.match.some((m: string) => location.pathname === m || location.pathname.startsWith(m + "/"));
 
   return (
     <>
@@ -51,28 +56,29 @@ export function BottomNav({ recommendedTab }: { recommendedTab?: string }) {
         className="fixed bottom-0 left-0 right-0 z-40 border-t border-border/60 bg-background/90 pb-[env(safe-area-inset-bottom)] backdrop-blur-3xl supports-[backdrop-filter]:bg-background/80 md:hidden h-16"
         aria-label="Asosiy navigatsiya"
       >
-        <div className="mx-auto flex max-w-6xl items-center justify-around px-2">
-          {TABS.map((t, idx) => {
+        <div className="mx-auto flex max-w-6xl items-center justify-around px-1">
+          {TABS.map((t: TabItem, idx) => {
             const active = isTabActive(t);
             const recommended = recommendedTab === t.to && !active;
             const Icon = t.icon;
             
-            // Layout order: [Bosh, Tana, <NadirGap>, Odat, O'rgan, Davra]
-            // We need to insert a gap in the middle for the FAB
-            const isFirstGroup = idx < 2;
-            const isSecondGroup = idx >= 2;
+            // Central gap for Nadir FAB remains at idx 2 if we use 5 tabs but 
+            // wait, we need it between idx 1 and 3 or similar.
+            // Let's adjust the indices.
             
             return (
               <div key={t.to} className="contents">
-                {idx === 2 && <div className="w-20 shrink-0" aria-hidden="true" />}
+                {idx === 2 && <div className="w-16 shrink-0" aria-hidden="true" />}
                 <Link
                   to={t.to}
                   aria-current={active ? "page" : undefined}
                   className={
-                    "tap relative flex min-w-[70px] flex-1 flex-col items-center justify-center gap-1.5 py-2 font-ui text-[9px] font-bold uppercase tracking-[0.2em] transition-all duration-300 " +
+                    "tap relative flex min-w-[60px] flex-1 flex-col items-center justify-center gap-1 py-1.5 font-ui text-[8px] font-bold uppercase tracking-[0.15em] transition-all duration-300 " +
                     (active
                       ? "text-primary"
-                      : "text-muted-foreground hover:text-foreground active:scale-[0.97]")
+                      : t.highlight 
+                        ? "text-primary animate-pulse" 
+                        : "text-muted-foreground hover:text-foreground active:scale-[0.97]")
                   }
                 >
                   {active && (

@@ -10,12 +10,15 @@ import {
   Users,
   LayoutDashboard,
   Dumbbell,
-  Target
+  Target,
+  Sparkles
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
+import { useT } from "@/i18n/use-t";
 
 export function NavMenu({ onClose }: { onClose?: () => void }) {
+  const { t } = useT();
   const handleLogout = async () => {
     await supabase.auth.signOut();
     toast.success("Tizimdan chiqdingiz");
@@ -59,6 +62,23 @@ export function NavMenu({ onClose }: { onClose?: () => void }) {
           </Link>
         ))}
       </nav>
+
+      <div className="mb-6 relative z-10">
+        <Link
+          to="/pricing"
+          onClick={onClose}
+          className="group relative flex items-center gap-3 overflow-hidden rounded-2xl bg-primary/10 p-4 transition-all hover:bg-primary/20 active:scale-[0.98]"
+        >
+          <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
+          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary text-primary-foreground shadow-[0_0_20px_hsl(var(--primary)/0.4)]">
+            <Sparkles className="h-5 w-5" />
+          </div>
+          <div className="flex flex-col">
+            <span className="font-ui text-sm font-bold text-primary">{t("nav.upgrade")}</span>
+            <span className="font-ui text-[10px] text-muted-foreground uppercase tracking-wider">Cheksiz imkoniyatlar</span>
+          </div>
+        </Link>
+      </div>
 
       <div className="mt-auto pt-6 border-t border-border relative z-10">
         <button
