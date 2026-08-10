@@ -118,21 +118,36 @@ function Hero() {
 
 function Features() {
   const items = [
-    { n: "01", t: "AI mentor", d: "Har kuni progressingni tekshiradi va keyingi qadamni aniq ko'rsatadi." },
-    { n: "02", t: "Intizom o'lchovi", d: "Streak, XP va 0–100 intizom balli. O'sishing raqamlarda ko'rinadi." },
-    { n: "03", t: "Kunlik missiyalar", d: "Uchta qisqa vazifa. Bugun bajarish mumkin, ortiqcha tanlov yo'q." },
+    { 
+      n: "01", 
+      t: "Nadir AI mentor", 
+      d: "Xulq-atvor psixologiyasiga sozlangan mentor. Har kuni progressingni tahlil qiladi va identity-shift (o'zlik o'zgarishi)ga yordam beradi." 
+    },
+    { 
+      n: "02", 
+      t: "Obsidian intizom", 
+      d: "Streak, XP va 0–100 intizom balli. Motivatsiya so'nganda ham tizimni ushlab turish uchun mo'ljallangan 'forgiving' (kechirimli) mexanizm." 
+    },
+    { 
+      n: "03", 
+      t: "Minimalist protokol", 
+      d: "Kunlik uchta aniq missiya. Ortiqcha tanlov charchog'isiz, faqat eng muhim qadamlar." 
+    },
   ];
 
   return (
-    <section className="border-b border-border py-24 md:py-32">
+    <section className="relative overflow-hidden border-b border-border py-24 md:py-32">
+      <div className="absolute top-0 left-1/4 h-[500px] w-[500px] rounded-full bg-primary/5 blur-[120px] pointer-events-none" />
       <div className="mx-auto max-w-6xl px-6 md:px-8">
-        <div className="grid md:grid-cols-3 gap-x-16 gap-y-12">
+        <div className="grid md:grid-cols-3 gap-x-12 gap-y-16">
           {items.map((f, i) => (
             <Reveal key={f.n} delay={i * 100}>
-              <div className="border-t border-border pt-8">
-                <div className="font-ui text-[11px] uppercase tracking-[0.2em] text-muted-foreground/60 mb-6 tabular-nums">{f.n}</div>
-                <h3 className="font-serif text-2xl font-bold mb-4 tracking-tight">{f.t}</h3>
-                <p className="font-ui text-base leading-relaxed text-muted-foreground/80">{f.d}</p>
+              <div className="group relative">
+                <div className="mb-8 flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
+                  <span className="font-serif text-lg font-bold">{f.n}</span>
+                </div>
+                <h3 className="font-serif text-2xl font-bold mb-4 tracking-tight group-hover:text-primary transition-colors">{f.t}</h3>
+                <p className="font-ui text-[15px] leading-relaxed text-muted-foreground/80">{f.d}</p>
               </div>
             </Reveal>
           ))}
@@ -141,6 +156,7 @@ function Features() {
     </section>
   );
 }
+
 
 function HowItWorks() {
   const steps = [
