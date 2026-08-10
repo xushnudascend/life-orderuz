@@ -7,16 +7,16 @@
   --font-display: "Karla", sans-serif;
 
   /* Premium Design Tokens */
-  --bg-primary: #0B1220;
-  --bg-secondary: #141B2E;
-  --bg-tertiary: #1C2438;
-  --border: #2A3348;
-  --accent: #D4AF37;
-  --accent-hover: #E5C158;
-  --accent-muted: #3A331A;
-  --text-primary: #F5F5F0;
-  --text-secondary: #A0A8BD;
-  --text-muted: #5C6478;
+  --bg-primary: #FFFFFF;
+  --bg-secondary: #F9F7F2;
+  --bg-tertiary: #EFEBE5;
+  --border: #E5E0D8;
+  --accent: #8B5E3C;
+  --accent-hover: #6F4A2F;
+  --accent-muted: #D2C2B4;
+  --text-primary: #2C2420;
+  --text-secondary: #5D544E;
+  --text-muted: #8E867E;
   --success: #4ADE80;
   --warning: #F5A623;
   --error: #EF5350;
