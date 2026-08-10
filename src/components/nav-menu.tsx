@@ -11,7 +11,8 @@ import {
   LayoutDashboard,
   Dumbbell,
   Target,
-  Sparkles
+  Sparkles,
+  Compass
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
