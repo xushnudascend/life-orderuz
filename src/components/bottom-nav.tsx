@@ -6,7 +6,7 @@ import { useT } from "@/i18n/use-t";
  * 5 tab bottom nav + markazda Nadir FAB (floating action button).
  * Faqat mobilda ( md:hidden ).
  */
-const TABS = (t: any) => [
+const TABS = [
   { to: "/dashboard", label: "Bosh", icon: Compass, match: ["/dashboard"] },
   { to: "/habits", label: "Odat", icon: ListChecks, match: ["/habits"] },
   { to: "/pricing", label: "Premium", icon: Zap, match: ["/pricing"], highlight: true },
@@ -14,15 +14,16 @@ const TABS = (t: any) => [
   { to: "/profile", label: "Profil", icon: User, match: ["/profile"] },
 ] as const;
 
+type TabItem = typeof TABS[number] & { highlight?: boolean };
+
 export function BottomNav({ recommendedTab }: { recommendedTab?: string }) {
   const { t } = useT();
   const location = useLocation();
-  const tabs = TABS(t);
 
   const isNadirActive = location.pathname.startsWith("/mentor");
 
-  const isTabActive = (t: any) =>
-    t.match.some((m: string) => location.pathname === m || location.pathname.startsWith(m + "/"));
+  const isTabActive = (tab: any) =>
+    tab.match.some((m: string) => location.pathname === m || location.pathname.startsWith(m + "/"));
 
   return (
     <>
@@ -56,7 +57,7 @@ export function BottomNav({ recommendedTab }: { recommendedTab?: string }) {
         aria-label="Asosiy navigatsiya"
       >
         <div className="mx-auto flex max-w-6xl items-center justify-around px-1">
-          {tabs.map((t, idx) => {
+          {TABS.map((t: TabItem, idx) => {
             const active = isTabActive(t);
             const recommended = recommendedTab === t.to && !active;
             const Icon = t.icon;
