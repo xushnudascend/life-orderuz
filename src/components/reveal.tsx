@@ -50,8 +50,8 @@ export function Reveal({
       ref={ref as React.Ref<HTMLElement>}
       style={{ transitionDelay: shown ? `${delay}ms` : "0ms" }}
       className={
-        "transition-[opacity,transform] duration-[700ms] ease-out will-change-[opacity,transform] " +
-        (shown ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2") +
+        "transition-[opacity,transform,filter] duration-[var(--dur-slow)] cubic-bezier(0.16, 1, 0.3, 1) will-change-[opacity,transform,filter] " +
+        (shown ? "opacity-100 translate-y-0 scale-100 blur-0" : "opacity-0 translate-y-8 scale-[0.97] blur-[8px]") +
         (className ? " " + className : "")
       }
     >
