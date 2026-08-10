@@ -11,7 +11,7 @@ import { SiteFooter } from "@/components/site-footer";
 const BRAND = "Life Order";
 const SITE_URL = "https://life-orderuz.lovable.app";
 const CANONICAL_URL = "https://life-orderuz.lovable.app/";
-const ONE_LINER = "Self-Control OS — Motivatsiya tugaydi, tizim qoladi. Har kuni uchta aniq qadam va Nadir AI mentor.";
+const ONE_LINER = "Life Order — O'z-o'zini boshqarish tizimi. Motivatsiya tugaydi, tizim qoladi. Kunlik 3 qadam va AI mentor.";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -92,8 +92,8 @@ function Hero() {
 
         <Reveal delay={400}>
           <p className="mx-auto mt-10 max-w-2xl font-ui text-lg leading-relaxed text-muted-foreground/80 md:text-xl">
-            Life Order — biologik ritming va xulq-atvor arxitekturangga moslangan,<br className="hidden md:block" />
-            o'zbek tilidagi yagona premium intizom tizimi.
+            Biologik ritm va psixologiyaga asoslangan,<br className="hidden md:block" />
+            hayotingizni tartibga soluvchi premium tizim.
           </p>
         </Reveal>
 
@@ -105,7 +105,7 @@ function Hero() {
               className="group relative h-16 rounded-full px-12 font-ui text-lg font-bold transition-all hover:scale-105 active:scale-[0.98] shadow-premium bg-primary text-primary-foreground"
             >
               <Link to="/auth">
-                Tashxisni boshlash
+                Boshlash
                 <ArrowRight className="ml-2.5 h-6 w-6 transition-transform group-hover:translate-x-1.5" />
               </Link>
             </Button>
@@ -139,8 +139,9 @@ function Features() {
   const items = [
     { 
       n: "01", 
-      t: "Nadir AI mentor", 
-      d: "Xulq-atvor psixologiyasiga sozlangan mentor. Har kuni progressingni tahlil qiladi va identity-shift (o'zlik o'zgarishi)ga yordam beradi." 
+      t: "AI Mentor", 
+      d: "Progressingizni tahlil qiladi va shaxsiy tavsiyalar beradi. O'zlik o'zgarishiga yordam beruvchi aqlli yordamchi." 
+
     },
     { 
       n: "02", 
@@ -149,8 +150,9 @@ function Features() {
     },
     { 
       n: "03", 
-      t: "Minimalist protokol", 
-      d: "Kunlik uchta aniq missiya. Ortiqcha tanlov charchog'isiz, faqat eng muhim qadamlar." 
+      t: "Aniq reja", 
+      d: "Kunlik uchta eng muhim vazifa. Ortiqcha charchoqsiz, faqat natija beruvchi qadamlar." 
+
     },
   ];
 
@@ -179,9 +181,9 @@ function Features() {
 
 function HowItWorks() {
   const steps = [
-    { n: "01", t: "Bir necha savolga javob ber", d: "60 soniyada hozirgi nuqtangni belgilaymiz." },
-    { n: "02", t: "Shaxsiy rejangni ol", d: "AI har kuni uchta aniq vazifa tuzadi." },
-    { n: "03", t: "Streakni qur", d: "Har bir missiya XP va streak beradi." },
+    { n: "01", t: "Savollarga javob bering", d: "Hozirgi holatingizni 60 soniyada aniqlaymiz." },
+    { n: "02", t: "Shaxsiy reja oling", d: "Har kunlik 3 ta eng muhim vazifa tuziladi." },
+    { n: "03", t: "Natijani ko'ring", d: "Har bir qadam bilan intizomingizni kuchaytiring." },
   ];
 
   return (
@@ -196,7 +198,7 @@ function HowItWorks() {
               </div>
               <h2 className="font-serif text-[44px] leading-[1.05] tracking-tighter mb-8 sm:text-[56px]">
                 Motivatsiyani emas, <br/>
-                <span className="italic opacity-80">tizimni boshqar.</span>
+                <span className="italic opacity-80">hayotingizni boshqaring.</span>
               </h2>
             </Reveal>
             <div className="space-y-10 mt-12">
