@@ -140,13 +140,13 @@
 
 /* Typography Hierarchy Tokens from Life Order */
 :root {
-  --fs-display: 2.5rem;   /* 40px  — hero mobile */
-  --fs-h1:      2rem;     /* 32px */
-  --fs-h2:      1.5rem;   /* 24px */
-  --fs-h3:      1.125rem; /* 18px */
-  --fs-body:    0.9375rem;/* 15px */
-  --fs-small:   0.8125rem;/* 13px */
-  --fs-caption: 0.6875rem;/* 11px — eyebrow/meta */
+  --fs-display: 2rem;     /* 32px  — hero mobile */
+  --fs-h1:      1.75rem;  /* 28px */
+  --fs-h2:      1.25rem;  /* 20px */
+  --fs-h3:      1rem;     /* 16px */
+  --fs-body:    0.875rem; /* 14px */
+  --fs-small:   0.75rem;  /* 12px */
+  --fs-caption: 0.625rem; /* 10px — eyebrow/meta */
   --lh-tight:   1.05;
   --lh-snug:    1.25;
   --lh-body:    1.55;

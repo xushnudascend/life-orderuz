@@ -141,7 +141,7 @@ export function DailyTimetable({ profile }: { profile?: TimetableProfile }) {
   const personalized = !!(profile && (profile.age || profile.archetype));
 
   return (
-    <div className="rounded-[var(--radius)] border border-border bg-card/40 p-4 transition-all hover:bg-card/60">
+    <div className="rounded-[28px] border border-border/40 bg-card/40 p-5 transition-all hover:bg-card/60">
       <div className="flex items-center justify-between">
         <p className="font-ui text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
           Jadval
@@ -152,7 +152,7 @@ export function DailyTimetable({ profile }: { profile?: TimetableProfile }) {
           </span>
         )}
       </div>
-      <ul className="mt-3 space-y-2 font-ui text-sm">
+      <ul className="mt-4 space-y-3 font-ui text-[13px]">
         {blocks.map((b) => {
           const active = hour >= b.from && hour < b.to;
           return (

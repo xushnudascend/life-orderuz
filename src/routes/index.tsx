@@ -61,17 +61,17 @@ function Hero() {
         </Reveal>
 
         <Reveal delay={250}>
-          <h1 className="font-serif text-[72px] leading-[0.88] tracking-tighter text-balance sm:text-[104px] md:text-[128px] lg:text-[152px]">
+          <h1 className="font-serif text-[64px] leading-[0.92] tracking-tighter text-balance sm:text-[88px] md:text-[104px] lg:text-[120px]">
             Motivatsiya tugaydi,<br />
             <span className="text-primary italic relative">
               Tizim qoladi.
-              <span className="absolute -bottom-4 left-0 h-1.5 w-full bg-primary/25 blur-md" />
+              <span className="absolute -bottom-2 left-0 h-1 w-full bg-primary/25 blur-md" />
             </span>
           </h1>
         </Reveal>
 
         <Reveal delay={400}>
-          <p className="mx-auto mt-14 max-w-3xl font-ui text-xl leading-relaxed text-muted-foreground/80 md:text-2xl">
+          <p className="mx-auto mt-10 max-w-2xl font-ui text-lg leading-relaxed text-muted-foreground/80 md:text-xl">
             Life Order — biologik ritming va xulq-atvor arxitekturangga moslangan,<br className="hidden md:block" />
             o'zbek tilidagi yagona premium intizom tizimi.
           </p>
@@ -82,7 +82,7 @@ function Hero() {
             <Button
               asChild
               size="lg"
-              className="group relative h-18 rounded-full px-16 font-ui text-xl font-bold transition-all hover:scale-105 active:scale-[0.98] shadow-[0_32px_64px_-16px_hsl(var(--primary)/0.6)]"
+              className="group relative h-16 rounded-full px-12 font-ui text-lg font-bold transition-all hover:scale-105 active:scale-[0.98] shadow-[0_24px_48px_-12px_hsl(var(--primary)/0.6)]"
             >
               <Link to="/auth">
                 Tashxisni boshlash
@@ -134,7 +134,7 @@ function HowItWorks() {
       <div className="mx-auto max-w-6xl px-6 md:px-8">
         <div className="max-w-2xl">
           <Reveal>
-            <h2 className="font-serif text-[42px] leading-[0.95] tracking-tighter mb-16 sm:text-[54px]">
+            <h2 className="font-serif text-[36px] leading-[0.95] tracking-tighter mb-12 sm:text-[48px]">
               Uch qadam.
             </h2>
           </Reveal>
@@ -216,7 +216,7 @@ function FinalCta() {
       <div className="mx-auto max-w-6xl px-6 md:px-8">
         <div className="max-w-3xl">
           <Reveal>
-            <h2 className="font-serif text-[54px] leading-[0.9] tracking-tighter mb-12 sm:text-[72px] md:text-[92px]">
+            <h2 className="font-serif text-[48px] leading-[0.9] tracking-tighter mb-10 sm:text-[64px] md:text-[80px]">
               Bugun boshla.
             </h2>
           </Reveal>
@@ -224,7 +224,7 @@ function FinalCta() {
             <Button
               asChild
               size="lg"
-              className="group h-18 rounded-full px-16 font-ui text-xl font-bold transition-all hover:scale-105 active:scale-[0.98] shadow-[0_32px_64px_-16px_hsl(var(--primary)/0.6)]"
+              className="group h-16 rounded-full px-12 font-ui text-lg font-bold transition-all hover:scale-105 active:scale-[0.98] shadow-[0_24px_48px_-12px_hsl(var(--primary)/0.6)]"
             >
               <Link to="/auth">
                 Bepul boshlash
