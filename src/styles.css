@@ -234,3 +234,16 @@
   to   { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
 }
 main#main-content > * { animation: routeIn var(--dur-base) var(--ease-out) both; }
+
+/* --- DESIGN SYSTEM OVERHAUL: LIFE ORDER (ASCEND) --- */
+@import "./design_system.css";
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+.bg-card { background-color: var(--bg-secondary); }
+.border-border { border-color: var(--border); }
+.text-primary { color: var(--accent); }
+.text-muted-foreground { color: var(--text-secondary); }
