@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Plus, Minus, Sparkles } from "lucide-react";
+import { cn } from "@/lib/utils";
 import { Reveal } from "@/components/reveal";
 import { ScrollProgress } from "@/components/scroll-progress";
 import { SiteHeader } from "@/components/site-header";
@@ -238,20 +239,28 @@ function FaqSection() {
   const [open, setOpen] = useState<number | null>(0);
 
   return (
-    <section className="border-b border-border py-24 md:py-32">
+    <section id="faq" className="border-b border-border py-24 md:py-32 bg-muted/5">
       <div className="mx-auto max-w-6xl px-6 md:px-8">
-        <div className="max-w-2xl">
-          <Reveal>
-            <h2 className="font-serif text-[42px] leading-[0.95] tracking-tighter mb-16 sm:text-[54px]">
-              Savollar.
-            </h2>
-          </Reveal>
-          <div className="space-y-0">
+        <div className="grid lg:grid-cols-[1fr_1.5fr] gap-16 lg:gap-24">
+          <div>
+            <Reveal>
+              <div className="mb-6 inline-flex rounded-full bg-primary/10 px-4 py-1.5 font-ui text-[10px] font-bold uppercase tracking-widest text-primary">
+                FAQ
+              </div>
+              <h2 className="font-serif text-[42px] leading-[1] tracking-tighter mb-8 sm:text-[54px]">
+                Ko'p so'raladigan savollar.
+              </h2>
+              <p className="font-ui text-muted-foreground/70 leading-relaxed max-w-sm">
+                Tizim qanday ishlashi va sizga qanday foyda berishi haqida barcha javoblar.
+              </p>
+            </Reveal>
+          </div>
+          <div className="space-y-0 border-t border-border">
             {items.map((it, i) => {
               const isOpen = open === i;
               return (
                 <Reveal key={i} delay={i * 50}>
-                  <div className="border-t border-border last:border-b">
+                  <div className="border-b border-border">
                     <button
                       type="button"
                       onClick={() => setOpen(isOpen ? null : i)}
@@ -259,12 +268,15 @@ function FaqSection() {
                       className="w-full flex items-center justify-between gap-6 py-8 text-left group"
                     >
                       <span className="font-serif text-xl font-bold tracking-tight transition-colors group-hover:text-primary">{it.q}</span>
-                      {isOpen
-                        ? <Minus className="h-5 w-5 text-primary shrink-0 transition-transform" />
-                        : <Plus className="h-5 w-5 text-muted-foreground shrink-0 transition-transform group-hover:text-primary" />}
+                      <div className={cn(
+                        "flex h-8 w-8 items-center justify-center rounded-full border border-border transition-all",
+                        isOpen ? "bg-primary border-primary text-primary-foreground" : "group-hover:border-primary/50"
+                      )}>
+                        {isOpen ? <Minus className="h-4 w-4" /> : <Plus className="h-4 w-4" />}
+                      </div>
                     </button>
                     <div
-                      className="grid transition-[grid-template-rows] duration-300 ease-out motion-reduce:transition-none"
+                      className="grid transition-[grid-template-rows] duration-300 ease-out"
                       style={{ gridTemplateRows: isOpen ? "1fr" : "0fr" }}
                     >
                       <div className="overflow-hidden">
@@ -281,6 +293,7 @@ function FaqSection() {
     </section>
   );
 }
+
 
 function FinalCta() {
   return (
