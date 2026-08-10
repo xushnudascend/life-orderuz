@@ -1,0 +1,35 @@
+:root {
+  --bg-primary: #0B1220;
+  --bg-secondary: #141B2E;
+  --bg-tertiary: #1C2438;
+  --border: #2A3348;
+  --accent: #D4AF37;
+  --accent-hover: #E5C158;
+  --accent-muted: #3A331A;
+  --text-primary: #F5F5F0;
+  --text-secondary: #A0A8BD;
+  --text-muted: #5C6478;
+  --success: #4ADE80;
+  --warning: #F5A623;
+  --error: #EF5350;
+  --info: #5B8DEF;
+}
+
+@theme {
+  --color-background: var(--bg-primary);
+  --color-background-secondary: var(--bg-secondary);
+  --color-background-tertiary: var(--bg-tertiary);
+  --color-border: var(--border);
+  --color-primary: var(--accent);
+  --color-primary-hover: var(--accent-hover);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
+}
+
+@layer base {
+  body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+  }
+}
