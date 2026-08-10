@@ -10,8 +10,8 @@ export async function rateLimit(opts: {
 }): Promise<{ allowed: boolean; retryAfter: number; count: number }> {
   const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
   
-  // Check if client is in blocked_clients table
-  const { data: block } = await supabaseAdmin
+  // Check if client is in blocked_clients table using raw select as types might be stale
+  const { data: block } = await (supabaseAdmin as any)
     .from("blocked_clients")
     .select("*")
     .eq("identifier", opts.key)
@@ -38,7 +38,7 @@ export async function rateLimit(opts: {
   // If hitting a hard limit (e.g., 2x the standard limit), log a security event
   if (!row.allowed && row.current_count > opts.limit * 2 && opts.request) {
     const ip = clientIpFromRequest(opts.request);
-    await supabaseAdmin.from("security_events").insert({
+    await (supabaseAdmin as any).from("security_events").insert({
       event_type: "RATE_LIMIT_ABUSE",
       severity: "medium",
       details: { key: opts.key, count: row.current_count, limit: opts.limit },
@@ -58,4 +58,3 @@ export function clientIpFromRequest(request: Request): string {
     "unknown"
   );
 }
-
