@@ -40,7 +40,7 @@ export async function activateProForOrder(orderId: string) {
 
     if (updateError) throw updateError;
     
-    console.log(`[BILLING] Activated Pro for user ${order.user_id} until ${base.toISOString()}`);
+    
   } catch (err) {
     alertCritical("Failed to activate pro for order", { 
       orderId, 
