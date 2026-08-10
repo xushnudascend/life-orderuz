@@ -54,6 +54,7 @@ export const Route = createFileRoute("/sitemap.xml")({
           },
           { path: "/blog/goal-tracking-apps", changefreq: "monthly", priority: "0.8" },
 
+
           { path: "/install", changefreq: "monthly", priority: "0.6" },
           { path: "/mcp", changefreq: "monthly", priority: "0.5" },
           { path: "/share/milestone", changefreq: "weekly", priority: "0.4" },

@@ -83,6 +83,7 @@ export const Route = createFileRoute("/blog/hayot-sohalari")({
   component: AspectsGuide,
 });
 
+
 function AspectsGuide() {
   return (
     <div className="min-h-dvh bg-background text-foreground animate-fade-in">
