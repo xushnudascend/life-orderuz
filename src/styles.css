@@ -87,21 +87,22 @@
 }
 
 @keyframes orb-float {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  50% { transform: translate(20px, -20px) scale(1.1); }
+  0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); opacity: 0.8; }
+  33% { transform: translate(30px, -40px) scale(1.15) rotate(2deg); opacity: 1; }
+  66% { transform: translate(-20px, 20px) scale(0.9) rotate(-1deg); opacity: 0.9; }
 }
 
 @keyframes orb-float-delayed {
-  0%, 100% { transform: translate(0, 0) scale(1.1); }
-  50% { transform: translate(-20px, 20px) scale(1); }
+  0%, 100% { transform: translate(0, 0) scale(1.1) rotate(0deg); opacity: 0.7; }
+  50% { transform: translate(-40px, 30px) scale(0.95) rotate(-3deg); opacity: 0.9; }
 }
 
 .animate-orb-float {
-  animation: orb-float 10s ease-in-out infinite;
+  animation: orb-float 15s var(--ease-in-out) infinite;
 }
 
 .animate-orb-float-delayed {
-  animation: orb-float-delayed 12s ease-in-out infinite;
+  animation: orb-float-delayed 18s var(--ease-in-out) infinite;
 }
 
 /* Girih Pattern Utility */
