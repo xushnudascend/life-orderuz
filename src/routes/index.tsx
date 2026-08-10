@@ -61,11 +61,11 @@ function Hero() {
         </Reveal>
 
         <Reveal delay={250}>
-          <h1 className="font-serif text-[72px] leading-[0.88] tracking-tighter text-balance sm:text-[104px] md:text-[128px] lg:text-[152px]">
+          <h1 className="font-serif text-[64px] leading-[0.92] tracking-tighter text-balance sm:text-[88px] md:text-[104px] lg:text-[120px]">
             Motivatsiya tugaydi,<br />
             <span className="text-primary italic relative">
               Tizim qoladi.
-              <span className="absolute -bottom-4 left-0 h-1.5 w-full bg-primary/25 blur-md" />
+              <span className="absolute -bottom-2 left-0 h-1 w-full bg-primary/25 blur-md" />
             </span>
           </h1>
         </Reveal>
