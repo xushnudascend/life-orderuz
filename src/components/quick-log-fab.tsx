@@ -135,7 +135,7 @@ export function QuickLogFab() {
                 setExpanded(false);
                 openNadir();
               }}
-              className="flex animate-scale-in items-center gap-2 rounded-full border border-border bg-card/95 py-2 pl-3 pr-4 font-ui text-xs font-medium shadow-lg backdrop-blur transition-colors hover:border-primary"
+              className="flex animate-scale-in items-center gap-2 rounded-full border border-border bg-card/95 py-1.5 pl-2.5 pr-3.5 font-ui text-[10px] font-medium shadow-md backdrop-blur transition-colors hover:border-primary"
             >
               <MessageSquare className="h-4 w-4 text-primary" aria-hidden />
               Nadir
@@ -146,7 +146,7 @@ export function QuickLogFab() {
                 setExpanded(false);
                 setOpen(true);
               }}
-              className="flex animate-scale-in items-center gap-2 rounded-full border border-border bg-card/95 py-2 pl-3 pr-4 font-ui text-xs font-medium shadow-lg backdrop-blur transition-colors hover:border-primary"
+              className="flex animate-scale-in items-center gap-2 rounded-full border border-border bg-card/95 py-1.5 pl-2.5 pr-3.5 font-ui text-[10px] font-medium shadow-md backdrop-blur transition-colors hover:border-primary"
             >
               <Flame className="h-4 w-4 text-primary" aria-hidden />
               Tezkor log
@@ -158,10 +158,10 @@ export function QuickLogFab() {
           onClick={() => setExpanded((v) => !v)}
           aria-expanded={expanded}
           aria-label={expanded ? "Amallarni yopish" : "Tezkor amallar"}
-          className="grid h-14 w-14 place-items-center rounded-full bg-primary text-primary-foreground shadow-[0_10px_30px_-8px_hsl(var(--primary)/0.55)] transition-transform hover:scale-105 active:scale-95"
+          className="grid h-12 w-12 place-items-center rounded-full bg-primary text-primary-foreground shadow-[0_8px_24px_-6px_hsl(var(--primary)/0.5)] transition-transform hover:scale-105 active:scale-95"
         >
           <Plus
-            className={`h-6 w-6 transition-transform duration-200 ${expanded ? "rotate-45" : ""}`}
+            className={`h-5 w-5 transition-transform duration-200 ${expanded ? "rotate-45" : ""}`}
             strokeWidth={2.5}
           />
         </button>

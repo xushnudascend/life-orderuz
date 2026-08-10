@@ -309,7 +309,7 @@ function HabitsPage() {
                       <div
                         key={h.id}
                         className={
-                          "flex items-center justify-between rounded-[var(--radius)] border p-4 transition-colors " +
+                          "flex items-center justify-between rounded-xl border p-3.5 transition-colors " +
                           (doneRow
                             ? "border-primary/40 bg-primary/5"
                             : movedAway
@@ -325,7 +325,7 @@ function HabitsPage() {
                           <div className="relative">
                             <span
                               className={
-                                "flex h-10 w-10 items-center justify-center rounded-full border transition-all duration-300 " +
+                                "flex h-9 w-9 items-center justify-center rounded-full border transition-all duration-300 " +
                                 (doneRow
                                   ? "border-primary bg-primary text-primary-foreground scale-110 shadow-[0_0_15px_rgba(45,212,191,0.4)]"
                                   : "border-border bg-background text-muted-foreground group-hover/habit:border-primary/50 group-hover/habit:text-primary")
@@ -340,7 +340,7 @@ function HabitsPage() {
                             )}
                           </div>
                           <div className={doneRow ? "opacity-50" : ""}>
-                            <p className={"font-serif text-[17px] leading-tight " + (doneRow ? "line-through text-muted-foreground" : "text-foreground")}>
+                            <p className={"font-serif text-base leading-tight " + (doneRow ? "line-through text-muted-foreground" : "text-foreground")}>
                               {h.title}
                             </p>
                             <p className="mt-1 font-ui text-xs uppercase tracking-[0.2em] text-primary">

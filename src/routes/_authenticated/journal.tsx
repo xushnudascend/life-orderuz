@@ -101,10 +101,10 @@ function JournalPage() {
         subtitle="Bugun o'zing bilan halol gaplash. Faqat sen o'qiysan."
       />
 
-      <Panel as="section" className="mt-8">
+      <Panel as="section" className="mt-6 p-5">
         <PanelHeader
           eyebrow="Yangi yozuv"
-          title={<p className="font-serif text-lg font-semibold">Bugungi ichki manzarangni yoz</p>}
+          title={<p className="font-serif text-base font-semibold">Bugungi ichki manzarangni yoz</p>}
         />
         <form onSubmit={save} className="mt-4 space-y-4">
           <Textarea
@@ -142,7 +142,7 @@ function JournalPage() {
 
       <div className="mt-10 space-y-3">
         {loading ? (
-          <div className="flex justify-center py-10">
+          <div className="flex justify-center py-6">
             <Loader2 className="h-5 w-5 animate-spin text-muted-foreground" />
           </div>
         ) : entries.length === 0 ? (

@@ -287,7 +287,7 @@ function Dashboard() {
                       onClick={(ev) => toggle(h, ev)}
                       aria-pressed={isDone}
                       className={
-                        "tap group flex w-full items-center gap-4 rounded-2xl border px-4 py-4 text-left transition-all hover:shadow-lg active:scale-[0.99] " +
+                        "tap group flex w-full items-center gap-3 rounded-xl border px-3 py-3 text-left transition-all hover:shadow-md active:scale-[0.99] " +
                         (isDone
                           ? "border-primary/20 bg-primary/5 opacity-80"
                           : "border-border/60 bg-background/40 hover:border-primary/40 hover:bg-primary/[0.02]")
@@ -295,7 +295,7 @@ function Dashboard() {
                     >
                       <span
                         className={
-                          "flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border transition-all duration-300 " +
+                          "flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border transition-all duration-300 " +
                           (isDone
                             ? "border-primary bg-primary text-primary-foreground shadow-[0_0_15px_hsl(var(--primary)/0.4)]"
                             : "border-border bg-card text-muted-foreground group-hover:border-primary/60 group-hover:text-primary")

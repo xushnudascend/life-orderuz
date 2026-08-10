@@ -121,7 +121,7 @@ function AssessmentPage() {
 
           <Panel>
             <p className="text-xs uppercase tracking-widest text-amber-400/80">{scaleMeta.title}</p>
-            <h2 className="mt-2 text-xl font-semibold leading-snug sm:text-2xl">
+            <h2 className="mt-2 text-lg font-semibold leading-snug sm:text-xl">
               {current.prompt}
             </h2>
 
@@ -198,7 +198,7 @@ function AssessmentPage() {
       )}
 
       {phase === "computing" && (
-        <div className="flex min-h-[60vh] flex-col items-center justify-center gap-4 text-center">
+        <div className="flex min-h-[50vh] flex-col items-center justify-center gap-4 text-center">
           <div className="relative">
             <div className="absolute inset-0 animate-ping rounded-full bg-amber-500/20" />
             <Loader2 className="relative h-10 w-10 animate-spin text-amber-400" aria-hidden />
