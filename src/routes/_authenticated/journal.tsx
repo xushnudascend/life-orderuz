@@ -142,7 +142,7 @@ function JournalPage() {
 
       <div className="mt-10 space-y-3">
         {loading ? (
-          <div className="flex justify-center py-10">
+          <div className="flex justify-center py-6">
             <Loader2 className="h-5 w-5 animate-spin text-muted-foreground" />
           </div>
         ) : entries.length === 0 ? (
