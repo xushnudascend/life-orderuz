@@ -13,6 +13,7 @@ export const Route = createFileRoute("/security")({
       { property: "og:title", content: `Xavfsizlik — ${uz.brand.name}` },
       { property: "og:description", content: DESC },
       { property: "og:url", content: "https://life-orderuz.lovable.app/security" },
+      { property: "og:type", content: "website" },
     ],
     links: [{ rel: "canonical", href: "https://life-orderuz.lovable.app/security" }],
   }),

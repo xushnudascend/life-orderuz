@@ -12,6 +12,8 @@ import { uz } from "@/i18n";
 
 import { track } from "@/lib/analytics";
 
+const CANONICAL_URL = "https://life-orderuz.lovable.app/auth";
+
 function sanitizeNext(next: unknown): string {
   if (typeof next !== "string" || !next.startsWith("/") || next.startsWith("//"))
     return "/dashboard";
@@ -41,7 +43,10 @@ export const Route = createFileRoute("/auth")({
           "Life Order hisobingizga kiring yoki bepul ro'yxatdan o'ting — odat, kundalik va Nadir AI mentor bir joyda.",
       },
       { name: "robots", content: "noindex" },
+      { property: "og:url", content: CANONICAL_URL },
+      { property: "og:type", content: "website" },
     ],
+    links: [{ rel: "canonical", href: CANONICAL_URL }],
   }),
   component: AuthPage,
 });

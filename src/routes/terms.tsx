@@ -14,6 +14,7 @@ export const Route = createFileRoute("/terms")({
       { property: "og:title", content: `Foydalanish shartlari — ${uz.brand.name}` },
       { property: "og:description", content: DESC },
       { property: "og:url", content: "https://life-orderuz.lovable.app/terms" },
+      { property: "og:type", content: "website" },
     ],
     links: [{ rel: "canonical", href: "https://life-orderuz.lovable.app/terms" }],
   }),
