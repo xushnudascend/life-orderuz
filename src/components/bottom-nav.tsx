@@ -1,5 +1,5 @@
 import { Link, useLocation } from "@tanstack/react-router";
-import { Compass, ListChecks, GraduationCap, Sparkles, User, Zap } from "lucide-react";
+import { Compass, ListChecks, GraduationCap, Sparkles, User, Zap, Users } from "lucide-react";
 import { useT } from "@/i18n/use-t";
 
 /**
