@@ -5,19 +5,19 @@
 export const uz = {
   brand: {
     name: "Life Order",
-    tagline: "Intizom — iroda mevasidir",
+    tagline: "O'zini yengish — eng katta g'alabadir",
     oneLiner:
-      "Self-Control OS — o'zbekona intizom va zamonaviy fan uyg'unligi. Tashxis, protokol va halol mentor Nadir.",
+      "Self-Control OS — Hayotingni tartibga solish tizimi. 3 daqiqada tashxis, kunlik 3 qadam va AI mentor.",
   },
   errors: {
     auth: {
-      invalid: "Email yoki parol mos kelmadi. Qayta tekshirib ko'ring — hech narsa yo'qolmadi.",
-      exists: "Bu email allaqachon ro'yxatdan o'tgan. Kirish tabini tanlang yoki parolni tiklang.",
-      confirm: "Email hali tasdiqlanmagan. Pochtangizni tekshiring — havola yuborilgan.",
-      rate: "Ko'p urinish bo'ldi. Bir daqiqadan keyin qayta urinib ko'ring.",
-      weak: "Parol kuchsizroq — kamida 8 belgi va turli-tuman kombinatsiya bering.",
-      network: "Internet aloqasi uzildi. Ulanish tiklanganda qayta urinib ko'ring.",
-      generic: "Xato yuz berdi. Qayta urinib ko'ring — hech narsa buzilmadi.",
+      invalid: "Email yoki parol xato. Qayta urinib ko'ring.",
+      exists: "Bu email bilan ro'yxatdan o'tilgan. Kirishni tanlang.",
+      confirm: "Email tasdiqlanmagan. Pochtangizni tekshiring.",
+      rate: "Ko'p urinish bo'ldi. 1 daqiqa kuting.",
+      weak: "Parol kamida 8 belgi bo'lishi kerak.",
+      network: "Internet ulanishini tekshiring.",
+      generic: "Xato yuz berdi. Qayta urinib ko'ring.",
     }
   },
   nav: {
@@ -31,16 +31,16 @@ export const uz = {
   },
   hero: {
     eyebrow: "Beta bosqichida · Kartasiz",
-    title: "O'zingni yengish — eng katta g'alabadir.",
+    title: "Motivatsiya o'tkinchi. Tizim esa abadiy.",
     subtitle:
-      "Life Order sening kunlaringni tartibli amallar zanjiriga aylantiradi. Ortiqcha gaplarsiz. Nadir — sening vijdoningdek halol AI mentor.",
-    ctaPrimary: "3 daqiqada tashxisdan o't",
-    ctaSecondary: "Uslubimiz haqida",
-    trustLine: "Kartasiz · O'zbek tilida · Milliy intizom tizimi",
+      "Life Order har kunlik odatlaringizni natijaga yo'naltiradi. Ortiqcha gaplarsiz, faqat amaliy qadamlar.",
+    ctaPrimary: "Tashxisdan o'tish",
+    ctaSecondary: "Qanday ishlaydi?",
+    trustLine: "Kartasiz sinab ko'ring · O'zbek tilida",
   },
   pricing: {
     heading: "Narxlar — sodda",
-    subheading: "Kartasiz sinash. Yoqmasa — hech qanday yozuv qolmaydi.",
+    subheading: "Karta shart emas. Istalgan vaqtda to'xtatish mumkin.",
     free: {
       title: "Bepul",
       price: "0 so'm",
@@ -69,9 +69,9 @@ export const uz = {
     },
   },
   cta: {
-    heading: "Bugun boshla. Ertaga — g'animat.",
-    body: "3 daqiqalik tashxis. Hech qanday karta shart emas. Sen uchun yangi yo'l.",
-    button: "Tashxisni boshlash",
+    heading: "Yangi hayotni bugundan boshlang",
+    body: "3 daqiqalik tashxis orqali shaxsiy o'sish rejangizni oling. Mutlaqo bepul.",
+    button: "Boshlash",
   },
   footer: {
     tagline: "Self-Control OS — o'zbek tilida qurilgan.",
@@ -104,9 +104,9 @@ export const uz = {
     },
     habits: {
       manage: "Boshqarish",
-      emptyTitle: "Bugundan boshlab bitta kichik odat",
-      emptyDesc: "2 daqiqalik odatdan boshlang — Nadir siz uchun shaxsiy reja tuzib beradi.",
-      emptyCta: "Shaxsiy reja tuzish",
+      emptyTitle: "Bugun bitta kichik odat boshlang",
+      emptyDesc: "2 daqiqalik odatdan boshlang. AI mentor sizga yo'l ko'rsatadi.",
+      emptyCta: "Reja tuzish",
       loading: "Yuklanmoqda...",
     },
     quick: {
