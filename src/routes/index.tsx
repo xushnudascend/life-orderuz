@@ -99,19 +99,38 @@ function Hero() {
         </Reveal>
 
         <Reveal delay={550}>
-          <div className="mt-20 flex flex-col items-center justify-center gap-8 sm:flex-row">
+          <div className="mt-20 flex flex-col items-center justify-center gap-6 sm:flex-row">
             <Button
               asChild
               size="lg"
-              className="group relative h-16 rounded-full px-12 font-ui text-lg font-bold transition-all hover:scale-105 active:scale-[0.98] shadow-[0_24px_48px_-12px_hsl(var(--primary)/0.6)]"
+              className="group relative h-16 rounded-full px-12 font-ui text-lg font-bold transition-all hover:scale-105 active:scale-[0.98] shadow-premium bg-primary text-primary-foreground"
             >
               <Link to="/auth">
                 Tashxisni boshlash
                 <ArrowRight className="ml-2.5 h-6 w-6 transition-transform group-hover:translate-x-1.5" />
               </Link>
             </Button>
+            <Button
+              asChild
+              variant="outline"
+              size="lg"
+              className="h-16 rounded-full px-12 font-ui text-lg font-bold border-border bg-transparent hover:bg-muted/30 transition-all active:scale-[0.98]"
+            >
+              <Link to="/pricing">Narxlar</Link>
+            </Button>
           </div>
         </Reveal>
+        
+        <Reveal delay={700}>
+          <div className="mt-24 flex items-center justify-center gap-12 grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-700">
+            <div className="text-[10px] uppercase tracking-[0.3em] font-bold">Identity Shift</div>
+            <div className="h-1 w-1 rounded-full bg-border" />
+            <div className="text-[10px] uppercase tracking-[0.3em] font-bold">Deep Work</div>
+            <div className="h-1 w-1 rounded-full bg-border" />
+            <div className="text-[10px] uppercase tracking-[0.3em] font-bold">Habit Design</div>
+          </div>
+        </Reveal>
+
       </div>
     </section>
   );
