@@ -6,6 +6,22 @@
   --font-body: "Karla", sans-serif;
   --font-display: "Karla", sans-serif;
 
+  /* Premium Design Tokens */
+  --bg-primary: #0B1220;
+  --bg-secondary: #141B2E;
+  --bg-tertiary: #1C2438;
+  --border: #2A3348;
+  --accent: #D4AF37;
+  --accent-hover: #E5C158;
+  --accent-muted: #3A331A;
+  --text-primary: #F5F5F0;
+  --text-secondary: #A0A8BD;
+  --text-muted: #5C6478;
+  --success: #4ADE80;
+  --warning: #F5A623;
+  --error: #EF5350;
+  --info: #5B8DEF;
+
   --color-background: var(--bg-primary);
   --color-foreground: var(--text-primary);
   
@@ -17,7 +33,7 @@
   --color-popover-foreground: var(--text-primary);
   
   --color-primary: var(--accent);
-  --color-primary-foreground: var(--bg-primary);
+  --color-primary-foreground: #0B1220;
   
   --color-secondary: var(--bg-secondary);
   --color-secondary-foreground: var(--text-secondary);
@@ -48,6 +64,14 @@
   --shadow-card: 0 4px 24px -8px rgba(0, 0, 0, 0.5);
   --shadow-glow: 0 0 20px -5px var(--accent);
   --shadow-premium: 0 32px 64px -16px rgba(0, 0, 0, 0.6);
+
+  /* Spacing Scale */
+  --spacing-1: 4px;
+  --spacing-2: 8px;
+  --spacing-3: 16px;
+  --spacing-4: 24px;
+  --spacing-5: 32px;
+  --spacing-6: 48px;
 }
 
 @layer base {
@@ -239,30 +263,7 @@
 main#main-content > * { animation: routeIn var(--dur-base) var(--ease-out) both; }
 
 /* --- DESIGN SYSTEM OVERHAUL: LIFE ORDER (ASCEND) --- */
-:root {
-  --bg-primary: #0B1220;
-  --bg-secondary: #141B2E;
-  --bg-tertiary: #1C2438;
-  --border: #2A3348;
-  --accent: #D4AF37;
-  --accent-hover: #E5C158;
-  --accent-muted: #3A331A;
-  --text-primary: #F5F5F0;
-  --text-secondary: #A0A8BD;
-  --text-muted: #5C6478;
-  --success: #4ADE80;
-  --warning: #F5A623;
-  --error: #EF5350;
-  --info: #5B8DEF;
-
-  /* Spacing Scale */
-  --space-1: 4px;
-  --space-2: 8px;
-  --space-3: 16px;
-  --space-4: 24px;
-  --space-5: 32px;
-  --space-6: 48px;
-}
+/* Design System Pass complete - Variables moved to @theme top level */
 
 @layer base {
   body {

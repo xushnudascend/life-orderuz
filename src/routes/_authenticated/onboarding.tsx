@@ -201,12 +201,12 @@ function Onboarding() {
 
   if (ahaNudge !== null) {
     return (
-      <div className="min-h-dvh bg-background-primary text-foreground relative overflow-hidden flex items-center justify-center">
+      <div className="min-h-dvh bg-background text-foreground relative overflow-hidden flex items-center justify-center">
         {/* Apple-style background refinement */}
         <div className="absolute top-[-10%] right-[-10%] h-[500px] w-[500px] animate-orb-float rounded-full bg-primary/5 blur-[120px]" />
         
         <div className="mx-auto max-w-2xl px-5 py-16 relative z-10 w-full">
-          <div className="animate-fade-in-up rounded-[32px] border border-border/40 bg-background-secondary p-8 md:p-12 shadow-premium backdrop-blur-4xl">
+          <div className="animate-fade-in-up rounded-[32px] border border-border/40 bg-secondary p-8 md:p-12 shadow-premium backdrop-blur-4xl">
             <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-1.5 font-ui text-[11px] font-bold uppercase tracking-[0.2em] text-primary shadow-[0_0_20px_hsl(var(--primary)/0.2)]">
               <Sparkles className="h-4 w-4" />
               Tashxis yakunlandi

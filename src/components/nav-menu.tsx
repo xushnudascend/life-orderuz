@@ -36,7 +36,7 @@ export function NavMenu({ onClose }: { onClose?: () => void }) {
   ];
 
   return (
-    <div className="flex flex-col h-full bg-background-primary border-r border-border/40 w-64 p-6 overflow-y-auto relative backdrop-blur-4xl">
+    <div className="flex flex-col h-full bg-background border-r border-border/40 w-64 p-6 overflow-y-auto relative backdrop-blur-4xl">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,var(--accent)/0.05,transparent_75%)] pointer-events-none" />
       
       <div className="mb-10 flex items-center justify-between relative z-10">
