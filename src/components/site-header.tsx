@@ -19,7 +19,7 @@ export function SiteHeader({
   cta?: { label: string; to: string };
 }) {
   return (
-    <header className="sticky top-0 z-40 h-14 border-b border-border/70 bg-background/75 backdrop-blur-xl supports-[backdrop-filter]:bg-background/60">
+    <header className="sticky top-0 z-40 h-16 border-b border-border/70 bg-background/80 backdrop-blur-xl">
       {/* amber hairline — subtle authority signal */}
       <span
         aria-hidden

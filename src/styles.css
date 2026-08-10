@@ -34,10 +34,10 @@
   --color-input: hsl(0 0% 12%);
   --color-ring: hsl(72 100% 50%);
 
-  --radius-xl: 2rem;
-  --radius-lg: 1.5rem;
-  --radius-md: 1.25rem;
-  --radius-sm: 1rem;
+  --radius-xl: 1.5rem;
+  --radius-lg: 1rem;
+  --radius-md: 0.75rem;
+  --radius-sm: 0.5rem;
 
   --shadow-card: 0 40px 80px -20px rgba(0, 0, 0, 0.7);
   --shadow-glow: 0 0 40px -5px hsl(72 100% 50% / 0.5);
@@ -130,13 +130,23 @@
 }
 
 @keyframes blob-breathe {
-  0%, 100% { transform: scale(1); opacity: 0.1; }
-  50% { transform: scale(1.15); opacity: 0.2; }
+  0%, 100% { transform: scale(1); opacity: 0.15; }
+  50% { transform: scale(1.2); opacity: 0.25; }
 }
 
 .animate-blob-breathe {
-  animation: blob-breathe 3.5s ease-in-out infinite;
+  animation: blob-breathe 4s ease-in-out infinite;
 }
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 8s linear infinite;
+}
+
 
 /* Typography Hierarchy Tokens from Life Order */
 :root {
@@ -210,7 +220,7 @@
 
 /* Route transitions */
 @keyframes routeIn {
-  from { opacity: 0; transform: translateY(6px); }
+  from { opacity: 0; transform: translateY(8px); }
   to   { opacity: 1; transform: translateY(0); }
 }
-main#main-content > * { animation: routeIn 180ms ease-out both; }
+main#main-content > * { animation: routeIn 250ms var(--ease-out) both; }

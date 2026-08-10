@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Plus, Minus, Sparkles } from "lucide-react";
+import { cn } from "@/lib/utils";
 import { Reveal } from "@/components/reveal";
 import { ScrollProgress } from "@/components/scroll-progress";
 import { SiteHeader } from "@/components/site-header";
@@ -81,11 +82,10 @@ function Hero() {
         </Reveal>
 
         <Reveal delay={250}>
-          <h1 className="font-serif text-[64px] leading-[0.92] tracking-tighter text-balance sm:text-[88px] md:text-[104px] lg:text-[120px]">
+          <h1 className="font-serif text-[64px] leading-[0.9] tracking-tighter text-balance sm:text-[88px] md:text-[104px] lg:text-[132px]">
             Motivatsiya tugaydi,<br />
-            <span className="text-primary italic relative">
+            <span className="text-primary italic">
               Tizim qoladi.
-              <span className="absolute -bottom-2 left-0 h-1 w-full bg-primary/25 blur-md" />
             </span>
           </h1>
         </Reveal>
@@ -98,19 +98,38 @@ function Hero() {
         </Reveal>
 
         <Reveal delay={550}>
-          <div className="mt-20 flex flex-col items-center justify-center gap-8 sm:flex-row">
+          <div className="mt-20 flex flex-col items-center justify-center gap-6 sm:flex-row">
             <Button
               asChild
               size="lg"
-              className="group relative h-16 rounded-full px-12 font-ui text-lg font-bold transition-all hover:scale-105 active:scale-[0.98] shadow-[0_24px_48px_-12px_hsl(var(--primary)/0.6)]"
+              className="group relative h-16 rounded-full px-12 font-ui text-lg font-bold transition-all hover:scale-105 active:scale-[0.98] shadow-premium bg-primary text-primary-foreground"
             >
               <Link to="/auth">
                 Tashxisni boshlash
                 <ArrowRight className="ml-2.5 h-6 w-6 transition-transform group-hover:translate-x-1.5" />
               </Link>
             </Button>
+            <Button
+              asChild
+              variant="outline"
+              size="lg"
+              className="h-16 rounded-full px-12 font-ui text-lg font-bold border-border bg-transparent hover:bg-muted/30 transition-all active:scale-[0.98]"
+            >
+              <Link to="/pricing">Narxlar</Link>
+            </Button>
           </div>
         </Reveal>
+        
+        <Reveal delay={700}>
+          <div className="mt-24 flex items-center justify-center gap-12 grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-700">
+            <div className="text-[10px] uppercase tracking-[0.3em] font-bold">Identity Shift</div>
+            <div className="h-1 w-1 rounded-full bg-border" />
+            <div className="text-[10px] uppercase tracking-[0.3em] font-bold">Deep Work</div>
+            <div className="h-1 w-1 rounded-full bg-border" />
+            <div className="text-[10px] uppercase tracking-[0.3em] font-bold">Habit Design</div>
+          </div>
+        </Reveal>
+
       </div>
     </section>
   );
@@ -118,21 +137,36 @@ function Hero() {
 
 function Features() {
   const items = [
-    { n: "01", t: "AI mentor", d: "Har kuni progressingni tekshiradi va keyingi qadamni aniq ko'rsatadi." },
-    { n: "02", t: "Intizom o'lchovi", d: "Streak, XP va 0–100 intizom balli. O'sishing raqamlarda ko'rinadi." },
-    { n: "03", t: "Kunlik missiyalar", d: "Uchta qisqa vazifa. Bugun bajarish mumkin, ortiqcha tanlov yo'q." },
+    { 
+      n: "01", 
+      t: "Nadir AI mentor", 
+      d: "Xulq-atvor psixologiyasiga sozlangan mentor. Har kuni progressingni tahlil qiladi va identity-shift (o'zlik o'zgarishi)ga yordam beradi." 
+    },
+    { 
+      n: "02", 
+      t: "Obsidian intizom", 
+      d: "Streak, XP va 0–100 intizom balli. Motivatsiya so'nganda ham tizimni ushlab turish uchun mo'ljallangan 'forgiving' (kechirimli) mexanizm." 
+    },
+    { 
+      n: "03", 
+      t: "Minimalist protokol", 
+      d: "Kunlik uchta aniq missiya. Ortiqcha tanlov charchog'isiz, faqat eng muhim qadamlar." 
+    },
   ];
 
   return (
-    <section className="border-b border-border py-24 md:py-32">
+    <section className="relative overflow-hidden border-b border-border py-24 md:py-32">
+      <div className="absolute top-0 left-1/4 h-[500px] w-[500px] rounded-full bg-primary/5 blur-[120px] pointer-events-none" />
       <div className="mx-auto max-w-6xl px-6 md:px-8">
-        <div className="grid md:grid-cols-3 gap-x-16 gap-y-12">
+        <div className="grid md:grid-cols-3 gap-x-12 gap-y-16">
           {items.map((f, i) => (
             <Reveal key={f.n} delay={i * 100}>
-              <div className="border-t border-border pt-8">
-                <div className="font-ui text-[11px] uppercase tracking-[0.2em] text-muted-foreground/60 mb-6 tabular-nums">{f.n}</div>
-                <h3 className="font-serif text-2xl font-bold mb-4 tracking-tight">{f.t}</h3>
-                <p className="font-ui text-base leading-relaxed text-muted-foreground/80">{f.d}</p>
+              <div className="group relative">
+                <div className="mb-8 flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
+                  <span className="font-serif text-lg font-bold">{f.n}</span>
+                </div>
+                <h3 className="font-serif text-2xl font-bold mb-4 tracking-tight group-hover:text-primary transition-colors">{f.t}</h3>
+                <p className="font-ui text-[15px] leading-relaxed text-muted-foreground/80">{f.d}</p>
               </div>
             </Reveal>
           ))}
@@ -142,6 +176,7 @@ function Features() {
   );
 }
 
+
 function HowItWorks() {
   const steps = [
     { n: "01", t: "Bir necha savolga javob ber", d: "60 soniyada hozirgi nuqtangni belgilaymiz." },
@@ -150,30 +185,66 @@ function HowItWorks() {
   ];
 
   return (
-    <section className="border-b border-border py-24 md:py-32">
+    <section className="relative overflow-hidden border-b border-border py-24 md:py-40">
+      <div className="absolute right-0 top-1/2 -translate-y-1/2 h-[600px] w-[600px] rounded-full bg-primary/5 blur-[140px] pointer-events-none" />
       <div className="mx-auto max-w-6xl px-6 md:px-8">
-        <div className="max-w-2xl">
-          <Reveal>
-            <h2 className="font-serif text-[36px] leading-[0.95] tracking-tighter mb-12 sm:text-[48px]">
-              Uch qadam.
-            </h2>
-          </Reveal>
-          <ol className="space-y-12">
-            {steps.map((s, i) => (
-              <Reveal key={s.n} delay={i * 100}>
-                <li className="flex gap-8 group">
-                  <span className="font-ui text-[11px] uppercase tracking-[0.2em] text-muted-foreground/40 pt-1.5 w-6 shrink-0 tabular-nums transition-colors group-hover:text-primary">{s.n}</span>
-                  <div>
-                    <div className="font-serif text-2xl font-bold mb-3 tracking-tight">{s.t}</div>
-                    <p className="font-ui text-base leading-relaxed text-muted-foreground/80">{s.d}</p>
+        <div className="grid lg:grid-cols-2 gap-20 items-center">
+          <div>
+            <Reveal>
+              <div className="mb-6 inline-flex rounded-full bg-primary/10 px-4 py-1.5 font-ui text-[10px] font-bold uppercase tracking-widest text-primary">
+                Amaliyot
+              </div>
+              <h2 className="font-serif text-[44px] leading-[1.05] tracking-tighter mb-8 sm:text-[56px]">
+                Motivatsiyani emas, <br/>
+                <span className="italic opacity-80">tizimni boshqar.</span>
+              </h2>
+            </Reveal>
+            <div className="space-y-10 mt-12">
+              {steps.map((s, i) => (
+                <Reveal key={s.n} delay={i * 100}>
+                  <div className="group flex gap-6">
+                    <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-border bg-muted/30 font-serif text-sm font-bold transition-colors group-hover:border-primary/50 group-hover:text-primary">
+                      {s.n}
+                    </div>
+                    <div>
+                      <h3 className="font-serif text-xl font-bold mb-2 tracking-tight">{s.t}</h3>
+                      <p className="font-ui text-[15px] leading-relaxed text-muted-foreground/70">{s.d}</p>
+                    </div>
                   </div>
-                </li>
-              </Reveal>
-            ))}
-          </ol>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+          <Reveal delay={300} className="relative aspect-square lg:aspect-auto lg:h-[600px]">
+            <div className="absolute inset-0 rounded-[var(--radius-xl)] border border-border bg-gradient-to-br from-card/80 to-card/20 backdrop-blur-sm overflow-hidden shadow-premium">
+               {/* Mock UI visualization */}
+               <div className="absolute inset-x-0 top-0 h-12 border-b border-border bg-muted/20 px-4 flex items-center gap-2">
+                 <div className="h-2 w-2 rounded-full bg-border" />
+                 <div className="h-2 w-2 rounded-full bg-border" />
+                 <div className="h-2 w-2 rounded-full bg-border" />
+               </div>
+               <div className="p-8 pt-20 space-y-6">
+                 <div className="h-24 w-full rounded-2xl bg-primary/5 border border-primary/10 p-4 flex items-center justify-between">
+                   <div className="space-y-2">
+                     <div className="h-2 w-24 bg-primary/20 rounded" />
+                     <div className="h-4 w-32 bg-primary/40 rounded" />
+                   </div>
+                   <div className="h-12 w-12 rounded-full border-2 border-primary border-t-transparent animate-spin-slow" />
+                 </div>
+                 <div className="grid grid-cols-2 gap-4">
+                   <div className="h-32 rounded-2xl border border-border bg-muted/20" />
+                   <div className="h-32 rounded-2xl border border-border bg-muted/20" />
+                 </div>
+                 <div className="h-40 rounded-2xl border border-border bg-muted/20 relative overflow-hidden">
+                    <div className="absolute inset-0 backdrop-grid opacity-30" />
+                 </div>
+               </div>
+            </div>
+          </Reveal>
         </div>
       </div>
     </section>
+
   );
 }
 
@@ -186,20 +257,28 @@ function FaqSection() {
   const [open, setOpen] = useState<number | null>(0);
 
   return (
-    <section className="border-b border-border py-24 md:py-32">
+    <section id="faq" className="border-b border-border py-24 md:py-32 bg-muted/5">
       <div className="mx-auto max-w-6xl px-6 md:px-8">
-        <div className="max-w-2xl">
-          <Reveal>
-            <h2 className="font-serif text-[42px] leading-[0.95] tracking-tighter mb-16 sm:text-[54px]">
-              Savollar.
-            </h2>
-          </Reveal>
-          <div className="space-y-0">
+        <div className="grid lg:grid-cols-[1fr_1.5fr] gap-16 lg:gap-24">
+          <div>
+            <Reveal>
+              <div className="mb-6 inline-flex rounded-full bg-primary/10 px-4 py-1.5 font-ui text-[10px] font-bold uppercase tracking-widest text-primary">
+                FAQ
+              </div>
+              <h2 className="font-serif text-[42px] leading-[1] tracking-tighter mb-8 sm:text-[54px]">
+                Ko'p so'raladigan savollar.
+              </h2>
+              <p className="font-ui text-muted-foreground/70 leading-relaxed max-w-sm">
+                Tizim qanday ishlashi va sizga qanday foyda berishi haqida barcha javoblar.
+              </p>
+            </Reveal>
+          </div>
+          <div className="space-y-0 border-t border-border">
             {items.map((it, i) => {
               const isOpen = open === i;
               return (
                 <Reveal key={i} delay={i * 50}>
-                  <div className="border-t border-border last:border-b">
+                  <div className="border-b border-border">
                     <button
                       type="button"
                       onClick={() => setOpen(isOpen ? null : i)}
@@ -207,12 +286,15 @@ function FaqSection() {
                       className="w-full flex items-center justify-between gap-6 py-8 text-left group"
                     >
                       <span className="font-serif text-xl font-bold tracking-tight transition-colors group-hover:text-primary">{it.q}</span>
-                      {isOpen
-                        ? <Minus className="h-5 w-5 text-primary shrink-0 transition-transform" />
-                        : <Plus className="h-5 w-5 text-muted-foreground shrink-0 transition-transform group-hover:text-primary" />}
+                      <div className={cn(
+                        "flex h-8 w-8 items-center justify-center rounded-full border border-border transition-all",
+                        isOpen ? "bg-primary border-primary text-primary-foreground" : "group-hover:border-primary/50"
+                      )}>
+                        {isOpen ? <Minus className="h-4 w-4" /> : <Plus className="h-4 w-4" />}
+                      </div>
                     </button>
                     <div
-                      className="grid transition-[grid-template-rows] duration-300 ease-out motion-reduce:transition-none"
+                      className="grid transition-[grid-template-rows] duration-300 ease-out"
                       style={{ gridTemplateRows: isOpen ? "1fr" : "0fr" }}
                     >
                       <div className="overflow-hidden">
@@ -230,30 +312,38 @@ function FaqSection() {
   );
 }
 
+
 function FinalCta() {
   return (
-    <section className="py-24 md:py-40">
-      <div className="mx-auto max-w-6xl px-6 md:px-8">
-        <div className="max-w-3xl">
-          <Reveal>
-            <h2 className="font-serif text-[48px] leading-[0.9] tracking-tighter mb-10 sm:text-[64px] md:text-[80px]">
-              Bugun boshla.
-            </h2>
-          </Reveal>
-          <Reveal delay={200}>
+    <section className="relative py-24 md:py-48 overflow-hidden">
+      <div className="absolute inset-0 bg-primary/[0.02] pointer-events-none" />
+      <div className="mx-auto max-w-6xl px-6 md:px-8 text-center">
+        <Reveal>
+          <h2 className="font-serif text-[56px] leading-[1] tracking-tighter mb-10 sm:text-[80px] md:text-[100px] text-balance">
+            Ertadan emas,<br/>
+            <span className="text-primary italic">hozirdan.</span>
+          </h2>
+        </Reveal>
+        <Reveal delay={200}>
+          <p className="mx-auto mt-6 mb-14 max-w-xl font-ui text-lg text-muted-foreground/80">
+            Intizom — bu o'zingga bergan va'dangni bajarish. <br className="hidden md:block"/>
+            Life Order bilan buni osonlashtir.
+          </p>
+          <div className="flex flex-col items-center justify-center gap-6 sm:flex-row">
             <Button
               asChild
               size="lg"
-              className="group h-16 rounded-full px-12 font-ui text-lg font-bold transition-all hover:scale-105 active:scale-[0.98] shadow-[0_24px_48px_-12px_hsl(var(--primary)/0.6)]"
+              className="group h-16 rounded-full px-12 font-ui text-lg font-bold transition-all hover:scale-105 active:scale-[0.98] shadow-premium bg-primary text-primary-foreground"
             >
               <Link to="/auth">
                 Bepul boshlash
                 <ArrowRight className="ml-2.5 h-6 w-6 transition-transform group-hover:translate-x-1.5" />
               </Link>
             </Button>
-          </Reveal>
-        </div>
+          </div>
+        </Reveal>
       </div>
     </section>
   );
 }
+
