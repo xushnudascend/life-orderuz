@@ -7,4 +7,5 @@
 - RLS on every table.
 
 ## Memories
+- [Security Policy Comments](.lovable/mem/policy-comments.md) — Requirements for SQL comments in migrations.
 - [Life Order System Context](.lovable/mem/system-context.md) — Architectural, design, and behavioral science laws.
