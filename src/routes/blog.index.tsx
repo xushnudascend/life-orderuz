@@ -91,7 +91,10 @@ export const Route = createFileRoute("/blog/")({
       { property: "og:title", content: TITLE },
       { property: "og:description", content: DESCRIPTION },
       { property: "og:url", content: `${SITE_URL}/blog` },
+      { property: "og:image", content: `${SITE_URL}/og/blog-index.jpg` },
       { property: "og:type", content: "website" },
+      { property: "twitter:card", content: "summary_large_image" },
+      { property: "twitter:image", content: `${SITE_URL}/og/blog-index.jpg` },
     ],
     links: [{ rel: "canonical", href: `${SITE_URL}/blog` }],
     scripts: [
@@ -124,10 +127,10 @@ export const Route = createFileRoute("/blog/")({
 
 function BlogIndex() {
   return (
-    <div className="min-h-dvh bg-background text-foreground animate-fade-in">
+    <div className="min-h-dvh bg-background text-foreground animate-fade-in" role="document">
       <SiteHeader />
       <main className="mx-auto max-w-4xl px-5 py-16">
-        <p className="font-ui text-[11px] uppercase tracking-[0.24em] text-primary">Blog</p>
+        <p className="font-ui text-[11px] uppercase tracking-[0.24em] text-primary" aria-hidden="true">Blog</p>
         <h1 className="mt-3 font-serif text-4xl leading-[1.05] tracking-tight md:text-5xl">
           Tizim quruvchilarga o'qish
         </h1>
@@ -141,6 +144,7 @@ function BlogIndex() {
             <a
               key={p.slug}
               href={`/blog/${p.slug}`}
+              aria-labelledby={`post-title-${p.slug}`}
               className="group rounded-[var(--radius)] border border-border/60 bg-card/40 p-6 transition-all hover:border-primary/40 hover:bg-card/60"
             >
               <div className="flex items-center gap-2 font-ui text-[11px] uppercase tracking-[0.22em] text-primary">
@@ -148,7 +152,7 @@ function BlogIndex() {
                 <span aria-hidden>·</span>
                 <span className="text-muted-foreground">{p.minutes} daq</span>
               </div>
-              <h2 className="mt-3 font-serif text-xl leading-tight tracking-tight text-foreground transition-colors group-hover:text-primary">
+              <h2 className="mt-3 font-serif text-xl leading-tight tracking-tight text-foreground transition-colors group-hover:text-primary" id={`post-title-${p.slug}`}>
                 {p.title}
               </h2>
               <p className="mt-3 font-ui text-sm leading-relaxed text-muted-foreground text-pretty">

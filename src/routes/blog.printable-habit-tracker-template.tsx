@@ -22,7 +22,9 @@ export const Route = createFileRoute("/blog/printable-habit-tracker-template")({
       { property: "og:description", content: DESCRIPTION },
       { property: "og:type", content: "article" },
       { property: "og:url", content: `${SITE_URL}${PATH}` },
+      { property: "og:image", content: `${SITE_URL}/og/blog-printable-habit-tracker-template.jpg` },
       { property: "twitter:card", content: "summary_large_image" },
+      { property: "twitter:image", content: `${SITE_URL}/og/blog-printable-habit-tracker-template.jpg` },
     ],
     links: [{ rel: "canonical", href: `${SITE_URL}${PATH}` }],
     scripts: [

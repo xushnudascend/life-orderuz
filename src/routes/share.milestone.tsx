@@ -29,7 +29,9 @@ export const Route = createFileRoute("/share/milestone")({
         { property: "og:description", content: description },
         { property: "og:url", content: CANONICAL },
         { property: "og:type", content: "article" },
+        { property: "og:image", content: `${SITE_URL}/og/share-milestone.jpg` },
         { name: "twitter:card", content: "summary_large_image" },
+        { name: "twitter:image", content: `${SITE_URL}/og/share-milestone.jpg` },
       ],
       links: [{ rel: "canonical", href: CANONICAL }],
     };

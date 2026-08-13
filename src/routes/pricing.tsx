@@ -44,7 +44,10 @@ export const Route = createFileRoute("/pricing")({
       { property: "og:title", content: `Narxlar — ${uz.brand.name}` },
       { property: "og:description", content: DESC },
       { property: "og:url", content: `${SITE_URL}/pricing` },
+      { property: "og:image", content: `${SITE_URL}/og/pricing.jpg` },
       { property: "og:type", content: "website" },
+      { property: "twitter:card", content: "summary_large_image" },
+      { property: "twitter:image", content: `${SITE_URL}/og/pricing.jpg` },
     ],
     links: [{ rel: "canonical", href: `${SITE_URL}/pricing` }],
     scripts: [
