@@ -11,15 +11,18 @@ import { SiteFooter } from "@/components/site-footer";
 const BRAND = "Life Order";
 const SITE_URL = "https://life-orderuz.lovable.app";
 const CANONICAL_URL = "https://life-orderuz.lovable.app/";
-const ONE_LINER = "Life Order — O'z-o'zini boshqarish tizimi. Motivatsiya tugaydi, tizim qoladi. Kunlik 3 qadam va AI mentor.";
+const TITLE = "Life Order — O'z-o'zini boshqarish tizimi. Motivatsiya tugaydi, tizim qoladi";
+const DESCRIPTION = "Life Order bilan hayotingizni tartibga soling. Biologik ritm va psixologiyaga asoslangan premium habit tracker va AI mentor.";
+
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: `${BRAND} — Motivatsiya tugaydi, tizim qoladi` },
-      { name: "description", content: ONE_LINER },
-      { property: "og:title", content: `${BRAND} — Motivatsiya tugaydi, tizim qoladi` },
-      { property: "og:description", content: ONE_LINER },
+      { title: TITLE },
+      { name: "description", content: DESCRIPTION },
+      { property: "og:title", content: TITLE },
+      { property: "og:description", content: DESCRIPTION },
+
       { property: "og:url", content: `${SITE_URL}/` },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -35,7 +38,7 @@ export const Route = createFileRoute("/")({
           "@type": "WebApplication",
           name: BRAND,
           url: SITE_URL,
-          description: ONE_LINER,
+          description: DESCRIPTION,
           applicationCategory: "LifestyleApplication",
           operatingSystem: "Web, iOS, Android",
           offers: {

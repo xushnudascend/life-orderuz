@@ -40,8 +40,13 @@ import {
 
 export const Route = createFileRoute("/_authenticated/dashboard")({
   head: () => ({
-    meta: [{ title: `Dashboard — Life Order` }, { name: "robots", content: "noindex" }],
+    meta: [
+      { title: "Dashboard — Life Order: Sizning bugungi protokollaringiz" },
+      { name: "description", content: "Life Order dashboard: Bugungi odatlar, AI mentor tavsiyalari va biologik ritmlaringiz tahlili." },
+      { name: "robots", content: "noindex" }
+    ],
   }),
+
   component: Dashboard,
 });
 
