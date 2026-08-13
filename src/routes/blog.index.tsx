@@ -91,7 +91,10 @@ export const Route = createFileRoute("/blog/")({
       { property: "og:title", content: TITLE },
       { property: "og:description", content: DESCRIPTION },
       { property: "og:url", content: `${SITE_URL}/blog` },
+      { property: "og:image", content: `${SITE_URL}/og/blog-index.jpg` },
       { property: "og:type", content: "website" },
+      { property: "twitter:card", content: "summary_large_image" },
+      { property: "twitter:image", content: `${SITE_URL}/og/blog-index.jpg` },
     ],
     links: [{ rel: "canonical", href: `${SITE_URL}/blog` }],
     scripts: [

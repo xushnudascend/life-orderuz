@@ -17,7 +17,9 @@ export const Route = createFileRoute("/blog/habit-tracker-guide")({
       { property: "og:description", content: DESCRIPTION },
       { property: "og:type", content: "article" },
       { property: "og:url", content: `${SITE_URL}${PATH}` },
+      { property: "og:image", content: `${SITE_URL}/og/blog-habit-tracker-guide.jpg` },
       { property: "twitter:card", content: "summary_large_image" },
+      { property: "twitter:image", content: `${SITE_URL}/og/blog-habit-tracker-guide.jpg` },
     ],
     links: [{ rel: "canonical", href: `${SITE_URL}${PATH}` }],
     scripts: [
