@@ -47,6 +47,9 @@ export const Route = createFileRoute("/u/$username")({
         { property: "og:title", content: `@${params.username} — ${uz.brand.name}` },
         { property: "og:description", content: desc },
         { property: "og:url", content: `https://life-orderuz.lovable.app/u/${params.username}` },
+        { property: "og:image", content: "https://life-orderuz.lovable.app/og/user-profile.jpg" },
+        { name: "twitter:card", content: "summary_large_image" },
+        { name: "twitter:image", content: "https://life-orderuz.lovable.app/og/user-profile.jpg" },
       ],
       links: [{ rel: "canonical", href: `https://life-orderuz.lovable.app/u/${params.username}` }],
       scripts: [
