@@ -77,9 +77,9 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
 }
 
 const SITE_URL = "https://life-orderuz.lovable.app";
-const DESCRIPTION =
-  "Life Order — o'z-o'zini boshqarish OS. Trigger tahlili, kunlik uchta qadam va halol AI mentor Nadir. 60 soniyada tashxis, kartasiz.";
-const TITLE = "Life Order — Motivatsiya tugaydi. Tizim qoladi";
+const DESCRIPTION = "Life Order bilan hayotingizni tartibga soling. Biologik ritm va psixologiyaga asoslangan premium habit tracker va AI mentor.";
+const TITLE = "Life Order — O'z-o'zini boshqarish tizimi. Motivatsiya tugaydi, tizim qoladi";
+
 const OG_IMAGE =
   "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/b42cdfab-e69a-4d7f-bbe4-846f5657aa60";
 

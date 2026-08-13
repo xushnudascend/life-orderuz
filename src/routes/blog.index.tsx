@@ -3,9 +3,9 @@ import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 
 const SITE_URL = "https://life-orderuz.lovable.app";
-const TITLE = "Blog — xulq-atvor fani va odat protokollari";
-const DESCRIPTION =
-  "Life Order blogi: real tadqiqotlarga asoslangan protokollar. 66 kun qoidasi, uyqu ritmi, motivatsiya tuzog'i va boshqalar.";
+const TITLE = "Blog — Life Order: Odatlar va intizom haqida ilmiy maqolalar";
+const DESCRIPTION = "Life Order blogi: Odatlarni shakllantirish, biologik ritmlar va samaradorlik haqida amaliy protokollar va ilmiy tadqiqotlar.";
+
 
 type Post = {
   slug: string;

@@ -14,8 +14,9 @@ import { CheckoutPanel } from "@/components/checkout-panel";
 import { freeTierLimits, proTierLimits, pricing } from "@/lib/limits";
 
 const SITE_URL = "https://life-orderuz.lovable.app";
-const DESC =
-  "Life Order narxlari. Free doimiy va kartasiz. Pro — kengroq AI konteksti, cheksiz odat, haftalik hisobot. 14 kunlik to'lovni qaytarish kafolati.";
+const TITLE = "Narxlar — Life Order: Premium va Free rejalar";
+const DESC = "Life Order narxlari: Free doimiy bepul va Pro reja imkoniyatlari. O'zingizga mos tarifni tanlang va intizomni hozirroq boshlang.";
+
 
 const FAQ: { q: string; a: string }[] = [
   {
@@ -39,9 +40,9 @@ const FAQ: { q: string; a: string }[] = [
 export const Route = createFileRoute("/pricing")({
   head: () => ({
     meta: [
-      { title: `Narxlar — ${uz.brand.name}` },
+      { title: TITLE },
       { name: "description", content: DESC },
-      { property: "og:title", content: `Narxlar — ${uz.brand.name}` },
+      { property: "og:title", content: TITLE },
       { property: "og:description", content: DESC },
       { property: "og:url", content: `${SITE_URL}/pricing` },
       { property: "og:image", content: `${SITE_URL}/og/pricing.jpg` },
