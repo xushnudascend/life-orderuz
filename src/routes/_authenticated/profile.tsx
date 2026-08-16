@@ -156,7 +156,7 @@ function ProfilePage() {
     <AppShell title="Profil">
       <PageHero
         eyebrow={t("profile.hero.eyebrow")}
-        title={profile?.display_name ?? t("brand.discipline")}
+        title={profile?.display_name ?? t("settings.profile.title")}
         subtitle={
           profile?.username
             ? `@${profile.username}`

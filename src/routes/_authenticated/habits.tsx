@@ -187,7 +187,7 @@ function HabitsPage() {
     <AppShell title="Odatlar">
       <PageHero
         eyebrow={t("habits.hero.eyebrow")}
-        title={t("brand.discipline")}
+        title={t("journal.hero.title")}
         subtitle={
           <>
             {t("habits.hero.subtitle")
