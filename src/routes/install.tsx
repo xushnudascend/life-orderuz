@@ -10,13 +10,13 @@ const SITE_URL = "https://life-orderuz.lovable.app";
 export const Route = createFileRoute("/install")({
   head: () => ({
     meta: [
-      { title: "Life Order'ni telefonga o'rnatish — PWA & APK" },
+      { title: "Life Order ilovasini o'rnatish" },
       {
         name: "description",
         content:
           "Life Order'ni iPhone yoki Android telefoningizga bir bosishda o'rnating. Home Screen, offline rejim va APK yo'riqnomasi.",
       },
-      { property: "og:title", content: "Life Order — telefonga o'rnatish" },
+      { property: "og:title", content: "Life Order — ilovani o'rnatish" },
       {
         property: "og:description",
         content: "PWA sifatida bir bosishda o'rnating yoki APK yig'ing.",
