@@ -416,27 +416,6 @@ function PricingSection({ t }: { t: any }) {
               </Button>
             </div>
           </Reveal>
-        </div>
-                <ul className="space-y-4 mb-10">
-                  {p.features.map(f => (
-                    <li key={f} className="flex items-center gap-3 text-sm font-ui text-muted-foreground/80">
-                      <Check className="h-4 w-4 text-primary shrink-0" />
-                      {f}
-                    </li>
-                  ))}
-                </ul>
-                <Button 
-                  asChild 
-                  size="lg" 
-                  variant={p.highlight ? "default" : "outline"}
-                  className="w-full rounded-full font-bold shadow-premium"
-                >
-                  <Link to="/auth">{p.cta}</Link>
-                </Button>
-              </div>
-            </Reveal>
-          ))}
-        </div>
       </div>
     </section>
   );
