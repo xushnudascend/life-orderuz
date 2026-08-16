@@ -142,8 +142,10 @@ const _en = {
       title: "Pricing — Life Order: Premium & Free Plans",
       description: "Life Order pricing: Free forever and Pro plan features. Pick your plan and start your discipline journey now.",
     },
-    heading: "Pricing — simple",
-    subheading: "Try without a card. If you don't like it — no trace stays.",
+    title: "Fair pricing.",
+    subtitle: "No hidden fees.",
+    monthly: "Monthly",
+    yearly: "Yearly",
     free: {
       title: "Free",
       price: "0",

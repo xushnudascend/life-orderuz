@@ -110,8 +110,10 @@ export const uz = {
       title: "Narxlar — Life Order: Premium va Free rejalar",
       description: "Life Order narxlari: Free doimiy bepul va Pro reja imkoniyatlari. O'zingizga mos tarifni tanlang va intizomni hozirroq boshlang.",
     },
-    heading: "Narxlar — sodda",
-    subheading: "Karta shart emas. Istalgan vaqtda to'xtatish mumkin.",
+    title: "Halol narxlar.",
+    subtitle: "Yashirin to'lovsiz.",
+    monthly: "Oylik",
+    yearly: "Yillik",
     free: {
       title: "Bepul",
       price: "0",

@@ -345,11 +345,11 @@ function PricingSection({ t }: { t: any }) {
         <div className="mb-20 text-center">
           <Reveal>
             <h2 className="font-serif text-[clamp(2rem,6vw,3.5rem)] leading-[1.05] tracking-tighter mb-6">
-              {t("pricing.title") || "Halol narxlar."} <span className="text-text-secondary">{t("pricing.subtitle") || "Yashirin to'lovsiz."}</span>
+              {t("pricing.title")} <span className="text-text-secondary">{t("pricing.subtitle")}</span>
             </h2>
             <div className="flex items-center justify-center gap-4 mb-8">
               <span className={cn("text-sm font-ui transition-colors", billing === "monthly" ? "text-foreground font-bold" : "text-text-secondary")}>
-                {t("pricing.monthly") || "Oylik"}
+                {t("pricing.monthly")}
               </span>
               <button 
                 onClick={() => setBilling(billing === "monthly" ? "yearly" : "monthly")}
@@ -362,7 +362,7 @@ function PricingSection({ t }: { t: any }) {
                 )} />
               </button>
               <span className={cn("text-sm font-ui transition-colors", billing === "yearly" ? "text-foreground font-bold" : "text-text-secondary")}>
-                {t("pricing.yearly") || "Yillik"} <span className="text-[10px] bg-primary/10 text-primary px-1.5 py-0.5 rounded-full ml-1">-30%</span>
+                {t("pricing.yearly")} <span className="text-[10px] bg-primary/10 text-primary px-1.5 py-0.5 rounded-full ml-1">-30%</span>
               </span>
             </div>
           </Reveal>
@@ -377,7 +377,7 @@ function PricingSection({ t }: { t: any }) {
                 <div className="flex items-baseline gap-2">
                   <span className="font-serif text-4xl font-bold tracking-tighter tabular-nums">{t("pricing.free.price")}</span>
                   <span className="text-sm font-ui text-text-secondary tracking-wide uppercase">
-                    {billing === "monthly" ? t("pricing.free.period") : t("pricing.free.periodYearly")}
+                    {t("pricing.free.period")}
                   </span>
                 </div>
               </div>
@@ -405,7 +405,7 @@ function PricingSection({ t }: { t: any }) {
                 <h3 className="font-serif text-2xl font-bold mb-2">{t("pricing.premium.title")}</h3>
                 <div className="flex items-baseline gap-2">
                   <span className="font-serif text-4xl font-bold tracking-tighter tabular-nums">
-                    {billing === "monthly" ? t("pricing.premium.price") : "490 000"} so'm
+                    {billing === "monthly" ? t("pricing.premium.price") : "490 000"}
                   </span>
                   <span className="text-sm font-ui text-text-secondary tracking-wide uppercase">
                     {billing === "monthly" ? t("pricing.premium.period") : t("pricing.premium.periodYearly")}
