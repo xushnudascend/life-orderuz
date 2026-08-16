@@ -1595,6 +1595,14 @@ export type Database = {
           isSetofReturn: false
         }
       }
+      log_habit_action: {
+        Args: { _date: string; _habit_id: string; _user_id: string }
+        Returns: undefined
+      }
+      log_habit_action_self: {
+        Args: { _date: string; _habit_id: string }
+        Returns: undefined
+      }
       public_profile_by_username: {
         Args: { _username: string }
         Returns: {
