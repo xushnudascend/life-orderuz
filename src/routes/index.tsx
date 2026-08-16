@@ -264,7 +264,7 @@ function HowItWorks({ t }: { t: any }) {
 
 function FaqSection({ t }: { t: any }) {
   const items = Array.isArray(t("faq.items")) ? (t("faq.items") as any[]) : [];
-  const [open, setOpen] = useState<number | null>(0);
+  const [open, setOpen] = useState<number | null>(null);
 
   return (
     <section id="faq" className="border-b border-border py-24 md:py-32 bg-muted/5">
@@ -376,7 +376,9 @@ function PricingSection({ t }: { t: any }) {
                 <h3 className="font-serif text-2xl font-bold mb-2">{t("pricing.free.title")}</h3>
                 <div className="flex items-baseline gap-2">
                   <span className="font-serif text-4xl font-bold tracking-tighter tabular-nums">{t("pricing.free.price")}</span>
-                  <span className="text-sm font-ui text-text-secondary tracking-wide uppercase">{t("pricing.free.period")}</span>
+                  <span className="text-sm font-ui text-text-secondary tracking-wide uppercase">
+                    {billing === "monthly" ? t("pricing.free.period") : t("pricing.free.periodYearly")}
+                  </span>
                 </div>
               </div>
               <ul className="mb-10 space-y-4">
@@ -403,7 +405,7 @@ function PricingSection({ t }: { t: any }) {
                 <h3 className="font-serif text-2xl font-bold mb-2">{t("pricing.premium.title")}</h3>
                 <div className="flex items-baseline gap-2">
                   <span className="font-serif text-4xl font-bold tracking-tighter tabular-nums">
-                    {billing === "monthly" ? "59 000" : "490 000"} so'm
+                    {billing === "monthly" ? t("pricing.premium.price") : "490 000"} so'm
                   </span>
                   <span className="text-sm font-ui text-text-secondary tracking-wide uppercase">
                     {billing === "monthly" ? t("pricing.premium.period") : t("pricing.premium.periodYearly")}
