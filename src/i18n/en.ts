@@ -142,37 +142,31 @@ const _en = {
       title: "Pricing — Life Order: Premium & Free Plans",
       description: "Life Order pricing: Free forever and Pro plan features. Pick your plan and start your discipline journey now.",
     },
-    title: "Fair pricing.",
-    subtitle: "No hidden fees.",
-    monthly: "Monthly",
-    yearly: "Yearly",
+    heading: "Pricing — simple",
+    subheading: "Try without a card. If you don't like it — no trace stays.",
     free: {
       title: "Free",
-      price: "0",
-      period: "Forever",
-      periodYearly: "Forever",
+      price: "0 UZS",
+      period: "always",
       features: [
-        "Up to 3 habits",
-        "Circadian rhythm (Energy Map)",
-        "Psychological focus tools",
-        "Nadir (5 messages / day)",
-        "PWA — offline mode",
+        "Three daily steps",
+        "Habits and streak",
+        "Chat with Nadir 5×/week",
+        "Basic stats",
       ],
       cta: "Sign up",
     },
     premium: {
       title: "Premium",
-      price: "59 000",
-      period: "per month",
-      periodYearly: "per year",
-      badge: "Most Popular",
+      price: "$4.99",
+      period: "per month · 7-day free trial",
+      badge: "Recommended",
       features: [
-        "Nadir Pro (Unlimited Memory)",
-        "Weekly AI Report",
-        "3 Shields per week",
-        "Burnout Signaling",
-        "Advanced Analytics",
-        "Priority Support",
+        "Unlimited Nadir chat",
+        "Daily AI analysis and plan",
+        "Workout + Diet module",
+        '"Circle" — community and Party',
+        "Leaderboard and achievements",
       ],
       cta: "Upgrade to Premium",
     },
@@ -293,28 +287,28 @@ const _en = {
   faq: {
     items: [
       {
+        q: "What is Life Order Pro and how does it differ from the free plan?",
+        a: "The Free plan includes basic discipline protocols. The Pro plan provides premium tools such as unlimited mentor memory, weekly AI reports, Shield (streak protection), and burnout signaling."
+      },
+      {
         q: "What happens if I lose my streak?",
-        a: "Life Order is based on the principle of 'Forgiving Discipline'. If a streak is lost, we don't punish you, but we recommend restarting. Pro users can use 3 Shields per week to protect their streak."
+        a: "Life Order is based on the principle of 'Forgiving Discipline'. If a streak is lost, we don't punish you, but we recommend restarting the 66-day automation period. Pro users can use 3 Shields per week."
       },
       {
         q: "Is my data safe?",
-        a: "Absolutely. Your data is stored on secure Lovable Cloud (Supabase) servers. We never sell your data to third parties."
+        a: "Absolutely. Your data is stored on secure Supabase (Lovable Cloud) servers. We never sell your data to third parties or use it for advertising."
       },
       {
-        q: "What is limited on the Free plan?",
-        a: "The Free plan is forever free. It includes up to 3 habits, 1 journal entry per day, and 5 messages with Nadir per day."
-      },
-      {
-        q: "What payment methods are available?",
-        a: "Currently, payment via Click and Payme is available for users in Uzbekistan. We are also working on Stripe integration for international cards."
+        q: "How is payment handled?",
+        a: "For users in Uzbekistan, payment is available via Click and Payme in local currency. For international users, Stripe/Paddle systems are being integrated."
       },
       {
         q: "Can I install the app on my phone?",
-        a: "Yes. Life Order is built with PWA technology. You can select 'Add to Home Screen' in your browser menu to use it like an app."
+        a: "Yes. Life Order is built using PWA (Progressive Web App) technology. You can select 'Add to Home Screen' or 'Install' from your browser menu to use it like a regular app."
       },
       {
         q: "Who is Nadir AI and how does it work?",
-        a: "Nadir is an AI mentor based on behavioral psychology. It analyzes your triggers and rhythms, providing honest (sometimes ruthless) advice when you slip up."
+        a: "Nadir is an AI mentor based on behavioral psychology. It analyzes your triggers, circadian rhythms, and daily activity to provide advice in 'soft' or 'ruthless' discipline modes."
       }
     ]
   },
