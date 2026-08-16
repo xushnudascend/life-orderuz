@@ -9,6 +9,8 @@ import { supabase } from "@/integrations/supabase/client";
 export type AnalyticsEvent =
   | "signup"
   | "login"
+  | "signup_click"
+  | "login_click"
   | "onboarding_started"
   | "onboarding_completed"
   | "assessment_started"

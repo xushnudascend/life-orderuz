@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 import { useT } from "@/i18n/use-t";
 import { LanguageSwitcher } from "@/components/language-switcher";
+import { track } from "@/lib/analytics";
 
 type NavLink = { href: string; label: string };
 
@@ -57,13 +58,15 @@ export function SiteHeader({
           <LanguageSwitcher className="hidden sm:inline-flex" />
           <Link 
             to="/auth" 
-            className="hidden sm:block font-ui text-[12px] font-medium text-muted-foreground hover:text-foreground transition-colors"
+            onClick={() => track("login_click")}
+            className="hidden sm:block font-ui text-[12px] font-medium text-text-secondary hover:text-foreground transition-colors"
           >
             {t("auth.signIn")}
           </Link>
           <Button
             asChild
             size="sm"
+            onClick={() => track("signup_click")}
             className="group rounded-full px-4 font-ui font-bold shadow-premium transition-all hover:scale-105 active:scale-[0.98] text-[12px] h-8"
           >
             <Link to="/auth" search={{ mode: "signup" }}>

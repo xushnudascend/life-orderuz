@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
+import { track } from "@/lib/analytics";
 import {
   Accordion,
   AccordionContent,
@@ -226,7 +227,7 @@ function Plans() {
         <div className="grid gap-5 md:grid-cols-2">
           <Plan
             name="Free"
-            price="0 so'm"
+            price={`${pricing.monthly.amount.toLocaleString("uz-UZ")} so'm`}
             tagline="Doimiy · Kartasiz"
             features={[
               `${freeTierLimits.habits} tagacha odat`,
@@ -241,8 +242,8 @@ function Plans() {
           <Plan
             name="Pro"
             highlight
-            price={pricing.monthly.label}
-            tagline={`Yoki ${pricing.yearly.label} · 14 kun qaytarish`}
+            price={`${pricing.monthly.amount.toLocaleString("uz-UZ")} so'm`}
+            tagline={`Yoki ${pricing.yearly.amount.toLocaleString("uz-UZ")} / yil · 14 kun qaytarish`}
             features={[
               "Kutubxona: Barcha ilmiy manbalar",
               "Kurslar: 66 kunlik intizom kursi",
@@ -329,7 +330,7 @@ function Plan({
         variant={highlight ? "default" : "outline"}
         className="mt-8 w-full rounded-full font-ui font-semibold"
       >
-        <Link to="/auth">
+        <Link to="/auth" onClick={() => track("signup_click", { source: "pricing_plan" })}>
           {ctaLabel} <ArrowRight className="ml-1 h-4 w-4" />
         </Link>
       </Button>

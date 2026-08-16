@@ -7,7 +7,8 @@ import { Reveal } from "@/components/reveal";
 import { ScrollProgress } from "@/components/scroll-progress";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
-
+import { track } from "@/lib/analytics";
+import { freeTierLimits } from "@/lib/limits";
 import { useT } from "@/i18n/use-t";
 
 const BRAND = "Life Order";
@@ -112,6 +113,7 @@ function Hero({ t }: { t: any }) {
             <Button
               asChild
               size="lg"
+              onClick={() => track("signup_click", { source: "hero" })}
               className="group relative h-14 rounded-full px-12 font-ui text-base font-bold transition-all hover:scale-105 active:scale-[0.98] shadow-premium bg-primary text-primary-foreground"
             >
               <Link to="/auth">
@@ -293,22 +295,27 @@ function FaqSection({ t }: { t: any }) {
                       type="button"
                       onClick={() => setOpen(isOpen ? null : i)}
                       aria-expanded={isOpen}
-                      className="w-full flex items-center justify-between gap-6 py-8 text-left group"
+                      aria-controls={`faq-content-${i}`}
+                      id={`faq-button-${i}`}
+                      className="w-full flex items-center justify-between gap-6 py-8 text-left group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-lg"
                     >
                       <span className="font-serif text-xl font-bold tracking-tight transition-colors group-hover:text-primary">{it.q}</span>
                       <div className={cn(
                         "flex h-8 w-8 items-center justify-center rounded-full border border-border transition-all",
                         isOpen ? "bg-primary border-primary text-primary-foreground" : "group-hover:border-primary/50"
                       )}>
-                        {isOpen ? <Minus className="h-4 w-4" /> : <Plus className="h-4 w-4" />}
+                        {isOpen ? <Minus className="h-4 w-4" aria-hidden="true" /> : <Plus className="h-4 w-4" aria-hidden="true" />}
                       </div>
                     </button>
                     <div
+                      id={`faq-content-${i}`}
+                      role="region"
+                      aria-labelledby={`faq-button-${i}`}
                       className="grid transition-[grid-template-rows] duration-300 ease-out"
                       style={{ gridTemplateRows: isOpen ? "1fr" : "0fr" }}
                     >
                       <div className="overflow-hidden">
-                        <div className="pb-8 font-ui text-base leading-relaxed text-muted-foreground/85 max-w-xl">{it.a}</div>
+                        <div className="pb-8 font-ui text-base leading-relaxed text-text-secondary max-w-xl">{it.a}</div>
                       </div>
                     </div>
                   </div>
@@ -330,9 +337,11 @@ function PricingSection({ t }: { t: any }) {
       price: "0",
       period: t("brand.monthly"),
       features: [
-        "3 tagacha odat",
-        "Biologik ritm tahlili",
-        "AI mentor (cheklangan)",
+        `${freeTierLimits.habits} tagacha odat`,
+        `Kunlik ${freeTierLimits.journalEntriesPerDay} ta kundalik yozuv`,
+        `Nadir bilan kunda ${freeTierLimits.mentorMessagesPerDay} ta xabar`,
+        "Kunlik 3 ta mikro-vazifa",
+        "Streak, XP va intizom balli",
         "PWA offline rejim"
       ],
       cta: t("auth.signUp"),

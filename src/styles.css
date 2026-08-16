@@ -15,8 +15,8 @@
   --accent-hover: #E5C158;
   --accent-muted: #3A331A;
   --text-primary: #F5F5F0;
-  --text-secondary: #A0A8BD;
-  --text-muted: #5C6478;
+  --text-secondary: #B0B8CC; /* Improved from #A0A8BD for better contrast on #0B1220 (AA 4.5:1 target) */
+  --text-muted: #8E96AA; /* Improved from #5C6478 for better contrast on #0B1220 (AA 3.0:1 for small, aiming higher) */
   --success: #4ADE80;
   --warning: #F5A623;
   --error: #EF5350;
@@ -246,7 +246,7 @@
   /* Standardized opaque surfaces */
   .surface { 
     background: #141B2E; 
-    border: 1px solid hsl(var(--color-border) / 0.7); 
+    border: 1px solid hsl(var(--color-border) / 0.9); 
     border-radius: var(--radius-md); 
   }
   .surface-strong { 
