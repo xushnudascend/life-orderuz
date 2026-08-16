@@ -1,10 +1,10 @@
 @import "tailwindcss";
 
 @theme {
-  --font-serif: "Instrument Serif", serif;
+  --font-serif: "Karla", sans-serif;
   --font-ui: "Karla", sans-serif;
   --font-body: "Karla", sans-serif;
-  --font-display: "Instrument Serif", serif;
+  --font-display: "Karla", sans-serif;
 
   /* Premium Design Tokens */
   --bg-primary: #0B1220;
@@ -93,7 +93,11 @@
   }
   h1, h2, h3, h4, h5, h6 { 
     font-family: var(--font-display); 
+    letter-spacing: -0.015em; 
+    font-weight: 700; 
   }
+  h1 { letter-spacing: -0.04em; font-weight: 700; line-height: 1; }
+  h2 { letter-spacing: -0.03em; font-weight: 700; }
   p { color: var(--color-text-secondary); }
 }
 
