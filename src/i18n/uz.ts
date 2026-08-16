@@ -114,8 +114,9 @@ export const uz = {
     subheading: "Karta shart emas. Istalgan vaqtda to'xtatish mumkin.",
     free: {
       title: "Bepul",
-      price: "0 so'm",
-      period: "har doim",
+      price: "0",
+      period: "Abadiy",
+      periodYearly: "Abadiy",
       features: [
         "3 tagacha odat",
         "Sirkad ritm (Energy Map)",
