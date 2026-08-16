@@ -143,7 +143,7 @@ function BlogIndex() {
           {POSTS.map((p) => (
             <Link
               key={p.slug}
-              to="/blog/hayot-sohalari"
+              to={`/blog/${p.slug}` as any}
               aria-labelledby={`post-title-${p.slug}`}
               className="group rounded-[var(--radius)] border border-border/60 bg-card/40 p-6 transition-all hover:border-primary/40 hover:bg-card/60"
             >
