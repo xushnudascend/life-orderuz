@@ -99,21 +99,21 @@ function JournalPage() {
   return (
     <AppShell title="Kundalik">
       <PageHero
-        eyebrow="Refleksiya"
-        title="Kundalik"
-        subtitle="Bugun o'zing bilan halol gaplash. Faqat sen o'qiysan."
+        eyebrow={t("journal.hero.eyebrow")}
+        title={t("journal.hero.title")}
+        subtitle={t("journal.hero.subtitle")}
       />
 
       <Panel as="section" className="mt-6 p-5">
         <PanelHeader
-          eyebrow="Yangi yozuv"
-          title={<p className="font-serif text-base font-semibold">Bugungi ichki manzarangni yoz</p>}
+          eyebrow={t("journal.add.title")}
+          title={<p className="font-serif text-base font-semibold">{t("journal.add.title")}</p>}
         />
         <form onSubmit={save} className="mt-4 space-y-4">
           <Textarea
             value={content}
             onChange={(e) => setContent(e.target.value)}
-            placeholder="Bugun nima bo'ldi? Nimadan qochding? Nimani boshqara oldingmi?"
+            placeholder={t("journal.add.placeholder")}
             rows={5}
             className="font-ui resize-none"
           />
@@ -137,7 +137,7 @@ function JournalPage() {
               ))}
             </div>
             <Button type="submit" disabled={saving || !content.trim()}>
-              Saqlash
+              {t("journal.add.submit")}
             </Button>
           </div>
         </form>
@@ -151,8 +151,8 @@ function JournalPage() {
         ) : entries.length === 0 ? (
           <EmptyState
             icon={<BookOpen className="h-5 w-5" />}
-            title="Hozircha yozuv yo'q"
-            description="Bugungi kayfiyatingni yoz. Fikrni qog'ozga tushirsang, u ustidan nazorat qo'ling ostiga o'tadi."
+            title={t("journal.empty.title")}
+            description={t("journal.empty.desc")}
           />
         ) : (
           entries.map((e) => {

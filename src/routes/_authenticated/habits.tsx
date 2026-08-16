@@ -186,14 +186,15 @@ function HabitsPage() {
   return (
     <AppShell title="Odatlar">
       <PageHero
-        eyebrow="Kunlik ritm"
-        title="Odatlar"
+        eyebrow={t("habits.hero.eyebrow")}
+        title={t("brand.discipline")}
         subtitle={
           <>
-            Bugun: <span className="text-foreground">{doneCount}</span> / {todayCount} bajarildi.
-            Kichik takror — katta o'zgarish.
+            {t("habits.hero.subtitle")
+              .replace("{done}", doneCount.toString())
+              .replace("{total}", todayCount.toString())}
             <div className="mt-2 text-[10px] uppercase tracking-widest text-muted-foreground opacity-50">
-              Forgiving Streak Active
+              {t("habits.hero.forgiving")}
             </div>
           </>
         }
@@ -201,17 +202,17 @@ function HabitsPage() {
 
       <Panel as="section" className="mt-8">
         <PanelHeader
-          eyebrow="Yangi odat"
+          eyebrow={t("habits.add.quick")}
           title={
             <p className="font-serif text-lg font-semibold">
-              Kichik boshla
+              {t("habits.add.title")}
             </p>
           }
         />
         <form onSubmit={addHabit} className="mt-4 space-y-4">
           <div className="rounded-[var(--radius)] border border-border/60 bg-background/40 p-4 transition-all hover:border-primary/30">
             <Input
-              placeholder="Nima qilasiz? (masalan: 2 daqiqa kitob o'qish)"
+              placeholder={t("habits.add.placeholder")}
               value={newTitle}
               onChange={(e) => setNewTitle(e.target.value)}
               className="font-ui text-sm"
@@ -220,7 +221,7 @@ function HabitsPage() {
 
           <div className="flex flex-wrap items-center gap-2">
             <span className="font-ui text-xs uppercase tracking-[0.2em] text-muted-foreground">
-              Qiyinlik
+              {t("habits.add.difficulty")}
             </span>
             {[1, 2, 3, 4, 5].map((d) => (
               <button
@@ -243,7 +244,7 @@ function HabitsPage() {
           </div>
           <div className="flex flex-wrap items-center gap-2">
             <span className="font-ui text-xs uppercase tracking-[0.2em] text-muted-foreground">
-              Kategoriya
+              {t("habits.add.category")}
             </span>
             {CATEGORIES.map((c) => (
               <button
@@ -263,7 +264,7 @@ function HabitsPage() {
           </div>
           <div className="flex flex-wrap items-center gap-2">
             <span className="font-ui text-xs uppercase tracking-[0.2em] text-muted-foreground">
-              Tez tanlash
+              {t("habits.add.quick")}
             </span>
             {QUICK_PICKS.map((q) => (
               <button
@@ -278,7 +279,7 @@ function HabitsPage() {
           </div>
           <div className="pt-1">
             <Button type="submit" disabled={saving || !newTitle.trim()}>
-              <Plus className="mr-1 h-4 w-4" /> Qo'shish
+              <Plus className="mr-1 h-4 w-4" /> {t("habits.add.submit")}
             </Button>
           </div>
         </form>
@@ -292,8 +293,8 @@ function HabitsPage() {
         ) : habits.length === 0 ? (
           <EmptyState
             icon={<Flame className="h-5 w-5" />}
-            title="Hali odat qo'shilmagan"
-            description="Kichkina va aniq bir odatdan boshla — masalan '2 daqiqa nafas mashqi'. Kichik boshlanish uzoq davom etadi."
+            title={t("habits.empty.title")}
+            description={t("habits.empty.desc")}
           />
         ) : (
           CATEGORIES.map((cat) =>
