@@ -135,7 +135,7 @@ const _en = {
         '"Circle" — community and Party',
         "Leaderboard and achievements",
       ],
-      cta: "Start 7 days free",
+      cta: "Upgrade to Premium",
     },
   },
   cta: {
