@@ -7,7 +7,8 @@ import { Reveal } from "@/components/reveal";
 import { ScrollProgress } from "@/components/scroll-progress";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
-
+import { track } from "@/lib/analytics";
+import { freeTierLimits } from "@/lib/limits";
 import { useT } from "@/i18n/use-t";
 
 const BRAND = "Life Order";
