@@ -7,9 +7,10 @@ import { track } from "@/lib/analytics";
 type NavLink = { href: string; label: string };
 
 const DEFAULT_NAV: NavLink[] = [
+  { href: "/", label: "brand.home" },
   { href: "/#features", label: "brand.features" },
   { href: "/pricing", label: "brand.pricing" },
-  { href: "/blog", label: "brand.blog" },
+  { href: "/blog/hayot-sohalari", label: "brand.blog" },
   { href: "/#faq", label: "brand.faq" },
 ];
 
