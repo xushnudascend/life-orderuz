@@ -5,6 +5,10 @@
 export const uz = {
   brand: {
     name: "Life Order",
+    features: "Imkoniyatlar",
+    pricing: "Narxlar",
+    blog: "Blog",
+    faq: "Savollar",
     tagline: "Motivatsiya tugaydi, tizim qoladi.",
     oneLiner:
       "Self-Control OS — Hayotingizni intizomga soluvchi yaxlit tizim. 3 daqiqada tashxis, kunlik 3 qadam va shafqatsiz AI mentor.",

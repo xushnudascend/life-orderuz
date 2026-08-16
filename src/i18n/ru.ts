@@ -6,6 +6,10 @@ import type { Dict } from "./uz";
 const _ru = {
   brand: {
     name: "Life Order",
+    features: "Возможности",
+    pricing: "Цены",
+    blog: "Блог",
+    faq: "Вопросы",
     tagline: "Мотивация проходит, система остается.",
     oneLiner:
       "Self-Control OS — ОС для управления собой. Диагноз за 3 минуты, 3 шага в день и честный ИИ-ментор Надир.",
