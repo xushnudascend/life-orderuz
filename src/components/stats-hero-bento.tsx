@@ -6,7 +6,7 @@ import { ShieldIndicator } from "@/components/shield-indicator";
 import { CornerOrnament } from "@/components/corner-ornament";
 import { CountUpNumber } from "@/components/count-up-number";
 import { ArchetypeRow } from "@/components/archetype-row";
-import { Tilt } from "@/components/tilt";
+
 import { progressMessage, type Archetype } from "@/lib/nervous";
 import { useT } from "@/i18n/use-t";
 import { tierFromScore } from "@/lib/nervous";

@@ -229,6 +229,8 @@ function Onboarding() {
                 {ahaNudge}
               </div>
             )}
+            
+            <SocialMirror />
             <div className="mt-8">
               <FirstTaskCard answers={answers} />
             </div>
@@ -425,8 +427,8 @@ function OptionList({
             onClick={() => (isMulti ? onToggleMulti(opt.value) : onChange(opt.value))}
             className={
               selected
-                ? "flex w-full items-center justify-between rounded-[var(--radius)] border-2 border-primary bg-primary/5 px-5 py-4 text-left font-ui text-sm transition-all"
-                : "lift flex w-full items-center justify-between rounded-[var(--radius)] border border-border bg-card px-5 py-4 text-left font-ui text-sm transition-colors hover:border-foreground/30"
+                ? "flex w-full items-center justify-between rounded-[var(--radius-md)] border-2 border-primary bg-primary/5 px-5 py-4 text-left font-ui text-sm transition-all"
+                : "lift flex w-full items-center justify-between rounded-[var(--radius-md)] border border-border bg-card px-5 py-4 text-left font-ui text-sm transition-colors hover:border-foreground/30"
             }
           >
             <span className={selected ? "text-foreground" : "text-foreground/90"}>{opt.label}</span>
@@ -509,7 +511,7 @@ function FinalPage({
         </p>
       </div>
 
-      <div className="divide-y divide-border/40 overflow-hidden rounded-[var(--radius)] border border-border/60 bg-card/30">
+      <div className="divide-y divide-border/40 overflow-hidden rounded-[var(--radius-md)] border border-border/60 bg-card/30">
         {questions.map((q) => {
           const isOpen = openKey === q.key;
           const answered = summary(q) !== "—";
@@ -645,8 +647,8 @@ function FinalPage({
                           }}
                           className={
                             selected
-                              ? "rounded-[var(--radius)] border-2 border-primary bg-primary/5 p-4 text-left"
-                              : "lift rounded-[var(--radius)] border border-border bg-card p-4 text-left"
+                              ? "rounded-[var(--radius-md)] border-2 border-primary bg-primary/5 p-4 text-left"
+                              : "lift rounded-[var(--radius-md)] border border-border bg-card p-4 text-left"
                           }
                         >
                           <span className="font-ui text-[10px] uppercase tracking-[0.22em] text-primary">
@@ -688,7 +690,7 @@ function SocialMirror() {
   return (
     <div className="mt-8 relative">
       <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 to-transparent blur-lg opacity-50" />
-      <div className="relative rounded-[var(--radius)] border border-border/60 bg-background/60 p-5 backdrop-blur-sm">
+      <div className="relative rounded-[var(--radius-md)] border border-border/60 bg-background/60 p-5 backdrop-blur-sm">
         <div className="flex items-center gap-2 mb-3">
           <div className="flex -space-x-2">
             {[1, 2, 3].map(i => (
