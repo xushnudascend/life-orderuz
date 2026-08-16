@@ -5,6 +5,16 @@ export const Route = createFileRoute("/api/public/telegram/webhook")({
   server: {
     handlers: {
       POST: async ({ request }) => {
+        // Fix 2: Verify Telegram Bot API Secret Token
+        const secretToken = request.headers.get("x-telegram-bot-api-secret-token");
+        const expectedToken = process.env.TELEGRAM_WEBHOOK_SECRET;
+
+        if (!expectedToken || secretToken !== expectedToken) {
+          // Note: In production, constant-time comparison is preferred. 
+          // But since this is a shared secret via env, we enforce its presence.
+          return new Response("Unauthorized", { status: 401 });
+        }
+
         const body = await request.json();
         const { message, callback_query } = body;
 
