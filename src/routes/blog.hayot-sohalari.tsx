@@ -52,7 +52,7 @@ const AREAS: { n: string; title: string; body: string }[] = [
 export const Route = createFileRoute("/blog/hayot-sohalari")({
   head: () => ({
     meta: [
-      { title: `${TITLE} · Life Order` },
+      { title: TITLE },
       { name: "description", content: DESCRIPTION },
       { property: "og:title", content: TITLE },
       { property: "og:description", content: DESCRIPTION },

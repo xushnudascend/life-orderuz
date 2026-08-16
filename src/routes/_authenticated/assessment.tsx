@@ -18,7 +18,7 @@ import { submitAssessment } from "@/lib/assessment.functions";
 export const Route = createFileRoute("/_authenticated/assessment")({
   head: () => ({
     meta: [
-      { title: "Human Potential Assessment — Life Order" },
+      { title: "Psixologik test — Life Order" },
       {
         name: "description",
         content:

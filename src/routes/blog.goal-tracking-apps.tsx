@@ -39,7 +39,7 @@ const rows = [
 export const Route = createFileRoute("/blog/goal-tracking-apps")({
   head: () => ({
     meta: [
-      { title: `${TITLE} · Life Order` },
+      { title: TITLE },
       { name: "description", content: DESCRIPTION },
       { property: "og:title", content: TITLE },
       { property: "og:description", content: DESCRIPTION },

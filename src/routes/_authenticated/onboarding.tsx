@@ -17,7 +17,7 @@ import {
 
 export const Route = createFileRoute("/_authenticated/onboarding")({
   head: () => ({
-    meta: [{ title: "Onboarding — Life Order" }, { name: "robots", content: "noindex" }],
+    meta: [{ title: "Tashxis — Life Order" }, { name: "robots", content: "noindex" }],
   }),
   component: Onboarding,
 });

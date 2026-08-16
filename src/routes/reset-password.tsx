@@ -11,7 +11,7 @@ import { uz } from "@/i18n";
 export const Route = createFileRoute("/reset-password")({
   head: () => ({
     meta: [
-      { title: `Parolni tiklash — ${uz.brand.name}` },
+      { title: `Parolni tiklash — Life Order` },
       { name: "description", content: "Life Order — hisob parolini tiklash" },
       { name: "robots", content: "noindex, nofollow" },
     ],

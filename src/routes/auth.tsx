@@ -27,7 +27,7 @@ export const Route = createFileRoute("/auth")({
   },
   head: () => ({
     meta: [
-      { title: `Kirish — ${uz.brand.name}` },
+      { title: `Kirish — Life Order` },
       {
         name: "description",
         content:
@@ -35,7 +35,7 @@ export const Route = createFileRoute("/auth")({
       },
       {
         property: "og:title",
-        content: `Kirish — ${uz.brand.name}`,
+        content: `Kirish — Life Order`,
       },
       {
         property: "og:description",

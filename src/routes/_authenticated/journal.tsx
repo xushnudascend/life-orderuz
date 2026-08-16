@@ -18,7 +18,7 @@ export const Route = createFileRoute("/_authenticated/journal")({
     url: typeof search.url === "string" ? search.url : undefined,
   }),
   head: () => ({
-    meta: [{ title: `Kundalik — ${uz.brand.name}` }, { name: "robots", content: "noindex" }],
+    meta: [{ title: `Kundalik — Life Order` }, { name: "robots", content: "noindex" }],
   }),
   component: JournalPage,
 });

@@ -14,7 +14,7 @@ import { xpFromDifficulty } from "@/lib/nervous";
 
 export const Route = createFileRoute("/_authenticated/habits")({
   head: () => ({
-    meta: [{ title: `Odatlar — ${uz.brand.name}` }, { name: "robots", content: "noindex" }],
+    meta: [{ title: `Odatlar — Life Order` }, { name: "robots", content: "noindex" }],
   }),
   component: HabitsPage,
 });

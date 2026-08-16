@@ -42,9 +42,9 @@ export const Route = createFileRoute("/u/$username")({
     const desc = `@${params.username} — Life Order ochiq profili: intizom balli, streak, XP darajasi va yutuqlar. Self-Control OS jamoasidagi shaxsiy natijalar.`;
     return {
       meta: [
-        { title: `@${params.username} — ${uz.brand.name}` },
+        { title: `@${params.username} — Life Order` },
         { name: "description", content: desc },
-        { property: "og:title", content: `@${params.username} — ${uz.brand.name}` },
+        { property: "og:title", content: `@${params.username} — Life Order` },
         { property: "og:description", content: desc },
         { property: "og:url", content: `https://life-orderuz.lovable.app/u/${params.username}` },
         { property: "og:image", content: "https://life-orderuz.lovable.app/og/user-profile.jpg" },
