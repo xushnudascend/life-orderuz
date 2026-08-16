@@ -32,7 +32,7 @@ import { Shimmer } from "@/components/ai-elements/shimmer";
 
 export const Route = createFileRoute("/_authenticated/mentor")({
   head: () => ({
-    meta: [{ title: `Nadir — ${uz.brand.name}` }, { name: "robots", content: "noindex" }],
+    meta: [{ title: `Nadir AI — Life Order` }, { name: "robots", content: "noindex" }],
   }),
   component: MentorPage,
 });
