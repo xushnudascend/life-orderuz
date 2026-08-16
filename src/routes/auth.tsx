@@ -9,6 +9,7 @@ import { Label } from "@/components/ui/label";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { ArrowLeft, Eye, EyeOff, Loader2, ShieldCheck } from "lucide-react";
 import { uz } from "@/i18n";
+import { useT } from "@/i18n/use-t";
 
 import { track } from "@/lib/analytics";
 
@@ -56,6 +57,7 @@ export const Route = createFileRoute("/auth")({
 
 function AuthPage() {
   const search = Route.useSearch();
+  const { t } = useT();
   const next = search.next ?? "/dashboard";
   const [tab, setTab] = useState<"signin" | "signup">("signup");
   const navigate = useNavigate();
@@ -102,11 +104,10 @@ function AuthPage() {
             <ShieldCheck className="h-8 w-8" strokeWidth={2.2} />
           </div>
           <h1 className="font-serif text-[36px] leading-[0.9] tracking-tighter md:text-[44px]">
-            Tizimga kirish
+            {t("auth.title")}
           </h1>
           <p className="mt-6 font-ui text-[17px] leading-relaxed text-muted-foreground/75 text-pretty max-w-sm mx-auto">
-            Bank darajasidagi shifrlash (AES-256) va TLS 1.3 himoyasi bilan 
-            shaxsiy ma'lumotlaringiz xavfsizligi kafolatlanadi.
+            {t("auth.subtitle")}
           </p>
         </div>
 
@@ -115,7 +116,7 @@ function AuthPage() {
           style={{ animationDelay: "80ms" }}
         >
           <div className="space-y-3">
-            <OAuthButton provider="google" label="Google bilan davom etish" next={next} />
+            <OAuthButton provider="google" label={t("auth.google")} next={next} />
             <div className="grid grid-cols-2 gap-3">
               <OAuthButton provider="apple" label="Apple" next={next} />
               <OAuthButton provider="microsoft" label="Microsoft" next={next} />
@@ -128,15 +129,15 @@ function AuthPage() {
             </div>
             <div className="relative flex justify-center">
               <span className="bg-card px-3 font-ui text-xs uppercase tracking-[0.2em] text-muted-foreground">
-                yoki email
+                {t("auth.or")}
               </span>
             </div>
           </div>
 
           <Tabs value={tab} onValueChange={(v) => setTab(v as "signin" | "signup")}>
             <TabsList className="grid w-full grid-cols-2 font-ui">
-              <TabsTrigger value="signup">Ro'yxatdan o'tish</TabsTrigger>
-              <TabsTrigger value="signin">Kirish</TabsTrigger>
+              <TabsTrigger value="signup">{t("auth.signUp")}</TabsTrigger>
+              <TabsTrigger value="signin">{t("auth.signIn")}</TabsTrigger>
             </TabsList>
             <TabsContent value="signup" className="pt-6">
               <EmailForm mode="signup" next={next} />
@@ -152,7 +153,7 @@ function AuthPage() {
           className="group mx-auto mt-6 inline-flex items-center gap-2 rounded-full border border-border/70 px-3.5 py-1.5 font-ui text-[11px] text-muted-foreground transition-colors hover:border-primary/40 hover:text-foreground"
         >
           <ShieldCheck className="h-3.5 w-3.5 text-primary" />
-          Maxfiylik va xavfsizlik
+          {t("auth.privacy")}
         </Link>
       </div>
     </div>
@@ -160,6 +161,7 @@ function AuthPage() {
 }
 
 function EmailForm({ mode, next }: { mode: "signin" | "signup"; next: string }) {
+  const { t } = useT();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -221,7 +223,7 @@ function EmailForm({ mode, next }: { mode: "signin" | "signup"; next: string }) 
       <div className="space-y-1.5">
         <div className="flex items-center justify-between">
           <Label htmlFor="password">Parol</Label>
-          {mode === "signin" && <ForgotPasswordLink email={email} />}
+          {mode === "signin" && <ForgotPasswordLink email={email} t={t} />}
         </div>
         <div className="relative">
           <Input
@@ -265,13 +267,13 @@ function EmailForm({ mode, next }: { mode: "signin" | "signup"; next: string }) 
       </div>
       <Button type="submit" className="w-full font-ui font-semibold" disabled={loading}>
         {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-        {mode === "signup" ? "Hisob yaratish" : "Kirish"}
+        {mode === "signup" ? t("auth.signUp") : t("auth.signIn")}
       </Button>
     </form>
   );
 }
 
-function ForgotPasswordLink({ email }: { email: string }) {
+function ForgotPasswordLink({ email, t }: { email: string; t: any }) {
   const [busy, setBusy] = useState(false);
   async function send() {
     if (busy) return;
@@ -300,7 +302,7 @@ function ForgotPasswordLink({ email }: { email: string }) {
       disabled={busy}
       className="font-ui text-[11px] uppercase tracking-[0.18em] text-muted-foreground hover:text-primary disabled:opacity-50"
     >
-      {busy ? "Yuborilmoqda..." : "Parolni unutdim"}
+      {busy ? "..." : t("auth.forgot")}
     </button>
   );
 }

@@ -8,6 +8,8 @@ import { ScrollProgress } from "@/components/scroll-progress";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 
+import { useT } from "@/i18n/use-t";
+
 const BRAND = "Life Order";
 const SITE_URL = "https://life-orderuz.lovable.app";
 const CANONICAL_URL = "https://life-orderuz.lovable.app/";
@@ -54,23 +56,24 @@ export const Route = createFileRoute("/")({
 });
 
 function Landing() {
+  const { t } = useT();
   return (
     <div className="min-h-dvh bg-background text-foreground selection:bg-primary/20">
       <ScrollProgress />
       <SiteHeader />
       <main id="main-content">
-        <Hero />
-        <Features />
-        <HowItWorks />
-        <FaqSection />
-        <FinalCta />
+        <Hero t={t} />
+        <Features t={t} />
+        <HowItWorks t={t} />
+        <FaqSection t={t} />
+        <FinalCta t={t} />
       </main>
       <SiteFooter />
     </div>
   );
 }
 
-function Hero() {
+function Hero({ t }: { t: any }) {
   return (
     <section className="relative flex min-h-dvh flex-col items-center justify-center overflow-hidden border-b border-border bg-background">
       {/* Premium 3D Orb Backgrounds */}
@@ -87,17 +90,16 @@ function Hero() {
 
         <Reveal delay={250}>
           <h1 className="font-serif text-[48px] leading-[0.9] tracking-tighter text-balance sm:text-[72px] md:text-[84px] lg:text-[104px] text-text-primary">
-            Motivatsiya tugaydi,<br />
+            {t("hero.title").split(".")[0]}.<br />
             <span className="text-primary italic">
-              Tizim qoladi.
+              {t("hero.title").split(".")[1] || ""}
             </span>
           </h1>
         </Reveal>
 
         <Reveal delay={400}>
           <p className="mx-auto mt-10 max-w-2xl font-ui text-xl leading-relaxed text-text-secondary md:text-2xl">
-            Biologik ritm va psixologiyaga asoslangan,<br className="hidden md:block" />
-            hayotingizni tartibga soluvchi premium tizim.
+            {t("hero.subtitle")}
           </p>
         </Reveal>
 
@@ -109,7 +111,7 @@ function Hero() {
               className="group relative h-14 rounded-full px-10 font-ui text-base font-bold transition-all hover:scale-105 active:scale-[0.98] shadow-premium bg-primary text-primary-foreground"
             >
               <Link to="/auth">
-                Boshlash
+                {t("hero.ctaPrimary")}
                 <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1.5" />
               </Link>
             </Button>
@@ -118,7 +120,7 @@ function Hero() {
               size="lg"
               className="h-14 rounded-full px-10 font-ui text-base font-bold border-border bg-transparent hover:bg-muted/30 transition-all active:scale-[0.98]"
             >
-              <Link to="/pricing">Narxlar</Link>
+              <Link to="/pricing">{t("nav.pricing")}</Link>
             </Button>
           </div>
         </Reveal>
@@ -138,13 +140,12 @@ function Hero() {
   );
 }
 
-function Features() {
+function Features({ t }: { t: any }) {
   const items = [
     { 
       n: "01", 
-      t: "AI Mentor", 
-      d: "Progressingizni tahlil qiladi va shaxsiy tavsiyalar beradi. O'zlik o'zgarishiga yordam beruvchi aqlli yordamchi." 
-
+      t: t("dashboard.quick.quests"), 
+      d: t("dashboard.habits.emptyDesc") 
     },
     { 
       n: "02", 
@@ -153,9 +154,8 @@ function Features() {
     },
     { 
       n: "03", 
-      t: "Aniq reja", 
-      d: "Kunlik uchta eng muhim vazifa. Ortiqcha charchoqsiz, faqat natija beruvchi qadamlar." 
-
+      t: t("dashboard.sections.timetable"), 
+      d: t("dashboard.habits.emptyDesc") 
     },
   ];
 
@@ -182,11 +182,11 @@ function Features() {
 }
 
 
-function HowItWorks() {
+function HowItWorks({ t }: { t: any }) {
   const steps = [
-    { n: "01", t: "Savollarga javob bering", d: "Hozirgi holatingizni 60 soniyada aniqlaymiz." },
-    { n: "02", t: "Shaxsiy reja oling", d: "Har kunlik 3 ta eng muhim vazifa tuziladi." },
-    { n: "03", t: "Natijani ko'ring", d: "Har bir qadam bilan intizomingizni kuchaytiring." },
+    { n: "01", t: t("onboarding.questions.goal"), d: t("onboarding.subtitle") },
+    { n: "02", t: t("dashboard.habits.emptyCta"), d: t("dashboard.habits.emptyDesc") },
+    { n: "03", t: t("dashboard.hero.plan"), d: t("dashboard.hero.discipline") },
   ];
 
   return (
@@ -200,8 +200,7 @@ function HowItWorks() {
                 Amaliyot
               </div>
               <h2 className="font-serif text-[44px] leading-[1.05] tracking-tighter mb-8 sm:text-[56px]">
-                Motivatsiyani emas, <br/>
-                <span className="italic opacity-80">hayotingizni boshqaring.</span>
+                {t("hero.title")}
               </h2>
             </Reveal>
             <div className="space-y-10 mt-12">
@@ -253,11 +252,11 @@ function HowItWorks() {
   );
 }
 
-function FaqSection() {
+function FaqSection({ t }: { t: any }) {
   const items = [
-    { q: "Life Order nima?", a: "O'z-o'zini boshqarish tizimi. Har kuni uchta aniq qadam va AI mentor." },
-    { q: "Bepulmi?", a: "Ha. Bepul reja cheksiz ishlaydi va karta so'ralmaydi." },
-    { q: "Qancha vaqt kerak?", a: "Kuniga 10–15 daqiqa yetarli." },
+    { q: t("brand.name") + " nima?", a: t("brand.oneLiner") },
+    { q: t("pricing.free.title") + "mi?", a: t("pricing.free.price") + " - " + t("pricing.free.period") },
+    { q: t("dashboard.sections.timetable") + "?", a: t("hero.subtitle") },
   ];
   const [open, setOpen] = useState<number | null>(0);
 
@@ -318,21 +317,19 @@ function FaqSection() {
 }
 
 
-function FinalCta() {
+function FinalCta({ t }: { t: any }) {
   return (
     <section className="relative py-24 md:py-48 overflow-hidden">
       <div className="absolute inset-0 bg-primary/[0.02] pointer-events-none" />
       <div className="mx-auto max-w-6xl px-6 md:px-8 text-center">
         <Reveal>
           <h2 className="font-serif text-[56px] leading-[1] tracking-tighter mb-10 sm:text-[80px] md:text-[100px] text-balance">
-            Ertadan emas,<br/>
-            <span className="text-primary italic">hozirdan.</span>
+            {t("cta.heading")}
           </h2>
         </Reveal>
         <Reveal delay={200}>
           <p className="mx-auto mt-6 mb-14 max-w-xl font-ui text-lg text-muted-foreground/80">
-            Intizom — bu o'zingga bergan va'dangni bajarish. <br className="hidden md:block"/>
-            Life Order bilan buni osonlashtir.
+            {t("cta.body")}
           </p>
           <div className="flex flex-col items-center justify-center gap-6 sm:flex-row">
             <Button
@@ -341,7 +338,7 @@ function FinalCta() {
               className="group h-16 rounded-full px-12 font-ui text-lg font-bold transition-all hover:scale-105 active:scale-[0.98] shadow-premium bg-primary text-primary-foreground"
             >
               <Link to="/auth">
-                Bepul boshlash
+                {t("cta.button")}
                 <ArrowRight className="ml-2.5 h-6 w-6 transition-transform group-hover:translate-x-1.5" />
               </Link>
             </Button>

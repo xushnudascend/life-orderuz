@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
-import { uz } from "@/i18n";
+import { useT } from "@/i18n/use-t";
 import { LanguageSwitcher } from "@/components/language-switcher";
 
 type NavLink = { href: string; label: string };
@@ -18,6 +18,7 @@ export function SiteHeader({
   nav?: NavLink[];
   cta?: { label: string; to: string };
 }) {
+  const { t } = useT();
   return (
     <header className="sticky top-0 z-40 h-16 border-b border-border/70 bg-background/80 backdrop-blur-xl">
       {/* amber hairline — subtle authority signal */}
@@ -33,7 +34,7 @@ export function SiteHeader({
           >
             <span className="font-serif text-[15px] font-semibold leading-none">L</span>
           </span>
-          <span className="font-serif text-[17px] font-bold tracking-tight">{uz.brand.name}</span>
+          <span className="font-serif text-[17px] font-bold tracking-tight">{t("brand.name")}</span>
         </Link>
         <nav className="hidden items-center gap-7 md:flex font-ui text-[13px] text-muted-foreground">
           {nav.map((l) => (
@@ -58,7 +59,7 @@ export function SiteHeader({
             className="group rounded-full font-ui font-semibold shadow-[0_0_0_1px_hsl(var(--primary)/0.4),0_8px_24px_-12px_hsl(var(--primary)/0.55)] transition-shadow hover:shadow-[0_0_0_1px_hsl(var(--primary)/0.6),0_12px_32px_-10px_hsl(var(--primary)/0.75)]"
           >
             <Link to={cta.to}>
-              {cta.label}
+              {cta.label === "Boshlash" ? t("hero.ctaPrimary") : cta.label}
               <span aria-hidden className="cta-arrow ml-1 inline-block">
                 →
               </span>

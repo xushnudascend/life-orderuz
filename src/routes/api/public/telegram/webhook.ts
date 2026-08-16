@@ -12,7 +12,7 @@ export const Route = createFileRoute("/api/public/telegram/webhook")({
         if (!expectedToken || secretToken !== expectedToken) {
           // Note: In production, constant-time comparison is preferred. 
           // But since this is a shared secret via env, we enforce its presence.
-          return new Response("Unauthorized", { status: 401 });
+          return new Response("Ruxsat berilmagan", { status: 401 });
         }
 
         const body = await request.json();
@@ -34,7 +34,7 @@ export const Route = createFileRoute("/api/public/telegram/webhook")({
             // Optional: send a welcome message back to the user via Telegram Bot API
             return Response.json({ status: "ok", linked: true });
           } else {
-            return Response.json({ status: "error", message: "Invalid or expired token" });
+            return Response.json({ status: "error", message: "Token yaroqsiz yoki muddati o'tgan" });
           }
         }
 

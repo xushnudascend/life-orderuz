@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { ArrowLeft, ArrowRight, Check, Loader2, Sparkles, Target } from "lucide-react";
+import { useT } from "@/i18n/use-t";
 import {
   ONBOARDING_QUESTIONS,
   bmiLabel,
@@ -32,6 +33,7 @@ type Answers = Record<string, AnswerValue>;
 
 function Onboarding() {
   const { userId } = Route.useRouteContext();
+  const { t } = useT();
   const navigate = useNavigate();
 
   // Ketma-ketlik: avval B bo'lim (naqsh) — barcha savollar alohida qadamlarda.
@@ -209,17 +211,17 @@ function Onboarding() {
           <div className="animate-fade-in-up rounded-[32px] border border-border/40 bg-secondary p-8 md:p-12 shadow-premium backdrop-blur-4xl">
             <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-1.5 font-ui text-[11px] font-bold uppercase tracking-[0.2em] text-primary shadow-[0_0_20px_hsl(var(--primary)/0.2)]">
               <Sparkles className="h-4 w-4" />
-              Tashxis yakunlandi
+              {t("onboarding.finish")}
             </div>
             <h1 className="mb-4 font-serif text-[36px] leading-[0.95] tracking-tighter sm:text-[48px]">
-              Protokol tayyor.
+              {t("brand.oneLiner").split(".")[0]}.
             </h1>
             <p className="mb-8 text-lg text-muted-foreground/80 font-ui leading-relaxed">
               Biologik ritming va triggerlaring tahlil qilindi. Nadir AI sening xulq-atvor arxitekturangni quyidagicha shakllantirdi:
             </p>
             {archetypeName && (
               <p className="mb-6 font-ui text-[10px] font-bold uppercase tracking-[0.3em] text-primary/80">
-                Arxetip · {archetypeName.replace('_', ' ')}
+                {t("brand.disciplineScore")} · {archetypeName.replace('_', ' ')}
               </p>
             )}
             {ahaNudge && (
@@ -236,7 +238,7 @@ function Onboarding() {
               size="lg"
               onClick={() => navigate({ to: "/dashboard" })}
             >
-              Protokolni boshlash
+              {t("onboarding.start")}
               <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
           </div>
@@ -318,7 +320,7 @@ function Onboarding() {
             disabled={step === 0 || saving}
           >
             <ArrowLeft className="mr-1.5 h-4 w-4" />
-            Orqaga
+            {t("onboarding.back")}
           </Button>
 
           <Button
@@ -328,7 +330,7 @@ function Onboarding() {
             disabled={!canAdvance || saving}
           >
             {saving && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-            {isFinalStep ? "Yo'lni tuzish" : "Davom etish"}
+            {isFinalStep ? t("onboarding.finish") : t("onboarding.next")}
             {!isFinalStep && (
               <ArrowRight className="ml-1.5 h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" />
             )}
