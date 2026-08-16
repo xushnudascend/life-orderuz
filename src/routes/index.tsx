@@ -547,16 +547,18 @@ function PricingSection({ t }: { t: any }) {
 
 function FinalCta({ t }: { t: any }) {
   return (
-    <section className="relative py-24 md:py-48 overflow-hidden">
+    <section className="relative py-24 md:py-48 overflow-hidden border-t border-border bg-card/20">
       <div className="absolute inset-0 bg-primary/[0.02] pointer-events-none" />
-      <div className="mx-auto max-w-6xl px-6 md:px-8 text-center">
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[100px] pointer-events-none" />
+      
+      <div className="mx-auto max-w-6xl px-6 md:px-8 text-center relative z-10">
         <Reveal>
-          <h2 className="font-serif text-[56px] leading-[1] tracking-tighter mb-10 sm:text-[80px] md:text-[100px] text-balance">
+          <h2 className="font-serif text-[56px] leading-[0.95] tracking-tighter mb-10 sm:text-[80px] md:text-[100px] text-balance">
             {t("cta.heading")}
           </h2>
         </Reveal>
         <Reveal delay={200}>
-          <p className="mx-auto mt-6 mb-14 max-w-xl font-ui text-lg text-muted-foreground/80">
+          <p className="mx-auto mt-6 mb-14 max-w-xl font-ui text-lg text-muted-foreground/80 md:text-xl">
             {t("cta.body")}
           </p>
           <div className="flex flex-col items-center justify-center gap-6 sm:flex-row">
