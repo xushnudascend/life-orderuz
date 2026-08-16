@@ -218,7 +218,7 @@ function Onboarding() {
               {t("brand.oneLiner").split(".")[0]}.
             </h1>
             <p className="mb-8 text-lg text-muted-foreground/80 font-ui leading-relaxed">
-              Biologik ritming va triggerlaring tahlil qilindi. Nadir AI sening xulq-atvor arxitekturangni quyidagicha shakllantirdi:
+              {t("onboarding.messages.ahaNote")}
             </p>
             {archetypeName && (
               <p className="mb-6 font-ui text-[10px] font-bold uppercase tracking-[0.3em] text-primary/80">
@@ -231,9 +231,9 @@ function Onboarding() {
               </div>
             )}
             
-            <SocialMirror />
+            <SocialMirror t={t} />
             <div className="mt-8">
-              <FirstTaskCard answers={answers} />
+              <FirstTaskCard answers={answers} t={t} />
             </div>
             
             <Button
@@ -311,6 +311,7 @@ function Onboarding() {
               bmi={bmi}
               plan={plan}
               onPlanChange={setPlan}
+              t={t}
             />
           )}
         </div>
@@ -476,6 +477,7 @@ function FinalPage({
   bmi: number | null;
   plan: 7 | 30 | null;
   onPlanChange: (p: 7 | 30) => void;
+  t: any;
 }) {
   // Har bir savol yig'ilib turadi — ustiga bossa ochiladi.
   // Boshida — birinchi javob berilmagan savol avtomatik ochiladi.
@@ -671,7 +673,7 @@ function FinalPage({
   );
 }
 
-function SocialMirror() {
+function SocialMirror({ t }: { t: any }) {
   const [data, setData] = useState<{ sameArchetype: number; samePlan: number } | null>(null);
   useEffect(() => {
     let cancelled = false;
@@ -717,7 +719,7 @@ function SocialMirror() {
   );
 }
 
-function FirstTaskCard({ answers }: { answers: Answers }) {
+function FirstTaskCard({ answers, t }: { answers: Answers; t: any }) {
   const task = useMemo(() => firstTaskFromAnswers(answers), [answers]);
   return (
     <div className="mt-6 rounded-2xl border border-primary/20 bg-primary/5 p-6 shadow-[inset_0_0_20px_rgba(45,212,191,0.05)]">
