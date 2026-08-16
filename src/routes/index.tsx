@@ -362,6 +362,9 @@ function PricingSection({ t }: { t: any }) {
     }
   ];
 
+  const freeFeatures = Array.isArray(t("pricing.free.features")) ? (t("pricing.free.features") as string[]) : plans[0].features;
+  const premiumFeatures = Array.isArray(t("pricing.premium.features")) ? (t("pricing.premium.features") as string[]) : plans[1].features;
+
   return (
     <section id="pricing" className="relative py-24 md:py-40 bg-muted/5 border-b border-border overflow-hidden">
       <div className="mx-auto max-w-6xl px-6 md:px-8">
@@ -388,7 +391,7 @@ function PricingSection({ t }: { t: any }) {
                 </div>
               </div>
               <ul className="mb-10 space-y-4">
-                {Array.isArray(t("pricing.free.features")) && (t("pricing.free.features") as string[]).map((feat: string) => (
+                {freeFeatures.map((feat: string) => (
                   <li key={feat} className="flex items-start gap-3 text-sm font-ui text-muted-foreground/90">
                     <Check className="h-4 w-4 text-primary shrink-0 mt-0.5" />
                     <span>{feat}</span>
@@ -415,7 +418,7 @@ function PricingSection({ t }: { t: any }) {
                 </div>
               </div>
               <ul className="mb-10 space-y-4">
-                {Array.isArray(t("pricing.premium.features")) && (t("pricing.premium.features") as string[]).map((feat: string) => (
+                {premiumFeatures.map((feat: string) => (
                   <li key={feat} className="flex items-start gap-3 text-sm font-ui text-muted-foreground/90">
                     <Check className="h-4 w-4 text-primary shrink-0 mt-0.5" />
                     <span>{feat}</span>
