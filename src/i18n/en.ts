@@ -86,13 +86,13 @@ const _en = {
     startFree: "Start free",
   },
   hero: {
-    eyebrow: "Beta · No card",
+    eyebrow: "Self-Control OS",
     title: "Motivation ends. The system remains.",
     subtitle:
-      "Failing to control yourself isn't a flaw — it's a missing OS. Life Order turns your daily chaos into three clear steps.",
-    ctaPrimary: "Get the 60-second diagnosis",
-    ctaSecondary: "See the method",
-    trustLine: "No card · Uzbek-first · PWA — installs to phone",
+      "You don't lack willpower to order your life — you lack an operating system (OS). Life Order turns chaos into three clear daily steps.",
+    ctaPrimary: "Take the Diagnosis",
+    ctaSecondary: "How it works",
+    trustLine: "Try without a card · No fake social proof",
   },
   pillars: {
     heading: "Three pillars — one system",

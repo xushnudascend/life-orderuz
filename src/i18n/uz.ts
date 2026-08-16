@@ -97,13 +97,13 @@ export const uz = {
     upgrade: "Premiumga o'tish",
   },
   hero: {
-    eyebrow: "Beta 2.0 · Self-Control OS",
+    eyebrow: "Self-Control OS",
     title: "Motivatsiya tugaydi, tizim qoladi.",
     subtitle:
-      "Life Order — o'zini boshqara olmaslik muammosini ilmiy asoslangan tizim bilan hal qiladi. 3 daqiqalik tashxis va shaxsiy intizom protokoli.",
+      "Hayotingizni tartibga solish uchun iroda yetishmayotgani yo'q — sizda shunchaki operatsion tizim (OS) yo'q. Life Order tartibsizlikni 3 ta aniq qadamga aylantiradi.",
     ctaPrimary: "Tashxisdan o'tish",
     ctaSecondary: "Qanday ishlaydi?",
-    trustLine: "Kartasiz sinab ko'ring · O'zbek tilida",
+    trustLine: "Kartasiz sinab ko'ring · O'zbekistonda №1",
   },
   pricing: {
     meta: {
