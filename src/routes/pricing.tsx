@@ -226,7 +226,7 @@ function Plans() {
         <div className="grid gap-5 md:grid-cols-2">
           <Plan
             name="Free"
-            price="0 so'm"
+            price={`${pricing.monthly.amount.toLocaleString("uz-UZ")} so'm`}
             tagline="Doimiy · Kartasiz"
             features={[
               `${freeTierLimits.habits} tagacha odat`,
@@ -241,8 +241,8 @@ function Plans() {
           <Plan
             name="Pro"
             highlight
-            price={pricing.monthly.label}
-            tagline={`Yoki ${pricing.yearly.label} · 14 kun qaytarish`}
+            price={`${pricing.monthly.amount.toLocaleString("uz-UZ")} so'm`}
+            tagline={`Yoki ${pricing.yearly.amount.toLocaleString("uz-UZ")} / yil · 14 kun qaytarish`}
             features={[
               "Kutubxona: Barcha ilmiy manbalar",
               "Kurslar: 66 kunlik intizom kursi",
