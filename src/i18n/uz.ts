@@ -97,10 +97,10 @@ export const uz = {
     upgrade: "Premiumga o'tish",
   },
   hero: {
-    eyebrow: "Beta bosqichida · Kartasiz",
-    title: "Motivatsiya tugaydi. Tizim qoladi.",
+    eyebrow: "Beta 2.0 · Self-Control OS",
+    title: "Motivatsiya o'tkinchi. Tizim esa abadiy.",
     subtitle:
-      "O'zingni boshqara olmaslik — kasallik emas, tizimning yo'qligidir. Life Order — har kunlik harakatingni natijaga aylantiradi.",
+      "Life Order — o'zini boshqara olmaslik muammosini ilmiy asoslangan tizim bilan hal qiladi. 3 daqiqalik tashxis va shaxsiy intizom protokoli.",
     ctaPrimary: "Tashxisdan o'tish",
     ctaSecondary: "Qanday ishlaydi?",
     trustLine: "Kartasiz sinab ko'ring · O'zbek tilida",
