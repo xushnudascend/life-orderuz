@@ -7,7 +7,6 @@ const COLUMNS: { title: string; links: { href: string; label: string }[] }[] = [
     links: [
       { href: "/", label: "Bosh sahifa" },
       { href: "/pricing", label: "Narxlar" },
-      { href: "/pricing", label: "Narxlar" },
       { href: "/#faq", label: "Savollar" },
     ],
   },
@@ -60,12 +59,12 @@ export function SiteFooter() {
               <ul className="mt-4 space-y-2.5 font-ui text-sm">
                 {col.links.map((l) => (
                   <li key={l.href}>
-                    <a
-                      href={l.href}
+                    <Link
+                      to={l.href as any}
                       className="text-muted-foreground transition-colors hover:text-foreground"
                     >
                       {l.label}
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>

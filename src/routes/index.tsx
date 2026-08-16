@@ -77,9 +77,8 @@ function Landing() {
 function Hero({ t }: { t: any }) {
   return (
     <section className="relative flex min-h-dvh flex-col items-center justify-center overflow-hidden border-b border-border bg-background">
-      {/* Premium 3D Orb Backgrounds */}
-      <div className="absolute top-[-15%] right-[-15%] h-[800px] w-[800px] animate-orb-float rounded-full bg-primary/10 blur-[140px] pointer-events-none" />
-      <div className="absolute bottom-[-15%] left-[-15%] h-[700px] w-[700px] animate-orb-float-delayed rounded-full bg-primary/5 blur-[120px] pointer-events-none" />
+      {/* Static Radial Gradient Background */}
+      <div className="absolute top-0 right-0 w-full h-full bg-[radial-gradient(ellipse_at_top_right,_var(--primary)_0%,_transparent_70%)] opacity-[0.03] pointer-events-none" />
       
       <div className="relative z-10 mx-auto w-full max-w-6xl px-6 py-20 text-center md:px-8">
         <Reveal delay={100}>
@@ -128,27 +127,17 @@ function Hero({ t }: { t: any }) {
         
         <Reveal delay={700}>
           <div className="mt-20 flex flex-col items-center gap-6">
-            <div className="flex -space-x-3 overflow-hidden">
-              {[1, 2, 3, 4, 5].map((i) => (
-                <div key={i} className="inline-block h-10 w-10 rounded-full border-2 border-background bg-muted/50" />
-              ))}
-              <div className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-background bg-primary text-[10px] font-bold text-primary-foreground">
-                12k+
-              </div>
-            </div>
-            <p className="font-ui text-xs font-medium text-muted-foreground/60 tracking-wide">
-              12,400+ dan ortiq real foydalanuvchilar yo'lda
+            <p className="font-ui text-xs font-medium text-muted-foreground tracking-wide">
+              Beta 2.0 · Erta kirish ochiq
             </p>
           </div>
         </Reveal>
 
         <Reveal delay={850}>
-          <div className="mt-24 flex items-center justify-center gap-12 grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-700">
-            <div className="text-[10px] uppercase tracking-[0.3em] font-bold">Identity Shift</div>
+          <div className="mt-24 flex items-center justify-center gap-12 grayscale opacity-60">
+            <div className="text-[10px] uppercase tracking-[0.3em] font-bold">Fogg Behavior Model</div>
             <div className="h-1 w-1 rounded-full bg-border" />
-            <div className="text-[10px] uppercase tracking-[0.3em] font-bold">Deep Work</div>
-            <div className="h-1 w-1 rounded-full bg-border" />
-            <div className="text-[10px] uppercase tracking-[0.3em] font-bold">Habit Design</div>
+            <div className="text-[10px] uppercase tracking-[0.3em] font-bold">Self-Determination Theory</div>
           </div>
         </Reveal>
 
