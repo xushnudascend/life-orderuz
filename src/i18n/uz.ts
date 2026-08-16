@@ -127,9 +127,10 @@ export const uz = {
     },
     premium: {
       title: "Premium",
-      price: "59 000 so'm",
-      period: "oyiga · cheksiz mentor",
-      badge: "Tavsiya",
+      price: "59 000",
+      period: "oyiga",
+      periodYearly: "yiliga",
+      badge: "Eng ommabop",
       features: [
         "Nadir Pro (Cheksiz xotira)",
         "Haftalik AI hisobot",

@@ -87,9 +87,8 @@ function Hero({ t }: { t: any }) {
       
       <div className="relative z-10 mx-auto w-full max-w-6xl px-6 py-20 text-center md:px-8">
         <Reveal delay={100}>
-          <div className="mb-10 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-6 py-2 font-ui text-[11px] font-bold uppercase tracking-[0.25em] text-primary shadow-[0_0_30px_hsl(var(--primary)/0.25)] backdrop-blur-md">
-            <Sparkles className="h-4 w-4" />
-            Self-Control OS
+          <div className="mb-10 inline-flex items-center rounded-full border border-primary/20 bg-primary/5 px-6 py-2 font-ui text-[11px] font-bold uppercase tracking-[0.25em] text-primary shadow-[0_0_30px_hsl(var(--primary)/0.25)] backdrop-blur-md">
+            {t("hero.eyebrow") || "Self-Control OS"}
           </div>
         </Reveal>
 

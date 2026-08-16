@@ -28,8 +28,6 @@ const COLUMNS: { title: string; links: { href: string; label: string }[] }[] = [
   },
 ];
 
-import { Link } from "@tanstack/react-router";
-
 export function SiteFooter() {
   const { t } = useT();
   const year = new Date().getFullYear();
