@@ -70,8 +70,6 @@ function Landing() {
         <Hero t={t} />
         <ProblemSection t={t} />
         <MechanismSection t={t} />
-        <Features t={t} />
-        <HowItWorks t={t} />
         <PricingSection t={t} />
         <FaqSection t={t} />
         <FinalCta t={t} />
