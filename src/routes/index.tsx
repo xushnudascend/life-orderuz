@@ -330,6 +330,8 @@ function FaqSection({ t }: { t: any }) {
 
 
 function PricingSection({ t }: { t: any }) {
+  console.log("FAQ debug:", t("faq.items"));
+  console.log("Pricing features debug:", t("pricing.free.features"));
   const displayFree = [
     `${freeTierLimits.habits} tagacha odat`,
     `Kunlik ${freeTierLimits.journalEntriesPerDay} ta kundalik yozuv`,
