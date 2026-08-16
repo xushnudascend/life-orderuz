@@ -39,9 +39,10 @@ export function SiteHeader({
         </Link>
         <nav className="hidden items-center gap-7 md:flex font-ui text-[13px] text-muted-foreground">
           {nav.map((l) => (
-            <a
+            <Link
               key={l.href}
-              href={l.href}
+              to={l.href.startsWith("/#") ? "/" : (l.href as any)}
+              hash={l.href.startsWith("/#") ? l.href.slice(2) : undefined}
               className="group relative transition-colors hover:text-foreground"
             >
               {l.label}
@@ -49,7 +50,7 @@ export function SiteHeader({
                 aria-hidden
                 className="absolute -bottom-1 left-0 h-px w-full origin-left scale-x-0 bg-primary transition-transform duration-300 group-hover:scale-x-100"
               />
-            </a>
+            </Link>
           ))}
         </nav>
         <div className="flex items-center gap-3">
