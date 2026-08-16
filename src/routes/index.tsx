@@ -167,7 +167,7 @@ function Features({ t }: { t: any }) {
 
   return (
     <section id="features" className="relative overflow-hidden border-b border-border py-24 md:py-32">
-      <div className="absolute top-0 left-1/4 h-[500px] w-[500px] rounded-full bg-primary/5 blur-[120px] pointer-events-none" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--primary)_0%,_transparent_70%)] opacity-[0.02] pointer-events-none" />
       <div className="mx-auto max-w-6xl px-6 md:px-8">
         <div className="grid md:grid-cols-3 gap-x-12 gap-y-16">
           {items.map((f, i) => (
@@ -197,7 +197,7 @@ function HowItWorks({ t }: { t: any }) {
 
   return (
     <section className="relative overflow-hidden border-b border-border py-24 md:py-40">
-      <div className="absolute right-0 top-1/2 -translate-y-1/2 h-[600px] w-[600px] rounded-full bg-primary/5 blur-[140px] pointer-events-none" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_right,_var(--primary)_0%,_transparent_70%)] opacity-[0.02] pointer-events-none" />
       <div className="mx-auto max-w-6xl px-6 md:px-8">
         <div className="grid lg:grid-cols-2 gap-20 items-center">
           <div>
@@ -218,7 +218,7 @@ function HowItWorks({ t }: { t: any }) {
                     </div>
                     <div>
                       <h3 className="font-serif text-xl font-bold mb-2 tracking-tight">{s.t}</h3>
-                      <p className="font-ui text-[15px] leading-relaxed text-muted-foreground/70">{s.d}</p>
+                      <p className="font-ui text-[15px] leading-relaxed text-muted-foreground/85">{s.d}</p>
                     </div>
                   </div>
                 </Reveal>
