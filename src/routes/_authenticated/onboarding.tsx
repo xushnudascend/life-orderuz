@@ -34,6 +34,7 @@ type Answers = Record<string, AnswerValue>;
 function Onboarding() {
   const { userId } = Route.useRouteContext();
   const { t } = useT();
+  if (!t) return null;
   const navigate = useNavigate();
 
   // Ketma-ketlik: avval B bo'lim (naqsh) — barcha savollar alohida qadamlarda.
@@ -150,7 +151,7 @@ function Onboarding() {
         .eq("id", userId);
       if (profErr) throw profErr;
 
-      toast.success("Tashxis tugadi. O'zbekona intizom yo'li tuzildi.");
+      toast.success(t("onboarding.messages.finish"));
       setArchetypeName(arche.id);
 
       // "Aha!" — shaxsiy nudge (best-effort, xatolarda dashbordga to'g'ridan-to'g'ri o'tamiz)
@@ -217,7 +218,7 @@ function Onboarding() {
               {t("brand.oneLiner").split(".")[0]}.
             </h1>
             <p className="mb-8 text-lg text-muted-foreground/80 font-ui leading-relaxed">
-              Biologik ritming va triggerlaring tahlil qilindi. Nadir AI sening xulq-atvor arxitekturangni quyidagicha shakllantirdi:
+              {t("onboarding.messages.ahaNote")}
             </p>
             {archetypeName && (
               <p className="mb-6 font-ui text-[10px] font-bold uppercase tracking-[0.3em] text-primary/80">
@@ -230,9 +231,9 @@ function Onboarding() {
               </div>
             )}
             
-            <SocialMirror />
+            <SocialMirror t={t} />
             <div className="mt-8">
-              <FirstTaskCard answers={answers} />
+              <FirstTaskCard answers={answers} t={t} />
             </div>
             
             <Button
@@ -310,6 +311,7 @@ function Onboarding() {
               bmi={bmi}
               plan={plan}
               onPlanChange={setPlan}
+              t={t}
             />
           )}
         </div>
@@ -468,6 +470,7 @@ function FinalPage({
   bmi,
   plan,
   onPlanChange,
+  t,
 }: {
   questions: OnboardingQuestion[];
   answers: Answers;
@@ -475,6 +478,7 @@ function FinalPage({
   bmi: number | null;
   plan: 7 | 30 | null;
   onPlanChange: (p: 7 | 30) => void;
+  t: any;
 }) {
   // Har bir savol yig'ilib turadi — ustiga bossa ochiladi.
   // Boshida — birinchi javob berilmagan savol avtomatik ochiladi.
@@ -504,10 +508,10 @@ function FinalPage({
     <div className="space-y-6">
       <div>
         <h2 className="font-serif text-2xl leading-tight tracking-tight text-balance sm:text-3xl">
-          Sen haqingda oxirgi ma'lumot
+          {t("onboarding.messages.finalStepTitle")}
         </h2>
         <p className="mt-2 font-ui text-sm leading-relaxed text-muted-foreground">
-          Har bir qatorga bosib, javobingni yoz. Kerak bo'lsa qaytadan ochib tahrirlaysan.
+          {t("onboarding.messages.finalStepDesc")}
         </p>
       </div>
 
@@ -599,7 +603,7 @@ function FinalPage({
                 aria-expanded={isOpen}
               >
                 <div className="min-w-0 flex-1">
-                  <p className="font-ui text-sm font-medium text-foreground">Reja davomiyligi</p>
+                  <p className="font-ui text-sm font-medium text-foreground">{t("onboarding.messages.planTitle")}</p>
                   <p
                     className={
                       "mt-1 truncate font-ui text-xs " +
@@ -625,15 +629,15 @@ function FinalPage({
                     {[
                       {
                         value: 7 as const,
-                        tag: "Tez sprint",
-                        title: "7 kun",
-                        body: "Bir haftalik intensiv — tez natija.",
+                        tag: t("onboarding.plans.sprint.tag"),
+                        title: t("onboarding.plans.sprint.title"),
+                        body: t("onboarding.plans.sprint.desc"),
                       },
                       {
                         value: 30 as const,
-                        tag: "To'liq o'zgarish",
-                        title: "30 kun",
-                        body: "Chuqurroq qayta qurish — odat singiydi.",
+                        tag: t("onboarding.plans.long.tag"),
+                        title: t("onboarding.plans.long.title"),
+                        body: t("onboarding.plans.long.desc"),
                       },
                     ].map((opt) => {
                       const selected = plan === opt.value;
@@ -670,7 +674,7 @@ function FinalPage({
   );
 }
 
-function SocialMirror() {
+function SocialMirror({ t }: { t: any }) {
   const [data, setData] = useState<{ sameArchetype: number; samePlan: number } | null>(null);
   useEffect(() => {
     let cancelled = false;
@@ -700,30 +704,30 @@ function SocialMirror() {
             ))}
           </div>
           <p className="font-ui text-[10px] uppercase tracking-[0.2em] text-primary font-bold">
-            Senga o'xshaganlar
+            {t("onboarding.messages.socialTitle")}
           </p>
         </div>
         <p className="font-ui text-[14px] leading-relaxed text-foreground/90">
-          Aynan shu arxetipda <span className="font-serif font-bold text-primary">{(data?.sameArchetype ?? 0) + 1240}</span> ta odam yo'lda.
-          Ulardan <span className="font-serif font-bold text-primary">{(data?.samePlan ?? 0) + 820}</span> tasi hozir siz kabi o'zgarishni boshlamoqda.
+          {t("onboarding.messages.socialArchetype").replace("{count}", ((data?.sameArchetype ?? 0) + 1240).toString())}
+          {t("onboarding.messages.socialPlan").replace("{count}", ((data?.samePlan ?? 0) + 820).toString())}
         </p>
         <div className="mt-3 flex items-center gap-1.5 font-ui text-[11px] text-muted-foreground/60 italic">
           <Check className="h-3 w-3 text-primary" />
-          Tasdiqlangan ijtimoiy dalil (Social Proof)
+          {t("onboarding.messages.socialVerified")}
         </div>
       </div>
     </div>
   );
 }
 
-function FirstTaskCard({ answers }: { answers: Answers }) {
+function FirstTaskCard({ answers, t }: { answers: Answers; t: any }) {
   const task = useMemo(() => firstTaskFromAnswers(answers), [answers]);
   return (
     <div className="mt-6 rounded-2xl border border-primary/20 bg-primary/5 p-6 shadow-[inset_0_0_20px_rgba(45,212,191,0.05)]">
       <div className="flex items-center gap-2 mb-4">
         <Target className="h-4 w-4 text-primary" />
         <p className="font-ui text-[10px] font-bold uppercase tracking-[0.24em] text-primary">
-          Bugungi birinchi g'alaba · {task.minutes} daqiqa
+          {t("onboarding.messages.firstWinTitle").replace("{minutes}", task.minutes.toString())}
         </p>
       </div>
       <h2 className="font-serif text-2xl leading-tight tracking-tight text-foreground">{task.title}</h2>
@@ -732,7 +736,7 @@ function FirstTaskCard({ answers }: { answers: Answers }) {
       </p>
       <div className="mt-5 flex items-center gap-2 font-ui text-[10px] font-bold uppercase tracking-[0.1em] text-primary/80">
         <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
-        Tavsiya etilgan vaqt: {task.when}
+        {t("onboarding.messages.recommendedTime")}: {task.when}
       </div>
     </div>
   );

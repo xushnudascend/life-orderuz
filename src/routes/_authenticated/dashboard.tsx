@@ -71,6 +71,7 @@ function today(): string {
 function Dashboard() {
   const { userId } = Route.useRouteContext();
   const { t } = useT();
+  if (!t) return null; // Prevent hydration crashes
   const [profile, setProfile] = useState<Profile | null>(null);
   const [habits, setHabits] = useState<Habit[]>([]);
   const [done, setDone] = useState<Set<string>>(new Set());

@@ -35,6 +35,31 @@ export const uz = {
       rhythm: "Siz qaysi vaqtda energiyangizni eng yuqori his qilasiz?",
       sleep: "Uyqu tartibingiz qanday?",
       discipline: "Hozirgi intizom darajangizni qanday baholaysiz?",
+    },
+    messages: {
+      finish: "Tashxis tugadi. O'zbekona intizom yo'li tuzildi.",
+      ahaNote: "Biologik ritming va triggerlaring tahlil qilindi. Nadir AI sening xulq-atvor arxitekturangni quyidagicha shakllantirdi:",
+      finalStepTitle: "Sen haqingda oxirgi ma'lumot",
+      finalStepDesc: "Har bir qatorga bosib, javobingni yoz. Kerak bo'lsa qaytadan ochib tahrirlaysan.",
+      planTitle: "Reja davomiyligi",
+      socialTitle: "Senga o'xshaganlar",
+      socialArchetype: "Aynan shu arxetipda {count} ta odam yo'lda. ",
+      socialPlan: "Ulardan {count} tasi hozir siz kabi o'zgarishni boshlamoqda.",
+      socialVerified: "Tasdiqlangan ijtimoiy dalil (Social Proof)",
+      firstWinTitle: "Bugungi birinchi g'alaba · {minutes} daqiqa",
+      recommendedTime: "Tavsiya etilgan vaqt",
+    },
+    plans: {
+      sprint: {
+        tag: "Tez sprint",
+        title: "7 kun",
+        desc: "Bir haftalik intensiv — tez natija.",
+      },
+      long: {
+        tag: "To'liq o'zgarish",
+        title: "30 kun",
+        desc: "Chuqurroq qayta qurish — odat singiydi.",
+      }
     }
   },
   auth: {
@@ -81,6 +106,10 @@ export const uz = {
     trustLine: "Kartasiz sinab ko'ring · O'zbek tilida",
   },
   pricing: {
+    meta: {
+      title: "Narxlar — Life Order: Premium va Free rejalar",
+      description: "Life Order narxlari: Free doimiy bepul va Pro reja imkoniyatlari. O'zingizga mos tarifni tanlang va intizomni hozirroq boshlang.",
+    },
     heading: "Narxlar — sodda",
     subheading: "Karta shart emas. Istalgan vaqtda to'xtatish mumkin.",
     free: {
@@ -250,6 +279,100 @@ export const uz = {
         a: "Nadir — bu xulq-atvor psixologiyasiga asoslangan AI mentor. U sizning triggers, sirkad ritm va kunlik faolligingizni tahlil qilib, 'yumshoq' yoki 'shafqatsiz' intizom rejimida maslahatlar beradi."
       }
     ]
+  },
+  profile: {
+    hero: {
+      eyebrow: "Siz",
+      subtitle: "Rankingni, streakni va shieldni bir joyda ko'r.",
+      publicLink: "Ochiq profilni ko'rish →",
+    },
+    stats: {
+      level: "Daraja",
+      totalXp: "Umumiy XP",
+      currentStreak: "Joriy streak",
+      xpHistory: "{delta}% oldingi haftaga nisbatan",
+      xpCollecting: "so'nggi 7 kunda ma'lumot yig'ilyapti",
+      longestStreak: "eng uzun: {days} kun",
+    },
+    plan: {
+      title: "Rejang",
+      label: "Reja",
+      days: "{days} kun",
+      onboarding: "Onboarding",
+      longest: "Eng uzun streak",
+    },
+    username: {
+      title: "Username",
+      placeholder: "masalan: aziz",
+      hint: "Faqat kichik harflar, raqamlar, ostki chiziq. Kamida 3 belgi.",
+      error: "Username 3+ belgidan iborat bo'lsin.",
+      saved: "Username saqlandi.",
+    },
+    shield: {
+      title: "Shield",
+      desc: "Haftada 1 marta — bo'sh kun uchun streak saqlanadi.",
+      activeUntil: "Faol: {date}",
+      limitError: "Bu haftada shield ishlatib bo'lingan.",
+      genericError: "Ba'zi maydonlar to'g'ri to'ldirilmagan.",
+      success: "Shield faol. Bugungi bo'sh kun uchun streak saqlanadi.",
+      cta: "Faollashtirish",
+      used: "Ishlatildi",
+    },
+    actions: {
+      back: "Bugungi kunga qaytish",
+      settings: "Sozlamalar",
+      achievements: "Yutuqlar",
+      signOut: "Chiqish",
+    }
+  },
+  habits: {
+    hero: {
+      eyebrow: "Kunlik ritm",
+      subtitle: "Bugun: {done} / {total} bajarildi. Kichik takror — katta o'zgarish.",
+      forgiving: "Forgiving Streak Active",
+    },
+    add: {
+      title: "Kichik boshla",
+      placeholder: "Nima qilasiz? (masalan: 2 daqiqa kitob o'qish)",
+      difficulty: "Qiyinlik",
+      category: "Kategoriya",
+      quick: "Tez tanlash",
+      submit: "Qo'shish",
+      limitError: "Free rejada 3 ta odat limiti. Ko'proq uchun Pro'ga o'ting.",
+    },
+    categories: {
+      body: "Tana",
+      habit: "Odat",
+      learn: "O'rganish",
+      other: "Boshqa",
+    },
+    empty: {
+      title: "Hali odat qo'shilmagan",
+      desc: "Kichkina va aniq bir odatdan boshla — masalan '2 daqiqa nafas mashqi'. Kichik boshlanish uzoq davom etadi.",
+    },
+    messages: {
+      moved: "Ertangi kunga ko'chirildi.",
+      alreadyScheduled: "Bu odat boshqa kunga ko'chirilgan.",
+      oneLeft: "Bir qadam qoldi. Iroda kuchi — bu mushak.",
+      allDone: "G'alaba! Bugungi protokol 100% yopildi.",
+      xpAwarded: "+{xp} XP. Kichik qadam, katta natija.",
+    }
+  },
+  journal: {
+    hero: {
+      eyebrow: "Refleksiya",
+      title: "Kundalik",
+      subtitle: "Bugun o'zing bilan halol gaplash. Faqat sen o'qiysan.",
+    },
+    add: {
+      title: "Bugungi ichki manzarangni yoz",
+      placeholder: "Bugun nima bo'ldi? Nimadan qochding? Nimani boshqara oldingmi?",
+      submit: "Saqlash",
+    },
+    empty: {
+      title: "Hozircha yozuv yo'q",
+      desc: "Bugungi kayfiyatingni yoz. Fikrni qog'ozga tushirsang, u ustidan nazorat qo'ling ostiga o'tadi.",
+    }
   },
 } as const;
 

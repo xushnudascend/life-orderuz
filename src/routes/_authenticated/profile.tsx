@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Loader2, Shield } from "lucide-react";
 import { toast } from "sonner";
+import { useT } from "@/i18n/use-t";
 import { uz } from "@/i18n";
 import { RankBadge } from "@/components/rank-badge";
 import { ShieldIndicator } from "@/components/shield-indicator";
@@ -40,6 +41,8 @@ type Streak = {
 
 function ProfilePage() {
   const { userId } = Route.useRouteContext();
+  const { t } = useT();
+  if (!t) return null;
   const [profile, setProfile] = useState<Profile | null>(null);
   const [stats, setStats] = useState<Stats>(null);
   const [streak, setStreak] = useState<Streak>(null);
@@ -115,12 +118,12 @@ function ProfilePage() {
     if (error) {
       toast.error(
         error.message.includes("shield_limit_reached")
-          ? "Bu haftada shield ishlatib bo'lingan."
-          : "Ba'zi maydonlar to'g'ri to'ldirilmagan.",
+          ? t("profile.shield.limitError")
+          : t("profile.shield.genericError"),
       );
       return;
     }
-    toast.success("Shield faol. Bugungi bo'sh kun uchun streak saqlanadi.");
+    toast.success(t("profile.shield.success"));
     refresh();
   }
 
@@ -129,10 +132,10 @@ function ProfilePage() {
       .trim()
       .toLowerCase()
       .replace(/[^a-z0-9_]/g, "");
-    if (clean.length < 3) return toast.error("Username 3+ belgidan iborat bo'lsin.");
+    if (clean.length < 3) return toast.error(t("profile.username.error"));
     const { error } = await supabase.from("profiles").update({ username: clean }).eq("id", userId);
     if (error) return toast.error("Ba'zi maydonlar to'g'ri to'ldirilmagan.");
-    toast.success("Username saqlandi.");
+    toast.success(t("profile.username.saved"));
     refresh();
   }
 
@@ -152,12 +155,12 @@ function ProfilePage() {
   return (
     <AppShell title="Profil">
       <PageHero
-        eyebrow="Sen"
-        title={profile?.display_name ?? "Foydalanuvchi"}
+        eyebrow={t("profile.hero.eyebrow")}
+        title={profile?.display_name ?? t("settings.profile.title")}
         subtitle={
           profile?.username
             ? `@${profile.username}`
-            : "Rankingni, streakni va shieldni bir joyda ko'r."
+            : t("profile.hero.subtitle")
         }
         actions={<RankBadge score={score} />}
       />
@@ -168,7 +171,7 @@ function ProfilePage() {
             params={{ username: profile.username }}
             className="text-primary hover:underline"
           >
-            Ochiq profilni ko'rish →
+            {t("profile.hero.publicLink")} →
           </Link>
         </p>
       )}
@@ -183,20 +186,20 @@ function ProfilePage() {
       ) : (
         <>
           <div className="mt-8 grid gap-4 sm:grid-cols-3">
-            <Stat label="Daraja" value={stats?.level ?? 1} />
+            <Stat label={t("profile.stats.level")} value={stats?.level ?? 1} />
             <Stat
-              label="Umumiy XP"
+              label={t("profile.stats.totalXp")}
               value={stats?.total_xp ?? 0}
               context={
                 xpDeltaPct === null
-                  ? "so'nggi 7 kunda ma'lumot yig'ilyapti"
-                  : `so'nggi 7 kun: ${xpDeltaPct >= 0 ? "+" : ""}${xpDeltaPct}% oldingi haftaga nisbatan`
+                  ? t("profile.stats.xpCollecting")
+                  : t("profile.stats.xpHistory").replace("{delta}", (xpDeltaPct >= 0 ? "+" : "") + xpDeltaPct)
               }
             />
             <Stat
-              label="Joriy streak"
-              value={`${streak?.current_days ?? 0} kun`}
-              context={`eng uzun: ${streak?.longest_days ?? 0} kun`}
+              label={t("profile.stats.currentStreak")}
+              value={`${streak?.current_days ?? 0} ${t("dashboard.hero.kun")}`}
+              context={t("profile.stats.longestStreak").replace("{days}", (streak?.longest_days ?? 0).toString())}
             />
           </div>
 
@@ -205,44 +208,44 @@ function ProfilePage() {
           </div>
 
           <Panel className="mt-6 p-5">
-            <PanelHeader eyebrow="Umumiy" title={<h2 className="font-serif text-lg">Rejang</h2>} />
+            <PanelHeader eyebrow={t("profile.plan.title")} title={<h2 className="font-serif text-lg">{t("profile.plan.title")}</h2>} />
             <div className="mt-4 space-y-3">
-              <Row label="Reja" value={`${profile?.plan_length_days ?? 7} kun`} />
+              <Row label={t("profile.plan.label")} value={t("profile.plan.days").replace("{days}", (profile?.plan_length_days ?? 7).toString())} />
               <Row
-                label="Onboarding"
+                label={t("profile.plan.onboarding")}
                 value={
                   profile?.onboarding_completed_at
                     ? new Date(profile.onboarding_completed_at).toLocaleDateString("uz-UZ")
                     : "—"
                 }
               />
-              <Row label="Eng uzun streak" value={`${streak?.longest_days ?? 0} kun`} />
+              <Row label={t("profile.plan.longest")} value={`${streak?.longest_days ?? 0} ${t("dashboard.hero.kun")}`} />
             </div>
           </Panel>
 
           <Panel className="mt-6 p-5">
             <PanelHeader
-              eyebrow="Ochiq profil"
+              eyebrow={t("profile.username.title")}
               title={
                 <Label htmlFor="uname" className="font-serif text-lg">
-                  Username
+                  {t("profile.username.title")}
                 </Label>
               }
             />
             <div className="mt-4 flex gap-2">
               <Input
                 id="uname"
-                placeholder="masalan: aziz"
+                placeholder={t("profile.username.placeholder")}
                 value={usernameDraft}
                 onChange={(e) => setUsernameDraft(e.target.value)}
                 className="max-w-xs"
               />
               <Button onClick={saveUsername} variant="outline">
-                Saqlash
+                {t("settings.save")}
               </Button>
             </div>
             <p className="mt-2 font-ui text-xs text-muted-foreground">
-              Faqat kichik harflar, raqamlar, ostki chiziq. Kamida 3 belgi.
+              {t("profile.username.hint")}
             </p>
           </Panel>
 
@@ -253,11 +256,11 @@ function ProfilePage() {
                   <Shield className="h-4 w-4 text-primary" />
                 </span>
                 <div>
-                  <p className="font-serif text-lg">Shield</p>
+                  <p className="font-serif text-lg">{t("profile.shield.title")}</p>
                   <p className="font-ui text-xs text-muted-foreground">
-                    Haftada 1 marta — bo'sh kun uchun streak saqlanadi.
+                    {t("profile.shield.desc")}
                     {streak?.freeze_active_until && (
-                      <> Faol: {new Date(streak.freeze_active_until).toLocaleDateString("uz-UZ")}</>
+                      <> {t("profile.shield.activeUntil").replace("{date}", new Date(streak.freeze_active_until).toLocaleDateString("uz-UZ"))}</>
                     )}
                   </p>
                 </div>
@@ -268,7 +271,7 @@ function ProfilePage() {
                 variant="outline"
                 size="sm"
               >
-                {shieldsUsed >= 1 ? "Ishlatildi" : "Faollashtirish"}
+                {shieldsUsed >= 1 ? t("profile.shield.used") : t("profile.shield.cta")}
               </Button>
             </div>
           </Panel>
@@ -278,16 +281,16 @@ function ProfilePage() {
 
       <div className="mt-10 flex flex-wrap gap-3">
         <Button asChild variant="outline">
-          <Link to="/dashboard">Bugungi kunga qaytish</Link>
+          <Link to="/dashboard">{t("profile.actions.back")}</Link>
         </Button>
         <Button asChild variant="outline">
-          <Link to="/settings">Sozlamalar</Link>
+          <Link to="/settings">{t("profile.actions.settings")}</Link>
         </Button>
         <Button asChild variant="outline">
-          <Link to="/achievements">Yutuqlar</Link>
+          <Link to="/achievements">{t("profile.actions.achievements")}</Link>
         </Button>
         <Button variant="ghost" onClick={signOut}>
-          Chiqish
+          {t("profile.actions.signOut")}
         </Button>
       </div>
     </AppShell>
