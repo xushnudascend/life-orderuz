@@ -84,20 +84,20 @@ function ProblemSection({ t }: { t: any }) {
   
   return (
     <section id="problem" className="relative py-24 md:py-32 bg-muted/5 border-b border-border overflow-hidden">
-      <div className="mx-auto max-w-6xl px-6 md:px-8">
-        <div className="text-center mb-20">
+      <div className="mx-auto max-w-4xl px-6 md:px-8">
+        <div className="text-center mb-16">
           <Reveal>
-            <h2 className="font-serif text-[44px] leading-[1.05] tracking-tighter mb-6 sm:text-[56px]">
+            <h2 className="font-serif text-[40px] leading-[1.1] tracking-tighter mb-6 sm:text-[48px]">
               {t("dashboard.problem.title")}
             </h2>
-            <p className="font-ui text-lg text-muted-foreground max-w-2xl mx-auto">
+            <p className="font-ui text-lg text-muted-foreground max-w-xl mx-auto">
               {t("dashboard.problem.subtitle")}
             </p>
           </Reveal>
         </div>
         
-        <div className="grid md:grid-cols-3 gap-8">
-          {items.map((item, i) => (
+        <div className="grid md:grid-cols-3 gap-6">
+          {items.map((item: any, i: number) => (
             <Reveal key={i} delay={i * 100}>
               <div className="p-8 rounded-[32px] border border-border bg-card/50 backdrop-blur-sm transition-all hover:bg-primary/5 hover:border-primary/20">
                 <h3 className="font-serif text-2xl font-bold mb-4">{item.t}</h3>
