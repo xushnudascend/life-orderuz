@@ -132,11 +132,9 @@ function HabitsPage() {
     if (doneNow) {
       await supabase.from("habit_logs").delete().eq("habit_id", h.id).eq("logged_date", today());
     } else {
-      await supabase.from("habit_logs").insert({
-        user_id: userId,
-        habit_id: h.id,
-        logged_date: today(),
-        xp_awarded: h.xp_reward,
+      await supabase.rpc("log_habit_action_self", {
+        _habit_id: h.id,
+        _date: today(),
       });
       await supabase.rpc(
         "award_action_xp" as never,

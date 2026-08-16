@@ -149,6 +149,27 @@ export type Database = {
         }
         Relationships: []
       }
+      blocked_clients: {
+        Row: {
+          blocked_until: string
+          created_at: string | null
+          identifier: string
+          reason: string | null
+        }
+        Insert: {
+          blocked_until: string
+          created_at?: string | null
+          identifier: string
+          reason?: string | null
+        }
+        Update: {
+          blocked_until?: string
+          created_at?: string | null
+          identifier?: string
+          reason?: string | null
+        }
+        Relationships: []
+      }
       chat_messages: {
         Row: {
           content: string
@@ -1081,6 +1102,36 @@ export type Database = {
         }
         Relationships: []
       }
+      security_events: {
+        Row: {
+          created_at: string | null
+          details: Json | null
+          event_type: string
+          id: string
+          ip_address: unknown
+          severity: string
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          details?: Json | null
+          event_type: string
+          id?: string
+          ip_address?: unknown
+          severity: string
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          details?: Json | null
+          event_type?: string
+          id?: string
+          ip_address?: unknown
+          severity?: string
+          user_id?: string | null
+        }
+        Relationships: []
+      }
       shields: {
         Row: {
           created_at: string
@@ -1594,6 +1645,14 @@ export type Database = {
           isOneToOne: true
           isSetofReturn: false
         }
+      }
+      log_habit_action: {
+        Args: { _date: string; _habit_id: string; _user_id: string }
+        Returns: undefined
+      }
+      log_habit_action_self: {
+        Args: { _date: string; _habit_id: string }
+        Returns: undefined
       }
       public_profile_by_username: {
         Args: { _username: string }
