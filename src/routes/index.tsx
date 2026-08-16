@@ -89,7 +89,7 @@ function Hero({ t }: { t: any }) {
         <Reveal delay={100}>
           <div className="mb-10 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-6 py-2 font-ui text-[11px] font-bold uppercase tracking-[0.25em] text-primary shadow-[0_0_30px_hsl(var(--primary)/0.25)] backdrop-blur-md">
             <Sparkles className="h-4 w-4" />
-            Beta 2.0 · Self-Control OS
+            Self-Control OS
           </div>
         </Reveal>
 
@@ -131,7 +131,7 @@ function Hero({ t }: { t: any }) {
         <Reveal delay={700}>
           <div className="mt-20 flex flex-col items-center gap-6">
             <p className="font-ui text-xs font-medium text-muted-foreground tracking-wide">
-              Beta 2.0 · Erta kirish ochiq
+              Erta kirish ochiq
             </p>
           </div>
         </Reveal>

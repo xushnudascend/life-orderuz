@@ -38,18 +38,18 @@ export function SiteHeader({
           </span>
           <span className="font-serif text-[17px] font-bold tracking-tight">{t("brand.name")}</span>
         </Link>
-        <nav className="hidden items-center gap-7 md:flex font-ui text-[13px] text-muted-foreground">
+        <nav className="hidden items-center gap-10 md:flex font-ui text-[14px] font-medium text-muted-foreground">
           {nav.map((l) => (
             <Link
               key={l.href}
               to={l.href.startsWith("/#") ? "/" : (l.href as any)}
               hash={l.href.startsWith("/#") ? l.href.slice(2) : undefined}
-              className="group relative transition-colors hover:text-foreground"
+              className="group relative transition-all hover:text-foreground hover:scale-105 active:scale-95"
             >
               {t(l.label as any)}
               <span
                 aria-hidden
-                className="absolute -bottom-1 left-0 h-px w-full origin-left scale-x-0 bg-primary transition-transform duration-300 group-hover:scale-x-100"
+                className="absolute -bottom-1.5 left-0 h-[2px] w-full origin-left scale-x-0 bg-primary transition-transform duration-300 ease-out group-hover:scale-x-100"
               />
             </Link>
           ))}
