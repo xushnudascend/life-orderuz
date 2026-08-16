@@ -97,13 +97,13 @@ export const uz = {
     upgrade: "Premiumga o'tish",
   },
   hero: {
-    eyebrow: "Beta 2.0 · Self-Control OS",
+    eyebrow: "Self-Control OS",
     title: "Motivatsiya tugaydi, tizim qoladi.",
     subtitle:
-      "Life Order — o'zini boshqara olmaslik muammosini ilmiy asoslangan tizim bilan hal qiladi. 3 daqiqalik tashxis va shaxsiy intizom protokoli.",
+      "Hayotingizni tartibga solish uchun iroda yetishmayotgani yo'q — sizda shunchaki operatsion tizim (OS) yo'q. Life Order tartibsizlikni 3 ta aniq qadamga aylantiradi.",
     ctaPrimary: "Tashxisdan o'tish",
     ctaSecondary: "Qanday ishlaydi?",
-    trustLine: "Kartasiz sinab ko'ring · O'zbek tilida",
+    trustLine: "Kartasiz sinab ko'ring · O'zbekistonda №1",
   },
   pricing: {
     meta: {
@@ -166,12 +166,52 @@ export const uz = {
       greetingPrefix: "Bugungi",
     },
     sections: {
+      problem: "Muammo",
+      mechanism: "Mexanizm",
       urgent: "Zarur",
       dailyLoop: "Kunlik halqa",
       depth: "Chuqurroq",
       habits: "Bugungi protokollar",
       quickAccess: "Modullar",
       timetable: "Kunlik jadval",
+    },
+    problem: {
+      title: "Nega o'zgarish qiyin?",
+      subtitle: "Biz odatda motivatsiya bilan boshlaymiz, lekin tizim yo'qligi sababli to'xtab qolamiz.",
+      items: [
+        {
+          t: "Iroda kuchi tugaydi",
+          d: "Har kuni qaror qabul qilish miyani charchatadi."
+        },
+        {
+          t: "Aniq reja yo'q",
+          d: "Nima qilishni bilmaslik chalg'ishga olib keladi."
+        },
+        {
+          t: "Natija ko'rinmaydi",
+          d: "Kichik g'alabalarni sezmaslik motivatsiyani o'ldiradi."
+        }
+      ]
+    },
+    mechanism: {
+      title: "Life Order qanday ishlaydi?",
+      steps: [
+        {
+          n: "01",
+          t: "Tashxis",
+          d: "Sizning biologik ritmingiz va triggerlaringizni aniqlaymiz."
+        },
+        {
+          n: "02",
+          t: "Protokol",
+          d: "Har kuni miya resursini tejaydigan 3 ta aniq vazifa."
+        },
+        {
+          n: "03",
+          t: "Nadir AI",
+          d: "Sizni yo'ldan chalg'itmaydigan shafqatsiz mentor."
+        }
+      ]
     },
     habits: {
       manage: "Boshqarish",

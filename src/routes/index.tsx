@@ -68,6 +68,8 @@ function Landing() {
       <SiteHeader />
       <main id="main-content">
         <Hero t={t} />
+        <ProblemSection t={t} />
+        <MechanismSection t={t} />
         <Features t={t} />
         <HowItWorks t={t} />
         <PricingSection t={t} />
@@ -79,34 +81,100 @@ function Landing() {
   );
 }
 
+function ProblemSection({ t }: { t: any }) {
+  const items = Array.isArray(t("dashboard.problem.items")) ? (t("dashboard.problem.items") as any[]) : [];
+  
+  return (
+    <section id="problem" className="relative py-24 md:py-32 bg-muted/5 border-b border-border overflow-hidden">
+      <div className="mx-auto max-w-6xl px-6 md:px-8">
+        <div className="text-center mb-20">
+          <Reveal>
+            <h2 className="font-serif text-[44px] leading-[1.05] tracking-tighter mb-6 sm:text-[56px]">
+              {t("dashboard.problem.title")}
+            </h2>
+            <p className="font-ui text-lg text-muted-foreground max-w-2xl mx-auto">
+              {t("dashboard.problem.subtitle")}
+            </p>
+          </Reveal>
+        </div>
+        
+        <div className="grid md:grid-cols-3 gap-8">
+          {items.map((item, i) => (
+            <Reveal key={i} delay={i * 100}>
+              <div className="p-8 rounded-[32px] border border-border bg-card/50 backdrop-blur-sm transition-all hover:bg-primary/5 hover:border-primary/20">
+                <h3 className="font-serif text-2xl font-bold mb-4">{item.t}</h3>
+                <p className="font-ui text-muted-foreground leading-relaxed">{item.d}</p>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function MechanismSection({ t }: { t: any }) {
+  const steps = Array.isArray(t("dashboard.mechanism.steps")) ? (t("dashboard.mechanism.steps") as any[]) : [];
+
+  return (
+    <section id="mechanism" className="relative py-24 md:py-40 border-b border-border overflow-hidden">
+      <div className="mx-auto max-w-6xl px-6 md:px-8">
+        <div className="text-center mb-20">
+          <Reveal>
+            <h2 className="font-serif text-[44px] leading-[1.05] tracking-tighter mb-6 sm:text-[56px]">
+              {t("dashboard.mechanism.title")}
+            </h2>
+          </Reveal>
+        </div>
+        
+        <div className="grid md:grid-cols-3 gap-12 relative">
+          <div className="hidden md:block absolute top-12 left-0 w-full h-px bg-gradient-to-r from-transparent via-border to-transparent" />
+          {steps.map((step, i) => (
+            <Reveal key={i} delay={i * 150}>
+              <div className="relative z-10 text-center">
+                <div className="w-16 h-16 rounded-2xl bg-primary text-primary-foreground font-serif text-2xl font-bold flex items-center justify-center mx-auto mb-8 shadow-glow">
+                  {step.n}
+                </div>
+                <h3 className="font-serif text-2xl font-bold mb-4">{step.t}</h3>
+                <p className="font-ui text-muted-foreground leading-relaxed px-4">{step.d}</p>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function Hero({ t }: { t: any }) {
   return (
-    <section className="relative flex min-h-dvh flex-col items-center justify-center overflow-hidden border-b border-border bg-background">
-      {/* Static Radial Gradient Background */}
+    <section className="relative flex min-h-[90dvh] flex-col items-center justify-center overflow-hidden border-b border-border bg-background pt-32 pb-20">
+      {/* Dynamic Background Elements */}
       <div className="absolute top-0 right-0 w-full h-full bg-[radial-gradient(ellipse_at_top_right,_var(--primary)_0%,_transparent_70%)] opacity-[0.03] pointer-events-none" />
+      <div className="absolute -top-[20%] -left-[10%] w-[60%] h-[60%] rounded-full bg-primary/5 blur-[120px] pointer-events-none animate-orb-float" />
       
-      <div className="relative z-10 mx-auto w-full max-w-6xl px-6 py-20 text-center md:px-8">
+      <div className="relative z-10 mx-auto w-full max-w-6xl px-6 text-center md:px-8">
         <Reveal delay={100}>
-          <div className="mb-10 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-6 py-2 font-ui text-[11px] font-bold uppercase tracking-[0.25em] text-primary shadow-[0_0_30px_hsl(var(--primary)/0.25)] backdrop-blur-md">
+          <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-5 py-1.5 font-ui text-[11px] font-bold uppercase tracking-[0.25em] text-primary shadow-[0_0_30px_hsl(var(--primary)/0.2)] backdrop-blur-md">
             <Sparkles className="h-4 w-4" />
-            Self-Control OS
+            {t("hero.eyebrow")}
           </div>
         </Reveal>
 
         <Reveal delay={250}>
-          <h1 className="font-serif text-[48px] leading-[0.9] tracking-tighter text-balance sm:text-[72px] md:text-[84px] lg:text-[100px] text-text-primary">
+          <h1 className="font-serif text-[54px] leading-[0.9] tracking-tighter text-balance sm:text-[84px] md:text-[96px] lg:text-[112px] text-text-primary mb-8">
             {t("hero.title")}
           </h1>
         </Reveal>
 
         <Reveal delay={400}>
-          <p className="mx-auto mt-10 max-w-2xl font-ui text-xl leading-relaxed text-text-secondary md:text-2xl">
+          <p className="mx-auto max-w-2xl font-ui text-lg leading-relaxed text-text-secondary md:text-xl lg:text-2xl opacity-90">
             {t("hero.subtitle")}
           </p>
         </Reveal>
 
         <Reveal delay={550}>
-          <div className="mt-16 flex flex-col items-center justify-center gap-5 sm:flex-row">
+          <div className="mt-12 flex flex-col items-center justify-center gap-5 sm:flex-row">
             <Button
               asChild
               size="lg"
@@ -114,7 +182,7 @@ function Hero({ t }: { t: any }) {
               className="group relative h-14 rounded-full px-12 font-ui text-base font-bold transition-all hover:scale-105 active:scale-[0.98] shadow-premium bg-primary text-primary-foreground"
             >
               <Link to="/auth">
-                {t("auth.signUp")}
+                {t("hero.ctaPrimary")}
                 <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1.5" />
               </Link>
             </Button>
@@ -123,27 +191,67 @@ function Hero({ t }: { t: any }) {
               size="lg"
               className="h-14 rounded-full px-10 font-ui text-base font-bold border-border bg-transparent hover:bg-muted/30 transition-all active:scale-[0.98]"
             >
-              <Link to="/pricing">{t("nav.pricing")}</Link>
+              <Link to="/">{t("hero.ctaSecondary")}</Link>
             </Button>
           </div>
         </Reveal>
         
         <Reveal delay={700}>
-          <div className="mt-20 flex flex-col items-center gap-6">
-            <p className="font-ui text-xs font-medium text-muted-foreground tracking-wide">
-              Erta kirish ochiq
-            </p>
+          <div className="mt-12 flex flex-col items-center gap-3">
+            <div className="flex items-center gap-2 text-primary">
+              <Check className="h-4 w-4" />
+              <span className="font-ui text-xs font-bold tracking-wider uppercase opacity-80">
+                {t("hero.trustLine")}
+              </span>
+            </div>
           </div>
         </Reveal>
 
-        <Reveal delay={850}>
-          <div className="mt-24 flex items-center justify-center gap-12 grayscale opacity-60">
-            <div className="text-[10px] uppercase tracking-[0.3em] font-bold">Fogg Behavior Model</div>
-            <div className="h-1 w-1 rounded-full bg-border" />
-            <div className="text-[10px] uppercase tracking-[0.3em] font-bold">Self-Determination Theory</div>
+        {/* Dashboard Preview Visualization */}
+        <Reveal delay={850} className="mt-20 w-full max-w-5xl mx-auto px-4 sm:px-0">
+          <div className="relative group perspective-1000">
+            <div className="relative rounded-[2rem] border border-border bg-card/50 backdrop-blur-2xl overflow-hidden shadow-[0_48px_100px_-24px_rgba(0,0,0,0.6)] transition-transform duration-700 hover:rotate-x-2">
+              <div className="h-10 border-b border-border bg-muted/20 px-4 flex items-center gap-2">
+                <div className="h-2.5 w-2.5 rounded-full bg-red-500/50" />
+                <div className="h-2.5 w-2.5 rounded-full bg-amber-500/50" />
+                <div className="h-2.5 w-2.5 rounded-full bg-emerald-500/50" />
+              </div>
+              <div className="p-4 sm:p-8 space-y-6">
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                  {[1, 2, 3, 4].map(i => (
+                    <div key={i} className="h-20 sm:h-24 rounded-2xl bg-primary/5 border border-primary/10 p-4 space-y-2">
+                      <div className="h-2 w-12 bg-primary/20 rounded" />
+                      <div className="h-4 w-16 bg-primary/40 rounded" />
+                    </div>
+                  ))}
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                  <div className="sm:col-span-2 h-48 sm:h-64 rounded-2xl border border-border bg-muted/20 p-6 relative overflow-hidden">
+                    <div className="absolute inset-0 backdrop-grid opacity-30" />
+                    <div className="relative space-y-4">
+                      <div className="h-4 w-32 bg-primary/20 rounded" />
+                      <div className="space-y-2">
+                        {[1, 2, 3].map(i => (
+                          <div key={i} className="h-10 w-full rounded-lg bg-card border border-border flex items-center px-4 gap-3">
+                            <div className="h-4 w-4 rounded bg-primary/40" />
+                            <div className="h-2 w-48 bg-muted-foreground/20 rounded" />
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="h-48 sm:h-64 rounded-2xl border border-border bg-primary/5 p-6 flex flex-col justify-between">
+                    <div className="space-y-2">
+                      <div className="h-4 w-20 bg-primary/20 rounded" />
+                      <div className="h-8 w-12 bg-primary/40 rounded" />
+                    </div>
+                    <div className="h-24 w-24 mx-auto rounded-full border-4 border-primary border-t-transparent animate-spin-slow" />
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </Reveal>
-
       </div>
     </section>
   );
@@ -349,7 +457,10 @@ function PricingSection({ t }: { t: any }) {
 
   return (
     <section id="pricing" className="relative py-24 md:py-40 bg-muted/5 border-b border-border overflow-hidden">
-      <div className="mx-auto max-w-6xl px-6 md:px-8">
+      {/* Background decoration */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/5 rounded-full blur-[120px] pointer-events-none" />
+      
+      <div className="mx-auto max-w-6xl px-6 md:px-8 relative z-10">
         <div className="mb-20 text-center">
           <Reveal>
             <h2 className="font-serif text-[44px] leading-[1.05] tracking-tighter mb-6 sm:text-[56px]">
@@ -436,16 +547,18 @@ function PricingSection({ t }: { t: any }) {
 
 function FinalCta({ t }: { t: any }) {
   return (
-    <section className="relative py-24 md:py-48 overflow-hidden">
+    <section className="relative py-24 md:py-48 overflow-hidden border-t border-border bg-card/20">
       <div className="absolute inset-0 bg-primary/[0.02] pointer-events-none" />
-      <div className="mx-auto max-w-6xl px-6 md:px-8 text-center">
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[100px] pointer-events-none" />
+      
+      <div className="mx-auto max-w-6xl px-6 md:px-8 text-center relative z-10">
         <Reveal>
-          <h2 className="font-serif text-[56px] leading-[1] tracking-tighter mb-10 sm:text-[80px] md:text-[100px] text-balance">
+          <h2 className="font-serif text-[56px] leading-[0.95] tracking-tighter mb-10 sm:text-[80px] md:text-[100px] text-balance">
             {t("cta.heading")}
           </h2>
         </Reveal>
         <Reveal delay={200}>
-          <p className="mx-auto mt-6 mb-14 max-w-xl font-ui text-lg text-muted-foreground/80">
+          <p className="mx-auto mt-6 mb-14 max-w-xl font-ui text-lg text-muted-foreground/80 md:text-xl">
             {t("cta.body")}
           </p>
           <div className="flex flex-col items-center justify-center gap-6 sm:flex-row">

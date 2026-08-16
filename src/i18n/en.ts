@@ -86,13 +86,13 @@ const _en = {
     startFree: "Start free",
   },
   hero: {
-    eyebrow: "Beta · No card",
+    eyebrow: "Self-Control OS",
     title: "Motivation ends. The system remains.",
     subtitle:
-      "Failing to control yourself isn't a flaw — it's a missing OS. Life Order turns your daily chaos into three clear steps.",
-    ctaPrimary: "Get the 60-second diagnosis",
-    ctaSecondary: "See the method",
-    trustLine: "No card · Uzbek-first · PWA — installs to phone",
+      "You don't lack willpower to order your life — you lack an operating system (OS). Life Order turns chaos into three clear daily steps.",
+    ctaPrimary: "Take the Diagnosis",
+    ctaSecondary: "How it works",
+    trustLine: "Try without a card · No fake social proof",
   },
   pillars: {
     heading: "Three pillars — one system",
@@ -198,12 +198,52 @@ const _en = {
       greetingPrefix: "Today's",
     },
     sections: {
+      problem: "Problem",
+      mechanism: "Mechanism",
       urgent: "Urgent",
       dailyLoop: "Daily Loop",
       depth: "Depth",
       habits: "Today's habits",
       quickAccess: "Quick access",
       timetable: "Daily timetable",
+    },
+    problem: {
+      title: "Why is change so hard?",
+      subtitle: "We usually start with motivation, but fail because we lack a system.",
+      items: [
+        {
+          t: "Willpower fades",
+          d: "Making decisions every day drains your mental energy."
+        },
+        {
+          t: "No clear plan",
+          d: "Not knowing what to do leads to instant distraction."
+        },
+        {
+          t: "Invisible progress",
+          d: "Missing small wins kills your motivation to continue."
+        }
+      ]
+    },
+    mechanism: {
+      title: "How Life Order Works",
+      steps: [
+        {
+          n: "01",
+          t: "Diagnosis",
+          d: "We identify your unique biorhythms and triggers."
+        },
+        {
+          n: "02",
+          t: "Protocol",
+          d: "3 clear daily actions that save your mental resources."
+        },
+        {
+          n: "03",
+          t: "Nadir AI",
+          d: "A relentless mentor that keeps you from getting distracted."
+        }
+      ]
     },
     habits: {
       manage: "Manage",
