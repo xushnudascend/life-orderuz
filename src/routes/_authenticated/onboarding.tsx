@@ -470,6 +470,7 @@ function FinalPage({
   bmi,
   plan,
   onPlanChange,
+  t,
 }: {
   questions: OnboardingQuestion[];
   answers: Answers;
