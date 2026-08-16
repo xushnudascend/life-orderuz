@@ -279,7 +279,7 @@ function FaqSection({ t }: { t: any }) {
               <h2 className="font-serif text-[42px] leading-[1] tracking-tighter mb-8 sm:text-[54px]">
                 Savol va javoblar.
               </h2>
-              <p className="font-ui text-muted-foreground/80 leading-relaxed max-w-sm">
+              <p className="font-ui text-text-secondary leading-relaxed max-w-sm">
                 Tizim qanday ishlashi va sizga qanday foyda berishi haqida barcha javoblar.
               </p>
             </Reveal>
@@ -379,7 +379,7 @@ function PricingSection({ t }: { t: any }) {
               </div>
               <ul className="mb-10 space-y-4">
                 {displayFree.map((feat: string) => (
-                  <li key={feat} className="flex items-start gap-3 text-sm font-ui text-muted-foreground/90">
+                  <li key={feat} className="flex items-start gap-3 text-sm font-ui text-text-secondary">
                     <Check className="h-4 w-4 text-primary shrink-0 mt-0.5" />
                     <span>{feat}</span>
                   </li>
@@ -438,7 +438,7 @@ function FinalCta({ t }: { t: any }) {
           </h2>
         </Reveal>
         <Reveal delay={200}>
-          <p className="mx-auto mt-6 mb-14 max-w-xl font-ui text-lg text-muted-foreground/80">
+          <p className="mx-auto mt-6 mb-14 max-w-xl font-ui text-lg text-text-secondary">
             {t("cta.body")}
           </p>
           <div className="flex flex-col items-center justify-center gap-6 sm:flex-row">
