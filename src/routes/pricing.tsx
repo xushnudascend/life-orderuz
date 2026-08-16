@@ -104,11 +104,10 @@ function Pricing() {
     <div className="min-h-dvh bg-background text-foreground animate-fade-in">
       <SiteHeader
         nav={[
-          { href: "/", label: "Bosh sahifa" },
-          { href: "/#science", label: "Ilm" },
-          { href: "/#faq", label: "Savollar" },
+          { href: "/", label: "brand.home" },
+          { href: "/#features", label: "brand.features" },
+          { href: "/#faq", label: "brand.faq" },
         ]}
-        cta={{ label: "Kirish", to: "/auth" }}
       />
       <main>
         <Hero />

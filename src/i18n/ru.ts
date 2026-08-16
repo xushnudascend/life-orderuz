@@ -6,6 +6,7 @@ import type { Dict } from "./uz";
 const _ru = {
   brand: {
     name: "Life Order",
+    home: "Главная",
     features: "Возможности",
     pricing: "Цены",
     blog: "Блог",

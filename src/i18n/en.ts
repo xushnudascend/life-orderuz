@@ -6,6 +6,7 @@ import type { Dict } from "./uz";
 const _en = {
   brand: {
     name: "Life Order",
+    home: "Home",
     features: "Features",
     pricing: "Pricing",
     blog: "Blog",
