@@ -6,9 +6,9 @@ import type { Dict } from "./uz";
 const _en = {
   brand: {
     name: "Life Order",
-    tagline: "Put your life in order",
+    tagline: "Motivation ends, the system remains.",
     oneLiner:
-      "Self-Control OS — the operating system for self-mastery. Trigger analysis, three clear daily steps, an honest AI mentor named Nadir.",
+      "Self-Control OS — the operating system for mastery. 3-minute diagnosis, 3 daily steps, and a relentless AI mentor.",
     disciplineScore: "Discipline Score",
     xp: "XP",
     level: "Level",
@@ -58,9 +58,9 @@ const _en = {
   },
   hero: {
     eyebrow: "Beta · No card",
-    title: "Losing control isn't a disease — it's a missing system.",
+    title: "Motivation ends. The system remains.",
     subtitle:
-      "Life Order turns your day into three clear steps. No emojis. No preaching. Nadir — the honest AI mentor — speaks truth to you.",
+      "Failing to control yourself isn't a flaw — it's a missing OS. Life Order turns your daily chaos into three clear steps.",
     ctaPrimary: "Get the 60-second diagnosis",
     ctaSecondary: "See the method",
     trustLine: "No card · Uzbek-first · PWA — installs to phone",

@@ -5,9 +5,9 @@
 export const uz = {
   brand: {
     name: "Life Order",
-    tagline: "O'zini yengish — eng katta g'alabadir",
+    tagline: "Motivatsiya tugaydi, tizim qoladi.",
     oneLiner:
-      "Self-Control OS — Hayotingni tartibga solish tizimi. 3 daqiqada tashxis, kunlik 3 qadam va AI mentor.",
+      "Self-Control OS — Hayotingizni intizomga soluvchi yaxlit tizim. 3 daqiqada tashxis, kunlik 3 qadam va shafqatsiz AI mentor.",
     disciplineScore: "Intizom balli",
     xp: "XP",
     level: "Daraja",
@@ -69,9 +69,9 @@ export const uz = {
   },
   hero: {
     eyebrow: "Beta bosqichida · Kartasiz",
-    title: "Motivatsiya o'tkinchi. Tizim esa abadiy.",
+    title: "Motivatsiya tugaydi. Tizim qoladi.",
     subtitle:
-      "Life Order har kunlik odatlaringizni natijaga yo'naltiradi. Ortiqcha gaplarsiz, faqat amaliy qadamlar.",
+      "O'zingni boshqara olmaslik — kasallik emas, tizimning yo'qligidir. Life Order — har kunlik harakatingni natijaga aylantiradi.",
     ctaPrimary: "Tashxisdan o'tish",
     ctaSecondary: "Qanday ishlaydi?",
     trustLine: "Kartasiz sinab ko'ring · O'zbek tilida",
@@ -129,8 +129,8 @@ export const uz = {
       xp: "XP",
       streak: "streak",
       kun: "kun",
-      discipline: "intizom",
-      greetingPrefix: "bugungi",
+      discipline: "Intizom",
+      greetingPrefix: "Bugungi",
     },
     sections: {
       urgent: "Zarur",
