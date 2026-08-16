@@ -115,11 +115,11 @@ function MechanismSection({ t }: { t: any }) {
   const steps = Array.isArray(t("dashboard.mechanism.steps")) ? (t("dashboard.mechanism.steps") as any[]) : [];
 
   return (
-    <section id="mechanism" className="relative py-24 md:py-40 border-b border-border overflow-hidden">
-      <div className="mx-auto max-w-6xl px-6 md:px-8">
+    <section id="mechanism" className="relative py-24 md:py-32 border-b border-border overflow-hidden bg-background">
+      <div className="mx-auto max-w-4xl px-6 md:px-8">
         <div className="text-center mb-20">
           <Reveal>
-            <h2 className="font-serif text-[44px] leading-[1.05] tracking-tighter mb-6 sm:text-[56px]">
+            <h2 className="font-serif text-[40px] leading-[1.1] tracking-tighter mb-6 sm:text-[48px]">
               {t("dashboard.mechanism.title")}
             </h2>
           </Reveal>
@@ -127,10 +127,10 @@ function MechanismSection({ t }: { t: any }) {
         
         <div className="grid md:grid-cols-3 gap-12 relative">
           <div className="hidden md:block absolute top-12 left-0 w-full h-px bg-gradient-to-r from-transparent via-border to-transparent" />
-          {steps.map((step, i) => (
+          {steps.map((step: any, i: number) => (
             <Reveal key={i} delay={i * 150}>
               <div className="relative z-10 text-center">
-                <div className="w-16 h-16 rounded-2xl bg-primary text-primary-foreground font-serif text-2xl font-bold flex items-center justify-center mx-auto mb-8 shadow-glow">
+                <div className="w-16 h-16 rounded-2xl bg-primary text-primary-foreground font-serif text-2xl font-bold flex items-center justify-center mx-auto mb-8 shadow-glow transition-transform hover:scale-110">
                   {step.n}
                 </div>
                 <h3 className="font-serif text-2xl font-bold mb-4">{step.t}</h3>
