@@ -7,6 +7,7 @@ import { EmptyState } from "@/components/empty-state";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Loader2, Trash2, BookOpen } from "lucide-react";
+import { useT } from "@/i18n/use-t";
 import { uz } from "@/i18n";
 import { Panel, PanelHeader } from "@/components/panel";
 

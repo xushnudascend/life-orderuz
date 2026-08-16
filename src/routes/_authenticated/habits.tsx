@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Loader2, Plus, Trash2, Flame, ArrowRight, Target, Zap, Check } from "lucide-react";
 import { toast } from "sonner";
+import { useT } from "@/i18n/use-t";
 import { uz } from "@/i18n";
 import { Panel, PanelHeader } from "@/components/panel";
 import { xpFromDifficulty } from "@/lib/nervous";
@@ -127,7 +128,7 @@ function HabitsPage() {
   async function toggleToday(h: Habit) {
     // Faqat bugunga rejalashtirilgan bo'lsa ish beradi (scheduled_for null => today)
     if (h.scheduled_for && h.scheduled_for !== today()) {
-      toast.info("Bu odat boshqa kunga ko'chirilgan.");
+      toast.info(t("habits.messages.alreadyScheduled"));
       return;
     }
     const doneNow = todayLogs.has(h.id);
@@ -146,16 +147,16 @@ function HabitsPage() {
         } as never,
       );
       const rem = habits.length - todayLogs.size - 1;
-      if (rem === 1) toast.success("Bir qadam qoldi. Iroda kuchi — bu mushak.");
-      else if (rem === 0) toast.success("G'alaba! Bugungi protokol 100% yopildi.");
-      else toast.success(`+${h.xp_reward} XP. Kichik qadam, katta natija.`);
+      if (rem === 1) toast.success(t("habits.messages.oneLeft"));
+      else if (rem === 0) toast.success(t("habits.messages.allDone"));
+      else toast.success(t("habits.messages.xpAwarded").replace("{xp}", h.xp_reward.toString()));
     }
     refresh();
   }
 
   async function moveToTomorrow(h: Habit) {
     await supabase.from("habits").update({ scheduled_for: tomorrow() }).eq("id", h.id);
-    toast.success("Ertangi kunga ko'chirildi.");
+    toast.success(t("habits.messages.moved"));
     refresh();
   }
 

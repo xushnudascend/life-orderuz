@@ -251,6 +251,100 @@ export const uz = {
       }
     ]
   },
+  profile: {
+    hero: {
+      eyebrow: "Siz",
+      subtitle: "Rankingni, streakni va shieldni bir joyda ko'r.",
+      publicLink: "Ochiq profilni ko'rish →",
+    },
+    stats: {
+      level: "Daraja",
+      totalXp: "Umumiy XP",
+      currentStreak: "Joriy streak",
+      xpHistory: "{delta}% oldingi haftaga nisbatan",
+      xpCollecting: "so'nggi 7 kunda ma'lumot yig'ilyapti",
+      longestStreak: "eng uzun: {days} kun",
+    },
+    plan: {
+      title: "Rejang",
+      label: "Reja",
+      days: "{days} kun",
+      onboarding: "Onboarding",
+      longest: "Eng uzun streak",
+    },
+    username: {
+      title: "Username",
+      placeholder: "masalan: aziz",
+      hint: "Faqat kichik harflar, raqamlar, ostki chiziq. Kamida 3 belgi.",
+      error: "Username 3+ belgidan iborat bo'lsin.",
+      saved: "Username saqlandi.",
+    },
+    shield: {
+      title: "Shield",
+      desc: "Haftada 1 marta — bo'sh kun uchun streak saqlanadi.",
+      activeUntil: "Faol: {date}",
+      limitError: "Bu haftada shield ishlatib bo'lingan.",
+      genericError: "Ba'zi maydonlar to'g'ri to'ldirilmagan.",
+      success: "Shield faol. Bugungi bo'sh kun uchun streak saqlanadi.",
+      cta: "Faollashtirish",
+      used: "Ishlatildi",
+    },
+    actions: {
+      back: "Bugungi kunga qaytish",
+      settings: "Sozlamalar",
+      achievements: "Yutuqlar",
+      signOut: "Chiqish",
+    }
+  },
+  habits: {
+    hero: {
+      eyebrow: "Kunlik ritm",
+      subtitle: "Bugun: {done} / {total} bajarildi. Kichik takror — katta o'zgarish.",
+      forgiving: "Forgiving Streak Active",
+    },
+    add: {
+      title: "Kichik boshla",
+      placeholder: "Nima qilasiz? (masalan: 2 daqiqa kitob o'qish)",
+      difficulty: "Qiyinlik",
+      category: "Kategoriya",
+      quick: "Tez tanlash",
+      submit: "Qo'shish",
+      limitError: "Free rejada 3 ta odat limiti. Ko'proq uchun Pro'ga o'ting.",
+    },
+    categories: {
+      body: "Tana",
+      habit: "Odat",
+      learn: "O'rganish",
+      other: "Boshqa",
+    },
+    empty: {
+      title: "Hali odat qo'shilmagan",
+      desc: "Kichkina va aniq bir odatdan boshla — masalan '2 daqiqa nafas mashqi'. Kichik boshlanish uzoq davom etadi.",
+    },
+    messages: {
+      moved: "Ertangi kunga ko'chirildi.",
+      alreadyScheduled: "Bu odat boshqa kunga ko'chirilgan.",
+      oneLeft: "Bir qadam qoldi. Iroda kuchi — bu mushak.",
+      allDone: "G'alaba! Bugungi protokol 100% yopildi.",
+      xpAwarded: "+{xp} XP. Kichik qadam, katta natija.",
+    }
+  },
+  journal: {
+    hero: {
+      eyebrow: "Refleksiya",
+      title: "Kundalik",
+      subtitle: "Bugun o'zing bilan halol gaplash. Faqat sen o'qiysan.",
+    },
+    add: {
+      title: "Bugungi ichki manzarangni yoz",
+      placeholder: "Bugun nima bo'ldi? Nimadan qochding? Nimani boshqara oldingmi?",
+      submit: "Saqlash",
+    },
+    empty: {
+      title: "Hozircha yozuv yo'q",
+      desc: "Bugungi kayfiyatingni yoz. Fikrni qog'ozga tushirsang, u ustidan nazorat qo'ling ostiga o'tadi.",
+    }
+  },
 } as const;
 
 export type Dict = typeof uz;

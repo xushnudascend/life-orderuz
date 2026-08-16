@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Loader2, Shield } from "lucide-react";
 import { toast } from "sonner";
+import { useT } from "@/i18n/use-t";
 import { uz } from "@/i18n";
 import { RankBadge } from "@/components/rank-badge";
 import { ShieldIndicator } from "@/components/shield-indicator";
@@ -117,12 +118,12 @@ function ProfilePage() {
     if (error) {
       toast.error(
         error.message.includes("shield_limit_reached")
-          ? "Bu haftada shield ishlatib bo'lingan."
-          : "Ba'zi maydonlar to'g'ri to'ldirilmagan.",
+          ? t("profile.shield.limitError")
+          : t("profile.shield.genericError"),
       );
       return;
     }
-    toast.success("Shield faol. Bugungi bo'sh kun uchun streak saqlanadi.");
+    toast.success(t("profile.shield.success"));
     refresh();
   }
 
@@ -131,10 +132,10 @@ function ProfilePage() {
       .trim()
       .toLowerCase()
       .replace(/[^a-z0-9_]/g, "");
-    if (clean.length < 3) return toast.error("Username 3+ belgidan iborat bo'lsin.");
+    if (clean.length < 3) return toast.error(t("profile.username.error"));
     const { error } = await supabase.from("profiles").update({ username: clean }).eq("id", userId);
     if (error) return toast.error("Ba'zi maydonlar to'g'ri to'ldirilmagan.");
-    toast.success("Username saqlandi.");
+    toast.success(t("profile.username.saved"));
     refresh();
   }
 
