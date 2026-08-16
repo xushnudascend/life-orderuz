@@ -68,6 +68,8 @@ function Landing() {
       <SiteHeader />
       <main id="main-content">
         <Hero t={t} />
+        <ProblemSection t={t} />
+        <MechanismSection t={t} />
         <Features t={t} />
         <HowItWorks t={t} />
         <PricingSection t={t} />
@@ -76,6 +78,71 @@ function Landing() {
       </main>
       <SiteFooter />
     </div>
+  );
+}
+
+function ProblemSection({ t }: { t: any }) {
+  const items = Array.isArray(t("dashboard.problem.items")) ? (t("dashboard.problem.items") as any[]) : [];
+  
+  return (
+    <section id="problem" className="relative py-24 md:py-32 bg-muted/5 border-b border-border overflow-hidden">
+      <div className="mx-auto max-w-6xl px-6 md:px-8">
+        <div className="text-center mb-20">
+          <Reveal>
+            <h2 className="font-serif text-[44px] leading-[1.05] tracking-tighter mb-6 sm:text-[56px]">
+              {t("dashboard.problem.title")}
+            </h2>
+            <p className="font-ui text-lg text-muted-foreground max-w-2xl mx-auto">
+              {t("dashboard.problem.subtitle")}
+            </p>
+          </Reveal>
+        </div>
+        
+        <div className="grid md:grid-cols-3 gap-8">
+          {items.map((item, i) => (
+            <Reveal key={i} delay={i * 100}>
+              <div className="p-8 rounded-[32px] border border-border bg-card/50 backdrop-blur-sm transition-all hover:bg-primary/5 hover:border-primary/20">
+                <h3 className="font-serif text-2xl font-bold mb-4">{item.t}</h3>
+                <p className="font-ui text-muted-foreground leading-relaxed">{item.d}</p>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function MechanismSection({ t }: { t: any }) {
+  const steps = Array.isArray(t("dashboard.mechanism.steps")) ? (t("dashboard.mechanism.steps") as any[]) : [];
+
+  return (
+    <section id="mechanism" className="relative py-24 md:py-40 border-b border-border overflow-hidden">
+      <div className="mx-auto max-w-6xl px-6 md:px-8">
+        <div className="text-center mb-20">
+          <Reveal>
+            <h2 className="font-serif text-[44px] leading-[1.05] tracking-tighter mb-6 sm:text-[56px]">
+              {t("dashboard.mechanism.title")}
+            </h2>
+          </Reveal>
+        </div>
+        
+        <div className="grid md:grid-cols-3 gap-12 relative">
+          <div className="hidden md:block absolute top-12 left-0 w-full h-px bg-gradient-to-r from-transparent via-border to-transparent" />
+          {steps.map((step, i) => (
+            <Reveal key={i} delay={i * 150}>
+              <div className="relative z-10 text-center">
+                <div className="w-16 h-16 rounded-2xl bg-primary text-primary-foreground font-serif text-2xl font-bold flex items-center justify-center mx-auto mb-8 shadow-glow">
+                  {step.n}
+                </div>
+                <h3 className="font-serif text-2xl font-bold mb-4">{step.t}</h3>
+                <p className="font-ui text-muted-foreground leading-relaxed px-4">{step.d}</p>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }
 
@@ -124,7 +191,7 @@ function Hero({ t }: { t: any }) {
               size="lg"
               className="h-14 rounded-full px-10 font-ui text-base font-bold border-border bg-transparent hover:bg-muted/30 transition-all active:scale-[0.98]"
             >
-              <Link to="/#features">{t("hero.ctaSecondary")}</Link>
+              <Link to="/">{t("hero.ctaSecondary")}</Link>
             </Button>
           </div>
         </Reveal>
