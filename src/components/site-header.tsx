@@ -57,14 +57,14 @@ export function SiteHeader({
           <LanguageSwitcher className="hidden sm:inline-flex" />
           <Link 
             to="/auth" 
-            className="hidden sm:block font-ui text-[13px] font-medium text-muted-foreground hover:text-foreground transition-colors"
+            className="hidden sm:block font-ui text-[12px] font-medium text-muted-foreground hover:text-foreground transition-colors"
           >
             {t("auth.signIn")}
           </Link>
           <Button
             asChild
             size="sm"
-            className="group rounded-full px-5 font-ui font-bold shadow-premium transition-all hover:scale-105 active:scale-[0.98]"
+            className="group rounded-full px-4 font-ui font-bold shadow-premium transition-all hover:scale-105 active:scale-[0.98] text-[12px] h-8"
           >
             <Link to="/auth" search={{ mode: "signup" }}>
               {t("auth.signUp")}
