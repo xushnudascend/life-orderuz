@@ -330,7 +330,7 @@ function FaqSection({ t }: { t: any }) {
 
 
 function PricingSection({ t }: { t: any }) {
-  const freeFeatures = [
+  const displayFree = [
     `${freeTierLimits.habits} tagacha odat`,
     `Kunlik ${freeTierLimits.journalEntriesPerDay} ta kundalik yozuv`,
     `Nadir bilan kunda ${freeTierLimits.mentorMessagesPerDay} ta xabar`,
@@ -339,23 +339,13 @@ function PricingSection({ t }: { t: any }) {
     "PWA offline rejim"
   ];
 
-  const premiumFeatures = [
+  const displayPremium = [
     "Cheksiz odatlar",
     "Nadir Pro (Full Memory)",
     "Haftalik AI hisobotlar",
     "Burnout oldini olish",
     "Premium yordam"
   ];
-
-  const f_feats = t("pricing.free.features");
-  const displayFree = Array.isArray(f_feats) 
-    ? (f_feats as string[]) 
-    : freeFeatures;
-    
-  const p_feats = t("pricing.premium.features");
-  const displayPremium = Array.isArray(p_feats) 
-    ? (p_feats as string[]) 
-    : premiumFeatures;
 
   return (
     <section id="pricing" className="relative py-24 md:py-40 bg-muted/5 border-b border-border overflow-hidden">
