@@ -37,16 +37,10 @@ export default defineTool({
       return { content: [{ type: "text", text: "Habit not found" }], isError: true };
     }
     const date = logged_date ?? new Date().toISOString().slice(0, 10);
-    const { data, error } = await supabase
-      .from("habit_logs")
-      .insert({
-        user_id: ctx.getUserId()!,
-        habit_id: habit.id,
-        logged_date: date,
-        xp_awarded: habit.xp_reward,
-      })
-      .select()
-      .maybeSingle();
+    const { data, error } = await supabase.rpc("log_habit_action_self", {
+      _habit_id: habit.id,
+      _date: date,
+    });
     if (error) {
       // Unique violation = already logged today; treat as idempotent success.
       if (error.code === "23505") {
