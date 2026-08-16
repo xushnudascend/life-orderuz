@@ -64,7 +64,7 @@ export const uz = {
   },
   auth: {
     title: "Tizimga kirish",
-    subtitle: "Motivatsiya o'tkinchi. Tizim esa abadiy.",
+    subtitle: "Motivatsiya tugaydi, tizim qoladi.",
     signIn: "Kirish",
     signUp: "Ro'yxatdan o'tish",
     email: "Email",
