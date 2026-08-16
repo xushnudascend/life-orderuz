@@ -94,7 +94,7 @@ function Hero({ t }: { t: any }) {
         </Reveal>
 
         <Reveal delay={250}>
-          <h1 className="font-serif text-[48px] leading-[0.9] tracking-tighter text-balance sm:text-[72px] md:text-[84px] lg:text-[100px] text-text-primary">
+          <h1 className="font-serif text-[clamp(2.5rem,8vw,5.5rem)] leading-[0.95] tracking-tighter text-balance text-text-primary">
             {t("hero.title")}
           </h1>
         </Reveal>
@@ -137,10 +137,12 @@ function Hero({ t }: { t: any }) {
         </Reveal>
 
         <Reveal delay={850}>
-          <div className="mt-24 flex items-center justify-center gap-12 grayscale opacity-60">
-            <div className="text-[10px] uppercase tracking-[0.3em] font-bold">Fogg Behavior Model</div>
-            <div className="h-1 w-1 rounded-full bg-border" />
-            <div className="text-[10px] uppercase tracking-[0.3em] font-bold">Self-Determination Theory</div>
+          <div className="mt-24 flex items-center justify-center gap-12 grayscale opacity-40">
+            <div className="text-[10px] uppercase tracking-[0.3em] font-bold">Lovable Cloud</div>
+            <div className="h-1 w-1 rounded-full bg-border" aria-hidden="true" />
+            <div className="text-[10px] uppercase tracking-[0.3em] font-bold">PWA Offline Support</div>
+            <div className="h-1 w-1 rounded-full bg-border" aria-hidden="true" />
+            <div className="text-[10px] uppercase tracking-[0.3em] font-bold">Behavioral Science</div>
           </div>
         </Reveal>
 
@@ -229,7 +231,7 @@ function HowItWorks({ t }: { t: any }) {
             </div>
           </div>
           <Reveal delay={300} className="relative aspect-square lg:aspect-auto lg:h-[600px]">
-            <div className="absolute inset-0 rounded-[var(--radius-xl)] border border-border bg-gradient-to-br from-card/80 to-card/20 backdrop-blur-sm overflow-hidden shadow-premium">
+            <div className="absolute inset-0 rounded-[var(--radius-xl)] border border-border bg-gradient-to-br from-card to-card/20 backdrop-blur-sm overflow-hidden shadow-premium">
                {/* Mock UI visualization */}
                <div className="absolute inset-x-0 top-0 h-12 border-b border-border bg-muted/20 px-4 flex items-center gap-2">
                  <div className="h-2 w-2 rounded-full bg-border" />
@@ -237,18 +239,18 @@ function HowItWorks({ t }: { t: any }) {
                  <div className="h-2 w-2 rounded-full bg-border" />
                </div>
                <div className="p-8 pt-20 space-y-6">
-                 <div className="h-24 w-full rounded-2xl bg-primary/5 border border-primary/10 p-4 flex items-center justify-between">
+                 <div className="h-24 w-full rounded-[var(--radius-md)] bg-primary/5 border border-primary/10 p-4 flex items-center justify-between">
                    <div className="space-y-2">
                      <div className="h-2 w-24 bg-primary/20 rounded" />
                      <div className="h-4 w-32 bg-primary/40 rounded" />
                    </div>
                    <div className="h-12 w-12 rounded-full border-2 border-primary border-t-transparent animate-spin-slow" />
                  </div>
-                 <div className="grid grid-cols-2 gap-4">
-                   <div className="h-32 rounded-2xl border border-border bg-muted/20" />
-                   <div className="h-32 rounded-2xl border border-border bg-muted/20" />
-                 </div>
-                 <div className="h-40 rounded-2xl border border-border bg-muted/20 relative overflow-hidden">
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="h-32 rounded-[var(--radius-md)] border border-border bg-muted/20" />
+                    <div className="h-32 rounded-[var(--radius-md)] border border-border bg-muted/20" />
+                  </div>
+                  <div className="h-40 rounded-[var(--radius-md)] border border-border bg-muted/20 relative overflow-hidden">
                     <div className="absolute inset-0 backdrop-grid opacity-30" />
                  </div>
                </div>
@@ -330,22 +332,13 @@ function FaqSection({ t }: { t: any }) {
 function PricingSection({ t }: { t: any }) {
   const [billing, setBilling] = useState<"monthly" | "yearly">("yearly");
 
-  const displayFree = [
-    `${freeTierLimits.habits} tagacha odat`,
-    `Kunlik ${freeTierLimits.journalEntriesPerDay} ta kundalik yozuv`,
-    `Nadir bilan kunda ${freeTierLimits.mentorMessagesPerDay} ta xabar`,
-    "Kunlik 3 ta mikro-vazifa",
-    "Streak, XP va intizom balli",
-    "PWA offline rejim"
-  ];
+  const displayFree = Array.isArray(t("pricing.free.features")) 
+    ? (t("pricing.free.features") as string[]) 
+    : [];
 
-  const displayPremium = [
-    "Cheksiz odatlar",
-    "Nadir Pro (Full Memory)",
-    "Haftalik AI hisobotlar",
-    "Burnout oldini olish",
-    "Premium yordam"
-  ];
+  const displayPremium = Array.isArray(t("pricing.premium.features")) 
+    ? (t("pricing.premium.features") as string[]) 
+    : [];
 
   return (
     <section id="pricing" className="relative py-24 md:py-40 bg-muted/5 border-b border-border overflow-hidden">
@@ -376,7 +369,7 @@ function PricingSection({ t }: { t: any }) {
         <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
           {/* Free Plan */}
           <Reveal delay={0}>
-            <div className="relative rounded-3xl p-10 transition-all hover:scale-[1.02] bg-background border border-border">
+            <div className="relative rounded-[var(--radius-xl)] p-10 transition-all hover:scale-[1.02] bg-background border border-border">
               <div className="mb-8">
                 <h3 className="font-serif text-2xl font-bold mb-2">{t("pricing.free.title")}</h3>
                 <div className="flex items-baseline gap-2">
@@ -400,8 +393,8 @@ function PricingSection({ t }: { t: any }) {
 
           {/* Pro Plan */}
           <Reveal delay={150}>
-            <div className="relative rounded-3xl p-10 transition-all hover:scale-[1.02] bg-card border-2 border-primary shadow-[0_32px_64px_-16px_hsl(var(--primary)/0.15)]">
-              <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-primary text-primary-foreground px-4 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest">
+            <div className="relative rounded-[var(--radius-xl)] p-10 transition-all hover:scale-[1.02] bg-card border-2 border-primary shadow-[0_32px_64px_-16px_hsl(var(--primary)/0.15)]">
+              <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-primary text-primary-foreground px-4 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest" aria-hidden="true">
                 {t("pricing.premium.badge")}
               </div>
               <div className="mb-8">
@@ -417,7 +410,7 @@ function PricingSection({ t }: { t: any }) {
               </div>
               <ul className="mb-10 space-y-4">
                 {displayPremium.map((feat: string) => (
-                  <li key={feat} className="flex items-start gap-3 text-sm font-ui text-muted-foreground/90">
+                  <li key={feat} className="flex items-start gap-3 text-sm font-ui text-text-secondary">
                     <Check className="h-4 w-4 text-primary shrink-0 mt-0.5" />
                     <span>{feat}</span>
                   </li>
