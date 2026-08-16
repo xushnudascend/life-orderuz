@@ -254,7 +254,7 @@ function FaqSection({ t }: { t: any }) {
 
   return (
     <section id="faq" className="border-b border-border py-24 md:py-32 bg-muted/5">
-      <div className="mx-auto max-w-6xl px-6 md:px-8">
+      <div className="mx-auto max-w-4xl px-6 md:px-8">
         <div className="grid lg:grid-cols-[1fr_1.5fr] gap-16 lg:gap-24">
           <div>
             <Reveal>
@@ -335,11 +335,11 @@ function PricingSection({ t }: { t: any }) {
   ];
 
   return (
-    <section id="pricing" className="relative py-24 md:py-40 bg-muted/5 border-b border-border overflow-hidden">
+    <section id="pricing" className="relative py-24 md:py-32 bg-muted/5 border-b border-border overflow-hidden">
       {/* Background decoration */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/5 rounded-full blur-[120px] pointer-events-none" />
       
-      <div className="mx-auto max-w-6xl px-6 md:px-8 relative z-10">
+      <div className="mx-auto max-w-4xl px-6 md:px-8 relative z-10">
         <div className="mb-20 text-center">
           <Reveal>
             <h2 className="font-serif text-[44px] leading-[1.05] tracking-tighter mb-6 sm:text-[56px]">
@@ -430,7 +430,7 @@ function FinalCta({ t }: { t: any }) {
       <div className="absolute inset-0 bg-primary/[0.02] pointer-events-none" />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[100px] pointer-events-none" />
       
-      <div className="mx-auto max-w-6xl px-6 md:px-8 text-center relative z-10">
+      <div className="mx-auto max-w-4xl px-6 md:px-8 text-center relative z-10">
         <Reveal>
           <h2 className="font-serif text-[56px] leading-[0.95] tracking-tighter mb-10 sm:text-[80px] md:text-[100px] text-balance">
             {t("cta.heading")}
