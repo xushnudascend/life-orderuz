@@ -81,6 +81,10 @@ export const uz = {
     trustLine: "Kartasiz sinab ko'ring · O'zbek tilida",
   },
   pricing: {
+    meta: {
+      title: "Narxlar — Life Order: Premium va Free rejalar",
+      description: "Life Order narxlari: Free doimiy bepul va Pro reja imkoniyatlari. O'zingizga mos tarifni tanlang va intizomni hozirroq boshlang.",
+    },
     heading: "Narxlar — sodda",
     subheading: "Karta shart emas. Istalgan vaqtda to'xtatish mumkin.",
     free: {
