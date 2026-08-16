@@ -415,6 +415,7 @@ function PricingSection({ t }: { t: any }) {
               </Button>
             </div>
           </Reveal>
+        </div>
       </div>
     </section>
   );
