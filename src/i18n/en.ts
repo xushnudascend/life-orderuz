@@ -139,8 +139,8 @@ const _en = {
     },
   },
   cta: {
-    heading: "Start today. Tomorrow is late.",
-    body: "60-second onboarding. No card. Don't like it — no trace stays.",
+    heading: "Order your life today",
+    body: "Get your personal growth protocol through a 3-minute diagnosis. Completely free.",
     button: "Take the diagnosis",
   },
   footer: {

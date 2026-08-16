@@ -107,8 +107,8 @@ export const uz = {
     },
   },
   cta: {
-    heading: "Yangi hayotni bugundan boshlang",
-    body: "3 daqiqalik tashxis orqali shaxsiy o'sish rejangizni oling. Mutlaqo bepul.",
+    heading: "Yangi hayotni bugundan tartibga soling",
+    body: "3 daqiqalik tashxis orqali shaxsiy o'sish protokoliingizni oling. Mutlaqo bepul.",
     button: "Boshlash",
   },
   footer: {
@@ -136,7 +136,7 @@ export const uz = {
       urgent: "Zarur",
       dailyLoop: "Kunlik halqa",
       depth: "Chuqurroq",
-      habits: "Protokol",
+      habits: "Bugungi protokollar",
       quickAccess: "Modullar",
       timetable: "Kunlik jadval",
     },
@@ -155,7 +155,7 @@ export const uz = {
     },
     depth: {
       title: "Nadir",
-      insightContext: "Psixologik profil: {name}. Bugungi progress: {done}/{total} ({percent}%). Streak: {streak} kun. Arxetip: {archetype}.",
+      insightContext: "Psixologik profil: {name}. Bugungi harakat: {done}/{total} ({percent}%). Streak: {streak} kun. Arxetip: {archetype}.",
     },
   },
   settings: {
