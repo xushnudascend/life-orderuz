@@ -35,6 +35,31 @@ export const uz = {
       rhythm: "Siz qaysi vaqtda energiyangizni eng yuqori his qilasiz?",
       sleep: "Uyqu tartibingiz qanday?",
       discipline: "Hozirgi intizom darajangizni qanday baholaysiz?",
+    },
+    messages: {
+      finish: "Tashxis tugadi. O'zbekona intizom yo'li tuzildi.",
+      ahaNote: "Biologik ritming va triggerlaring tahlil qilindi. Nadir AI sening xulq-atvor arxitekturangni quyidagicha shakllantirdi:",
+      finalStepTitle: "Sen haqingda oxirgi ma'lumot",
+      finalStepDesc: "Har bir qatorga bosib, javobingni yoz. Kerak bo'lsa qaytadan ochib tahrirlaysan.",
+      planTitle: "Reja davomiyligi",
+      socialTitle: "Senga o'xshaganlar",
+      socialArchetype: "Aynan shu arxetipda {count} ta odam yo'lda. ",
+      socialPlan: "Ulardan {count} tasi hozir siz kabi o'zgarishni boshlamoqda.",
+      socialVerified: "Tasdiqlangan ijtimoiy dalil (Social Proof)",
+      firstWinTitle: "Bugungi birinchi g'alaba · {minutes} daqiqa",
+      recommendedTime: "Tavsiya etilgan vaqt",
+    },
+    plans: {
+      sprint: {
+        tag: "Tez sprint",
+        title: "7 kun",
+        desc: "Bir haftalik intensiv — tez natija.",
+      },
+      long: {
+        tag: "To'liq o'zgarish",
+        title: "30 kun",
+        desc: "Chuqurroq qayta qurish — odat singiydi.",
+      }
     }
   },
   auth: {

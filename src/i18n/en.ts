@@ -36,6 +36,31 @@ const _en = {
       rhythm: "When do you feel your energy is at its peak?",
       sleep: "How is your sleep routine?",
       discipline: "How do you rate your current discipline level?",
+    },
+    messages: {
+      finish: "Diagnosis complete. Your discipline path is ready.",
+      ahaNote: "Your biorhythms and triggers have been analyzed. Nadir AI has shaped your behavioral architecture:",
+      finalStepTitle: "Final details about you",
+      finalStepDesc: "Click each row to provide your answer. You can edit them later if needed.",
+      planTitle: "Plan Duration",
+      socialTitle: "People like you",
+      socialArchetype: "There are {count} people in this archetype. ",
+      socialPlan: "Of them, {count} are starting their transformation right now.",
+      socialVerified: "Verified Social Proof",
+      firstWinTitle: "Today's first victory · {minutes} min",
+      recommendedTime: "Recommended time",
+    },
+    plans: {
+      sprint: {
+        tag: "Fast Sprint",
+        title: "7 days",
+        desc: "One week of intensity — fast results.",
+      },
+      long: {
+        tag: "Full Transformation",
+        title: "30 days",
+        desc: "Deeper rebuilding — habits will stick.",
+      }
     }
   },
   auth: {
