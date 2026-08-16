@@ -345,13 +345,16 @@ function PricingSection({ t }: { t: any }) {
       <div className="mx-auto max-w-6xl px-6 md:px-8">
         <div className="mb-20 text-center">
           <Reveal>
-            <h2 className="font-serif text-[44px] leading-[1.05] tracking-tighter mb-6 sm:text-[56px]">
-              Halol narxlar. <span className="text-muted-foreground">Yashirin to'lovsiz.</span>
+            <h2 className="font-serif text-[clamp(2rem,6vw,3.5rem)] leading-[1.05] tracking-tighter mb-6">
+              {t("pricing.title") || "Halol narxlar."} <span className="text-text-secondary">{t("pricing.subtitle") || "Yashirin to'lovsiz."}</span>
             </h2>
             <div className="flex items-center justify-center gap-4 mb-8">
-              <span className={cn("text-sm font-ui transition-colors", billing === "monthly" ? "text-foreground font-bold" : "text-muted-foreground")}>Oylik</span>
+              <span className={cn("text-sm font-ui transition-colors", billing === "monthly" ? "text-foreground font-bold" : "text-text-secondary")}>
+                {t("pricing.monthly") || "Oylik"}
+              </span>
               <button 
                 onClick={() => setBilling(billing === "monthly" ? "yearly" : "monthly")}
+                aria-label="Billing toggle"
                 className="relative h-6 w-12 rounded-full bg-muted border border-border transition-colors hover:border-primary/50"
               >
                 <div className={cn(
@@ -359,8 +362,8 @@ function PricingSection({ t }: { t: any }) {
                   billing === "monthly" ? "left-1" : "left-7"
                 )} />
               </button>
-              <span className={cn("text-sm font-ui transition-colors", billing === "yearly" ? "text-foreground font-bold" : "text-muted-foreground")}>
-                Yillik <span className="text-[10px] bg-primary/10 text-primary px-1.5 py-0.5 rounded-full ml-1">-30%</span>
+              <span className={cn("text-sm font-ui transition-colors", billing === "yearly" ? "text-foreground font-bold" : "text-text-secondary")}>
+                {t("pricing.yearly") || "Yillik"} <span className="text-[10px] bg-primary/10 text-primary px-1.5 py-0.5 rounded-full ml-1">-30%</span>
               </span>
             </div>
           </Reveal>
@@ -374,7 +377,7 @@ function PricingSection({ t }: { t: any }) {
                 <h3 className="font-serif text-2xl font-bold mb-2">{t("pricing.free.title")}</h3>
                 <div className="flex items-baseline gap-2">
                   <span className="font-serif text-4xl font-bold tracking-tighter tabular-nums">{t("pricing.free.price")}</span>
-                  <span className="text-sm font-ui text-muted-foreground tracking-wide uppercase">{t("pricing.free.period")}</span>
+                  <span className="text-sm font-ui text-text-secondary tracking-wide uppercase">{t("pricing.free.period")}</span>
                 </div>
               </div>
               <ul className="mb-10 space-y-4">
@@ -403,8 +406,8 @@ function PricingSection({ t }: { t: any }) {
                   <span className="font-serif text-4xl font-bold tracking-tighter tabular-nums">
                     {billing === "monthly" ? "59 000" : "490 000"} so'm
                   </span>
-                  <span className="text-sm font-ui text-muted-foreground tracking-wide uppercase">
-                    {billing === "monthly" ? "oyiga" : "yiliga"}
+                  <span className="text-sm font-ui text-text-secondary tracking-wide uppercase">
+                    {billing === "monthly" ? t("pricing.premium.period") : t("pricing.premium.periodYearly")}
                   </span>
                 </div>
               </div>
