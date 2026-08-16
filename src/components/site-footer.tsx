@@ -74,7 +74,7 @@ export function SiteFooter() {
         </div>
         <div className="mt-12 flex flex-wrap items-center justify-between gap-3 border-t border-border pt-6 font-ui text-xs text-muted-foreground">
           <p>
-            © {year} {uz.brand.name}. Barcha huquqlar himoyalangan.
+            © {year} {t("brand.name")}. Barcha huquqlar himoyalangan.
           </p>
           <p className="flex items-center gap-2">
             <span
