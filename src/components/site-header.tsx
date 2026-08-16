@@ -65,7 +65,7 @@ export function SiteHeader({
             size="sm"
             className="group rounded-full px-5 font-ui font-bold shadow-premium transition-all hover:scale-105 active:scale-[0.98]"
           >
-            <Link to="/auth?mode=signup">
+            <Link to="/auth" search={{ mode: "signup" }}>
               {t("auth.signUp")}
             </Link>
           </Button>
