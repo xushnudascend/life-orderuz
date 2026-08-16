@@ -264,7 +264,7 @@ function HowItWorks({ t }: { t: any }) {
 }
 
 function FaqSection({ t }: { t: any }) {
-  const items = t("faq.items") || [];
+  const items = Array.isArray(t("faq.items")) ? (t("faq.items") as any[]) : [];
   const [open, setOpen] = useState<number | null>(0);
 
   return (
