@@ -352,14 +352,13 @@ function PricingSection({ t }: { t: any }) {
 
   return (
     <section id="pricing" className="relative py-24 md:py-40 bg-muted/5 border-b border-border overflow-hidden">
-      <div className="absolute top-0 right-0 h-[600px] w-[600px] rounded-full bg-primary/5 blur-[120px] pointer-events-none" />
       <div className="mx-auto max-w-6xl px-6 md:px-8">
         <div className="mb-20 text-center">
           <Reveal>
             <h2 className="font-serif text-[44px] leading-[1.05] tracking-tighter mb-6 sm:text-[56px]">
               Halol narxlar. <span className="text-muted-foreground">Yashirin to'lovsiz.</span>
             </h2>
-            <p className="mx-auto max-w-2xl font-ui text-lg text-muted-foreground/70">
+            <p className="mx-auto max-w-2xl font-ui text-lg text-muted-foreground/80">
               Karta so'ralmaydi. Free bilan boshlang, o'zingizga kerak bo'lganda Pro ga o'ting.
             </p>
           </Reveal>
