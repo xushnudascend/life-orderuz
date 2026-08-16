@@ -9,6 +9,7 @@ import { Label } from "@/components/ui/label";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { ArrowLeft, Eye, EyeOff, Loader2, ShieldCheck } from "lucide-react";
 import { uz } from "@/i18n";
+import { useT } from "@/i18n/use-t";
 
 import { track } from "@/lib/analytics";
 
@@ -56,6 +57,7 @@ export const Route = createFileRoute("/auth")({
 
 function AuthPage() {
   const search = Route.useSearch();
+  const { t } = useT();
   const next = search.next ?? "/dashboard";
   const [tab, setTab] = useState<"signin" | "signup">("signup");
   const navigate = useNavigate();
@@ -159,6 +161,7 @@ function AuthPage() {
 }
 
 function EmailForm({ mode, next }: { mode: "signin" | "signup"; next: string }) {
+  const { t } = useT();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -220,7 +223,7 @@ function EmailForm({ mode, next }: { mode: "signin" | "signup"; next: string }) 
       <div className="space-y-1.5">
         <div className="flex items-center justify-between">
           <Label htmlFor="password">Parol</Label>
-          {mode === "signin" && <ForgotPasswordLink email={email} />}
+          {mode === "signin" && <ForgotPasswordLink email={email} t={t} />}
         </div>
         <div className="relative">
           <Input
@@ -264,13 +267,13 @@ function EmailForm({ mode, next }: { mode: "signin" | "signup"; next: string }) 
       </div>
       <Button type="submit" className="w-full font-ui font-semibold" disabled={loading}>
         {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-        {mode === "signup" ? "Hisob yaratish" : "Kirish"}
+        {mode === "signup" ? t("auth.signUp") : t("auth.signIn")}
       </Button>
     </form>
   );
 }
 
-function ForgotPasswordLink({ email }: { email: string }) {
+function ForgotPasswordLink({ email, t }: { email: string; t: any }) {
   const [busy, setBusy] = useState(false);
   async function send() {
     if (busy) return;
@@ -299,7 +302,7 @@ function ForgotPasswordLink({ email }: { email: string }) {
       disabled={busy}
       className="font-ui text-[11px] uppercase tracking-[0.18em] text-muted-foreground hover:text-primary disabled:opacity-50"
     >
-      {busy ? "Yuborilmoqda..." : "Parolni unutdim"}
+      {busy ? "..." : t("auth.forgot")}
     </button>
   );
 }
