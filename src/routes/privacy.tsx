@@ -7,9 +7,9 @@ const DESC = "Life Order shaxsiy ma'lumotlar xavfsizligi va maxfiylik tamoyillar
 export const Route = createFileRoute("/privacy")({
   head: () => ({
     meta: [
-      { title: `Maxfiylik siyosati — ${uz.brand.name}` },
+      { title: `Maxfiylik siyosati — Life Order` },
       { name: "description", content: DESC },
-      { property: "og:title", content: `Maxfiylik siyosati — ${uz.brand.name}` },
+      { property: "og:title", content: `Maxfiylik siyosati — Life Order` },
       { property: "og:description", content: DESC },
       { property: "og:url", content: "https://life-orderuz.lovable.app/privacy" },
       { property: "og:type", content: "website" },

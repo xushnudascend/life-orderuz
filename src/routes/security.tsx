@@ -8,9 +8,9 @@ const DESC =
 export const Route = createFileRoute("/security")({
   head: () => ({
     meta: [
-      { title: `Xavfsizlik — ${uz.brand.name}` },
+      { title: `Xavfsizlik — Life Order` },
       { name: "description", content: DESC },
-      { property: "og:title", content: `Xavfsizlik — ${uz.brand.name}` },
+      { property: "og:title", content: `Xavfsizlik — Life Order` },
       { property: "og:description", content: DESC },
       { property: "og:url", content: "https://life-orderuz.lovable.app/security" },
       { property: "og:type", content: "website" },

@@ -8,9 +8,9 @@ const DESC =
 export const Route = createFileRoute("/refund")({
   head: () => ({
     meta: [
-      { title: `To'lovni qaytarish — ${uz.brand.name}` },
+      { title: `To'lovni qaytarish — Life Order` },
       { name: "description", content: DESC },
-      { property: "og:title", content: `To'lovni qaytarish — ${uz.brand.name}` },
+      { property: "og:title", content: `To'lovni qaytarish — Life Order` },
       { property: "og:description", content: DESC },
       { property: "og:url", content: "https://life-orderuz.lovable.app/refund" },
       { property: "og:type", content: "website" },

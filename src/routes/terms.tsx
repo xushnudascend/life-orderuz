@@ -9,9 +9,9 @@ const DESC =
 export const Route = createFileRoute("/terms")({
   head: () => ({
     meta: [
-      { title: `Foydalanish shartlari — ${uz.brand.name}` },
+      { title: `Foydalanish shartlari — Life Order` },
       { name: "description", content: DESC },
-      { property: "og:title", content: `Foydalanish shartlari — ${uz.brand.name}` },
+      { property: "og:title", content: `Foydalanish shartlari — Life Order` },
       { property: "og:description", content: DESC },
       { property: "og:url", content: "https://life-orderuz.lovable.app/terms" },
       { property: "og:type", content: "website" },
