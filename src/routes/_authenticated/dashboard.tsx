@@ -71,6 +71,7 @@ function today(): string {
 function Dashboard() {
   const { userId } = Route.useRouteContext();
   const { t } = useT();
+  if (!t || typeof t !== "function") return null;
 
   const [profile, setProfile] = useState<Profile | null>(null);
   const [habits, setHabits] = useState<Habit[]>([]);

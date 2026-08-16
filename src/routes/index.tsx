@@ -58,6 +58,7 @@ export const Route = createFileRoute("/")({
 
 function Landing() {
   const { t } = useT();
+  if (!t || typeof t !== "function") return null;
   
 
 

@@ -42,6 +42,7 @@ type Streak = {
 function ProfilePage() {
   const { userId } = Route.useRouteContext();
   const { t } = useT();
+  if (!t || typeof t !== "function") return null;
 
   const [profile, setProfile] = useState<Profile | null>(null);
   const [stats, setStats] = useState<Stats>(null);

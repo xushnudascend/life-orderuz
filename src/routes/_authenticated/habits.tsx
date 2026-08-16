@@ -60,6 +60,7 @@ function tomorrow(): string {
 function HabitsPage() {
   const { userId } = Route.useRouteContext();
   const { t } = useT();
+  if (!t || typeof t !== "function") return null;
 
   const [loading, setLoading] = useState(true);
   const [habits, setHabits] = useState<Habit[]>([]);

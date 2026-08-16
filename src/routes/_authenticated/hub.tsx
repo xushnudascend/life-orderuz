@@ -71,6 +71,7 @@ const MODULES = [
 
 function HubPage() {
   const { t } = useT();
+  if (!t || typeof t !== "function") return null;
 
 
   return (
