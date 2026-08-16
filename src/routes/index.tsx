@@ -62,11 +62,11 @@ function Landing() {
       <ScrollProgress />
       <SiteHeader />
       <main id="main-content">
-        <Hero />
-        <Features />
-        <HowItWorks />
-        <FaqSection />
-        <FinalCta />
+        <Hero t={t} />
+        <Features t={t} />
+        <HowItWorks t={t} />
+        <FaqSection t={t} />
+        <FinalCta t={t} />
       </main>
       <SiteFooter />
     </div>
@@ -140,13 +140,12 @@ function Hero({ t }: { t: any }) {
   );
 }
 
-function Features() {
+function Features({ t }: { t: any }) {
   const items = [
     { 
       n: "01", 
-      t: "AI Mentor", 
-      d: "Progressingizni tahlil qiladi va shaxsiy tavsiyalar beradi. O'zlik o'zgarishiga yordam beruvchi aqlli yordamchi." 
-
+      t: t("dashboard.quick.quests"), 
+      d: t("dashboard.habits.emptyDesc") 
     },
     { 
       n: "02", 
@@ -155,9 +154,8 @@ function Features() {
     },
     { 
       n: "03", 
-      t: "Aniq reja", 
-      d: "Kunlik uchta eng muhim vazifa. Ortiqcha charchoqsiz, faqat natija beruvchi qadamlar." 
-
+      t: t("dashboard.sections.timetable"), 
+      d: t("dashboard.habits.emptyDesc") 
     },
   ];
 

@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { uz } from "@/i18n";
+import { useT } from "@/i18n/use-t";
 
 const COLUMNS: { title: string; links: { href: string; label: string }[] }[] = [
   {
@@ -29,6 +29,7 @@ const COLUMNS: { title: string; links: { href: string; label: string }[] }[] = [
 ];
 
 export function SiteFooter() {
+  const { t } = useT();
   const year = new Date().getFullYear();
   return (
     <footer className="border-t border-border bg-background">
@@ -42,10 +43,10 @@ export function SiteFooter() {
               >
                 <span className="font-serif text-base font-semibold leading-none">L</span>
               </span>
-              <span className="font-serif text-lg font-bold tracking-tight">{uz.brand.name}</span>
+              <span className="font-serif text-lg font-bold tracking-tight">{t("brand.name")}</span>
             </Link>
             <p className="mt-4 max-w-[240px] font-ui text-[13px] leading-relaxed text-muted-foreground">
-              Intizom — iroda mevasidir. Xulq-atvor tizimi — o'zbek tilida.
+              {t("brand.tagline")} — {t("footer.tagline")}
             </p>
             <p className="mt-4 font-ui text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
               Toshkent · O'zbekiston
