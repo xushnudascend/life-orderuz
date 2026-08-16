@@ -283,6 +283,100 @@ const _en = {
       }
     ]
   },
+  profile: {
+    hero: {
+      eyebrow: "You",
+      subtitle: "Ranking, streak, and shield in one place.",
+      publicLink: "View public profile →",
+    },
+    stats: {
+      level: "Level",
+      totalXp: "Total XP",
+      currentStreak: "Current streak",
+      xpHistory: "{delta}% vs last week",
+      xpCollecting: "collecting data for last 7 days",
+      longestStreak: "longest: {days} days",
+    },
+    plan: {
+      title: "Your Plan",
+      label: "Plan",
+      days: "{days} days",
+      onboarding: "Onboarding",
+      longest: "Longest streak",
+    },
+    username: {
+      title: "Username",
+      placeholder: "e.g. aziz",
+      hint: "Lowercase letters, numbers, underscore only. Min 3 chars.",
+      error: "Username must be 3+ chars.",
+      saved: "Username saved.",
+    },
+    shield: {
+      title: "Shield",
+      desc: "Once a week — protects your streak on a day off.",
+      activeUntil: "Active until: {date}",
+      limitError: "Shield limit reached for this week.",
+      genericError: "Some fields are incorrect.",
+      success: "Shield active. Streak preserved for today.",
+      cta: "Activate",
+      used: "Used",
+    },
+    actions: {
+      back: "Back to today",
+      settings: "Settings",
+      achievements: "Achievements",
+      signOut: "Sign out",
+    }
+  },
+  habits: {
+    hero: {
+      eyebrow: "Daily Rhythm",
+      subtitle: "Today: {done} / {total} completed. Small repetition — big change.",
+      forgiving: "Forgiving Streak Active",
+    },
+    add: {
+      title: "Start Small",
+      placeholder: "What will you do? (e.g. 2 min reading)",
+      difficulty: "Difficulty",
+      category: "Category",
+      quick: "Quick pick",
+      submit: "Add",
+      limitError: "3 habit limit on Free plan. Upgrade to Pro for more.",
+    },
+    categories: {
+      body: "Body",
+      habit: "Habit",
+      learn: "Learn",
+      other: "Other",
+    },
+    empty: {
+      title: "No habits added yet",
+      desc: "Start with a small and clear habit — e.g. '2 min breathing'. A small start goes a long way.",
+    },
+    messages: {
+      moved: "Moved to tomorrow.",
+      alreadyScheduled: "This habit is scheduled for another day.",
+      oneLeft: "One step left. Willpower is a muscle.",
+      allDone: "Victory! Today's protocol is 100% closed.",
+      xpAwarded: "+{xp} XP. Small step, big result.",
+    }
+  },
+  journal: {
+    hero: {
+      eyebrow: "Reflection",
+      title: "Journal",
+      subtitle: "Talk to yourself honestly today. Only you read this.",
+    },
+    add: {
+      title: "Write your internal landscape",
+      placeholder: "What happened today? What did you avoid? What did you control?",
+      submit: "Save",
+    },
+    empty: {
+      title: "No entries yet",
+      desc: "Write your mood today. By putting thoughts on paper, you gain control over them.",
+    }
+  },
 };
 
 export const en = _en as unknown as Dict;
