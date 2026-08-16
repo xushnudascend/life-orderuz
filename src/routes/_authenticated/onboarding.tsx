@@ -425,8 +425,8 @@ function OptionList({
             onClick={() => (isMulti ? onToggleMulti(opt.value) : onChange(opt.value))}
             className={
               selected
-                ? "flex w-full items-center justify-between rounded-[var(--radius)] border-2 border-primary bg-primary/5 px-5 py-4 text-left font-ui text-sm transition-all"
-                : "lift flex w-full items-center justify-between rounded-[var(--radius)] border border-border bg-card px-5 py-4 text-left font-ui text-sm transition-colors hover:border-foreground/30"
+                ? "flex w-full items-center justify-between rounded-[var(--radius-md)] border-2 border-primary bg-primary/5 px-5 py-4 text-left font-ui text-sm transition-all"
+                : "lift flex w-full items-center justify-between rounded-[var(--radius-md)] border border-border bg-card px-5 py-4 text-left font-ui text-sm transition-colors hover:border-foreground/30"
             }
           >
             <span className={selected ? "text-foreground" : "text-foreground/90"}>{opt.label}</span>

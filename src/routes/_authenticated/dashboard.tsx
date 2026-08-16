@@ -200,9 +200,8 @@ function Dashboard() {
 
   return (
     <AppShell title="Dashboard">
-      {/* 3D Orb Backgrounds for Dashboard */}
-      <div className="absolute top-[-5%] right-[-5%] h-[400px] w-[400px] animate-orb-float rounded-full bg-primary/[0.03] blur-[100px] pointer-events-none" />
-      <div className="absolute bottom-[-5%] left-[-5%] h-[300px] w-[300px] animate-orb-float-delayed rounded-full bg-primary/[0.02] blur-[80px] pointer-events-none" />
+      {/* Reveal Animation Overlay */}
+      <div className="animate-in fade-in duration-1000 slide-in-from-bottom-2" />
 
       {/* Unified Hero — Ascend-style dense bento */}
       {!loaded ? (
@@ -217,7 +216,11 @@ function Dashboard() {
           </div>
         </div>
       ) : (
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-6">
+          <ProfileCompletionCard missing={missing} />
+          
+          <StreakAtRisk streakDays={streak?.current_days ?? 0} percent={percent} />
+          
           <StatsHeroBento
             greeting={`${c.greeting} · ${c.label}`}
             displayName={profile?.display_name ?? null}
@@ -234,18 +237,37 @@ function Dashboard() {
             shieldsUsed={shieldsUsed}
             score={score}
           />
+
+          <NadirNudgeBanner userId={userId} />
           
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
              <div className="rounded-[32px] border border-border/60 bg-secondary p-6 transition-all hover:bg-primary/5 hover:border-primary/40 backdrop-blur-xl group">
                 <BiorythmPeak />
              </div>
-             <div className="rounded-[32px] border border-border/60 bg-secondary p-6 transition-all hover:bg-primary/5 hover:border-primary/40 backdrop-blur-xl group flex items-center justify-center">
-               <Link to="/mentor" className="flex items-center gap-3 text-primary font-serif text-xl">
+             <div className="rounded-[32px] border border-border/60 bg-secondary p-6 transition-all hover:bg-primary/5 hover:border-primary/40 backdrop-blur-xl group flex flex-col gap-4">
+               <Link to="/mentor" className="flex items-center gap-3 text-primary font-serif text-xl p-2">
                  <Sparkles className="h-6 w-6" />
                  Mentor bilan suhbat
                </Link>
+               <PsychologicalFocus score={score} />
              </div>
           </div>
+
+          <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+            <HundredDayTimeline streakDays={streak?.current_days ?? 0} />
+            <PeakEndCurve userId={userId} />
+          </div>
+
+          <AIInsightCard 
+            context={`User archetype is ${profile?.archetype}. Level ${stats?.level}. Current streak ${streak?.current_days} days. Today's habits: ${habits.map(h => h.title).join(', ')}.`} 
+          />
+
+          {milestone && (
+            <StreakMilestone 
+              days={milestone} 
+              onDismiss={() => setMilestone(null)} 
+            />
+          )}
         </div>
       )}
 
