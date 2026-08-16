@@ -6,10 +6,10 @@ import { LanguageSwitcher } from "@/components/language-switcher";
 type NavLink = { href: string; label: string };
 
 const DEFAULT_NAV: NavLink[] = [
-  { href: "/#features", label: "Imkoniyatlar" },
-  { href: "/pricing", label: "Narx" },
-  { href: "/blog", label: "Blog" },
-  { href: "/#faq", label: "Savollar" },
+  { href: "/#features", label: "brand.features" },
+  { href: "/pricing", label: "brand.pricing" },
+  { href: "/blog", label: "brand.blog" },
+  { href: "/#faq", label: "brand.faq" },
 ];
 
 export function SiteHeader({
@@ -45,7 +45,7 @@ export function SiteHeader({
               hash={l.href.startsWith("/#") ? l.href.slice(2) : undefined}
               className="group relative transition-colors hover:text-foreground"
             >
-              {l.label}
+              {t(l.label as any)}
               <span
                 aria-hidden
                 className="absolute -bottom-1 left-0 h-px w-full origin-left scale-x-0 bg-primary transition-transform duration-300 group-hover:scale-x-100"

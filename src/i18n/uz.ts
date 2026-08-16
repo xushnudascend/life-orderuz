@@ -5,6 +5,10 @@
 export const uz = {
   brand: {
     name: "Life Order",
+    features: "Imkoniyatlar",
+    pricing: "Narxlar",
+    blog: "Blog",
+    faq: "Savollar",
     tagline: "Motivatsiya tugaydi, tizim qoladi.",
     oneLiner:
       "Self-Control OS — Hayotingizni intizomga soluvchi yaxlit tizim. 3 daqiqada tashxis, kunlik 3 qadam va shafqatsiz AI mentor.",
@@ -103,7 +107,7 @@ export const uz = {
         "Haftasiga 3 ta Shield",
         "Burnout signalizatsiyasi",
       ],
-      cta: "7 kun bepul boshlash",
+      cta: "Premiumga o'tish",
     },
   },
   cta: {
@@ -218,6 +222,34 @@ export const uz = {
     saving: "Saqlanmoqda...",
     success: "Sozlamalar saqlandi",
     error: "Saqlab bo'lmadi",
+  },
+  faq: {
+    items: [
+      {
+        q: "Life Order Pro nima va u bepul rejadan nimasi bilan farq qiladi?",
+        a: "Bepul reja (Free) asosiy intizom protokollarini o'z ichiga oladi. Pro reja esa cheksiz mentor xotirasi, haftalik AI hisobotlar, Shield (streakni asrash) va burnout signalizatsiyasi kabi premium vositalarni taqdim etadi."
+      },
+      {
+        q: "Streak (uzluksiz kunlar) yo'qolsa nima bo'ladi?",
+        a: "Life Order 'kechirimli intizom' (Forgiving Discipline) tamoyiliga asoslangan. Streak yo'qolsa, sizni jazolamaymiz, lekin 66 kunlik avtomatlashuv davrini yangidan boshlashni tavsiya etamiz. Pro foydalanuvchilar haftasiga 3 ta Shield ishlatishlari mumkin."
+      },
+      {
+        q: "Ma'lumotlarim xavfsizmi?",
+        a: "Mutlaqo. Ma'lumotlaringiz Supabase (Lovable Cloud) xavfsiz serverlarida saqlanadi. Biz ma'lumotlaringizni hech qachon uchinchi shaxslarga sotmaymiz yoki reklama uchun ishlatmaymiz."
+      },
+      {
+        q: "To'lov qanday amalga oshiriladi?",
+        a: "O'zbekiston foydalanuvchilari uchun Click va Payme orqali milliy valyutada to'lash imkoniyati mavjud. Xalqaro foydalanuvchilar uchun esa Stripe/Paddle tizimlari integratsiya qilinmoqda."
+      },
+      {
+        q: "Ilovani telefonga o'rnatish mumkinmi?",
+        a: "Ha. Life Order PWA (Progressive Web App) texnologiyasida qurilgan. Brauzeringiz menyusidan 'Add to Home Screen' yoki 'O'rnatish' tugmasini bosib, uni oddiy ilova kabi ishlatishingiz mumkin."
+      },
+      {
+        q: "Nadir AI kim va u qanday ishlaydi?",
+        a: "Nadir — bu xulq-atvor psixologiyasiga asoslangan AI mentor. U sizning triggers, sirkad ritm va kunlik faolligingizni tahlil qilib, 'yumshoq' yoki 'shafqatsiz' intizom rejimida maslahatlar beradi."
+      }
+    ]
   },
 } as const;
 

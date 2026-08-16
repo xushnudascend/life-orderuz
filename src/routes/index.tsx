@@ -77,9 +77,8 @@ function Landing() {
 function Hero({ t }: { t: any }) {
   return (
     <section className="relative flex min-h-dvh flex-col items-center justify-center overflow-hidden border-b border-border bg-background">
-      {/* Premium 3D Orb Backgrounds */}
-      <div className="absolute top-[-15%] right-[-15%] h-[800px] w-[800px] animate-orb-float rounded-full bg-primary/10 blur-[140px] pointer-events-none" />
-      <div className="absolute bottom-[-15%] left-[-15%] h-[700px] w-[700px] animate-orb-float-delayed rounded-full bg-primary/5 blur-[120px] pointer-events-none" />
+      {/* Static Radial Gradient Background */}
+      <div className="absolute top-0 right-0 w-full h-full bg-[radial-gradient(ellipse_at_top_right,_var(--primary)_0%,_transparent_70%)] opacity-[0.03] pointer-events-none" />
       
       <div className="relative z-10 mx-auto w-full max-w-6xl px-6 py-20 text-center md:px-8">
         <Reveal delay={100}>
@@ -128,27 +127,17 @@ function Hero({ t }: { t: any }) {
         
         <Reveal delay={700}>
           <div className="mt-20 flex flex-col items-center gap-6">
-            <div className="flex -space-x-3 overflow-hidden">
-              {[1, 2, 3, 4, 5].map((i) => (
-                <div key={i} className="inline-block h-10 w-10 rounded-full border-2 border-background bg-muted/50" />
-              ))}
-              <div className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-background bg-primary text-[10px] font-bold text-primary-foreground">
-                12k+
-              </div>
-            </div>
-            <p className="font-ui text-xs font-medium text-muted-foreground/60 tracking-wide">
-              12,400+ dan ortiq real foydalanuvchilar yo'lda
+            <p className="font-ui text-xs font-medium text-muted-foreground tracking-wide">
+              Beta 2.0 · Erta kirish ochiq
             </p>
           </div>
         </Reveal>
 
         <Reveal delay={850}>
-          <div className="mt-24 flex items-center justify-center gap-12 grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-700">
-            <div className="text-[10px] uppercase tracking-[0.3em] font-bold">Identity Shift</div>
+          <div className="mt-24 flex items-center justify-center gap-12 grayscale opacity-60">
+            <div className="text-[10px] uppercase tracking-[0.3em] font-bold">Fogg Behavior Model</div>
             <div className="h-1 w-1 rounded-full bg-border" />
-            <div className="text-[10px] uppercase tracking-[0.3em] font-bold">Deep Work</div>
-            <div className="h-1 w-1 rounded-full bg-border" />
-            <div className="text-[10px] uppercase tracking-[0.3em] font-bold">Habit Design</div>
+            <div className="text-[10px] uppercase tracking-[0.3em] font-bold">Self-Determination Theory</div>
           </div>
         </Reveal>
 
@@ -178,7 +167,7 @@ function Features({ t }: { t: any }) {
 
   return (
     <section id="features" className="relative overflow-hidden border-b border-border py-24 md:py-32">
-      <div className="absolute top-0 left-1/4 h-[500px] w-[500px] rounded-full bg-primary/5 blur-[120px] pointer-events-none" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--primary)_0%,_transparent_70%)] opacity-[0.02] pointer-events-none" />
       <div className="mx-auto max-w-6xl px-6 md:px-8">
         <div className="grid md:grid-cols-3 gap-x-12 gap-y-16">
           {items.map((f, i) => (
@@ -208,7 +197,7 @@ function HowItWorks({ t }: { t: any }) {
 
   return (
     <section className="relative overflow-hidden border-b border-border py-24 md:py-40">
-      <div className="absolute right-0 top-1/2 -translate-y-1/2 h-[600px] w-[600px] rounded-full bg-primary/5 blur-[140px] pointer-events-none" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_right,_var(--primary)_0%,_transparent_70%)] opacity-[0.02] pointer-events-none" />
       <div className="mx-auto max-w-6xl px-6 md:px-8">
         <div className="grid lg:grid-cols-2 gap-20 items-center">
           <div>
@@ -229,7 +218,7 @@ function HowItWorks({ t }: { t: any }) {
                     </div>
                     <div>
                       <h3 className="font-serif text-xl font-bold mb-2 tracking-tight">{s.t}</h3>
-                      <p className="font-ui text-[15px] leading-relaxed text-muted-foreground/70">{s.d}</p>
+                      <p className="font-ui text-[15px] leading-relaxed text-muted-foreground/85">{s.d}</p>
                     </div>
                   </div>
                 </Reveal>
@@ -270,11 +259,7 @@ function HowItWorks({ t }: { t: any }) {
 }
 
 function FaqSection({ t }: { t: any }) {
-  const items = [
-    { q: t("brand.name") + " nima?", a: t("brand.oneLiner") },
-    { q: t("pricing.free.title") + "mi?", a: t("pricing.free.price") + " - " + t("pricing.free.period") },
-    { q: t("dashboard.sections.timetable") + "?", a: t("hero.subtitle") },
-  ];
+  const items = t("faq.items") || [];
   const [open, setOpen] = useState<number | null>(0);
 
   return (
@@ -287,15 +272,15 @@ function FaqSection({ t }: { t: any }) {
                 FAQ
               </div>
               <h2 className="font-serif text-[42px] leading-[1] tracking-tighter mb-8 sm:text-[54px]">
-                Ko'p so'raladigan savollar.
+                Savol va javoblar.
               </h2>
-              <p className="font-ui text-muted-foreground/70 leading-relaxed max-w-sm">
+              <p className="font-ui text-muted-foreground/80 leading-relaxed max-w-sm">
                 Tizim qanday ishlashi va sizga qanday foyda berishi haqida barcha javoblar.
               </p>
             </Reveal>
           </div>
           <div className="space-y-0 border-t border-border">
-            {items.map((it, i) => {
+            {items.map((it: any, i: number) => {
               const isOpen = open === i;
               return (
                 <Reveal key={i} delay={i * 50}>
@@ -319,7 +304,7 @@ function FaqSection({ t }: { t: any }) {
                       style={{ gridTemplateRows: isOpen ? "1fr" : "0fr" }}
                     >
                       <div className="overflow-hidden">
-                        <div className="pb-8 font-ui text-base leading-relaxed text-muted-foreground/80 max-w-xl">{it.a}</div>
+                        <div className="pb-8 font-ui text-base leading-relaxed text-muted-foreground/85 max-w-xl">{it.a}</div>
                       </div>
                     </div>
                   </div>
@@ -367,59 +352,69 @@ function PricingSection({ t }: { t: any }) {
 
   return (
     <section id="pricing" className="relative py-24 md:py-40 bg-muted/5 border-b border-border overflow-hidden">
-      <div className="absolute top-0 right-0 h-[600px] w-[600px] rounded-full bg-primary/5 blur-[120px] pointer-events-none" />
       <div className="mx-auto max-w-6xl px-6 md:px-8">
         <div className="mb-20 text-center">
           <Reveal>
             <h2 className="font-serif text-[44px] leading-[1.05] tracking-tighter mb-6 sm:text-[56px]">
               Halol narxlar. <span className="text-muted-foreground">Yashirin to'lovsiz.</span>
             </h2>
-            <p className="mx-auto max-w-2xl font-ui text-lg text-muted-foreground/70">
+            <p className="mx-auto max-w-2xl font-ui text-lg text-muted-foreground/80">
               Karta so'ralmaydi. Free bilan boshlang, o'zingizga kerak bo'lganda Pro ga o'ting.
             </p>
           </Reveal>
         </div>
 
         <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-          {plans.map((p, i) => (
-            <Reveal key={p.name} delay={i * 150}>
-              <div className={cn(
-                "relative rounded-3xl p-10 transition-all hover:scale-[1.02]",
-                p.highlight 
-                  ? "bg-card border-2 border-primary shadow-[0_32px_64px_-16px_hsl(var(--primary)/0.15)]" 
-                  : "bg-background border border-border"
-              )}>
-                {p.highlight && (
-                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-primary text-primary-foreground px-4 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest">
-                    Tavsiya etiladi
-                  </div>
-                )}
-                <div className="mb-8">
-                  <h3 className="font-serif text-2xl font-bold mb-2">{p.name}</h3>
-                  <div className="flex items-baseline gap-2">
-                    <span className="font-serif text-4xl font-bold tracking-tighter tabular-nums">{p.price}</span>
-                    <span className="text-sm font-ui text-muted-foreground tracking-wide uppercase">{t("brand.xp").includes("XP") ? "UZS" : ""} / {p.period}</span>
-                  </div>
+          {/* Free Plan */}
+          <Reveal delay={0}>
+            <div className="relative rounded-3xl p-10 transition-all hover:scale-[1.02] bg-background border border-border">
+              <div className="mb-8">
+                <h3 className="font-serif text-2xl font-bold mb-2">{t("pricing.free.title")}</h3>
+                <div className="flex items-baseline gap-2">
+                  <span className="font-serif text-4xl font-bold tracking-tighter tabular-nums">{t("pricing.free.price")}</span>
+                  <span className="text-sm font-ui text-muted-foreground tracking-wide uppercase">{t("pricing.free.period")}</span>
                 </div>
-                <ul className="space-y-4 mb-10">
-                  {p.features.map(f => (
-                    <li key={f} className="flex items-center gap-3 text-sm font-ui text-muted-foreground/80">
-                      <Check className="h-4 w-4 text-primary shrink-0" />
-                      {f}
-                    </li>
-                  ))}
-                </ul>
-                <Button 
-                  asChild 
-                  size="lg" 
-                  variant={p.highlight ? "default" : "outline"}
-                  className="w-full rounded-full font-bold shadow-premium"
-                >
-                  <Link to="/auth">{p.cta}</Link>
-                </Button>
               </div>
-            </Reveal>
-          ))}
+              <ul className="mb-10 space-y-4">
+                {(t("pricing.free.features") as string[]).map((feat: string) => (
+                  <li key={feat} className="flex items-start gap-3 text-sm font-ui text-muted-foreground/90">
+                    <Check className="h-4 w-4 text-primary shrink-0 mt-0.5" />
+                    <span>{feat}</span>
+                  </li>
+                ))}
+              </ul>
+              <Button asChild size="lg" variant="outline" className="w-full rounded-full h-12 font-ui font-bold">
+                <Link to="/auth">{t("pricing.free.cta")}</Link>
+              </Button>
+            </div>
+          </Reveal>
+
+          {/* Pro Plan */}
+          <Reveal delay={150}>
+            <div className="relative rounded-3xl p-10 transition-all hover:scale-[1.02] bg-card border-2 border-primary shadow-[0_32px_64px_-16px_hsl(var(--primary)/0.15)]">
+              <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-primary text-primary-foreground px-4 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest">
+                {t("pricing.premium.badge")}
+              </div>
+              <div className="mb-8">
+                <h3 className="font-serif text-2xl font-bold mb-2">{t("pricing.premium.title")}</h3>
+                <div className="flex items-baseline gap-2">
+                  <span className="font-serif text-4xl font-bold tracking-tighter tabular-nums">{t("pricing.premium.price")}</span>
+                  <span className="text-sm font-ui text-muted-foreground tracking-wide uppercase">{t("pricing.premium.period")}</span>
+                </div>
+              </div>
+              <ul className="mb-10 space-y-4">
+                {(t("pricing.premium.features") as string[]).map((feat: string) => (
+                  <li key={feat} className="flex items-start gap-3 text-sm font-ui text-muted-foreground/90">
+                    <Check className="h-4 w-4 text-primary shrink-0 mt-0.5" />
+                    <span>{feat}</span>
+                  </li>
+                ))}
+              </ul>
+              <Button asChild size="lg" className="w-full rounded-full h-12 font-ui font-bold bg-primary text-primary-foreground">
+                <Link to="/pricing">{t("pricing.premium.cta")}</Link>
+              </Button>
+            </div>
+          </Reveal>
         </div>
       </div>
     </section>

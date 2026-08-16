@@ -6,6 +6,10 @@ import type { Dict } from "./uz";
 const _en = {
   brand: {
     name: "Life Order",
+    features: "Features",
+    pricing: "Pricing",
+    blog: "Blog",
+    faq: "FAQ",
     tagline: "Motivation ends, the system remains.",
     oneLiner:
       "Self-Control OS — the operating system for mastery. 3-minute diagnosis, 3 daily steps, and a relentless AI mentor.",
@@ -135,7 +139,7 @@ const _en = {
         '"Circle" — community and Party',
         "Leaderboard and achievements",
       ],
-      cta: "Start 7 days free",
+      cta: "Upgrade to Premium",
     },
   },
   cta: {
@@ -250,6 +254,34 @@ const _en = {
     saving: "Saving...",
     success: "Settings saved",
     error: "Failed to save",
+  },
+  faq: {
+    items: [
+      {
+        q: "What is Life Order Pro and how does it differ from the free plan?",
+        a: "The Free plan includes basic discipline protocols. The Pro plan provides premium tools such as unlimited mentor memory, weekly AI reports, Shield (streak protection), and burnout signaling."
+      },
+      {
+        q: "What happens if I lose my streak?",
+        a: "Life Order is based on the principle of 'Forgiving Discipline'. If a streak is lost, we don't punish you, but we recommend restarting the 66-day automation period. Pro users can use 3 Shields per week."
+      },
+      {
+        q: "Is my data safe?",
+        a: "Absolutely. Your data is stored on secure Supabase (Lovable Cloud) servers. We never sell your data to third parties or use it for advertising."
+      },
+      {
+        q: "How is payment handled?",
+        a: "For users in Uzbekistan, payment is available via Click and Payme in local currency. For international users, Stripe/Paddle systems are being integrated."
+      },
+      {
+        q: "Can I install the app on my phone?",
+        a: "Yes. Life Order is built using PWA (Progressive Web App) technology. You can select 'Add to Home Screen' or 'Install' from your browser menu to use it like a regular app."
+      },
+      {
+        q: "Who is Nadir AI and how does it work?",
+        a: "Nadir is an AI mentor based on behavioral psychology. It analyzes your triggers, circadian rhythms, and daily activity to provide advice in 'soft' or 'ruthless' discipline modes."
+      }
+    ]
   },
 };
 
