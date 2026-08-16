@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
+import { track } from "@/lib/analytics";
 import {
   Accordion,
   AccordionContent,
@@ -329,7 +330,7 @@ function Plan({
         variant={highlight ? "default" : "outline"}
         className="mt-8 w-full rounded-full font-ui font-semibold"
       >
-        <Link to="/auth">
+        <Link to="/auth" onClick={() => track("signup_click", { source: "pricing_plan" })}>
           {ctaLabel} <ArrowRight className="ml-1 h-4 w-4" />
         </Link>
       </Button>
