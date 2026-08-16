@@ -330,42 +330,30 @@ function FaqSection({ t }: { t: any }) {
 
 
 function PricingSection({ t }: { t: any }) {
-  const plans = [
-    {
-      name: "Free",
-      price: "0",
-      period: t("brand.monthly"),
-      features: [
-        `${freeTierLimits.habits} tagacha odat`,
-        `Kunlik ${freeTierLimits.journalEntriesPerDay} ta kundalik yozuv`,
-        `Nadir bilan kunda ${freeTierLimits.mentorMessagesPerDay} ta xabar`,
-        "Kunlik 3 ta mikro-vazifa",
-        "Streak, XP va intizom balli",
-        "PWA offline rejim"
-      ],
-      cta: t("auth.signUp"),
-      highlight: false
-    },
-    {
-      name: "Pro",
-      price: "59,000",
-      period: t("brand.monthly"),
-      features: [
-        "Cheksiz odatlar",
-        "Nadir Pro (Full Memory)",
-        "Haftalik AI hisobotlar",
-        "Burnout oldini olish",
-        "Premium yordam"
-      ],
-      cta: "Pro ni boshlash",
-      highlight: true
-    }
+  const freeFeatures = [
+    `${freeTierLimits.habits} tagacha odat`,
+    `Kunlik ${freeTierLimits.journalEntriesPerDay} ta kundalik yozuv`,
+    `Nadir bilan kunda ${freeTierLimits.mentorMessagesPerDay} ta xabar`,
+    "Kunlik 3 ta mikro-vazifa",
+    "Streak, XP va intizom balli",
+    "PWA offline rejim"
   ];
 
-  const rawFree = t("pricing.free.features");
-  const freeFeatures = Array.isArray(rawFree) ? (rawFree as string[]) : plans[0].features;
-  const rawPremium = t("pricing.premium.features");
-  const premiumFeatures = Array.isArray(rawPremium) ? (rawPremium as string[]) : plans[1].features;
+  const premiumFeatures = [
+    "Cheksiz odatlar",
+    "Nadir Pro (Full Memory)",
+    "Haftalik AI hisobotlar",
+    "Burnout oldini olish",
+    "Premium yordam"
+  ];
+
+  const displayFree = Array.isArray(t("pricing.free.features")) 
+    ? (t("pricing.free.features") as string[]) 
+    : freeFeatures;
+    
+  const displayPremium = Array.isArray(t("pricing.premium.features")) 
+    ? (t("pricing.premium.features") as string[]) 
+    : premiumFeatures;
 
   return (
     <section id="pricing" className="relative py-24 md:py-40 bg-muted/5 border-b border-border overflow-hidden">
@@ -393,7 +381,7 @@ function PricingSection({ t }: { t: any }) {
                 </div>
               </div>
               <ul className="mb-10 space-y-4">
-                {freeFeatures.map((feat: string) => (
+                {displayFree.map((feat: string) => (
                   <li key={feat} className="flex items-start gap-3 text-sm font-ui text-muted-foreground/90">
                     <Check className="h-4 w-4 text-primary shrink-0 mt-0.5" />
                     <span>{feat}</span>
@@ -420,7 +408,7 @@ function PricingSection({ t }: { t: any }) {
                 </div>
               </div>
               <ul className="mb-10 space-y-4">
-                {premiumFeatures.map((feat: string) => (
+                {displayPremium.map((feat: string) => (
                   <li key={feat} className="flex items-start gap-3 text-sm font-ui text-muted-foreground/90">
                     <Check className="h-4 w-4 text-primary shrink-0 mt-0.5" />
                     <span>{feat}</span>
