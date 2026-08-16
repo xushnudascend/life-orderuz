@@ -316,7 +316,7 @@ function OptionList({ q, value, onChange, onToggleMulti, }) {
         })}
     </div>);
 }
-function FinalPage({ questions, answers, onChange, bmi, plan, onPlanChange, }) {
+function FinalPage({ questions, answers, onChange, bmi, plan, onPlanChange, t, }) {
     // Har bir savol yig'ilib turadi — ustiga bossa ochiladi.
     // Boshida — birinchi javob berilmagan savol avtomatik ochiladi.
     const firstUnanswered = questions.find((q) => {
