@@ -249,7 +249,7 @@ function Dashboard() {
                  <Sparkles className="h-6 w-6" />
                  Mentor bilan suhbat
                </Link>
-               <PsychologicalFocus score={score} />
+               <PsychologicalFocus archetype={profile?.archetype ?? null} />
              </div>
           </div>
 
