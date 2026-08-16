@@ -347,12 +347,14 @@ function PricingSection({ t }: { t: any }) {
     "Premium yordam"
   ];
 
-  const displayFree = Array.isArray(t("pricing.free.features")) 
-    ? (t("pricing.free.features") as string[]) 
+  const f_feats = t("pricing.free.features");
+  const displayFree = Array.isArray(f_feats) 
+    ? (f_feats as string[]) 
     : freeFeatures;
     
-  const displayPremium = Array.isArray(t("pricing.premium.features")) 
-    ? (t("pricing.premium.features") as string[]) 
+  const p_feats = t("pricing.premium.features");
+  const displayPremium = Array.isArray(p_feats) 
+    ? (p_feats as string[]) 
     : premiumFeatures;
 
   return (
