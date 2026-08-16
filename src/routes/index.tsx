@@ -87,14 +87,13 @@ function Hero({ t }: { t: any }) {
       
       <div className="relative z-10 mx-auto w-full max-w-6xl px-6 py-20 text-center md:px-8">
         <Reveal delay={100}>
-          <div className="mb-10 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-6 py-2 font-ui text-[11px] font-bold uppercase tracking-[0.25em] text-primary shadow-[0_0_30px_hsl(var(--primary)/0.25)] backdrop-blur-md">
-            <Sparkles className="h-4 w-4" />
-            Self-Control OS
+          <div className="mb-10 inline-flex items-center rounded-full border border-primary/20 bg-primary/5 px-6 py-2 font-ui text-[11px] font-bold uppercase tracking-[0.25em] text-primary shadow-[0_0_30px_hsl(var(--primary)/0.25)] backdrop-blur-md">
+            {t("hero.eyebrow") || "Self-Control OS"}
           </div>
         </Reveal>
 
         <Reveal delay={250}>
-          <h1 className="font-serif text-[48px] leading-[0.9] tracking-tighter text-balance sm:text-[72px] md:text-[84px] lg:text-[100px] text-text-primary">
+          <h1 className="font-serif text-[clamp(2.5rem,8vw,5.5rem)] leading-[0.95] tracking-tighter text-balance text-text-primary">
             {t("hero.title")}
           </h1>
         </Reveal>
@@ -137,10 +136,12 @@ function Hero({ t }: { t: any }) {
         </Reveal>
 
         <Reveal delay={850}>
-          <div className="mt-24 flex items-center justify-center gap-12 grayscale opacity-60">
-            <div className="text-[10px] uppercase tracking-[0.3em] font-bold">Fogg Behavior Model</div>
-            <div className="h-1 w-1 rounded-full bg-border" />
-            <div className="text-[10px] uppercase tracking-[0.3em] font-bold">Self-Determination Theory</div>
+          <div className="mt-24 flex items-center justify-center gap-12 grayscale opacity-40">
+            <div className="text-[10px] uppercase tracking-[0.3em] font-bold">Lovable Cloud</div>
+            <div className="h-1 w-1 rounded-full bg-border" aria-hidden="true" />
+            <div className="text-[10px] uppercase tracking-[0.3em] font-bold">PWA Offline Support</div>
+            <div className="h-1 w-1 rounded-full bg-border" aria-hidden="true" />
+            <div className="text-[10px] uppercase tracking-[0.3em] font-bold">Behavioral Science</div>
           </div>
         </Reveal>
 
@@ -229,7 +230,7 @@ function HowItWorks({ t }: { t: any }) {
             </div>
           </div>
           <Reveal delay={300} className="relative aspect-square lg:aspect-auto lg:h-[600px]">
-            <div className="absolute inset-0 rounded-[var(--radius-xl)] border border-border bg-gradient-to-br from-card/80 to-card/20 backdrop-blur-sm overflow-hidden shadow-premium">
+            <div className="absolute inset-0 rounded-[var(--radius-xl)] border border-border bg-gradient-to-br from-card to-card/20 backdrop-blur-sm overflow-hidden shadow-premium">
                {/* Mock UI visualization */}
                <div className="absolute inset-x-0 top-0 h-12 border-b border-border bg-muted/20 px-4 flex items-center gap-2">
                  <div className="h-2 w-2 rounded-full bg-border" />
@@ -237,18 +238,18 @@ function HowItWorks({ t }: { t: any }) {
                  <div className="h-2 w-2 rounded-full bg-border" />
                </div>
                <div className="p-8 pt-20 space-y-6">
-                 <div className="h-24 w-full rounded-2xl bg-primary/5 border border-primary/10 p-4 flex items-center justify-between">
+                 <div className="h-24 w-full rounded-[var(--radius-md)] bg-primary/5 border border-primary/10 p-4 flex items-center justify-between">
                    <div className="space-y-2">
                      <div className="h-2 w-24 bg-primary/20 rounded" />
                      <div className="h-4 w-32 bg-primary/40 rounded" />
                    </div>
                    <div className="h-12 w-12 rounded-full border-2 border-primary border-t-transparent animate-spin-slow" />
                  </div>
-                 <div className="grid grid-cols-2 gap-4">
-                   <div className="h-32 rounded-2xl border border-border bg-muted/20" />
-                   <div className="h-32 rounded-2xl border border-border bg-muted/20" />
-                 </div>
-                 <div className="h-40 rounded-2xl border border-border bg-muted/20 relative overflow-hidden">
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="h-32 rounded-[var(--radius-md)] border border-border bg-muted/20" />
+                    <div className="h-32 rounded-[var(--radius-md)] border border-border bg-muted/20" />
+                  </div>
+                  <div className="h-40 rounded-[var(--radius-md)] border border-border bg-muted/20 relative overflow-hidden">
                     <div className="absolute inset-0 backdrop-grid opacity-30" />
                  </div>
                </div>
@@ -263,7 +264,7 @@ function HowItWorks({ t }: { t: any }) {
 
 function FaqSection({ t }: { t: any }) {
   const items = Array.isArray(t("faq.items")) ? (t("faq.items") as any[]) : [];
-  const [open, setOpen] = useState<number | null>(0);
+  const [open, setOpen] = useState<number | null>(null);
 
   return (
     <section id="faq" className="border-b border-border py-24 md:py-32 bg-muted/5">
@@ -277,7 +278,7 @@ function FaqSection({ t }: { t: any }) {
               <h2 className="font-serif text-[42px] leading-[1] tracking-tighter mb-8 sm:text-[54px]">
                 Savol va javoblar.
               </h2>
-              <p className="font-ui text-muted-foreground/80 leading-relaxed max-w-sm">
+              <p className="font-ui text-text-secondary leading-relaxed max-w-sm">
                 Tizim qanday ishlashi va sizga qanday foyda berishi haqida barcha javoblar.
               </p>
             </Reveal>
@@ -330,35 +331,29 @@ function FaqSection({ t }: { t: any }) {
 function PricingSection({ t }: { t: any }) {
   const [billing, setBilling] = useState<"monthly" | "yearly">("yearly");
 
-  const displayFree = [
-    `${freeTierLimits.habits} tagacha odat`,
-    `Kunlik ${freeTierLimits.journalEntriesPerDay} ta kundalik yozuv`,
-    `Nadir bilan kunda ${freeTierLimits.mentorMessagesPerDay} ta xabar`,
-    "Kunlik 3 ta mikro-vazifa",
-    "Streak, XP va intizom balli",
-    "PWA offline rejim"
-  ];
+  const displayFree = Array.isArray(t("pricing.free.features")) 
+    ? (t("pricing.free.features") as string[]) 
+    : [];
 
-  const displayPremium = [
-    "Cheksiz odatlar",
-    "Nadir Pro (Full Memory)",
-    "Haftalik AI hisobotlar",
-    "Burnout oldini olish",
-    "Premium yordam"
-  ];
+  const displayPremium = Array.isArray(t("pricing.premium.features")) 
+    ? (t("pricing.premium.features") as string[]) 
+    : [];
 
   return (
     <section id="pricing" className="relative py-24 md:py-40 bg-muted/5 border-b border-border overflow-hidden">
       <div className="mx-auto max-w-6xl px-6 md:px-8">
         <div className="mb-20 text-center">
           <Reveal>
-            <h2 className="font-serif text-[44px] leading-[1.05] tracking-tighter mb-6 sm:text-[56px]">
-              Halol narxlar. <span className="text-muted-foreground">Yashirin to'lovsiz.</span>
+            <h2 className="font-serif text-[clamp(2rem,6vw,3.5rem)] leading-[1.05] tracking-tighter mb-6">
+              {t("pricing.title") || "Halol narxlar."} <span className="text-text-secondary">{t("pricing.subtitle") || "Yashirin to'lovsiz."}</span>
             </h2>
             <div className="flex items-center justify-center gap-4 mb-8">
-              <span className={cn("text-sm font-ui transition-colors", billing === "monthly" ? "text-foreground font-bold" : "text-muted-foreground")}>Oylik</span>
+              <span className={cn("text-sm font-ui transition-colors", billing === "monthly" ? "text-foreground font-bold" : "text-text-secondary")}>
+                {t("pricing.monthly") || "Oylik"}
+              </span>
               <button 
                 onClick={() => setBilling(billing === "monthly" ? "yearly" : "monthly")}
+                aria-label="Billing toggle"
                 className="relative h-6 w-12 rounded-full bg-muted border border-border transition-colors hover:border-primary/50"
               >
                 <div className={cn(
@@ -366,8 +361,8 @@ function PricingSection({ t }: { t: any }) {
                   billing === "monthly" ? "left-1" : "left-7"
                 )} />
               </button>
-              <span className={cn("text-sm font-ui transition-colors", billing === "yearly" ? "text-foreground font-bold" : "text-muted-foreground")}>
-                Yillik <span className="text-[10px] bg-primary/10 text-primary px-1.5 py-0.5 rounded-full ml-1">-30%</span>
+              <span className={cn("text-sm font-ui transition-colors", billing === "yearly" ? "text-foreground font-bold" : "text-text-secondary")}>
+                {t("pricing.yearly") || "Yillik"} <span className="text-[10px] bg-primary/10 text-primary px-1.5 py-0.5 rounded-full ml-1">-30%</span>
               </span>
             </div>
           </Reveal>
@@ -376,17 +371,19 @@ function PricingSection({ t }: { t: any }) {
         <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
           {/* Free Plan */}
           <Reveal delay={0}>
-            <div className="relative rounded-3xl p-10 transition-all hover:scale-[1.02] bg-background border border-border">
+            <div className="relative rounded-[var(--radius-xl)] p-10 transition-all hover:scale-[1.02] bg-background border border-border">
               <div className="mb-8">
                 <h3 className="font-serif text-2xl font-bold mb-2">{t("pricing.free.title")}</h3>
                 <div className="flex items-baseline gap-2">
                   <span className="font-serif text-4xl font-bold tracking-tighter tabular-nums">{t("pricing.free.price")}</span>
-                  <span className="text-sm font-ui text-muted-foreground tracking-wide uppercase">{t("pricing.free.period")}</span>
+                  <span className="text-sm font-ui text-text-secondary tracking-wide uppercase">
+                    {billing === "monthly" ? t("pricing.free.period") : t("pricing.free.periodYearly")}
+                  </span>
                 </div>
               </div>
               <ul className="mb-10 space-y-4">
                 {displayFree.map((feat: string) => (
-                  <li key={feat} className="flex items-start gap-3 text-sm font-ui text-muted-foreground/90">
+                  <li key={feat} className="flex items-start gap-3 text-sm font-ui text-text-secondary">
                     <Check className="h-4 w-4 text-primary shrink-0 mt-0.5" />
                     <span>{feat}</span>
                   </li>
@@ -400,24 +397,24 @@ function PricingSection({ t }: { t: any }) {
 
           {/* Pro Plan */}
           <Reveal delay={150}>
-            <div className="relative rounded-3xl p-10 transition-all hover:scale-[1.02] bg-card border-2 border-primary shadow-[0_32px_64px_-16px_hsl(var(--primary)/0.15)]">
-              <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-primary text-primary-foreground px-4 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest">
+            <div className="relative rounded-[var(--radius-xl)] p-10 transition-all hover:scale-[1.02] bg-card border-2 border-primary shadow-[0_32px_64px_-16px_hsl(var(--primary)/0.15)]">
+              <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-primary text-primary-foreground px-4 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest" aria-hidden="true">
                 {t("pricing.premium.badge")}
               </div>
               <div className="mb-8">
                 <h3 className="font-serif text-2xl font-bold mb-2">{t("pricing.premium.title")}</h3>
                 <div className="flex items-baseline gap-2">
                   <span className="font-serif text-4xl font-bold tracking-tighter tabular-nums">
-                    {billing === "monthly" ? "59 000" : "490 000"} so'm
+                    {billing === "monthly" ? t("pricing.premium.price") : "490 000"} so'm
                   </span>
-                  <span className="text-sm font-ui text-muted-foreground tracking-wide uppercase">
-                    {billing === "monthly" ? "oyiga" : "yiliga"}
+                  <span className="text-sm font-ui text-text-secondary tracking-wide uppercase">
+                    {billing === "monthly" ? t("pricing.premium.period") : t("pricing.premium.periodYearly")}
                   </span>
                 </div>
               </div>
               <ul className="mb-10 space-y-4">
                 {displayPremium.map((feat: string) => (
-                  <li key={feat} className="flex items-start gap-3 text-sm font-ui text-muted-foreground/90">
+                  <li key={feat} className="flex items-start gap-3 text-sm font-ui text-text-secondary">
                     <Check className="h-4 w-4 text-primary shrink-0 mt-0.5" />
                     <span>{feat}</span>
                   </li>
@@ -445,7 +442,7 @@ function FinalCta({ t }: { t: any }) {
           </h2>
         </Reveal>
         <Reveal delay={200}>
-          <p className="mx-auto mt-6 mb-14 max-w-xl font-ui text-lg text-muted-foreground/80">
+          <p className="mx-auto mt-6 mb-14 max-w-xl font-ui text-lg text-text-secondary">
             {t("cta.body")}
           </p>
           <div className="flex flex-col items-center justify-center gap-6 sm:flex-row">

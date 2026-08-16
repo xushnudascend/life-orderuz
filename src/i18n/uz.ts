@@ -114,8 +114,9 @@ export const uz = {
     subheading: "Karta shart emas. Istalgan vaqtda to'xtatish mumkin.",
     free: {
       title: "Bepul",
-      price: "0 so'm",
-      period: "har doim",
+      price: "0",
+      period: "Abadiy",
+      periodYearly: "Abadiy",
       features: [
         "3 tagacha odat",
         "Sirkad ritm (Energy Map)",
@@ -127,14 +128,17 @@ export const uz = {
     },
     premium: {
       title: "Premium",
-      price: "59 000 so'm",
-      period: "oyiga · cheksiz mentor",
-      badge: "Tavsiya",
+      price: "59 000",
+      period: "oyiga",
+      periodYearly: "yiliga",
+      badge: "Eng ommabop",
       features: [
         "Nadir Pro (Cheksiz xotira)",
         "Haftalik AI hisobot",
         "Haftasiga 3 ta Shield",
         "Burnout signalizatsiyasi",
+        "Kengaytirilgan analitika",
+        "Ustuvor yordam",
       ],
       cta: "Premiumga o'tish",
     },
@@ -255,24 +259,28 @@ export const uz = {
   faq: {
     items: [
       {
-        q: "Life Order oddiy habit trekerdan nimasi bilan farq qiladi?",
-        a: "Bizda shunchaki 'checklist' yo'q. Tizim sening biologik ritming, triggers va psixologik holatingni tahlil qiladi. Motivatsiya so'nganda ham intizomni ushlab turish uchun 'Nadir' AI mentor yordam beradi."
+        q: "Streak yo'qolsa nima bo'ladi?",
+        a: "Life Order 'kechirimli intizom' (Forgiving Discipline) tamoyiliga asoslangan. Streak yo'qolsa, tizim sizni jazolamaydi, balki 'nima chalg'itdi?' deb so'raydi. Pro foydalanuvchilar esa haftasiga 3 ta Shield ishlatib, streakni saqlab qolishlari mumkin."
       },
       {
-        q: "Nega aynan 'Life Order' deb nomlangan?",
-        a: "Order — bu ham tartib, ham buyruq degani. Hayotdagi tartibni o'rnatish uchun o'zingga 'buyruq' berish emas, balki ishlaydigan operatsion tizim (OS) qurish kerakligini anglatadi."
+        q: "Ma'lumotlarim xavfsizmi?",
+        a: "Mutlaqo. Barcha ma'lumotlaringiz shifrlangan holda Lovable Cloud (Supabase) serverlarida saqlanadi. Biz shaxsiy ma'lumotlarni hech qachon uchinchi shaxslarga sotmaymiz."
       },
       {
-        q: "Nadir AI mentor qanday yordam beradi?",
-        a: "U sening harakatlaringni kuzatadi. Agar vazifalarni bajarmasang, u seni jazolamaydi, balki 'nima chalg'ityapti?' deb so'raydi va rejangni osonroq qadamlarga bo'lib beradi."
+        q: "Bepul rejada nima cheklangan?",
+        a: "Free reja doimiy bepul. Unda 3 tagacha odat, kunlik 1 ta kundalik yozuv va Nadir bilan kuniga 5 ta xabar limiti bor. Bu asosiy tartibni o'rnatish uchun yetarli."
       },
       {
-        q: "Premium obuna narxi o'zgaradimi?",
-        a: "Beta bosqichida qo'shilganlar uchun biz narxlarni umrbod 'muzlatib' qo'yamiz. Kelajakda narx oshsa ham, beta foydalanuvchilari eski narxda qoladilar."
+        q: "Qanday to'lov usullari bor?",
+        a: "Hozirda Click va Payme orqali milliy valyutada to'lash imkoniyati mavjud. Shuningdek, xalqaro kartalar uchun Stripe integratsiyasi ustida ishlayapmiz."
       },
       {
-        q: "Ilovani telefonga qanday o'rnataman?",
-        a: "Juda oson. Brauzeringizda (Chrome yoki Safari) 'Add to Home Screen' tugmasini bosing. Life Order ilova kabi ish stoliingizda paydo bo'ladi va offline rejimda ham ishlaydi."
+        q: "Telefonga o'rnatish mumkinmi?",
+        a: "Ha. Life Order PWA (Progressive Web App) texnologiyasida qurilgan. Brauzeringizda 'Add to Home Screen' tugmasini bosing va u oddiy ilovadek ish stoliingizda paydo bo'ladi."
+      },
+      {
+        q: "Nadir AI kim, qanday ishlaydi?",
+        a: "Nadir — bu xulq-atvor psixologiyasiga asoslangan AI mentor. U shunchaki suhbatdosh emas, u sizning triggers va ritmingizni tahlil qilib, intizomni buzganingizda halol (ba'zan shafqatsiz) maslahatlar beradi."
       }
     ]
   },

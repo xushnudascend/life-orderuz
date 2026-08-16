@@ -187,8 +187,8 @@
 
 /* Typography Hierarchy Tokens from Life Order */
 :root {
-  --fs-display: 1.75rem;     /* 28px  — hero mobile */
-  --fs-h1:      1.375rem;    /* 22px */
+  --fs-display: 2rem;        /* 32px — hero mobile */
+  --fs-h1:      1.5rem;       /* 24px */
   --fs-h2:      1rem;        /* 16px */
   --fs-h3:      0.875rem;    /* 14px */
   --fs-body:    0.75rem;     /* 12px */
