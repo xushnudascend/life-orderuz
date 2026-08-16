@@ -98,7 +98,7 @@ export const uz = {
   },
   hero: {
     eyebrow: "Beta 2.0 · Self-Control OS",
-    title: "Motivatsiya o'tkinchi. Tizim esa abadiy.",
+    title: "Motivatsiya tugaydi, tizim qoladi.",
     subtitle:
       "Life Order — o'zini boshqara olmaslik muammosini ilmiy asoslangan tizim bilan hal qiladi. 3 daqiqalik tashxis va shaxsiy intizom protokoli.",
     ctaPrimary: "Tashxisdan o'tish",

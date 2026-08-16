@@ -1,10 +1,10 @@
 @import "tailwindcss";
 
 @theme {
-  --font-serif: "Instrument Serif", serif;
-  --font-ui: "Inter", sans-serif;
-  --font-body: "Inter", sans-serif;
-  --font-display: "Instrument Serif", serif;
+  --font-serif: "Karla", sans-serif;
+  --font-ui: "Karla", sans-serif;
+  --font-body: "Karla", sans-serif;
+  --font-display: "Karla", sans-serif;
 
   /* Premium Design Tokens */
   --bg-primary: #0B1220;
