@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Plus, Minus, Sparkles } from "lucide-react";
+import { ArrowRight, Plus, Minus, Sparkles, Check, Users } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Reveal } from "@/components/reveal";
 import { ScrollProgress } from "@/components/scroll-progress";
@@ -65,6 +65,7 @@ function Landing() {
         <Hero t={t} />
         <Features t={t} />
         <HowItWorks t={t} />
+        <PricingSection t={t} />
         <FaqSection t={t} />
         <FinalCta t={t} />
       </main>
@@ -126,6 +127,22 @@ function Hero({ t }: { t: any }) {
         </Reveal>
         
         <Reveal delay={700}>
+          <div className="mt-20 flex flex-col items-center gap-8">
+            <div className="flex -space-x-3 overflow-hidden">
+              {[1, 2, 3, 4, 5].map((i) => (
+                <div key={i} className="inline-block h-10 w-10 rounded-full border-2 border-background bg-muted" />
+              ))}
+              <div className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-background bg-primary text-[10px] font-bold text-primary-foreground">
+                12k+
+              </div>
+            </div>
+            <p className="font-ui text-xs font-medium text-muted-foreground/70 tracking-wide">
+              12,400+ dan ortiq foydalanuvchilar o'z hayotini tartibga soldi
+            </p>
+          </div>
+        </Reveal>
+
+        <Reveal delay={850}>
           <div className="mt-24 flex items-center justify-center gap-12 grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-700">
             <div className="text-[10px] uppercase tracking-[0.3em] font-bold">Identity Shift</div>
             <div className="h-1 w-1 rounded-full bg-border" />
@@ -160,7 +177,7 @@ function Features({ t }: { t: any }) {
   ];
 
   return (
-    <section className="relative overflow-hidden border-b border-border py-24 md:py-32">
+    <section id="features" className="relative overflow-hidden border-b border-border py-24 md:py-32">
       <div className="absolute top-0 left-1/4 h-[500px] w-[500px] rounded-full bg-primary/5 blur-[120px] pointer-events-none" />
       <div className="mx-auto max-w-6xl px-6 md:px-8">
         <div className="grid md:grid-cols-3 gap-x-12 gap-y-16">
@@ -316,6 +333,98 @@ function FaqSection({ t }: { t: any }) {
   );
 }
 
+
+function PricingSection({ t }: { t: any }) {
+  const plans = [
+    {
+      name: "Free",
+      price: "0",
+      period: t("brand.monthly"),
+      features: [
+        "3 tagacha odat",
+        "Biologik ritm tahlili",
+        "AI mentor (cheklangan)",
+        "PWA offline rejim"
+      ],
+      cta: t("auth.signUp"),
+      highlight: false
+    },
+    {
+      name: "Pro",
+      price: "59,000",
+      period: t("brand.monthly"),
+      features: [
+        "Cheksiz odatlar",
+        "Nadir Pro (Full Memory)",
+        "Haftalik AI hisobotlar",
+        "Burnout oldini olish",
+        "Premium yordam"
+      ],
+      cta: "Pro ni boshlash",
+      highlight: true
+    }
+  ];
+
+  return (
+    <section id="pricing" className="relative py-24 md:py-40 bg-muted/5 border-b border-border overflow-hidden">
+      <div className="absolute top-0 right-0 h-[600px] w-[600px] rounded-full bg-primary/5 blur-[120px] pointer-events-none" />
+      <div className="mx-auto max-w-6xl px-6 md:px-8">
+        <div className="mb-20 text-center">
+          <Reveal>
+            <h2 className="font-serif text-[44px] leading-[1.05] tracking-tighter mb-6 sm:text-[56px]">
+              Halol narxlar. <span className="text-muted-foreground">Yashirin to'lovsiz.</span>
+            </h2>
+            <p className="mx-auto max-w-2xl font-ui text-lg text-muted-foreground/70">
+              Karta so'ralmaydi. Free bilan boshlang, o'zingizga kerak bo'lganda Pro ga o'ting.
+            </p>
+          </Reveal>
+        </div>
+
+        <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+          {plans.map((p, i) => (
+            <Reveal key={p.name} delay={i * 150}>
+              <div className={cn(
+                "relative rounded-3xl p-10 transition-all hover:scale-[1.02]",
+                p.highlight 
+                  ? "bg-card border-2 border-primary shadow-[0_32px_64px_-16px_hsl(var(--primary)/0.15)]" 
+                  : "bg-background border border-border"
+              )}>
+                {p.highlight && (
+                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-primary text-primary-foreground px-4 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest">
+                    Tavsiya etiladi
+                  </div>
+                )}
+                <div className="mb-8">
+                  <h3 className="font-serif text-2xl font-bold mb-2">{p.name}</h3>
+                  <div className="flex items-baseline gap-2">
+                    <span className="font-serif text-4xl font-bold tracking-tighter tabular-nums">{p.price}</span>
+                    <span className="text-sm font-ui text-muted-foreground tracking-wide uppercase">{t("brand.xp").includes("XP") ? "UZS" : ""} / {p.period}</span>
+                  </div>
+                </div>
+                <ul className="space-y-4 mb-10">
+                  {p.features.map(f => (
+                    <li key={f} className="flex items-center gap-3 text-sm font-ui text-muted-foreground/80">
+                      <Check className="h-4 w-4 text-primary shrink-0" />
+                      {f}
+                    </li>
+                  ))}
+                </ul>
+                <Button 
+                  asChild 
+                  size="lg" 
+                  variant={p.highlight ? "default" : "outline"}
+                  className="w-full rounded-full font-bold shadow-premium"
+                >
+                  <Link to="/auth">{p.cta}</Link>
+                </Button>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
 
 function FinalCta({ t }: { t: any }) {
   return (

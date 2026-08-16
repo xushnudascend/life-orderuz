@@ -7,11 +7,22 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import { ArrowLeft, Eye, EyeOff, Loader2, ShieldCheck } from "lucide-react";
+import { 
+  ArrowLeft, 
+  Eye, 
+  EyeOff, 
+  Loader2, 
+  ShieldCheck, 
+  Sparkles, 
+  Lock,
+  Zap,
+  Shield
+} from "lucide-react";
 import { uz } from "@/i18n";
 import { useT } from "@/i18n/use-t";
-
 import { track } from "@/lib/analytics";
+import { Reveal } from "@/components/reveal";
+import { cn } from "@/lib/utils";
 
 const CANONICAL_URL = "https://life-orderuz.lovable.app/auth";
 
@@ -22,9 +33,13 @@ function sanitizeNext(next: unknown): string {
 }
 
 export const Route = createFileRoute("/auth")({
-  validateSearch: (s: Record<string, unknown>): { next?: string } => {
+  validateSearch: (s: Record<string, unknown>): { next?: string; mode?: "signin" | "signup" } => {
     const next = sanitizeNext(s.next);
-    return next ? { next } : {};
+    const mode = s.mode === "signin" || s.mode === "signup" ? s.mode : undefined;
+    return { 
+      next: next || "/dashboard",
+      mode 
+    };
   },
   head: () => ({
     meta: [
@@ -59,16 +74,14 @@ function AuthPage() {
   const search = Route.useSearch();
   const { t } = useT();
   const next = search.next ?? "/dashboard";
-  const [tab, setTab] = useState<"signin" | "signup">("signup");
+  const [tab, setTab] = useState<"signin" | "signup">(search.mode ?? "signup");
   const navigate = useNavigate();
 
-  // If already signed in → return to `next` (defaults to /dashboard).
   useEffect(() => {
     let mounted = true;
     supabase.auth.getSession().then(({ data }) => {
       if (!mounted) return;
       if (data.session) {
-        // First time signup should go to onboarding
         const isNew = data.session.user.created_at === data.session.user.last_sign_in_at;
         navigate({ to: isNew ? "/onboarding" : next });
       }
@@ -79,82 +92,97 @@ function AuthPage() {
   }, [next, navigate]);
 
   return (
-    <div className="relative min-h-dvh overflow-hidden bg-background text-foreground flex items-center justify-center p-4">
-      {/* Visual signatures from Life Order (Deep Obsidian + 3D Orbs) */}
-      <div className="absolute inset-0 -z-10 overflow-hidden bg-background">
-        <div className="girih-corner absolute inset-0 opacity-10" />
-        <div className="absolute top-[-10%] right-[-10%] h-[500px] w-[500px] animate-orb-float rounded-full bg-primary/5 blur-[120px]" />
-        <div className="absolute bottom-[-10%] left-[-10%] h-[400px] w-[400px] animate-orb-float-delayed rounded-full bg-primary/5 blur-[100px]" />
+    <div className="relative min-h-dvh overflow-hidden bg-background text-foreground flex items-center justify-center p-4 selection:bg-primary/20">
+      {/* Premium Orbs */}
+      <div className="absolute top-[-10%] right-[-10%] h-[600px] w-[600px] animate-orb-float rounded-full bg-primary/10 blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-[-10%] left-[-10%] h-[500px] w-[500px] animate-orb-float-delayed rounded-full bg-primary/5 blur-[100px] pointer-events-none" />
+
+      <div className="relative z-10 w-full max-w-lg">
+        <Reveal delay={100}>
+          <div className="mb-10 flex flex-col items-center text-center">
+            <Link to="/" className="group mb-8 flex items-center gap-3 transition-transform hover:scale-105 active:scale-95">
+              <div className="grid h-10 w-10 place-items-center rounded-xl bg-primary text-primary-foreground shadow-premium transition-shadow group-hover:shadow-[0_0_24px_hsl(var(--primary)/0.55)]">
+                <span className="font-serif text-xl font-bold leading-none">L</span>
+              </div>
+              <span className="font-serif text-2xl font-bold tracking-tight">Life Order</span>
+            </Link>
+            
+            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-1.5 font-ui text-[10px] font-bold uppercase tracking-[0.2em] text-primary shadow-[0_0_20px_hsl(var(--primary)/0.15)] backdrop-blur-md">
+              <Sparkles className="h-3 w-3" />
+              ELITE PROTOCOL ACCESS
+            </div>
+            
+            <h1 className="font-serif text-[44px] leading-[0.9] tracking-tighter md:text-[52px]">
+              {t("auth.title")}
+            </h1>
+            <p className="mt-6 font-ui text-lg leading-relaxed text-muted-foreground/80 text-pretty">
+              {t("auth.subtitle")}
+            </p>
+          </div>
+        </Reveal>
+
+        <Reveal delay={250}>
+          <div className="rounded-[32px] border border-border bg-card/50 p-8 shadow-premium backdrop-blur-2xl md:p-10">
+            <div className="mb-8 space-y-4">
+              <OAuthButton provider="google" label={t("auth.google")} next={next} />
+              <div className="grid grid-cols-2 gap-4">
+                <OAuthButton provider="apple" label="Apple" next={next} />
+                <OAuthButton provider="microsoft" label="Microsoft" next={next} />
+              </div>
+            </div>
+
+            <div className="relative mb-8">
+              <div className="absolute inset-0 flex items-center" aria-hidden="true">
+                <div className="w-full border-t border-border/60"></div>
+              </div>
+              <div className="relative flex justify-center">
+                <span className="bg-card/50 px-4 font-ui text-[10px] font-bold uppercase tracking-[0.25em] text-muted-foreground/60">
+                  {t("auth.or")}
+                </span>
+              </div>
+            </div>
+
+            <Tabs value={tab} onValueChange={(v) => setTab(v as "signin" | "signup")} className="w-full">
+              <TabsList className="grid w-full grid-cols-2 rounded-2xl bg-muted/40 p-1 mb-8">
+                <TabsTrigger value="signup" className="rounded-xl font-bold transition-all data-[state=active]:bg-background data-[state=active]:shadow-sm">
+                  {t("auth.signUp")}
+                </TabsTrigger>
+                <TabsTrigger value="signin" className="rounded-xl font-bold transition-all data-[state=active]:bg-background data-[state=active]:shadow-sm">
+                  {t("auth.signIn")}
+                </TabsTrigger>
+              </TabsList>
+              <TabsContent value="signup">
+                <EmailForm mode="signup" next={next} />
+              </TabsContent>
+              <TabsContent value="signin">
+                <EmailForm mode="signin" next={next} />
+              </TabsContent>
+            </Tabs>
+          </div>
+        </Reveal>
+
+        <Reveal delay={400}>
+          <div className="mt-10 text-center">
+            <Link
+              to="/privacy"
+              className="font-ui text-xs font-medium text-muted-foreground/60 transition-colors hover:text-primary"
+            >
+              {t("auth.privacy")}
+            </Link>
+          </div>
+        </Reveal>
       </div>
 
-      <div className="w-full max-w-[480px] space-y-12 animate-fade-in-up">
-        <div className="text-center">
-          <Link to="/" className="inline-block mb-12 group transition-transform hover:scale-105">
-            <div className="flex items-center gap-4 font-serif text-4xl font-bold tracking-tight">
-              <span className="grid h-12 w-12 place-items-center rounded-[20px] bg-primary text-primary-foreground shadow-[0_0_30px_hsl(var(--primary)/0.5)]">
-                L
-              </span>
-              Life<span className="text-primary italic">.</span>Order
-            </div>
-          </Link>
+      {/* Feature Pills */}
+      <div className="absolute bottom-8 left-1/2 flex -translate-x-1/2 items-center gap-6 opacity-30 grayscale transition-all hover:opacity-100 hover:grayscale-0 pointer-events-none sm:gap-12">
+        <div className="flex items-center gap-2 font-ui text-[10px] font-bold uppercase tracking-widest">
+          <Shield className="h-4 w-4" />
+          Secure
         </div>
-
-        <div className="animate-fade-in-up text-center">
-          <div className="mx-auto mb-8 grid h-16 w-16 place-items-center rounded-[24px] bg-primary/10 text-primary shadow-[0_0_40px_hsl(var(--primary)/0.25)] border border-primary/20 backdrop-blur-md">
-            <ShieldCheck className="h-8 w-8" strokeWidth={2.2} />
-          </div>
-          <h1 className="font-serif text-[36px] leading-[0.9] tracking-tighter md:text-[44px]">
-            {t("auth.title")}
-          </h1>
-          <p className="mt-6 font-ui text-[17px] leading-relaxed text-muted-foreground/75 text-pretty max-w-sm mx-auto">
-            {t("auth.subtitle")}
-          </p>
+        <div className="flex items-center gap-2 font-ui text-[10px] font-bold uppercase tracking-widest">
+          <Zap className="h-4 w-4" />
+          Pro Performance
         </div>
-
-          <div
-            className="animate-fade-in-up rounded-[32px] border border-border/40 bg-secondary p-8 md:p-10 shadow-premium backdrop-blur-4xl"
-          style={{ animationDelay: "80ms" }}
-        >
-          <div className="space-y-3">
-            <OAuthButton provider="google" label={t("auth.google")} next={next} />
-            <div className="grid grid-cols-2 gap-3">
-              <OAuthButton provider="apple" label="Apple" next={next} />
-              <OAuthButton provider="microsoft" label="Microsoft" next={next} />
-            </div>
-          </div>
-
-          <div className="relative my-6">
-            <div className="absolute inset-0 flex items-center">
-              <span className="w-full border-t border-border" />
-            </div>
-            <div className="relative flex justify-center">
-              <span className="bg-card px-3 font-ui text-xs uppercase tracking-[0.2em] text-muted-foreground">
-                {t("auth.or")}
-              </span>
-            </div>
-          </div>
-
-          <Tabs value={tab} onValueChange={(v) => setTab(v as "signin" | "signup")}>
-            <TabsList className="grid w-full grid-cols-2 font-ui">
-              <TabsTrigger value="signup">{t("auth.signUp")}</TabsTrigger>
-              <TabsTrigger value="signin">{t("auth.signIn")}</TabsTrigger>
-            </TabsList>
-            <TabsContent value="signup" className="pt-6">
-              <EmailForm mode="signup" next={next} />
-            </TabsContent>
-            <TabsContent value="signin" className="pt-6">
-              <EmailForm mode="signin" next={next} />
-            </TabsContent>
-          </Tabs>
-        </div>
-
-        <Link
-          to="/privacy"
-          className="group mx-auto mt-6 inline-flex items-center gap-2 rounded-full border border-border/70 px-3.5 py-1.5 font-ui text-[11px] text-muted-foreground transition-colors hover:border-primary/40 hover:text-foreground"
-        >
-          <ShieldCheck className="h-3.5 w-3.5 text-primary" />
-          {t("auth.privacy")}
-        </Link>
       </div>
     </div>
   );
@@ -179,7 +207,6 @@ function EmailForm({ mode, next }: { mode: "signin" | "signup"; next: string }) 
           options: { emailRedirectTo: `${window.location.origin}/onboarding` },
         });
         if (error) throw error;
-        // Auto-confirm on → signUp already returns session. Skip extra roundtrips.
         if (up.session) {
           track("signup", { method: "email" });
           window.location.replace("/onboarding");
@@ -207,9 +234,11 @@ function EmailForm({ mode, next }: { mode: "signin" | "signup"; next: string }) 
   }
 
   return (
-    <form onSubmit={onSubmit} className="space-y-4">
-      <div className="space-y-1.5">
-        <Label htmlFor="email">Email</Label>
+    <form onSubmit={onSubmit} className="space-y-6">
+      <div className="space-y-2">
+        <Label htmlFor="email" className="font-ui text-xs font-bold uppercase tracking-widest text-muted-foreground ml-1">
+          {t("auth.email")}
+        </Label>
         <Input
           id="email"
           type="email"
@@ -217,12 +246,15 @@ function EmailForm({ mode, next }: { mode: "signin" | "signup"; next: string }) 
           autoComplete="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          placeholder="siz@example.com"
+          placeholder="name@example.com"
+          className="h-12 rounded-2xl bg-muted/20 border-border/60 focus:ring-primary/20 focus:border-primary transition-all"
         />
       </div>
-      <div className="space-y-1.5">
-        <div className="flex items-center justify-between">
-          <Label htmlFor="password">Parol</Label>
+      <div className="space-y-2">
+        <div className="flex items-center justify-between ml-1">
+          <Label htmlFor="password" className="font-ui text-xs font-bold uppercase tracking-widest text-muted-foreground">
+            {t("auth.password")}
+          </Label>
           {mode === "signin" && <ForgotPasswordLink email={email} t={t} />}
         </div>
         <div className="relative">
@@ -235,29 +267,12 @@ function EmailForm({ mode, next }: { mode: "signin" | "signup"; next: string }) 
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Kamida 8 belgi"
-            className="pr-10"
+            className="h-12 rounded-2xl bg-muted/20 border-border/60 pr-10 focus:ring-primary/20 focus:border-primary transition-all"
           />
-          {mode === "signup" && password.length > 0 && (
-            <div className="mt-1 flex gap-1">
-              {[1, 2, 3, 4].map((i) => (
-                <div
-                  key={i}
-                  className={`h-1 w-full rounded-full ${
-                    i <= Math.min(4, Math.floor(password.length / 3))
-                      ? "bg-primary"
-                      : "bg-border"
-                  }`}
-                />
-              ))}
-              <span className="ml-2 font-ui text-[10px] uppercase text-muted-foreground">
-                {password.length < 8 ? "Kuchsiz" : password.length < 12 ? "O'rtacha" : "Kuchli"}
-              </span>
-            </div>
-          )}
           <button
             type="button"
             onClick={() => setShowPassword((v) => !v)}
-            className="absolute inset-y-0 right-0 flex items-center px-3 text-muted-foreground transition-colors hover:text-foreground focus:outline-none focus-visible:text-foreground"
+            className="absolute inset-y-0 right-0 flex items-center px-3 text-muted-foreground transition-colors hover:text-foreground focus:outline-none"
             aria-label={showPassword ? "Parolni yashirish" : "Parolni ko'rsatish"}
             tabIndex={-1}
           >
@@ -265,9 +280,18 @@ function EmailForm({ mode, next }: { mode: "signin" | "signup"; next: string }) 
           </button>
         </div>
       </div>
-      <Button type="submit" className="w-full font-ui font-semibold" disabled={loading}>
-        {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-        {mode === "signup" ? t("auth.signUp") : t("auth.signIn")}
+      
+      <Button
+        type="submit"
+        disabled={loading}
+        size="lg"
+        className="mt-8 w-full rounded-full font-bold shadow-premium transition-all hover:scale-[1.01] active:scale-[0.99]"
+      >
+        {loading ? (
+          <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+        ) : (
+          mode === "signup" ? t("auth.signUp") : t("auth.signIn")
+        )}
       </Button>
     </form>
   );
@@ -321,8 +345,6 @@ function OAuthButton({
     if (loading) return;
     setLoading(true);
     try {
-      // Return to /auth with the same `next` so this page can navigate onward
-      // after the session is set.
       const redirectUri =
         next === "/dashboard"
           ? window.location.origin
@@ -334,7 +356,7 @@ function OAuthButton({
         toast.error(`${label} amalga oshmadi. Qayta urinib ko'ring yoki email orqali davom eting.`);
         return;
       }
-      if (result.redirected) return; // full-page nav
+      if (result.redirected) return;
       track("login", { method: provider });
       window.location.replace(next);
     } finally {
@@ -345,7 +367,7 @@ function OAuthButton({
     <Button
       type="button"
       variant="secondary"
-      className="tap w-full justify-center rounded-xl font-ui transition-transform duration-200 active:scale-[0.99]"
+      className="tap w-full justify-center rounded-2xl h-12 font-bold transition-transform duration-200 active:scale-[0.99] border border-border/60 bg-muted/20"
       onClick={onClick}
       disabled={loading}
     >
