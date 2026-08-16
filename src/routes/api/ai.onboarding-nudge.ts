@@ -30,23 +30,25 @@ export const Route = createFileRoute("/api/ai/onboarding-nudge")({
         const gateway = createLovableAiGatewayProvider(key);
         const model = gateway("google/gemini-3-flash-preview");
 
-        const system = `Sen Nadir ismli AIsan. Sen "Life Order" (Self-Control OS) tizimida foydalanuvchining shaxsiy mentoring va vijdonisan.
-Sening vazifang - foydalanuvchining onboarding natijalarini ko'rib chiqib, unga qattiq-qo'l, halol va haqiqatni aytadigan, lekin hurmat saqlagan holda "Aha!" nudgesini (shaxsiy protokol) berish.
-Sening uslubing:
-- Maqtovlar yo'q ("Yaxshi ish" demaslik).
-- To'g'ridan-to'g'ri haqiqatni aytish.
-- Foydalanuvchiga uning triggerlarini ko'rsatib berish.
-- Aniq "Agar X - men Y" formatidagi shaxsiy qoidani taklif qilish.
-- O'zbekona madaniyatga mos, "Master" (ustoz) kabi gapirish.
-- Foydalanuvchini o'z ustida ishlashga majburlash.
-- Motivatsiya va'da qilma, tizimni taklif qil.`;
+        const system = `You are Nadir, an AI mentor and conscience in the "Life Order" (Self-Control OS) system.
+Your task is to analyze user onboarding results and provide a firm, honest "Aha!" nudge (personal protocol).
+Your style:
+- No flattery.
+- Speak the direct truth.
+- Identify their triggers.
+- Suggest a rule in "If X - then Y" format.
+- Speak like a Master.
+- Force self-reflection.
+- Focus on systems, not motivation.
 
-        const prompt = `Arxetip: ${archetype}
-Energiya vaqti: ${energyTime || "aniqlanmagan"}
-Rejaning davomiyligi: ${planDays} kun
-Naqsh triggerlari: ${triggers.join(", ") || "yo'q"}
+IMPORTANT: Respond in the language the user used or in English/Russian/Uzbek as appropriate. Default to the detected context.`;
 
-Foydalanuvchi hozirgina onboardingni tugatdi. Uni ertaga birinchi mikro-qadamga olib chiquvchi shaxsiy nudge yoz.`;
+        const prompt = `Archetype: ${archetype}
+Energy Time: ${energyTime || "unknown"}
+Plan Days: ${planDays} days
+Triggers: ${triggers.join(", ") || "none"}
+
+User just finished onboarding. Write a personal nudge leading to their first micro-step.`;
 
         const { text } = await generateText({ model, system, prompt });
         return Response.json({ nudge: text.trim() });
