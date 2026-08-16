@@ -388,7 +388,7 @@ function PricingSection({ t }: { t: any }) {
                 </div>
               </div>
               <ul className="mb-10 space-y-4">
-                {(t("pricing.free.features") as string[]).map((feat: string) => (
+                {Array.isArray(t("pricing.free.features")) && (t("pricing.free.features") as string[]).map((feat: string) => (
                   <li key={feat} className="flex items-start gap-3 text-sm font-ui text-muted-foreground/90">
                     <Check className="h-4 w-4 text-primary shrink-0 mt-0.5" />
                     <span>{feat}</span>
@@ -415,7 +415,7 @@ function PricingSection({ t }: { t: any }) {
                 </div>
               </div>
               <ul className="mb-10 space-y-4">
-                {(t("pricing.premium.features") as string[]).map((feat: string) => (
+                {Array.isArray(t("pricing.premium.features")) && (t("pricing.premium.features") as string[]).map((feat: string) => (
                   <li key={feat} className="flex items-start gap-3 text-sm font-ui text-muted-foreground/90">
                     <Check className="h-4 w-4 text-primary shrink-0 mt-0.5" />
                     <span>{feat}</span>
