@@ -95,10 +95,7 @@ function Hero({ t }: { t: any }) {
 
         <Reveal delay={250}>
           <h1 className="font-serif text-[48px] leading-[0.9] tracking-tighter text-balance sm:text-[72px] md:text-[84px] lg:text-[100px] text-text-primary">
-            {t("hero.title").split(".")[0]}.<br />
-            <span className="text-primary italic">
-              {t("hero.title").split(".")[1] || ""}
-            </span>
+            {t("hero.title")}
           </h1>
         </Reveal>
 
@@ -156,18 +153,18 @@ function Features({ t }: { t: any }) {
   const items = [
     { 
       n: "01", 
-      t: t("dashboard.quick.quests"), 
-      d: t("dashboard.habits.emptyDesc") 
+      t: "Tashxis", 
+      d: "Sizning biologik ritmingiz va triggers arxitekturangizni 3 daqiqada tahlil qilamiz." 
     },
     { 
       n: "02", 
-      t: "Obsidian intizom", 
-      d: "Obsidian intizom tizimi. Motivatsiya so'nganda ham tizimni ushlab turish uchun mo'ljallangan 'forgiving' mexanizm." 
+      t: "Protokol", 
+      d: "Miya resurslarini tejash uchun har kuni atigi 3 ta aniq vazifa — Motivatsiya tugaganda ham ishlaydigan tizim." 
     },
     { 
       n: "03", 
-      t: t("dashboard.sections.timetable"), 
-      d: t("dashboard.habits.emptyDesc") 
+      t: "Nadir AI", 
+      d: "Shafqatsiz, ammo halol AI mentor. U sizning harakatlaringizni kuzatadi va o'sishingiz uchun haqiqatni aytadi." 
     },
   ];
 
@@ -196,9 +193,9 @@ function Features({ t }: { t: any }) {
 
 function HowItWorks({ t }: { t: any }) {
   const steps = [
-    { n: "01", t: t("onboarding.questions.goal"), d: t("onboarding.subtitle") },
-    { n: "02", t: t("dashboard.habits.emptyCta"), d: t("dashboard.habits.emptyDesc") },
-    { n: "03", t: t("dashboard.hero.plan"), d: t("dashboard.hero.discipline") },
+    { n: "01", t: "Diagnostika", d: "60 soniyalik test orqali o'z profilingizni aniqlang." },
+    { n: "02", t: "Odatlar", d: "Sizga moslashtirilgan 3 ta kunlik protokolni qabul qiling." },
+    { n: "03", t: "Intizom", d: "Nadir AI nazorati ostida 66 kunlik avtomatlashuv yo'lini boshlang." },
   ];
 
   return (
@@ -212,7 +209,7 @@ function HowItWorks({ t }: { t: any }) {
                 Amaliyot
               </div>
               <h2 className="font-serif text-[44px] leading-[1.05] tracking-tighter mb-8 sm:text-[56px]">
-                {t("hero.title")}
+                3 qadamda<br /><span className="text-primary italic">tartib.</span>
               </h2>
             </Reveal>
             <div className="space-y-10 mt-12">
@@ -331,6 +328,8 @@ function FaqSection({ t }: { t: any }) {
 
 
 function PricingSection({ t }: { t: any }) {
+  const [billing, setBilling] = useState<"monthly" | "yearly">("yearly");
+
   const displayFree = [
     `${freeTierLimits.habits} tagacha odat`,
     `Kunlik ${freeTierLimits.journalEntriesPerDay} ta kundalik yozuv`,
@@ -356,9 +355,21 @@ function PricingSection({ t }: { t: any }) {
             <h2 className="font-serif text-[44px] leading-[1.05] tracking-tighter mb-6 sm:text-[56px]">
               Halol narxlar. <span className="text-muted-foreground">Yashirin to'lovsiz.</span>
             </h2>
-            <p className="mx-auto max-w-2xl font-ui text-lg text-muted-foreground/80">
-              Karta so'ralmaydi. Free bilan boshlang, o'zingizga kerak bo'lganda Pro ga o'ting.
-            </p>
+            <div className="flex items-center justify-center gap-4 mb-8">
+              <span className={cn("text-sm font-ui transition-colors", billing === "monthly" ? "text-foreground font-bold" : "text-muted-foreground")}>Oylik</span>
+              <button 
+                onClick={() => setBilling(billing === "monthly" ? "yearly" : "monthly")}
+                className="relative h-6 w-12 rounded-full bg-muted border border-border transition-colors hover:border-primary/50"
+              >
+                <div className={cn(
+                  "absolute top-1 h-4 w-4 rounded-full bg-primary transition-all shadow-[0_0_8px_hsl(var(--primary)/0.5)]",
+                  billing === "monthly" ? "left-1" : "left-7"
+                )} />
+              </button>
+              <span className={cn("text-sm font-ui transition-colors", billing === "yearly" ? "text-foreground font-bold" : "text-muted-foreground")}>
+                Yillik <span className="text-[10px] bg-primary/10 text-primary px-1.5 py-0.5 rounded-full ml-1">-30%</span>
+              </span>
+            </div>
           </Reveal>
         </div>
 
@@ -396,8 +407,12 @@ function PricingSection({ t }: { t: any }) {
               <div className="mb-8">
                 <h3 className="font-serif text-2xl font-bold mb-2">{t("pricing.premium.title")}</h3>
                 <div className="flex items-baseline gap-2">
-                  <span className="font-serif text-4xl font-bold tracking-tighter tabular-nums">{t("pricing.premium.price")}</span>
-                  <span className="text-sm font-ui text-muted-foreground tracking-wide uppercase">{t("pricing.premium.period")}</span>
+                  <span className="font-serif text-4xl font-bold tracking-tighter tabular-nums">
+                    {billing === "monthly" ? "59 000" : "490 000"} so'm
+                  </span>
+                  <span className="text-sm font-ui text-muted-foreground tracking-wide uppercase">
+                    {billing === "monthly" ? "oyiga" : "yiliga"}
+                  </span>
                 </div>
               </div>
               <ul className="mb-10 space-y-4">
