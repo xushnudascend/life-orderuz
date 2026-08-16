@@ -59,8 +59,7 @@ export const Route = createFileRoute("/")({
 function Landing() {
   const { t } = useT();
   
-  // Minimal check to avoid issues with hydration or undefined t
-  if (!t) return null;
+
 
   return (
     <div className="min-h-dvh bg-background text-foreground selection:bg-primary/20">
