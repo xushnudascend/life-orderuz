@@ -362,12 +362,10 @@ function PricingSection({ t }: { t: any }) {
     }
   ];
 
-  const freeFeatures = Array.isArray(t("pricing.free.features")) 
-    ? (t("pricing.free.features") as string[]) 
-    : plans[0].features;
-  const premiumFeatures = Array.isArray(t("pricing.premium.features")) 
-    ? (t("pricing.premium.features") as string[]) 
-    : plans[1].features;
+  const rawFree = t("pricing.free.features");
+  const freeFeatures = Array.isArray(rawFree) ? (rawFree as string[]) : plans[0].features;
+  const rawPremium = t("pricing.premium.features");
+  const premiumFeatures = Array.isArray(rawPremium) ? (rawPremium as string[]) : plans[1].features;
 
   return (
     <section id="pricing" className="relative py-24 md:py-40 bg-muted/5 border-b border-border overflow-hidden">
