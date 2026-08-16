@@ -335,16 +335,14 @@ function PricingSection({ t }: { t: any }) {
       name: "Free",
       price: "0",
       period: t("brand.monthly"),
-      features: Array.isArray(t("pricing.free.features")) 
-        ? (t("pricing.free.features") as string[]) 
-        : [
-            `${freeTierLimits.habits} tagacha odat`,
-            `Kunlik ${freeTierLimits.journalEntriesPerDay} ta kundalik yozuv`,
-            `Nadir bilan kunda ${freeTierLimits.mentorMessagesPerDay} ta xabar`,
-            "Kunlik 3 ta mikro-vazifa",
-            "Streak, XP va intizom balli",
-            "PWA offline rejim"
-          ],
+      features: [
+        `${freeTierLimits.habits} tagacha odat`,
+        `Kunlik ${freeTierLimits.journalEntriesPerDay} ta kundalik yozuv`,
+        `Nadir bilan kunda ${freeTierLimits.mentorMessagesPerDay} ta xabar`,
+        "Kunlik 3 ta mikro-vazifa",
+        "Streak, XP va intizom balli",
+        "PWA offline rejim"
+      ],
       cta: t("auth.signUp"),
       highlight: false
     },
@@ -352,22 +350,24 @@ function PricingSection({ t }: { t: any }) {
       name: "Pro",
       price: "59,000",
       period: t("brand.monthly"),
-      features: Array.isArray(t("pricing.premium.features")) 
-        ? (t("pricing.premium.features") as string[]) 
-        : [
-            "Cheksiz odatlar",
-            "Nadir Pro (Full Memory)",
-            "Haftalik AI hisobotlar",
-            "Burnout oldini olish",
-            "Premium yordam"
-          ],
+      features: [
+        "Cheksiz odatlar",
+        "Nadir Pro (Full Memory)",
+        "Haftalik AI hisobotlar",
+        "Burnout oldini olish",
+        "Premium yordam"
+      ],
       cta: "Pro ni boshlash",
       highlight: true
     }
   ];
 
-  const freeFeatures = plans[0].features;
-  const premiumFeatures = plans[1].features;
+  const freeFeatures = Array.isArray(t("pricing.free.features")) 
+    ? (t("pricing.free.features") as string[]) 
+    : plans[0].features;
+  const premiumFeatures = Array.isArray(t("pricing.premium.features")) 
+    ? (t("pricing.premium.features") as string[]) 
+    : plans[1].features;
 
   return (
     <section id="pricing" className="relative py-24 md:py-40 bg-muted/5 border-b border-border overflow-hidden">
