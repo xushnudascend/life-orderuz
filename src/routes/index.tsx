@@ -90,7 +90,7 @@ function Hero({ t }: { t: any }) {
         </Reveal>
 
         <Reveal delay={250}>
-          <h1 className="font-serif text-[48px] leading-[0.9] tracking-tighter text-balance sm:text-[72px] md:text-[84px] lg:text-[104px] text-text-primary">
+          <h1 className="font-serif text-[48px] leading-[0.9] tracking-tighter text-balance sm:text-[72px] md:text-[84px] lg:text-[100px] text-text-primary">
             {t("hero.title").split(".")[0]}.<br />
             <span className="text-primary italic">
               {t("hero.title").split(".")[1] || ""}
@@ -109,10 +109,10 @@ function Hero({ t }: { t: any }) {
             <Button
               asChild
               size="lg"
-              className="group relative h-14 rounded-full px-10 font-ui text-base font-bold transition-all hover:scale-105 active:scale-[0.98] shadow-premium bg-primary text-primary-foreground"
+              className="group relative h-14 rounded-full px-12 font-ui text-base font-bold transition-all hover:scale-105 active:scale-[0.98] shadow-premium bg-primary text-primary-foreground"
             >
               <Link to="/auth">
-                {t("hero.ctaPrimary")}
+                {t("auth.signUp")}
                 <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1.5" />
               </Link>
             </Button>
@@ -127,17 +127,17 @@ function Hero({ t }: { t: any }) {
         </Reveal>
         
         <Reveal delay={700}>
-          <div className="mt-20 flex flex-col items-center gap-8">
+          <div className="mt-20 flex flex-col items-center gap-6">
             <div className="flex -space-x-3 overflow-hidden">
               {[1, 2, 3, 4, 5].map((i) => (
-                <div key={i} className="inline-block h-10 w-10 rounded-full border-2 border-background bg-muted" />
+                <div key={i} className="inline-block h-10 w-10 rounded-full border-2 border-background bg-muted/50" />
               ))}
               <div className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-background bg-primary text-[10px] font-bold text-primary-foreground">
                 12k+
               </div>
             </div>
-            <p className="font-ui text-xs font-medium text-muted-foreground/70 tracking-wide">
-              12,400+ dan ortiq foydalanuvchilar o'z hayotini tartibga soldi
+            <p className="font-ui text-xs font-medium text-muted-foreground/60 tracking-wide">
+              12,400+ dan ortiq real foydalanuvchilar yo'lda
             </p>
           </div>
         </Reveal>
@@ -167,7 +167,7 @@ function Features({ t }: { t: any }) {
     { 
       n: "02", 
       t: "Obsidian intizom", 
-      d: "Streak, XP va 0–100 intizom balli. Motivatsiya so'nganda ham tizimni ushlab turish uchun mo'ljallangan 'forgiving' (kechirimli) mexanizm." 
+      d: "Obsidian intizom tizimi. Motivatsiya so'nganda ham tizimni ushlab turish uchun mo'ljallangan 'forgiving' mexanizm." 
     },
     { 
       n: "03", 
