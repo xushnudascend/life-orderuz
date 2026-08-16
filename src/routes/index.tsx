@@ -58,6 +58,13 @@ export const Route = createFileRoute("/")({
 
 function Landing() {
   const { t } = useT();
+  const [hydrated, setHydrated] = useState(false);
+
+  useEffect(() => {
+    setHydrated(true);
+  }, []);
+
+  if (!hydrated) return null;
   if (!t || typeof t !== "function") return null;
   
 
