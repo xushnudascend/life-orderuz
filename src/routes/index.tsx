@@ -147,11 +147,10 @@ function MechanismSection({ t }: { t: any }) {
 function Hero({ t }: { t: any }) {
   return (
     <section className="relative flex min-h-[90dvh] flex-col items-center justify-center overflow-hidden border-b border-border bg-background pt-32 pb-20">
-      {/* Dynamic Background Elements */}
       <div className="absolute top-0 right-0 w-full h-full bg-[radial-gradient(ellipse_at_top_right,_var(--primary)_0%,_transparent_70%)] opacity-[0.03] pointer-events-none" />
       <div className="absolute -top-[20%] -left-[10%] w-[60%] h-[60%] rounded-full bg-primary/5 blur-[120px] pointer-events-none animate-orb-float" />
       
-      <div className="relative z-10 mx-auto w-full max-w-6xl px-6 text-center md:px-8">
+      <div className="relative z-10 mx-auto w-full max-w-4xl px-6 text-center md:px-8">
         <Reveal delay={100}>
           <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-5 py-1.5 font-ui text-[11px] font-bold uppercase tracking-[0.25em] text-primary shadow-[0_0_30px_hsl(var(--primary)/0.2)] backdrop-blur-md">
             <Sparkles className="h-4 w-4" />
@@ -160,13 +159,13 @@ function Hero({ t }: { t: any }) {
         </Reveal>
 
         <Reveal delay={250}>
-          <h1 className="font-serif text-[54px] leading-[0.9] tracking-tighter text-balance sm:text-[84px] md:text-[96px] lg:text-[112px] text-text-primary mb-8">
+          <h1 className="font-serif text-[54px] leading-[0.9] tracking-tighter text-balance sm:text-[84px] md:text-[96px] text-text-primary mb-8">
             {t("hero.title")}
           </h1>
         </Reveal>
 
         <Reveal delay={400}>
-          <p className="mx-auto max-w-2xl font-ui text-lg leading-relaxed text-text-secondary md:text-xl lg:text-2xl opacity-90">
+          <p className="mx-auto max-w-xl font-ui text-lg leading-relaxed text-text-secondary md:text-xl opacity-90">
             {t("hero.subtitle")}
           </p>
         </Reveal>
@@ -183,13 +182,6 @@ function Hero({ t }: { t: any }) {
                 {t("hero.ctaPrimary")}
                 <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1.5" />
               </Link>
-            </Button>
-            <Button
-              asChild
-              size="lg"
-              className="h-14 rounded-full px-10 font-ui text-base font-bold border-border bg-transparent hover:bg-muted/30 transition-all active:scale-[0.98]"
-            >
-              <Link to="/">{t("hero.ctaSecondary")}</Link>
             </Button>
           </div>
         </Reveal>
