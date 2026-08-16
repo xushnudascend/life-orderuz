@@ -6,6 +6,7 @@ import { LanguageSwitcher } from "@/components/language-switcher";
 type NavLink = { href: string; label: string };
 
 const DEFAULT_NAV: NavLink[] = [
+  { href: "/#features", label: "Imkoniyatlar" },
   { href: "/pricing", label: "Narx" },
   { href: "/blog", label: "Blog" },
   { href: "/#faq", label: "Savollar" },
@@ -51,18 +52,21 @@ export function SiteHeader({
             </a>
           ))}
         </nav>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-3">
           <LanguageSwitcher className="hidden sm:inline-flex" />
+          <Link 
+            to="/auth" 
+            className="hidden sm:block font-ui text-[13px] font-medium text-muted-foreground hover:text-foreground transition-colors"
+          >
+            {t("auth.signIn")}
+          </Link>
           <Button
             asChild
             size="sm"
-            className="group rounded-full font-ui font-semibold shadow-[0_0_0_1px_hsl(var(--primary)/0.4),0_8px_24px_-12px_hsl(var(--primary)/0.55)] transition-shadow hover:shadow-[0_0_0_1px_hsl(var(--primary)/0.6),0_12px_32px_-10px_hsl(var(--primary)/0.75)]"
+            className="group rounded-full px-5 font-ui font-bold shadow-premium transition-all hover:scale-105 active:scale-[0.98]"
           >
-            <Link to={cta.to}>
-              {cta.label === "Boshlash" ? t("hero.ctaPrimary") : cta.label}
-              <span aria-hidden className="cta-arrow ml-1 inline-block">
-                →
-              </span>
+            <Link to="/auth?mode=signup">
+              {t("auth.signUp")}
             </Link>
           </Button>
         </div>
