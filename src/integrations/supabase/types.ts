@@ -149,6 +149,27 @@ export type Database = {
         }
         Relationships: []
       }
+      blocked_clients: {
+        Row: {
+          blocked_until: string
+          created_at: string | null
+          identifier: string
+          reason: string | null
+        }
+        Insert: {
+          blocked_until: string
+          created_at?: string | null
+          identifier: string
+          reason?: string | null
+        }
+        Update: {
+          blocked_until?: string
+          created_at?: string | null
+          identifier?: string
+          reason?: string | null
+        }
+        Relationships: []
+      }
       chat_messages: {
         Row: {
           content: string
@@ -1078,6 +1099,36 @@ export type Database = {
           name?: string
           starts_at?: string
           theme?: string | null
+        }
+        Relationships: []
+      }
+      security_events: {
+        Row: {
+          created_at: string | null
+          details: Json | null
+          event_type: string
+          id: string
+          ip_address: unknown
+          severity: string
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          details?: Json | null
+          event_type: string
+          id?: string
+          ip_address?: unknown
+          severity: string
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          details?: Json | null
+          event_type?: string
+          id?: string
+          ip_address?: unknown
+          severity?: string
+          user_id?: string | null
         }
         Relationships: []
       }
