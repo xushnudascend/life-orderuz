@@ -34,7 +34,9 @@ type Answers = Record<string, AnswerValue>;
 function Onboarding() {
   const { userId } = Route.useRouteContext();
   const { t } = useT();
-  if (!t) return null;
+
+  if (!t || typeof t !== "function") return null;
+
   const navigate = useNavigate();
 
   // Ketma-ketlik: avval B bo'lim (naqsh) — barcha savollar alohida qadamlarda.

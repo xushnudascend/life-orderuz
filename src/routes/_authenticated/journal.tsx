@@ -43,7 +43,8 @@ const MOODS = [
 function JournalPage() {
   const { userId } = Route.useRouteContext();
   const { t } = useT();
-  if (!t) return null;
+  if (!t || typeof t !== "function") return null;
+
   const shared = Route.useSearch();
   const [entries, setEntries] = useState<Entry[]>([]);
   const [loading, setLoading] = useState(true);

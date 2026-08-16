@@ -71,7 +71,8 @@ const MODULES = [
 
 function HubPage() {
   const { t } = useT();
-  if (!t) return null;
+  if (!t || typeof t !== "function") return null;
+
 
   return (
     <AppShell title="Hub">

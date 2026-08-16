@@ -58,9 +58,9 @@ export const Route = createFileRoute("/")({
 
 function Landing() {
   const { t } = useT();
+  if (!t || typeof t !== "function") return null;
   
-  // Minimal check to avoid issues with hydration or undefined t
-  if (!t) return null;
+
 
   return (
     <div className="min-h-dvh bg-background text-foreground selection:bg-primary/20">
@@ -265,7 +265,7 @@ function HowItWorks({ t }: { t: any }) {
 }
 
 function FaqSection({ t }: { t: any }) {
-  const items = t("faq.items") || [];
+  const items = Array.isArray(t("faq.items")) ? (t("faq.items") as any[]) : [];
   const [open, setOpen] = useState<number | null>(0);
 
   return (
@@ -331,36 +331,21 @@ function FaqSection({ t }: { t: any }) {
 
 
 function PricingSection({ t }: { t: any }) {
-  const plans = [
-    {
-      name: "Free",
-      price: "0",
-      period: t("brand.monthly"),
-      features: [
-        `${freeTierLimits.habits} tagacha odat`,
-        `Kunlik ${freeTierLimits.journalEntriesPerDay} ta kundalik yozuv`,
-        `Nadir bilan kunda ${freeTierLimits.mentorMessagesPerDay} ta xabar`,
-        "Kunlik 3 ta mikro-vazifa",
-        "Streak, XP va intizom balli",
-        "PWA offline rejim"
-      ],
-      cta: t("auth.signUp"),
-      highlight: false
-    },
-    {
-      name: "Pro",
-      price: "59,000",
-      period: t("brand.monthly"),
-      features: [
-        "Cheksiz odatlar",
-        "Nadir Pro (Full Memory)",
-        "Haftalik AI hisobotlar",
-        "Burnout oldini olish",
-        "Premium yordam"
-      ],
-      cta: "Pro ni boshlash",
-      highlight: true
-    }
+  const displayFree = [
+    `${freeTierLimits.habits} tagacha odat`,
+    `Kunlik ${freeTierLimits.journalEntriesPerDay} ta kundalik yozuv`,
+    `Nadir bilan kunda ${freeTierLimits.mentorMessagesPerDay} ta xabar`,
+    "Kunlik 3 ta mikro-vazifa",
+    "Streak, XP va intizom balli",
+    "PWA offline rejim"
+  ];
+
+  const displayPremium = [
+    "Cheksiz odatlar",
+    "Nadir Pro (Full Memory)",
+    "Haftalik AI hisobotlar",
+    "Burnout oldini olish",
+    "Premium yordam"
   ];
 
   return (
@@ -389,7 +374,7 @@ function PricingSection({ t }: { t: any }) {
                 </div>
               </div>
               <ul className="mb-10 space-y-4">
-                {(t("pricing.free.features") as string[]).map((feat: string) => (
+                {displayFree.map((feat: string) => (
                   <li key={feat} className="flex items-start gap-3 text-sm font-ui text-muted-foreground/90">
                     <Check className="h-4 w-4 text-primary shrink-0 mt-0.5" />
                     <span>{feat}</span>
@@ -416,7 +401,7 @@ function PricingSection({ t }: { t: any }) {
                 </div>
               </div>
               <ul className="mb-10 space-y-4">
-                {(t("pricing.premium.features") as string[]).map((feat: string) => (
+                {displayPremium.map((feat: string) => (
                   <li key={feat} className="flex items-start gap-3 text-sm font-ui text-muted-foreground/90">
                     <Check className="h-4 w-4 text-primary shrink-0 mt-0.5" />
                     <span>{feat}</span>
