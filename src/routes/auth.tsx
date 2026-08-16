@@ -227,7 +227,7 @@ function EmailForm({ mode, next }: { mode: "signin" | "signup"; next: string }) 
       }
     } catch (err) {
       const msg = err instanceof Error ? err.message : "Xato yuz berdi";
-      toast.error(translateAuthError(msg));
+      toast.error(translateAuthError(msg, t));
     } finally {
       setLoading(false);
     }
@@ -415,20 +415,21 @@ function MicrosoftIcon() {
   );
 }
 
-function translateAuthError(msg: string): string {
+function translateAuthError(msg: string, t: any): string {
   const s = msg.toLowerCase();
-  const e = uz.errors.auth;
+  
   if (s.includes("invalid login") || s.includes("invalid credentials"))
-    return e.invalid;
+    return t("errors.auth.invalid");
   if (s.includes("already registered") || s.includes("user already"))
-    return e.exists;
+    return t("errors.auth.exists");
   if (s.includes("email not confirmed"))
-    return e.confirm;
+    return t("errors.auth.confirm");
   if (s.includes("rate limit") || s.includes("too many"))
-    return e.rate;
+    return t("errors.auth.rate");
   if (s.includes("password"))
-    return e.weak;
+    return t("errors.auth.weak");
   if (s.includes("network") || s.includes("fetch"))
-    return e.network;
-  return e.generic;
+    return t("errors.auth.network");
+  
+  return t("errors.auth.generic");
 }
