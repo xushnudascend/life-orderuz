@@ -7,7 +7,7 @@ import { getLocale, setLocale, t as translate, type Locale, type TKey } from "./
  * SSR-safe: server tomonda doim "uz".
  */
 export function useT() {
-  const [locale, setLocaleState] = useState<Locale>("uz");
+  const [locale, setLocaleState] = useState<Locale>(getLocale());
 
   useEffect(() => {
     setLocaleState(getLocale());
