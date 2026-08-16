@@ -9,7 +9,7 @@ const DESCRIPTION =
 export const Route = createFileRoute("/blog/tungi-ritual")({
   head: () => ({
     meta: [
-      { title: `${TITLE} · Life Order` },
+      { title: TITLE },
       { name: "description", content: DESCRIPTION },
       { property: "og:title", content: TITLE },
       { property: "og:description", content: DESCRIPTION },

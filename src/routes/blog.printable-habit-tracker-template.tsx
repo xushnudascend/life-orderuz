@@ -16,7 +16,7 @@ const PDF_HREF =
 export const Route = createFileRoute("/blog/printable-habit-tracker-template")({
   head: () => ({
     meta: [
-      { title: `${TITLE} · Life Order` },
+      { title: TITLE },
       { name: "description", content: DESCRIPTION },
       { property: "og:title", content: TITLE },
       { property: "og:description", content: DESCRIPTION },
