@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Plus, Minus, Sparkles, Check, Users } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -58,6 +58,13 @@ export const Route = createFileRoute("/")({
 
 function Landing() {
   const { t } = useT();
+  const [hydrated, setHydrated] = useState(false);
+
+  useEffect(() => {
+    setHydrated(true);
+  }, []);
+
+  if (!hydrated) return null;
   if (!t || typeof t !== "function") return null;
   
 
@@ -70,8 +77,6 @@ function Landing() {
         <Hero t={t} />
         <ProblemSection t={t} />
         <MechanismSection t={t} />
-        <Features t={t} />
-        <HowItWorks t={t} />
         <PricingSection t={t} />
         <FaqSection t={t} />
         <FinalCta t={t} />
@@ -86,20 +91,20 @@ function ProblemSection({ t }: { t: any }) {
   
   return (
     <section id="problem" className="relative py-24 md:py-32 bg-muted/5 border-b border-border overflow-hidden">
-      <div className="mx-auto max-w-6xl px-6 md:px-8">
-        <div className="text-center mb-20">
+      <div className="mx-auto max-w-4xl px-6 md:px-8">
+        <div className="text-center mb-16">
           <Reveal>
-            <h2 className="font-serif text-[44px] leading-[1.05] tracking-tighter mb-6 sm:text-[56px]">
+            <h2 className="font-serif text-[40px] leading-[1.1] tracking-tighter mb-6 sm:text-[48px]">
               {t("dashboard.problem.title")}
             </h2>
-            <p className="font-ui text-lg text-muted-foreground max-w-2xl mx-auto">
+            <p className="font-ui text-lg text-muted-foreground max-w-xl mx-auto">
               {t("dashboard.problem.subtitle")}
             </p>
           </Reveal>
         </div>
         
-        <div className="grid md:grid-cols-3 gap-8">
-          {items.map((item, i) => (
+        <div className="grid md:grid-cols-3 gap-6">
+          {items.map((item: any, i: number) => (
             <Reveal key={i} delay={i * 100}>
               <div className="p-8 rounded-[32px] border border-border bg-card/50 backdrop-blur-sm transition-all hover:bg-primary/5 hover:border-primary/20">
                 <h3 className="font-serif text-2xl font-bold mb-4">{item.t}</h3>
@@ -117,11 +122,11 @@ function MechanismSection({ t }: { t: any }) {
   const steps = Array.isArray(t("dashboard.mechanism.steps")) ? (t("dashboard.mechanism.steps") as any[]) : [];
 
   return (
-    <section id="mechanism" className="relative py-24 md:py-40 border-b border-border overflow-hidden">
-      <div className="mx-auto max-w-6xl px-6 md:px-8">
+    <section id="mechanism" className="relative py-24 md:py-32 border-b border-border overflow-hidden bg-background">
+      <div className="mx-auto max-w-4xl px-6 md:px-8">
         <div className="text-center mb-20">
           <Reveal>
-            <h2 className="font-serif text-[44px] leading-[1.05] tracking-tighter mb-6 sm:text-[56px]">
+            <h2 className="font-serif text-[40px] leading-[1.1] tracking-tighter mb-6 sm:text-[48px]">
               {t("dashboard.mechanism.title")}
             </h2>
           </Reveal>
@@ -129,10 +134,10 @@ function MechanismSection({ t }: { t: any }) {
         
         <div className="grid md:grid-cols-3 gap-12 relative">
           <div className="hidden md:block absolute top-12 left-0 w-full h-px bg-gradient-to-r from-transparent via-border to-transparent" />
-          {steps.map((step, i) => (
+          {steps.map((step: any, i: number) => (
             <Reveal key={i} delay={i * 150}>
               <div className="relative z-10 text-center">
-                <div className="w-16 h-16 rounded-2xl bg-primary text-primary-foreground font-serif text-2xl font-bold flex items-center justify-center mx-auto mb-8 shadow-glow">
+                <div className="w-16 h-16 rounded-2xl bg-primary text-primary-foreground font-serif text-2xl font-bold flex items-center justify-center mx-auto mb-8 shadow-glow transition-transform hover:scale-110">
                   {step.n}
                 </div>
                 <h3 className="font-serif text-2xl font-bold mb-4">{step.t}</h3>
@@ -149,11 +154,10 @@ function MechanismSection({ t }: { t: any }) {
 function Hero({ t }: { t: any }) {
   return (
     <section className="relative flex min-h-[90dvh] flex-col items-center justify-center overflow-hidden border-b border-border bg-background pt-32 pb-20">
-      {/* Dynamic Background Elements */}
       <div className="absolute top-0 right-0 w-full h-full bg-[radial-gradient(ellipse_at_top_right,_var(--primary)_0%,_transparent_70%)] opacity-[0.03] pointer-events-none" />
       <div className="absolute -top-[20%] -left-[10%] w-[60%] h-[60%] rounded-full bg-primary/5 blur-[120px] pointer-events-none animate-orb-float" />
       
-      <div className="relative z-10 mx-auto w-full max-w-6xl px-6 text-center md:px-8">
+      <div className="relative z-10 mx-auto w-full max-w-4xl px-6 text-center md:px-8">
         <Reveal delay={100}>
           <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-5 py-1.5 font-ui text-[11px] font-bold uppercase tracking-[0.25em] text-primary shadow-[0_0_30px_hsl(var(--primary)/0.2)] backdrop-blur-md">
             <Sparkles className="h-4 w-4" />
@@ -162,13 +166,13 @@ function Hero({ t }: { t: any }) {
         </Reveal>
 
         <Reveal delay={250}>
-          <h1 className="font-serif text-[54px] leading-[0.9] tracking-tighter text-balance sm:text-[84px] md:text-[96px] lg:text-[112px] text-text-primary mb-8">
+          <h1 className="font-serif text-[54px] leading-[0.9] tracking-tighter text-balance sm:text-[84px] md:text-[96px] text-text-primary mb-8">
             {t("hero.title")}
           </h1>
         </Reveal>
 
         <Reveal delay={400}>
-          <p className="mx-auto max-w-2xl font-ui text-lg leading-relaxed text-text-secondary md:text-xl lg:text-2xl opacity-90">
+          <p className="mx-auto max-w-xl font-ui text-lg leading-relaxed text-text-secondary md:text-xl opacity-90">
             {t("hero.subtitle")}
           </p>
         </Reveal>
@@ -185,13 +189,6 @@ function Hero({ t }: { t: any }) {
                 {t("hero.ctaPrimary")}
                 <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1.5" />
               </Link>
-            </Button>
-            <Button
-              asChild
-              size="lg"
-              className="h-14 rounded-full px-10 font-ui text-base font-bold border-border bg-transparent hover:bg-muted/30 transition-all active:scale-[0.98]"
-            >
-              <Link to="/">{t("hero.ctaSecondary")}</Link>
             </Button>
           </div>
         </Reveal>
@@ -257,120 +254,6 @@ function Hero({ t }: { t: any }) {
   );
 }
 
-function Features({ t }: { t: any }) {
-  const items = [
-    { 
-      n: "01", 
-      t: "Tashxis", 
-      d: "Sizning biologik ritmingiz va triggers arxitekturangizni 3 daqiqada tahlil qilamiz." 
-    },
-    { 
-      n: "02", 
-      t: "Protokol", 
-      d: "Miya resurslarini tejash uchun har kuni atigi 3 ta aniq vazifa — Motivatsiya tugaganda ham ishlaydigan tizim." 
-    },
-    { 
-      n: "03", 
-      t: "Nadir AI", 
-      d: "Shafqatsiz, ammo halol AI mentor. U sizning harakatlaringizni kuzatadi va o'sishingiz uchun haqiqatni aytadi." 
-    },
-  ];
-
-  return (
-    <section id="features" className="relative overflow-hidden border-b border-border py-24 md:py-32">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--primary)_0%,_transparent_70%)] opacity-[0.02] pointer-events-none" />
-      <div className="mx-auto max-w-6xl px-6 md:px-8">
-        <div className="grid md:grid-cols-3 gap-x-12 gap-y-16">
-          {items.map((f, i) => (
-            <Reveal key={f.n} delay={i * 100}>
-              <div className="group relative">
-                <div 
-                  aria-hidden="true"
-                  className="mb-8 flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary transition-all duration-300 group-hover:bg-primary group-hover:text-primary-foreground group-hover:scale-110 group-hover:shadow-glow"
-                >
-                  <span className="font-serif text-lg font-bold">{f.n}</span>
-                </div>
-                <h3 className="font-serif text-2xl font-bold mb-4 tracking-tight group-hover:text-primary transition-colors">{f.t}</h3>
-                <p className="font-ui text-[15px] leading-relaxed text-text-secondary">{f.d}</p>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-
-function HowItWorks({ t }: { t: any }) {
-  const steps = [
-    { n: "01", t: "Diagnostika", d: "60 soniyalik test orqali o'z profilingizni aniqlang." },
-    { n: "02", t: "Odatlar", d: "Sizga moslashtirilgan 3 ta kunlik protokolni qabul qiling." },
-    { n: "03", t: "Intizom", d: "Nadir AI nazorati ostida 66 kunlik avtomatlashuv yo'lini boshlang." },
-  ];
-
-  return (
-    <section className="relative overflow-hidden border-b border-border py-24 md:py-40">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_right,_var(--primary)_0%,_transparent_70%)] opacity-[0.02] pointer-events-none" />
-      <div className="mx-auto max-w-6xl px-6 md:px-8">
-        <div className="grid lg:grid-cols-2 gap-20 items-center">
-          <div>
-            <Reveal>
-              <div className="mb-6 inline-flex rounded-full bg-primary/10 px-4 py-1.5 font-ui text-[10px] font-bold uppercase tracking-widest text-primary">
-                Amaliyot
-              </div>
-              <h2 className="font-serif text-[44px] leading-[1.05] tracking-tighter mb-8 sm:text-[56px]">
-                3 qadamda<br /><span className="text-primary italic">tartib.</span>
-              </h2>
-            </Reveal>
-            <div className="space-y-10 mt-12">
-              {steps.map((s, i) => (
-                <Reveal key={s.n} delay={i * 100}>
-                  <div className="group flex gap-6">
-                    <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-border bg-muted/30 font-serif text-sm font-bold transition-colors group-hover:border-primary/50 group-hover:text-primary">
-                      {s.n}
-                    </div>
-                    <div>
-                      <h3 className="font-serif text-xl font-bold mb-2 tracking-tight">{s.t}</h3>
-                      <p className="font-ui text-[15px] leading-relaxed text-muted-foreground/85">{s.d}</p>
-                    </div>
-                  </div>
-                </Reveal>
-              ))}
-            </div>
-          </div>
-          <Reveal delay={300} className="relative aspect-square lg:aspect-auto lg:h-[600px]">
-            <div className="absolute inset-0 rounded-[var(--radius-xl)] border border-border bg-gradient-to-br from-card/80 to-card/20 backdrop-blur-sm overflow-hidden shadow-premium">
-               {/* Mock UI visualization */}
-               <div className="absolute inset-x-0 top-0 h-12 border-b border-border bg-muted/20 px-4 flex items-center gap-2">
-                 <div className="h-2 w-2 rounded-full bg-border" />
-                 <div className="h-2 w-2 rounded-full bg-border" />
-                 <div className="h-2 w-2 rounded-full bg-border" />
-               </div>
-               <div className="p-8 pt-20 space-y-6">
-                 <div className="h-24 w-full rounded-2xl bg-primary/5 border border-primary/10 p-4 flex items-center justify-between">
-                   <div className="space-y-2">
-                     <div className="h-2 w-24 bg-primary/20 rounded" />
-                     <div className="h-4 w-32 bg-primary/40 rounded" />
-                   </div>
-                   <div className="h-12 w-12 rounded-full border-2 border-primary border-t-transparent animate-spin-slow" />
-                 </div>
-                 <div className="grid grid-cols-2 gap-4">
-                   <div className="h-32 rounded-2xl border border-border bg-muted/20" />
-                   <div className="h-32 rounded-2xl border border-border bg-muted/20" />
-                 </div>
-                 <div className="h-40 rounded-2xl border border-border bg-muted/20 relative overflow-hidden">
-                    <div className="absolute inset-0 backdrop-grid opacity-30" />
-                 </div>
-               </div>
-            </div>
-          </Reveal>
-        </div>
-      </div>
-    </section>
-
-  );
-}
 
 function FaqSection({ t }: { t: any }) {
   const items = Array.isArray(t("faq.items")) ? (t("faq.items") as any[]) : [];
@@ -378,7 +261,7 @@ function FaqSection({ t }: { t: any }) {
 
   return (
     <section id="faq" className="border-b border-border py-24 md:py-32 bg-muted/5">
-      <div className="mx-auto max-w-6xl px-6 md:px-8">
+      <div className="mx-auto max-w-4xl px-6 md:px-8">
         <div className="grid lg:grid-cols-[1fr_1.5fr] gap-16 lg:gap-24">
           <div>
             <Reveal>
@@ -459,11 +342,11 @@ function PricingSection({ t }: { t: any }) {
   ];
 
   return (
-    <section id="pricing" className="relative py-24 md:py-40 bg-muted/5 border-b border-border overflow-hidden">
+    <section id="pricing" className="relative py-24 md:py-32 bg-muted/5 border-b border-border overflow-hidden">
       {/* Background decoration */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/5 rounded-full blur-[120px] pointer-events-none" />
       
-      <div className="mx-auto max-w-6xl px-6 md:px-8 relative z-10">
+      <div className="mx-auto max-w-4xl px-6 md:px-8 relative z-10">
         <div className="mb-20 text-center">
           <Reveal>
             <h2 className="font-serif text-[44px] leading-[1.05] tracking-tighter mb-6 sm:text-[56px]">
@@ -554,7 +437,7 @@ function FinalCta({ t }: { t: any }) {
       <div className="absolute inset-0 bg-primary/[0.02] pointer-events-none" />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[100px] pointer-events-none" />
       
-      <div className="mx-auto max-w-6xl px-6 md:px-8 text-center relative z-10">
+      <div className="mx-auto max-w-4xl px-6 md:px-8 text-center relative z-10">
         <Reveal>
           <h2 className="font-serif text-[56px] leading-[0.95] tracking-tighter mb-10 sm:text-[80px] md:text-[100px] text-balance">
             {t("cta.heading")}

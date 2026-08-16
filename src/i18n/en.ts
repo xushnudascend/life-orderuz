@@ -11,6 +11,7 @@ const _en = {
     pricing: "Pricing",
     blog: "Blog",
     faq: "FAQ",
+    howItWorks: "How it works",
     tagline: "Motivation ends, the system remains.",
     oneLiner:
       "Self-Control OS — the operating system for mastery. 3-minute diagnosis, 3 daily steps, and a relentless AI mentor.",
