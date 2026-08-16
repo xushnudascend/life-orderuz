@@ -457,7 +457,10 @@ function PricingSection({ t }: { t: any }) {
 
   return (
     <section id="pricing" className="relative py-24 md:py-40 bg-muted/5 border-b border-border overflow-hidden">
-      <div className="mx-auto max-w-6xl px-6 md:px-8">
+      {/* Background decoration */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/5 rounded-full blur-[120px] pointer-events-none" />
+      
+      <div className="mx-auto max-w-6xl px-6 md:px-8 relative z-10">
         <div className="mb-20 text-center">
           <Reveal>
             <h2 className="font-serif text-[44px] leading-[1.05] tracking-tighter mb-6 sm:text-[56px]">
