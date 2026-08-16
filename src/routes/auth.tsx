@@ -102,11 +102,10 @@ function AuthPage() {
             <ShieldCheck className="h-8 w-8" strokeWidth={2.2} />
           </div>
           <h1 className="font-serif text-[36px] leading-[0.9] tracking-tighter md:text-[44px]">
-            Tizimga kirish
+            {t("auth.title")}
           </h1>
           <p className="mt-6 font-ui text-[17px] leading-relaxed text-muted-foreground/75 text-pretty max-w-sm mx-auto">
-            Bank darajasidagi shifrlash (AES-256) va TLS 1.3 himoyasi bilan 
-            shaxsiy ma'lumotlaringiz xavfsizligi kafolatlanadi.
+            {t("auth.subtitle")}
           </p>
         </div>
 
@@ -115,7 +114,7 @@ function AuthPage() {
           style={{ animationDelay: "80ms" }}
         >
           <div className="space-y-3">
-            <OAuthButton provider="google" label="Google bilan davom etish" next={next} />
+            <OAuthButton provider="google" label={t("auth.google")} next={next} />
             <div className="grid grid-cols-2 gap-3">
               <OAuthButton provider="apple" label="Apple" next={next} />
               <OAuthButton provider="microsoft" label="Microsoft" next={next} />
@@ -128,15 +127,15 @@ function AuthPage() {
             </div>
             <div className="relative flex justify-center">
               <span className="bg-card px-3 font-ui text-xs uppercase tracking-[0.2em] text-muted-foreground">
-                yoki email
+                {t("auth.or")}
               </span>
             </div>
           </div>
 
           <Tabs value={tab} onValueChange={(v) => setTab(v as "signin" | "signup")}>
             <TabsList className="grid w-full grid-cols-2 font-ui">
-              <TabsTrigger value="signup">Ro'yxatdan o'tish</TabsTrigger>
-              <TabsTrigger value="signin">Kirish</TabsTrigger>
+              <TabsTrigger value="signup">{t("auth.signUp")}</TabsTrigger>
+              <TabsTrigger value="signin">{t("auth.signIn")}</TabsTrigger>
             </TabsList>
             <TabsContent value="signup" className="pt-6">
               <EmailForm mode="signup" next={next} />
@@ -152,7 +151,7 @@ function AuthPage() {
           className="group mx-auto mt-6 inline-flex items-center gap-2 rounded-full border border-border/70 px-3.5 py-1.5 font-ui text-[11px] text-muted-foreground transition-colors hover:border-primary/40 hover:text-foreground"
         >
           <ShieldCheck className="h-3.5 w-3.5 text-primary" />
-          Maxfiylik va xavfsizlik
+          {t("auth.privacy")}
         </Link>
       </div>
     </div>

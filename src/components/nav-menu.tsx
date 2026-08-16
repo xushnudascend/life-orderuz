@@ -27,13 +27,13 @@ export function NavMenu({ onClose }: { onClose?: () => void }) {
   };
 
   const links = [
-    { to: "/dashboard", label: "Bugun", icon: LayoutDashboard },
-    { to: "/hub", label: "Ekotizim (Hub)", icon: Compass },
-    { to: "/habits", label: "Odatlar", icon: Zap },
-    { to: "/community", label: "Davra", icon: Users },
-    { to: "/mentor", label: "Nadir AI", icon: BookOpen },
-    { to: "/settings", label: "Sozlamalar", icon: Settings },
-    { to: "/settings/subscription", label: "Obunani boshqarish", icon: Shield },
+    { to: "/dashboard", label: t("dashboard.sections.dailyLoop"), icon: LayoutDashboard },
+    { to: "/hub", label: t("dashboard.sections.quickAccess"), icon: Compass },
+    { to: "/habits", label: t("dashboard.sections.habits"), icon: Zap },
+    { to: "/community", label: t("nav.features"), icon: Users },
+    { to: "/mentor", label: t("nav.mentor"), icon: BookOpen },
+    { to: "/settings", label: t("settings.hero.title").split(".")[0], icon: Settings },
+    { to: "/settings/subscription", label: t("nav.upgrade"), icon: Shield },
   ];
 
   return (
