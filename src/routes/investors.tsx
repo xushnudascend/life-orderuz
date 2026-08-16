@@ -26,13 +26,13 @@ const CANONICAL = `${SITE_URL}/investors`;
 export const Route = createFileRoute("/investors")({
   head: () => ({
     meta: [
-      { title: `Investorlar uchun — ${uz.brand.name}` },
+      { title: `Investorlar uchun — Life Order` },
       {
         name: "description",
         content:
           "Life Order — O'zbekistondagi birinchi xulq-atvor fanida asoslangan Self-Control OS. Bozor, mahsulot, traksiya va so'rov.",
       },
-      { property: "og:title", content: `Investorlar — ${uz.brand.name}` },
+      { property: "og:title", content: `Investorlar — Life Order` },
       {
         property: "og:description",
         content:
@@ -136,7 +136,7 @@ function InvestorsPage() {
             to="/"
             className="font-serif text-lg font-semibold tracking-tight hover:text-primary transition-colors"
           >
-            {uz.brand.name}
+            Life Order
           </Link>
           <span className="hidden sm:inline font-ui text-[10px] font-semibold uppercase tracking-[0.24em] text-primary">
             Investor deck · Konfidensial
