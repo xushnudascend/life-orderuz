@@ -29,7 +29,7 @@ export function LegalShell({
             to="/"
             className="font-ui text-xs uppercase tracking-[0.22em] text-muted-foreground hover:text-foreground"
           >
-            Bosh sahifa
+            {uz.brand.home}
           </Link>
         </div>
       </header>

@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 
@@ -141,9 +141,9 @@ function BlogIndex() {
 
         <div className="mt-12 grid gap-4 md:grid-cols-2">
           {POSTS.map((p) => (
-            <a
+            <Link
               key={p.slug}
-              href={`/blog/${p.slug}`}
+              to="/blog/hayot-sohalari"
               aria-labelledby={`post-title-${p.slug}`}
               className="group rounded-[var(--radius)] border border-border/60 bg-card/40 p-6 transition-all hover:border-primary/40 hover:bg-card/60"
             >
@@ -158,7 +158,7 @@ function BlogIndex() {
               <p className="mt-3 font-ui text-sm leading-relaxed text-muted-foreground text-pretty">
                 {p.excerpt}
               </p>
-            </a>
+            </Link>
           ))}
         </div>
       </main>

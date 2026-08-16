@@ -5,6 +5,7 @@
 export const uz = {
   brand: {
     name: "Life Order",
+    home: "Bosh sahifa",
     features: "Imkoniyatlar",
     pricing: "Narxlar",
     blog: "Blog",

@@ -284,10 +284,13 @@ function Features({ t }: { t: any }) {
           {items.map((f, i) => (
             <Reveal key={f.n} delay={i * 100}>
               <div className="group relative">
-                <div className="mb-8 flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
+                <div 
+                  aria-hidden="true"
+                  className="mb-8 flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary transition-all duration-300 group-hover:bg-primary group-hover:text-primary-foreground group-hover:scale-110 group-hover:shadow-glow"
+                >
                   <span className="font-serif text-lg font-bold">{f.n}</span>
                 </div>
-                <h3 className="font-serif text-2xl font-bold mb-4 tracking-tight group-hover:text-text-primary transition-colors">{f.t}</h3>
+                <h3 className="font-serif text-2xl font-bold mb-4 tracking-tight group-hover:text-primary transition-colors">{f.t}</h3>
                 <p className="font-ui text-[15px] leading-relaxed text-text-secondary">{f.d}</p>
               </div>
             </Reveal>
@@ -404,9 +407,9 @@ function FaqSection({ t }: { t: any }) {
                       id={`faq-button-${i}`}
                       className="w-full flex items-center justify-between gap-6 py-8 text-left group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-lg"
                     >
-                      <span className="font-serif text-xl font-bold tracking-tight transition-colors group-hover:text-primary">{it.q}</span>
+                      <span className="font-serif text-xl font-bold tracking-tight transition-colors group-hover:text-primary text-balance">{it.q}</span>
                       <div className={cn(
-                        "flex h-8 w-8 items-center justify-center rounded-full border border-border transition-all",
+                        "flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-border transition-all",
                         isOpen ? "bg-primary border-primary text-primary-foreground" : "group-hover:border-primary/50"
                       )}>
                         {isOpen ? <Minus className="h-4 w-4" aria-hidden="true" /> : <Plus className="h-4 w-4" aria-hidden="true" />}

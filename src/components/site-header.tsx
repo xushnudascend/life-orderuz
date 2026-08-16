@@ -7,9 +7,10 @@ import { track } from "@/lib/analytics";
 type NavLink = { href: string; label: string };
 
 const DEFAULT_NAV: NavLink[] = [
+  { href: "/", label: "brand.home" },
   { href: "/#features", label: "brand.features" },
   { href: "/pricing", label: "brand.pricing" },
-  { href: "/blog", label: "brand.blog" },
+  { href: "/blog/hayot-sohalari", label: "brand.blog" },
   { href: "/#faq", label: "brand.faq" },
 ];
 
@@ -29,10 +30,10 @@ export function SiteHeader({
         className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent"
       />
       <div className="mx-auto flex h-full max-w-6xl items-center justify-between px-5">
-        <Link to="/" className="group flex items-center gap-2.5">
+        <Link to="/" className="group flex items-center gap-2.5 outline-none">
           <span
             aria-hidden
-            className="grid h-7 w-7 place-items-center rounded-[10px] bg-primary text-primary-foreground shadow-[0_0_18px_hsl(var(--primary)/0.35)] transition-transform duration-300 group-hover:scale-105 group-hover:shadow-[0_0_24px_hsl(var(--primary)/0.55)]"
+            className="grid h-7 w-7 place-items-center rounded-[10px] bg-primary text-primary-foreground shadow-[0_0_18px_hsl(var(--primary)/0.35)] transition-transform duration-300 group-hover:scale-105 group-hover:shadow-[0_0_24px_hsl(var(--primary)/0.55)] group-focus-visible:ring-2 group-focus-visible:ring-primary group-focus-visible:ring-offset-2 group-focus-visible:ring-offset-background"
           >
             <span className="font-serif text-[15px] font-semibold leading-none">L</span>
           </span>
