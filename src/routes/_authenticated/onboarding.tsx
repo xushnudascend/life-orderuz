@@ -248,7 +248,7 @@ function Onboarding() {
             <Button
               className="mt-10 w-full h-14 rounded-full font-ui text-base font-semibold shadow-[0_20px_40px_-12px_hsl(var(--primary)/0.5)] transition-all hover:scale-[1.02]"
               size="lg"
-              onClick={() => navigate({ to: "/dashboard" })}
+              onClick={() => window.location.replace("/dashboard")}
             >
               {t("onboarding.start")}
               <ArrowRight className="ml-2 h-5 w-5" />
