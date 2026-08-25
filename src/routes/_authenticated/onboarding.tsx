@@ -1,4 +1,4 @@
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
@@ -37,7 +37,6 @@ function Onboarding() {
 
   if (!t || typeof t !== "function") return null;
 
-  const navigate = useNavigate();
 
   // Ketma-ketlik: avval B bo'lim (naqsh) — barcha savollar alohida qadamlarda.
   // Oxirgi qadam — A bo'lim (barcha savollar) bitta sahifada.
@@ -153,6 +152,13 @@ function Onboarding() {
         .eq("id", userId);
       if (profErr) throw profErr;
 
+      // Layout guard cache: aks holda /dashboard ga o'tganda yana onboardingga qaytaradi.
+      try {
+        window.localStorage.setItem(`lo:onboarded:${userId}`, "1");
+      } catch {
+        // ignore
+      }
+
       toast.success(t("onboarding.messages.finish"));
       setArchetypeName(arche.id);
 
@@ -241,7 +247,7 @@ function Onboarding() {
             <Button
               className="mt-10 w-full h-14 rounded-full font-ui text-base font-semibold shadow-[0_20px_40px_-12px_hsl(var(--primary)/0.5)] transition-all hover:scale-[1.02]"
               size="lg"
-              onClick={() => navigate({ to: "/dashboard" })}
+              onClick={() => window.location.replace("/dashboard")}
             >
               {t("onboarding.start")}
               <ArrowRight className="ml-2 h-5 w-5" />
