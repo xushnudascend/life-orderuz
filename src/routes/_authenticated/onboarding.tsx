@@ -153,6 +153,13 @@ function Onboarding() {
         .eq("id", userId);
       if (profErr) throw profErr;
 
+      // Layout guard cache: aks holda /dashboard ga o'tganda yana onboardingga qaytaradi.
+      try {
+        window.localStorage.setItem(`lo:onboarded:${userId}`, "1");
+      } catch {
+        // ignore
+      }
+
       toast.success(t("onboarding.messages.finish"));
       setArchetypeName(arche.id);
 
